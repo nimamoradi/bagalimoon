@@ -1,0 +1,139 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:1:1-22:12
+	package
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:2:5-26
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:1:11-69
+	android:versionCode
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:4:22-64
+application
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:6:5-20:19
+MERGED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:11:5-18:19
+MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\54e585dce4d582fc2c9ff9f5ebc2f19f84933d5d\output\AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:3:3-17
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.android\build-cache\a7f03022832eaf97df1a7696f3b7a5e704d83134\output\AndroidManifest.xml:2:3-17
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:11:5-20
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:26:5-20
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.android\build-cache\16b9119ad7871710a9f17d178eb18afef7a5eeb0\output\AndroidManifest.xml:12:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.android\build-cache\4617bf6e491a61ffe107144a5702ececbc74ac8b\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.android\build-cache\5201409396e9112d3f53643b0912e4ac3382027f\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.android\build-cache\0cf40cd41d187e29d86476fe979dceb809b48402\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:29:5-20
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:12:5-20
+	android:label
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:10:9-41
+	android:allowBackup
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:8:9-36
+	android:icon
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:9:9-43
+	android:theme
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:11:9-65
+	android:name
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:7:9-40
+activity#com.example.MainActivity
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:12:9-19:20
+	android:label
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:14:13-45
+	android:name
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:13:13-41
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:15:13-18:29
+action#android.intent.action.MAIN
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from E:\example\android\app\src\main\AndroidManifest.xml:17:17-77
+	android:name
+		ADDED from E:\example\android\app\src\main\AndroidManifest.xml:17:27-74
+uses-sdk
+INJECTED from E:\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\54e585dce4d582fc2c9ff9f5ebc2f19f84933d5d\output\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41
+MERGED from [com.facebook.fresco:fresco:1.0.1] C:\Users\nima\.android\build-cache\edf05249fdf7a41fd6f248f1e2a2b9af6029a7b9\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.0.1] C:\Users\nima\.android\build-cache\491d73c6b3c676ab89687e2530d4a195211039c6\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.0.1] C:\Users\nima\.android\build-cache\26a47423188fd82c75a25a16303e8ec8d2142916\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.0.1] C:\Users\nima\.android\build-cache\1c33024c7f988eec4aaef85277d719e2f1d5d18d\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.0.1] C:\Users\nima\.android\build-cache\49df4f68ca39094bf62dd0f87ad497330c8ec879\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.0.1] C:\Users\nima\.android\build-cache\b346dbb1858d4c7fe4112c02068087ccfc1950a2\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:2:3-70
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:20:5-44
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.android\build-cache\16b9119ad7871710a9f17d178eb18afef7a5eeb0\output\AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.android\build-cache\4617bf6e491a61ffe107144a5702ececbc74ac8b\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.android\build-cache\5201409396e9112d3f53643b0912e4ac3382027f\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.android\build-cache\0cf40cd41d187e29d86476fe979dceb809b48402\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:8:5-10:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\example\android\app\src\main\AndroidManifest.xml
+activity#com.reactnativenavigation.controllers.NavigationActivity
+ADDED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:12:9-14:86
+	android:configChanges
+		ADDED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:14:13-83
+	android:name
+		ADDED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:13:13-84
+activity#com.facebook.react.devsupport.DevSettingsActivity
+ADDED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:15:9-17:40
+	android:exported
+		ADDED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:17:13-37
+	android:name
+		ADDED from [example:react-native-navigation:unspecified] E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:16:13-77
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\54e585dce4d582fc2c9ff9f5ebc2f19f84933d5d\output\AndroidManifest.xml:11:5-78
+	android:name
+		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\54e585dce4d582fc2c9ff9f5ebc2f19f84933d5d\output\AndroidManifest.xml:11:22-75
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+IMPLIED from E:\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from E:\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from E:\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.android\build-cache\4617bf6e491a61ffe107144a5702ececbc74ac8b\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.android\build-cache\5201409396e9112d3f53643b0912e4ac3382027f\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.android\build-cache\0cf40cd41d187e29d86476fe979dceb809b48402\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:26:9-47

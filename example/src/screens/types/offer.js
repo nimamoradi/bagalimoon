@@ -1,47 +1,55 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text, Button, Image, ScrollView} from 'react-native';
+
+class offer extends Component {
 
 
-function offer({title}) {
-      return (
+    render() {
+        return (
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{this.props.title}</Text>
+                    <Image style={styles.image} source={{uri: this.props.imageUrl}}/>
+                    <Text style={styles.des}>{this.props.des}</Text>
+                </View>
+            </ScrollView>
+        );
+    }
 
-        <View style={styles.row}>
-            <Text style={styles.text}>{title}</Text>
-            {/*<Image source={{uri: imageUrl}} style={styles.image}>*/}
 
-            {/*</Image>*/}
-
-        </View>
-
-    );
 }
 
 offer.propTypes = {
     title: PropTypes.string.isRequired,
-    // imageUrl: PropTypes.string.isRequired,
-    // des: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    des: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
-    row: {
-
-        height: 150,
-        paddingHorizontal: 16,
+    container: {
+        flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
-
+        backgroundColor: '#ffffff',
     },
-    text: {
+    button: {
+        marginTop: 16
+    },
+    title: {
+        padding: 15,
+        fontSize: 20,
+        textAlign: 'center'
+
+    }
+    , des: {
+        padding: 15,
         fontSize: 16,
 
+
     },
-    image: {
-        width: 150,
-        height: 150
-    }
+    image: {flex: 1, resizeMode: 'stretch', width: 400, height: 400}
 });
+
 export default offer;

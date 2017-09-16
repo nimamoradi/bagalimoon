@@ -20,25 +20,25 @@ class NavigationTypes extends React.Component {
     offer = () => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
-            // params: {
-                title: 'New Screen',//todo add param
-                // imageUrl: 'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg',
-                // des: 'hi hello'
-            // }
+            title: 'hot offer',//todo add param
+            passProps: {
+                title: 'تنقلات',
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                des: '95 درصد تخفیف '
+            },
+
+
         });
     };
 
 
+    pushScreen = () => {
+        this.props.navigator.push({
+            screen: 'example.Types.Push',
+            title: 's',
 
-
-
-    // pushScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.Push',
-    //     title: 'New Screen',
-
-    //   });
-    // };
+        });
+    };
 
     // pushCustomTopBarScreen = () => {
     //   this.props.navigator.push({
@@ -100,16 +100,17 @@ class NavigationTypes extends React.Component {
     //   });
     // };
 
+
     render() {
         return (
             <ScrollView style={styles.container}>
                 <Row style={styles.row} title={'Toggle Drawer'} onPress={this.toggleDrawer}/>
                 <ImageRow title={'offer'}
-                          imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
+                          imageUrl={'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg'}
                           onPress={this.offer}/>
                 <ImageRow title={'top sell'}
                           imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
-                          onPress={this.toggleDrawer}/>
+                          onPress={this.pushScreen}/>
             </ScrollView>
 
 

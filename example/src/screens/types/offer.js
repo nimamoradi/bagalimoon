@@ -3,10 +3,18 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 
 class offer extends Component {
-    onAddToBasket = () => {
+    desPan = () => {
+        this.props.navigator.push({
+            screen: 'example.Types.descriptionPan',
+            title: 'hot offer',
+            passProps: {
+               // date:data ,
+               //  size:size,
+            },
 
+
+        });
     };
-
 
     render() {
         return (
@@ -15,13 +23,41 @@ class offer extends Component {
                     <View style={styles.container}>
                         <Text style={styles.title}>{this.props.title}</Text>
                         <Image style={styles.image} source={{uri: this.props.imageUrl}}/>
+                        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                            <TouchableOpacity>
+                                <Text style={{
+                                    margin: 10,
+                                    borderRadius: 10,
+                                    borderColor: '#bec4be',
+                                    borderWidth: 0.5,
+                                    padding: 20
+                                }}>
+                                    نظرات کاربران
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                             onPress={this.desPan}
+                            >
+                                <Text style={{
+                                    margin: 10,
+                                    borderRadius: 10,
+                                    borderColor: '#bec4be',
+                                    borderWidth: 0.5,
+                                    padding: 20,
+                                }}>
+                                    مشخصات محصول
+                                </Text>
+                            </TouchableOpacity>
+
+                        </View>
                         <Text style={styles.des}>{this.props.des}</Text>
                     </View>
 
                     <TouchableOpacity
                         color="#ffff00"
                         style={{
-                            margin:15,
+                            margin: 15,
                             marginLeft: 150,
                             marginRight: 150,
                         }}
@@ -92,7 +128,7 @@ const styles = StyleSheet.create({
 
 
     },
-    image: {flex: 1, resizeMode: 'stretch', width: 400, height: 400}
+    image: {flex: 1, resizeMode: 'stretch', width: 380, height: 380}
 });
 
 export default offer;

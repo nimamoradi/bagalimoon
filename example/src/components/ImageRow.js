@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
 
     },
-    image:{flex:1,resizeMode:'stretch',width:400}
+    image:{flex:1,resizeMode:'stretch',width:380}
 });
 
 

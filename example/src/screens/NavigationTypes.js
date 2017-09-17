@@ -17,15 +17,14 @@ class NavigationTypes extends React.Component {
             animated: true
         });
     };
-    offer = () => {
+    offer = (title,imageUrl,des) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
-            title: 'hot offer',//todo add param
+            title: 'hot offer',
             passProps: {
-                title: 'تنقلات',
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                des: '95 درصد تخفیف مفت مفت!!' +
-                'هدفون‌های بیتس اغلب به‌عنوان وسیله‌ای با صدایی شفاف و رسا شناخته می‌شوند. Studio Wirless  یکی از محصولات بی‌سیم بیتس است که در عین زیبایی و سبک‌وزنی، صدایی شفاف به همراه بیسی عالی ارائه می‌دهد. این دستگاه با وجود کارآمدبودن باتری ضعیفی دارد. آن را به افراد حرفه‌ای پیشنهاد می‌کنیم که می‌خواهند به موسیقی با صدایی رسا گوش دهند. در ادامه، بیشتر به این محصول خواهیم پرداخت'
+                title:title ,
+                imageUrl: imageUrl,
+                des: des
             },
 
 
@@ -108,10 +107,21 @@ class NavigationTypes extends React.Component {
                 <Row style={styles.row} title={'Toggle Drawer'} onPress={this.toggleDrawer}/>
                 <ImageRow title={'offer'}
                           imageUrl={'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg'}
-                          onPress={this.offer}/>
+                          onPress={()=>this.offer('تنقلات' ,
+                              'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg' ,
+                              'دستگاه «PIXMA G2400» ساخت شرکت «Canon» پرینتری جوهرافشان است که علاوه‌بر پرینت، قابلیت‌های دیگری مانند اسکن و کپی را هم به همراه دارد. این پرینتر اگرچه چندکاره طراحی شده ' +
+                              'است، قابلیت‌ چاپ عکس را به ‌صورت اختصاصی هم دارد. درنتیجه می‌توانید این پرینتر را برای چاپ عکس با کیفیت بالا خرید' +
+                              'اری کنید و از قابلیت‌های اسکن و کپی هم در آن بهره ببرید. این دستگاه از سیستم مخزن جوهر یا همان تانکر استف' +
+                              'اده می‌کند که در مدیریت هزینه‌ها تأثیر بسیار زیادی دارد و با اتمام جوهر، نیازی به تعویض کارتریج آن نیست؛ تن' +
+                              'ها کافی است جوهر موردنیاز را در مخزن مناسب خود بریزید. انواع کاغذ‌های مخصوص چاپ عکس در این پرینتر قابل ‌اس' +
+                              'تفاده هستند که می‌توانید شرح آن‌ها را در قسمت مشخصات فنی محصول مشاهده فرمایید. یکی از ویژگی‌های مثبت ای' +
+                              'ن دستگاه، قابلیت چاپ بدون حاشیه است که درنتیجه‌ی آن می‌توانید عکس‌های تمام‌صفحه روی کاغذ مخ' +
+                              'صوص عکس، چاپ کنید. برای اتصال این دستگاه به رایانه باید از درگاه USB استفاده کرد.'
+                          )}/>
                 <ImageRow title={'top sell'}
                           imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
                           onPress={this.pushScreen}/>
+
             </ScrollView>
 
 

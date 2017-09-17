@@ -10,7 +10,7 @@ import LightBox from './types/LightBox';
 import Notification from './types/Notification';
 import Modal from './types/Modal';
 import offer from './types/offer';
-
+import descriptionPan from '../components/descriptionPan';
 import CustomTopBarScreen from './types/CustomTopBarScreen';
 import CustomButtonScreen from './types/CustomButtonScreen';
 import TopTabs from './types/TopTabs';
@@ -40,6 +40,7 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.CustomTopBarScreen', () => CustomTopBarScreen);
   Navigation.registerComponent('example.Types.CustomButtonScreen', () => CustomButtonScreen);
   Navigation.registerComponent('example.Types.offer', () => offer);
+  Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
 
   Navigation.registerComponent('example.Types.TopTabs', () => TopTabs);
   Navigation.registerComponent('example.Types.TopTabs.TabOne', () => TabOne);

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/superMan.iml" filepath="$PROJECT_DIR$/.idea/superMan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/node_modules/react-native-navigation/android/app/build/intermediates/bundles/default/default.iml" filepath="$PROJECT_DIR$/example/node_modules/react-native-navigation/android/app/build/intermediates/bundles/default/default.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/.idea/modules/myapplication/myapplication.iml" group="myapplication" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/superMan.iml" filepath="$PROJECT_DIR$/.idea/modules/superMan.iml" />
     </modules>
   </component>
 </project>

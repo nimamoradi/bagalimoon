@@ -8,7 +8,9 @@ function descriptionPan() {
     return (
 
             <View>
-                <Text >ss</Text>
+                <Text>
+                    hello dolly
+                </Text>
             </View>
 
     );

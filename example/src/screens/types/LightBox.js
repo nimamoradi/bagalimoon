@@ -12,7 +12,7 @@ class Lightbox extends React.Component {
         </View>
         <View style={{flex: 2}}>
           <Button
-            title={'Close'}
+            title={'بستن'}
             onPress={() => this.props.onClose()}
           />
         </View>

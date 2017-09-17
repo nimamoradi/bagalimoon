@@ -1,21 +1,67 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Button, Image, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 
 class offer extends Component {
+    onAddToBasket = () => {
+
+    };
 
 
     render() {
         return (
             <ScrollView>
-                <View style={styles.container}>
-                    <Text style={styles.title}>{this.props.title}</Text>
-                    <Image style={styles.image} source={{uri: this.props.imageUrl}}/>
-                    <Text style={styles.des}>{this.props.des}</Text>
+                <View>
+                    <View style={styles.container}>
+                        <Text style={styles.title}>{this.props.title}</Text>
+                        <Image style={styles.image} source={{uri: this.props.imageUrl}}/>
+                        <Text style={styles.des}>{this.props.des}</Text>
+                    </View>
+
+                    <TouchableOpacity
+                        color="#ffff00"
+                        style={{
+                            margin:15,
+                            marginLeft: 150,
+                            marginRight: 150,
+                        }}
+                        onPress={this.showLightBox}>
+                        <Text style={{
+                            flex: 1,
+
+                            backgroundColor: '#8ac47d',
+                            flexDirection: 'row',
+                            textAlign: 'center',
+                            borderColor: '#6bb7dd',
+                            borderRadius: 20,
+                            justifyContent: 'center',
+                        }}>
+                            افزودن به سبد خرید
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         );
     }
+
+    showLightBox = () => {
+        this.props.navigator.showLightBox({
+            screen: "example.Types.LightBox",
+            passProps: {
+                title: 'توجه',
+                content: 'به سبد خرید اضافه شد',
+                onClose: this.dismissLightBox,
+            },
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                tapBackgroundToDismiss: true
+            }
+        });
+    };
+    dismissLightBox = () => {
+        this.props.navigator.dismissLightBox();
+    };
 
 
 }
@@ -33,9 +79,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
-    },
-    button: {
-        marginTop: 16
     },
     title: {
         padding: 15,

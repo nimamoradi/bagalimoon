@@ -16,22 +16,23 @@ let navigator;
 dismissLightBox = () => {
     navigator.dismissLightBox();
 };
-const CustomButton = ({text}) =>
+showLightBox = () => navigator.showLightBox({
+    screen: 'example.Types.newComment',
+    title: 'نظرات',
+    passProps: {
+        title: 'پیغام جدید',
+        content: 'Hey there, I\'m a light box screen :D',
+        onClose: this.dismissLightBox,
+    },
+});
+const CustomButton = ({text}) => (
     <TouchableOpacity
         style={[styles.buttonContainer]}
-        onPress={() => navigator.showLightBox({
-            screen: 'example.Types.newComment',
-            title: 'نظرات',
-            passProps: {
-                            title: 'پیغام جدید',
-                            content: 'Hey there, I\'m a light box screen :D',
-                            onClose: this.dismissLightBox,
-                        },
-        })}>
+        onPress={() => showLightBox()}>
         <View style={styles.button}>
             <Text style={{color: 'black'}}>{text}</Text>
         </View>
-    </TouchableOpacity>;
+    </TouchableOpacity>);
 Navigation.registerComponent('CustomButton', () => CustomButton);
 
 

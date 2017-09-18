@@ -20,6 +20,7 @@ import opinion from '../components/opinion'
 import CollapsingHeader from './transitions/CollapsingHeader';
 import SharedElementTransitions from './transitions/SharedElementTransitions';
 
+import  newComment from './types/newComment'
 import Cards from './transitions/sharedElementTransitions/Cards/Cards';
 import CardsInfo from './transitions/sharedElementTransitions/Cards/Info';
 
@@ -42,12 +43,13 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.offer', () => offer);
   Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
   Navigation.registerComponent('example.Types.opinion', () => opinion);
+    Navigation.registerComponent('example.Types.newComment', () => newComment);
 
   Navigation.registerComponent('example.Types.TopTabs', () => TopTabs);
   Navigation.registerComponent('example.Types.TopTabs.TabOne', () => TabOne);
   Navigation.registerComponent('example.Types.TopTabs.TabTwo', () => TabTwo);
 
-
+    newComment
   Navigation.registerComponent('example.Transitions.CollapsingHeader', () => CollapsingHeader);
   Navigation.registerComponent('example.Transitions.SharedElementTransitions', () => SharedElementTransitions);
   Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards', () => Cards);

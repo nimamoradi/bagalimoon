@@ -6,7 +6,7 @@ function singleOpinion({title,name,opinion}) {
 
     return (
 
-        <View>
+        <View style={styles.row}>
             <Text>{name}</Text>
             <Text style={styles.text}>{title}</Text>
             <Text>{opinion}</Text>
@@ -23,13 +23,11 @@ singleOpinion.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        height: 48,
-        paddingHorizontal: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        marginBottom: 10,
+        borderRadius: 10,
+        borderColor: '#bec4be',
+        borderWidth: 0.5,
+        padding: 20,
     },
     text: {
         fontSize: 18,

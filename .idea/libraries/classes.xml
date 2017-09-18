@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="classes">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/example/node_modules/react-native-navigation/android/app/build/intermediates/bundles/default/classes.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

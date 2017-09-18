@@ -1,4 +1,4 @@
-#Sat Sep 16 19:48:20 IRDT 2017
-base.0=E\:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Sun Sep 17 11:58:01 IRDT 2017
+base.0=E\:\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=E\:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=E\:\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

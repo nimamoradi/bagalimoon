@@ -15,6 +15,18 @@ class offer extends Component {
 
         });
     };
+    opinion = () => {
+        this.props.navigator.push({
+            screen: 'example.Types.opinion',
+            title: 'نظرات',
+            passProps: {
+                title:' hi'
+                //  size:size,
+            },
+
+
+        });
+    };
 
     render() {
         return (
@@ -24,7 +36,9 @@ class offer extends Component {
                         <Text style={styles.title}>{this.props.title}</Text>
                         <Image style={styles.image} source={{uri: this.props.imageUrl}}/>
                         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                            onPress={this.opinion}
+                            >
                                 <Text style={{
                                     margin: 10,
                                     borderRadius: 10,
@@ -37,8 +51,7 @@ class offer extends Component {
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                             onPress={this.desPan}
-                            >
+                             onPress={this.desPan}>
                                 <Text style={{
                                     margin: 10,
                                     borderRadius: 10,

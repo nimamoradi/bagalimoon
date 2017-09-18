@@ -13,7 +13,6 @@ class Push extends Component {
     });
   };
 
-
   onResetTo = () => {
     this.props.navigator.resetTo({
       label: 'Navigation',

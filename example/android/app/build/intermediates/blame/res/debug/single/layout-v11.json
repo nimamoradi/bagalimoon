@@ -4,16 +4,8 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_media_cancel_action.xml"
     },
     {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_media_action.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_media_action.xml"
-    },
-    {
         "merged": "E:\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_media_action.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_media_action.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_narrow.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_template_big_media_narrow.xml"
     },
     {
         "merged": "E:\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media.xml",
@@ -28,23 +20,7 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_template_big_media_narrow_custom.xml"
     },
     {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_narrow_custom.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_template_big_media_narrow_custom.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_media_cancel_action.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_media_cancel_action.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_custom.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_template_big_media_custom.xml"
-    },
-    {
         "merged": "E:\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media_custom.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_template_big_media_custom.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11\\notification_template_big_media.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\layout-v11\\notification_template_big_media.xml"
     }
 ]

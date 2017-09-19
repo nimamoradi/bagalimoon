@@ -1,5 +1,5 @@
 import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
-
+import test from '../screens/text';
 import Types from './NavigationTypes';
 import Actions from './Actions';
 import Transitions from './Transitions';
@@ -32,6 +32,8 @@ export function registerScreens() {
   Navigation.registerComponent('example.Actions', () => Actions);
   Navigation.registerComponent('example.Transitions', () => Transitions);
 
+
+    Navigation.registerComponent('example.Types.test', () => test);
   Navigation.registerComponent('example.Types.Push', () => Push);
   Navigation.registerComponent('example.Types.Drawer', () => Drawer);
   Navigation.registerComponent('example.Types.Screen', () => Drawer);

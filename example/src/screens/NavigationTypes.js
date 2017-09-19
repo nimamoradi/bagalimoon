@@ -7,7 +7,7 @@ class NavigationTypes extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
 
 
@@ -34,8 +34,8 @@ class NavigationTypes extends React.Component {
 
     pushScreen = () => {
         this.props.navigator.push({
-            screen: 'example.Types.Push',
-            title: 's',
+            screen: 'example.Types.test',
+            title: 'list view',
 
         });
     };
@@ -99,12 +99,23 @@ class NavigationTypes extends React.Component {
     //     screen: 'example.Types.Notification',
     //   });
     // };
+    onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+
+        if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+            if (event.id == 'back') { // this is the same id field from the static navigatorButtons definition
+                this.toggleDrawer()
+            }
+            if (event.id == 'edit') {
+                // AlertIOS.alert('NavBar', 'Add button pressed');
+            }
+        }
+    }
 
 
     render() {
         return (
             <ScrollView style={styles.container}>
-                <Row style={styles.row} title={'Toggle Drawer'} onPress={this.toggleDrawer}/>
+
                 <ImageRow title={'offer'}
                           imageUrl={'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg'}
                           onPress={()=>this.offer('تنقلات' ,
@@ -121,7 +132,7 @@ class NavigationTypes extends React.Component {
                 <ImageRow title={'top sell'}
                           imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
                           onPress={this.pushScreen}/>
-
+                <Row style={styles.row} title={'Toggle Drawer'} onPress={this.toggleDrawer}/>
             </ScrollView>
 
 

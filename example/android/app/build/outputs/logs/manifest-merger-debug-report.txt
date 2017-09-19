@@ -20,7 +20,7 @@ ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 application
 ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:6:5-20:19
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:11:5-18:19
-MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\13f1f3c00c531bc6cecf980cd7fc103b40edeed4\output\AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:3:3-17
 MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.android\build-cache\a7f03022832eaf97df1a7696f3b7a5e704d83134\output\AndroidManifest.xml:2:3-17
 MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:11:5-20
@@ -66,7 +66,7 @@ ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 uses-sdk
 INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\13f1f3c00c531bc6cecf980cd7fc103b40edeed4\output\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41
 MERGED from [com.facebook.fresco:fresco:1.0.1] C:\Users\nima\.android\build-cache\edf05249fdf7a41fd6f248f1e2a2b9af6029a7b9\output\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:drawee:1.0.1] C:\Users\nima\.android\build-cache\491d73c6b3c676ab89687e2530d4a195211039c6\output\AndroidManifest.xml:5:5-7:41
@@ -111,9 +111,9 @@ ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan\ex
 	android:name
 		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:16:13-77
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\13f1f3c00c531bc6cecf980cd7fc103b40edeed4\output\AndroidManifest.xml:11:5-78
+ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:11:5-78
 	android:name
-		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\13f1f3c00c531bc6cecf980cd7fc103b40edeed4\output\AndroidManifest.xml:11:22-75
+		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:11:22-75
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE

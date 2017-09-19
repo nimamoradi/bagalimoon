@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Dimensions, Button} from 'react-native';
+import PropTypes from 'prop-types';
 
 class newComment extends React.Component {
 
@@ -20,6 +21,10 @@ class newComment extends React.Component {
         );
     }
 }
+newComment.propTypes = {
+    title: PropTypes.string.isRequired,
+
+};
 
 const styles = StyleSheet.create({
     container: {

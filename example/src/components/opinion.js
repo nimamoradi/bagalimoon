@@ -3,6 +3,7 @@ import {
     View,
     StyleSheet,
     Text,
+    Image,
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
@@ -29,9 +30,9 @@ const CustomButton = ({text}) => (
     <TouchableOpacity
         style={[styles.buttonContainer]}
         onPress={() => showLightBox()}>
-        <View style={styles.button}>
-            <Text style={{color: 'black'}}>{text}</Text>
-        </View>
+
+            <Image style={styles.button} source={require('../../img/plus.png')}/>
+
     </TouchableOpacity>);
 Navigation.registerComponent('CustomButton', () => CustomButton);
 
@@ -45,7 +46,7 @@ export default class opinion extends React.Component {
                 id: 'custom-button',
                 component: 'CustomButton',
                 passProps: {
-                    text: 'htc,nk kzv'
+                    text: 'افزودن پیام'
                 }
             }
         ]
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     container: {
         margin: 5,
         flex: 1,
+        flexDirection:'column',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white'
@@ -101,11 +103,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     button: {
-        backgroundColor: 'tomato',
         width: 34,
         height: 34,
         borderRadius: 34 / 2,
-        overflow: 'hidden',
+
         justifyContent: 'center',
         alignItems: 'center'
     },

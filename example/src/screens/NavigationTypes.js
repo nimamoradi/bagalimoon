@@ -1,13 +1,15 @@
 import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView, View} from 'react-native';
 import Row from '../components/Row';
 import ImageRow from "../components/ImageRow";
+import Header from '../components/header'
+import Item from '../components/item'
 
 class NavigationTypes extends React.Component {
 
     constructor(props) {
         super(props);
-         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
 
 
@@ -17,12 +19,12 @@ class NavigationTypes extends React.Component {
             animated: true
         });
     };
-    offer = (title,imageUrl,des) => {
+    offer = (title, imageUrl, des) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
             title: 'hot offer',
             passProps: {
-                title:title ,
+                title: title,
                 imageUrl: imageUrl,
                 des: des
             },
@@ -114,12 +116,12 @@ class NavigationTypes extends React.Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container }>
 
                 <ImageRow title={'offer'}
                           imageUrl={'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg'}
-                          onPress={()=>this.offer('تنقلات' ,
-                              'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg' ,
+                          onPress={() => this.offer('تنقلات',
+                              'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                               'دستگاه «PIXMA G2400» ساخت شرکت «Canon» پرینتری جوهرافشان است که علاوه‌بر پرینت، قابلیت‌های دیگری مانند اسکن و کپی را هم به همراه دارد. این پرینتر اگرچه چندکاره طراحی شده ' +
                               'است، قابلیت‌ چاپ عکس را به ‌صورت اختصاصی هم دارد. درنتیجه می‌توانید این پرینتر را برای چاپ عکس با کیفیت بالا خرید' +
                               'اری کنید و از قابلیت‌های اسکن و کپی هم در آن بهره ببرید. این دستگاه از سیستم مخزن جوهر یا همان تانکر استف' +
@@ -129,10 +131,42 @@ class NavigationTypes extends React.Component {
                               'ن دستگاه، قابلیت چاپ بدون حاشیه است که درنتیجه‌ی آن می‌توانید عکس‌های تمام‌صفحه روی کاغذ مخ' +
                               'صوص عکس، چاپ کنید. برای اتصال این دستگاه به رایانه باید از درگاه USB استفاده کرد.'
                           )}/>
+                <Header title="پیشنهاد ویژه"/>
                 <ImageRow title={'top sell'}
-                          imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
+                          imageUrl={'https://www.w3schools.com/css/paris.jpg'}
                           onPress={this.pushScreen}/>
-                <Row style={styles.row} title={'Toggle Drawer'} onPress={this.toggleDrawer}/>
+
+                <View style={{flexDirection: 'row', flex: 1,marginTop:20}}>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        <Item title={'top sell'}
+                              price={'100,000'}
+                              imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
+                              onPress={this.pushScreen}/>
+                        <Item title={'top sell'}
+                              price={'100,000'}
+                              imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
+                              onPress={this.pushScreen}/>
+                        <Item title={'top sell'}
+                              price={'100,000'}
+                              imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
+                              onPress={this.pushScreen}/>
+                        <Item title={'top sell'}
+                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                              onPress={this.pushScreen}/>
+                        <Item title={'top sell'}
+                              price={'100,000'}
+                              imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
+                              onPress={this.pushScreen}/>
+                        <Item title={'top sell'}
+                              price={'100,000'}
+                              imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
+                              onPress={this.pushScreen}/>
+                        <Item title={'top sell for you and me and all '}
+                              price={'100,000'}
+                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                              onPress={this.pushScreen}/>
+                    </ScrollView>
+                </View>
             </ScrollView>
 
 
@@ -144,8 +178,10 @@ class NavigationTypes extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#eeeceb'
     },
     row: {
+
         height: 50,
         paddingHorizontal: 16,
         flexDirection: 'row',

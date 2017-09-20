@@ -8,8 +8,8 @@ class offer extends Component {
             screen: 'example.Types.descriptionPan',
             title: 'hot offer',
             passProps: {
-               // date:data ,
-               //  size:size,
+                // date:data ,
+                //  size:size,
             },
 
 
@@ -20,7 +20,7 @@ class offer extends Component {
             screen: 'example.Types.opinion',
             title: 'نظرات',
             passProps: {
-                title:' hi'
+                title: ' hi'
                 //  size:size,
             },
 
@@ -30,64 +30,44 @@ class offer extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <View>
-                    <View style={styles.container}>
-                        <Text style={styles.title}>{this.props.title}</Text>
-                        <Image style={styles.image} source={{uri: this.props.imageUrl}}/>
-                        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                            <TouchableOpacity
+            <ScrollView contentContainerStyle={{flex: 1, margin: 15,    flexDirection: "column",
+                alignItems: "stretch",}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={{flex: 1}}>
+                        <Text>
+                            ji
+                        </Text>
+                    </View>
+                    <Image source={{
+                        uri: this.props.imageUrl
+                    }}
+                           style={{flex: 1}}/>
+
+                </View>
+                <View style={{flex: 0.35,justifyContent:"center" ,alignItems:"center"}}>
+                    <View style={styles.flexRow}>
+                        <TouchableOpacity
+                            style={styles.flex}
                             onPress={this.opinion}
-                            >
-                                <Text style={{
-                                    margin: 10,
-                                    borderRadius: 10,
-                                    borderColor: '#bec4be',
-                                    borderWidth: 0.5,
-                                    padding: 20
-                                }}>
-                                    نظرات کاربران
-                                </Text>
-                            </TouchableOpacity>
+                        >
+                            <Text style={styles.buttonText}>
+                                نظرات کاربران
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.flex}
+                            onPress={this.desPan}>
+                            <Text style={styles.buttonText}>
+                                مشخصات محصول
+                            </Text>
+                        </TouchableOpacity>
 
-                            <TouchableOpacity
-                             onPress={this.desPan}>
-                                <Text style={{
-                                    margin: 10,
-                                    borderRadius: 10,
-                                    borderColor: '#bec4be',
-                                    borderWidth: 0.5,
-                                    padding: 20,
-                                }}>
-                                    مشخصات محصول
-                                </Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <Text style={styles.des}>{this.props.des}</Text>
                     </View>
 
-                    <TouchableOpacity
-                        color="#ffff00"
-                        style={{
-                            margin: 15,
-                            marginLeft: 150,
-                            marginRight: 150,
-                        }}
-                        onPress={this.showLightBox}>
-                        <Text style={{
-                            flex: 1,
 
-                            backgroundColor: '#8ac47d',
-                            flexDirection: 'row',
-                            textAlign: 'center',
-                            borderColor: '#6bb7dd',
-                            borderRadius: 20,
-                            justifyContent: 'center',
-                        }}>
-                            افزودن به سبد خرید
-                        </Text>
-                    </TouchableOpacity>
+                </View>
+                <View style={styles.flex}>
+                    <Text>{this.props.des}</Text>
                 </View>
             </ScrollView>
         );
@@ -122,6 +102,11 @@ offer.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    flex: {
+        flex: 1,
+
+    },
+    flexRow: { flexDirection: 'row'},
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -135,13 +120,18 @@ const styles = StyleSheet.create({
         textAlign: 'center'
 
     }
-    , des: {
-        padding: 15,
-        fontSize: 16,
+    , des: {},
+    image: {flex: 1, alignSelf: 'stretch', width: undefined, height: undefined},
+    buttonText: {
+        textAlign: 'center',
+        margin: 10,
+
+        borderRadius: 10,
+        borderColor: '#bec4be',
+        borderWidth: 0.5,
 
 
-    },
-    image: {flex: 1, resizeMode: 'stretch', width: 380, height: 380}
+    }
 });
 
 export default offer;

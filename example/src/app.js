@@ -63,7 +63,7 @@ Navigation.startSingleScreenApp({
         screen: 'example.Types', // unique ID registered with Navigation.registerScreen
         title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
         navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-        navigatorButtons: {
+            navigatorButtons: {
             // leftButtons: [
             //     {
             //         title: 'Edit',
@@ -108,6 +108,6 @@ Navigation.startSingleScreenApp({
         disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
     },
     passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
-    animationType: 'slide-down', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+    animationType: 'fade', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
 
 });

@@ -1,37 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Platform, Image, Dimensions} from 'react-native';
-let wid = Dimensions.get('window').width /2.5;
-function item({title, onPress,imageUrl,price}) {
+import {StyleSheet, View, Text, TouchableHighlight, Image} from 'react-native';
 
-
-    return (
-        <View style={{ backgroundColor:'#eeeceb'}}>
-            <TouchableHighlight
-                onPress={onPress}
-                underlayColor={'rgba(0, 0, 0, 0.054)'}>
-                <View style={styles.row}>
-                    <Image source={{uri: imageUrl}} style={styles.image}/>
-
-
-                    <Text style={styles.text}>{title}</Text>
+function item({title, onPress, imageUrl, price, disscount}) {
+    if (disscount == null) {
+        return (
+            <View style={styles.row}>
+                <Image source={{uri: imageUrl}} style={styles.image}/>
+                <Text style={styles.text}>{title}</Text>
+                <View style={styles.priceView}>
                     <Text style={styles.price}>{price}</Text>
+
+
                 </View>
-            </TouchableHighlight>
-        </View>
-    );
+            </View>
+        );
+    } else {
+
+        return (
+            <View style={styles.row}>
+                <Image source={{uri: imageUrl}} style={styles.image}/>
+                <Text style={styles.text}>{title}</Text>
+                <View style={styles.priceView}>
+                    <Text style={styles.price}>{price}</Text>
+
+                    <Text style={styles.discount}>{disscount}</Text>
+                </View>
+            </View>
+        );
+    }
 }
 
 item.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
+    disscount: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
+    priceView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     row: {
-        height: wid+20,
+        flex: 1,
         paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -43,8 +58,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
 
     },
-    price:{   fontSize: 16,color:'#17c408'},
-    image: {flex: 1, resizeMode: 'stretch', width: wid-15, height: wid-15}
+    price: {flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},
+    discount: {flex: 1, textDecorationLine: 'line-through', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
+    image: {flex: 1, resizeMode: 'stretch', height: 150, minWidth: 150, alignSelf: 'stretch',}
 });
 
 export default item;

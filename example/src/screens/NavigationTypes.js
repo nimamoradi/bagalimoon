@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View} from 'react-native';
-import Row from '../components/Row';
+import {StyleSheet, ScrollView, View, ListView} from 'react-native';
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
@@ -10,6 +9,18 @@ class NavigationTypes extends React.Component {
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            dataSource: ds.cloneWithRows([{
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                action_name: 'offer', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                action_name: 'offer', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }]),
+        };
     }
 
 
@@ -116,60 +127,65 @@ class NavigationTypes extends React.Component {
 
     render() {
         return (
-            <ScrollView style={styles.container }>
+            <View Style={{height: 500}}>
+                <ScrollView Style={{flex: 1,flexDirection:'column'}}>
+                    <View style={{flex: 1}}>
 
-                <ImageRow title={'offer'}
-                          imageUrl={'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg'}
-                          onPress={() => this.offer('تنقلات',
-                              'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                              'دستگاه «PIXMA G2400» ساخت شرکت «Canon» پرینتری جوهرافشان است که علاوه‌بر پرینت، قابلیت‌های دیگری مانند اسکن و کپی را هم به همراه دارد. این پرینتر اگرچه چندکاره طراحی شده ' +
-                              'است، قابلیت‌ چاپ عکس را به ‌صورت اختصاصی هم دارد. درنتیجه می‌توانید این پرینتر را برای چاپ عکس با کیفیت بالا خرید' +
-                              'اری کنید و از قابلیت‌های اسکن و کپی هم در آن بهره ببرید. این دستگاه از سیستم مخزن جوهر یا همان تانکر استف' +
-                              'اده می‌کند که در مدیریت هزینه‌ها تأثیر بسیار زیادی دارد و با اتمام جوهر، نیازی به تعویض کارتریج آن نیست؛ تن' +
-                              'ها کافی است جوهر موردنیاز را در مخزن مناسب خود بریزید. انواع کاغذ‌های مخصوص چاپ عکس در این پرینتر قابل ‌اس' +
-                              'تفاده هستند که می‌توانید شرح آن‌ها را در قسمت مشخصات فنی محصول مشاهده فرمایید. یکی از ویژگی‌های مثبت ای' +
-                              'ن دستگاه، قابلیت چاپ بدون حاشیه است که درنتیجه‌ی آن می‌توانید عکس‌های تمام‌صفحه روی کاغذ مخ' +
-                              'صوص عکس، چاپ کنید. برای اتصال این دستگاه به رایانه باید از درگاه USB استفاده کرد.'
-                          )}/>
-                <Header title="پیشنهاد ویژه"/>
-                <ImageRow title={'top sell'}
-                          imageUrl={'https://www.w3schools.com/css/paris.jpg'}
-                          onPress={this.pushScreen}/>
+                        <ListView
+                            style={{flexDirection:'row',flex:1}}
+                            horizontal={true}
+                            dataSource={this.state.dataSource}
+                            renderRow={(rowData) => <ImageRow  title={rowData.action_name} imageUrl={rowData.imageUrl}
+                                                              onPress={rowData.onPress}/>}
+                        />
+                        <Header style={{flex: 1}} title="پیشنهاد ویژه"/>
+                        <ImageRow title={'top sell'}
+                                  style={{flex: 1}}
+                                  imageUrl={'https://www.w3schools.com/css/paris.jpg'}
+                                  onPress={this.pushScreen}/>
 
-                <View style={{flexDirection: 'row', flex: 1,marginTop:20}}>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell for you and me and all '}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              onPress={this.pushScreen}/>
-                    </ScrollView>
-                </View>
-            </ScrollView>
+                        <View style={{flexDirection: 'row', flex: 1, marginTop: 20}}>
+                            <ScrollView Style={{flex: 1}} horizontal={true} showsHorizontalScrollIndicator={false}>
 
 
+                                <Item title={'top sell'}
+                                      price={'100,000'}
+                                      style={styles.item}
+                                      imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
+                                      onPress={this.pushScreen}/>
+                                <Item title={'top sell'}
+                                      style={styles.item}
+                                      price={'100,000'}
+                                      imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
+                                      onPress={this.pushScreen}/>
+                                <Item title={'top sell'}
+                                      style={styles.item}
+                                      price={'100,000'}
+                                      imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                                      onPress={this.pushScreen}/>
+                                <Item title={'top sell'}
+                                      price={'100,000'}
+                                      style={{flex: 1}}
+                                      imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
+                                      onPress={this.pushScreen}/>
+                                <Item title={'top sell'}
+                                      price={'100,000'}
+                                      style={styles.item}
+                                      disscount={'150,000'}
+                                      imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
+                                      onPress={this.pushScreen}/>
+                                <Item title={'top sell for you and me and all '}
+                                      style={styles.item}
+                                      price={'50,000'}
+                                      disscount={'150,000'}
+                                      imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                                      onPress={this.pushScreen}/>
+
+                            </ScrollView>
+                        </View>
+                    </View>
+                </ScrollView>
+            </View>
         );
 
     }
@@ -178,8 +194,10 @@ class NavigationTypes extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#eeeceb'
+        flexDirection: 'column',
+        backgroundColor: '#eeeceb'
     },
+    item: {flex: 1, minWidth: 120},
     row: {
 
         height: 50,
@@ -190,9 +208,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
-    text: {
-        fontSize: 16,
-    },
+
 });
 
 export default NavigationTypes;

@@ -30,10 +30,13 @@ class offer extends Component {
 
     render() {
         return (
-            <ScrollView contentContainerStyle={{flex: 1, margin: 15,    flexDirection: "column",
-                alignItems: "stretch",}}>
+            <ScrollView
+                contentContainerStyle={{
+                flex: 1, margin: 15, flexDirection: "column",
+                alignItems: "stretch",
+            }}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 0.6}}>
                         <Text>
                             ji
                         </Text>
@@ -41,10 +44,10 @@ class offer extends Component {
                     <Image source={{
                         uri: this.props.imageUrl
                     }}
-                           style={{flex: 1}}/>
+                           style={styles.image}/>
 
                 </View>
-                <View style={{flex: 0.35,justifyContent:"center" ,alignItems:"center"}}>
+                <View style={{flex: 0.35, justifyContent: "center", alignItems: "center"}}>
                     <View style={styles.flexRow}>
                         <TouchableOpacity
                             style={styles.flex}
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
         flex: 1,
 
     },
-    flexRow: { flexDirection: 'row'},
+    flexRow: {flexDirection: 'row'},
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -121,7 +124,12 @@ const styles = StyleSheet.create({
 
     }
     , des: {},
-    image: {flex: 1, alignSelf: 'stretch', width: undefined, height: undefined},
+    image: {
+        flex: 1, alignSelf: 'stretch', width: undefined, height: undefined,
+        borderRadius: 20,
+        borderColor: '#bec4be',
+        borderWidth: 0.5,
+    },
     buttonText: {
         textAlign: 'center',
         margin: 10,

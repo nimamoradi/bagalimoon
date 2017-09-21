@@ -19,7 +19,7 @@ header.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        height: 50,
+
         paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'flex-end',

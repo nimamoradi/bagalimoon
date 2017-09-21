@@ -55,12 +55,15 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {
+        width: '100%',
         fontSize: 16,
 
     },
     price: {flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},
     discount: {flex: 1, textDecorationLine: 'line-through', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
-    image: {flex: 1, resizeMode: 'stretch', height: 150, minWidth: 150, alignSelf: 'stretch',}
+    image: { height: '60%', minWidth:100, borderRadius: 20,
+        borderColor: '#bec4be',
+        borderWidth: 0.5,}
 });
 
 export default item;

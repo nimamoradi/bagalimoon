@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View, ListView} from 'react-native';
+import {StyleSheet, ScrollView, View, ListView, Text} from 'react-native';
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
@@ -11,7 +11,7 @@ class NavigationTypes extends React.Component {
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows([{
+            dataSourceOffer: ds.cloneWithRows([{
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                 action_name: 'offer', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
@@ -20,6 +20,28 @@ class NavigationTypes extends React.Component {
                 action_name: 'offer', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
             }]),
+
+
+
+            dataSourceItem: ds.cloneWithRows([{
+                imageUrl: 'https://www.w3schools.com/css/lights600x400.jpg',
+                title: 'light',
+                disscount: 'توضیحات',price:'100'
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                title: 'offer', price:'100',onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                title: 'offer',price:'100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                title: 'ofsadasdad asdsadfer',price:'100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }
+            ]),
+
         };
     }
 
@@ -127,65 +149,65 @@ class NavigationTypes extends React.Component {
 
     render() {
         return (
-            <View Style={{height: 500}}>
-                <ScrollView Style={{flex: 1,flexDirection:'column'}}>
-                    <View style={{flex: 1}}>
-
-                        <ListView
-                            style={{flexDirection:'row',flex:1}}
-                            horizontal={true}
-                            dataSource={this.state.dataSource}
-                            renderRow={(rowData) => <ImageRow  title={rowData.action_name} imageUrl={rowData.imageUrl}
-                                                              onPress={rowData.onPress}/>}
-                        />
-                        <Header style={{flex: 1}} title="پیشنهاد ویژه"/>
-                        <ImageRow title={'top sell'}
-                                  style={{flex: 1}}
-                                  imageUrl={'https://www.w3schools.com/css/paris.jpg'}
-                                  onPress={this.pushScreen}/>
-
-                        <View style={{flexDirection: 'row', flex: 1, marginTop: 20}}>
-                            <ScrollView Style={{flex: 1}} horizontal={true} showsHorizontalScrollIndicator={false}>
+            <ScrollView>
 
 
-                                <Item title={'top sell'}
-                                      price={'100,000'}
-                                      style={styles.item}
-                                      imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
-                                      onPress={this.pushScreen}/>
-                                <Item title={'top sell'}
-                                      style={styles.item}
-                                      price={'100,000'}
-                                      imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
-                                      onPress={this.pushScreen}/>
-                                <Item title={'top sell'}
-                                      style={styles.item}
-                                      price={'100,000'}
-                                      imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                                      onPress={this.pushScreen}/>
-                                <Item title={'top sell'}
-                                      price={'100,000'}
-                                      style={{flex: 1}}
-                                      imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
-                                      onPress={this.pushScreen}/>
-                                <Item title={'top sell'}
-                                      price={'100,000'}
-                                      style={styles.item}
-                                      disscount={'150,000'}
-                                      imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
-                                      onPress={this.pushScreen}/>
-                                <Item title={'top sell for you and me and all '}
-                                      style={styles.item}
-                                      price={'50,000'}
-                                      disscount={'150,000'}
-                                      imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                                      onPress={this.pushScreen}/>
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '30%'}}
+                    horizontal={true}
+                    dataSource={this.state.dataSourceOffer}
+                    renderRow={(rowData) => <ImageRow title={rowData.action_name} imageUrl={rowData.imageUrl}
+                                                      onPress={rowData.onPress}/>}
+                />
+                <Header style={{width: '100%',height: '10'}} title="پیشنهاد ویژه"/>
+                {/*<ImageRow title={'top sell'}*/}
+                {/*style={{flex: 1}}*/}
+                {/*imageUrl={'https://www.w3schools.com/css/paris.jpg'}*/}
+                {/*onPress={this.pushScreen}/>*/}
 
-                            </ScrollView>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View>
+
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                    horizontal={true}
+
+                    dataSource={this.state.dataSourceItem}
+                    renderRow={(rowData) => <Item title={rowData.title}
+                                                  style={styles.item}
+                                                  price={rowData.price}
+                                                  disscount={rowData.disscount}
+                                                  imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                                                  onPress={this.pushScreen}/>}
+                />
+                <Header style={{width: '100%',height: '10'}} title="پرفروش ترین ها"/>
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                    horizontal={true}
+
+                    dataSource={this.state.dataSourceItem}
+                    renderRow={(rowData) => <Item title={rowData.title}
+                                                  style={styles.item}
+                                                  price={rowData.price}
+                                                  disscount={rowData.disscount}
+                                                  imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                                                  onPress={this.pushScreen}/>}
+                />
+
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                    horizontal={true}
+
+                    dataSource={this.state.dataSourceItem}
+                    renderRow={(rowData) => <Item title={rowData.title}
+                                                  style={styles.item}
+
+                                                  price={rowData.price}
+                                                  disscount={rowData.disscount}
+                                                  imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
+                                                  onPress={this.pushScreen}/>}
+                />
+
+
+            </ScrollView>
         );
 
     }
@@ -197,7 +219,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#eeeceb'
     },
-    item: {flex: 1, minWidth: 120},
+
+    item: {flex: 1,},
     row: {
 
         height: 50,

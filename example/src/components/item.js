@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Image} from 'react-native';
 
+
 function item({title, onPress, imageUrl, price, disscount}) {
+
     if (disscount == null) {
         return (
             <View style={styles.row}>
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     row: {
-        flex: 1,
+
         paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -61,9 +63,11 @@ const styles = StyleSheet.create({
     },
     price: {flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},
     discount: {flex: 1, textDecorationLine: 'line-through', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
-    image: { height: '60%', minWidth:100, borderRadius: 20,
+    image: {
+        height: 150, minWidth: 100, borderRadius: 20,
         borderColor: '#bec4be',
-        borderWidth: 0.5,}
+        borderWidth: 0.5,
+    }
 });
 
 export default item;

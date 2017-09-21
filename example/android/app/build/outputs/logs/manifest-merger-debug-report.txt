@@ -65,6 +65,7 @@ ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:17:27-74
 uses-sdk
 INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [example:react-native-vector-icons:unspecified] E:\projects\superMan\example\node_modules\react-native-vector-icons\android\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41

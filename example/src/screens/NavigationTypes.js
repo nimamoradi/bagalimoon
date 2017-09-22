@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View, ListView, Text, Dimensions, Image} from 'react-native';
+import {StyleSheet, ScrollView, View, ListView, Text, Dimensions, Image,ViewPagerAndroid} from 'react-native';
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
@@ -17,23 +17,23 @@ class NavigationTypes extends React.Component {
 
         this.state = {
 
-            dataSourceOffer: ds.cloneWithRows([{
+            dataSourceOffer:[{
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', onPress: (() => this.offer('تنقلات',
+                action_name: 'offer',id:'0', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '1000', '2'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', onPress: (() => this.offer('تنقلات',
+                action_name: 'offer',id:'1', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', onPress: (() => this.offer('تنقلات',
+                action_name: 'offer',id:'2', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', onPress: (() => this.offer('تنقلات',
+                action_name: 'offer',id:'3', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
-            }]),
+            }],
             dataSourceItem: ds.cloneWithRows([{
                 imageUrl: 'https://www.w3schools.com/css/lights600x400.jpg',
                 title: 'light',
@@ -103,16 +103,28 @@ class NavigationTypes extends React.Component {
 
 
 
+
     render() {
 
+       let tmp=   this.state.dataSourceOffer;
+        // for (var i = 0; i < this.state.dataSourceOffer.length; i++) {
+        //     tmp.push(i);
+        // }
+        let indents = tmp.map(function (i) {
+            return (
+                <View>
+                    <ImageRow className='indent'  key={i.id}  imageUrl={ i.imageUrl } title={i.action_name} onPress={i.onPress}/>
+                </View>
+            );
+        });
         return (
             <ScrollView>
-                <ListView
-                    horizontal={true}
-                    dataSource={this.state.dataSourceOffer}
-                    renderRow={(rowData) => <ImageRow title={rowData.action_name} imageUrl={rowData.imageUrl}
-                                                      onPress={rowData.onPress}/>}
-                />
+                <ViewPagerAndroid
+                    style={{width:400,height:400}}
+                    initialPage={0}>
+                    {indents}
+                </ViewPagerAndroid>
+
 
                 <ListView
                     style={{flexDirection: 'row', width: '100%', height: '10%'}}

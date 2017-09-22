@@ -5,7 +5,7 @@ import Header from '../components/header'
 import Item from '../components/item'
 import TypeButton from '../components/TypeButton'
 
-const sliderWidth = Dimensions.get('window').width;
+
 
 
 class NavigationTypes extends React.Component {
@@ -34,10 +34,13 @@ class NavigationTypes extends React.Component {
                 action_name: 'offer',id:'3', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
             }],
+
+
+
             dataSourceItem: ds.cloneWithRows([{
                 imageUrl: 'https://www.w3schools.com/css/lights600x400.jpg',
                 title: 'light',
-                disscount: 'توضیحات', price: '100'
+                disscount: '120', price: '100'
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                 title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
@@ -51,7 +54,24 @@ class NavigationTypes extends React.Component {
                 title: 'ofsadasdad asdsadfer', price: '100', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
             }
+                , {
+                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                    title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                }
+                , {
+                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                    title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                }
+                , {
+                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                    title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                },
             ]),
+
+
             dataSourceTypes: ds.cloneWithRows(['پروتین', 'غذایی', 'تنقلات', 'شوینده', 'نان', 'لبنیات'])
 
         };
@@ -89,6 +109,16 @@ class NavigationTypes extends React.Component {
         });
     };
 
+    TypePage= (title) => {
+        this.props.navigator.push({
+            screen: 'example.TypePage',
+            title: 'hi',
+            passProps: {
+                title: title,
+
+            },
+        });
+    };
     onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
 
         if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
@@ -132,7 +162,7 @@ class NavigationTypes extends React.Component {
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceTypes}
                     renderRow={(rowData) =>
-                        <TypeButton title={rowData}/>}
+                        <TypeButton title={rowData} onPress={()=>this.TypePage(rowData)}/>}
                 />
                 <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
                 {/*<ImageRow title={'top sell'}*/}
@@ -164,9 +194,10 @@ class NavigationTypes extends React.Component {
                         <Item title={rowData.title}
                               style={styles.item}
                               price={rowData.price}
+                              onPress={this.pushScreen}
                               disscount={rowData.disscount}
                               imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              onPress={this.pushScreen}/>}
+                              />}
                 />
 
 

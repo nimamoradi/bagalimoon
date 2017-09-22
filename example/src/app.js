@@ -1,7 +1,7 @@
 import {Platform, Text, StyleSheet, View, TouchableOpacity, Button} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 // screen related book keeping
 registerScreens();

@@ -5,22 +5,16 @@ import Actions from './Actions';
 import Transitions from './Transitions';
 
 import Push from './types/Push';
-import Drawer from './types/Drawer';
 import LightBox from './types/LightBox';
-import Notification from './types/Notification';
-import Modal from './types/Modal';
+
+//my views
+import Drawer from './types/Drawer';
 import offer from './types/offer';
 import descriptionPan from '../components/descriptionPan';
-import CustomTopBarScreen from './types/CustomTopBarScreen';
-import CustomButtonScreen from './types/CustomButtonScreen';
-import TopTabs from './types/TopTabs';
-import TabOne from './types/tabs/TabOne';
-import TabTwo from './types/tabs/TabTwo';
 import opinion from '../components/opinion'
-import CollapsingHeader from './transitions/CollapsingHeader';
-import SharedElementTransitions from './transitions/SharedElementTransitions';
-
 import  newComment from './types/newComment'
+import TypePage from './TypePage'
+
 import Cards from './transitions/sharedElementTransitions/Cards/Cards';
 import CardsInfo from './transitions/sharedElementTransitions/Cards/Info';
 
@@ -39,25 +33,16 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.Modal', () => Modal);
   Navigation.registerComponent('example.Types.LightBox', () => LightBox);
   Navigation.registerComponent('example.Types.Notification', () => Notification);
-  Navigation.registerComponent('example.Types.CustomTopBarScreen', () => CustomTopBarScreen);
-  Navigation.registerComponent('example.Types.CustomButtonScreen', () => CustomButtonScreen);
+
+  Navigation.registerComponent('example.TypePage', () => TypePage);
   Navigation.registerComponent('example.Types.offer', () => offer);
   Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
   Navigation.registerComponent('example.Types.opinion', () => opinion);
-    Navigation.registerComponent('example.Types.newComment', () => newComment);
+  Navigation.registerComponent('example.Types.newComment', () => newComment);
 
-  Navigation.registerComponent('example.Types.TopTabs', () => TopTabs);
-  Navigation.registerComponent('example.Types.TopTabs.TabOne', () => TabOne);
-  Navigation.registerComponent('example.Types.TopTabs.TabTwo', () => TabTwo);
 
-    Navigation.registerComponent('example.Types.test', () => test);
-  Navigation.registerComponent('example.Transitions.CollapsingHeader', () => CollapsingHeader);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions', () => SharedElementTransitions);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards', () => Cards);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Masonry', () => Masonry);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
 
+  Navigation.registerComponent('example.Types.test', () => test);
 
 }
 

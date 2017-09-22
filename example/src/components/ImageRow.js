@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        flex: 1, width: Dimensions.get('window').width-70, height:Dimensions.get('window').width,
+        flex: 1, width: Dimensions.get('window').width, height:Dimensions.get('window').width-60,
 
     }
 });

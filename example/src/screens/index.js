@@ -26,14 +26,13 @@ import CardsInfo from './transitions/sharedElementTransitions/Cards/Info';
 
 import Masonry from './transitions/sharedElementTransitions/Masonry/Masonry';
 import MasonryItem from './transitions/sharedElementTransitions/Masonry/Item';
-
+import OrderItem from './types/tabs/orderItem'
 export function registerScreens() {
   Navigation.registerComponent('example.Types', () => Types);
   Navigation.registerComponent('example.Actions', () => Actions);
   Navigation.registerComponent('example.Transitions', () => Transitions);
 
-
-    Navigation.registerComponent('example.Types.test', () => test);
+  Navigation.registerComponent('example.Types.OrderItem', () => OrderItem);
   Navigation.registerComponent('example.Types.Push', () => Push);
   Navigation.registerComponent('example.Types.Drawer', () => Drawer);
   Navigation.registerComponent('example.Types.Screen', () => Drawer);

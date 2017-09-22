@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, TextInput, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class offer extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            myNumber:'0',
+        this.state = {
+            myNumber: '0',
         }
     }
 
@@ -16,8 +16,8 @@ class offer extends Component {
             screen: 'example.Types.descriptionPan',
             title: 'hot offer',
             passProps: {
-                date:data ,
-                 size:size,
+                date: data,
+                size: size,
             },
         });
     };
@@ -43,23 +43,24 @@ class offer extends Component {
             }
             else {
                 // your call back function
-                alert("please enter numbers only");
+                alert("فقط عددد وارد کنید");
             }
             this.setState({myNumber: newText});
         }
     };
     onUp = () => {
 
-        this.setState({myNumber:String(  Number.parseInt(this.state.myNumber, 10) + 1)});
+        this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) + 1)});
 
     }
     onDown = () => {
-        if( Number.parseInt(this.state.myNumber, 10)!==0)
-        this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) - 1)});
-        else  this.setState({myNumber: '0'});
+        if (Number.parseInt(this.state.myNumber, 10) !== 0)
+            this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) - 1)});
+        else this.setState({myNumber: '0'});
 
 
     }
+
     render() {
         return (
             <ScrollView
@@ -70,21 +71,29 @@ class offer extends Component {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                     <View style={{flex: 0.6, flexDirection: 'column'}}>
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{color: '#17c408'}}>{this.price}</Text>
+                            <Text style={{color: '#17c408'}}>{this.props.price}</Text>
                             <Text>قیمت :</Text>
                         </View>
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                             <TextInput
-                                value = {this.state.myNumber}
+                                value={this.state.myNumber}
                                 onChangeText={(text) => this.onChanged(text)}
                                 keyboardType='numeric' style={{textAlign: 'center'}}/>
                             <View style={{flex: 1, flexDirection: 'column'}}>
-                                <Icon name="plus" size={30} color="#900" style={{margin: 10}} onPress={this.onUp}/>
-                                <Icon name="minus" size={30} color="#009" style={{margin: 10}} onPress={this.onDown}/>
+                                <TouchableOpacity onPress={this.onUp}>
+                                    <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={this.onDown}>
+                                    <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
+                                </TouchableOpacity>
                             </View>
 
                         </View>
+                        <TouchableOpacity
+                            onPress={this.addToCart}>
 
+                            < Icon name="cart-plus" size={30} color="#17C408" style={{margin: 10}}/>
+                        </TouchableOpacity>
                     </View>
                     <Image source={{
                         uri: this.props.imageUrl
@@ -121,25 +130,45 @@ class offer extends Component {
         );
     }
 
-    showLightBox = () => {
-        this.props.navigator.showLightBox({
+    addToCart = () => {
+        if (this.state.myNumber !== '0')
+            this.props.navigator.showLightBox({
+                screen: "example.Types.OrderItem",
+                passProps: {
+                    title: this.props.title,
+                    price: this.props.price,
+                    imageUrl: this.props.imageUrl,
+                    count: this.state.myNumber,
+                    content: 'به سبد خرید اضافه شد',
+                    id: this.props.id,
+                    onClose: this.dismissLightBox,
+                },
+                style: {
+                    backgroundBlur: 'dark',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    tapBackgroundToDismiss: true
+                }
+            });
+        else this.props.navigator.showLightBox({
             screen: "example.Types.LightBox",
             passProps: {
                 title: 'توجه',
-                content: 'به سبد خرید اضافه شد',
+                content: 'مقدار کالا صفر است',
                 onClose: this.dismissLightBox,
             },
             style: {
-                backgroundBlur: 'dark',
-                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                backgroundBlur: 'red',
+                backgroundColor: 'rgba(20, 0, 0, 0.5)',
                 tapBackgroundToDismiss: true
             }
         });
     };
-    dismissLightBox = () => {
+    dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
-    };
+        if(sendTOHome)
+        this.props.navigator.pop();
 
+    };
 
 }
 
@@ -147,6 +176,7 @@ offer.propTypes = {
     title: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
     des: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

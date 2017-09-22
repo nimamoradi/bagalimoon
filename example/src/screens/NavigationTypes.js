@@ -18,11 +18,11 @@ class NavigationTypes extends React.Component {
             dataSourceOffer: ds.cloneWithRows([{
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                 action_name: 'offer', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg','توضیحات','1000','2'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                 action_name: 'offer', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg','توضیحات','55154','1'))
             }]),
 
 
@@ -37,11 +37,11 @@ class NavigationTypes extends React.Component {
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                 title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg','توضیحات'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
                 title: 'ofsadasdad asdsadfer', price: '100', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات' ))
             }
             ]),
 
@@ -55,14 +55,16 @@ class NavigationTypes extends React.Component {
             animated: true
         });
     };
-    offer = (title, imageUrl, des) => {
+    offer = (title, imageUrl, des,price,id) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
             title: 'hot offer',
             passProps: {
                 title: title,
                 imageUrl: imageUrl,
-                des: des
+                des: des,
+                price:price,
+                id:id
             },
 
 
@@ -78,65 +80,6 @@ class NavigationTypes extends React.Component {
         });
     };
 
-    // pushCustomTopBarScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.CustomTopBarScreen'
-    //   });
-    // };
-
-    // pushCustomButtonScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.CustomButtonScreen',
-    //     title: 'Custom Buttons'
-    //   });
-    // };
-
-    // pushTopTabsScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.TopTabs',
-    //     title: 'Top Tabs',
-    //     topTabs: [{
-    //       screenId: 'example.Types.TopTabs.TabOne',
-    //       title: 'Tab One',
-    //     }, {
-    //       screenId: 'example.Types.TopTabs.TabTwo',
-    //       title: 'Tab Two',
-    //     }],
-    //   });
-    // };
-
-    // showModal = () => {
-    //   this.props.navigator.showModal({
-    //     screen: 'example.Types.Modal',
-    //     title: 'Modal',
-    //   });
-    // };
-
-    // showLightBox = () => {
-    //     this.props.navigator.showLightBox({
-    //         screen: "example.Types.LightBox",
-    //         passProps: {
-    //             title: 'LightBox',
-    //             content: 'Hey there, I\'m a light box screen :D',
-    //             onClose: this.dismissLightBox,
-    //         },
-    //         style: {
-    //             backgroundBlur: 'dark',
-    //             backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    //             tapBackgroundToDismiss: true
-    //         }
-    //     });
-    // };
-
-    // dismissLightBox = () => {
-    //   this.props.navigator.dismissLightBox();
-    // };
-
-    // showInAppNotification = () => {
-    //   this.props.navigator.showInAppNotification({
-    //     screen: 'example.Types.Notification',
-    //   });
-    // };
     onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
 
         if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
@@ -160,7 +103,7 @@ class NavigationTypes extends React.Component {
                     horizontal={true}
                     dataSource={this.state.dataSourceOffer}
                     renderRow={(rowData) => <ImageRow title={rowData.action_name} imageUrl={rowData.imageUrl}
-                                                      onPress={rowData.onPress}/>}
+                                                    onPress={rowData.onPress}/>}
                 />
                 <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
                 {/*<ImageRow title={'top sell'}*/}

@@ -6,8 +6,9 @@ function tableRow({title, des}) {
     return (
 
             <View style={styles.row}>
-                <Text style={styles.text}>{title}</Text>
                 <Text style={styles.text}>{des}</Text>
+                <Text style={styles.text}>{title} :</Text>
+
             </View>
 
     );

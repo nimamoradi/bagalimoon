@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform, Image, Dimensions} from 'react-native';
 
-function ImageRow({title, onPress, imageUrl}) {
+function ImageRow({title, onPress, imageUrl,Dimensions}) {
 
 
     return (
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        flex: 1, width: 380, height: 380,
+        flex: 1, width: Dimensions.get('window').width-70, height:Dimensions.get('window').width,
 
     }
 });

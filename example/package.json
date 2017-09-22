@@ -17,7 +17,8 @@
     "react-native-navigation": "latest",
     "react-native-snap-carousel": "^3.2.3",
     "react-native-ultimate-listview": "^3.2.2",
-    "react-native-vector-icons": "^4.4.0"
+    "react-native-vector-icons": "^4.4.0",
+    "react-native-viewpager": "^0.2.13"
   },
   "devDependencies": {
     "detox": "^5.0.0",

@@ -50,7 +50,7 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.TopTabs.TabOne', () => TabOne);
   Navigation.registerComponent('example.Types.TopTabs.TabTwo', () => TabTwo);
 
-    newComment
+    Navigation.registerComponent('example.Types.test', () => test);
   Navigation.registerComponent('example.Transitions.CollapsingHeader', () => CollapsingHeader);
   Navigation.registerComponent('example.Transitions.SharedElementTransitions', () => SharedElementTransitions);
   Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards', () => Cards);

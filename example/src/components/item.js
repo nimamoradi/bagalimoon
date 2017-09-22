@@ -7,19 +7,22 @@ function item({title, onPress, imageUrl, price, disscount}) {
 
     if (disscount == null) {
         return (
-            <View style={styles.row}>
-                <Image source={{uri: imageUrl}} style={styles.image}/>
-                <Text style={styles.text}>{title}</Text>
-                <View style={styles.priceView}>
-                    <Text style={styles.price}>{price}</Text>
+            <TouchableHighlight onPress={onPress}>
+                <View style={styles.row}>
+                    <Image source={{uri: imageUrl}} style={styles.image}/>
+                    <Text style={styles.text}>{title}</Text>
+                    <View style={styles.priceView}>
+                        <Text style={styles.price}>{price}</Text>
 
 
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     } else {
 
         return (
+            <TouchableHighlight onPress={onPress}>
             <View style={styles.row}>
                 <Image source={{uri: imageUrl}} style={styles.image}/>
                 <Text style={styles.text}>{title}</Text>
@@ -29,6 +32,7 @@ function item({title, onPress, imageUrl, price, disscount}) {
                     <Text style={styles.discount}>{disscount}</Text>
                 </View>
             </View>
+            </TouchableHighlight>
         );
     }
 }

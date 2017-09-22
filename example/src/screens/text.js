@@ -1,5 +1,3 @@
-import React, {Component} from "react";
-import {StyleSheet, View, Alert, Text, TouchableOpacity , ListView} from "react-native";
 import Row from '../components/Row'
 // import UltimateListView from "react-native-ultimate-listview";
 //
@@ -63,24 +61,46 @@ import Row from '../components/Row'
 // }
 
 
-class test extends Component {
-    constructor() {
-        super();
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2','row 1', 'row 2']),
-};
-    }
+import React, {Component} from 'react';
+import {View, StyleSheet, ScrollView, Dimensions, ViewPagerAndroid, Text} from 'react-native';
+//import { Constants } from 'expo';
+
+const {width} = Dimensions.get('window');
+
+export default class test extends Component {
+
 
     render() {
+        var tmp = [];
+        for (var i = 0; i < 20; i++) {
+            tmp.push(i);
+        }
+        var indents = tmp.map(function (i) {
+            return (
+                <View>
+                    <Text className='indent'>hi</Text>
+                </View>
+            );
+        });
         return (
-            <ListView
-                horizontal={true}
-                dataSource={this.state.dataSource}
-                renderRow={(rowData) => <Row title={rowData}/>}
-            />
+            <ViewPagerAndroid
+                style={styles.viewPager}
+                initialPage={0}>
+                {indents}
+            </ViewPagerAndroid>
         );
     }
-
 }
-export default test;
+
+
+const styles = StyleSheet.create({
+    pageStyle: {
+        alignItems: 'center',
+        padding: 20,
+    }, viewPager: {
+        width: 400,
+        height: 400
+
+    },
+});
+

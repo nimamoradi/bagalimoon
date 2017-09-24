@@ -62,7 +62,7 @@ import Row from '../components/Row'
 
 
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView, Dimensions, ViewPagerAndroid, Text} from 'react-native';
+import {View, StyleSheet,ListView, TouchableOpacity, ScrollView, Dimensions, ViewPagerAndroid, Text} from 'react-native';
 //import { Constants } from 'expo';
 
 const {width} = Dimensions.get('window');
@@ -70,24 +70,80 @@ const {width} = Dimensions.get('window');
 export default class test extends Component {
 
 
-    render() {
-        var tmp = [];
-        for (var i = 0; i < 20; i++) {
-            tmp.push(i);
-        }
-        var indents = tmp.map(function (i) {
-            return (
-                <View>
-                    <Text className='indent'>hi</Text>
-                </View>
-            );
+    constructor(props) {
+        super(props);
+        var ds = new ListView.DataSource({
+            rowHasChanged: (row1, row2) => row1 !== row2,
         });
+        var dataVar = [
+            {
+                id:0,
+                selected: true,
+            },{
+                id:1,
+                selected: false,
+            },{
+                id:2,
+                selected: false,
+            }
+        ];
+        this.state = {
+            data: dataVar,
+            fields: ds,
+        };
+    }
+
+    componentDidMount() {
+
+        this.setState({
+            fields: this.state.fields.cloneWithRows(this.state.data)
+        });
+    }
+
+
+    handleClick(field) {
+        console.log(field);
+        var dataClone = this.state.data;
+
+        for(let i=0;i<dataClone.length;i++){
+            dataClone[i].selected = false;
+            // dataClones.getRowData(0,i).renderRow();
+            // dataClones.rowShouldUpdate(0,i);
+
+        }
+
+
+        field.selected = !field.selected;
+
+
+        console.log(dataClone);
+
+        dataClone[field.id] = field;
+
+        this.setState({
+            data: dataClone,
+        });
+    }
+
+    renderField(field) {
+        let color = (field.selected == true)?'green':'white';
         return (
-            <ViewPagerAndroid
-                style={styles.viewPager}
-                initialPage={0}>
-                {indents}
-            </ViewPagerAndroid>
+            <TouchableOpacity onPress={this.handleClick.bind(this, field)} >
+                <View style={{backgroundColor:color}}>
+                    <Text style={{left:0, right:0, paddingVertical:50,borderWidth:1}}>     {field.id}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+    render() {
+        return (
+            <View>
+                <ListView
+                    dataSource={this.state.fields}
+                    renderRow={(field) => this.renderField(field)}
+                />
+            </View>
         );
     }
 }

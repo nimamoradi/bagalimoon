@@ -9,11 +9,10 @@ function ImageRow({title, onPress, imageUrl,Dimensions}) {
         <TouchableHighlight
             onPress={onPress}
             style={styles.row}
-            underlayColor={'rgba(0, 0, 0, 0.054)'}
+            underlayColor={'rgba(0, 0, 0, 0.0)'}
         >
             <View style={styles.row}>
                 <Image source={{uri: imageUrl}} style={styles.image} resizeMode={'stretch'}/>
-                <Text style={styles.text}>hi</Text>
             </View>
         </TouchableHighlight>
     );
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        flex: 1, width: Dimensions.get('window').width, height:Dimensions.get('window').width-60,
+        flex: 1, width: Dimensions.get('window').width, height:Dimensions.get('window').width-Dimensions.get('window').width/3,
 
     }
 });

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
         borderBottomWidth: 1,
-        borderBottomColor: 'rgba(5, 5, 5, 0.054)',
+        borderBottomColor: 'rgba(5, 5, 5, 0.0)',
     },
     text: {
         fontSize: 23,

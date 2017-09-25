@@ -19,6 +19,9 @@ ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:4:22-64
 application
 ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:6:5-20:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:28:5-48:19
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:22:5-20
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:11:5-18:19
 MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:3:3-17
@@ -66,6 +69,9 @@ ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 uses-sdk
 INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [example:react-native-vector-icons:unspecified] E:\projects\superMan\example\node_modules\react-native-vector-icons\android\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:20:5-44
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41
@@ -99,6 +105,26 @@ MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android
 	android:minSdkVersion
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
+activity#com.facebook.FacebookActivity
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:29:9-32:66
+	android:configChanges
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:31:13-96
+	android:theme
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:32:13-63
+	android:name
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:30:13-57
+activity#com.facebook.CustomTabMainActivity
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:33:9-71
+	android:name
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:33:19-68
+provider#com.facebook.internal.FacebookInitProvider
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:44:9-47:40
+	android:authorities
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:46:13-72
+	android:exported
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:45:13-70
 activity#com.reactnativenavigation.controllers.NavigationActivity
 ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:12:9-14:86
 	android:configChanges

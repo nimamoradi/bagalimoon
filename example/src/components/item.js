@@ -22,7 +22,7 @@ function item({title, onPress, imageUrl, price, disscount}) {
     } else {
 
         return (
-            <TouchableHighlight onPress={onPress}>
+            <TouchableHighlight onPress={onPress} >
             <View style={styles.row}>
                 <Image source={{uri: imageUrl}} style={styles.image}/>
                 <Text style={styles.text}>{title}</Text>
@@ -58,11 +58,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
     },
     text: {
         width: '100%',
         fontSize: 16,
+        textAlign:'center'
 
     },
     price: {flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},

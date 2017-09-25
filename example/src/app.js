@@ -49,23 +49,21 @@ registerScreenVisibilityListener();
 //   }
 // });
 // Register the component
-Navigation.registerComponent('CustomButton', () => CustomButton);
+// Navigation.registerComponent('CustomButton', () => CustomButton);
 
 Navigation.startSingleScreenApp({
     screen: {
         screen: 'example.Types', // unique ID registered with Navigation.registerScreen
         title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
         navigatorStyle: {
-            navBarTranslucent: true
+            navBarTranslucent: false
         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
         navigatorButtons: {
             leftButtons: [
                 {
-                    id: 'custom-button',
-                    component: 'CustomButton', // This line loads our component as a nav bar button item
-                    passProps: {
-                        text: 'Hi!',
-                    },
+                    id: 'ShoppingBasket',
+                    icon: require('../img/ShoppingBasket.png'),
+                    style:{width:5,height:5}
                 },
             ],
             rightButtons: [
@@ -91,7 +89,7 @@ Navigation.startSingleScreenApp({
             rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
         },
         type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-        animationType: 'door', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
+        animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
         // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
         disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
     },

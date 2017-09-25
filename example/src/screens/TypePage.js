@@ -11,7 +11,9 @@ class TypePage extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         let dateArray = [{'name': 'پروتین', selected: false,}, {'name': 'غذایی', selected: false,},
             {'name': 'شوینده', selected: false,}, {'name': 'لبنیات', selected: false,},
-            {'name': 'تنقلات', selected: false,}, {'name': 'نان', selected: false,}
+            {'name': 'تنقلات', selected: false,}, {'name': 'نان', selected: false,},
+            {'name': 'تنقلات', selected: false,}, {'name': 'نان', selected: false,},
+
         ];
         let subDataArray = [
             {'name': 'پروتین', 'value': [{'name': 'مرغ', selected: false,}, {'name': 'ماهی', selected: false,}]},
@@ -49,7 +51,10 @@ class TypePage extends Component {
             subFields: this.state.subFields.cloneWithRows(this.state.dataSourceTypesColumn)
         });
     }
-
+    componentWillUnmount() {
+        fields = null;
+        subFields=null;
+    }
     subItemChange = (field) => {
 
         let dataClone = this.state.dataSourceTypesColumn;
@@ -152,20 +157,21 @@ class TypePage extends Component {
         return (<View style={{flexDirection: 'column', flex: 1}}>
 
                 <ListView
-                    style={{flexDirection: 'row', height: '10%', width: '100%', flex: 1}}
+                    style={{flexDirection: 'row', height: '10%', width: '100%', flex: 2, flexWrap: 'wrap',flexGrow:1}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.subFields}
                     renderRow={(columnData) => this.subColumnRender(columnData)}
                 />
 
-                <View style={{flexDirection: 'row', flex: 9,}}>
+                <View style={{flexDirection: 'row', flex: 8,}}>
 
                     <View style={{flexDirection: 'row', flex: 10,}}>
                         <ListView
                             contentContainerStyle={{
                                 flexDirection: 'row',
-                                flexWrap: 'wrap'
+                                flexWrap: 'wrap',
+
                             }}
                             dataSource={this.state.fields}
                             renderRow={(columnData) => <ItemView title="dsa" price="1212"
@@ -173,7 +179,7 @@ class TypePage extends Component {
                         />
 
                     </View>
-                    <View style={{flex: 4,}}>
+                    <View style={{ flexWrap: 'wrap',}}>
 
                         <ListView
                             style={{flexDirection: 'row', flex: 5,}}

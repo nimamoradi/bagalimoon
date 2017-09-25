@@ -6,11 +6,18 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class offer extends Component {
     constructor(props) {
         super(props);
+        let produtCount='0';
+        if(this.props.myNumber!==null)
+            produtCount=this.props.myNumber;
         this.state = {
-            myNumber: '0',
+            myNumber: produtCount,
         }
     }
 
+
+    onPopToRoot = () => {
+        this.props.navigator.popToRoot();
+    };
     desPan = () => {
         this.props.navigator.push({
             screen: 'example.Types.descriptionPan',
@@ -27,9 +34,7 @@ class offer extends Component {
             title: 'نظرات',
             passProps: {
                 title: ' hi',
-
             },
-
 
         });
     };
@@ -177,6 +182,7 @@ offer.propTypes = {
     imageUrl: PropTypes.string.isRequired,
     des: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
+    myNumber:PropTypes.string,
 };
 
 const styles = StyleSheet.create({

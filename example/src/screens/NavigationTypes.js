@@ -1,14 +1,29 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View, ListView, Text, Dimensions, Image,ViewPagerAndroid} from 'react-native';
+import {StyleSheet, ScrollView, View, ListView, Dimensions, ViewPagerAndroid} from 'react-native';
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
 import TypeButton from '../components/TypeButton'
 
 
-
-
 class NavigationTypes extends React.Component {
+    dismissLightBox = async (sendTOHome) => {
+        this.props.navigator.dismissLightBox();
+        if (sendTOHome)
+            this.props.navigator.pop();
+
+    };
+
+    showLightBox = (screen, passProps) => (
+        this.props.navigator.showLightBox({
+            screen: screen,
+            passProps: passProps,
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        }));
 
     constructor(props) {
         super(props);
@@ -17,56 +32,56 @@ class NavigationTypes extends React.Component {
 
         this.state = {
 
-            dataSourceOffer:[{
+            dataSourceOffer: [{
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer',id:'0', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '1000', '2'))
+                action_name: 'offer', id: '0', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '1000', '0'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer',id:'1', onPress: (() => this.offer('تنقلات',
+                action_name: 'offer', id: '1', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer',id:'2', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
+                action_name: 'offer', id: '2', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '2'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer',id:'3', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
+                action_name: 'offer', id: '3', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '3'))
             }],
-
 
 
             dataSourceItem: ds.cloneWithRows([{
                 imageUrl: 'https://www.w3schools.com/css/lights600x400.jpg',
                 title: 'light',
-                disscount: '120', price: '100'
-            }, {
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                disscount: '120', price: '100', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                title: 'offer', id: '0', price: '100', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
             }, {
                 imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                title: 'ofsadasdad asdsadfer', price: '100', onPress: (() => this.offer('تنقلات',
+                title: 'offer', id: '1', price: '100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                title: 'ofsadasdad asdsadfer', id: '2', price: '100', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
             }
                 , {
                     imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                    title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                    title: 'offer', price: '100', id: '3', onPress: (() => this.offer('تنقلات',
                         'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
                 }
                 , {
                     imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                    title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                    title: 'offer', price: '100', id: '4', onPress: (() => this.offer('تنقلات',
                         'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
                 }
                 , {
                     imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                    title: 'offer', price: '100', onPress: (() => this.offer('تنقلات',
+                    title: 'offer', price: '100', id: '5', onPress: (() => this.offer('تنقلات',
                         'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
                 },
             ]),
@@ -101,15 +116,15 @@ class NavigationTypes extends React.Component {
     };
 
 
-    pushScreen = () => {
+    pushScreen = (screen, title, passProps) => {
         this.props.navigator.push({
-            screen: 'example.Types.test',
-            title: 'list view',
-
+            screen: screen,
+            title: title,
+            passProps: passProps,
         });
     };
 
-    TypePage= (title) => {
+    TypePage = (title) => {
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'hi',
@@ -119,38 +134,42 @@ class NavigationTypes extends React.Component {
             },
         });
     };
+
     onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
 
-        if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-            if (event.id == 'back') { // this is the same id field from the static navigatorButtons definition
+        if (event.type === 'NavBarButtonPress') { // this is the event type for button presses
+            if (event.id === 'back') { // this is the same id field from the static navigatorButtons definition
                 this.toggleDrawer()
             }
-            if (event.id == 'edit') {
-                // AlertIOS.alert('NavBar', 'Add button pressed');
+            if (event.id === 'ShoppingBasket') {
+                this.showLightBox('example.Types.basketLightBox', {
+                    title: this.props.title,
+
+                    onClose: this.dismissLightBox,
+                },);
             }
         }
     }
 
 
-
-
     render() {
 
-       let tmp=   this.state.dataSourceOffer;
+        let tmp = this.state.dataSourceOffer;
         // for (var i = 0; i < this.state.dataSourceOffer.length; i++) {
         //     tmp.push(i);
         // }
         let indents = tmp.map(function (i) {
             return (
                 <View>
-                    <ImageRow className='indent'  key={i.id}  imageUrl={ i.imageUrl } title={i.action_name} onPress={i.onPress}/>
+                    <ImageRow className='indent' key={i.id} imageUrl={i.imageUrl} title={i.action_name}
+                              onPress={i.onPress}/>
                 </View>
             );
         });
         return (
             <ScrollView>
                 <ViewPagerAndroid
-                    style={{width:400,height:400}}
+                    style={{width: Dimensions.get('window').width, height: Dimensions.get('window').width / 2}}
                     initialPage={0}>
                     {indents}
                 </ViewPagerAndroid>
@@ -162,7 +181,7 @@ class NavigationTypes extends React.Component {
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceTypes}
                     renderRow={(rowData) =>
-                        <TypeButton title={rowData} onPress={()=>this.TypePage(rowData)}/>}
+                        <TypeButton title={rowData} onPress={() => this.TypePage(rowData)}/>}
                 />
                 <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
                 {/*<ImageRow title={'top sell'}*/}
@@ -181,8 +200,10 @@ class NavigationTypes extends React.Component {
                               style={styles.item}
                               price={rowData.price}
                               disscount={rowData.disscount}
-                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              onPress={this.pushScreen}/>}
+                              imageUrl={rowData.imageUrl}
+                              onPress={() =>
+                                  rowData.onPress}
+                        />}
                 />
                 <Header style={{width: '100%', height: '10'}} title="پرفروش ترین ها"/>
                 <ListView
@@ -194,10 +215,11 @@ class NavigationTypes extends React.Component {
                         <Item title={rowData.title}
                               style={styles.item}
                               price={rowData.price}
-                              onPress={this.pushScreen}
+                              onPress={() => this.offer(rowData.title, rowData.imageUrl, 'nothing', rowData.price, rowData.id)}
                               disscount={rowData.disscount}
-                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              />}
+                              imageUrl={rowData.imageUrl}
+
+                        />}
                 />
 
 

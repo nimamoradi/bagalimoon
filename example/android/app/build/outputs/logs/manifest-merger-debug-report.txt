@@ -2,7 +2,7 @@
 manifest
 ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-22:12
 	package
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:2:5-26
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:2:5-27
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -50,7 +50,7 @@ MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:11:9-65
 	android:name
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:7:9-40
-activity#com.example.MainActivity
+activity#com.moonShop.MainActivity
 ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:12:9-19:20
 	android:label
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:14:13-45

@@ -10,7 +10,7 @@ class offer extends Component {
         if(this.props.myNumber!==null)
             produtCount=this.props.myNumber;
         this.state = {
-            myNumber: produtCount,
+            myNumber: '0',
         }
     }
 

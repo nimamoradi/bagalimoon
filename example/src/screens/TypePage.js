@@ -6,6 +6,7 @@ import ItemView from '../components/itemView'
 import ImageRow from "../components/ImageRow";
 
 class TypePage extends Component {
+
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -154,7 +155,7 @@ class TypePage extends Component {
     };
 
     render() {
-        return (<View style={{flexDirection: 'column', flex: 1}}>
+        return (<View style={{flexDirection: 'column', flex: 1, }}>
 
                 <ListView
                     style={{flexDirection: 'row', height: '10%', width: '100%', flex: 2, flexWrap: 'wrap',flexGrow:1}}
@@ -175,7 +176,7 @@ class TypePage extends Component {
                             }}
                             dataSource={this.state.fields}
                             renderRow={(columnData) => <ItemView title="dsa" price="1212"
-                                                                 imageUrl="http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg"/>}
+                                                                 imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"/>}
                         />
 
                     </View>

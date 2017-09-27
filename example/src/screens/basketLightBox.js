@@ -31,6 +31,8 @@ class basketLightBox extends React.Component {
     };
 
     pushScreen = (screen, title, passProps) => {
+
+        this.props.navigator.dismissLightBox();
         this.props.navigator.push({
             screen: screen,
             title: title,
@@ -39,50 +41,49 @@ class basketLightBox extends React.Component {
     };
 
     render() {
-        if(this.state.basket!==null||this.state.basket!=='?')
-        return (
-            <View style={styles.container}>
-                <View style={{flex: 8}}>
-                    <Text style={styles.title}>سبد خرید</Text>
-                    <TableRow title="تعداد کالا" des={this.state.basket.length}/>
-                    <TableRow title="قیمت کل" des={this.state.totalPrice}/>
+        if (this.state.basket !== null || this.state.basket !== '?')
+            return (
+                <View style={styles.container}>
+                    <View style={{flex: 8}}>
+                        <Text style={styles.title}>سبد خرید</Text>
+                        <TableRow title="تعداد کالا" des={this.state.basket.length}/>
+                        <TableRow title="قیمت کل" des={this.state.totalPrice}/>
 
-                    <View>
+                        <View>
 
+
+                        </View>
+
+                    </View>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{flex: 1}}/>
+                        <TouchableHighlight
+                            style={styles.button1}
+                            onPress={() => this.pushScreen('example.Types.basketPreview', 'خرید را نهایی کنید', {basket:this.state.basket})}
+                        ><Text>{'خرید'}</Text></TouchableHighlight>
+                        <View style={{flex: 1}}/>
+                        <TouchableHighlight
+                            style={styles.button}
+
+
+                            onPress={() => this.props.onClose(false)}
+                        ><Text>{'انصراف'}</Text></TouchableHighlight>
+                        <View style={{flex: 1}}/>
 
                     </View>
 
-                </View>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={{flex: 1}}/>
                     <TouchableHighlight
-                        style={styles.button1}
-                        onPress={() => this.pushScreen('example.Types.basketPreView','hi',{title:'hello'})}
-                    ><Text>{'خرید'}</Text></TouchableHighlight>
-                    <View style={{flex: 1}}/>
-                    <TouchableHighlight
-                        style={styles.button}
-
-
-                        onPress={() => this.props.onClose(false)}
-                    ><Text>{'انصراف'}</Text></TouchableHighlight>
-                    <View style={{flex: 1}}/>
-
+                        style={{
+                            flex: 1, borderWidth: 0.5, margin: 10, borderRadius: 5, justifyContent: 'center',
+                            alignItems: 'center', backgroundColor: '#ebe22850'
+                        }}
+                        onPress={() => this.addProduct()}
+                    ><Text>{'سبد های خرید قبلی'}</Text></TouchableHighlight>
                 </View>
-
-                <TouchableHighlight
-                    style={{
-                        flex: 1, borderWidth: 0.5, margin: 10, borderRadius: 5, justifyContent: 'center',
-                        alignItems: 'center', backgroundColor: '#ebe22850'
-                    }}
-                    onPress={() => this.addProduct()}
-                ><Text>{'سبد های خرید قبلی'}</Text></TouchableHighlight>
-            </View>
-        );
-        else return( <View style={styles.container}>
+            );
+        else return ( <View style={styles.container}>
                 <View style={{flex: 8}}>
-                    <Text style={styles.title}>سبد خرید</Text>
-
+                    <Text style={styles.title}>سبد خرید خالی است</Text>
 
 
                 </View>
@@ -92,7 +93,7 @@ class basketLightBox extends React.Component {
                     <View style={{flex: 0.5}}/>
                     <TouchableHighlight
                         style={styles.button}
-                      onPress={() => this.props.onClose(false)}
+                        onPress={() => this.props.onClose(false)}
                     ><Text>{'بستن'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
 
@@ -100,7 +101,7 @@ class basketLightBox extends React.Component {
 
 
             </View>
-            );
+        );
     }
 }
 

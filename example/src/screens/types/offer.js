@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class offer extends Component {
     constructor(props) {
         super(props);
+
         let produtCount='0';
         if(this.props.myNumber!==null)
             produtCount=this.props.myNumber;
@@ -38,11 +39,18 @@ class offer extends Component {
 
         });
     };
+    loadata=async()=>{
+        const data = await AsyncStorage.getItem('@CurrentBasket');
+        let val;
+        if(data === null) val=0;
+        const json = await  JSON.parse(data);
+        // else if(json.id)
+    };
     onChanged = (text) => {
         let newText = '0';
         let numbers = '0123456789';
 
-        for (var i = 0; i < text.length; i++) {
+        for (let i = 0; i < text.length; i++) {
             if (numbers.indexOf(text[i]) > -1) {
                 newText = newText + text[i];
             }
@@ -57,14 +65,14 @@ class offer extends Component {
 
         this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) + 1)});
 
-    }
+    };
     onDown = () => {
         if (Number.parseInt(this.state.myNumber, 10) !== 0)
             this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) - 1)});
         else this.setState({myNumber: '0'});
 
 
-    }
+    };
 
     render() {
         return (

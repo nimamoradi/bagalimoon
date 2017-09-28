@@ -6,54 +6,99 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class basketPreview extends React.Component {
     constructor(props) {
         super(props);
-        const basket = this.props.basket;
-        console.log(basket)
-        let dataArray=[];
-        for (let i = 0; i < basket.length; i++) {
-            dataArray.push({'title': basket[''], 'price': '', 'count': ''})
-        }
+        let basket = JSON.parse(this.props.basket);
+        console.log(basket);
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSourceProducts: ds.cloneWithRows([dataArray])
+            basket: basket,
+            dataSourceProducts: ds
         };
         // console.log(dataArray)
     }
 
+    componentDidMount() {
+        this.setState({
+            dataSourceProducts: this.state.dataSourceProducts.cloneWithRows(this.state.basket),
+
+        });
+    }
+
+
+    onUp = (rowdata) => {
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.basket;
+        let data = this.state.basket;
+        updatedState[data.indexOf(rowdata)]['count']++;
+        console.log(updatedState);
+        this.setState({basket: updatedState});
+    };
+    onDown = (rowdata) => {
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.basket;
+        let data = this.state.basket;
+        if(updatedState[data.indexOf(rowdata)]['count']!==0)
+        updatedState[data.indexOf(rowdata)]['count']--;
+        console.log(updatedState);
+        this.setState({basket: updatedState});
+
+    };
+
 
     renderRow = (rowData) => {
         return (
-            <View style={styles.row}>
-                <Text style={styles.text}>{rowData['name']} :</Text>
-                <Text style={styles.price}>{rowData.price} :</Text>
-                <TouchableOpacity onPress={this.onUp}>
-                    <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.onDown}>
-                    <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
-                </TouchableOpacity>
+            <View style={{flexDirection: 'row'}}>
+                <Text style={styles.text}>{rowData['name']}</Text>
+                <Text style={styles.price}>{rowData.price}</Text>
                 <Text style={styles.price}>{rowData.count}</Text>
+                <TouchableOpacity onPress={() => this.onUp(rowData)}>
+                    <Icon name="plus" size={30} color="#17C408" style={styles.text}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.onDown(rowData)}>
+                    <Icon name="minus" size={30} color="#C42B2D" style={styles.text}/>
+                </TouchableOpacity>
+
             </View>
         );
-    }
+    };
 
     render() {
-        return (<ListView
-                style={{flexDirection: 'column', width: '100%', height: '80%'}}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                dataSource={this.state.dataSourceProducts}
-                renderRow={(rowData) =>
-                    this.renderRow(rowData)}
-            />
+        return (
+            <View style={{flexDirection: 'column'}}>
+                <View>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={styles.tableHeader}>نام</Text>
+                        <Text style={styles.tableHeader}>قیمت واحد</Text>
+                        <Text style={styles.tableHeader}>تعداد</Text>
+                        <View style={{flex: 1}}/>
+
+                    </View>
+
+                </View>
+
+                <ListView
+                    style={{flexDirection: 'column', width: '100%', height: '80%'}}
+                    horizontal={false}
+                    showsHorizontalScrollIndicator={false}
+                    dataSource={this.state.dataSourceProducts}
+                    renderRow={(rowData) =>
+                        this.renderRow(rowData)}
+                />
+                <View>
+                    <Text style={{textAlign: 'center'}}>
+                        جمع خرید
+                    </Text>
+
+                </View>
+            </View>
         );
 
     }
 }
 
 basketPreview.propTypes = {
-    title: PropTypes.string.isRequired,
-    des: PropTypes.string.isRequired,
+    basket: PropTypes.array.isRequired,
+
 };
 
 const styles = StyleSheet.create({
@@ -68,12 +113,22 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        margin: 20,
+        flex: 1,
+        margin: 10,
+        textAlign: 'center'
     },
     price: {
+        margin: 10,
         fontSize: 16,
-        margin: 20,
-        color: '#28d715'
+        flex: 1,
+        textAlign: 'center'
+    },
+    tableHeader: {
+        fontSize: 20,
+        flex: 1,
+        margin: 10,
+        color: '#000',
+        textAlign: 'center'
     }
 });
 

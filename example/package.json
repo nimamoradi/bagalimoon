@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "bagali",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "react-native-animatable": "^1.1.0",
     "react-native-navigation": "latest",
     "react-native-snap-carousel": "^3.2.3",
+    "react-native-swiper": "^1.5.12",
     "react-native-ultimate-listview": "^3.2.2",
     "react-native-vector-icons": "^4.4.0",
     "react-native-viewpager": "^0.2.13"

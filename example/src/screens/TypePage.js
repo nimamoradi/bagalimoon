@@ -134,7 +134,7 @@ class TypePage extends Component {
 
     ItemChange = async (field) => {
         console.log(field);
-        var dataClone = this.state.dataSourceTypes;
+        let dataClone = this.state.dataSourceTypes;
         console.log(dataClone);
         for (let i = 0; i < dataClone.length; i++) {
             dataClone[i].selected = false;

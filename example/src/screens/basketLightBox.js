@@ -10,7 +10,7 @@ class basketLightBox extends React.Component {
         this.state = {
             basket: '?',
             overAllPrice: '?',
-
+            length: '?'
         }
     }
 
@@ -20,14 +20,18 @@ class basketLightBox extends React.Component {
 
     async loadData() {
         const data = await AsyncStorage.getItem('@CurrentBasket');
-        const json = await  JSON.parse(data);
-        await console.log(json);
-        let totalPrice = 0;
-        if (json !== null)
+        if (data !== null) {
+            const json = await  JSON.parse(data);
+            await console.log(json);
+            let totalPrice = 0;
+
             for (let i = 0; i < json.length; i++) {
                 totalPrice += Number.parseInt(json[i]['price'], 10) * Number.parseInt(json[i]['count'], 10);
             }
-        this.setState({json, totalPrice})
+            let length = json.length
+            let basket = JSON.stringify(json);
+            this.setState({basket, totalPrice, length})
+        }
     };
 
     pushScreen = (screen, title, passProps) => {
@@ -41,13 +45,13 @@ class basketLightBox extends React.Component {
     };
 
     render() {
-        if (this.state.basket !== null || this.state.basket !== '?')
+        if (this.state.basket !== '?')
             return (
                 <View style={styles.container}>
                     <View style={{flex: 8}}>
                         <Text style={styles.title}>سبد خرید</Text>
-                        <TableRow title="تعداد کالا" des={this.state.basket.length}/>
-                        <TableRow title="قیمت کل" des={this.state.totalPrice}/>
+                        <TableRow title="تعداد کالا" des={this.state.length}/>
+                        <TableRow title="قیمت کل" des={String(this.state.totalPrice)}/>
 
                         <View>
 
@@ -59,7 +63,10 @@ class basketLightBox extends React.Component {
                         <View style={{flex: 1}}/>
                         <TouchableHighlight
                             style={styles.button1}
-                            onPress={() => this.pushScreen('example.Types.basketPreview', 'خرید را نهایی کنید', {basket:this.state.basket})}
+                            onPress={() => this.pushScreen('example.Types.basketPreview', 'خرید را نهایی کنید',
+                                {
+                                    basket: this.state.basket
+                                })}
                         ><Text>{'خرید'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>
                         <TouchableHighlight
@@ -90,7 +97,7 @@ class basketLightBox extends React.Component {
                 <View style={{flex: 1, flexDirection: 'row'}}>
 
 
-                    <View style={{flex: 0.5}}/>
+                    <View style={{flex: 1}}/>
                     <TouchableHighlight
                         style={styles.button}
                         onPress={() => this.props.onClose(false)}

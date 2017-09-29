@@ -7,11 +7,12 @@ class offer extends Component {
     constructor(props) {
         super(props);
 
-        let produtCount='0';
-        if(this.props.myNumber!==null)
-            produtCount=this.props.myNumber;
+        let productCount = '0';
+        if (this.props.myNumber !== null)
+            productCount = this.props.myNumber;
         this.state = {
             myNumber: '0',
+            wasEmpty:true,
         }
     }
 
@@ -39,13 +40,30 @@ class offer extends Component {
 
         });
     };
-    loadata=async()=>{
+
+
+    componentDidMount() {
+        this.loadData();
+
+    }
+
+    loadData = async () => {
         const data = await AsyncStorage.getItem('@CurrentBasket');
         let val;
-        if(data === null) val=0;
+        if (data === null) return 0;
         const json = await  JSON.parse(data);
-        // else if(json.id)
+
+        let index=  json.map(function(e) { return e.id; }).indexOf(this.props.id);
+
+        if (index!==-1) {
+            this.setState({myNumber: '' + json[index]['count'],wasEmpty:false});
+        }
+        console.log(json);
+
     };
+    findIndex(array,id,id_number){
+        return  array.map(function(e) { return e.id; }).indexOf(id_number);
+    }
     onChanged = (text) => {
         let newText = '0';
         let numbers = '0123456789';
@@ -178,8 +196,8 @@ class offer extends Component {
     };
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
-        if(sendTOHome)
-        this.props.navigator.pop();
+        if (sendTOHome)
+            this.props.navigator.pop();
 
     };
 
@@ -190,7 +208,7 @@ offer.propTypes = {
     imageUrl: PropTypes.string.isRequired,
     des: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-    myNumber:PropTypes.string,
+    myNumber: PropTypes.string,
 };
 
 const styles = StyleSheet.create({

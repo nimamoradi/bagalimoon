@@ -37,8 +37,8 @@ class basketPreview extends React.Component {
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.basket;
         let data = this.state.basket;
-        if(updatedState[data.indexOf(rowdata)]['count']!==0)
-        updatedState[data.indexOf(rowdata)]['count']--;
+        if (updatedState[data.indexOf(rowdata)]['count'] !== 0)
+            updatedState[data.indexOf(rowdata)]['count']--;
         console.log(updatedState);
         this.setState({basket: updatedState});
 

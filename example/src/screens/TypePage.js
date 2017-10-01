@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, ListView, Image} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, ListView, Image, Picker} from 'react-native';
 import TypeButton from '../components/TypeButton'
 import ItemView from '../components/itemView'
 import ImageRow from "../components/ImageRow";
@@ -23,178 +23,77 @@ class TypePage extends Component {
             {'name': 'لبنیات', 'value': [{'name': 'شیر', selected: false,}, {'name': 'پنیر', selected: false,}]},
             {'name': 'تنقلات', 'value': [{'name': 'تنغ', selected: false,}, {'name': 'تنق', selected: false,}]},
             {'name': 'نان', 'value': [{'name': 'لواش', selected: false,}, {'name': 'سنگک', selected: false,}]},];
-        let index = this.getIndex(this.props.title, dateArray, 'name');
-        dateArray[index]['selected'] = true;
+
         this.state = {
-            title: this.props.title,
-            subtitle: this.props.title,
-            fields: ds,
-            subFields: ds,
+            mainSelected: this.props.title,
+            subSelected: 'مرغ',
             dataSourceTypes: dateArray,
             dataSourceTypesColumn: subDataArray,
+            fields: ds,
+
         }
 
     }
 
-    getIndex(value, arr, prop) {
+    componentDidMount() {
+        this.setState({
+            fields: this.state.fields.cloneWithRows(this.state.dataSourceTypes),
+        });
+    }
+
+    getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i][prop] === value) {
                 return i;
             }
         }
         return -1; //to handle the case where the value doesn't exist
-    }
-
-
-    componentDidMount() {
-        this.setState({
-            fields: this.state.fields.cloneWithRows(this.state.dataSourceTypes),
-            subFields: this.state.subFields.cloneWithRows(this.state.dataSourceTypesColumn)
-        });
-    }
-    componentWillUnmount() {
-        fields = null;
-        subFields=null;
-    }
-    subItemChange = (field) => {
-
-        let dataClone = this.state.dataSourceTypesColumn;
-        alert('subItemChange')
-        for (let i = 0; i < dataClone.length; i++) {
-            dataClone[i].selected = false;
-            // dataClones.getRowData(0,i).renderRow();
-            // dataClones.rowShouldUpdate(0,i);
-
-        }
-
-
-        field.selected = !field.selected;
-
-
-        dataClone[field] = field;
-
-        this.setState({
-            data: dataClone, title: field.name,
-        });
     };
 
-
-    subColumnRender = (columnData) => {
-
-        if (columnData['name'] === this.state.title)
-            return <View style={{flexDirection: 'row',}}>{columnData['value'].map((i) => {
-
-                if (i.selected) {
-                    return <TypeButton title={i.name}/>
-                }
-                else {
-
-                    return <TypeButton backgroundColor='#4adc4615' onPress={(i) => {
-
-                        let dataClone = this.state.dataSourceTypesColumn;
-                        let index = this.getIndex(this.state.title, this.state.dataSourceTypes, 'name');
-
-                        for (let j = 0; j < dataClone[index]['value'].length; j++) {
-                            dataClone[index]['value'][j].selected = false;
-
-                        }
-
-                        i.selected = true;
-
-
-                        dataClone[index]['value'][i] = i;
-
-                        this.setState({
-                            dataSourceTypesColumn: dataClone, subtitle: i.name,
-                        });
-
-                    }
-                    }
-                                       title={i.name}/>
-                }
-            })}
-            </View>;
-        else return null;
-
-
-    };
-
-
-    columnRender = (columnData) => {
-
-        if (columnData.selected) {
-            return <TypeButton backgroundColor='#4adc4650' title={columnData.name}/>
-        }
-        else {
-            return <TypeButton backgroundColor='#4adc4615' onPress={() => this.ItemChange(columnData)}
-                               title={columnData.name}/>
-        }
-
-    };
-
-    ItemChange = async (field) => {
-        console.log(field);
-        let dataClone = this.state.dataSourceTypes;
-        console.log(dataClone);
-        for (let i = 0; i < dataClone.length; i++) {
-            dataClone[i].selected = false;
-            // dataClones.getRowData(0,i).renderRow();
-            // dataClones.rowShouldUpdate(0,i);
-
-        }
-
-
-        field.selected = !field.selected;
-
-
-        dataClone[field] = field;
-
-        this.setState({
-            dataSourceTypes: dataClone, title: field.name,
-        });
-    };
 
     render() {
-        return (<View style={{flexDirection: 'column', flex: 1, }}>
+        let mainItems = this.state.dataSourceTypes.map((s, i) => {
+            return <Picker.Item key={i} value={s.name} label={s.name}/>
+        });
+        let index = this.getIndex(this.state.mainSelected, this.state.dataSourceTypesColumn, 'name');
+
+        let subItems = this.state.dataSourceTypesColumn[index]['value'].map((s, i) => {
+            return <Picker.Item key={i} value={s.name} label={s.name}/>
+        });
+
+        return (
+            <View style={{flexDirection: 'column', height: '100%', backgroundColor: '#ffffff'}}>
+                <View style={{flexDirection: 'row', flex: 0.13,}}>
+                    <View style={styles.viewPicker}>
+                        <Picker
+                            style={styles.picker}
+                            selectedValue={this.state.subSelected}
+                            onValueChange={(itemValue, itemIndex) => this.setState({subSelected: itemValue})}>
+                            {subItems}
+                        </Picker>
+
+                    </View>
+                    <View style={styles.viewPicker}>
+                        <Picker
+                            style={styles.picker}
+                            selectedValue={this.state.mainSelected}
+                            onValueChange={(itemValue, itemIndex) => this.setState({mainSelected: itemValue})}>
+                            {mainItems}
+                        </Picker>
+                    </View>
+
+                </View>
 
                 <ListView
-                    style={{flexDirection: 'row', height: '10%', width: '100%', flex: 2, flexWrap: 'wrap',flexGrow:1}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.subFields}
-                    renderRow={(columnData) => this.subColumnRender(columnData)}
+                    style={{flex: 3}}
+                    dataSource={this.state.fields}
+                    renderRow={(columnData) => <ItemView
+                        title="dsa" price="1212"
+                        imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"/>}
                 />
-
-                <View style={{flexDirection: 'row', flex: 8,}}>
-
-                    <View style={{flexDirection: 'row', flex: 10,}}>
-                        <ListView
-                            contentContainerStyle={{
-                                flexDirection: 'row',
-                                flexWrap: 'wrap',
-
-                            }}
-                            dataSource={this.state.fields}
-                            renderRow={(columnData) => <ItemView title="dsa" price="1212"
-                                                                 imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"/>}
-                        />
-
-                    </View>
-                    <View style={{ flexWrap: 'wrap',}}>
-
-                        <ListView
-                            style={{flexDirection: 'row', flex: 5,}}
-                            horizontal={false}
-                            showsVerticalScrollIndicator={false}
-                            dataSource={this.state.fields}
-                            renderRow={(columnData) => this.columnRender(columnData)}
-                        />
-                    </View>
-                </View>
 
 
             </View>
-
         );
     }
 
@@ -206,6 +105,20 @@ TypePage.propTypes = {
 
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    picker: {
+        flex: 1,
+        margin: 10,
+
+    },
+    viewPicker: {
+        flex: 1,
+        margin: 10,
+        backgroundColor: '#aeb3ae20',
+        borderRadius: 20,
+        borderColor: '#bec4be',
+        borderWidth: 0.5,
+    }
+});
 
 export default TypePage;

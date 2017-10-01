@@ -65,7 +65,7 @@ class offer extends Component {
         return  array.map(function(e) { return e.id; }).indexOf(id_number);
     }
     onChanged = (text) => {
-        let newText = '0';
+        let newText = '';
         let numbers = '0123456789';
 
         for (let i = 0; i < text.length; i++) {
@@ -107,9 +107,11 @@ class offer extends Component {
                         </View>
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                             <TextInput
-                                value={this.state.myNumber}
-                                onChangeText={(text) => this.onChanged(text)}
-                                keyboardType='numeric' style={{textAlign: 'center'}}/>
+                                maxLength={2}
+                                onChange ={ (event) => this.onChanged(event.nativeEvent.text)}
+                                keyboardType='numeric' style={{textAlign: 'center'}}>
+                              {this.state.myNumber}
+                            </TextInput>
                             <View style={{flex: 1, flexDirection: 'column'}}>
                                 <TouchableOpacity onPress={this.onUp}>
                                     <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>

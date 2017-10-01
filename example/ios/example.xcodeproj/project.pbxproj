@@ -36,6 +36,7 @@
 		B66FE9AC87E540BB8937578D /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 818CEB5582D64854AE5369FA /* Octicons.ttf */; };
 		B85D747B00894650B4482FD5 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414910DA8DD74DBDB8DE6581 /* SimpleLineIcons.ttf */; };
 		7CA517F376424BD9A85D9185 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40B3D4F33BAC40EEAAE333C4 /* Zocial.ttf */; };
+		8A157BD9DB4C4FD398357358 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3994D9C4CE5340E8912E0778 /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +270,8 @@
 		818CEB5582D64854AE5369FA /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		414910DA8DD74DBDB8DE6581 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		40B3D4F33BAC40EEAAE333C4 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7F8AC9967B124AF6A8079B5E /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3994D9C4CE5340E8912E0778 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +300,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				D29C73ADF6454CFFB970F994 /* libRNSVG.a in Frameworks */,
 				5862F270E6B14137A4D72D67 /* libRNVectorIcons.a in Frameworks */,
+				8A157BD9DB4C4FD398357358 /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +456,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				E6D38FCADC3A45B0B53E8A4D /* RNSVG.xcodeproj */,
 				E0D7BF9483ED4BD49282CF5F /* RNVectorIcons.xcodeproj */,
+				7F8AC9967B124AF6A8079B5E /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -923,6 +928,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -943,6 +949,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

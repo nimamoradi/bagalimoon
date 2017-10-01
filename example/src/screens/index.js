@@ -5,7 +5,7 @@ import basketLightBox from './basketLightBox'
 import Push from './types/Push';
 import LightBox from './types/LightBox';
 import basketPreview from './basketPreview'
-
+import mapView from './mapView'
 import Drawer from './types/Drawer';
 import offer from './types/offer';
 import descriptionPan from '../components/descriptionPan';
@@ -25,6 +25,7 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.Notification', () => Notification);
   Navigation.registerComponent('example.Types.basketPreview', () => basketPreview);
 
+    Navigation.registerComponent('example.mapView', () => mapView);
   Navigation.registerComponent('example.TypePage', () => TypePage);
   Navigation.registerComponent('example.Types.offer', () => offer);
   Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);

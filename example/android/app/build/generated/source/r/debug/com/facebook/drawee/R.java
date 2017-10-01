@@ -9,7 +9,7 @@ package com.facebook.drawee;
 public final class R {
     public static final class attr {
         public static final int actualImageScaleType = 0x7f0100ed;
-        public static final int actualImageUri = 0x7f010127;
+        public static final int actualImageUri = 0x7f010144;
         public static final int backgroundImage = 0x7f0100ee;
         public static final int fadeDuration = 0x7f0100e2;
         public static final int failureImage = 0x7f0100e8;
@@ -73,7 +73,7 @@ public final class R {
         public static final int GenericDraweeHierarchy_roundingBorderPadding = 24;
         public static final int GenericDraweeHierarchy_roundingBorderWidth = 22;
         public static final int GenericDraweeHierarchy_viewAspectRatio = 1;
-        public static final int[] SimpleDraweeView = { 0x7f010127 };
+        public static final int[] SimpleDraweeView = { 0x7f010144 };
         public static final int SimpleDraweeView_actualImageUri = 0;
     }
 }

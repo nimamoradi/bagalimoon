@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-22:12
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-26:12
 	package
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:2:5-27
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
@@ -13,12 +13,22 @@ ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:3:5-79
+	android:name
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:3:22-76
 uses-permission#android.permission.INTERNET
 ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:4:5-67
+MERGED from [example:react-native-maps:unspecified] E:\projects\superMan\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:9:5-67
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:20:5-66
 	android:name
 		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:6:5-20:19
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:6:5-24:19
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:24:5-19
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.android\build-cache\3e6b1191426ae8827072e172f7c1b0d59a5a9d98\output\AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.android\build-cache\8156cc03363bf9eb18c156d9207caf22a5c542e0\output\AndroidManifest.xml:19:5-21:19
 MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:28:5-48:19
 MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:22:5-20
@@ -41,33 +51,44 @@ MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.
 MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:29:5-20
 MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:12:5-20
 	android:label
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:10:9-41
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:11:9-41
 	android:allowBackup
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:8:9-36
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:9:9-36
 	android:icon
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:9:9-43
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:10:9-43
 	android:theme
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:11:9-65
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:12:9-65
 	android:name
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:7:9-40
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:8:9-40
+meta-data#com.google.android.geo.API_KEY
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:13:9-15:74
+	android:value
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:15:17-72
+	android:name
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:14:17-62
 activity#com.moonShop.MainActivity
-ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:12:9-19:20
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:16:9-23:20
 	android:label
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:14:13-45
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:18:13-45
 	android:name
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:13:13-41
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:17:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:15:13-18:29
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:19:13-22:29
 action#android.intent.action.MAIN
-ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:16:17-69
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:20:17-69
 	android:name
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:16:25-66
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:20:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:17:17-77
+ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:21:17-77
 	android:name
-		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:17:27-74
+		ADDED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:21:27-74
 uses-sdk
 INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [example:react-native-maps:unspecified] E:\projects\superMan\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:23:5-43
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.android\build-cache\3e6b1191426ae8827072e172f7c1b0d59a5a9d98\output\AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.android\build-cache\8156cc03363bf9eb18c156d9207caf22a5c542e0\output\AndroidManifest.xml:17:5-43
 MERGED from [example:react-native-vector-icons:unspecified] E:\projects\superMan\example\node_modules\react-native-vector-icons\android\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:24:5-26:41
 MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:20:5-43
@@ -105,6 +126,34 @@ MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android
 	android:minSdkVersion
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [example:react-native-maps:unspecified] E:\projects\superMan\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from [example:react-native-maps:unspecified] E:\projects\superMan\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:10:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:19:5-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:19:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:21:5-77
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:21:19-51
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\AndroidManifest.xml:21:52-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.android\build-cache\8156cc03363bf9eb18c156d9207caf22a5c542e0\output\AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.android\build-cache\8156cc03363bf9eb18c156d9207caf22a5c542e0\output\AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.android\build-cache\8156cc03363bf9eb18c156d9207caf22a5c542e0\output\AndroidManifest.xml:20:20-65
 activity#com.facebook.FacebookActivity
 ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:29:9-32:66
 	android:configChanges
@@ -142,11 +191,11 @@ ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build
 	android:name
 		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\AndroidManifest.xml:11:22-75
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from E:\projects\superMan\example\android\app\src\main\AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
 meta-data#android.support.VERSION
 ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:25:5-27:34
 MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:22:5-24:34

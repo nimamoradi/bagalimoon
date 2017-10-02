@@ -215,6 +215,7 @@ offer.propTypes = {
     des: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     myNumber: PropTypes.string,
+    id:PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

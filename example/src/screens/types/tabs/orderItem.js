@@ -34,6 +34,14 @@ class orderItem extends React.Component {
             </View>
         );
     }
+    getIndex = (value, arr, prop) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i][prop] === value) {
+                return i;
+            }
+        }
+        return -1; //to handle the case where the value doesn't exist
+    };
 
     addProduct = async () => {
 
@@ -46,19 +54,27 @@ class orderItem extends React.Component {
             if (value === null) {
                 console.log('don\'t have previews value');
                 value = [];
+                value.push({
+                    'name': this.props.title,
+                    'count': this.props.count,
+                    'price': this.props.price,
+                    'id': this.props.id
+                });
             }
             else
             {
-                console.log('have previews value ');
+                let index=this.getIndex(this.props.id,value,'id');
+                console.log('have previews value '+index);
+                value[index]=({
+                    'name': this.props.title,
+                    'count': this.props.count,
+                    'price': this.props.price,
+                    'id': this.props.id
+                });
 
             }
 
-            value.push({
-                'name': this.props.title,
-                'count': this.props.count,
-                'price': this.props.price,
-                'id': this.props.id
-            });
+
             console.log('new basket: ' + JSON.stringify(value));
             await  AsyncStorage.setItem('@CurrentBasket', JSON.stringify(value));
 
@@ -75,6 +91,7 @@ orderItem.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     count: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
 };

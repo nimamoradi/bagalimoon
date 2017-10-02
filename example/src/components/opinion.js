@@ -10,7 +10,7 @@ import {
 import PropTypes from 'prop-types';
 import SingleOpinion from './singleOpinion';
 import {Navigation} from 'react-native-navigation';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 let navigator;
 
@@ -26,15 +26,15 @@ showLightBox = () => navigator.showLightBox({
         onClose: this.dismissLightBox,
     },
 });
-const CustomButton = ({text}) => (
+const CustomButton = () => (
     <TouchableOpacity
         style={[styles.buttonContainer]}
         onPress={() => showLightBox()}>
 
-            <Image style={styles.button} source={require('../../img/plus.png')}/>
+        <Icon name="plus" size={30} color="#FF4500" />
 
     </TouchableOpacity>);
-Navigation.registerComponent('CustomButton', () => CustomButton);
+Navigation.registerComponent('plus', () => CustomButton);
 
 
 export default class opinion extends React.Component {
@@ -43,8 +43,8 @@ export default class opinion extends React.Component {
     static navigatorButtons = {
         rightButtons: [
             {
-                id: 'custom-button',
-                component: 'CustomButton',
+                id: 'plus',
+                component: 'plus',
                 passProps: {
                     text: 'افزودن پیام'
                 }

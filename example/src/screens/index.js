@@ -1,64 +1,43 @@
 import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
 import test from '../screens/text';
 import Types from './NavigationTypes';
-import Actions from './Actions';
-import Transitions from './Transitions';
-
+import basketLightBox from './basketLightBox'
 import Push from './types/Push';
-import Drawer from './types/Drawer';
 import LightBox from './types/LightBox';
-import Notification from './types/Notification';
-import Modal from './types/Modal';
+import basketPreview from './basketPreview'
+import mapView from './mapView'
+import Drawer from './types/Drawer';
 import offer from './types/offer';
 import descriptionPan from '../components/descriptionPan';
-import CustomTopBarScreen from './types/CustomTopBarScreen';
-import CustomButtonScreen from './types/CustomButtonScreen';
-import TopTabs from './types/TopTabs';
-import TabOne from './types/tabs/TabOne';
-import TabTwo from './types/tabs/TabTwo';
 import opinion from '../components/opinion'
-import CollapsingHeader from './transitions/CollapsingHeader';
-import SharedElementTransitions from './transitions/SharedElementTransitions';
-
-import  newComment from './types/newComment'
-import Cards from './transitions/sharedElementTransitions/Cards/Cards';
-import CardsInfo from './transitions/sharedElementTransitions/Cards/Info';
-
-import Masonry from './transitions/sharedElementTransitions/Masonry/Masonry';
-import MasonryItem from './transitions/sharedElementTransitions/Masonry/Item';
-
+import newComment from './types/newComment'
+import TypePage from './TypePage'
+import loginScreen from './loginScreen'
+import OrderItem from './types/tabs/orderItem'
 export function registerScreens() {
+  Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
+
   Navigation.registerComponent('example.Types', () => Types);
-  Navigation.registerComponent('example.Actions', () => Actions);
-  Navigation.registerComponent('example.Transitions', () => Transitions);
 
 
-    Navigation.registerComponent('example.Types.test', () => test);
+  Navigation.registerComponent('example.Types.OrderItem', () => OrderItem);
   Navigation.registerComponent('example.Types.Push', () => Push);
   Navigation.registerComponent('example.Types.Drawer', () => Drawer);
-  Navigation.registerComponent('example.Types.Screen', () => Drawer);
-  Navigation.registerComponent('example.Types.Modal', () => Modal);
   Navigation.registerComponent('example.Types.LightBox', () => LightBox);
   Navigation.registerComponent('example.Types.Notification', () => Notification);
-  Navigation.registerComponent('example.Types.CustomTopBarScreen', () => CustomTopBarScreen);
-  Navigation.registerComponent('example.Types.CustomButtonScreen', () => CustomButtonScreen);
+  Navigation.registerComponent('example.Types.basketPreview', () => basketPreview);
+
+
+  Navigation.registerComponent('example.mapView', () => mapView);
+  Navigation.registerComponent('example.TypePage', () => TypePage);
   Navigation.registerComponent('example.Types.offer', () => offer);
   Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
   Navigation.registerComponent('example.Types.opinion', () => opinion);
-    Navigation.registerComponent('example.Types.newComment', () => newComment);
+  Navigation.registerComponent('example.Types.newComment', () => newComment);
 
-  Navigation.registerComponent('example.Types.TopTabs', () => TopTabs);
-  Navigation.registerComponent('example.Types.TopTabs.TabOne', () => TabOne);
-  Navigation.registerComponent('example.Types.TopTabs.TabTwo', () => TabTwo);
+  Navigation.registerComponent('example.Types.basketLightBox', () => basketLightBox);
 
-    newComment
-  Navigation.registerComponent('example.Transitions.CollapsingHeader', () => CollapsingHeader);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions', () => SharedElementTransitions);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards', () => Cards);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Masonry', () => Masonry);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
-
+  Navigation.registerComponent('example.Types.test', () => test);
 
 }
 

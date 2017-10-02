@@ -1,15 +1,95 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View} from 'react-native';
-import Row from '../components/Row';
+import {StyleSheet, ScrollView, View, ListView, Dimensions, ViewPagerAndroid} from 'react-native';
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
+import TypeButton from '../components/TypeButton'
+
 
 class NavigationTypes extends React.Component {
+    dismissLightBox = async (sendTOHome) => {
+        this.props.navigator.dismissLightBox();
+        if (sendTOHome)
+            this.props.navigator.pop();
+
+    };
+
+    showLightBox = (screen, passProps) => (
+        this.props.navigator.showLightBox({
+            screen: screen,
+            passProps: passProps,
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        }));
 
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+        this.state = {
+
+            dataSourceOffer: [{
+                imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
+                action_name: 'offer', id: '0', onPress: (() => this.offer('تنقلات',
+                    'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG', 'توضیحات', '1000', '0'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                action_name: 'offer', id: '1', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                action_name: 'offer', id: '2', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '2'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                action_name: 'offer', id: '3', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '3'))
+            }],
+
+
+            dataSourceItem: ds.cloneWithRows([{
+                imageUrl: 'https://www.w3schools.com/css/lights600x400.jpg',
+                title: 'light',
+                disscount: '120', price: '100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                title: 'offer', id: '0', price: '100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
+                title: 'offer', id: '1', price: '100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }, {
+                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                title: 'ofsadasdad asdsadfer', id: '2', price: '100', onPress: (() => this.offer('تنقلات',
+                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+            }
+                , {
+                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                    title: 'offer', price: '100', id: '3', onPress: (() => this.offer('تنقلات',
+                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                }
+                , {
+                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                    title: 'offer', price: '100', id: '4', onPress: (() => this.offer('تنقلات',
+                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                }
+                , {
+                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
+                    title: 'offer', price: '100', id: '5', onPress: (() => this.offer('تنقلات',
+                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
+                },
+            ]),
+
+
+            dataSourceTypes: ds.cloneWithRows(['پروتین', 'غذایی', 'تنقلات', 'شوینده', 'نان', 'لبنیات'])
+
+        };
     }
 
 
@@ -19,14 +99,16 @@ class NavigationTypes extends React.Component {
             animated: true
         });
     };
-    offer = (title, imageUrl, des) => {
+    offer = (title, imageUrl, des, price, id) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
             title: 'hot offer',
             passProps: {
                 title: title,
                 imageUrl: imageUrl,
-                des: des
+                des: des,
+                price: price,
+                id: id
             },
 
 
@@ -34,151 +116,131 @@ class NavigationTypes extends React.Component {
     };
 
 
-    pushScreen = () => {
+    pushScreen = (screen, title, passProps) => {
         this.props.navigator.push({
-            screen: 'example.Types.test',
-            title: 'list view',
-
+            screen: screen,
+            title: title,
+            passProps: passProps,
         });
     };
 
-    // pushCustomTopBarScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.CustomTopBarScreen'
-    //   });
-    // };
+    TypePage = (title) => {
+        this.props.navigator.push({
+            screen: 'example.TypePage',
+            title: 'hi',
+            passProps: {
+                title: title,
 
-    // pushCustomButtonScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.CustomButtonScreen',
-    //     title: 'Custom Buttons'
-    //   });
-    // };
+            },
+        });
+    };
 
-    // pushTopTabsScreen = () => {
-    //   this.props.navigator.push({
-    //     screen: 'example.Types.TopTabs',
-    //     title: 'Top Tabs',
-    //     topTabs: [{
-    //       screenId: 'example.Types.TopTabs.TabOne',
-    //       title: 'Tab One',
-    //     }, {
-    //       screenId: 'example.Types.TopTabs.TabTwo',
-    //       title: 'Tab Two',
-    //     }],
-    //   });
-    // };
-
-    // showModal = () => {
-    //   this.props.navigator.showModal({
-    //     screen: 'example.Types.Modal',
-    //     title: 'Modal',
-    //   });
-    // };
-
-    // showLightBox = () => {
-    //     this.props.navigator.showLightBox({
-    //         screen: "example.Types.LightBox",
-    //         passProps: {
-    //             title: 'LightBox',
-    //             content: 'Hey there, I\'m a light box screen :D',
-    //             onClose: this.dismissLightBox,
-    //         },
-    //         style: {
-    //             backgroundBlur: 'dark',
-    //             backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    //             tapBackgroundToDismiss: true
-    //         }
-    //     });
-    // };
-
-    // dismissLightBox = () => {
-    //   this.props.navigator.dismissLightBox();
-    // };
-
-    // showInAppNotification = () => {
-    //   this.props.navigator.showInAppNotification({
-    //     screen: 'example.Types.Notification',
-    //   });
-    // };
     onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
 
-        if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-            if (event.id == 'back') { // this is the same id field from the static navigatorButtons definition
+        if (event.type === 'NavBarButtonPress') { // this is the event type for button presses
+            if (event.id === 'back') { // this is the same id field from the static navigatorButtons definition
                 this.toggleDrawer()
             }
-            if (event.id == 'edit') {
-                // AlertIOS.alert('NavBar', 'Add button pressed');
+            if (event.id === 'ShoppingBasket') {
+                this.showLightBox('example.Types.basketLightBox', {
+                    title: this.props.title,
+
+                    onClose: this.dismissLightBox,
+                },);
             }
         }
     }
 
 
     render() {
-        return (
-            <ScrollView style={styles.container }>
 
-                <ImageRow title={'offer'}
-                          imageUrl={'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg'}
-                          onPress={() => this.offer('تنقلات',
-                              'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                              'دستگاه «PIXMA G2400» ساخت شرکت «Canon» پرینتری جوهرافشان است که علاوه‌بر پرینت، قابلیت‌های دیگری مانند اسکن و کپی را هم به همراه دارد. این پرینتر اگرچه چندکاره طراحی شده ' +
-                              'است، قابلیت‌ چاپ عکس را به ‌صورت اختصاصی هم دارد. درنتیجه می‌توانید این پرینتر را برای چاپ عکس با کیفیت بالا خرید' +
-                              'اری کنید و از قابلیت‌های اسکن و کپی هم در آن بهره ببرید. این دستگاه از سیستم مخزن جوهر یا همان تانکر استف' +
-                              'اده می‌کند که در مدیریت هزینه‌ها تأثیر بسیار زیادی دارد و با اتمام جوهر، نیازی به تعویض کارتریج آن نیست؛ تن' +
-                              'ها کافی است جوهر موردنیاز را در مخزن مناسب خود بریزید. انواع کاغذ‌های مخصوص چاپ عکس در این پرینتر قابل ‌اس' +
-                              'تفاده هستند که می‌توانید شرح آن‌ها را در قسمت مشخصات فنی محصول مشاهده فرمایید. یکی از ویژگی‌های مثبت ای' +
-                              'ن دستگاه، قابلیت چاپ بدون حاشیه است که درنتیجه‌ی آن می‌توانید عکس‌های تمام‌صفحه روی کاغذ مخ' +
-                              'صوص عکس، چاپ کنید. برای اتصال این دستگاه به رایانه باید از درگاه USB استفاده کرد.'
-                          )}/>
-                <Header title="پیشنهاد ویژه"/>
-                <ImageRow title={'top sell'}
-                          imageUrl={'https://www.w3schools.com/css/paris.jpg'}
-                          onPress={this.pushScreen}/>
-
-                <View style={{flexDirection: 'row', flex: 1,marginTop:20}}>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'http://www.diskdoctoronline.com/uploads/news/360x350/1416120852.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/trolltunga.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell'}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/lights600x400.jpg'}
-                              onPress={this.pushScreen}/>
-                        <Item title={'top sell for you and me and all '}
-                              price={'100,000'}
-                              imageUrl={'https://www.w3schools.com/css/img_forest.jpg'}
-                              onPress={this.pushScreen}/>
-                    </ScrollView>
+        let tmp = this.state.dataSourceOffer;
+        // for (var i = 0; i < this.state.dataSourceOffer.length; i++) {
+        //     tmp.push(i);
+        // }
+        let indents = tmp.map(function (i) {
+            return (
+                <View>
+                    <ImageRow className='indent' key={i.id} imageUrl={i.imageUrl} title={i.action_name}
+                              onPress={i.onPress}/>
                 </View>
+            );
+        });
+        return (
+            <ScrollView>
+                <ViewPagerAndroid
+                    style={{width: Dimensions.get('window').width, height: Dimensions.get('window').width / 2}}
+                    initialPage={0}>
+                    {indents}
+                </ViewPagerAndroid>
+
+
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '10%'}}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    dataSource={this.state.dataSourceTypes}
+                    renderRow={(rowData) =>
+                        <TypeButton title={rowData} onPress={() => this.TypePage(rowData)}/>}
+                />
+                <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
+                {/*<ImageRow title={'top sell'}*/}
+                {/*style={{flex: 1}}*/}
+                {/*imageUrl={'https://www.w3schools.com/css/paris.jpg'}*/}
+                {/*onPress={this.pushScreen}/>*/}
+
+
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    dataSource={this.state.dataSourceItem}
+                    renderRow={(rowData) =>
+                        <Item title={rowData.title}
+                              style={styles.item}
+                              price={rowData.price}
+                              disscount={rowData.disscount}
+                              imageUrl={rowData.imageUrl}
+                              onPress={rowData.onPress}
+                        />}
+                />
+                <Header style={{width: '100%', height: '10'}} title="پرفروش ترین ها"/>
+                <ListView
+                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    dataSource={this.state.dataSourceItem}
+                    renderRow={(rowData) =>
+                        <Item title={rowData.title}
+                              style={styles.item}
+                              price={rowData.price}
+                              onPress={() => this.offer(rowData.title, rowData.imageUrl, 'nothing', rowData.price, rowData.id)}
+                              disscount={rowData.disscount}
+                              imageUrl={rowData.imageUrl}
+
+                        />}
+                />
+
+
             </ScrollView>
-
-
         );
 
     }
+
+
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#eeeceb'
+        flexDirection: 'column',
+        backgroundColor: '#eeeceb'
+    },
+
+
+    item: {
+        width: 380,
+        height: 150,
     },
     row: {
 
@@ -190,9 +252,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
-    text: {
-        fontSize: 16,
-    },
+
 });
 
 export default NavigationTypes;

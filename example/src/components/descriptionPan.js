@@ -1,22 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, ListView} from 'react-native';
+import TableRow from './TableRowLong'
 
-function descriptionPan() {
+class descriptionPan extends React.Component {
+    constructor(props) {
+        super(props);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+        this.state = {
+            dataSourceDes: ds.cloneWithRows(this.props.data)
+        };
+    }
 
-    return (
-
-            <View>
-                <Text>
-                    hello dolly
-                </Text>
+    render() {
+        return (
+            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                <ListView
+                    style={{flexDirection: 'row', justifyItems: 'center'}}
+                    horizontal={false}
+                    showsHorizontalScrollIndicator={false}
+                    dataSource={this.state.dataSourceDes}
+                    renderRow={(rowData) =>
+                        <TableRow title={rowData.title} des={rowData.des}/>}/>
             </View>
 
-    );
+        );
+    }
 }
 
-descriptionPan().propTypes = {
+descriptionPan.propTypes = {
 
     // size: PropTypes.number.isRequired,
 };

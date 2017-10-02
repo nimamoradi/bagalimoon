@@ -6,8 +6,9 @@ function tableRow({title, des}) {
     return (
 
             <View style={styles.row}>
-                <Text style={styles.text}>{title}</Text>
                 <Text style={styles.text}>{des}</Text>
+                <Text style={styles.text}>{title} :</Text>
+
             </View>
 
     );
@@ -20,7 +21,7 @@ tableRow.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        height: 48,
+        
         paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'center',

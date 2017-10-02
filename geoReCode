@@ -1,0 +1,578 @@
+for getting adress of latlang
+do this post request
+https://maps.googleapis.com/maps/api/geocode/json?latlng=36.291449,59.54428&key=AIzaSyAeuW_i1EAaXKVTtnGe7o5_JPlL5wcIEWE
+
+and response wil be
+
+
+{
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "فرخی شمالی",
+                    "short_name": "فرخی شمالی",
+                    "types": [
+                        "route"
+                    ]
+                },
+                {
+                    "long_name": "Reza Shahr",
+                    "short_name": "Reza Shahr",
+                    "types": [
+                        "political",
+                        "sublocality",
+                        "sublocality_level_1"
+                    ]
+                },
+                {
+                    "long_name": "Mashhad",
+                    "short_name": "Mashhad",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Razavi Khorasan Province",
+                    "short_name": "Razavi Khorasan Province",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Razavi Khorasan Province, Mashhad, Reza Shahr, فرخی شمالی, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.29188,
+                        "lng": 59.54387190000001
+                    },
+                    "southwest": {
+                        "lat": 36.2913708,
+                        "lng": 59.5433073
+                    }
+                },
+                "location": {
+                    "lat": 36.2916254,
+                    "lng": 59.5435896
+                },
+                "location_type": "GEOMETRIC_CENTER",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.2929743802915,
+                        "lng": 59.54493858029151
+                    },
+                    "southwest": {
+                        "lat": 36.2902764197085,
+                        "lng": 59.5422406197085
+                    }
+                }
+            },
+            "place_id": "ChIJ8X6mScqTbD8RDW8XxXI3H-w",
+            "types": [
+                "route"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "فاز 2",
+                    "short_name": "فاز 2",
+                    "types": [
+                        "neighborhood",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "مشهد",
+                    "short_name": "مشهد",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Mashhad",
+                    "short_name": "Mashhad",
+                    "types": [
+                        "administrative_area_level_3",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "استان خراسان رضوی",
+                    "short_name": "استان خراسان رضوی",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "فاز 2، مشهد، استان خراسان رضوی، Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.2916592,
+                        "lng": 59.5443964
+                    },
+                    "southwest": {
+                        "lat": 36.2904138,
+                        "lng": 59.5428837
+                    }
+                },
+                "location": {
+                    "lat": 36.2909611,
+                    "lng": 59.5436242
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.29238548029149,
+                        "lng": 59.5449890302915
+                    },
+                    "southwest": {
+                        "lat": 36.28968751970849,
+                        "lng": 59.5422910697085
+                    }
+                }
+            },
+            "place_id": "ChIJofeeMcqTbD8RBCYeC38rnNg",
+            "types": [
+                "neighborhood",
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Reza Shahr",
+                    "short_name": "Reza Shahr",
+                    "types": [
+                        "political",
+                        "sublocality",
+                        "sublocality_level_1"
+                    ]
+                },
+                {
+                    "long_name": "Mashhad",
+                    "short_name": "Mashhad",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Razavi Khorasan Province",
+                    "short_name": "Razavi Khorasan Province",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Reza Shahr, Mashhad, Razavi Khorasan Province, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.3003062,
+                        "lng": 59.5552112
+                    },
+                    "southwest": {
+                        "lat": 36.2834435,
+                        "lng": 59.532818
+                    }
+                },
+                "location": {
+                    "lat": 36.2912219,
+                    "lng": 59.54263410000001
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.3003062,
+                        "lng": 59.5552112
+                    },
+                    "southwest": {
+                        "lat": 36.2834435,
+                        "lng": 59.532818
+                    }
+                }
+            },
+            "place_id": "ChIJa2sqrsuTbD8RUs-Xl3y5T80",
+            "types": [
+                "political",
+                "sublocality",
+                "sublocality_level_1"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "District 9",
+                    "short_name": "District 9",
+                    "types": [
+                        "political",
+                        "sublocality",
+                        "sublocality_level_1"
+                    ]
+                },
+                {
+                    "long_name": "Mashhad",
+                    "short_name": "Mashhad",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Razavi Khorasan Province",
+                    "short_name": "Razavi Khorasan Province",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "District 9, Mashhad, Razavi Khorasan Province, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.3470015,
+                        "lng": 59.5629787
+                    },
+                    "southwest": {
+                        "lat": 36.2630303,
+                        "lng": 59.4394685
+                    }
+                },
+                "location": {
+                    "lat": 36.3011241,
+                    "lng": 59.52967419999999
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.3470015,
+                        "lng": 59.5629787
+                    },
+                    "southwest": {
+                        "lat": 36.2630303,
+                        "lng": 59.4394685
+                    }
+                }
+            },
+            "place_id": "ChIJa_K9vfKSbD8R0jPV8Np45nQ",
+            "types": [
+                "political",
+                "sublocality",
+                "sublocality_level_1"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Mashhad",
+                    "short_name": "Mashhad",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Razavi Khorasan Province",
+                    "short_name": "Razavi Khorasan Province",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Mashhad, Razavi Khorasan Province, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.4042558,
+                        "lng": 59.7220229
+                    },
+                    "southwest": {
+                        "lat": 36.1909881,
+                        "lng": 59.4368935
+                    }
+                },
+                "location": {
+                    "lat": 36.2604623,
+                    "lng": 59.6167549
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.4042558,
+                        "lng": 59.7220229
+                    },
+                    "southwest": {
+                        "lat": 36.1909881,
+                        "lng": 59.4368935
+                    }
+                }
+            },
+            "place_id": "ChIJ1zFBvhqRbD8RO3UYkzp-xck",
+            "types": [
+                "locality",
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Najafi Police",
+                    "short_name": "Najafi Police",
+                    "types": [
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Najafi Police, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.3231127,
+                        "lng": 59.55765719999999
+                    },
+                    "southwest": {
+                        "lat": 36.2582549,
+                        "lng": 59.4860316
+                    }
+                },
+                "location": {
+                    "lat": 36.2945843,
+                    "lng": 59.52391470000001
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.3231127,
+                        "lng": 59.55765719999999
+                    },
+                    "southwest": {
+                        "lat": 36.2582549,
+                        "lng": 59.4860316
+                    }
+                }
+            },
+            "place_id": "ChIJ-4JA71SSbD8R1KbdO2SsYFs",
+            "types": [
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Mashhad",
+                    "short_name": "Mashhad",
+                    "types": [
+                        "administrative_area_level_3",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Razavi Khorasan Province",
+                    "short_name": "Razavi Khorasan Province",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Mashhad, Razavi Khorasan Province, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 36.6224159,
+                        "lng": 59.99625220000001
+                    },
+                    "southwest": {
+                        "lat": 36.1604681,
+                        "lng": 59.16592610000001
+                    }
+                },
+                "location": {
+                    "lat": 36.4190601,
+                    "lng": 59.5642369
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 36.6224159,
+                        "lng": 59.99625220000001
+                    },
+                    "southwest": {
+                        "lat": 36.1604681,
+                        "lng": 59.16592610000001
+                    }
+                }
+            },
+            "place_id": "ChIJlc79aQ6PbD8R8zqaHD8UOro",
+            "types": [
+                "administrative_area_level_3",
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Razavi Khorasan Province",
+                    "short_name": "Razavi Khorasan Province",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Razavi Khorasan Province, Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 37.7905918,
+                        "lng": 61.282579
+                    },
+                    "southwest": {
+                        "lat": 33.4001927,
+                        "lng": 56.4763309
+                    }
+                },
+                "location": {
+                    "lat": 35.1020253,
+                    "lng": 59.1041758
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 37.7905918,
+                        "lng": 61.282579
+                    },
+                    "southwest": {
+                        "lat": 33.4001927,
+                        "lng": 56.4763309
+                    }
+                }
+            },
+            "place_id": "ChIJzVQLpM7REj8RYGbOyN7A13Q",
+            "types": [
+                "administrative_area_level_1",
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Iran",
+                    "short_name": "IR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Iran",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 39.782056,
+                        "lng": 63.3333366
+                    },
+                    "southwest": {
+                        "lat": 24.8066999,
+                        "lng": 44.0326949
+                    }
+                },
+                "location": {
+                    "lat": 32.427908,
+                    "lng": 53.688046
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 39.782056,
+                        "lng": 63.3333366
+                    },
+                    "southwest": {
+                        "lat": 24.8066999,
+                        "lng": 44.0326949
+                    }
+                }
+            },
+            "place_id": "ChIJ8R1rwS7s9z4RzvpRntOVsEA",
+            "types": [
+                "country",
+                "political"
+            ]
+        }
+    ],
+    "status": "OK"
+}

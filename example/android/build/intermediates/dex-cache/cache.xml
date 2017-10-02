@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\jars\classes.jar"
+        jar="C:\Users\nima\.android\build-cache\3e6b1191426ae8827072e172f7c1b0d59a5a9d98\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.1"
-        sha1="0d3e48e200296061415952a358fad487e129adaa">
-        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_064e3ab6139d9742ba710ea55f034a452d545eae.jar" />
+        sha1="5803db663655ef5cb38c6bcb17ba326fdb9edfbd">
+        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_792d86b214800a416849fa26f9cd5aefccfd6ec9.jar" />
     </item>
     <item
         is-multidex="false"
@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\nima\.android\build-cache\b380566836a0bd68265bf324a4580e7869e38029\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="dd1d0d84da2cff18f741c63a9c3af7d9aa89fdd6">
+        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_23347134244443b5faa068908f066e14c557f0b2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="E:\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -30,21 +39,48 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\nima\.android\build-cache\fb4607b48c39403e2d8acb6f5c6b9bb8d2eb24c4\output\jars\libs\infer-annotations-4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.1"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_616c79bdf3a7327178d0d2e95220951ceafbee10.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\nima\.android\build-cache\8281ecdc86636358f0fab44da060d8c348744199\output\jars\libs\infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
         <dex dex="E:\example\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_f1254f5b2a6c1565867126dc26dfc0584bfb1e00.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\nima\.android\build-cache\8156cc03363bf9eb18c156d9207caf22a5c542e0\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="9ed08fab37c3a572da1d9ed2bf2e36c8d3e2bc48">
+        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_05b3d2e0a52560f88b81b01d0a40201e4e4dd007.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\nima\.android\build-cache\8647a92daa06ef8aaceefe409c0dc3b1ddb6e3f3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6d0d5e86f5b7203834df01ed78ebfdd5cbf74d48">
+        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_9b7a975cd3a84d0a50dc6b2a9bbe782cbc28c899.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\projects\superMan\example\node_modules\react-native-vector-icons\android\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_07622a9698ded7088dba29c5b7fffcbcd8966383.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\projects\superMan\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3f17aa7e2799a291d04a1927e7a39448fd03655d">
+        <dex dex="E:\projects\superMan\example\android\app\build\intermediates\pre-dexed\debug\classes_edc5ff143af9218449fc781cdc0bc23db6a1ffc6.jar" />
     </item>
     <item
         is-multidex="false"

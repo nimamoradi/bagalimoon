@@ -89,6 +89,9 @@ class TypePage extends Component {
                     dataSource={this.state.fields}
                     renderRow={(columnData) => <ItemView
                         title="dsa" price="1212"
+                        count="1"
+                        onUp={this.onUp}
+                        onDown={this.onDown}
                         imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"/>}
                 />
 
@@ -97,6 +100,12 @@ class TypePage extends Component {
         );
     }
 
+    onUp = () => {
+
+
+    };
+    onDown = () => {
+    };
 
 }
 

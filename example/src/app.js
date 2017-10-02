@@ -53,27 +53,11 @@ registerScreenVisibilityListener();
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: 'example.Types', // unique ID registered with Navigation.registerScreen
-        title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
+        screen: 'example.Types.loginScreen', // unique ID registered with Navigation.registerScreen
         navigatorStyle: {
-            navBarTranslucent: false
-        }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-        navigatorButtons: {
-            leftButtons: [
-                {
-                    id: 'ShoppingBasket',
-                    icon: require('../img/ShoppingBasket.png'),
-                    style:{width:5,height:5}
-                },
-            ],
-            rightButtons: [
+            navBarHidden: true,
+        }
 
-                {
-                    id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                    icon: require('../img/menu.png'), // for icon button, provide the local image asset name
-                }
-            ],
-        } // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
     },
     drawer: { // optional, add this if you want a side menu drawer in your app
         right: { // optional, define if you want a drawer from the right
@@ -91,7 +75,7 @@ Navigation.startSingleScreenApp({
         // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
         disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
     },
-    passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+
     animationType: 'fade', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
 
 });

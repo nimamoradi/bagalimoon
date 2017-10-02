@@ -1,43 +1,61 @@
 import React from 'react';
-import {StyleSheet, View, Button, Image, Text} from 'react-native';
-
+import {StyleSheet, View, Button, TouchableOpacity, Image, Text, Dimensions} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 class MyClass extends React.Component {
+    dismissLightBox = async (sendTOHome) => {
+        this.props.navigator.dismissLightBox();
+        if (sendTOHome)
+            this.props.navigator.pop();
 
-    onShowModal = () => {
-        this.toggleDrawer();
-        this.props.navigator.showModal({
-            screen: 'example.Types.Modal',
-            title: `Modal`
-        });
-    };
-
-    onPushToFirstTab = () => {
-        this.toggleDrawer();
-        this.props.navigator.handleDeepLink({
-            link: 'tab1/example.Types.Push'
-        });
     };
 
     toggleDrawer = () => {
         this.props.navigator.toggleDrawer({
-            side: 'left'
+            side: 'right',
+            animated: true
         });
     };
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={{backgroundColor: 'red', flex: 1, width: 300,justifyContent: 'center',}}>
-                    <Image source={require('../../../img/gyro_header.jpg')}/>
-                    <Text>jjdfd fo</Text>
+                <View style={{backgroundColor: '#eeeceb', flex: 1, width: 300, justifyContent: 'center',}}>
+                    <Image style={styles.image} source={require('../../../img/gyro_header.jpg')}/>
+                    <Text style={{alignSelf: 'flex-end'}}>jjdfd fo</Text>
                 </View>
-                <View style={{backgroundColor: 'blue', flex: 3, width: 300,}}>
-                    <Text>jjo</Text>
+                <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
+                    <TouchableOpacity
+                        onPress={() => this.showLightBox('example.Types.basketLightBox', {
+                            title: this.props.title,
+                            onClose: this.dismissLightBox,
+                        },)}>
+                        <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>
+                            <Icon name="shopping-cart" size={35} color="#C42B2D" style={{margin: 10,alignSelf:'flex-start'}}/>
+                            <Text  style={{marginTop:35/2,}}>سبد خرید</Text>
+
+                        </View>
+
+                    </TouchableOpacity>
+
                 </View>
 
             </View>
         );
     }
+
+    showLightBox = (screen, passProps) => {
+        this.toggleDrawer();
+        this.props.navigator.showLightBox({
+            screen: screen,
+            passProps: passProps,
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        })
+    };
+
 }
 
 const styles = StyleSheet.create({
@@ -51,11 +69,11 @@ const styles = StyleSheet.create({
     },
     button: {},
     image: {
-        width: 300,
-
+        height: Dimensions.get('window').width / 3, width: Dimensions.get('window').width / 3,
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        borderRadius:150,
+        borderRadius: Dimensions.get('window').width / 6,
     }
     ,
 });

@@ -1,16 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Image, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image,TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function itemView({title, onPress, imageUrl, price, disscount}) {
+
+function itemView({title, onUp,onDown, imageUrl, price, disscount,count}) {
 
 
     return (
         <View style={{}}>
             <View style={styles.row}>
-                <Image source={{uri: imageUrl}} style={styles.image}/>
-                <Text style={styles.text}>{title}</Text>
+                <View style={{flexDirection: 'row', alignSelf: 'flex-end',}}>
+
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                            <Text
+                                editable={false} selectTextOnFocus={false}
+                                style={{textAlign: 'center'}}>
+                                {count}
+                            </Text>
+                            <View style={{flex: 1, flexDirection: 'column'}}>
+                                <Text style={styles.text}>{title}</Text>
+                                <TouchableOpacity onPress={onUp}>
+                                    <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={onDown}>
+                                    <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
+                                </TouchableOpacity>
+                            </View>
+
+                        </View>
+
+                    <Image source={{uri: imageUrl}} style={styles.image}/>
+                </View>
+
                 <View style={styles.priceView}>
                     <View style={{flexDirection: 'row', alignContent: 'center'}}>
                         <Text style={styles.price}>{price}</Text>
@@ -30,7 +52,8 @@ itemView.propTypes = {
     price: PropTypes.string.isRequired,
     disscount: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired,
+    onUp: PropTypes.func.isRequired,
+    onDown: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -45,8 +68,8 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         backgroundColor: '#e8f0e820',
         padding: 20,
-        margin:10,
-        width: Dimensions.get('window').width*0.95,
+        margin: 10,
+        width: Dimensions.get('window').width * 0.95,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -55,7 +78,7 @@ const styles = StyleSheet.create({
     },
     text: {
         alignSelf: 'flex-end',
-        fontSize: 16,
+        fontSize: 20,
         marginRight: 20,
         textAlign: 'center'
 

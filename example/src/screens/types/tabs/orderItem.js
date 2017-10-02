@@ -48,7 +48,10 @@ class orderItem extends React.Component {
                 value = [];
             }
             else
+            {
                 console.log('have previews value ');
+
+            }
 
             value.push({
                 'name': this.props.title,

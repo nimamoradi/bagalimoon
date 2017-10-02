@@ -43,7 +43,7 @@ class loginScreen extends React.Component {
                             borderColor: '#bec4be',
                             borderWidth: 0.5,
                             backgroundColor: '#5bca45',
-                            padding: 30,
+                            padding:10,
                             margin:10,
                             fontSize:20,
                             color:'#ffffff'
@@ -55,7 +55,7 @@ class loginScreen extends React.Component {
                             borderColor: '#bec4be',
                             borderWidth: 0.5,
                             backgroundColor: '#4b54ce',
-                            padding: 30,
+                            padding: 10,
                             margin:10,
                             fontSize:20,
                             color:'white'

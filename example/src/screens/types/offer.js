@@ -25,8 +25,12 @@ class offer extends Component {
             screen: 'example.Types.descriptionPan',
             title: 'hot offer',
             passProps: {
-                date: data,
-                size: size,
+                data: [{'title':'شماره','des':'1'},
+                    {'title':'شماره','des':'1'},
+                    {'title':'شماره','des':'1'},
+                    {'title':'شماره','des':'1'},
+                    {'title':'شماره','des':'1'}],
+
             },
         });
     };

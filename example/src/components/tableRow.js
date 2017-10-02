@@ -21,7 +21,7 @@ tableRow.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        height: 48,
+        
         paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'center',

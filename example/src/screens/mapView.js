@@ -31,7 +31,7 @@ class mapView extends Component {
             }
             else {
 
-                console.log(' ادرس '+value);
+                console.log(' ادرس ' + value);
                 this.setState({myLastAddress: value,});
             }
         }
@@ -84,7 +84,7 @@ class mapView extends Component {
                 latitude: 36.288022,
                 longitude: 59.616075,
             },
-            optionSelected: 1,
+            optionSelected: 0,
             error: null,
             myAddress: '',
             myLastAddress: '',
@@ -152,7 +152,7 @@ class mapView extends Component {
                     </View>
                 </View>
                 <View>
-                    <Radio onSelect={this.onSelect.bind(this)} defaultSelect={this.state.optionSelected - 1}>
+                    <Radio onSelect={this.onSelect.bind(this)} defaultSelect={this.state.optionSelected }>
                         <Option color="gray" selectedColor="#008BEF">
                             <View>
                                 <Text style={styles.Text}>آدرس</Text>
@@ -193,6 +193,7 @@ class mapView extends Component {
 
     onlineSale = async () => {
         try {
+            if(this.state.myAddress!==null&&this.state.optionSelected===0)
             await  AsyncStorage.setItem('@lastAddress', this.state.myAddress);
         } catch (error) {
             console.log('can\'t save data ' + error);
@@ -202,6 +203,7 @@ class mapView extends Component {
     };
     offlineSale = async () => {
         try {
+            if(this.state.myAddress!==null&&this.state.optionSelected===0)
             await  AsyncStorage.setItem('@lastAddress', this.state.myAddress);
         } catch (error) {
             console.log('can\'t save data ' + error);
@@ -240,14 +242,11 @@ const styles = StyleSheet.create({
             backgroundColor: '#23d42920',
         },
         bigButtonText: {
-
             textAlign: 'center',
             fontSize: 25,
             marginTop: 20,
             alignItems: 'center',
             alignContent: 'center',
-
-
         }
     }
 );

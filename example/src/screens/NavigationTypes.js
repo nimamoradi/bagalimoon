@@ -201,8 +201,7 @@ class NavigationTypes extends React.Component {
                               price={rowData.price}
                               disscount={rowData.disscount}
                               imageUrl={rowData.imageUrl}
-                              onPress={() =>
-                                  rowData.onPress}
+                              onPress={rowData.onPress}
                         />}
                 />
                 <Header style={{width: '100%', height: '10'}} title="پرفروش ترین ها"/>

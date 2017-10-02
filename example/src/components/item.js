@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Image} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 
 
 function item({title, onPress, imageUrl, price, disscount}) {
 
     if (disscount == null) {
         return (
-            <TouchableHighlight onPress={onPress}>
+            <TouchableOpacity onPress={onPress}>
                 <View style={styles.row}>
                     <Image source={{uri: imageUrl}} style={styles.image}/>
                     <Text style={styles.text}>{title}</Text>
@@ -17,12 +17,12 @@ function item({title, onPress, imageUrl, price, disscount}) {
 
                     </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     } else {
 
         return (
-            <TouchableHighlight onPress={onPress} >
+            <TouchableOpacity onPress={onPress} >
             <View style={styles.row}>
                 <Image source={{uri: imageUrl}} style={styles.image}/>
                 <Text style={styles.text}>{title}</Text>
@@ -32,7 +32,7 @@ function item({title, onPress, imageUrl, price, disscount}) {
                     <Text style={styles.discount}>{disscount}</Text>
                 </View>
             </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }

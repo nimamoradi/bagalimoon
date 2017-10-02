@@ -23,13 +23,25 @@ class TypePage extends Component {
             {'name': 'لبنیات', 'value': [{'name': 'شیر', selected: false,}, {'name': 'پنیر', selected: false,}]},
             {'name': 'تنقلات', 'value': [{'name': 'تنغ', selected: false,}, {'name': 'تنق', selected: false,}]},
             {'name': 'نان', 'value': [{'name': 'لواش', selected: false,}, {'name': 'سنگک', selected: false,}]},];
+        let ViewArray=[{'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'dsa','price':'1285', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'dsa','price':'165652', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'ddsaadasd','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
+            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},];
 
+
+        imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
         this.state = {
             mainSelected: this.props.title,
             subSelected: 'مرغ',
             dataSourceTypes: dateArray,
             dataSourceTypesColumn: subDataArray,
+            dataSourceView:ds.cloneWithRows(ViewArray),
             fields: ds,
+            viewDate:ViewArray,
 
         }
 
@@ -37,7 +49,9 @@ class TypePage extends Component {
 
     componentDidMount() {
         this.setState({
+            dataSourceView:this.state.fields.cloneWithRows(this.state.viewDate),
             fields: this.state.fields.cloneWithRows(this.state.dataSourceTypes),
+
         });
     }
 
@@ -86,13 +100,14 @@ class TypePage extends Component {
 
                 <ListView
                     style={{flex: 3}}
-                    dataSource={this.state.fields}
+                    dataSource={this.state.dataSourceView}
                     renderRow={(columnData) => <ItemView
-                        title="dsa" price="1212"
-                        count="1"
-                        onUp={this.onUp}
-                        onDown={this.onDown}
-                        imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"/>}
+                        title={columnData.title}
+                        price={columnData.price}
+                        count={columnData.count}
+                        onUp={()=>this.onUp(columnData)}
+                        onDown={()=>this.onDown(columnData)}
+                        imageUrl={columnData.imageUrl}/>}
                 />
 
 
@@ -100,11 +115,26 @@ class TypePage extends Component {
         );
     }
 
-    onUp = () => {
+    onUp = (rowdata) => {
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.viewDate;
 
+        updatedState[updatedState.indexOf(rowdata)]['count']++;
+        console.log(updatedState);
+        this.setState({viewDate: updatedState});
 
     };
-    onDown = () => {
+    onDown = (rowdata) => {
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.viewDate;
+        let data = this.state.viewDate;
+        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
+            updatedState[data.indexOf(rowdata)]['count']--;
+
+        }
+        console.log(updatedState);
+        this.setState({basket: updatedState});
+
     };
 
 }

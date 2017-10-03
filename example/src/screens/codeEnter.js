@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 
-class loginScreen extends React.Component {
+class codeEnter extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -22,26 +22,26 @@ class loginScreen extends React.Component {
 
                 <View style={styles.subRow}/>
                 <View style={styles.subRow}>
-                    <Text style={styles.text}>شماره همراه</Text>
+                    <Text style={styles.text}>شماره رمز</Text>
                     <TextInput  keyboardType='numeric'  style={styles.textInput}/>
-               </View>
+                </View>
 
 
                 <View style={styles.subRow}/>
                 <View style={{flexDirection:'column',justifyContent:'center'}}>
                     <TouchableOpacity
-                    onPress={this.login}
+                        onPress={this.login}
                     >
                         <Text style={{
                             textAlign: 'center', borderRadius: 20,
                             borderColor: '#bec4be',
                             borderWidth: 0.5,
-                            backgroundColor: '#5bca45',
+                            backgroundColor: '#7ab7ff',
                             padding:10,
                             margin:40,
                             fontSize:20,
                             color:'#ffffff'
-                        }}>ارسال</Text>
+                        }}>ورود</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -50,11 +50,31 @@ class loginScreen extends React.Component {
     }
 
     login = () => {
-        this.props.navigator.pop();
+
         this.props.navigator.push({
-            screen: 'example.Types.codeEnter',
-            title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
+            screen: 'example.Types',
+            title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
+            navigatorStyle: {
+                navBarTranslucent: false
+            }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             passProps: {},
+            overrideBackPress: true,
+            navigatorButtons: {
+                leftButtons: [
+                    {
+                        id: 'ShoppingBasket',
+                        icon: require('../../img/ShoppingBasket.png'),
+                        style: {width: 5, height: 5}
+                    },
+                ],
+                rightButtons: [
+
+                    {
+                        id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+                        icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
+                    }
+                ],
+            }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
 
 
         });
@@ -64,7 +84,7 @@ class loginScreen extends React.Component {
 }
 
 
-loginScreen.propTypes = {};
+codeEnter.propTypes = {};
 
 const styles = StyleSheet.create({
 
@@ -95,4 +115,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default loginScreen;
+export default codeEnter;

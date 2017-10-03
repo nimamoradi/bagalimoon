@@ -79,13 +79,6 @@ class basketLightBox extends React.Component {
 
                     </View>
 
-                    <TouchableHighlight
-                        style={{
-                            flex: 1, borderWidth: 0.5, margin: 10, borderRadius: 5, justifyContent: 'center',
-                            alignItems: 'center', backgroundColor: '#ebe22850'
-                        }}
-                        onPress={() => this.addProduct()}
-                    ><Text>{'سبد های خرید قبلی'}</Text></TouchableHighlight>
                 </View>
             );
         else return ( <View style={styles.container}>
@@ -116,7 +109,7 @@ basketLightBox.PropTypes = {};
 const styles = StyleSheet.create({
     container: {
         width: Dimensions.get('window').width * 0.7,
-        height: Dimensions.get('window').height * 0.4,
+        height: Dimensions.get('window').height * 0.35,
         backgroundColor: '#ffffff',
         borderRadius: 5,
         padding: 16,

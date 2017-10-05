@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, TextInput, AsyncStorage} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity,Dimensions, Image, ScrollView, TextInput, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class offer extends Component {
@@ -12,7 +12,7 @@ class offer extends Component {
             productCount = this.props.myNumber;
         this.state = {
             myNumber: '0',
-            wasEmpty:true,
+            wasEmpty: true,
         }
     }
 
@@ -25,11 +25,11 @@ class offer extends Component {
             screen: 'example.Types.descriptionPan',
             title: 'hot offer',
             passProps: {
-                data: [{'title':'شماره','des':'1'},
-                    {'title':'شماره','des':'1'},
-                    {'title':'شماره','des':'1'},
-                    {'title':'شماره','des':'1'},
-                    {'title':'شماره','des':'1'}],
+                data: [{'title': 'شماره', 'des': '1'},
+                    {'title': 'شماره', 'des': '1'},
+                    {'title': 'شماره', 'des': '1'},
+                    {'title': 'شماره', 'des': '1'},
+                    {'title': 'شماره', 'des': '1'}],
 
             },
         });
@@ -57,17 +57,23 @@ class offer extends Component {
         if (data === null) return 0;
         const json = await  JSON.parse(data);
 
-        let index=  json.map(function(e) { return e.id; }).indexOf(this.props.id);
+        let index = json.map(function (e) {
+            return e.id;
+        }).indexOf(this.props.id);
 
-        if (index!==-1) {
-            this.setState({myNumber: '' + json[index]['count'],wasEmpty:false});
+        if (index !== -1) {
+            this.setState({myNumber: '' + json[index]['count'], wasEmpty: false});
         }
         console.log(json);
 
     };
-    findIndex(array,id,id_number){
-        return  array.map(function(e) { return e.id; }).indexOf(id_number);
+
+    findIndex(array, id, id_number) {
+        return array.map(function (e) {
+            return e.id;
+        }).indexOf(id_number);
     }
+
     onChanged = (text) => {
         let newText = '';
         let numbers = '0123456789';
@@ -98,70 +104,74 @@ class offer extends Component {
 
     render() {
         return (
-            <ScrollView
-                contentContainerStyle={{
+            <ScrollView>
+
+                <View style={{
                     flex: 1, margin: 15, flexDirection: "column",
                     alignItems: "stretch",
                 }}>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={{flex: 0.6, flexDirection: 'column'}}>
-                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{color: '#17c408'}}>{this.props.price}</Text>
-                            <Text>قیمت :</Text>
-                        </View>
-                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <TextInput
-                                maxLength={2}
-                                onChange ={ (event) => this.onChanged(event.nativeEvent.text)}
-                                keyboardType='numeric' style={{textAlign: 'center'}}>
-                              {this.state.myNumber}
-                            </TextInput>
-                            <View style={{flex: 1, flexDirection: 'column'}}>
-                                <TouchableOpacity onPress={this.onUp}>
-                                    <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={this.onDown}>
-                                    <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
-                                </TouchableOpacity>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{flex: 0.6, flexDirection: 'column'}}>
+                            <View
+                                style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                <Text style={{color: '#17c408'}}>{this.props.price}</Text>
+                                <Text>قیمت :</Text>
                             </View>
+                            <View
+                                style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                <TextInput
+                                    maxLength={2}
+                                    onChange={(event) => this.onChanged(event.nativeEvent.text)}
+                                    keyboardType='numeric' style={{textAlign: 'center'}}>
+                                    {this.state.myNumber}
+                                </TextInput>
+                                <View style={{flex: 1, flexDirection: 'column'}}>
+                                    <TouchableOpacity onPress={this.onUp}>
+                                        <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={this.onDown}>
+                                        <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
+                                    </TouchableOpacity>
+                                </View>
+
+                            </View>
+                            <TouchableOpacity
+                                onPress={this.addToCart}>
+
+                                < Icon name="cart-plus" size={30} color="#17C408" style={{margin: 10}}/>
+                            </TouchableOpacity>
+                        </View>
+                        <Image source={{
+                            uri: this.props.imageUrl
+                        }}
+                               style={styles.image}/>
+
+                    </View>
+                    <View style={{flex: 0.35, justifyContent: "center", alignItems: "center"}}>
+                        <View style={styles.flexRow}>
+                            <TouchableOpacity
+                                style={styles.flex}
+                                onPress={this.opinion}
+                            >
+                                <Text style={styles.buttonText}>
+                                    نظرات کاربران
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.flex}
+                                onPress={this.desPan}>
+                                <Text style={styles.buttonText}>
+                                    مشخصات محصول
+                                </Text>
+                            </TouchableOpacity>
 
                         </View>
-                        <TouchableOpacity
-                            onPress={this.addToCart}>
 
-                            < Icon name="cart-plus" size={30} color="#17C408" style={{margin: 10}}/>
-                        </TouchableOpacity>
-                    </View>
-                    <Image source={{
-                        uri: this.props.imageUrl
-                    }}
-                           style={styles.image}/>
-
-                </View>
-                <View style={{flex: 0.35, justifyContent: "center", alignItems: "center"}}>
-                    <View style={styles.flexRow}>
-                        <TouchableOpacity
-                            style={styles.flex}
-                            onPress={this.opinion}
-                        >
-                            <Text style={styles.buttonText}>
-                                نظرات کاربران
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.flex}
-                            onPress={this.desPan}>
-                            <Text style={styles.buttonText}>
-                                مشخصات محصول
-                            </Text>
-                        </TouchableOpacity>
 
                     </View>
-
-
-                </View>
-                <View style={styles.flex}>
-                    <Text>{this.props.des}</Text>
+                    <View style={styles.flex}>
+                        <Text>{this.props.des}</Text>
+                    </View>
                 </View>
             </ScrollView>
         );
@@ -215,7 +225,7 @@ offer.propTypes = {
     des: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     myNumber: PropTypes.string,
-    id:PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -239,7 +249,7 @@ const styles = StyleSheet.create({
     }
     , des: {},
     image: {
-        flex: 1, alignSelf: 'stretch', width: undefined, height: undefined,
+        flex: 1, alignSelf: 'stretch', width: Dimensions.get('window').width/2, height: Dimensions.get('window').height/2.5,
         borderRadius: 20,
         borderColor: '#bec4be',
         borderWidth: 0.5,

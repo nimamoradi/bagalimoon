@@ -26,8 +26,8 @@ class loginScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{flex: 1}}>
-                    <Image source={require('../../img/masonry/AdGXmD1CH6.jpeg')}
-                           style={{
+                    <Image source={require('../../img/trademark.png')}
+                           style={{flex:1,resizeMode:'stretch',
                                width:Dimensions.get('window').width,height:Dimensions.get('window').height/2.1,marginBottom:10}}/>
                 </View>
 

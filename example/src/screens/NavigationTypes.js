@@ -14,6 +14,7 @@ class NavigationTypes extends React.Component {
 
     };
 
+
     showLightBox = (screen, passProps) => (
         this.props.navigator.showLightBox({
             screen: screen,
@@ -27,11 +28,11 @@ class NavigationTypes extends React.Component {
 
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side:'right',enabled:true});
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         console.log("inside responsejson");
-        console.log('response object page 2:',this.props.pageData);
+        console.log('response object page 2:', this.props.pageData);
 
         this.state = {
 
@@ -57,7 +58,7 @@ class NavigationTypes extends React.Component {
             dataSourceItem: ds.cloneWithRows(this.props.pageData),
 
 
-            dataSourceTypes: ds.cloneWithRows(['پروتین', 'غذایی', 'تنقلات', 'شوینده', 'نان', 'لبنیات'])
+            dataSourceTypes: ds.cloneWithRows(this.props.Categories),
 
         };
     }
@@ -100,7 +101,7 @@ class NavigationTypes extends React.Component {
             title: 'hi',
             passProps: {
                 title: title,
-
+                Categories:this.props.Categories,
             },
         });
     };
@@ -150,8 +151,12 @@ class NavigationTypes extends React.Component {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceTypes}
-                    renderRow={(rowData) =>
-                        <TypeButton title={rowData} onPress={() => this.TypePage(rowData)}/>}
+                    renderRow={(rowData) => {
+                        if (rowData.parent_category_id === 0)
+                            return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
+                        else return null;
+                    }
+                    }
                 />
                 <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
                 {/*<ImageRow title={'top sell'}*/}
@@ -170,8 +175,8 @@ class NavigationTypes extends React.Component {
                               style={styles.item}
                               price={rowData.price}
                               disscount={rowData.off}
-                              imageUrl={'http://10.0.2.2/superserver/public'+rowData.photo.file}
-                              onPress={() => this.offer(rowData.name,'http://10.0.2.2/superserver/public'+rowData.photo.file,
+                              imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
+                              onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
                                   rowData.long_description, rowData.price, rowData.id)}
                         />}
                 />
@@ -185,10 +190,10 @@ class NavigationTypes extends React.Component {
                         <Item title={rowData.name}
                               style={styles.item}
                               price={rowData.price}
-                              onPress={() => this.offer(rowData.name,'http://10.0.2.2/superserver/public'+rowData.photo.file,
+                              onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
                                   rowData.long_description, rowData.price, rowData.id)}
                               disscount={rowData.off}
-                              imageUrl={'http://10.0.2.2/superserver/public'+rowData.photo.file}
+                              imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
                         />}
                 />
 
@@ -197,7 +202,6 @@ class NavigationTypes extends React.Component {
         );
 
     }
-
 
 
 }

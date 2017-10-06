@@ -27,8 +27,13 @@ class loginScreen extends React.Component {
             <View style={styles.container}>
                 <View style={{flex: 1}}>
                     <Image source={require('../../img/trademark.png')}
-                           style={{flex:1,resizeMode:'stretch',
-                               width:Dimensions.get('window').width,height:Dimensions.get('window').height/2.1,marginBottom:10}}/>
+                           style={{
+                               flex: 1,
+                               resizeMode: 'stretch',
+                               width: Dimensions.get('window').width,
+                               height: Dimensions.get('window').height / 2.1,
+                               marginBottom: 10
+                           }}/>
                 </View>
 
                 <View style={{flex: 1.3}}>
@@ -147,8 +152,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,
-
-        width: '100%',
+        alignSelf: 'center',
+        width: '80%',
 
     },
     flex: {

@@ -10,47 +10,82 @@ class TypePage extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        let dateArray = [{'name': 'پروتین', selected: false,}, {'name': 'غذایی', selected: false,},
-            {'name': 'شوینده', selected: false,}, {'name': 'لبنیات', selected: false,},
-            {'name': 'تنقلات', selected: false,}, {'name': 'نان', selected: false,},
-            {'name': 'تنقلات', selected: false,}, {'name': 'نان', selected: false,},
 
-        ];
+        let Categories = props.Categories;
         let subDataArray = [
-            {'name': 'پروتین', 'value': [{'name': 'مرغ', selected: false,}, {'name': 'ماهی', selected: false,}]},
-            {'name': 'غذایی', 'value': [{'name': 'مرغ', selected: false,}, {'name': 'غذا', selected: false,}]},
-            {'name': 'شوینده', 'value': [{'name': 'مایع', selected: false,}, {'name': 'صابون', selected: false,}]},
-            {'name': 'لبنیات', 'value': [{'name': 'شیر', selected: false,}, {'name': 'پنیر', selected: false,}]},
-            {'name': 'تنقلات', 'value': [{'name': 'تنغ', selected: false,}, {'name': 'تنق', selected: false,}]},
-            {'name': 'نان', 'value': [{'name': 'لواش', selected: false,}, {'name': 'سنگک', selected: false,}]},];
-        let ViewArray=[{'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'dsa','price':'1285', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'dsa','price':'165652', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'ddsaadasd','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},
-            {'title':'dsa','price':'1212', 'count':'1','imageUrl':"https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"},];
+            {'name': 'پروتین', 'value': [{'name': 'مرغ'}, {'name': 'ماهی'}]},
+            {'name': 'غذایی', 'value': [{'name': 'مرغ'}, {'name': 'غذا'}]},
+            {'name': 'لوازم بهداشتی', 'value': [{'name': 'مایع'}, {'name': 'صابون'}]},
+            {'name': 'لبنیات', 'value': [{'name': 'شیر'}, {'name': 'پنیر'}]},
+            {'name': 'تنقلات', 'value': [{'name': 'تنغ'}, {'name': 'تنق'}]},
+            {'name': 'نان', 'value': [{'name': 'لواش'}, {'name': 'سنگک'}]},];
+        let ViewArray = [{
+            'title': 'dsa',
+            'price': '1212',
+            'count': '0',
+            'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+        },
+            {
+                'title': 'dsa',
+                'price': '1285',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },
+            {
+                'title': 'dsa',
+                'price': '165652',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },
+            {
+                'title': 'ddsaadasd',
+                'price': '1212',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },
+            {
+                'title': 'dsa',
+                'price': '1212',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },
+            {
+                'title': 'dsa',
+                'price': '1212',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },
+            {
+                'title': 'dsa',
+                'price': '1212',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },
+            {
+                'title': 'dsa',
+                'price': '1212',
+                'count': '0',
+                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+            },];
 
 
-        imageUrl="https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
+        imageUrl = "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg";
         this.state = {
             mainSelected: this.props.title,
             subSelected: 'مرغ',
-            dataSourceTypes: dateArray,
             dataSourceTypesColumn: subDataArray,
-            dataSourceView:ds.cloneWithRows(ViewArray),
+            dataSourceView: ds.cloneWithRows(ViewArray),
             fields: ds,
-            viewDate:ViewArray,
-
+            viewDate: ViewArray,
+            Categories: Categories,
         }
 
     }
 
     componentDidMount() {
         this.setState({
-            dataSourceView:this.state.fields.cloneWithRows(this.state.viewDate),
-            fields: this.state.fields.cloneWithRows(this.state.dataSourceTypes),
+            dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
+
 
         });
     }
@@ -66,13 +101,20 @@ class TypePage extends Component {
 
 
     render() {
-        let mainItems = this.state.dataSourceTypes.map((s, i) => {
-            return <Picker.Item key={i} value={s.name} label={s.name}/>
+        let mainItems = this.state.Categories.filter(function (x) {
+            return x.parent_category_id === 0;
+        }).map(function (x) {
+            return <Picker.Item key={x.id} value={x.name} label={x.name}/>
         });
-        let index = this.getIndex(this.state.mainSelected, this.state.dataSourceTypesColumn, 'name');
 
-        let subItems = this.state.dataSourceTypesColumn[index]['value'].map((s, i) => {
-            return <Picker.Item key={i} value={s.name} label={s.name}/>
+
+        let index = this.getIndex(this.state.mainSelected, this.state.Categories, 'name');
+        let parent_id = this.props.Categories[index].id ;
+
+        let subItems = this.state.Categories.filter(function (x) {
+            return x.parent_category_id === parent_id;
+        }).map(function (x) {
+            return <Picker.Item key={x.id} value={x.name} label={x.name}/>
         });
 
         return (
@@ -105,8 +147,8 @@ class TypePage extends Component {
                         title={columnData.title}
                         price={columnData.price}
                         count={columnData.count}
-                        onUp={()=>this.onUp(columnData)}
-                        onDown={()=>this.onDown(columnData)}
+                        onUp={() => this.onUp(columnData)}
+                        onDown={() => this.onDown(columnData)}
                         imageUrl={columnData.imageUrl}/>}
                 />
 

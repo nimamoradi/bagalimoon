@@ -13,12 +13,15 @@ import {
 } from 'react-native';
 
 let data;
-let isDataReady=false;
+let Categories;
+let isDataReady = false;
+
 class codeEnter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {code: ''};
-         this.loadData();
+        this.loadData();
+        this.loadCategories();
     }
 
     loadData() {
@@ -30,10 +33,31 @@ class codeEnter extends React.Component {
         }).then((response) => response.json().then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
-                    data=responseData;
-                    isDataReady=true;
+                data = responseData;
+                isDataReady = true;
 
-            }) .catch(error => {
+            }).catch(error => {
+                alert('اینترنت قطع است')
+            })
+        );
+
+
+    }
+
+    loadCategories() {
+
+        console.log("get Categories");
+
+        fetch('http://10.0.2.2/superserver/public/api/getAllCategories', {
+            method: 'POST',
+
+        }).then((response) => response.json().then((responseData) => {
+                console.log("inside responsejson");
+                console.log('response object:', responseData);
+                Categories = responseData;
+                // isDataReady=true;
+
+            }).catch(error => {
                 alert('اینترنت قطع است')
             })
         );
@@ -111,7 +135,7 @@ class codeEnter extends React.Component {
                     }
                 ],
             }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-passProps:{pageData:data}
+            passProps: {pageData: data,Categories:Categories}
 
         });
     };

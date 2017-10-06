@@ -11,7 +11,7 @@ import {
 
 
 } from 'react-native';
-
+import server from '../code'
 let data;
 let Categories;
 let isDataReady = false;
@@ -27,7 +27,7 @@ class codeEnter extends React.Component {
     loadData() {
 
         console.log("get data");
-        fetch('http://10.0.2.2/superserver/public/app', {
+        fetch(server.getServerAddress()+'/app', {
             method: 'GET',
 
         }).then((response) => response.json().then((responseData) => {
@@ -48,7 +48,7 @@ class codeEnter extends React.Component {
 
         console.log("get Categories");
 
-        fetch('http://10.0.2.2/superserver/public/api/getAllCategories', {
+        fetch(server.getServerAddress()+'/api/getAllCategories', {
             method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {

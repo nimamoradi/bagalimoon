@@ -12,13 +12,7 @@ class TypePage extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
         let Categories = props.Categories;
-        let subDataArray = [
-            {'name': 'پروتین', 'value': [{'name': 'مرغ'}, {'name': 'ماهی'}]},
-            {'name': 'غذایی', 'value': [{'name': 'مرغ'}, {'name': 'غذا'}]},
-            {'name': 'لوازم بهداشتی', 'value': [{'name': 'مایع'}, {'name': 'صابون'}]},
-            {'name': 'لبنیات', 'value': [{'name': 'شیر'}, {'name': 'پنیر'}]},
-            {'name': 'تنقلات', 'value': [{'name': 'تنغ'}, {'name': 'تنق'}]},
-            {'name': 'نان', 'value': [{'name': 'لواش'}, {'name': 'سنگک'}]},];
+
         let ViewArray = [{
             'title': 'dsa',
             'price': '1212',
@@ -73,7 +67,6 @@ class TypePage extends Component {
         this.state = {
             mainSelected: this.props.title,
             subSelected: 'مرغ',
-            dataSourceTypesColumn: subDataArray,
             dataSourceView: ds.cloneWithRows(ViewArray),
             fields: ds,
             viewDate: ViewArray,

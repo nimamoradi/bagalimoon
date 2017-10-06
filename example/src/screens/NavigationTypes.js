@@ -4,7 +4,7 @@ import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
 import TypeButton from '../components/TypeButton'
-
+import server from '../code'
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -175,8 +175,8 @@ class NavigationTypes extends React.Component {
                               style={styles.item}
                               price={rowData.price}
                               disscount={rowData.off}
-                              imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
-                              onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
+                              imageUrl={server.getServerAddress() + rowData.photo.file}
+                              onPress={() => this.offer(rowData.name,server.getServerAddress()+ rowData.photo.file,
                                   rowData.long_description, rowData.price, rowData.id)}
                         />}
                 />

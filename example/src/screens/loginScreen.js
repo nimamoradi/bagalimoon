@@ -11,16 +11,37 @@ import {
 
 
 } from 'react-native';
-
-
+import server from '../code'
+import Loading from '../components/loadScreen'
+let this_class;
 class loginScreen extends React.Component {
     constructor(props) {
         super(props);
+        this.login=this.login.bind();
         this.state = {
-            phoneNumber: ''
+            phoneNumber: '09',
+          login :this.login.bind(this)
         };
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false})
+        this_class=this;
     }
+
+    onChanged = (text) => {
+        let newText = '';
+        let numbers = '0123456789';
+
+        for (let i = 0; i < text.length; i++) {
+            if (numbers.indexOf(text[i]) > -1) {
+                newText = newText + text[i];
+            }
+            else {
+                // your call back function
+                newText = '';
+                alert("فقط عددد وارد کنید");
+            }
+            this.setState({phoneNumber: newText});
+        }
+    };
 
     render() {
         return (
@@ -43,13 +64,13 @@ class loginScreen extends React.Component {
 
                     <Text style={styles.text}>شماره همراه</Text>
                     <TextInput
-                        onTextChange={(text) => setState({phoneNumber: text})}
+                        onChange={(event) => this.onChanged(event.nativeEvent.text)}
                         keyboardType='numeric' style={styles.textInput}>
                         {this.state.phoneNumber}
                     </TextInput>
 
                     <TouchableOpacity
-                        onPress={this.login}
+                        onPress={this.doSignUp}
                     >
                         <Text style={{
                             textAlign: 'center', borderRadius: 20,
@@ -68,57 +89,43 @@ class loginScreen extends React.Component {
     }
 
     doSignUp() {
-
-        console.log("inside post api");
-        fetch('your API URL', {
+        server.showLightBox('example.Types.loadScreen',{},this_class);
+        console.log("inside post register");
+        fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-
             },
 
 
             body: JSON.stringify({
-                phoneNumber: this.state.phoneNumber,
-                hashCode: 'hi'
-
+                phone_number: this_class.state.phoneNumber,
             })
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log("inside responsejson");
-                console.log('response object:', responseData)
+                console.log('response object:', responseData);
+                server.dismissLightBox(this_class);
+                if (responseData.successful === true) {
+                    this_class.login();
+                } else if (responseData.successful === false) {
+                    alert('درخواست های زیاد با این شماره لطفا بعدا امتحان کنید')
+                }
+                else if(responseData.phone_number!==null){
+                    alert('شماره معتبر نمی باشد')
+                }
 
             }).done();
     }
 
-    test() {
 
-        console.log("get test");
-        fetch('https://facebook.github.io/react-native/movies.json', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+    login()  {
 
-
-        }).then((response) => response.json())
-            .then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData)
-
-            });
-    }
-
-    login = () => {
-
-        this.props.navigator.push({
+        this_class.props.navigator.push({
             screen: 'example.Types.codeEnter',
             title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
             passProps: {},
-
-
         });
     };
 

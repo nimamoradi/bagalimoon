@@ -53,7 +53,6 @@ class offer extends Component {
 
     loadData = async () => {
         const data = await AsyncStorage.getItem('@CurrentBasket');
-        let val;
         if (data === null) return 0;
         const json = await  JSON.parse(data);
 

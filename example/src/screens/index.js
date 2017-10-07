@@ -8,6 +8,7 @@ import basketPreview from './basketPreview'
 import mapView from './mapView'
 import Drawer from './types/Drawer';
 import offer from './types/offer';
+import loadScreen from '../components/loadScreen'
 import descriptionPan from '../components/descriptionPan';
 import opinion from '../components/opinion'
 import newComment from './types/newComment'
@@ -27,6 +28,7 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.LightBox', () => LightBox);
   Navigation.registerComponent('example.Types.Notification', () => Notification);
   Navigation.registerComponent('example.Types.basketPreview', () => basketPreview);
+    Navigation.registerComponent('example.Types.loadScreen', () => loadScreen);
 
   Navigation.registerComponent('example.Types.codeEnter', () => codeEnter);
 

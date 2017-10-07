@@ -5,7 +5,9 @@ import {
     TouchableOpacity,
     View,
     Text,
-    TextInput
+    TextInput,
+    Image,
+    Dimensions
 
 
 } from 'react-native';
@@ -13,102 +15,110 @@ import {
 
 class loginScreen extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            phoneNumber: ''
+        };
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false})
     }
 
     render() {
         return (
-            <View style={styles.rowMain}>
-
-                <View style={styles.subRow}/>
-                <View style={styles.subRow}>
-                    <Text style={styles.text}>شناسه</Text>
-                    <TextInput style={styles.textInput}/>
-
-
+            <View style={styles.container}>
+                <View style={{flex: 1}}>
+                    <Image source={require('../../img/trademark.png')}
+                           style={{
+                               flex: 1,
+                               resizeMode: 'stretch',
+                               width: Dimensions.get('window').width,
+                               height: Dimensions.get('window').height / 2.1,
+                               marginBottom: 10
+                           }}/>
                 </View>
-                <View style={styles.subRow}>
-                    <Text style={styles.text}>رمز</Text>
-                    <TextInput style={styles.textInput}/>
 
+                <View style={{flex: 1.3}}>
+                    <Text style={styles.text}>
+                        برای ورود شماره همراه خود را وارد کنید شماره فعال سازی برای شما پیامک می شود
+                    </Text>
 
-                </View>
-                <View style={styles.subRow}/>
-                <View style={{flexDirection:'column',justifyContent:'center'}}>
+                    <Text style={styles.text}>شماره همراه</Text>
+                    <TextInput
+                        onTextChange={(text) => setState({phoneNumber: text})}
+                        keyboardType='numeric' style={styles.textInput}>
+                        {this.state.phoneNumber}
+                    </TextInput>
+
                     <TouchableOpacity
-                    onPress={this.login}
+                        onPress={this.login}
                     >
                         <Text style={{
                             textAlign: 'center', borderRadius: 20,
                             borderColor: '#bec4be',
                             borderWidth: 0.5,
                             backgroundColor: '#5bca45',
-                            padding:10,
-                            margin:10,
-                            fontSize:20,
-                            color:'#ffffff'
-                        }}>ورود</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={{
-                            textAlign: 'center', borderRadius: 20,
-                            borderColor: '#bec4be',
-                            borderWidth: 0.5,
-                            backgroundColor: '#4b54ce',
                             padding: 10,
-                            margin:10,
-                            fontSize:20,
-                            color:'white'
-                        }}>ثبت نام</Text>
+                            margin: 40,
+                            fontSize: 20,
+                            color: '#ffffff'
+                        }}>ارسال</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         );
     }
 
-    login = () => {
-        this.props.navigator.pop();
-        this.props.navigator.push({
-            screen: 'example.Types',
-            title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
-            navigatorStyle: {
-                navBarTranslucent: false
-            }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-            passProps: {},
-            overrideBackPress: true,
-            navigatorButtons: {
-                leftButtons: [
-                    {
-                        id: 'ShoppingBasket',
-                        icon: require('../../img/ShoppingBasket.png'),
-                        style: {width: 5, height: 5}
-                    },
-                ],
-                rightButtons: [
+    doSignUp() {
 
-                    {
-                        id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                        icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
-                    }
-                ],
-            }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+        console.log("inside post api");
+        fetch('your API URL', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
 
-            drawer: { // optional, add this if you want a side menu drawer in your app
-                right: { // optional, define if you want a drawer from the right
-                    screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                    passProps: {} // simple serializable object that will pass as props to all top screens (optional)
-                },
-                style: { // ( iOS only )
-                    drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                    contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                    leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                    rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
-                },
-                type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-                animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-                // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-                disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
+
+
+            body: JSON.stringify({
+                phoneNumber: this.state.phoneNumber,
+                hashCode: 'hi'
+
+            })
+        }).then((response) => response.json())
+            .then((responseData) => {
+                console.log("inside responsejson");
+                console.log('response object:', responseData)
+
+            }).done();
+    }
+
+    test() {
+
+        console.log("get test");
+        fetch('https://facebook.github.io/react-native/movies.json', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+
+
+        }).then((response) => response.json())
+            .then((responseData) => {
+                console.log("inside responsejson");
+                console.log('response object:', responseData)
+
+            });
+    }
+
+    login = () => {
+
+        this.props.navigator.push({
+            screen: 'example.Types.codeEnter',
+            title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
+            passProps: {},
+
+
         });
     };
 
@@ -119,7 +129,11 @@ class loginScreen extends React.Component {
 loginScreen.propTypes = {};
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#eeeceb'
+    },
     rowMain: {},
     subRow: {
         flex: 1,
@@ -130,7 +144,7 @@ const styles = StyleSheet.create({
 
     },
     text: {
-
+        margin: 50,
         marginBottom: 10,
         marginLeft: 10,
     },
@@ -138,8 +152,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,
-
-        width: '100%',
+        alignSelf: 'center',
+        width: '80%',
 
     },
     flex: {

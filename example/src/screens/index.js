@@ -14,6 +14,7 @@ import newComment from './types/newComment'
 import TypePage from './TypePage'
 import loginScreen from './loginScreen'
 import OrderItem from './types/tabs/orderItem'
+import codeEnter from './codeEnter'
 export function registerScreens() {
   Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
 
@@ -27,6 +28,7 @@ export function registerScreens() {
   Navigation.registerComponent('example.Types.Notification', () => Notification);
   Navigation.registerComponent('example.Types.basketPreview', () => basketPreview);
 
+  Navigation.registerComponent('example.Types.codeEnter', () => codeEnter);
 
   Navigation.registerComponent('example.mapView', () => mapView);
   Navigation.registerComponent('example.TypePage', () => TypePage);

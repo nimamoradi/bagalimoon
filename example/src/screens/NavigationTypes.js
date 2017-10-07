@@ -4,7 +4,7 @@ import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
 import TypeButton from '../components/TypeButton'
-
+import server from '../code'
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -13,6 +13,7 @@ class NavigationTypes extends React.Component {
             this.props.navigator.pop();
 
     };
+
 
     showLightBox = (screen, passProps) => (
         this.props.navigator.showLightBox({
@@ -27,8 +28,11 @@ class NavigationTypes extends React.Component {
 
     constructor(props) {
         super(props);
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        console.log("inside responsejson");
+        console.log('response object page 2:', this.props.pageData);
 
         this.state = {
 
@@ -51,43 +55,10 @@ class NavigationTypes extends React.Component {
             }],
 
 
-            dataSourceItem: ds.cloneWithRows([{
-                imageUrl: 'https://www.w3schools.com/css/lights600x400.jpg',
-                title: 'light',
-                disscount: '120', price: '100', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-            }, {
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                title: 'offer', id: '0', price: '100', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-            }, {
-                imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
-                title: 'offer', id: '1', price: '100', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-            }, {
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                title: 'ofsadasdad asdsadfer', id: '2', price: '100', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-            }
-                , {
-                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                    title: 'offer', price: '100', id: '3', onPress: (() => this.offer('تنقلات',
-                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-                }
-                , {
-                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                    title: 'offer', price: '100', id: '4', onPress: (() => this.offer('تنقلات',
-                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-                }
-                , {
-                    imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                    title: 'offer', price: '100', id: '5', onPress: (() => this.offer('تنقلات',
-                        'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات'))
-                },
-            ]),
+            dataSourceItem: ds.cloneWithRows(this.props.pageData),
 
 
-            dataSourceTypes: ds.cloneWithRows(['پروتین', 'غذایی', 'تنقلات', 'شوینده', 'نان', 'لبنیات'])
+            dataSourceTypes: ds.cloneWithRows(this.props.Categories),
 
         };
     }
@@ -130,7 +101,7 @@ class NavigationTypes extends React.Component {
             title: 'hi',
             passProps: {
                 title: title,
-
+                Categories:this.props.Categories,
             },
         });
     };
@@ -180,8 +151,12 @@ class NavigationTypes extends React.Component {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceTypes}
-                    renderRow={(rowData) =>
-                        <TypeButton title={rowData} onPress={() => this.TypePage(rowData)}/>}
+                    renderRow={(rowData) => {
+                        if (rowData.parent_category_id === 0)
+                            return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
+                        else return null;
+                    }
+                    }
                 />
                 <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
                 {/*<ImageRow title={'top sell'}*/}
@@ -196,12 +171,13 @@ class NavigationTypes extends React.Component {
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceItem}
                     renderRow={(rowData) =>
-                        <Item title={rowData.title}
+                        <Item title={rowData.name}
                               style={styles.item}
                               price={rowData.price}
-                              disscount={rowData.disscount}
-                              imageUrl={rowData.imageUrl}
-                              onPress={rowData.onPress}
+                              disscount={rowData.off}
+                              imageUrl={server.getServerAddress() + rowData.photo.file}
+                              onPress={() => this.offer(rowData.name,server.getServerAddress()+ rowData.photo.file,
+                                  rowData.long_description, rowData.price, rowData.id)}
                         />}
                 />
                 <Header style={{width: '100%', height: '10'}} title="پرفروش ترین ها"/>
@@ -211,13 +187,13 @@ class NavigationTypes extends React.Component {
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceItem}
                     renderRow={(rowData) =>
-                        <Item title={rowData.title}
+                        <Item title={rowData.name}
                               style={styles.item}
                               price={rowData.price}
-                              onPress={() => this.offer(rowData.title, rowData.imageUrl, 'nothing', rowData.price, rowData.id)}
-                              disscount={rowData.disscount}
-                              imageUrl={rowData.imageUrl}
-
+                              onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
+                                  rowData.long_description, rowData.price, rowData.id)}
+                              disscount={rowData.off}
+                              imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
                         />}
                 />
 

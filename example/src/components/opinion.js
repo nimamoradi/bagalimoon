@@ -52,6 +52,7 @@ export default class opinion extends React.Component {
         ]
     };
 
+
     componentWillMount() {
         navigator = this.props.navigator;
     }

@@ -38,9 +38,11 @@ class loginScreen extends React.Component {
                 // your call back function
                 newText = '';
                 alert("فقط عددد وارد کنید");
+                break;
             }
-            this.setState({phoneNumber: newText});
+
         }
+        this.setState({phoneNumber: newText});
     };
 
     render() {
@@ -108,7 +110,7 @@ class loginScreen extends React.Component {
                 console.log('response object:', responseData);
                 server.dismissLightBox(this_class);
                 if (responseData.successful === true) {
-                    this_class.login();
+                    this_class.login({api_code:responseData.api_code});
                 } else if (responseData.successful === false) {
                     alert('درخواست های زیاد با این شماره لطفا بعدا امتحان کنید')
                 }
@@ -120,12 +122,12 @@ class loginScreen extends React.Component {
     }
 
 
-    login()  {
+    login(props)  {
 
         this_class.props.navigator.push({
             screen: 'example.Types.codeEnter',
             title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
-            passProps: {},
+            passProps: props,
         });
     };
 

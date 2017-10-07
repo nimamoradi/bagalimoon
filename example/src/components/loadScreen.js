@@ -4,9 +4,9 @@ import { ActivityIndicator, View, Text, TouchableOpacity, StyleSheet,Dimensions 
 class loadScreen extends Component {
     state = { animating: true };
 
-    closeActivityIndicator = ()  =>setTimeout(()  =>this.setState({animating: false }), 6000)
-
-    componentDidMount = () => this.closeActivityIndicator();
+    // closeActivityIndicator = ()  =>setTimeout(()  =>this.setState({animating: false }), 6000)
+    //
+    // componentDidMount = () => this.closeActivityIndicator();
     render() {
         const animating = this.state.animating;
         return (

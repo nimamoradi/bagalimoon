@@ -11,6 +11,7 @@ import {
 
 
 } from 'react-native';
+let context;
 import server from '../code'
 let data;
 let Categories;
@@ -22,6 +23,7 @@ class codeEnter extends React.Component {
         this.state = {code: ''};
         this.loadData();
         this.loadCategories();
+        context=this;
     }
 
     loadData() {
@@ -84,7 +86,7 @@ class codeEnter extends React.Component {
 
                     <Text style={styles.text}>کد دریافتی</Text>
                     <TextInput
-                        onTextChange={(text) => setState({code: text})}
+                        onChange={(event) => this.setState({code:event.nativeEvent.text})}
                         keyboardType='numeric' style={styles.textInput}>
                         {this.state.code}
                     </TextInput>
@@ -110,36 +112,62 @@ class codeEnter extends React.Component {
 
 
     enterCode = () => {
+        server.showLightBox('example.Types.loadScreen',{},context);
+        console.log("inside post smsVerify");
+        fetch(server.getServerAddress() + '/api/smsVerify', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_code: context.props.api_code,
+                sms_code:context.state.code,
+            })
+        }).then((response) => response.json())
+            .then((responseData) => {
+                console.log("inside responsejson");
+                console.log('response object:', responseData);
+                server.dismissLightBox(context);
+                if (responseData.successful === true) {
+                  context.pushMainScreen();
+                } else if (responseData.successful === false) {
+                    alert('کد اشتباه است')
+                }
 
-        this.props.navigator.push({
-            screen: 'example.Types',
-            title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
-            navigatorStyle: {
-                navBarTranslucent: false
-            }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
 
-            overrideBackPress: true,
-            navigatorButtons: {
-                leftButtons: [
-                    {
-                        id: 'ShoppingBasket',
-                        icon: require('../../img/ShoppingBasket.png'),
-                        style: {width: 5, height: 5}
-                    },
-                ],
-                rightButtons: [
+            }).done();
 
-                    {
-                        id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                        icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
-                    }
-                ],
-            }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-            passProps: {pageData: data,Categories:Categories}
-
-        });
     };
+pushMainScreen(){
+    context.props.navigator.push({
+        screen: 'example.Types',
+        title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
+        navigatorStyle: {
+            navBarTranslucent: false
+        }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
 
+        overrideBackPress: true,
+        navigatorButtons: {
+            leftButtons: [
+                {
+                    id: 'ShoppingBasket',
+                    icon: require('../../img/ShoppingBasket.png'),
+                    style: {width: 5, height: 5}
+                },
+            ],
+            rightButtons: [
+
+                {
+                    id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+                    icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
+                }
+            ],
+        }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+        passProps: {pageData: data,Categories:Categories}
+
+    });
+}
 
 }
 

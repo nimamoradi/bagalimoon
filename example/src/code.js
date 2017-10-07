@@ -8,8 +8,8 @@ class code {
         return this.serverAddress;
     }
 
-    static showLightBox(screen, passProps, this_class) {
-        this_class.props.navigator.showLightBox({
+    static showLightBox(screen, passProps, context) {
+        context.props.navigator.showLightBox({
             screen: screen,
             passProps: passProps,
             style: {

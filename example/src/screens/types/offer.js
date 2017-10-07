@@ -84,9 +84,11 @@ class offer extends Component {
             else {
                 // your call back function
                 alert("فقط عددد وارد کنید");
+                break;
             }
-            this.setState({myNumber: newText});
+
         }
+        this.setState({myNumber: newText});
     };
     onUp = () => {
 

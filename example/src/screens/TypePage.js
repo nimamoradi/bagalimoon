@@ -4,6 +4,9 @@ import {StyleSheet, View, Text, TouchableOpacity, ListView, Image, Picker} from 
 import TypeButton from '../components/TypeButton'
 import ItemView from '../components/itemView'
 import ImageRow from "../components/ImageRow";
+import server from '../code'
+
+let context;
 
 class TypePage extends Component {
 
@@ -71,15 +74,14 @@ class TypePage extends Component {
             fields: ds,
             viewDate: ViewArray,
             Categories: Categories,
-        }
+        };
 
+        context = this;
     }
 
     componentDidMount() {
         this.setState({
             dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
-
-
         });
     }
 
@@ -92,6 +94,35 @@ class TypePage extends Component {
         return -1; //to handle the case where the value doesn't exist
     };
 
+    loadRenderRowData(category_id, itemValue) {
+        console.log('category_id ' + category_id + ' itemValue' + itemValue);
+        context.setState({subSelected: itemValue});
+        server.showLightBox('example.Types.loadScreen', {}, context);
+        console.log("inside post smsVerify");
+        fetch(server.getServerAddress() + '/api/getProducts/' + itemValue, {
+
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        }).then((response) => response.json())
+            .then((responseData) => {
+                console.log("inside response json");
+                console.log('response object:', responseData);
+                server.dismissLightBox(context);
+                if (responseData === undefined)
+                    alert('اینترنت');
+                else if (responseData.length > 0) {
+                    console.log('update view');
+                    context.componentDidMount()
+                    context.setState({ViewArray: responseData,});
+                }
+
+
+            }).done();
+    }
 
     render() {
         let mainItems = this.state.Categories.filter(function (x) {
@@ -102,12 +133,13 @@ class TypePage extends Component {
 
 
         let index = this.getIndex(this.state.mainSelected, this.state.Categories, 'name');
-        let parent_id = this.props.Categories[index].id ;
+        let parent_id = this.props.Categories[index].id;
 
         let subItems = this.state.Categories.filter(function (x) {
             return x.parent_category_id === parent_id;
         }).map(function (x) {
-            return <Picker.Item key={x.id} value={x.name} label={x.name}/>
+            console.log('Categories id' + x.id);
+            return <Picker.Item key={x.id} value={x.id} label={x.name}/>
         });
 
         return (
@@ -117,7 +149,7 @@ class TypePage extends Component {
                         <Picker
                             style={styles.picker}
                             selectedValue={this.state.subSelected}
-                            onValueChange={(itemValue, itemIndex) => this.setState({subSelected: itemValue})}>
+                            onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex, itemValue)}>
                             {subItems}
                         </Picker>
 

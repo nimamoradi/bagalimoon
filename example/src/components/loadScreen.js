@@ -24,16 +24,16 @@ export default loadScreen
 
 const styles = StyleSheet.create ({
     container: {
-        width: Dimensions.get('window').width * 0.7,
-        height: Dimensions.get('window').height * 0.35,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#eeeeee70',
         borderRadius: 5,
         padding: 16,
+
     },
     activityIndicator: {
-        flex: 1,
+        width: Dimensions.get('window').width,
+        height:Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-        height: 150
+        // height: 150
     }
 });

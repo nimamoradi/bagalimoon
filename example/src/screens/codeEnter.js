@@ -15,7 +15,7 @@ let context;
 import server from '../code'
 let data;
 let Categories;
-let isDataReady = false;
+let isDataReady = 0;
 
 class codeEnter extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class codeEnter extends React.Component {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
                 data = responseData;
-                isDataReady = true;
+                isDataReady ++;
 
             }).catch(error => {
                 alert('اینترنت قطع است')
@@ -133,6 +133,9 @@ class codeEnter extends React.Component {
                   context.pushMainScreen();
                 } else if (responseData.successful === false) {
                     alert('کد اشتباه است')
+                }
+                else if(responseData.sms_code!==null){
+                alert('شماره کد را وارد کنید')
                 }
 
 

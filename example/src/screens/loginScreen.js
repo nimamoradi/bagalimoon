@@ -13,17 +13,20 @@ import {
 } from 'react-native';
 import server from '../code'
 import Loading from '../components/loadScreen'
+
 let this_class;
+
 class loginScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.login=this.login.bind();
+        this.login = this.login.bind();
         this.state = {
+            sendData:false,
             phoneNumber: '09',
-          login :this.login.bind(this)
+            login: this.login.bind(this)
         };
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false})
-        this_class=this;
+        this_class = this;
     }
 
     onChanged = (text) => {
@@ -48,50 +51,64 @@ class loginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{flex: 1}}>
-                    <Image source={require('../../img/trademark.png')}
-                           style={{
-                               flex: 1,
-                               resizeMode: 'stretch',
-                               width: Dimensions.get('window').width,
-                               height: Dimensions.get('window').height / 2.1,
-                               marginBottom: 10
-                           }}/>
+
+
+
+                <View style={{backgroundColor:'red'}}></View>
+
+
+
+                <View style={styles.container}>
+
+                    <View style={{flex: 1}}>
+                        <Image source={require('../../img/trademark.png')}
+                               style={{
+                                   flex: 1,
+                                   resizeMode: 'stretch',
+                                   width: Dimensions.get('window').width,
+                                   height: Dimensions.get('window').height / 2.1,
+                                   marginBottom: 10
+                               }}/>
+                    </View>
+
+                    <View style={{flex: 1.3}}>
+                        <Text style={styles.text}>
+                            برای ورود شماره همراه خود را وارد کنید شماره فعال سازی برای شما پیامک می شود
+                        </Text>
+
+                        <Text style={styles.text}>شماره همراه</Text>
+                        <TextInput
+                            onChange={(event) => this.onChanged(event.nativeEvent.text)}
+                            keyboardType='numeric' style={styles.textInput}>
+                            {this.state.phoneNumber}
+                        </TextInput>
+
+                        <TouchableOpacity
+                            onPress={this.doSignUp}
+                        >
+                            <Text style={{
+                                textAlign: 'center', borderRadius: 20,
+                                borderColor: '#bec4be',
+                                borderWidth: 0.5,
+                                backgroundColor: '#5bca45',
+                                padding: 10,
+                                margin: 40,
+                                fontSize: 20,
+                                color: '#ffffff'
+                            }}>ارسال</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+                    {(this.state.sendData == true) ? <Loading/>:null}
                 </View>
 
-                <View style={{flex: 1.3}}>
-                    <Text style={styles.text}>
-                        برای ورود شماره همراه خود را وارد کنید شماره فعال سازی برای شما پیامک می شود
-                    </Text>
 
-                    <Text style={styles.text}>شماره همراه</Text>
-                    <TextInput
-                        onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                        keyboardType='numeric' style={styles.textInput}>
-                        {this.state.phoneNumber}
-                    </TextInput>
-
-                    <TouchableOpacity
-                        onPress={this.doSignUp}
-                    >
-                        <Text style={{
-                            textAlign: 'center', borderRadius: 20,
-                            borderColor: '#bec4be',
-                            borderWidth: 0.5,
-                            backgroundColor: '#5bca45',
-                            padding: 10,
-                            margin: 40,
-                            fontSize: 20,
-                            color: '#ffffff'
-                        }}>ارسال</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        );
+            </View>        );
     }
 
     doSignUp() {
-        server.showLightBox('example.Types.loadScreen',{},this_class);
+        this_class.setState({ sendData: true });
         console.log("inside post register");
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
@@ -108,13 +125,13 @@ class loginScreen extends React.Component {
             .then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
-                server.dismissLightBox(this_class);
+                this_class.setState({ sendData: false });
                 if (responseData.successful === true) {
-                    this_class.login({api_code:responseData.api_code});
+                    this_class.login({api_code: responseData.api_code});
                 } else if (responseData.successful === false) {
                     alert('درخواست های زیاد با این شماره لطفا بعدا امتحان کنید')
                 }
-                else if(responseData.phone_number!==null){
+                else if (responseData.phone_number !== null) {
                     alert('شماره معتبر نمی باشد')
                 }
 
@@ -122,7 +139,7 @@ class loginScreen extends React.Component {
     }
 
 
-    login(props)  {
+    login(props) {
 
         this_class.props.navigator.push({
             screen: 'example.Types.codeEnter',

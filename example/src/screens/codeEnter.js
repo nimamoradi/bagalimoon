@@ -11,8 +11,11 @@ import {
 
 
 } from 'react-native';
+import Loading from '../components/loadScreen'
+
 let context;
 import server from '../code'
+
 let data;
 let Categories;
 let isDataReady = 0;
@@ -20,23 +23,26 @@ let isDataReady = 0;
 class codeEnter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {code: ''};
+        this.state = {
+            code: '',
+            sendData: false,
+        };
         this.loadData();
         this.loadCategories();
-        context=this;
+        context = this;
     }
 
     loadData() {
 
         console.log("get data");
-        fetch(server.getServerAddress()+'/app', {
+        fetch(server.getServerAddress() + '/app', {
             method: 'GET',
 
         }).then((response) => response.json().then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
                 data = responseData;
-                isDataReady ++;
+                isDataReady++;
 
             }).catch(error => {
                 alert('اینترنت قطع است')
@@ -50,7 +56,7 @@ class codeEnter extends React.Component {
 
         console.log("get Categories");
 
-        fetch(server.getServerAddress()+'/api/getAllCategories', {
+        fetch(server.getServerAddress() + '/api/getAllCategories', {
             method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
@@ -70,6 +76,9 @@ class codeEnter extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+                    {(this.state.sendData == true) ? <Loading/>:null}
+                </View>
                 <View style={{flex: 1}}>
                     <Image source={require('../../img/trademark.png')}
                            style={{
@@ -86,7 +95,7 @@ class codeEnter extends React.Component {
 
                     <Text style={styles.text}>کد دریافتی</Text>
                     <TextInput
-                        onChange={(event) => this.setState({code:event.nativeEvent.text})}
+                        onChange={(event) => this.setState({code: event.nativeEvent.text})}
                         keyboardType='numeric' style={styles.textInput}>
                         {this.state.code}
                     </TextInput>
@@ -112,7 +121,7 @@ class codeEnter extends React.Component {
 
 
     enterCode = () => {
-        server.showLightBox('example.Types.loadScreen',{},context);
+        context.setState({ sendData: true });
         console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',
@@ -122,55 +131,56 @@ class codeEnter extends React.Component {
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
-                sms_code:context.state.code,
+                sms_code: context.state.code,
             })
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
-                server.dismissLightBox(context);
+                context.setState({ sendData: false });
                 if (responseData.successful === true) {
-                  context.pushMainScreen();
+                    context.pushMainScreen();
                 } else if (responseData.successful === false) {
                     alert('کد اشتباه است')
                 }
-                else if(responseData.sms_code!==null){
-                alert('شماره کد را وارد کنید')
+                else if (responseData.sms_code !== null) {
+                    alert('شماره کد را وارد کنید')
                 }
 
 
             }).done();
 
     };
-pushMainScreen(){
-    context.props.navigator.push({
-        screen: 'example.Types',
-        title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
-        navigatorStyle: {
-            navBarTranslucent: false
-        }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
 
-        overrideBackPress: true,
-        navigatorButtons: {
-            leftButtons: [
-                {
-                    id: 'ShoppingBasket',
-                    icon: require('../../img/ShoppingBasket.png'),
-                    style: {width: 5, height: 5}
-                },
-            ],
-            rightButtons: [
+    pushMainScreen() {
+        context.props.navigator.push({
+            screen: 'example.Types',
+            title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
+            navigatorStyle: {
+                navBarTranslucent: false
+            }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
 
-                {
-                    id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                    icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
-                }
-            ],
-        }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-        passProps: {pageData: data,Categories:Categories}
+            overrideBackPress: true,
+            navigatorButtons: {
+                leftButtons: [
+                    {
+                        id: 'ShoppingBasket',
+                        icon: require('../../img/ShoppingBasket.png'),
+                        style: {width: 5, height: 5}
+                    },
+                ],
+                rightButtons: [
 
-    });
-}
+                    {
+                        id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+                        icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
+                    }
+                ],
+            }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+            passProps: {pageData: data, Categories: Categories}
+
+        });
+    }
 
 }
 

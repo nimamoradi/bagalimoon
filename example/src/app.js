@@ -1,4 +1,4 @@
-import {Platform, Text, StyleSheet, View, TouchableOpacity, Button} from 'react-native';
+import {Platform, Text, StyleSheet, View, TouchableOpacity,AsyncStorage, Button} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
 
@@ -6,50 +6,10 @@ import {registerScreens, registerScreenVisibilityListener} from './screens';
 // screen related book keeping
 registerScreens();
 registerScreenVisibilityListener();
+// console.log('@CurrentBasket');
+// value = JSON.parse(AsyncStorage.getItem('@CurrentBasket'));
+// console.log(value);
 
-// if (Platform.OS === 'android') {
-//   tabs.push({
-//     label: 'Transitions',
-//     screen: 'example.Transitions',
-//     icon: require('../img/transform.png'),
-//     title: 'Navigation Transitions',
-//   });
-// }
-
-// this will start our app
-// Navigation.startTabBasedApp({
-//   tabs,
-//   animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade',
-//   tabsStyle: {
-//     tabBarBackgroundColor: '#003a66',
-//     navBarButtonColor: '#ffffff',
-//     tabBarButtonColor: '#ffffff',
-//     navBarTextColor: '#ffffff',
-//     tabBarSelectedButtonColor: '#ff505c',
-//     navigationBarColor: '#003a66',
-//     navBarBackgroundColor: '#003a66',
-//     statusBarColor: '#002b4c',
-//     tabFontFamily: 'BioRhyme-Bold',
-//   },
-//   appStyle: {
-//     tabBarBackgroundColor: '#003a66',
-//     navBarButtonColor: '#ffffff',
-//     tabBarButtonColor: '#ffffff',
-//     navBarTextColor: '#ffffff',
-//     tabBarSelectedButtonColor: '#ff505c',
-//     navigationBarColor: '#003a66',
-//     navBarBackgroundColor: '#003a66',
-//     statusBarColor: '#002b4c',
-//     tabFontFamily: 'BioRhyme-Bold',
-//   },
-//   drawer: {
-//     right: {
-//       screen: 'example.Types.Drawer'
-//     }
-//   }
-// });
-// Register the component
-// Navigation.registerComponent('CustomButton', () => CustomButton);
 
 Navigation.startSingleScreenApp({
     screen: {

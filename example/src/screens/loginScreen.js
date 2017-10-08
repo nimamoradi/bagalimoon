@@ -93,6 +93,7 @@ class loginScreen extends React.Component {
                                 backgroundColor: '#5bca45',
                                 padding: 10,
                                 margin: 40,
+                                fontFamily: 'B Yekan',
                                 fontSize: 20,
                                 color: '#ffffff'
                             }}>ارسال</Text>
@@ -170,11 +171,13 @@ const styles = StyleSheet.create({
 
     },
     text: {
+        fontFamily: 'B Yekan',
         margin: 50,
         marginBottom: 10,
         marginLeft: 10,
     },
     textInput: {
+        fontFamily: 'B Yekan',
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,

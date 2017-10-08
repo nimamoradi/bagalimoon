@@ -8,7 +8,7 @@ import {
     TextInput,
     Image,
     Dimensions,
-
+    AsyncStorage
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
@@ -27,51 +27,11 @@ class codeEnter extends React.Component {
             code: '',
             sendData: false,
         };
-        this.loadData();
-        this.loadCategories();
+
         context = this;
     }
 
-    loadData() {
 
-        console.log("get data");
-        fetch(server.getServerAddress() + '/app', {
-            method: 'GET',
-
-        }).then((response) => response.json().then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
-                data = responseData;
-                isDataReady++;
-
-            }).catch(error => {
-                alert('اینترنت قطع است')
-            })
-        );
-
-
-    }
-
-    loadCategories() {
-
-        console.log("get Categories");
-
-        fetch(server.getServerAddress() + '/api/getAllCategories', {
-            method: 'POST',
-
-        }).then((response) => response.json().then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
-                Categories = responseData;
-                // isDataReady=true;
-
-            }).catch(error => {
-                alert('اینترنت قطع است')
-            })
-        );
-
-
-    }
 
     render() {
         return (
@@ -139,6 +99,7 @@ class codeEnter extends React.Component {
                 console.log('response object:', responseData);
                 context.setState({ sendData: false });
                 if (responseData.successful === true) {
+                    AsyncStorage.setItem('api_code', responseData.api_code);
                     context.pushMainScreen();
                 } else if (responseData.successful === false) {
                     alert('کد اشتباه است')
@@ -177,7 +138,7 @@ class codeEnter extends React.Component {
                     }
                 ],
             }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-            passProps: {pageData: data, Categories: Categories}
+
 
         });
     }

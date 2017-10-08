@@ -5,6 +5,9 @@ import Header from '../components/header'
 import Item from '../components/item'
 import TypeButton from '../components/TypeButton'
 import server from '../code'
+import Loading from '../components/loadScreen'
+
+let context;
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -14,6 +17,46 @@ class NavigationTypes extends React.Component {
 
     };
 
+    loadData() {
+
+        console.log("get data");
+        fetch(server.getServerAddress() + '/app', {
+            method: 'GET',
+
+        }).then((response) => response.json().then((responseData) => {
+                console.log("inside responsejson");
+                console.log('response object:', responseData);
+
+                context.setState({Items: responseData})
+                context.componentDidMount();
+            }).catch(error => {
+                console.log(error);
+                alert('اینترنت قطع است')
+            })
+        );
+
+
+    }
+
+    loadCategories() {
+
+        console.log("get Categories");
+
+        fetch(server.getServerAddress() + '/api/getAllCategories', {
+            method: 'POST',
+
+        }).then((response) => response.json().then((responseData) => {
+                console.log("inside responsejson");
+                console.log('response object:', responseData);
+                context.setState({Categories: responseData})
+                context.componentDidMount();
+            }).catch(error => {
+                alert('اینترنت قطع است')
+            })
+        );
+
+
+    }
 
     showLightBox = (screen, passProps) => (
         this.props.navigator.showLightBox({
@@ -26,16 +69,29 @@ class NavigationTypes extends React.Component {
             }
         }));
 
+    componentDidMount() {
+        this.setState({
+            dataSourceItem: this.state.ds.cloneWithRows(this.state.Items),
+            dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),
+        });
+    }
+
     constructor(props) {
         super(props);
+
+
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        console.log("inside responsejson");
-        console.log('response object page 2:', this.props.pageData);
+
 
         this.state = {
-
+            ds: ds,
+            dataReady: false,
+            Items: '',
+            Categories: '',
+            dataSourceItem: ds.cloneWithRows([]),
+            dataSourceTypes: ds.cloneWithRows([]),
             dataSourceOffer: [{
                 imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
                 action_name: 'offer', id: '0', onPress: (() => this.offer('تنقلات',
@@ -53,14 +109,11 @@ class NavigationTypes extends React.Component {
                 action_name: 'offer', id: '3', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '3'))
             }],
-
-
-            dataSourceItem: ds.cloneWithRows(this.props.pageData),
-
-
-            dataSourceTypes: ds.cloneWithRows(this.props.Categories),
-
         };
+        context = this;
+        this.loadCategories();
+        this.loadData();
+
     }
 
 
@@ -101,7 +154,7 @@ class NavigationTypes extends React.Component {
             title: 'hi',
             passProps: {
                 title: title,
-                Categories:this.props.Categories,
+                Categories: this.props.Categories,
             },
         });
     };
@@ -139,6 +192,17 @@ class NavigationTypes extends React.Component {
         });
         return (
             <ScrollView>
+                <View style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    {(this.state.dataReady === true) ? <Loading/> : null}
+                </View>
                 <ViewPagerAndroid
                     style={{width: Dimensions.get('window').width, height: Dimensions.get('window').width / 2}}
                     initialPage={0}>
@@ -176,7 +240,7 @@ class NavigationTypes extends React.Component {
                               price={rowData.price}
                               disscount={rowData.off}
                               imageUrl={server.getServerAddress() + rowData.photo.file}
-                              onPress={() => this.offer(rowData.name,server.getServerAddress()+ rowData.photo.file,
+                              onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo.file,
                                   rowData.long_description, rowData.price, rowData.id)}
                         />}
                 />

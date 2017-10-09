@@ -1,85 +1,42 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, ListView, Image, Picker} from 'react-native';
-import TypeButton from '../components/TypeButton'
+import {StyleSheet, View, Text, TouchableOpacity, ListView, Image, Picker, Dimensions} from 'react-native';
 import ItemView from '../components/itemView'
 import ImageRow from "../components/ImageRow";
 import server from '../code'
+import Loading from '../components/loadScreen'
 
 let context;
+let isFirstTime;
 
 class TypePage extends Component {
 
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
+        isFirstTime = true;
         let Categories = props.Categories;
 
-        let ViewArray = [{
-            'title': 'dsa',
-            'price': '1212',
-            'count': '0',
-            'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-        },
-            {
-                'title': 'dsa',
-                'price': '1285',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },
-            {
-                'title': 'dsa',
-                'price': '165652',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },
-            {
-                'title': 'ddsaadasd',
-                'price': '1212',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },
-            {
-                'title': 'dsa',
-                'price': '1212',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },
-            {
-                'title': 'dsa',
-                'price': '1212',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },
-            {
-                'title': 'dsa',
-                'price': '1212',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },
-            {
-                'title': 'dsa',
-                'price': '1212',
-                'count': '0',
-                'imageUrl': "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg"
-            },];
-
-
-        imageUrl = "https://app-1502027449.000webhostapp.com/image/0bb7de-550x600.jpg";
         this.state = {
             mainSelected: this.props.title,
-            subSelected: 'مرغ',
-            dataSourceView: ds.cloneWithRows(ViewArray),
+            subSelected: '',
+            dataSourceView: ds.cloneWithRows([]),
             fields: ds,
-            viewDate: ViewArray,
+            dataReady: true,
+            viewDate: [],
             Categories: Categories,
         };
 
         context = this;
+
     }
 
     componentDidMount() {
+        if (isFirstTime) {
+            let id = this.getIndex(this.props.title, this.props.Categories, 'name');
+            context.loadRenderRowData(0, 2);
+            isFirstTime = false;
+        }
         this.setState({
             dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
         });
@@ -94,11 +51,10 @@ class TypePage extends Component {
         return -1; //to handle the case where the value doesn't exist
     };
 
-    loadRenderRowData(category_id, itemValue) {
+    loadRenderRowData=async(category_id, itemValue)=> {
+        context.setState({dataReady: false, subSelected: itemValue});
         console.log('category_id ' + category_id + ' itemValue' + itemValue);
-        context.setState({subSelected: itemValue});
-        server.showLightBox('example.Types.loadScreen', {}, context);
-        console.log("inside post smsVerify");
+        console.log("inside post load product");
         fetch(server.getServerAddress() + '/api/getProducts/' + itemValue, {
 
             method: 'POST',
@@ -110,15 +66,12 @@ class TypePage extends Component {
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log("inside response json");
+                context.setState({viewDate: responseData, dataReady: true}, () => {
+                    context.componentDidMount();
+                });
+
                 console.log('response object:', responseData);
-                server.dismissLightBox(context);
-                if (responseData === undefined)
-                    alert('اینترنت');
-                else if (responseData.length > 0) {
-                    console.log('update view');
-                    context.componentDidMount()
-                    context.setState({ViewArray: responseData,});
-                }
+
 
 
             }).done();
@@ -138,12 +91,14 @@ class TypePage extends Component {
         let subItems = this.state.Categories.filter(function (x) {
             return x.parent_category_id === parent_id;
         }).map(function (x) {
-            console.log('Categories id' + x.id);
+
             return <Picker.Item key={x.id} value={x.id} label={x.name}/>
         });
 
         return (
+
             <View style={{flexDirection: 'column', height: '100%', backgroundColor: '#ffffff'}}>
+
                 <View style={{flexDirection: 'row', flex: 0.13,}}>
                     <View style={styles.viewPicker}>
                         <Picker
@@ -169,15 +124,25 @@ class TypePage extends Component {
                     style={{flex: 3}}
                     dataSource={this.state.dataSourceView}
                     renderRow={(columnData) => <ItemView
-                        title={columnData.title}
+                        title={columnData.name}
                         price={columnData.price}
                         count={columnData.count}
                         onUp={() => this.onUp(columnData)}
                         onDown={() => this.onDown(columnData)}
-                        imageUrl={columnData.imageUrl}/>}
+                        imageUrl={server.getServerAddress() + columnData.photo}/>}
                 />
 
-
+                {(!this.state.dataReady ) && <View style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Loading/>
+                </View>}
             </View>
         );
     }

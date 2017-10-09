@@ -8,7 +8,7 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 
 let context;
-
+let maunal=false;
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -24,14 +24,14 @@ class NavigationTypes extends React.Component {
             method: 'GET',
 
         }).then((response) => response.json().then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
 
-                context.setState({Items: responseData})
-                context.componentDidMount();
+                context.setState({Items: responseData},()=>{
+                    maunal=true;
+                    context.componentDidMount();
+                } )
             }).catch(error => {
                 console.log(error);
-                alert('اینترنت قطع است')
+
             })
         );
 
@@ -46,12 +46,13 @@ class NavigationTypes extends React.Component {
             method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
-                context.setState({Categories: responseData})
-                context.componentDidMount();
+                context.setState({Categories: responseData},(result)=>{
+                    maunal=true;
+                    context.componentDidMount();
+                    } )
+
             }).catch(error => {
-                alert('اینترنت قطع است')
+
             })
         );
 
@@ -70,10 +71,13 @@ class NavigationTypes extends React.Component {
         }));
 
     componentDidMount() {
-        this.setState({
-            dataSourceItem: this.state.ds.cloneWithRows(this.state.Items),
-            dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),
-        });
+        if(maunal){
+            context.setState({
+                dataSourceItem: this.state.ds.cloneWithRows(this.state.Items),
+                dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),
+            });
+        }
+
     }
 
     constructor(props) {
@@ -90,8 +94,8 @@ class NavigationTypes extends React.Component {
             dataReady: false,
             Items: '',
             Categories: '',
-            dataSourceItem: ds.cloneWithRows([]),
-            dataSourceTypes: ds.cloneWithRows([]),
+            dataSourceItem: ds.cloneWithRows({}),
+            dataSourceTypes: ds.cloneWithRows({}),
             dataSourceOffer: [{
                 imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
                 action_name: 'offer', id: '0', onPress: (() => this.offer('تنقلات',
@@ -154,7 +158,7 @@ class NavigationTypes extends React.Component {
             title: 'hi',
             passProps: {
                 title: title,
-                Categories: this.props.Categories,
+                Categories: this.state.Categories,
             },
         });
     };
@@ -192,17 +196,6 @@ class NavigationTypes extends React.Component {
         });
         return (
             <ScrollView>
-                <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    {(this.state.dataReady === true) ? <Loading/> : null}
-                </View>
                 <ViewPagerAndroid
                     style={{width: Dimensions.get('window').width, height: Dimensions.get('window').width / 2}}
                     initialPage={0}>
@@ -223,10 +216,6 @@ class NavigationTypes extends React.Component {
                     }
                 />
                 <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
-                {/*<ImageRow title={'top sell'}*/}
-                {/*style={{flex: 1}}*/}
-                {/*imageUrl={'https://www.w3schools.com/css/paris.jpg'}*/}
-                {/*onPress={this.pushScreen}/>*/}
 
 
                 <ListView

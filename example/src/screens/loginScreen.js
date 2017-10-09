@@ -14,7 +14,7 @@ import {
 import server from '../code'
 import Loading from '../components/loadScreen'
 
-let this_class;
+let context;
 
 class loginScreen extends React.Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class loginScreen extends React.Component {
             login: this.login.bind(this)
         };
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false})
-        this_class = this;
+        context = this;
     }
 
     onChanged = (text) => {
@@ -51,12 +51,6 @@ class loginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-
-
-
-                <View style={{backgroundColor:'red'}}></View>
-
-
 
                 <View style={styles.container}>
 
@@ -101,7 +95,7 @@ class loginScreen extends React.Component {
                     </View>
                 </View>
                 <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                    {(this.state.sendData == true) ? <Loading/>:null}
+                    {(this.state.sendData === true) ? <Loading/>:null}
                 </View>
 
 
@@ -109,7 +103,7 @@ class loginScreen extends React.Component {
     }
 
     doSignUp() {
-        this_class.setState({ sendData: true });
+        context.setState({ sendData: true });
         console.log("inside post register");
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
@@ -120,15 +114,15 @@ class loginScreen extends React.Component {
 
 
             body: JSON.stringify({
-                phone_number: this_class.state.phoneNumber,
+                phone_number: context.state.phoneNumber,
             })
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
-                this_class.setState({ sendData: false });
+                context.setState({ sendData: false });
                 if (responseData.successful === true) {
-                    this_class.login({api_code: responseData.api_code});
+                    context.login({api_code: responseData.api_code});
                 } else if (responseData.successful === false) {
                     alert('درخواست های زیاد با این شماره لطفا بعدا امتحان کنید')
                 }
@@ -142,7 +136,7 @@ class loginScreen extends React.Component {
 
     login(props) {
 
-        this_class.props.navigator.push({
+        context.props.navigator.push({
             screen: 'example.Types.codeEnter',
             title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
             passProps: props,

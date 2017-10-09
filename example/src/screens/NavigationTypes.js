@@ -8,7 +8,9 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 
 let context;
-let maunal=false;
+let maunal = false;
+let isFirstTime = true;
+
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -17,24 +19,46 @@ class NavigationTypes extends React.Component {
 
     };
 
-    loadData() {
+    getBestSellingProducts() {
 
         console.log("get data");
-        fetch(server.getServerAddress() + '/app', {
-            method: 'GET',
+        fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
+            method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({Items: responseData},()=>{
-                    maunal=true;
-                    context.componentDidMount();
-                } )
+                context.setState({BestSellingProducts: responseData}, () => {
+                    maunal = true;
+                    context.setState({dataSourceBestSellingProducts: this.state.ds.cloneWithRows(this.state.BestSellingProducts),})
+
+                })
             }).catch(error => {
                 console.log(error);
 
             })
         );
 
+
+    }
+
+    getSpecialOffer() {
+
+        console.log("get data");
+        fetch(server.getServerAddress() + '/api/getSpecialOffer', {
+            method: 'POST',
+
+        }).then((response) => response.json().then((responseData) => {
+
+                context.setState({SpecialOffer: responseData}, () => {
+                    maunal = true;
+                    context.setState({dataSourceSpecialOffer: this.state.ds.cloneWithRows(this.state.SpecialOffer),})
+                })
+            }).catch(error => {
+                console.log(error);
+
+            })
+        );
+        context.setState({});
 
     }
 
@@ -46,18 +70,21 @@ class NavigationTypes extends React.Component {
             method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
-                context.setState({Categories: responseData},(result)=>{
-                    maunal=true;
-                    context.componentDidMount();
-                    } )
 
+                context.setState({Categories: responseData}, function () {
+
+                    maunal = true;
+                    context.setState({dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),})
+                })
             }).catch(error => {
+
 
             })
         );
 
 
     }
+
 
     showLightBox = (screen, passProps) => (
         this.props.navigator.showLightBox({
@@ -71,12 +98,10 @@ class NavigationTypes extends React.Component {
         }));
 
     componentDidMount() {
-        if(maunal){
-            context.setState({
-                dataSourceItem: this.state.ds.cloneWithRows(this.state.Items),
-                dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),
-            });
-        }
+        this.loadCategories();
+        this.getBestSellingProducts();
+        this.getSpecialOffer();
+
 
     }
 
@@ -92,9 +117,11 @@ class NavigationTypes extends React.Component {
         this.state = {
             ds: ds,
             dataReady: false,
-            Items: '',
+            SpecialOffer: '',
+            BestSellingProducts: '',
             Categories: '',
-            dataSourceItem: ds.cloneWithRows({}),
+            dataSourceBestSellingProducts: ds.cloneWithRows({}),
+            dataSourceSpecialOffer: ds.cloneWithRows({}),
             dataSourceTypes: ds.cloneWithRows({}),
             dataSourceOffer: [{
                 imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
@@ -115,8 +142,6 @@ class NavigationTypes extends React.Component {
             }],
         };
         context = this;
-        this.loadCategories();
-        this.loadData();
 
     }
 
@@ -222,7 +247,7 @@ class NavigationTypes extends React.Component {
                     style={{flexDirection: 'row', width: '100%', height: '35%'}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.dataSourceItem}
+                    dataSource={this.state.dataSourceSpecialOffer}
                     renderRow={(rowData) =>
                         <Item title={rowData.name}
                               style={styles.item}
@@ -238,7 +263,7 @@ class NavigationTypes extends React.Component {
                     style={{flexDirection: 'row', width: '100%', height: '35%'}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.dataSourceItem}
+                    dataSource={this.state.dataSourceBestSellingProducts}
                     renderRow={(rowData) =>
                         <Item title={rowData.name}
                               style={styles.item}

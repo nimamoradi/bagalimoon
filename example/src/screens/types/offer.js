@@ -115,7 +115,7 @@ class offer extends Component {
                         <View style={{flex: 0.6, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={{color: '#17c408'}}>{this.props.price}</Text>
+                                <Text style={{color: '#17c408', fontFamily: 'B Yekan',}}>{this.props.price}</Text>
                                 <Text>قیمت :</Text>
                             </View>
                             <View
@@ -123,7 +123,7 @@ class offer extends Component {
                                 <TextInput
                                     maxLength={2}
                                     onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                                    keyboardType='numeric' style={{textAlign: 'center'}}>
+                                    keyboardType='numeric' style={{ fontFamily: 'B Yekan',textAlign: 'center'}}>
                                     {this.state.myNumber}
                                 </TextInput>
                                 <View style={{flex: 1, flexDirection: 'column'}}>
@@ -171,7 +171,7 @@ class offer extends Component {
 
                     </View>
                     <View style={styles.flex}>
-                        <Text>{this.props.des}</Text>
+                        <Text  style={{fontFamily: 'B Yekan',}}>{this.props.des}</Text>
                     </View>
                 </View>
             </ScrollView>
@@ -243,6 +243,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     title: {
+        fontFamily: 'B Yekan',
         padding: 15,
         fontSize: 20,
         textAlign: 'center'
@@ -256,6 +257,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
     },
     buttonText: {
+        fontFamily: 'B Yekan',
         textAlign: 'center',
         margin: 10,
 backgroundColor:'#a7adba50',

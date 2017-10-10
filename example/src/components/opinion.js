@@ -107,9 +107,12 @@ const styles = StyleSheet.create({
         width: 34,
         height: 34,
         borderRadius: 34 / 2,
-
+        fontFamily: 'B Yekan',
         justifyContent: 'center',
         alignItems: 'center'
     },
+    opinion:{
+        fontFamily: 'B Yekan',
+    }
 
 });

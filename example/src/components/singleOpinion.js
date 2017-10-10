@@ -9,7 +9,7 @@ function singleOpinion({title,name,opinion}) {
         <View style={styles.row}>
             <Text>{name}</Text>
             <Text style={styles.text}>{title}</Text>
-            <Text>{opinion}</Text>
+            <Text style={styles.opinion}>{opinion}</Text>
         </View>
 
     );
@@ -30,9 +30,14 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     text: {
+        fontFamily: 'B Yekan',
         fontSize: 18,
         textAlign: 'center',
     },
+    opinion:{
+        fontFamily: 'B Yekan',
+        lineHeight: 30,
+    }
 });
 
 export default singleOpinion;

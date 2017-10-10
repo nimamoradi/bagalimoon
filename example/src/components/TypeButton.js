@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         fontSize: 16,
-
+        fontFamily: 'B Yekan',
     },
 });
 

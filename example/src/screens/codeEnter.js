@@ -70,6 +70,7 @@ class codeEnter extends React.Component {
                             backgroundColor: '#5bca45',
                             padding: 10,
                             margin: 40,
+                            fontFamily: 'B Yekan',
                             fontSize: 20,
                             color: '#ffffff'
                         }}>تایید</Text>
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
 
     },
     text: {
+        fontFamily: 'B Yekan',
         margin: 50,
         marginBottom: 10,
         marginLeft: 10,
@@ -172,7 +174,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,
-
+        fontFamily: 'B Yekan',
         width: '100%',
 
     },

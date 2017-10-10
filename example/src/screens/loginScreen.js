@@ -88,7 +88,7 @@ class loginScreen extends React.Component {
                                 padding: 10,
                                 margin: 40,
                                 fontFamily: 'B Yekan',
-                                fontSize: 20,
+                                fontSize: 25,
                                 color: '#ffffff'
                             }}>ارسال</Text>
                         </TouchableOpacity>
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'B Yekan',
         margin: 50,
+        fontSize:16,
         marginBottom: 10,
         marginLeft: 10,
     },

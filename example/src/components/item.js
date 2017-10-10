@@ -11,11 +11,9 @@ function item({title, onPress, imageUrl, price, disscount}) {
                 <View style={styles.row}>
                     <Image source={{uri: imageUrl}} style={styles.image}/>
                     <Text style={styles.text}>{title}</Text>
-                    <View style={styles.priceView}>
-                        <Text style={styles.price}>{price}</Text>
 
+                        <Text style={styles.price}>{price} تومان </Text>
 
-                    </View>
                 </View>
             </TouchableOpacity>
         );
@@ -26,11 +24,11 @@ function item({title, onPress, imageUrl, price, disscount}) {
             <View style={styles.row}>
                 <Image source={{uri: imageUrl}} style={styles.image}/>
                 <Text style={styles.text}>{title}</Text>
-                <View style={styles.priceView}>
-                    <Text style={styles.price}>{price}</Text>
 
-                    <Text style={styles.discount}>{disscount}</Text>
-                </View>
+                    <Text style={styles.price}>{price} تومان </Text>
+
+                    <Text style={styles.discount}>{disscount} تومان </Text>
+
             </View>
             </TouchableOpacity>
         );
@@ -47,6 +45,7 @@ item.propTypes = {
 
 const styles = StyleSheet.create({
     priceView: {
+
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
@@ -63,11 +62,11 @@ const styles = StyleSheet.create({
     text: {
         width: '100%',
         fontSize: 16,
-        textAlign:'center'
-
+        textAlign:'center',
+        fontFamily: 'B Yekan',
     },
-    price: {flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},
-    discount: {flex: 1, textDecorationLine: 'line-through', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
+    price: { fontFamily: 'B Yekan',flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},
+    discount: {flex: 1, textDecorationLine: 'line-through', fontFamily: 'B Yekan', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
     image: {
         height: 150, minWidth: 100, borderRadius: 20,
         borderColor: '#bec4be',

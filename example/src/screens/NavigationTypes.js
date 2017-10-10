@@ -22,8 +22,8 @@ class NavigationTypes extends React.Component {
     getBestSellingProducts() {
 
         console.log("get data");
-        fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
-            method: 'POST',
+        fetch(server.getServerAddress() + '/app', {
+            method: 'get',
 
         }).then((response) => response.json().then((responseData) => {
 
@@ -44,8 +44,8 @@ class NavigationTypes extends React.Component {
     getSpecialOffer() {
 
         console.log("get data");
-        fetch(server.getServerAddress() + '/api/getSpecialOffer', {
-            method: 'POST',
+        fetch(server.getServerAddress() + '/app', {
+            method: 'get',
 
         }).then((response) => response.json().then((responseData) => {
 
@@ -155,7 +155,7 @@ class NavigationTypes extends React.Component {
     offer = (title, imageUrl, des, price, id) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
-            title: 'hot offer',
+            title: title,
             passProps: {
                 title: title,
                 imageUrl: imageUrl,
@@ -180,7 +180,7 @@ class NavigationTypes extends React.Component {
     TypePage = (title) => {
         this.props.navigator.push({
             screen: 'example.TypePage',
-            title: 'hi',
+            title: 'لیست محصولات',
             passProps: {
                 title: title,
                 Categories: this.state.Categories,

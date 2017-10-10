@@ -8,15 +8,16 @@ class orderItem extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{flex: 8}}>
+                <View style={{flex: 8.5}}>
                     <Text style={styles.title}>نمایش محصول</Text>
                     <TableRow title="اسم" des={this.props.title}/>
                     <TableRow title="قیمت هر محصول" des={this.props.price}/>
                     <TableRow title="تعداد" des={this.props.count}/>
                     <TableRow title="قیمت کل"
                               des={String(Number.parseInt(this.props.price) * Number.parseInt(this.props.count))}/>
+                    <View style={{height:20}}/>
                 </View>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row',marginTop:100}}>
                     <View style={{flex: 1}}/>
                     <TouchableHighlight
                         style={styles.button1}
@@ -28,7 +29,7 @@ class orderItem extends React.Component {
 
 
                         onPress={() => this.props.onClose(false)}
-                    ><Text  >{'انصراف'}</Text></TouchableHighlight>
+                    ><Text>{'انصراف'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
                 </View>
             </View>
@@ -100,12 +101,13 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 10,
         width: Dimensions.get('window').width * 0.7,
-        height: Dimensions.get('window').height * 0.5,
+        height: Dimensions.get('window').height * 0.50,
         backgroundColor: '#ffffff',
 
         padding: 16,
     },
     button1: {
+        fontFamily: 'B Yekan',
         borderRadius: 30,
         justifyContent:'center',
         alignItems:'center',
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
 
     },
     button: {
+        fontFamily: 'B Yekan',
         borderRadius: 30,
         justifyContent:'center',
         alignItems:'center',
@@ -124,12 +127,11 @@ const styles = StyleSheet.create({
 
     },
     title: {
+        fontFamily: 'B Yekan',
         fontSize: 17,
         fontWeight: '700',
     },
-    content: {
-        marginTop: 8,
-    },
+
 });
 
 

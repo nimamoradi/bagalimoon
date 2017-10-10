@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         flex: 1,
+        fontFamily: 'B Yekan',
         margin: 10,
         textAlign: 'center'
     },
@@ -166,10 +167,12 @@ const styles = StyleSheet.create({
         margin: 10,
         fontSize: 16,
         flex: 1,
+        fontFamily: 'B Yekan',
         textAlign: 'center'
     },
     tableHeader: {
         fontSize: 20,
+        fontFamily: 'B Yekan',
         flex: 1,
         margin: 10,
         color: '#000',
@@ -185,12 +188,14 @@ const styles = StyleSheet.create({
         margin:2,
         marginLeft:20,
         marginBottom:60,
+        fontFamily: 'B Yekan',
         alignContent:'center',
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
     },
     buttonCancel: {
         flex: 1,
+        fontFamily: 'B Yekan',
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,

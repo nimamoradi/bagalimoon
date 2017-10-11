@@ -6,6 +6,7 @@ import Item from '../components/item'
 import TypeButton from '../components/TypeButton'
 import server from '../code'
 import Loading from '../components/loadScreen'
+import Carousel from 'react-native-snap-carousel';
 
 let context;
 let maunal = false;
@@ -140,6 +141,10 @@ class NavigationTypes extends React.Component {
                 action_name: 'offer', id: '3', onPress: (() => this.offer('تنقلات',
                     'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '3'))
             }],
+            viewport: {
+                width: Dimensions.get('window').width,
+                height: Dimensions.get('window').height/2.5
+            }
         };
         context = this;
 
@@ -203,7 +208,14 @@ class NavigationTypes extends React.Component {
             }
         }
     }
-
+    _renderItem ({item, index}) {
+        return (
+            <View>
+                <ImageRow className='indent' key={item.id} imageUrl={item.imageUrl} title={item.action_name}
+                          onPress={item.onPress}/>
+            </View>
+        );
+    }
 
     render() {
 
@@ -220,13 +232,30 @@ class NavigationTypes extends React.Component {
             );
         });
         return (
-            <ScrollView>
-                <ViewPagerAndroid
-                    style={{width: Dimensions.get('window').width, height: Dimensions.get('window').width / 2}}
-                    initialPage={0}>
-                    {indents}
-                </ViewPagerAndroid>
+            <ScrollView
+                onLayout={() => {
+                    this.setState({
+                        viewport: {
+                            width: Dimensions.get('window').width,
+                            height: Dimensions.get('window').height/3
+                        }
+                    });
+                }}>
 
+
+                <Carousel
+                    autoplayInterval={5000}
+                    autoplayDelay={5000}
+                    autoplay={true}
+                    ref={(c) => {
+                        this._carousel = c;
+                    }}
+                    data={this.state.dataSourceOffer}
+                    renderItem={this._renderItem}
+                    sliderHeight={this.state.viewport.height / 4.5}
+                    sliderWidth={this.state.viewport.width}
+                    itemWidth={this.state.viewport.width}
+                />
 
                 <ListView
                     style={{flexDirection: 'row', width: '100%', height: '10%'}}

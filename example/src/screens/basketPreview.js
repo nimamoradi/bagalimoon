@@ -112,7 +112,7 @@ class basketPreview extends React.Component {
                 <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
                     <View style={{flex: 1}}/>
                     <Text style={styles.price}>
-                        {this.state.totalPrice}
+                        {this.state.totalPrice} تومان
                     </Text>
                     <Text style={styles.text}>
                         جمع خرید

@@ -115,7 +115,7 @@ class offer extends Component {
                         <View style={{flex: 0.6, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={{color: '#17c408', fontFamily: 'B Yekan',}}>{this.props.price}</Text>
+                                <Text style={{color: '#17c408', fontFamily: 'B Yekan',}}>{this.props.price} تومان</Text>
                                 <Text>قیمت :</Text>
                             </View>
                             <View

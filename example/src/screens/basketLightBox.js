@@ -50,8 +50,8 @@ class basketLightBox extends React.Component {
                 <View style={styles.container}>
                     <View style={{flex: 8}}>
                         <Text style={styles.title}>سبد خرید</Text>
-                        <TableRow title="تعداد کالا" des={this.state.length}/>
-                        <TableRow title="قیمت کل" des={String(this.state.totalPrice)}/>
+                        <TableRow title="تعداد کالا" des={this.state.length+' عدد'}/>
+                        <TableRow title="قیمت کل" des={String(this.state.totalPrice)+' تومان'}/>
 
                         <View>
 
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     button1: {
+        fontFamily: 'B Yekan',
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -129,10 +130,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: '#bec4be',
         borderWidth: 0.5, flex: 2,
-        backgroundColor: '#c4282250'
+        backgroundColor: '#c4282250',
+        fontFamily: 'B Yekan',
 
     },
     title: {
+        fontFamily: 'B Yekan',
         fontSize: 17,
         fontWeight: '700',
     },

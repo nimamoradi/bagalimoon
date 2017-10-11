@@ -11,10 +11,10 @@ class orderItem extends React.Component {
                 <View style={{flex: 8.5}}>
                     <Text style={styles.title}>نمایش محصول</Text>
                     <TableRow title="اسم" des={this.props.title}/>
-                    <TableRow title="قیمت هر محصول" des={this.props.price}/>
-                    <TableRow title="تعداد" des={this.props.count}/>
+                    <TableRow title="قیمت هر محصول" des={this.props.price+' تومان'}/>
+                    <TableRow title="تعداد" des={this.props.count+' عدد'}/>
                     <TableRow title="قیمت کل"
-                              des={String(Number.parseInt(this.props.price) * Number.parseInt(this.props.count))}/>
+                              des={String(Number.parseInt(this.props.price) * Number.parseInt(this.props.count))+' تومان'}/>
                     <View style={{height:20}}/>
                 </View>
                 <View style={{flex: 1, flexDirection: 'row',marginTop:100}}>

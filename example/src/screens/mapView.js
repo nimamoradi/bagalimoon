@@ -171,8 +171,8 @@ class mapView extends Component {
                     name: context.state.myAddressName,
                     city_id: "0",        //now select 0
                     state_id: "0", //now select 0
-                    Address:  context.state.myAddress,
-                    lat:  context.state.myLocation.latitude,
+                    Address: context.state.myAddress,
+                    lat: context.state.myLocation.latitude,
                     lng: context.state.myLocation.longitude,
                 }
             })
@@ -281,13 +281,18 @@ class mapView extends Component {
     }
 
     onlineSale = async () => {
-        this.newAddresses();
+        if (context.state.myAddress !== null && context.state.myAddressName !== null && context.state.optionSelected === 1)
+            this.newAddresses();
+        else if (context.state.optionSelected === 1)
+            alert('همه فیلدها پر نشده اند');
         console.log('saved' + this.state.myLocation);
 
     };
     offlineSale = async () => {
-        this.newAddresses();
-
+        if (context.state.myAddress !== null && context.state.myAddressName !== null && context.state.optionSelected === 1)
+            this.newAddresses();
+        else if (context.state.optionSelected === 1)
+            alert('همه فیلدها پر نشده اند');
         console.log('saved' + this.state.myLocation);
     };
 

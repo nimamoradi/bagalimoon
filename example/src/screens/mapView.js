@@ -10,13 +10,16 @@ import {
     TextInput,
     AsyncStorage,
     PermissionsAndroid,
-    Dimensions
+    Dimensions,
+    Picker
 } from 'react-native';
 
 import MapView from 'react-native-maps';
+import server from "../code";
 
 let Radio = require('../components/index');
 let Option = Radio.Option;
+let context;
 
 class mapView extends Component {
     loadPreviewsAddress = async () => {
@@ -40,6 +43,40 @@ class mapView extends Component {
         }
     };
 
+    load_api_code = () => {
+        AsyncStorage.getItem('api_code').then((item) => {
+
+            context.setState({api_code: item}, () => {
+                context.getAddresses(item);
+
+            })
+
+        })
+    };
+
+    getAddresses(item) {
+
+        console.log("get Addresses");
+        fetch(server.getServerAddress() + '/api/getAddresses', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_code: item,
+            })
+        }).then((response) => response.json().then((responseData) => {
+
+                context.setState({oldAddresses: responseData})
+            }).catch(error => {
+
+
+            })
+        );
+
+
+    }
 
     async requestLocationPermission() {
         try {
@@ -86,16 +123,20 @@ class mapView extends Component {
             },
             optionSelected: 0,
             error: null,
-            myAddress: '',
+            myAddress: [],
             myLastAddress: '',
+            myAddressName: '',
+            oldAddresses: [],
+            api_code: '',
         };
-        this.requestLocationPermission();
-        this.loadPreviewsAddress();
+
+
+        context = this;
     }
 
     componentDidMount() {
-
-
+        this.requestLocationPermission();
+        this.load_api_code();
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 console.log(position);
@@ -113,6 +154,41 @@ class mapView extends Component {
 
     }
 
+
+    newAddresses() {
+
+        console.log("addNewAddress");
+
+        fetch(server.getServerAddress() + '/api/addNewAddress', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_code: context.state.api_code,
+                address: {
+                    name: context.state.myAddressName,
+                    city_id: "0",        //now select 0
+                    state_id: "0", //now select 0
+                    Address:  context.state.myAddress,
+                    lat:  context.state.myLocation.latitude,
+                    lng: context.state.myLocation.longitude,
+                }
+            })
+
+        }).then((response) => response.json().then((responseData) => {
+
+                context.setState({oldAddresses: responseData})
+            }).catch(error => {
+
+
+            })
+        );
+
+
+    }
+
     onSelect(index) {
         this.setState({
             optionSelected: index + 1
@@ -120,7 +196,9 @@ class mapView extends Component {
     }
 
     render() {
-
+        let oldAddresses = this.state.oldAddresses.map(function (x) {
+            return <Picker.Item value={x.Address} label={x.name + ' : ' + x.Address}/>
+        });
         return (
             <ScrollView>
                 <View style={{height: Dimensions.get('window').width - 100,}}>
@@ -152,22 +230,33 @@ class mapView extends Component {
                     </View>
                 </View>
                 <View>
-                    <Radio onSelect={this.onSelect.bind(this)} defaultSelect={this.state.optionSelected }>
+                    <Radio onSelect={this.onSelect.bind(this)} defaultSelect={this.state.optionSelected}>
                         <Option color="gray" selectedColor="#008BEF">
                             <View>
+                                <Text style={styles.Text}>نام آدرس</Text>
+                                <TextInput style={styles.borderText}
+                                           onChangeText={(text) => this.setState({myAddressName: text})}>
+                                    {this.state.myAddressName}
+                                </TextInput>
+
                                 <Text style={styles.Text}>آدرس</Text>
                                 <TextInput style={styles.borderText}
                                            onChangeText={(text) => this.setState({myAddress: text})}>
                                     {this.state.myAddress}
                                 </TextInput>
+
                             </View>
                         </Option>
                         <Option color="gray" selectedColor="#008BEF">
                             <View>
-                                <Text style={styles.Text}>آدرس قبلی</Text>
-                                <Text style={styles.borderText}>
-                                    {this.state.myLastAddress}
-                                </Text>
+                                <Text style={styles.Text}>آدرس های قبلی</Text>
+                                <Picker
+                                    style={styles.picker}
+                                    onValueChange={(itemValue, itemIndex) => {
+                                    }}>
+                                    {oldAddresses}
+                                </Picker>
+
                             </View>
                         </Option>
 
@@ -192,22 +281,13 @@ class mapView extends Component {
     }
 
     onlineSale = async () => {
-        try {
-            if(this.state.myAddress!==null&&this.state.optionSelected===0)
-            await  AsyncStorage.setItem('@lastAddress', this.state.myAddress);
-        } catch (error) {
-            console.log('can\'t save data ' + error);
-        }
+        this.newAddresses();
         console.log('saved' + this.state.myLocation);
 
     };
     offlineSale = async () => {
-        try {
-            if(this.state.myAddress!==null&&this.state.optionSelected===0)
-            await  AsyncStorage.setItem('@lastAddress', this.state.myAddress);
-        } catch (error) {
-            console.log('can\'t save data ' + error);
-        }
+        this.newAddresses();
+
         console.log('saved' + this.state.myLocation);
     };
 
@@ -227,12 +307,14 @@ const styles = StyleSheet.create({
         borderText: {
             padding: 2,
             margin: 10,
+            fontFamily: 'B Yekan',
             borderRadius: 10,
             borderColor: 'gray', borderWidth: 1,
             height: 40,
         },
         Text: {
             margin: 10,
+            fontFamily: 'B Yekan',
         }, bigButton: {
             height: 80,
             flex: 1, alignContent: 'center', borderRadius: 10,

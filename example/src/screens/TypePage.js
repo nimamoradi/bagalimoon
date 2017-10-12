@@ -75,7 +75,7 @@ class TypePage extends Component {
 
 
             }).done();
-    }
+    };
 
     render() {
         let mainItems = this.state.Categories.filter(function (x) {

@@ -5,6 +5,7 @@ import ItemView from '../components/itemView'
 import ImageRow from "../components/ImageRow";
 import server from '../code'
 import Loading from '../components/loadScreen'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 let context;
 let isFirstTime;
@@ -16,14 +17,18 @@ class TypePage extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         isFirstTime = true;
         let Categories = props.Categories;
+        let subCategories = this.getIndex(this.props.title, this.props.Categories, 'name');
+        let parent_id = Categories[subCategories].id;
+        let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
 
         this.state = {
             mainSelected: this.props.title,
-            subSelected: '',
+            subSelected: Categories[sub].id,
             dataSourceView: ds.cloneWithRows([]),
             fields: ds,
             dataReady: true,
             viewDate: [],
+            basket: [],
             Categories: Categories,
         };
 
@@ -33,8 +38,11 @@ class TypePage extends Component {
 
     componentDidMount() {
         if (isFirstTime) {
-            let id = this.getIndex(this.props.title, this.props.Categories, 'name');
-            context.loadRenderRowData(0, 2);
+
+            let index = this.getIndex(this.props.title, this.props.Categories, 'name');
+            let parent_id = context.state.Categories[index].id;
+            let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
+            context.loadRenderRowData(0,  this.props.Categories[sub].id);
             isFirstTime = false;
         }
         this.setState({
@@ -51,7 +59,7 @@ class TypePage extends Component {
         return -1; //to handle the case where the value doesn't exist
     };
 
-    loadRenderRowData=async(category_id, itemValue)=> {
+    loadRenderRowData = async (category_id, itemValue) => {
         context.setState({dataReady: false, subSelected: itemValue});
         console.log('category_id ' + category_id + ' itemValue' + itemValue);
         console.log("inside post load product");
@@ -66,6 +74,11 @@ class TypePage extends Component {
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log("inside response json");
+
+                context.state.basket.push({
+                    'name': context.state.mainSelected + context.state.subSelected,
+                    'value': responseData
+                });
                 context.setState({viewDate: responseData, dataReady: true}, () => {
                     context.componentDidMount();
                 });
@@ -73,8 +86,40 @@ class TypePage extends Component {
                 console.log('response object:', responseData);
 
 
-
             }).done();
+    };
+    addToCart = () => {
+        if (this.state.myNumber !== '0')
+            this.props.navigator.showLightBox({
+                screen: "example.Types.OrderItem",
+                passProps: {
+                    title: this.props.title,
+                    price: this.props.price,
+                    imageUrl: this.props.imageUrl,
+                    count: this.state.myNumber,
+                    content: 'به سبد خرید اضافه شد',
+                    id: this.props.id,
+                    onClose: this.dismissLightBox,
+                },
+                style: {
+                    backgroundBlur: 'dark',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    tapBackgroundToDismiss: true
+                }
+            });
+        else this.props.navigator.showLightBox({
+            screen: "example.Types.LightBox",
+            passProps: {
+                title: 'توجه',
+                content: 'مقدار کالا صفر است',
+                onClose: this.dismissLightBox,
+            },
+            style: {
+                backgroundBlur: 'red',
+                backgroundColor: 'rgba(20, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        });
     };
 
     render() {
@@ -100,6 +145,11 @@ class TypePage extends Component {
             <View style={{flexDirection: 'column', height: '100%', backgroundColor: '#ffffff'}}>
 
                 <View style={{flexDirection: 'row', flex: 0.13,}}>
+                    <TouchableOpacity
+                        onPress={this.addToCart}
+                        style={styles.viewPickerText}>
+                        <Icon name="add-shopping-cart" size={30} color="#00aa00" style={{margin: 10}}/>
+                    </TouchableOpacity>
                     <View style={styles.viewPicker}>
                         <Picker
                             style={styles.picker}
@@ -153,7 +203,8 @@ class TypePage extends Component {
 
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         console.log(updatedState);
-        this.setState({viewDate: updatedState});
+
+        this.setState({viewDate: updatedState,});
 
     };
     onDown = (rowdata) => {
@@ -165,7 +216,7 @@ class TypePage extends Component {
 
         }
         console.log(updatedState);
-        this.setState({basket: updatedState});
+        this.setState({viewDate: updatedState});
 
     };
 
@@ -187,6 +238,14 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: '#aeb3ae20',
         borderRadius: 20,
+        borderColor: '#bec4be',
+        borderWidth: 0.5,
+    },
+    viewPickerText: {
+        flex: 0.35,
+        margin: 10,
+        backgroundColor: '#aeb3ae20',
+        borderRadius: 5,
         borderColor: '#bec4be',
         borderWidth: 0.5,
     }

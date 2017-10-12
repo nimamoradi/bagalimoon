@@ -139,7 +139,7 @@ class offer extends Component {
                             <TouchableOpacity
                                 onPress={this.addToCart}>
 
-                                < Icon name="cart-plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                <Icon name="cart-plus" size={30} color="#17C408" style={{margin: 10}}/>
                             </TouchableOpacity>
                         </View>
                         <Image source={{

@@ -40,7 +40,7 @@ AsyncStorage.getItem('api_code').then((item) => {
                 disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
 
-            animationType: 'fade', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+
 
         };
     else //user is logined before
@@ -87,7 +87,7 @@ AsyncStorage.getItem('api_code').then((item) => {
                 disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
             passProps: {api_code:item}, // simple serializable object that will pass as props to all top screens (optional)
-            animationType: 'fade', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+
 
         };
     Navigation.startSingleScreenApp(startAppdata);

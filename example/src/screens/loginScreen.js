@@ -21,7 +21,7 @@ class loginScreen extends React.Component {
         super(props);
         this.login = this.login.bind();
         this.state = {
-            sendData:false,
+            sendData: false,
             phoneNumber: '09',
             login: this.login.bind(this)
         };
@@ -50,26 +50,16 @@ class loginScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Image
+                style={{
+                    width: Dimensions.get('window').width,
+                    height: Dimensions.get('window').height,
+                    backgroundColor: '#ffffff10'
+                }}
+                source={require('../../img/login.png')}>
 
-                <View style={styles.container}>
-
-                    <View style={{flex: 1}}>
-                        <Image source={require('../../img/trademark.png')}
-                               style={{
-                                   flex: 1,
-                                   resizeMode: 'stretch',
-                                   width: Dimensions.get('window').width,
-                                   height: Dimensions.get('window').height / 2.1,
-                                   marginBottom: 10
-                               }}/>
-                    </View>
-
-                    <View style={{flex: 1.3}}>
-                        <Text style={styles.text}>
-                            برای ورود شماره همراه خود را وارد کنید شماره فعال سازی برای شما پیامک می شود
-                        </Text>
-
+                <View style={styles.absolote}>
+                    <View style={{width: Dimensions.get('window').width - 100}}>
                         <Text style={styles.text}>شماره همراه</Text>
                         <TextInput
                             onChange={(event) => this.onChanged(event.nativeEvent.text)}
@@ -88,22 +78,22 @@ class loginScreen extends React.Component {
                                 padding: 10,
                                 margin: 40,
                                 fontFamily: 'B Yekan',
-                                fontSize: 25,
+                                fontSize: 20,
                                 color: '#ffffff'
-                            }}>ارسال</Text>
+                            }}>ورود</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                    {(this.state.sendData === true) ? <Loading/>:null}
+
+
+                <View style={styles.absolote}>
+                    {(this.state.sendData === true) ? <Loading/> : null}
                 </View>
-
-
-            </View>        );
+            </Image>        );
     }
 
     doSignUp() {
-        context.setState({ sendData: true });
+        context.setState({sendData: true});
         console.log("inside post register");
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
@@ -120,7 +110,7 @@ class loginScreen extends React.Component {
             .then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
-                context.setState({ sendData: false });
+                context.setState({sendData: false});
                 if (responseData.successful === true) {
                     context.login({api_code: responseData.api_code});
                 } else if (responseData.successful === false) {
@@ -138,6 +128,12 @@ class loginScreen extends React.Component {
 
         context.props.navigator.push({
             screen: 'example.Types.codeEnter',
+            navigatorStyle: {
+                navBarBackgroundColor: 'transparent', // the background is black
+                drawUnderNavBar: true,
+                drawUnderTabBar: true,
+                navBarTranslucent: false
+            },
             title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
             passProps: props,
         });
@@ -167,7 +163,7 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'B Yekan',
         margin: 50,
-        fontSize:16,
+        fontSize: 16,
         marginBottom: 10,
         marginLeft: 10,
     },
@@ -182,6 +178,14 @@ const styles = StyleSheet.create({
     },
     flex: {
         flex: 1,
+    }, absolote: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 

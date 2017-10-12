@@ -32,57 +32,52 @@ class codeEnter extends React.Component {
     }
 
 
-
     render() {
         return (
-            <View style={styles.container}>
-                <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                    {(this.state.sendData == true) ? <Loading/>:null}
+            <Image
+                style={{
+                    width: Dimensions.get('window').width,
+                    height: Dimensions.get('window').height,
+                    backgroundColor: '#ffffff10'
+                }}
+                source={require('../../img/login.png')}>
+
+                <View style={styles.absolote}>
+                    <View style={{width: Dimensions.get('window').width - 150}}>
+                        <Text style={styles.text}>کد دریافتی</Text>
+                        <TextInput
+                            onChange={(event) => this.setState({code: event.nativeEvent.text})}
+                            keyboardType='numeric' style={styles.textInput}>
+                            {this.state.code}
+                        </TextInput>
+
+                        <TouchableOpacity
+                            onPress={this.enterCode}
+                        >
+                            <Text style={{
+                                textAlign: 'center', borderRadius: 20,
+                                borderColor: '#bec4be',
+                                borderWidth: 0.5,
+                                backgroundColor: '#5bca45',
+                                padding: 10,
+                                margin: 40,
+                                fontFamily: 'B Yekan',
+                                fontSize: 20,
+                                color: '#ffffff'
+                            }}>تایید</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={{flex: 1}}>
-                    <Image source={require('../../img/trademark.png')}
-                           style={{
-                               flex: 1,
-                               resizeMode: 'stretch',
-                               width: Dimensions.get('window').width,
-                               height: Dimensions.get('window').height / 2.1,
-                               marginBottom: 10
-                           }}/>
+                <View style={styles.absolote}>
+                    {(this.state.sendData === true) ? <Loading/> : null}
                 </View>
-
-                <View style={{flex: 1.3}}>
-
-
-                    <Text style={styles.text}>کد دریافتی</Text>
-                    <TextInput
-                        onChange={(event) => this.setState({code: event.nativeEvent.text})}
-                        keyboardType='numeric' style={styles.textInput}>
-                        {this.state.code}
-                    </TextInput>
-
-                    <TouchableOpacity
-                        onPress={this.enterCode}
-                    >
-                        <Text style={{
-                            textAlign: 'center', borderRadius: 20,
-                            borderColor: '#bec4be',
-                            borderWidth: 0.5,
-                            backgroundColor: '#5bca45',
-                            padding: 10,
-                            margin: 40,
-                            fontFamily: 'B Yekan',
-                            fontSize: 20,
-                            color: '#ffffff'
-                        }}>تایید</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            </Image>
         );
     }
 
 
     enterCode = () => {
-        context.setState({ sendData: true });
+        context.setState({sendData: true});
         console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',
@@ -98,10 +93,10 @@ class codeEnter extends React.Component {
             .then((responseData) => {
                 console.log("inside responsejson");
                 console.log('response object:', responseData);
-                context.setState({ sendData: false });
+                context.setState({sendData: false});
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
-                    context.pushMainScreen( responseData.api_code);
+                    context.pushMainScreen(responseData.api_code);
                 } else if (responseData.successful === false) {
                     alert('کد اشتباه است')
                 }
@@ -139,7 +134,7 @@ class codeEnter extends React.Component {
                     }
                 ],
             }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-            passProps: {api_code:api},
+            passProps: {api_code: api},
 
         });
     }
@@ -180,6 +175,14 @@ const styles = StyleSheet.create({
     },
     flex: {
         flex: 1,
+    }, absolote: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 export default codeEnter;

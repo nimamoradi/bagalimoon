@@ -23,8 +23,8 @@ class NavigationTypes extends React.Component {
     getBestSellingProducts() {
 
         console.log("get data");
-        fetch(server.getServerAddress() + '/app', {
-            method: 'get',
+        fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
+            method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
 
@@ -45,8 +45,8 @@ class NavigationTypes extends React.Component {
     getSpecialOffer() {
 
         console.log("get data");
-        fetch(server.getServerAddress() + '/app', {
-            method: 'get',
+        fetch(server.getServerAddress() + '/api/getSpecialOffer', {
+            method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
 

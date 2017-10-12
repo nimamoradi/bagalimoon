@@ -42,7 +42,7 @@ class TypePage extends Component {
             let index = this.getIndex(this.props.title, this.props.Categories, 'name');
             let parent_id = context.state.Categories[index].id;
             let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-            context.loadRenderRowData(0,  this.props.Categories[sub].id);
+            context.loadRenderRowData(0, this.props.Categories[sub].id);
             isFirstTime = false;
         }
         this.setState({
@@ -74,12 +74,18 @@ class TypePage extends Component {
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log("inside response json");
+                let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
+                    context.state.basket, 'name');
 
-                context.state.basket.push({
-                    'name': context.state.mainSelected + context.state.subSelected,
-                    'value': responseData
-                });
-                context.setState({viewDate: responseData, dataReady: true}, () => {
+                let oldbasket = context.state.basket;
+                if (index_of_data === -1)
+                    oldbasket.push({
+                        'name': context.state.mainSelected + context.state.subSelected,
+                        'value': responseData
+                    });
+                else
+                    responseData = oldbasket[index_of_data].value;
+                context.setState({viewDate: responseData, dataReady: true, basket: oldbasket}, () => {
                     context.componentDidMount();
                 });
 
@@ -198,25 +204,28 @@ class TypePage extends Component {
     }
 
     onUp = (rowdata) => {
+
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.viewDate;
-
+        let updatedbasket = this.state.basket;
         updatedState[updatedState.indexOf(rowdata)]['count']++;
+        updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         console.log(updatedState);
 
-        this.setState({viewDate: updatedState,});
+        this.setState({viewDate: updatedState, basket: updatedbasket});
 
     };
     onDown = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.viewDate;
+        let updatedbasket = this.state.basket;
         let data = this.state.viewDate;
         if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
             updatedState[data.indexOf(rowdata)]['count']--;
-
+            updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         }
         console.log(updatedState);
-        this.setState({viewDate: updatedState});
+        this.setState({viewDate: updatedState, basket: updatedbasket});
 
     };
 

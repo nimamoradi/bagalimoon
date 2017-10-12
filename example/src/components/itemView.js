@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image,TextInput, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function itemView({title, onUp,onDown, imageUrl, price, disscount,count}) {
+function itemView({title, onUp, onDown, imageUrl, price, disscount, count, onPress}) {
 
 
     return (
@@ -12,25 +12,26 @@ function itemView({title, onUp,onDown, imageUrl, price, disscount,count}) {
             <View style={styles.row}>
                 <View style={{flexDirection: 'row', alignSelf: 'flex-end',}}>
 
-                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <Text
-                                editable={false} selectTextOnFocus={false}
-                                style={{textAlign: 'center'}}>
-                                {count}
-                            </Text>
-                            <View style={{flex: 1, flexDirection: 'column'}}>
-                                <Text style={styles.text}>{title}</Text>
-                                <TouchableOpacity onPress={onUp}>
-                                    <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={onDown}>
-                                    <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
-                                </TouchableOpacity>
-                            </View>
-
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                        <Text
+                            editable={false} selectTextOnFocus={false}
+                            style={{textAlign: 'center'}}>
+                            {count}
+                        </Text>
+                        <View style={{flex: 1, flexDirection: 'column'}}>
+                            <Text style={styles.text}>{title}</Text>
+                            <TouchableOpacity onPress={onUp}>
+                                <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={onDown}>
+                                <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
+                            </TouchableOpacity>
                         </View>
 
-                    <Image source={{uri: imageUrl}} style={styles.image}/>
+                    </View>
+                    <TouchableOpacity onPress={onPress}>
+                        <Image source={{uri: imageUrl}} style={styles.image}/>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.priceView}>

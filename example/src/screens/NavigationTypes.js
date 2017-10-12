@@ -242,7 +242,7 @@ class NavigationTypes extends React.Component {
                     this.setState({
                         viewport: {
                             width: Dimensions.get('window').width,
-                            height: Dimensions.get('window').height / 3
+                            height: Dimensions.get('window').height / 2.5
                         }
                     });
                 }}>
@@ -257,7 +257,7 @@ class NavigationTypes extends React.Component {
                     }}
                     data={this.state.dataSourceOffer}
                     renderItem={this._renderItem}
-                    sliderHeight={this.state.viewport.height / 3}
+                    sliderHeight={this.state.viewport.height / 2.5}
                     sliderWidth={this.state.viewport.width}
                     itemWidth={this.state.viewport.width}
                 />

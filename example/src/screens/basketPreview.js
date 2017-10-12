@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, ListView,} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity,AsyncStorage, ListView,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class basketPreview extends React.Component {
@@ -128,7 +128,11 @@ class basketPreview extends React.Component {
                             <Text style={{flex:1}}>پرداخت</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{flex: 1}}>
+                    <TouchableOpacity style={{flex: 1}}
+                    onPress={()=>{
+                         AsyncStorage.setItem('@CurrentBasket','');
+                        this.props.navigator.pop();
+                    }}>
                         <View style={styles.buttonCancel}>
 
                             <Text  style={{flex:1}}>حذف سفارش</Text>

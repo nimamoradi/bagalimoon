@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, ListView, Image, Picker, Dimensions} from 'react-native';
+import {
+    StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
+    ListView, Image, Picker, Dimensions
+} from 'react-native';
 import ItemView from '../components/itemView'
 import ImageRow from "../components/ImageRow";
 import server from '../code'
@@ -36,6 +39,35 @@ class TypePage extends Component {
 
     }
 
+
+
+
+
+
+    shop = () => {
+        this.props.navigator.push({
+            screen: 'example.Types.basketPreview',
+            title: 'خرید را نهایی کنید',
+            passProps: {
+                basket: this.state.basket
+            },
+        });
+    };
+    product = (title,imageUrl,des,price,myNumber,id) => {
+        this.props.navigator.push({
+            screen: 'example.Types.offer',
+            title: title,
+            passProps: {
+                title:title,
+                imageUrl:imageUrl,
+                des:des,
+                price:price,
+                myNumber:myNumber,
+                id:id
+
+            },
+        });
+    };
     componentDidMount() {
         if (isFirstTime) {
 
@@ -104,16 +136,21 @@ class TypePage extends Component {
                 )
             }
         );
-
-
-        // let basket = this.state.basket.filter(function (x) {
-        //  let a=   x.value.filter(function (sub) {
-        //         return sub.count>0;
-        //     });
+        this.shop();
+        // AsyncStorage.getItem('@CurrentBasket').then((item) => {
         //
-        //     return a.length>0;
+        //     item=  item.concat(basket);
+        //     for(let i=0; i<item.length; ++i) {
+        //         for(let j=i+1; j<item.length; ++j) {
+        //             if(item[i].id === item[j].id)
+        //                 item.splice(j--, 1);
+        //         }
+        //     }
+        //
+        //
+        //     alert(JSON.stringify(item));
         // });
-        alert(JSON.stringify(basket));
+
 
     };
 
@@ -168,13 +205,21 @@ class TypePage extends Component {
                 <ListView
                     style={{flex: 3}}
                     dataSource={this.state.dataSourceView}
-                    renderRow={(columnData) => <ItemView
-                        title={columnData.name}
-                        price={columnData.price}
-                        count={columnData.count}
-                        onUp={() => this.onUp(columnData)}
-                        onDown={() => this.onDown(columnData)}
-                        imageUrl={server.getServerAddress() + columnData.photo}/>}
+                    renderRow={(columnData) =>
+                        <ItemView
+                            onPress={()=>this.product(columnData.name,
+                                server.getServerAddress() + columnData.photo,
+                                columnData.long_description,
+                                columnData.price,
+                                0,
+                                columnData.id
+                                )}
+                            title={columnData.name}
+                            price={columnData.price}
+                            count={columnData.count}
+                            onUp={() => this.onUp(columnData)}
+                            onDown={() => this.onDown(columnData)}
+                            imageUrl={server.getServerAddress() + columnData.photo}/>}
                 />
 
                 {(!this.state.dataReady ) && <View style={{

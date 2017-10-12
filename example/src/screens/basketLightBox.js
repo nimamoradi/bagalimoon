@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, Dimensions, Button, TouchableHighlight, AsyncSto
 import PropTypes from 'prop-types';
 import TableRow from '../components/tableRow'
 import BasketPreView from './basketPreview'
+import {vw, vh, vmin, vmax} from '../viewport'
 
 class basketLightBox extends React.Component {
     constructor(props) {
@@ -67,14 +68,14 @@ class basketLightBox extends React.Component {
                                 {
                                     basket: this.state.basket
                                 })}
-                        ><Text>{'خرید'}</Text></TouchableHighlight>
+                        ><Text  style={{ fontSize: vw*4,}}>{'خرید'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>
                         <TouchableHighlight
                             style={styles.button}
 
 
                             onPress={() => this.props.onClose(false)}
-                        ><Text>{'انصراف'}</Text></TouchableHighlight>
+                        ><Text  style={{ fontSize: vw*4,}}>{'انصراف'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>
 
                     </View>
@@ -94,7 +95,7 @@ class basketLightBox extends React.Component {
                     <TouchableHighlight
                         style={styles.button}
                         onPress={() => this.props.onClose(false)}
-                    ><Text>{'بستن'}</Text></TouchableHighlight>
+                    ><Text style={{ fontSize: vw*4,}}>{'بستن'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
 
                 </View>
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'B Yekan',
-        fontSize: 17,
+        fontSize: vw*4,
         fontWeight: '700',
     },
     content: {

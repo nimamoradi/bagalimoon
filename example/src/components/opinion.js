@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import SingleOpinion from './singleOpinion';
 import {Navigation} from 'react-native-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 let navigator;
 
 dismissLightBox = () => {
@@ -31,7 +31,7 @@ const CustomButton = () => (
         style={[styles.buttonContainer]}
         onPress={() => showLightBox()}>
 
-        <Icon name="plus" size={30} color="#FF4500" />
+        <Icon name="plus" size={vw*4} color="#FF4500" />
 
     </TouchableOpacity>);
 Navigation.registerComponent('plus', () => CustomButton);
@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
     },
     opinion:{
         fontFamily: 'B Yekan',
-    }
+            }
 
 });

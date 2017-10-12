@@ -25,7 +25,7 @@ class loginScreen extends React.Component {
             phoneNumber: '09',
             login: this.login.bind(this)
         };
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false})
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         context = this;
     }
 
@@ -134,7 +134,6 @@ class loginScreen extends React.Component {
                 drawUnderTabBar: true,
                 navBarTranslucent: false
             },
-            title: 'وارد کردن رمز', // title of the screen as appears in the nav bar (optional)
             passProps: props,
         });
     };

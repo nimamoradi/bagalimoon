@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Dimensions, Button} from 'react-native';
+import {vw, vh, vmin, vmax} from '../../viewport'
 
 class Lightbox extends React.Component {
 
@@ -12,6 +13,8 @@ class Lightbox extends React.Component {
         </View>
         <View style={{flex: 2}}>
           <Button
+              large
+              buttonStyle={{size: vw*5,}}
             title={'بستن'}
             onPress={() => this.props.onClose()}
           />
@@ -30,10 +33,11 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontSize: 17,
+    fontSize: vw*5,
     fontWeight: '700',
   },
   content: {
+      fontSize: vw*4,
     marginTop: 8,
   },
 });

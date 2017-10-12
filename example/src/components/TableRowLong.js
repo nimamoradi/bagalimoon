@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight,Dimensions, Platform} from 'react-native';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 function tableRowLong({title, des}) {
     return (
 
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {
-        fontSize: 16,
+        fontSize: vw*4,
         margin: 20,
         alignSelf:'flex-end'
     },
     des: {
-        fontSize: 16,
+        fontSize: vw*4,
         margin: 20,
         alignSelf:'flex-start'
     },

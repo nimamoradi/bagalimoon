@@ -16,6 +16,7 @@ import {
 
 import MapView from 'react-native-maps';
 import server from "../code";
+import {vw, vh, vmin, vmax} from '../viewport'
 
 let Radio = require('../components/index');
 let Option = Radio.Option;
@@ -311,13 +312,15 @@ const styles = StyleSheet.create({
         },
         borderText: {
             padding: 2,
+            fontSize: vw*4,
             margin: 10,
             fontFamily: 'B Yekan',
             borderRadius: 10,
             borderColor: 'gray', borderWidth: 1,
-            height: 40,
+            height: vh*6,
         },
         Text: {
+            fontSize: vw*4,
             margin: 10,
             fontFamily: 'B Yekan',
         }, bigButton: {
@@ -330,7 +333,7 @@ const styles = StyleSheet.create({
         },
         bigButtonText: {
             textAlign: 'center',
-            fontSize: 25,
+            fontSize: vw*6,
             marginTop: 20,
             alignItems: 'center',
             alignContent: 'center',

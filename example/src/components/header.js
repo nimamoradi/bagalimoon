@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text} from 'react-native';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 function header({title}) {
     return (
 
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(5, 5, 5, 0.0)',
     },
     text: {
-        fontSize: 23,
+        fontSize:vw*4,
+
         fontWeight:'900'
     },
 });

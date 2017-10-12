@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, } from 'react-native';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 function singleOpinion({title,name,opinion}) {
 
     return (
 
         <View style={styles.row}>
-            <Text>{name}</Text>
+            <Text style={{fontSize:vw*4}}>{name}</Text>
             <Text style={styles.text}>{title}</Text>
             <Text style={styles.opinion}>{opinion}</Text>
         </View>
@@ -31,12 +31,13 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: 'B Yekan',
-        fontSize: 18,
+        fontSize: vw*5,
         textAlign: 'center',
     },
     opinion:{
         fontFamily: 'B Yekan',
         lineHeight: 30,
+        fontSize: vw*4,
     }
 });
 

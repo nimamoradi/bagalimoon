@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform, Image, Dimensions} from 'react-native';
+import {vw, vh, vmin, vmax} from '../viewport'
 
 function ImageRow({title, onPress, imageUrl,Dimensions}) {
 
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'B Yekan',
         textAlign: 'center',
-        fontSize: 16,
+        fontSize: vw*5,
 
     },
     image: {

@@ -60,7 +60,6 @@ AsyncStorage.getItem('api_code').then((item) => {
                         },
                     ],
                     rightButtons: [
-
                         {
                             id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
                             icon: require('../img/menu.png'), // for icon button, provide the local image asset name

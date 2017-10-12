@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Dimensions, Button} from 'react-native';
 import PropTypes from 'prop-types';
-
+import {vw, vh, vmin, vmax} from '../../viewport'
 class newComment extends React.Component {
 
     render() {
@@ -35,10 +35,11 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     title: {
-        fontSize: 17,
+        fontSize: vw*4,
         fontWeight: '700',
     },
     content: {
+        fontSize: vw*4,
         marginTop: 8,
     },
 });

@@ -9,7 +9,7 @@ import ImageRow from "../components/ImageRow";
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 let context;
 let isFirstTime;
 
@@ -180,7 +180,7 @@ class TypePage extends Component {
                     <TouchableOpacity
                         onPress={this.addToCart}
                         style={styles.viewPickerText}>
-                        <Icon name="add-shopping-cart" size={30} color="#00aa00" style={{margin: 10}}/>
+                        <Icon name="add-shopping-cart" size={vw*10} color="#00aa00" style={{margin: 10}}/>
                     </TouchableOpacity>
                     <View style={styles.viewPicker}>
                         <Picker
@@ -274,6 +274,7 @@ const styles = StyleSheet.create({
     picker: {
         flex: 1,
         margin: 10,
+        fontSize:vw*4,
 
     },
     viewPicker: {

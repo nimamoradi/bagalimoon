@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 
+import {vw, vh, vmin, vmax} from '../viewport'
 
 function item({title, onPress, imageUrl, price, disscount}) {
 
@@ -61,12 +62,12 @@ const styles = StyleSheet.create({
     },
     text: {
         width: '100%',
-        fontSize: 16,
+        fontSize: vw*4.5,
         textAlign:'center',
         fontFamily: 'B Yekan',
     },
-    price: { fontFamily: 'B Yekan',flex: 1, fontSize: 16, color: '#17c408', textAlign: 'left'},
-    discount: {flex: 1, textDecorationLine: 'line-through', fontFamily: 'B Yekan', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
+    price: { fontFamily: 'B Yekan',flex: 1, fontSize: vw*4, color: '#17c408', textAlign: 'left'},
+    discount: {flex: 1, textDecorationLine: 'line-through', fontFamily: 'B Yekan', fontSize: vw*4, color: '#d94c3d', textAlign: 'right'},
     image: {
         height: 150, minWidth: 100, borderRadius: 20,
         borderColor: '#bec4be',

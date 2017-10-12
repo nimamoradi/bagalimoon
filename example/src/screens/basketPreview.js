@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity,AsyncStorage, ListView,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {vw, vh, vmin, vmax} from '../viewport'
 
 class basketPreview extends React.Component {
     constructor(props) {
@@ -77,10 +78,10 @@ class basketPreview extends React.Component {
                 <Text style={styles.price}>{rowData.price}</Text>
                 <Text style={styles.price}>{rowData.count}</Text>
                 <TouchableOpacity onPress={() => this.onUp(rowData)}>
-                    <Icon name="plus" size={30} color="#17C408" style={styles.text}/>
+                    <Icon name="plus" size={vw*4} color="#17C408" style={styles.text}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.onDown(rowData)}>
-                    <Icon name="minus" size={30} color="#C42B2D" style={styles.text}/>
+                    <Icon name="minus" size={vw*4} color="#C42B2D" style={styles.text}/>
                 </TouchableOpacity>
 
             </View>
@@ -123,9 +124,9 @@ class basketPreview extends React.Component {
                     <TouchableOpacity style={{flex: 1}}
                     onPress={this.address}>
                         <View style={styles.button}>
-                            <Icon name="shopping-cart" size={30} color="#00ff0050"  style={{flex:1}}/>
+                            <Icon name="shopping-cart" size={vw*5} color="#00ff0050"  style={{flex:1}}/>
                             <View style={{flex:0.5}}/>
-                            <Text style={{flex:1}}>پرداخت</Text>
+                            <Text style={{flex:1,fontSize: vw*4,}}>پرداخت</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex: 1}}
@@ -135,7 +136,7 @@ class basketPreview extends React.Component {
                     }}>
                         <View style={styles.buttonCancel}>
 
-                            <Text  style={{flex:1}}>حذف سفارش</Text>
+                            <Text  style={{flex:1,fontSize: vw*4,}}>حذف سفارش</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {
-        fontSize: 16,
+        fontSize: vw*4,
         flex: 1,
         fontFamily: 'B Yekan',
         margin: 10,
@@ -169,13 +170,13 @@ const styles = StyleSheet.create({
     },
     price: {
         margin: 10,
-        fontSize: 16,
+        fontSize:vw*4,
         flex: 1,
         fontFamily: 'B Yekan',
         textAlign: 'center'
     },
     tableHeader: {
-        fontSize: 20,
+        fontSize: vw*5,
         fontFamily: 'B Yekan',
         flex: 1,
         margin: 10,
@@ -205,6 +206,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
         margin:2,
+
         marginTop:20,
         alignContent:'center',
         marginRight:20,

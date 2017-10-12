@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Button, Image, Dimensions, AsyncStorage} from 'react-native';
 import TableRow from '../../../components/tableRow';
-
+import {vw, vh, vmin, vmax} from '../../../viewport'
 class orderItem extends React.Component {
 
     render() {
@@ -22,14 +22,14 @@ class orderItem extends React.Component {
                     <TouchableHighlight
                         style={styles.button1}
                         onPress={() => this.addProduct()}
-                    ><Text>{'تایید'}</Text></TouchableHighlight>
+                    ><Text style={{ fontSize: vw*5,}}>{'تایید'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
                     <TouchableHighlight
                         style={styles.button}
 
 
                         onPress={() => this.props.onClose(false)}
-                    ><Text>{'انصراف'}</Text></TouchableHighlight>
+                    ><Text style={{ fontSize: vw*5,}}>{'انصراف'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
                 </View>
             </View>
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     button1: {
+        fontSize: vw*5,
         fontFamily: 'B Yekan',
         borderRadius: 30,
         justifyContent:'center',
@@ -123,12 +124,12 @@ const styles = StyleSheet.create({
         alignItems:'center',
         borderColor: '#bec4be',
         borderWidth: 0.5, flex: 2,
-        backgroundColor:'#c4282250'
-
+        backgroundColor:'#c4282250',
+        fontSize: vw*5,
     },
     title: {
         fontFamily: 'B Yekan',
-        fontSize: 17,
+        fontSize: vw*5,
         fontWeight: '700',
     },
 

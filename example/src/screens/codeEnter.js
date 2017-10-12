@@ -11,6 +11,7 @@ import {
     AsyncStorage
 
 } from 'react-native';
+import {vw, vh, vmin, vmax} from '../viewport'
 import Loading from '../components/loadScreen'
 
 let context;
@@ -160,12 +161,14 @@ const styles = StyleSheet.create({
 
     },
     text: {
+        fontSize:vw*5,
         fontFamily: 'B Yekan',
         margin: 50,
         marginBottom: 10,
         marginLeft: 10,
     },
     textInput: {
+        fontSize:vw*5,
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,

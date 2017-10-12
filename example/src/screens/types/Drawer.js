@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Button, TouchableOpacity,AsyncStorage, Image, Text, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {vw, vh, vmin, vmax} from '../../viewport'
 
 class MyClass extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -23,7 +24,7 @@ class MyClass extends React.Component {
             <View style={styles.container}>
                 <View style={{backgroundColor: '#eeeceb', flex: 1, width: 300, justifyContent: 'center',}}>
                     <Image style={styles.image} source={require('../../../img/gyro_header.jpg')}/>
-                    <Text style={{alignSelf: 'flex-end'}}>jjdfd fo</Text>
+                    <Text style={{alignSelf: 'flex-end',fontSize:vw*4}}>jjdfd fo</Text>
                 </View>
                 <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
                     <TouchableOpacity
@@ -32,8 +33,8 @@ class MyClass extends React.Component {
                             onClose: this.dismissLightBox,
                         },)}>
                         <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>
-                            <Icon name="shopping-cart" size={35} color="green" style={{margin: 10,alignSelf:'flex-start'}}/>
-                            <Text  style={{marginTop:35/2,}}>سبد خرید</Text>
+                            <Icon name="shopping-cart" size={vw*6} color="green" style={{margin: 10,alignSelf:'flex-start'}}/>
+                            <Text  style={{marginTop:35/2,fontSize:vw*4}}>سبد خرید</Text>
 
                         </View>
 
@@ -46,8 +47,8 @@ class MyClass extends React.Component {
 
                         }}>
                         <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>
-                            <MaterialIcon name="logout" size={35} color="#C42B2D" style={{margin: 10,alignSelf:'flex-start'}}/>
-                            <Text  style={{marginTop:35/2,}}>خروج</Text>
+                            <MaterialIcon name="logout" size={vw*6} color="#C42B2D" style={{margin: 10,alignSelf:'flex-start'}}/>
+                            <Text  style={{marginTop:35/2,fontSize:vw*4}}>خروج</Text>
 
                         </View>
 

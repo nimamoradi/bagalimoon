@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform} from 'react-native';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 function Row({title, onPress, platform, testID}) {
   if (platform && platform !== Platform.OS) {
     return <View />;
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(0, 0, 0, 0.054)',
   },
   text: {
-    fontSize: 16,
+    fontSize: vw*4,
   },
 });
 

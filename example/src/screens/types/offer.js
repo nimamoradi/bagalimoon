@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity,Dimensions, Image, ScrollView, TextInput, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {vw, vh, vmin, vmax} from '../../viewport'
 class offer extends Component {
     constructor(props) {
         super(props);
@@ -115,23 +115,24 @@ class offer extends Component {
                         <View style={{flex: 0.6, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={{color: '#17c408', fontFamily: 'B Yekan',}}>{this.props.price} تومان</Text>
-                                <Text>قیمت :</Text>
+                                <Text style={{color: '#17c408', fontFamily: 'B Yekan',fontSize:vw*4}}>{this.props.price} تومان</Text>
+                                <Text style={{fontSize:vw*4}}>قیمت :</Text>
                             </View>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <TextInput
                                     maxLength={2}
                                     onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                                    keyboardType='numeric' style={{ fontFamily: 'B Yekan',textAlign: 'center'}}>
+                                    keyboardType='numeric' style={{ fontSize:vw*4,
+                                    fontFamily: 'B Yekan',textAlign: 'center'}}>
                                     {this.state.myNumber}
                                 </TextInput>
                                 <View style={{flex: 1, flexDirection: 'column'}}>
                                     <TouchableOpacity onPress={this.onUp}>
-                                        <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                        <Icon name="plus" size={vw*5} color="#17C408" style={{margin: 10}}/>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={this.onDown}>
-                                        <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
+                                        <Icon name="minus" size={vw*5} color="#C42B2D" style={{margin: 10}}/>
                                     </TouchableOpacity>
                                 </View>
 
@@ -139,7 +140,7 @@ class offer extends Component {
                             <TouchableOpacity
                                 onPress={this.addToCart}>
 
-                                <Icon name="cart-plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                <Icon name="cart-plus" size={ vw*5} color="#17C408" style={{margin: 10}}/>
                             </TouchableOpacity>
                         </View>
                         <Image source={{
@@ -171,7 +172,7 @@ class offer extends Component {
 
                     </View>
                     <View style={styles.flex}>
-                        <Text  style={{fontFamily: 'B Yekan',}}>{this.props.des}</Text>
+                        <Text  style={{fontFamily: 'B Yekan',fontSize:vw*4,}}>{this.props.des}</Text>
                     </View>
                 </View>
             </ScrollView>
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'B Yekan',
         padding: 15,
-        fontSize: 20,
+        fontSize:vw*5,
         textAlign: 'center'
 
     }
@@ -260,6 +261,7 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         textAlign: 'center',
         margin: 10,
+        fontSize:vw*4,
 backgroundColor:'#a7adba50',
         borderRadius: 10,
         borderColor: '#bec4be',

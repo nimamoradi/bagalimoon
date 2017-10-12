@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform} from 'react-native';
+import {vw, vh, vmin, vmax} from '../viewport'
 
 function tableRow({title, des}) {
     return (
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         fontSize: 16,
         margin:20,
+        fontSize: vw*5,
     },
 });
 

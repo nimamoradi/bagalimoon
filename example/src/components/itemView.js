@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 
 function itemView({title, onUp, onDown, imageUrl, price, disscount, count, onPress}) {
 
@@ -15,16 +15,16 @@ function itemView({title, onUp, onDown, imageUrl, price, disscount, count, onPre
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                         <Text
                             editable={false} selectTextOnFocus={false}
-                            style={{textAlign: 'center'}}>
+                            style={{textAlign: 'center',fontSize:vw*4}}>
                             {count}
                         </Text>
                         <View style={{flex: 1, flexDirection: 'column'}}>
                             <Text style={styles.text}>{title}</Text>
                             <TouchableOpacity onPress={onUp}>
-                                <Icon name="plus" size={30} color="#17C408" style={{margin: 10}}/>
+                                <Icon name="plus" size={vw*4} color="#17C408" style={{margin: 10}}/>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={onDown}>
-                                <Icon name="minus" size={30} color="#C42B2D" style={{margin: 10}}/>
+                                <Icon name="minus" size={vw*4} color="#C42B2D" style={{margin: 10}}/>
                             </TouchableOpacity>
                         </View>
 
@@ -37,7 +37,7 @@ function itemView({title, onUp, onDown, imageUrl, price, disscount, count, onPre
                 <View style={styles.priceView}>
                     <View style={{flexDirection: 'row', alignContent: 'center'}}>
                         <Text style={styles.price}>{price}</Text>
-                        <Text style={{fontSize: 16,}}>قیمت:</Text>
+                        <Text style={{fontSize:vw*4,}}>قیمت:</Text>
                     </View>
                     <Text style={styles.discount}>{disscount}</Text>
 
@@ -79,13 +79,13 @@ const styles = StyleSheet.create({
     },
     text: {
         alignSelf: 'flex-end',
-        fontSize: 20,
+        fontSize:vw*5,
         marginRight: 20,
         textAlign: 'center'
 
     },
-    price: {fontSize: 16, color: '#17c408', textAlign: 'left', marginRight: 10},
-    discount: {flex: 1, textDecorationLine: 'line-through', fontSize: 16, color: '#d94c3d', textAlign: 'right'},
+    price: {fontSize:vw*4, color: '#17c408', textAlign: 'left', marginRight: 10},
+    discount: {flex: 1, textDecorationLine: 'line-through', fontSize:vw*4, color: '#d94c3d', textAlign: 'right'},
     image: {
         alignSelf: 'flex-end',
         height: Dimensions.get('window').width / 3, width: Dimensions.get('window').width / 4,

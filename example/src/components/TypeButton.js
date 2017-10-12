@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {vw, vh, vmin, vmax} from '../viewport'
 let backgroundColorOriginal='#4adc4620';
 function TypeButton({title, onPress,backgroundColor}) {
 if(backgroundColor==null)
@@ -39,7 +40,7 @@ TypeButton.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-
+fontSize:vw*3,
         paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'center',
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
         borderColor: '#349630',
         backgroundColor: backgroundColorOriginal,
         borderWidth: 0.5,
+
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {

@@ -86,6 +86,35 @@ class NavigationTypes extends React.Component {
 
     }
 
+    getBanners() {
+
+        console.log("get Banners");
+
+        fetch(server.getServerAddress() + '/api/getBanners', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_code: context.props.api_code,
+            })
+        }).then((response) => response.json().then((responseData) => {
+
+                context.setState({banners: responseData}, function () {
+                    console.log(responseData);
+                    maunal = true;
+
+                    context.setState({dataSourceOffer:this.state.banners})
+                })
+            }).catch(error => {
+
+
+            })
+        );
+
+
+    }
 
     showLightBox = (screen, passProps) => (
         this.props.navigator.showLightBox({
@@ -102,7 +131,7 @@ class NavigationTypes extends React.Component {
         this.loadCategories();
         this.getBestSellingProducts();
         this.getSpecialOffer();
-
+        this.getBanners();
 
     }
 
@@ -124,26 +153,11 @@ class NavigationTypes extends React.Component {
             dataSourceBestSellingProducts: ds.cloneWithRows({}),
             dataSourceSpecialOffer: ds.cloneWithRows({}),
             dataSourceTypes: ds.cloneWithRows({}),
-            dataSourceOffer: [{
-                imageUrl: 'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG',
-                action_name: 'offer', id: '0', onPress: (() => this.offer('تنقلات',
-                    'https://file.digi-kala.com/digikala/Image/Webstore/Product/P_117401/Original/Persil-Millions-For-Colored-Clothes-Automatic-Washing-Liquid-2-7-Liter-43cfc2.JPG', 'توضیحات', '1000', '0'))
-            }, {
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', id: '1', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '1'))
-            }, {
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', id: '2', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '2'))
-            }, {
-                imageUrl: 'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg',
-                action_name: 'offer', id: '3', onPress: (() => this.offer('تنقلات',
-                    'http://www.mihanfal.com/wp-content/uploads/2016/05/522-768x480.jpg', 'توضیحات', '55154', '3'))
-            }],
+            dataSourceOffer: [],
+            banners: [],
             viewport: {
                 width: Dimensions.get('window').width,
-                height: Dimensions.get('window').height/2.5
+                height: Dimensions.get('window').height / 2.5
             }
         };
         context = this;
@@ -208,36 +222,27 @@ class NavigationTypes extends React.Component {
             }
         }
     }
-    _renderItem ({item, index}) {
+
+    _renderItem({item, index}) {
         return (
             <View>
-                <ImageRow className='indent' key={item.id} imageUrl={item.imageUrl} title={item.action_name}
-                          onPress={item.onPress}/>
+                <ImageRow className='indent' key={item.id}
+                          imageUrl={server.getServerAddress()+item.photo}
+                          title={item.description}
+                          />
             </View>
         );
     }
 
     render() {
 
-        let tmp = this.state.dataSourceOffer;
-        // for (var i = 0; i < this.state.dataSourceOffer.length; i++) {
-        //     tmp.push(i);
-        // }
-        let indents = tmp.map(function (i) {
-            return (
-                <View>
-                    <ImageRow className='indent' key={i.id} imageUrl={i.imageUrl} title={i.action_name}
-                              onPress={i.onPress}/>
-                </View>
-            );
-        });
         return (
             <ScrollView
                 onLayout={() => {
                     this.setState({
                         viewport: {
                             width: Dimensions.get('window').width,
-                            height: Dimensions.get('window').height/3
+                            height: Dimensions.get('window').height / 3
                         }
                     });
                 }}>
@@ -252,7 +257,7 @@ class NavigationTypes extends React.Component {
                     }}
                     data={this.state.dataSourceOffer}
                     renderItem={this._renderItem}
-                    sliderHeight={this.state.viewport.height / 4.5}
+                    sliderHeight={this.state.viewport.height / 3}
                     sliderWidth={this.state.viewport.width}
                     itemWidth={this.state.viewport.width}
                 />

@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Button, TouchableOpacity, Image, Text, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 class MyClass extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -37,6 +39,18 @@ class MyClass extends React.Component {
 
                     </TouchableOpacity>
 
+                    <TouchableOpacity
+                        onPress={() => this.showLightBox('example.Types.basketLightBox', {
+                            title: this.props.title,
+                            onClose: this.dismissLightBox,
+                        },)}>
+                        <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>
+                            <MaterialIcon name="logout" size={35} color="#C42B2D" style={{margin: 10,alignSelf:'flex-start'}}/>
+                            <Text  style={{marginTop:35/2,}}>خروج</Text>
+
+                        </View>
+
+                    </TouchableOpacity>
                 </View>
 
             </View>

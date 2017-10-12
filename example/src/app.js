@@ -81,7 +81,7 @@ AsyncStorage.getItem('api_code').then((item) => {
                 // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
                 disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
-            passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+            passProps: {api_code:item}, // simple serializable object that will pass as props to all top screens (optional)
             animationType: 'fade', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
 
         };

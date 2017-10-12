@@ -101,7 +101,7 @@ class codeEnter extends React.Component {
                 context.setState({ sendData: false });
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
-                    context.pushMainScreen();
+                    context.pushMainScreen( responseData.api_code);
                 } else if (responseData.successful === false) {
                     alert('کد اشتباه است')
                 }
@@ -114,7 +114,7 @@ class codeEnter extends React.Component {
 
     };
 
-    pushMainScreen() {
+    pushMainScreen(api) {
         context.props.navigator.push({
             screen: 'example.Types',
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -139,7 +139,7 @@ class codeEnter extends React.Component {
                     }
                 ],
             }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-
+            passProps: {api_code:api},
 
         });
     }

@@ -95,37 +95,26 @@ class TypePage extends Component {
             }).done();
     };
     addToCart = () => {
-        if (this.state.myNumber !== '0')
-            this.props.navigator.showLightBox({
-                screen: "example.Types.OrderItem",
-                passProps: {
-                    title: this.props.title,
-                    price: this.props.price,
-                    imageUrl: this.props.imageUrl,
-                    count: this.state.myNumber,
-                    content: 'به سبد خرید اضافه شد',
-                    id: this.props.id,
-                    onClose: this.dismissLightBox,
-                },
-                style: {
-                    backgroundBlur: 'dark',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    tapBackgroundToDismiss: true
-                }
-            });
-        else this.props.navigator.showLightBox({
-            screen: "example.Types.LightBox",
-            passProps: {
-                title: 'توجه',
-                content: 'مقدار کالا صفر است',
-                onClose: this.dismissLightBox,
-            },
-            style: {
-                backgroundBlur: 'red',
-                backgroundColor: 'rgba(20, 0, 0, 0.5)',
-                tapBackgroundToDismiss: true
+        let basket = this.state.basket.map(
+            function (x) {
+                return x.value.filter(
+                    function (y) {
+                        return y.count > 0
+                    }
+                )
             }
-        });
+        );
+
+
+        // let basket = this.state.basket.filter(function (x) {
+        //  let a=   x.value.filter(function (sub) {
+        //         return sub.count>0;
+        //     });
+        //
+        //     return a.length>0;
+        // });
+        alert(JSON.stringify(basket));
+
     };
 
     render() {

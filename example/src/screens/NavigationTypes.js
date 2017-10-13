@@ -7,7 +7,7 @@ import TypeButton from '../components/TypeButton'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
-
+import {vw, vh, vmin, vmax} from '../viewport'
 let context;
 let maunal = false;
 let isFirstTime = true;
@@ -242,7 +242,7 @@ class NavigationTypes extends React.Component {
                     this.setState({
                         viewport: {
                             width: Dimensions.get('window').width,
-                            height: Dimensions.get('window').height / 2.5
+                            height: Dimensions.get('window').height / 2.25
                         }
                     });
                 }}>
@@ -257,13 +257,13 @@ class NavigationTypes extends React.Component {
                     }}
                     data={this.state.dataSourceOffer}
                     renderItem={this._renderItem}
-                    sliderHeight={this.state.viewport.height / 2.5}
+                    sliderHeight={vh*40}
                     sliderWidth={this.state.viewport.width}
                     itemWidth={this.state.viewport.width}
                 />
 
                 <ListView
-                    style={{flexDirection: 'row', width: '100%', height: '10%'}}
+                    style={{flexDirection: 'row', width: '100%', height: vh*18}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceTypes}
@@ -274,7 +274,7 @@ class NavigationTypes extends React.Component {
                     }
                     }
                 />
-                <Header style={{width: '100%', height: '10'}} title="پیشنهاد ویژه"/>
+                <Header style={{width: '100%', height: vh*10}} title="پیشنهاد ویژه"/>
 
 
                 <ListView
@@ -292,7 +292,7 @@ class NavigationTypes extends React.Component {
                                   rowData.long_description, rowData.price, rowData.id)}
                         />}
                 />
-                <Header style={{width: '100%', height: '10'}} title="پرفروش ترین ها"/>
+                <Header style={{width: '100%', height: vh*10}} title="پرفروش ترین ها"/>
                 <ListView
                     style={{flexDirection: 'row', width: '100%', height: '35%'}}
                     horizontal={true}

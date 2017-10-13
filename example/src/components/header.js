@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(5, 5, 5, 0.0)',
     },
     text: {
-        fontSize:vw*4,
+        fontSize:vw*6,
 
         fontWeight:'900'
     },

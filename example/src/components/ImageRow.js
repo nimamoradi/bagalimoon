@@ -27,7 +27,7 @@ ImageRow.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        flex: 1,
+
         // paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        flex: 1, width: Dimensions.get('window').width, height:Dimensions.get('window').width-Dimensions.get('window').width/3,
+        flex: 1, width: Dimensions.get('window').width, height:vh*40,
+        resizeMode:'stretch'
 
     }
 });

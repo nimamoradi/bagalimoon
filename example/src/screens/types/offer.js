@@ -11,7 +11,7 @@ class offer extends Component {
         if (this.props.myNumber !== null)
             productCount = this.props.myNumber;
         this.state = {
-            myNumber: '0',
+            myNumber: productCount,
             wasEmpty: true,
         }
     }
@@ -47,6 +47,7 @@ class offer extends Component {
 
 
     componentDidMount() {
+        if (this.props.myNumber === '')
         this.loadData();
 
     }
@@ -226,7 +227,6 @@ offer.propTypes = {
     imageUrl: PropTypes.string.isRequired,
     des: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-    myNumber: PropTypes.string,
     id: PropTypes.string.isRequired,
 };
 

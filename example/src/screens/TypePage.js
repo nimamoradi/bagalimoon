@@ -62,7 +62,7 @@ class TypePage extends Component {
                 imageUrl:imageUrl,
                 des:des,
                 price:price,
-                myNumber:myNumber,
+                myNumber:myNumber===0?'':myNumber,
                 id:id
 
             },
@@ -211,7 +211,7 @@ class TypePage extends Component {
                                 server.getServerAddress() + columnData.photo,
                                 columnData.long_description,
                                 columnData.price,
-                                0,
+                                columnData.count,
                                 columnData.id
                                 )}
                             title={columnData.name}
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     picker: {
         flex: 1,
         margin: 10,
-        fontSize:vw*4,
+
 
     },
     viewPicker: {

@@ -10,6 +10,7 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
+
 let context;
 let isFirstTime;
 
@@ -23,10 +24,12 @@ class TypePage extends Component {
         let subCategories = this.getIndex(this.props.title, this.props.Categories, 'name');
         let parent_id = Categories[subCategories].id;
         let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-
+        let id = 0;
+        if (sub > -1)
+            id = Categories[sub].id;
         this.state = {
             mainSelected: this.props.title,
-            subSelected: Categories[sub].id,
+            subSelected: id,
             dataSourceView: ds.cloneWithRows([]),
             fields: ds,
             dataReady: true,
@@ -40,10 +43,6 @@ class TypePage extends Component {
     }
 
 
-
-
-
-
     shop = () => {
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
@@ -53,28 +52,36 @@ class TypePage extends Component {
             },
         });
     };
-    product = (title,imageUrl,des,price,myNumber,id) => {
+    product = (title, imageUrl, des, price, myNumber, id) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
             title: title,
             passProps: {
-                title:title,
-                imageUrl:imageUrl,
-                des:des,
-                price:price,
-                myNumber:myNumber==='0'?'':myNumber,
-                id:id
+                title: title,
+                imageUrl: imageUrl,
+                des: des,
+                price: price,
+                myNumber: myNumber === '0' ? '' : myNumber,
+                id: id
 
             },
         });
     };
+
     componentDidMount() {
         if (isFirstTime) {
 
             let index = this.getIndex(this.props.title, this.props.Categories, 'name');
             let parent_id = context.state.Categories[index].id;
             let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-            context.loadRenderRowData(0, this.props.Categories[sub].id);
+            if (sub > -1)
+                context.loadRenderRowData(0, this.props.Categories[sub].id);
+            else context.setState({viewDate: []}, () => {
+                this.setState({
+                    dataSourceView: this.state.fields.cloneWithRows([]),
+                    dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
+                });
+            });
             isFirstTime = false;
         }
         this.setState({
@@ -181,7 +188,7 @@ class TypePage extends Component {
                     <TouchableOpacity
                         onPress={this.addToCart}
                         style={styles.viewPickerText}>
-                        <Icon name="add-shopping-cart" size={vw*10} color="#00aa00" style={{margin: 10}}/>
+                        <Icon name="add-shopping-cart" size={vw * 10} color="#00aa00" style={{margin: 10}}/>
                     </TouchableOpacity>
                     <View style={styles.viewPicker}>
                         <Picker
@@ -208,13 +215,13 @@ class TypePage extends Component {
                     dataSource={this.state.dataSourceView}
                     renderRow={(columnData) =>
                         <ItemView
-                            onPress={()=>this.product(columnData.name,
+                            onPress={() => this.product(columnData.name,
                                 server.getServerAddress() + columnData.photo,
                                 columnData.long_description,
                                 columnData.price,
                                 columnData.count,
                                 columnData.id
-                                )}
+                            )}
                             title={columnData.name}
                             price={columnData.price}
                             count={columnData.count}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform, Image, Dimensions} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 
-function ImageRow({title, onPress, imageUrl,Dimensions}) {
+function ImageRow({title, onPress, imageUrl}) {
 
 
     return (
@@ -13,7 +13,10 @@ function ImageRow({title, onPress, imageUrl,Dimensions}) {
             underlayColor={'rgba(0, 0, 0, 0.0)'}
         >
             <View style={styles.row}>
-                <Image source={{uri: imageUrl}} style={styles.image} resizeMode={'stretch'}/>
+                <Image source={{uri: imageUrl}}
+                       resizeMethod='scale'
+                       resizeMode='stretch'
+                       style={styles.image} />
             </View>
         </TouchableHighlight>
     );
@@ -35,15 +38,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
-    text: {
-        fontFamily: 'B Yekan',
-        textAlign: 'center',
-        fontSize: vw*5,
+     image: {
+        flex: 1, width: Dimensions.get('window').width, height:vh*30,
 
-    },
-    image: {
-        flex: 1, width: Dimensions.get('window').width, height:vh*40,
-        resizeMode:'stretch'
 
     }
 });

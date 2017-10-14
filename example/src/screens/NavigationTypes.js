@@ -258,6 +258,7 @@ class NavigationTypes extends React.Component {
                     data={this.state.dataSourceOffer}
                     renderItem={this._renderItem}
                     sliderHeight={vh*40}
+                    itemHeight={vh*40}
                     sliderWidth={this.state.viewport.width}
                     itemWidth={this.state.viewport.width}
                 />

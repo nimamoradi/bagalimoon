@@ -15,7 +15,7 @@ function itemView({title, onUp, onDown, imageUrl, price, disscount, count, onPre
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                         <Text
                             editable={false} selectTextOnFocus={false}
-                            style={{textAlign: 'center',fontSize:vw*4}}>
+                            style={{textAlign: 'center',fontFamily: 'B Yekan',fontSize:vw*4}}>
                             {count}
                         </Text>
                         <View style={{flex: 1, flexDirection: 'column'}}>
@@ -37,7 +37,7 @@ function itemView({title, onUp, onDown, imageUrl, price, disscount, count, onPre
                 <View style={styles.priceView}>
                     <View style={{flexDirection: 'row', alignContent: 'center'}}>
                         <Text style={styles.price}>{price}</Text>
-                        <Text style={{fontSize:vw*4,}}>قیمت:</Text>
+                        <Text style={{fontSize:vw*4,fontFamily: 'B Yekan',}}>قیمت:</Text>
                     </View>
                     <Text style={styles.discount}>{disscount}</Text>
 
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
 
     },
-    price: {fontSize:vw*4, color: '#17c408', textAlign: 'left', marginRight: 10},
+    price: {fontSize:vw*4, color: '#17c408',fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
     discount: {flex: 1, textDecorationLine: 'line-through', fontSize:vw*4, color: '#d94c3d', textAlign: 'right'},
     image: {
         alignSelf: 'flex-end',

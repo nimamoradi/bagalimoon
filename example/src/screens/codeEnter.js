@@ -99,10 +99,10 @@ class codeEnter extends React.Component {
                     AsyncStorage.setItem('api_code', responseData.api_code);
                     context.pushMainScreen(responseData.api_code);
                 } else if (responseData.successful === false) {
-                    alert('کد اشتباه است')
+                    server.alert('هشدار','کد اشتباه است',context);
                 }
                 else if (responseData.sms_code !== null) {
-                    alert('شماره کد را وارد کنید')
+                    server.alert('هشدار','شماره کد را وارد کنید',context);
                 }
 
 

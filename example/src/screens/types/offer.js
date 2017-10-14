@@ -8,7 +8,7 @@ class offer extends Component {
         super(props);
 
         let productCount = '0';
-        if (this.props.myNumber !== null)
+        if (this.props.myNumber !== null&&(this.props.myNumber !== 0))
             productCount = this.props.myNumber;
         this.state = {
             myNumber: productCount,
@@ -47,7 +47,7 @@ class offer extends Component {
 
 
     componentDidMount() {
-        if (this.props.myNumber === '')
+        if (this.props.myNumber === null||this.props.myNumber === 0||this.props.myNumber === '0')
         this.loadData();
 
     }

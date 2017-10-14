@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     container: {
         borderWidth: 0.5,
         borderRadius: 10,
-        width: Dimensions.get('window').width * 0.7,
-        height: Dimensions.get('window').height * 0.50,
+        width: Dimensions.get('window').width * 0.8,
+        height: Dimensions.get('window').height * 0.60,
         backgroundColor: '#ffffff',
 
         padding: 16,

@@ -40,7 +40,7 @@ class loginScreen extends React.Component {
             else {
                 // your call back function
                 newText = '';
-                alert("فقط عددد وارد کنید");
+                server.alert('هشدار',"فقط عدد وارد کنید",context);
                 break;
             }
 
@@ -114,10 +114,10 @@ class loginScreen extends React.Component {
                 if (responseData.successful === true) {
                     context.login({api_code: responseData.api_code});
                 } else if (responseData.successful === false) {
-                    alert('درخواست های زیاد با این شماره لطفا بعدا امتحان کنید')
+                    server.alert('هشدار','درخواست های زیاد با این شماره لطفا بعدا امتحان کنید',context);
                 }
                 else if (responseData.phone_number !== null) {
-                    alert('شماره معتبر نمی باشد')
+                    server.alert('هشدار','شماره معتبر نمی باشد',context);
                 }
 
             }).done();

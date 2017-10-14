@@ -62,7 +62,7 @@ class TypePage extends Component {
                 imageUrl:imageUrl,
                 des:des,
                 price:price,
-                myNumber:myNumber===0?'':myNumber,
+                myNumber:myNumber==='0'?'':myNumber,
                 id:id
 
             },
@@ -137,6 +137,7 @@ class TypePage extends Component {
             }
         );
         this.shop();
+
         // AsyncStorage.getItem('@CurrentBasket').then((item) => {
         //
         //     item=  item.concat(basket);

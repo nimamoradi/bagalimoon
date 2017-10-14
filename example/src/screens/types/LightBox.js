@@ -14,6 +14,7 @@ class Lightbox extends React.Component {
         <View style={{flex: 2}}>
           <Button
               large
+              color="green"
               buttonStyle={{size: vw*5,}}
             title={'بستن'}
             onPress={() => this.props.onClose()}

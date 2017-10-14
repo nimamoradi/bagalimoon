@@ -19,6 +19,17 @@ class code {
         })
     };
 
+    static alert(title,text, context) {
+        context.props.navigator.showLightBox({
+            screen: 'example.alert',
+            passProps: {title:title,text:text,onClose:()=>this.dismissLightBox(context)},
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        })
+    };
     static dismissLightBox(context) {
         context.props.navigator.dismissLightBox();
     };

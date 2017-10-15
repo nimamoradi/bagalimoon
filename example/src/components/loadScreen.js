@@ -3,7 +3,7 @@ import {ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Dimensions}
 
 
 function loadScreen() {
-     return (
+    return (
         <View style={styles.container}>
             <ActivityIndicator
                 color='#bc2b78'
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         justifyContent: 'center',
         alignItems: 'center',
-
+        backgroundColor: '#99999910'
     }
 });
 export default loadScreen;

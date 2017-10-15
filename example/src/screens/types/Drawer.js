@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Button, TouchableOpacity,AsyncStorage, Image, Text, Dimensions} from 'react-native';
+import {StyleSheet, BackHandler, View, Button, TouchableOpacity,AsyncStorage, Image, Text, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
@@ -43,7 +43,7 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={() =>{
                             AsyncStorage.clear();
-
+                            BackHandler.exitApp();
 
                         }}>
                         <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>

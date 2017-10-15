@@ -17,12 +17,15 @@ import loginScreen from './loginScreen'
 import OrderItem from './types/tabs/orderItem'
 import codeEnter from './codeEnter'
 import alert from '../components/alertBox'
+import finalBasket from './basketFinal'
+
 export function registerScreens() {
   Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
 
   Navigation.registerComponent('example.Types', () => Types);
   Navigation.registerComponent('example.alert', () => alert);
 
+  Navigation.registerComponent('example.Types.basketFinal', () => finalBasket);
   Navigation.registerComponent('example.Types.OrderItem', () => OrderItem);
   Navigation.registerComponent('example.Types.Push', () => Push);
   Navigation.registerComponent('example.Types.Drawer', () => Drawer);

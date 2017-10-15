@@ -13,7 +13,7 @@ import {
     Dimensions,
     Picker
 } from 'react-native';
-
+import Loading from '../components/loadScreen'
 import MapView from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -23,26 +23,7 @@ let Option = Radio.Option;
 let context;
 
 class mapView extends Component {
-    loadPreviewsAddress = async () => {
-        let value;
-        try {
-            console.log('loading address');
-            value = await AsyncStorage.getItem('@lastAddress');
-            if (value === null) {
 
-                console.log('don\'t have previews value');
-                return '';
-            }
-            else {
-
-                console.log(' ادرس ' + value);
-                this.setState({myLastAddress: value,});
-            }
-        }
-        catch (error) {
-            console.log('can\'t load data ' + error);
-        }
-    };
 
     load_api_code = () => {
         AsyncStorage.getItem('api_code').then((item) => {
@@ -125,10 +106,12 @@ class mapView extends Component {
             optionSelected: 0,
             error: null,
             myAddress: [],
-            myLastAddress: '',
+            sendData: false,
             myAddressName: '',
+            serverAdderss: '',
             oldAddresses: [],
             api_code: '',
+            senderName: '',
         };
 
 
@@ -180,13 +163,13 @@ class mapView extends Component {
 
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({oldAddresses: responseData})
+                context.setState({sendData: false})//add oldAddresses
             }).catch(error => {
 
 
             })
         );
-
+        context.finalBasket();
 
     }
 
@@ -198,10 +181,22 @@ class mapView extends Component {
 
     render() {
         let oldAddresses = this.state.oldAddresses.map(function (x) {
-            return <Picker.Item value={x.Address} label={x.name + ' : ' + x.Address}/>
+            return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
         });
         return (
             <ScrollView>
+
+                <View style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    {(this.state.sendData === true) ? <Loading/> : null}
+                </View>
                 <View style={{height: Dimensions.get('window').width - 100,}}>
                     <View style={styles.container}>
                         <MapView
@@ -253,8 +248,7 @@ class mapView extends Component {
                                 <Text style={styles.Text}>آدرس های قبلی</Text>
                                 <Picker
                                     style={styles.picker}
-                                    onValueChange={(itemValue, itemIndex) => {
-                                    }}>
+                                    selectedValue={this.state.serverAdderss}>
                                     {oldAddresses}
                                 </Picker>
 
@@ -268,34 +262,71 @@ class mapView extends Component {
                     <TouchableOpacity
                         onPress={this.offlineSale}
                         style={styles.bigButton}>
-                        <Text style={styles.bigButtonText}>پرداخت حضوری</Text>
+                        <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={this.onlineSale}
-                        style={styles.bigButton}>
-                        <Text style={styles.bigButtonText}>پرداخت انلاین</Text>
-                    </TouchableOpacity>
+                    <View style={{flex: 1}}>
+                        <Text style={{
+                            fontSize: vw * 4,
+                            fontFamily: 'B Yekan', textAlign: 'center'
+                        }}>نام تحویل گیرنده</Text>
+                        <TextInput
+
+                            style={{
+                                fontSize: vw * 4,
+                                fontFamily: 'B Yekan', textAlign: 'center'
+                            }}
+                            onChangeText={(text) => this.setState({senderName:text})}
+                            placeholder="نام"
+                        >
+                            {context.state.senderName}
+                        </TextInput>
+                    </View>
                 </View>
 
             </ScrollView>
         );
     }
 
-    onlineSale = async () => {
-        if (context.state.myAddress !== null && context.state.myAddressName !== null && context.state.optionSelected === 1)
-            this.newAddresses();
-        else if (context.state.optionSelected === 1)
-            alert('همه فیلدها پر نشده اند');
+
+    offlineSale = () => {
+
+        if (context.state.senderName !== ''&&context.state.senderName !== undefined&&context.state.senderName.search(/[a-zA-Z]/)===-1) {
+            if (context.state.optionSelected === 1 || context.state.optionSelected === 0) {
+
+                if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
+                        && context.state.myAddressName !== null)) {
+                    alert('همه فیلدها پر نشده اند');
+                }
+                else {
+                    context.setState({sendData: true});
+                    this.newAddresses();
+                }
+            }
+            else if (context.state.optionSelected === 2) {
+                if (context.state.serverAdderss === '' && context.state.serverAdderss === null) {
+                    alert('ادرسی از قبل وجود ندارد');
+                }
+                else context.finalBasket();
+            }
+
+        }
+        else if(context.state.senderName.search(/[a-zA-Z]/)!==-1){alert('نام تحویل گیرنده باید فارسی باشد');}
+        else alert('نام تحویل گیرنده الزامی است');
         console.log('saved' + this.state.myLocation);
 
     };
-    offlineSale = async () => {
-        if (context.state.myAddress !== null && context.state.myAddressName !== null && context.state.optionSelected === 1)
-            this.newAddresses();
-        else if (context.state.optionSelected === 1)
-            alert('همه فیلدها پر نشده اند');
-        console.log('saved' + this.state.myLocation);
-    };
+    finalBasket = () => {
+
+        this.props.navigator.push({
+            screen: 'example.Types.basketFinal',
+            title: 'خرید را نهایی کنید',
+            passProps: {
+                id: 5,
+                basket: context.props.basket,
+                senderName: context.state.senderName,
+            },
+        });
+    }
 
 }
 
@@ -312,15 +343,15 @@ const styles = StyleSheet.create({
         },
         borderText: {
             padding: 2,
-            fontSize: vw*4,
+            fontSize: vw * 4,
             margin: 10,
             fontFamily: 'B Yekan',
             borderRadius: 10,
             borderColor: 'gray', borderWidth: 1,
-            height: vh*6,
+            height: vh * 6,
         },
         Text: {
-            fontSize: vw*4,
+            fontSize: vw * 4,
             margin: 10,
             fontFamily: 'B Yekan',
         }, bigButton: {
@@ -333,7 +364,7 @@ const styles = StyleSheet.create({
         },
         bigButtonText: {
             textAlign: 'center',
-            fontSize: vw*6,
+            fontSize: vw * 6,
             marginTop: 20,
             alignItems: 'center',
             alignContent: 'center',

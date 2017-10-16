@@ -104,16 +104,7 @@ class NavigationTypes extends React.Component {
                 this.getBanners();
             })
             .catch(error => {
-                this.props.navigator.push({
-                    screen: 'example.Types.reTry',
-                    navigatorStyle: {
-                        navBarHidden: true,
-                    },
-                    // overrideBackPress: true,
-                    passProps: {
-                        task: this.isAvailable,
-                    },
-                });
+                server.retry(this.isAvailable,context)
             });
     };
 

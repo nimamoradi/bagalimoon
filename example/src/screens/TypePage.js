@@ -71,23 +71,41 @@ class TypePage extends Component {
     componentDidMount() {
         if (isFirstTime) {
 
-            let index = this.getIndex(this.props.title, this.props.Categories, 'name');
-            let parent_id = context.state.Categories[index].id;
-            let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-            if (sub > -1)
-                context.loadRenderRowData(0, this.props.Categories[sub].id);
-            else context.setState({viewDate: []}, () => {
-                this.setState({
-                    dataSourceView: this.state.fields.cloneWithRows([]),
-                    dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
-                });
-            });
+            this.isAvailable();
             isFirstTime = false;
         }
         this.setState({
             dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
         });
     }
+
+
+    isAvailable = () => {
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, 'Request timed out');
+        });
+
+        const request = fetch(server.getServerAddress());
+
+        return Promise
+            .race([timeout, request])
+            .then(response => {
+                context.setState({dataReady: true});
+                let index = context.getIndex(context.props.title, context.props.Categories, 'name');
+                let parent_id = context.state.Categories[index].id;
+                let sub = context.getIndex(parent_id, context.props.Categories, 'parent_category_id');
+                if (sub > -1)
+                    context.loadRenderRowData(0, context.props.Categories[sub].id);
+                else context.setState({viewDate: []}, () => {
+                    context.setState({
+                        dataSourceView: context.state.fields.cloneWithRows(this.state.viewDate),
+                    });
+                });
+            })
+            .catch(error => {
+                server.retry(this.isAvailable, context)
+            });
+    };
 
     getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {
@@ -146,8 +164,8 @@ class TypePage extends Component {
         );
         let orderBasket = [];
         for (let i = 0; i < basket.length; i++) {
-            console.log( basket[i]);
-            orderBasket=  orderBasket.concat(basket[i]);
+            console.log(basket[i]);
+            orderBasket = orderBasket.concat(basket[i]);
         }
         console.log(orderBasket);
         this.shop(JSON.stringify(orderBasket));

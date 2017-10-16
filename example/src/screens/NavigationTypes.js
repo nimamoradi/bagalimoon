@@ -89,20 +89,25 @@ class NavigationTypes extends React.Component {
 
     isAvailable = () => {
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, 600, 'Request timed out');
+            setTimeout(reject, 1000, 'Request timed out');
         });
 
         const request = fetch(server.getServerAddress());
 
         return Promise
             .race([timeout, request])
-            .then(response => alert('It worked :)'))
+            .then(response => {
+                context.setState({dataReady: true});
+                this.loadCategories();
+                this.getBestSellingProducts();
+                this.getSpecialOffer();
+                this.getBanners();
+            })
             .catch(error => alert('It timed out :('));
     };
 
 
     getBanners() {
-
 
 
         fetch(server.getServerAddress() + '/api/getBanners', {
@@ -142,11 +147,8 @@ class NavigationTypes extends React.Component {
         }));
 
     componentDidMount() {
-        this.loadCategories();
-        this.getBestSellingProducts();
-        this.getSpecialOffer();
-        this.getBanners();
-        // this.isAvailable();
+
+        this.isAvailable();
     }
 
     constructor(props) {
@@ -249,84 +251,97 @@ class NavigationTypes extends React.Component {
     }
 
     render() {
+        if (!this.state.dataReady) return <View style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
 
-        return (
-            <ScrollView
-                onLayout={() => {
-                    this.setState({
-                        viewport: {
-                            width: Dimensions.get('window').width,
-                            height: Dimensions.get('window').height / 2.25
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Loading/>
+        </View>;
+        else
+            return (
+                <ScrollView
+                    onLayout={() => {
+                        this.setState({
+                            viewport: {
+                                width: Dimensions.get('window').width,
+                                height: Dimensions.get('window').height / 2.25
+                            }
+                        });
+                    }}>
+
+
+                    <Carousel
+                        autoplayInterval={5000}
+                        autoplayDelay={5000}
+                        autoplay={true}
+                        ref={(c) => {
+                            this._carousel = c;
+                        }}
+                        data={this.state.dataSourceOffer}
+                        renderItem={this._renderItem}
+                        sliderHeight={vh * 40}
+                        itemHeight={vh * 40}
+                        sliderWidth={this.state.viewport.width}
+                        itemWidth={this.state.viewport.width}
+                    />
+
+                    <ListView
+                        style={{flexDirection: 'row', width: '100%', height: vh * 18}}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        dataSource={this.state.dataSourceTypes}
+                        renderRow={(rowData) => {
+                            if (rowData.parent_category_id === 0)
+                                return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
+                            else return null;
                         }
-                    });
-                }}>
+                        }
+                    />
+                    <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
-                <Carousel
-                    autoplayInterval={5000}
-                    autoplayDelay={5000}
-                    autoplay={true}
-                    ref={(c) => {
-                        this._carousel = c;
-                    }}
-                    data={this.state.dataSourceOffer}
-                    renderItem={this._renderItem}
-                    sliderHeight={vh * 40}
-                    itemHeight={vh * 40}
-                    sliderWidth={this.state.viewport.width}
-                    itemWidth={this.state.viewport.width}
-                />
+                    <ListView
+                        style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        dataSource={this.state.dataSourceSpecialOffer}
+                        renderRow={(rowData) =>
+                            <Item title={rowData.name}
+                                  style={styles.item}
+                                  price={rowData.price}
+                                  disscount={rowData.off}
+                                  imageUrl={server.getServerAddress() + rowData.photo.file}
+                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo.file,
+                                      rowData.long_description, rowData.price, rowData.id)}
+                            />}
+                    />
 
-                <ListView
-                    style={{flexDirection: 'row', width: '100%', height: vh * 18}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.dataSourceTypes}
-                    renderRow={(rowData) => {
-                        if (rowData.parent_category_id === 0)
-                            return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
-                        else return null;
-                    }
-                    }
-                />
-                <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
-
-
-                <ListView
-                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.dataSourceSpecialOffer}
-                    renderRow={(rowData) =>
-                        <Item title={rowData.name}
-                              style={styles.item}
-                              price={rowData.price}
-                              disscount={rowData.off}
-                              imageUrl={server.getServerAddress() + rowData.photo.file}
-                              onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo.file,
-                                  rowData.long_description, rowData.price, rowData.id)}
-                        />}
-                />
-                <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
-                <ListView
-                    style={{flexDirection: 'row', width: '100%', height: '35%'}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.dataSourceBestSellingProducts}
-                    renderRow={(rowData) =>
-                        <Item title={rowData.name}
-                              style={styles.item}
-                              price={rowData.price}
-                              onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
-                                  rowData.long_description, rowData.price, rowData.id)}
-                              disscount={rowData.off}
-                              imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
-                        />}
-                />
+                    <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
+                    <ListView
+                        style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        dataSource={this.state.dataSourceBestSellingProducts}
+                        renderRow={(rowData) =>
+                            <Item title={rowData.name}
+                                  style={styles.item}
+                                  price={rowData.price}
+                                  onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
+                                      rowData.long_description, rowData.price, rowData.id)}
+                                  disscount={rowData.off}
+                                  imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
+                            />}
+                    />
 
 
-            </ScrollView>
-        );
+                </ScrollView>
+            );
 
     }
 

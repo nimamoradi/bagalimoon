@@ -75,7 +75,7 @@ class basketLightBox extends React.Component {
 
 
                             onPress={() => this.props.onClose(false)}
-                        ><Text  style={{ fontSize: vw*4,}}>{'انصراف'}</Text></TouchableHighlight>
+                        ><Text  style={{ fontSize: vw*4,  fontFamily: 'B Yekan',}}>{'انصراف'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>
 
                     </View>
@@ -95,7 +95,7 @@ class basketLightBox extends React.Component {
                     <TouchableHighlight
                         style={styles.button}
                         onPress={() => this.props.onClose(false)}
-                    ><Text style={{ fontSize: vw*4,}}>{'بستن'}</Text></TouchableHighlight>
+                    ><Text style={{ fontSize: vw*4,  fontFamily: 'B Yekan',}}>{'بستن'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
 
                 </View>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     button1: {
-        fontFamily: 'B Yekan',
+
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         borderColor: '#bec4be',
         borderWidth: 0.5, flex: 2,
         backgroundColor: '#c4282250',
-        fontFamily: 'B Yekan',
+
 
     },
     title: {

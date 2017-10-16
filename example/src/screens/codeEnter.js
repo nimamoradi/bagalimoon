@@ -63,7 +63,7 @@ class codeEnter extends React.Component {
                                 padding: 10,
                                 margin: 40,
                                 fontFamily: 'B Yekan',
-                                fontSize: 20,
+                                fontSize: vw*6,
                                 color: '#ffffff'
                             }}>تایید</Text>
                         </TouchableOpacity>

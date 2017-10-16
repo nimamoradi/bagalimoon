@@ -8,6 +8,7 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
+
 let context;
 let maunal = false;
 let isFirstTime = true;
@@ -86,9 +87,23 @@ class NavigationTypes extends React.Component {
 
     }
 
+    isAvailable = () => {
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, 600, 'Request timed out');
+        });
+
+        const request = fetch(server.getServerAddress());
+
+        return Promise
+            .race([timeout, request])
+            .then(response => alert('It worked :)'))
+            .catch(error => alert('It timed out :('));
+    };
+
+
     getBanners() {
 
-        console.log("get Banners");
+
 
         fetch(server.getServerAddress() + '/api/getBanners', {
             method: 'POST',
@@ -100,15 +115,14 @@ class NavigationTypes extends React.Component {
                 api_code: context.props.api_code,
             })
         }).then((response) => response.json().then((responseData) => {
-
                 context.setState({banners: responseData}, function () {
-                    console.log(responseData);
+                    console.log("get Banners" + responseData);
                     maunal = true;
 
-                    context.setState({dataSourceOffer:this.state.banners})
+                    context.setState({dataSourceOffer: this.state.banners})
                 })
             }).catch(error => {
-
+                console.log("get Banners" + error)
 
             })
         );
@@ -132,7 +146,7 @@ class NavigationTypes extends React.Component {
         this.getBestSellingProducts();
         this.getSpecialOffer();
         this.getBanners();
-
+        // this.isAvailable();
     }
 
     constructor(props) {
@@ -227,9 +241,9 @@ class NavigationTypes extends React.Component {
         return (
             <View>
                 <ImageRow className='indent' key={item.id}
-                          imageUrl={server.getServerAddress()+item.photo}
+                          imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
-                          />
+                />
             </View>
         );
     }
@@ -257,14 +271,14 @@ class NavigationTypes extends React.Component {
                     }}
                     data={this.state.dataSourceOffer}
                     renderItem={this._renderItem}
-                    sliderHeight={vh*40}
-                    itemHeight={vh*40}
+                    sliderHeight={vh * 40}
+                    itemHeight={vh * 40}
                     sliderWidth={this.state.viewport.width}
                     itemWidth={this.state.viewport.width}
                 />
 
                 <ListView
-                    style={{flexDirection: 'row', width: '100%', height: vh*18}}
+                    style={{flexDirection: 'row', width: '100%', height: vh * 18}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     dataSource={this.state.dataSourceTypes}
@@ -275,7 +289,7 @@ class NavigationTypes extends React.Component {
                     }
                     }
                 />
-                <Header style={{width: '100%', height: vh*10}} title="پیشنهاد ویژه"/>
+                <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
                 <ListView
@@ -293,7 +307,7 @@ class NavigationTypes extends React.Component {
                                   rowData.long_description, rowData.price, rowData.id)}
                         />}
                 />
-                <Header style={{width: '100%', height: vh*10}} title="پرفروش ترین ها"/>
+                <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
                 <ListView
                     style={{flexDirection: 'row', width: '100%', height: '35%'}}
                     horizontal={true}

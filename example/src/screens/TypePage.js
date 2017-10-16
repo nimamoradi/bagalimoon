@@ -43,12 +43,12 @@ class TypePage extends Component {
     }
 
 
-    shop = () => {
+    shop = (basket) => {
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                basket: this.state.basket
+                basket: basket
             },
         });
     };
@@ -134,6 +134,7 @@ class TypePage extends Component {
             }).done();
     };
     addToCart = () => {
+
         let basket = this.state.basket.map(
             function (x) {
                 return x.value.filter(
@@ -143,7 +144,13 @@ class TypePage extends Component {
                 )
             }
         );
-        this.shop();
+        let orderBasket = [];
+        for (let i = 0; i < basket.length; i++) {
+            console.log( basket[i]);
+            orderBasket=  orderBasket.concat(basket[i]);
+        }
+        console.log(orderBasket);
+        this.shop(JSON.stringify(orderBasket));
 
         // AsyncStorage.getItem('@CurrentBasket').then((item) => {
         //

@@ -58,7 +58,10 @@ class basketFinal extends React.Component {
                     customer_receiver_name:responseData.customer_receiver_name
                 });
 
-            }).done();
+            }).done() .catch((error) => {
+            console.error(error);
+        });
+
 
     };
 

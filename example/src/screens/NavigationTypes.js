@@ -103,7 +103,18 @@ class NavigationTypes extends React.Component {
                 this.getSpecialOffer();
                 this.getBanners();
             })
-            .catch(error => alert('It timed out :('));
+            .catch(error => {
+                this.props.navigator.push({
+                    screen: 'example.Types.reTry',
+                    navigatorStyle: {
+                        navBarHidden: true,
+                    },
+                    // overrideBackPress: true,
+                    passProps: {
+                        task: this.isAvailable,
+                    },
+                });
+            });
     };
 
 

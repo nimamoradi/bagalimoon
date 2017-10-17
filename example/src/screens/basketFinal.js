@@ -33,8 +33,8 @@ class basketFinal extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                api_code: '$2y$10$Wk1bC6zaJGJEq9FOA5eN4u1npKXUK9cL8zI29Mqw7MttoS9XU0QN68RAa8iuZL8iDVkEjlc30gdziHNtlF7',
-                address_id: 1,
+                api_code: context.props.api_code,
+                address_id: context.props.id,
                 customer_receiver_name: context.props.senderName,
                 items: context.props.basket,
 
@@ -58,7 +58,7 @@ class basketFinal extends React.Component {
                     customer_receiver_name:responseData.customer_receiver_name
                 });
 
-            }).done() .catch((error) => {
+            }).catch((error) => {
             console.error(error);
         });
 

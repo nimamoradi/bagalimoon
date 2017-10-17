@@ -112,6 +112,7 @@ class mapView extends Component {
             oldAddresses: [],
             api_code: '',
             senderName: '',
+            myAddress_id: 0,
         };
 
 
@@ -138,6 +139,27 @@ class mapView extends Component {
 
     }
 
+    isAvailable = () => {
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, 2000, 'Request timed out');
+        });
+
+        const request = fetch(server.getServerAddress());
+
+        return Promise
+            .race([timeout, request])
+            .then(response => {
+                context.setState({dataReady: true});
+                this.loadCategories();
+                this.getBestSellingProducts();
+                this.getSpecialOffer();
+                this.getBanners();
+            })
+            .catch(error => {
+                server.retry(this.isAvailable, context)
+            });
+    };
+
 
     newAddresses() {
 
@@ -163,13 +185,15 @@ class mapView extends Component {
 
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({sendData: false})//add oldAddresses
+                context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
+
+                context.finalBasket();
             }).catch(error => {
 
 
             })
         );
-        context.finalBasket();
+        // context.finalBasket();
 
     }
 
@@ -183,6 +207,7 @@ class mapView extends Component {
         let oldAddresses = this.state.oldAddresses.map(function (x) {
             return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
         });
+
         return (
             <ScrollView>
 
@@ -208,16 +233,16 @@ class mapView extends Component {
                                 longitudeDelta: 0.01,
                             }}
                             onLongPress={(e) => {
-                                this.setState({myLocation: e.nativeEvent.coordinate})
-                                this.setState({latitude: e.nativeEvent.coordinate.latitude})
-                                this.setState({longitude: e.nativeEvent.coordinate.longitude})
+                                this.setState({myLocation: e.nativeEvent.coordinate});
+                                this.setState({latitude: e.nativeEvent.coordinate.latitude});
+                                this.setState({longitude: e.nativeEvent.coordinate.longitude});
                             }}>
                             <MapView.Marker draggable
                                             coordinate={this.state.myLocation}
                                             onDragEnd={(e) => {
-                                                this.setState({myLocation: e.nativeEvent.coordinate})
-                                                this.setState({latitude: e.nativeEvent.coordinate.latitude})
-                                                this.setState({longitude: e.nativeEvent.coordinate.longitude})
+                                                this.setState({myLocation: e.nativeEvent.coordinate});
+                                                this.setState({latitude: e.nativeEvent.coordinate.latitude});
+                                                this.setState({longitude: e.nativeEvent.coordinate.longitude});
                                             }
                                             }
 
@@ -247,8 +272,10 @@ class mapView extends Component {
                             <View>
                                 <Text style={styles.Text}>آدرس های قبلی</Text>
                                 <Picker
+                                    onValueChange={(itemValue, itemIndex) =>this.setState({serverAdderss:itemValue,myAddress_id:itemValue})}
                                     style={styles.picker}
                                     selectedValue={this.state.serverAdderss}>
+                                    <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
                                     {oldAddresses}
                                 </Picker>
 
@@ -270,14 +297,12 @@ class mapView extends Component {
                             fontFamily: 'B Yekan', textAlign: 'center'
                         }}>نام تحویل گیرنده</Text>
                         <TextInput
-
                             style={{
                                 fontSize: vw * 4,
                                 fontFamily: 'B Yekan', textAlign: 'center'
                             }}
-                            onChangeText={(text) => this.setState({senderName:text})}
-                            placeholder="نام"
-                        >
+                            onChangeText={(text) => this.setState({senderName: text})}
+                            placeholder="نام">
                             {context.state.senderName}
                         </TextInput>
                     </View>
@@ -290,7 +315,7 @@ class mapView extends Component {
 
     offlineSale = () => {
 
-        if (context.state.senderName !== ''&&context.state.senderName !== undefined&&context.state.senderName.search(/[a-zA-Z]/)===-1) {
+        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
             if (context.state.optionSelected === 1 || context.state.optionSelected === 0) {
 
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
@@ -306,11 +331,21 @@ class mapView extends Component {
                 if (context.state.serverAdderss === '' && context.state.serverAdderss === null) {
                     alert('ادرسی از قبل وجود ندارد');
                 }
-                else context.finalBasket();
+
+                else {
+                    if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
+
+                        alert("لطفا آدرس را انتخاب کنید");
+                    else
+                        this.finalBasket();
+
+                }
             }
 
         }
-        else if(context.state.senderName.search(/[a-zA-Z]/)!==-1){alert('نام تحویل گیرنده باید فارسی باشد');}
+        else if (context.state.senderName.search(/[a-zA-Z]/) !== -1) {
+            alert('نام تحویل گیرنده باید فارسی باشد');
+        }
         else alert('نام تحویل گیرنده الزامی است');
         console.log('saved' + this.state.myLocation);
 
@@ -321,7 +356,8 @@ class mapView extends Component {
             screen: 'example.Types.basketFinal',
             title: 'خرید را نهایی کنید',
             passProps: {
-                id: 5,
+                api_code: context.state.api_code,
+                id: context.state.myAddress_id,
                 basket: context.props.basket,
                 senderName: context.state.senderName,
             },

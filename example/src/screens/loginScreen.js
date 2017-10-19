@@ -40,7 +40,7 @@ class loginScreen extends React.Component {
             else {
                 // your call back function
                 newText = '';
-                server.alert('هشدار',"فقط عدد وارد کنید",context);
+                server.alert('هشدار', "فقط عدد وارد کنید", context);
                 break;
             }
 
@@ -49,51 +49,64 @@ class loginScreen extends React.Component {
     };
 
     render() {
-        return (
-            <Image
-                style={{
-                    width: Dimensions.get('window').width,
-                    height: Dimensions.get('window').height,
-                    backgroundColor: '#ffffff10'
-                }}
-                source={require('../../img/login.png')}>
+        if (this.state.sendData) return <View style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
 
-                <View style={styles.absolote}>
-                    <View style={{width: Dimensions.get('window').width - 100}}>
-                        <Text style={styles.text}>شماره همراه</Text>
-                        <TextInput
-                            onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                            keyboardType='numeric' style={styles.textInput}>
-                            {this.state.phoneNumber}
-                        </TextInput>
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Loading/>
+        </View>;
+        else
+            return (
+                <Image
+                    style={{
+                        width: Dimensions.get('window').width,
+                        height: Dimensions.get('window').height,
+                        backgroundColor: '#ffffff10'
+                    }}
+                    source={require('../../img/login.png')}>
 
-                        <TouchableOpacity
-                            onPress={this.doSignUp}
-                        >
-                            <Text style={{
-                                textAlign: 'center', borderRadius: 20,
-                                borderColor: '#bec4be',
-                                borderWidth: 0.5,
-                                backgroundColor: '#5bca45',
-                                padding: 10,
-                                margin: 40,
-                                fontFamily: 'B Yekan',
-                                fontSize: 20,
-                                color: '#ffffff'
-                            }}>ورود</Text>
-                        </TouchableOpacity>
+                    <View style={styles.absolote}>
+                        <View style={{width: Dimensions.get('window').width - 100}}>
+                            <Text style={styles.text}>شماره همراه</Text>
+                            <TextInput
+                                onChange={(event) => this.onChanged(event.nativeEvent.text)}
+                                keyboardType='numeric' style={styles.textInput}>
+                                {this.state.phoneNumber}
+                            </TextInput>
+
+                            <TouchableOpacity
+                                onPress={this.isAvailable}
+                            >
+                                <Text style={{
+                                    textAlign: 'center', borderRadius: 20,
+                                    borderColor: '#bec4be',
+                                    borderWidth: 0.5,
+                                    backgroundColor: '#5bca45',
+                                    padding: 10,
+                                    margin: 40,
+                                    fontFamily: 'B Yekan',
+                                    fontSize: 20,
+                                    color: '#ffffff'
+                                }}>ورود</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
 
 
-                <View style={styles.absolote}>
-                    {(this.state.sendData === true) ? <Loading/> : null}
-                </View>
-            </Image>        );
+                    <View style={styles.absolote}>
+                        {(this.state.sendData === true) ? <Loading/> : null}
+                    </View>
+                </Image>        );
     }
 
     doSignUp() {
-        context.setState({sendData: true});
+
         console.log("inside post register");
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
@@ -114,13 +127,15 @@ class loginScreen extends React.Component {
                 if (responseData.successful === true) {
                     context.login({api_code: responseData.api_code});
                 } else if (responseData.successful === false) {
-                    server.alert('هشدار','درخواست های زیاد با این شماره لطفا بعدا امتحان کنید',context);
+                    server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
                 }
                 else if (responseData.phone_number !== null) {
-                    server.alert('هشدار','شماره معتبر نمی باشد',context);
+                    server.alert('هشدار', 'شماره معتبر نمی باشد', context);
                 }
 
-            }).done();
+            });
+
+
     }
 
 
@@ -136,6 +151,24 @@ class loginScreen extends React.Component {
             },
             passProps: props,
         });
+    };
+
+    isAvailable = () => {
+        context.setState({sendData: true});
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, 4000, 'Request timed out');
+        });
+
+        const request = fetch(server.getServerAddress());
+
+        return Promise
+            .race([timeout, request])
+            .then(response => {
+                context.doSignUp();
+            })
+            .catch(error => {
+                server.retry(context.isAvailable, context)
+            });
     };
 
 

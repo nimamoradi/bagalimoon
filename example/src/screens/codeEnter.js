@@ -53,7 +53,7 @@ class codeEnter extends React.Component {
                         </TextInput>
 
                         <TouchableOpacity
-                            onPress={this.enterCode}
+                            onPress={this.isAvailable}
                         >
                             <Text style={{
                                 textAlign: 'center', borderRadius: 20,
@@ -75,7 +75,23 @@ class codeEnter extends React.Component {
             </Image>
         );
     }
+    isAvailable = () => {
+        context.setState({sendData: true});
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, 4000, 'Request timed out');
+        });
 
+        const request = fetch(server.getServerAddress());
+
+        return Promise
+            .race([timeout, request])
+            .then(response => {
+                context.enterCode();
+            })
+            .catch(error => {
+                server.retry(context.isAvailable, context)
+            });
+    };
 
     enterCode = () => {
         context.setState({sendData: true});

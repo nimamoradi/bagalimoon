@@ -307,7 +307,8 @@ const styles = StyleSheet.create({
     picker: {
         flex: 1,
         margin: 10,
-
+        width:35*vw,
+        height:15*vh,
 
     },
     viewPicker: {
@@ -319,7 +320,8 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
     },
     viewPickerText: {
-        flex: 0.35,
+        width:15*vw,
+        height:10*vh,
         margin: 10,
         backgroundColor: '#aeb3ae20',
         borderRadius: 5,

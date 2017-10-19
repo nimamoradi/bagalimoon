@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize:vw*6,
-
+        padding:10,
+        borderRadius: 2*vh, borderColor: '#ebe228', borderWidth: vw/1.75,
         fontWeight:'900'
     },
 });

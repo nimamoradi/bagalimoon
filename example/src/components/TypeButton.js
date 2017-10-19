@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
-let backgroundColorOriginal='#4adc4620';
+let backgroundColorOriginal='#349630';
 function TypeButton({title, onPress,backgroundColor}) {
-if(backgroundColor==null)
+if(backgroundColor===null)
     backgroundColor='#4adc4640';
 
     return (
@@ -16,10 +16,10 @@ if(backgroundColor==null)
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderBottomWidth: 1,
-                margin: 15,
+                margin: 5,
                 borderRadius: 15,
                 borderColor: '#349630',
-                backgroundColor: backgroundColor,
+                backgroundColor: backgroundColorOriginal,
                 borderWidth: 0.5,
                 borderBottomColor: 'rgba(0, 0, 0, 0.054)',
             }}
@@ -49,7 +49,6 @@ fontSize:vw*3,
         margin: 15,
         borderRadius: 15,
         borderColor: '#349630',
-        backgroundColor: backgroundColorOriginal,
         borderWidth: 0.5,
 
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
@@ -57,7 +56,8 @@ fontSize:vw*3,
     text: {
         flex: 1,
         textAlign: 'center',
-        fontSize:4*vw,
+        fontSize: 4*vw,
+        color:'white',
         fontFamily: 'B Yekan',
     },
 });

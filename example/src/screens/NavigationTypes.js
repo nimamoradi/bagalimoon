@@ -89,7 +89,7 @@ class NavigationTypes extends React.Component {
 
     isAvailable = () => {
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, 2000, 'Request timed out');
+            setTimeout(reject,4000, 'Request timed out');
         });
 
         const request = fetch(server.getServerAddress());

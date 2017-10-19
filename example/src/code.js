@@ -1,5 +1,5 @@
 class code {
-    static serverAddress = 'http://10.0.2.2/superserver/public';
+    static serverAddress = 'http://baghalimoon.ir';
 
     //other relevant code here
 

@@ -1,10 +1,32 @@
 import React from 'react';
-import {StyleSheet, BackHandler, View, Button, TouchableOpacity,AsyncStorage, Image, Text, Dimensions} from 'react-native';
+import {
+    StyleSheet,
+    BackHandler,
+    View,
+    Button,
+    TouchableOpacity,
+    AsyncStorage,
+    Image,
+    Text,
+    Dimensions
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 
+let context;
+
 class MyClass extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {user_number: ''};
+        context = this;
+        AsyncStorage.getItem('user_number').then((item) => {
+            context.setState ({user_number: item})
+        });
+    }
+
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
         if (sendTOHome)
@@ -23,8 +45,8 @@ class MyClass extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{backgroundColor: '#eeeceb', flex: 1, width: 300, justifyContent: 'center',}}>
-                    <Image style={styles.image} source={require('../../../img/gyro_header.jpg')}/>
-                    <Text style={{alignSelf: 'flex-end',fontSize:vw*4}}>jjdfd fo</Text>
+                    <Image style={styles.image} source={require('../../../img/grocery.png')}/>
+                    <Text style={{alignSelf: 'flex-end', fontSize: vw * 4}}>{this.state.user_number}</Text>
                 </View>
                 <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
                     <TouchableOpacity
@@ -32,23 +54,25 @@ class MyClass extends React.Component {
                             title: this.props.title,
                             onClose: this.dismissLightBox,
                         },)}>
-                        <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>
-                            <Icon name="shopping-cart" size={vw*6} color="green" style={{margin: 10,alignSelf:'flex-start'}}/>
-                            <Text  style={{marginTop:35/2,fontSize:vw*4}}>سبد خرید</Text>
+                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                            <Icon name="shopping-cart" size={vw * 6} color="green"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>سبد خرید</Text>
 
                         </View>
 
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={() =>{
+                        onPress={() => {
                             AsyncStorage.clear();
                             BackHandler.exitApp();
 
                         }}>
-                        <View style={{flexDirection:'row',alignSelf:'flex-end',alignContent:'center'}}>
-                            <MaterialIcon name="logout" size={vw*6} color="#C42B2D" style={{margin: 10,alignSelf:'flex-start'}}/>
-                            <Text  style={{marginTop:35/2,fontSize:vw*4}}>خروج</Text>
+                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                            <MaterialIcon name="logout" size={vw * 6} color="#C42B2D"
+                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>خروج</Text>
 
                         </View>
 
@@ -89,7 +113,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        borderRadius: Dimensions.get('window').width / 6,
     }
     ,
 });

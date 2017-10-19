@@ -294,7 +294,7 @@ class NavigationTypes extends React.Component {
                     />
 
                     <ListView
-                        style={{flexDirection: 'row', width: '100%', height: vh * 18}}
+                        style={{flexDirection: 'row', width: '100%', height: vh *22}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceTypes}

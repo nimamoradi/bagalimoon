@@ -7,7 +7,8 @@ import {
     Text,
     TextInput,
     Image,
-    Dimensions
+    Dimensions,
+    AsyncStorage
 
 
 } from 'react-native';
@@ -126,6 +127,7 @@ class loginScreen extends React.Component {
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     context.login({api_code: responseData.api_code});
+                    AsyncStorage.setItem('user_number',context.state.phoneNumber);
                 } else if (responseData.successful === false) {
                     server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
                 }

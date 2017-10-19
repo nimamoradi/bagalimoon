@@ -57,7 +57,7 @@ fontSize:vw*3,
     text: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 16,
+        fontSize:4*vw,
         fontFamily: 'B Yekan',
     },
 });

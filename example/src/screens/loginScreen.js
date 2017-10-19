@@ -127,7 +127,7 @@ class loginScreen extends React.Component {
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     context.login({api_code: responseData.api_code});
-                    AsyncStorage.setItem('user_number',context.state.phoneNumber);
+                    AsyncStorage.setItem('user_number', context.state.phoneNumber);
                 } else if (responseData.successful === false) {
                     server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
                 }
@@ -135,9 +135,9 @@ class loginScreen extends React.Component {
                     server.alert('هشدار', 'شماره معتبر نمی باشد', context);
                 }
 
-            });
-
-
+            }).catch(error => {
+            server.retry(context.isAvailable, context)
+        });
     }
 
 
@@ -167,6 +167,7 @@ class loginScreen extends React.Component {
             .race([timeout, request])
             .then(response => {
                 context.doSignUp();
+
             })
             .catch(error => {
                 server.retry(context.isAvailable, context)

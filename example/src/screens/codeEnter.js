@@ -122,8 +122,9 @@ class codeEnter extends React.Component {
                 }
 
 
-            }).done();
-
+            }).catch(error => {
+            server.retry(context.isAvailable, context)
+        });
     };
 
     pushMainScreen(api) {

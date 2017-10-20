@@ -158,7 +158,7 @@ class loginScreen extends React.Component {
     isAvailable = () => {
         context.setState({sendData: true});
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, 4000, 'Request timed out');
+            setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
         const request = fetch(server.getServerAddress());

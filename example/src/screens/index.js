@@ -19,6 +19,7 @@ import codeEnter from './codeEnter'
 import alert from '../components/alertBox'
 import finalBasket from './basketFinal'
 import reTry from '../components/reTry'
+import subOffer from './types/subOffer';
 
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
@@ -49,6 +50,7 @@ export function registerScreens() {
 
     Navigation.registerComponent('example.Types.test', () => test);
 
+    Navigation.registerComponent('example.Types.subOffer', () => subOffer);
 }
 
 export function registerScreenVisibilityListener() {

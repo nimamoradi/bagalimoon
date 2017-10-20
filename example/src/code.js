@@ -1,12 +1,14 @@
 class code {
     static serverAddress = 'http://baghalimoon.ir';
-
+    static timeOut =4000;
     //other relevant code here
 
     static getServerAddress() {
         return this.serverAddress;
     }
-
+    static getTimeOut() {
+        return this.timeOut;
+    }
     static showLightBox(screen, passProps, context) {
         context.props.navigator.showLightBox({
             screen: screen,
@@ -34,6 +36,20 @@ class code {
     static dismissLightBox(context) {
         context.props.navigator.dismissLightBox();
     };
+
+    static retryParam(task,context,param) {
+        context.props.navigator.push({
+            screen: 'example.Types.reTry',
+            navigatorStyle: {
+                navBarHidden: true,
+            },
+            overrideBackPress: true,
+            passProps: {
+                task:task,
+                param:param,
+            },
+        });
+    }
 
     static retry(task,context) {
         context.props.navigator.push({

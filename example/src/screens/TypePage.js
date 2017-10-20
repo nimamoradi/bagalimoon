@@ -79,10 +79,9 @@ class TypePage extends Component {
         });
     }
 
-
     isAvailable = () => {
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, 2000, 'Request timed out');
+            setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
         const request = fetch(server.getServerAddress());
@@ -91,9 +90,9 @@ class TypePage extends Component {
             .race([timeout, request])
             .then(response => {
                 context.setState({dataReady: true});
-                let index = context.getIndex(context.props.title, context.props.Categories, 'name');
+                let index = context.getIndex(context.state.mainSelected, context.state.Categories, 'name');
                 let parent_id = context.state.Categories[index].id;
-                let sub = context.getIndex(parent_id, context.props.Categories, 'parent_category_id');
+                let sub = context.getIndex(parent_id,context.state.Categories, 'parent_category_id');
                 if (sub > -1)
                     context.loadRenderRowData(0, context.props.Categories[sub].id);
                 else context.setState({viewDate: []}, () => {
@@ -118,7 +117,6 @@ class TypePage extends Component {
 
     loadRenderRowData = async (category_id, itemValue) => {
         context.setState({dataReady: false, subSelected: itemValue});
-        console.log('category_id ' + category_id + ' itemValue' + itemValue);
         console.log("inside post load product");
         fetch(server.getServerAddress() + '/api/getProducts/' + itemValue, {
 
@@ -130,6 +128,7 @@ class TypePage extends Component {
             body: JSON.stringify({})
         }).then((response) => response.json())
             .then((responseData) => {
+
                 console.log("inside response json");
                 let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
                     context.state.basket, 'name');
@@ -149,7 +148,9 @@ class TypePage extends Component {
                 console.log('response object:', responseData);
 
 
-            }).done();
+            }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context,)
+            });
     };
     addToCart = () => {
 
@@ -219,7 +220,7 @@ class TypePage extends Component {
                         <Picker
                             style={styles.picker}
                             selectedValue={this.state.subSelected}
-                            onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex, itemValue)}>
+                            onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex,itemValue)}>
                             {subItems}
                         </Picker>
 
@@ -307,8 +308,8 @@ const styles = StyleSheet.create({
     picker: {
         flex: 1,
         margin: 10,
-        width:35*vw,
-        height:15*vh,
+        width: 35 * vw,
+        height: 15 * vh,
 
     },
     viewPicker: {
@@ -320,8 +321,8 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
     },
     viewPickerText: {
-        width:15*vw,
-        height:10*vh,
+        width: 15 * vw,
+        height: 10 * vh,
         margin: 10,
         backgroundColor: '#aeb3ae20',
         borderRadius: 5,

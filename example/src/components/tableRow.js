@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: 'B Yekan',
-        fontSize: 16,
         margin:20,
         fontSize: vw*5,
     },

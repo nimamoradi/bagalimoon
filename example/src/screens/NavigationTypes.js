@@ -56,8 +56,7 @@ class NavigationTypes extends React.Component {
                     context.setState({dataSourceSpecialOffer: this.state.ds.cloneWithRows(this.state.SpecialOffer),})
                 })
             }).catch(error => {
-                console.log(error);
-
+                server.retry(context.isAvailable, context)
             })
         );
         context.setState({});
@@ -79,8 +78,7 @@ class NavigationTypes extends React.Component {
                     context.setState({dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),})
                 })
             }).catch(error => {
-
-
+                server.retry(context.isAvailable, context)
             })
         );
 
@@ -89,7 +87,7 @@ class NavigationTypes extends React.Component {
 
     isAvailable = () => {
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject,4000, 'Request timed out');
+            setTimeout(reject, 4000, 'Request timed out');
         });
 
         const request = fetch(server.getServerAddress());
@@ -104,7 +102,7 @@ class NavigationTypes extends React.Component {
                 this.getBanners();
             })
             .catch(error => {
-                server.retry(this.isAvailable,context)
+                server.retry(this.isAvailable, context)
             });
     };
 
@@ -122,17 +120,15 @@ class NavigationTypes extends React.Component {
                 api_code: context.props.api_code,
             })
         }).then((response) => response.json().then((responseData) => {
-                context.setState({banners: responseData}, function () {
-                    console.log("get Banners" + responseData);
-                    maunal = true;
+            context.setState({banners: responseData}, function () {
+                console.log("get Banners" + responseData);
+                maunal = true;
 
-                    context.setState({dataSourceOffer: this.state.banners})
-                })
-            }).catch(error => {
-                console.log("get Banners" + error)
-
+                context.setState({dataSourceOffer: this.state.banners})
             })
-        );
+        }).catch(error => {
+            server.retry(context.isAvailable, context)
+        }));
 
 
     }
@@ -294,9 +290,11 @@ class NavigationTypes extends React.Component {
                     />
 
                     <ListView
-                        style={{flexDirection: 'row', width: '100%', height: vh *22,
-                            margin:5,
-                            borderRadius: 2*vh, borderColor: '#c495c1', borderWidth: vw/1.75,}}
+                        style={{
+                            flexDirection: 'row', width: '100%', height: vh * 22,
+                            margin: 5,
+                            borderRadius: 2 * vh, borderColor: '#c495c1', borderWidth: vw / 1.75,
+                        }}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceTypes}

@@ -7,7 +7,8 @@ class reTry extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            task: this.props.task
+            task: this.props.task,
+            parms: this.props.parms
         };
 
     }
@@ -18,7 +19,11 @@ class reTry extends React.Component {
                 <Text style={styles.text}>اتصال قطع شد</Text>
                 <TouchableOpacity
                     onPress={() => {
-                        this.state.task();
+                        if (this.state.parms === null)
+                            this.state.task();
+                        else {
+                            this.state.task(this.state.parms);
+                        }
                         this.props.navigator.pop();
                     }}>
                     <Icon name="redo" size={vw * 20} color="#777777" style={{margin: 2 * vw}}/>

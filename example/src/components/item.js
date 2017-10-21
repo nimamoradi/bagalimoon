@@ -6,7 +6,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 
 function item({title, onPress, imageUrl, price, disscount}) {
 
-    if (disscount == null) {
+    if (disscount === null) {
         return (
             <TouchableOpacity onPress={onPress}>
                 <View style={styles.row}>

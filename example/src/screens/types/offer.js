@@ -1,14 +1,25 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity,Dimensions, Image, ScrollView, TextInput, AsyncStorage} from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text,
+    TouchableOpacity,
+    Dimensions,
+    Image,
+    ScrollView,
+    TextInput,
+    AsyncStorage
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../../viewport'
+
 class offer extends Component {
     constructor(props) {
         super(props);
 
         let productCount = '0';
-        if (this.props.myNumber !== null&&(this.props.myNumber !== 0))
+        if (this.props.myNumber !== null && (this.props.myNumber !== 0))
             productCount = this.props.myNumber;
         this.state = {
             myNumber: productCount,
@@ -47,8 +58,8 @@ class offer extends Component {
 
 
     componentDidMount() {
-        if (this.props.myNumber === null||this.props.myNumber === 0||this.props.myNumber === '0')
-        this.loadData();
+        if (this.props.myNumber === null || this.props.myNumber === 0 || this.props.myNumber === '0')
+            this.loadData();
 
     }
 
@@ -116,24 +127,34 @@ class offer extends Component {
                         <View style={{flex: 0.6, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={{color: '#17c408', fontFamily: 'B Yekan',fontSize:vw*4}}>{this.props.price} تومان</Text>
-                                <Text style={{fontSize:vw*4}}>قیمت :</Text>
+                                <Text style={{
+                                    color: '#17c408',
+                                    fontFamily: 'B Yekan',
+                                    fontSize: vw * 4
+                                }}>{this.props.price} تومان</Text>
+                                <Text style={{fontSize: vw * 4}}>قیمت :</Text>
                             </View>
+                            {(this.props.off !== 0) ? <View
+                                style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                <Text style={styles.discount}>{this.props.disscount} تومان</Text>
+                            </View> : null}
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <TextInput
                                     maxLength={2}
                                     onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                                    keyboardType='numeric' style={{ fontSize:vw*4,
-                                    fontFamily: 'B Yekan',textAlign: 'center'}}>
+                                    keyboardType='numeric' style={{
+                                    fontSize: vw * 4,
+                                    fontFamily: 'B Yekan', textAlign: 'center'
+                                }}>
                                     {this.state.myNumber}
                                 </TextInput>
                                 <View style={{flex: 1, flexDirection: 'column'}}>
                                     <TouchableOpacity onPress={this.onUp}>
-                                        <Icon name="plus" size={vw*5} color="#17C408" style={{margin: 10}}/>
+                                        <Icon name="plus" size={vw * 5} color="#17C408" style={{margin: 10}}/>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={this.onDown}>
-                                        <Icon name="minus" size={vw*5} color="#C42B2D" style={{margin: 10}}/>
+                                        <Icon name="minus" size={vw * 5} color="#C42B2D" style={{margin: 10}}/>
                                     </TouchableOpacity>
                                 </View>
 
@@ -141,7 +162,7 @@ class offer extends Component {
                             <TouchableOpacity
                                 onPress={this.addToCart}>
 
-                                <Icon name="cart-plus" size={ vw*5} color="#17C408" style={{margin: 10}}/>
+                                <Icon name="cart-plus" size={vw * 5} color="#17C408" style={{margin: 10}}/>
                             </TouchableOpacity>
                         </View>
                         <Image source={{
@@ -173,7 +194,7 @@ class offer extends Component {
 
                     </View>
                     <View style={styles.flex}>
-                        <Text  style={{fontFamily: 'B Yekan',fontSize:vw*4,}}>{this.props.des}</Text>
+                        <Text style={{fontFamily: 'B Yekan', fontSize: vw * 4,}}>{this.props.des}</Text>
                     </View>
                 </View>
             </ScrollView>
@@ -246,13 +267,16 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'B Yekan',
         padding: 15,
-        fontSize:vw*5,
+        fontSize: vw * 5,
         textAlign: 'center'
 
     }
     , des: {},
     image: {
-        flex: 1, alignSelf: 'stretch', width: Dimensions.get('window').width/2, height: Dimensions.get('window').height/2.5,
+        flex: 1,
+        alignSelf: 'stretch',
+        width: Dimensions.get('window').width / 2,
+        height: Dimensions.get('window').height / 2.5,
         borderRadius: 20,
         borderColor: '#bec4be',
         borderWidth: 0.5,
@@ -261,14 +285,18 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         textAlign: 'center',
         margin: 10,
-        fontSize:vw*4,
-backgroundColor:'#a7adba50',
+        fontSize: vw * 4,
+        backgroundColor: '#a7adba50',
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,
 
 
-    }
+    },
+    discount: {
+        fontFamily: 'B Yekan',
+        textDecorationLine: 'line-through', fontSize: vw * 4, color: '#d94c3d',
+    },
 });
 
 export default offer;

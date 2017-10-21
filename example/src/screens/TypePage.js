@@ -5,7 +5,6 @@ import {
     ListView, Image, Picker, Dimensions
 } from 'react-native';
 import ItemView from '../components/itemView'
-import ImageRow from "../components/ImageRow";
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -52,9 +51,9 @@ class TypePage extends Component {
             },
         });
     };
-    product = (title, imageUrl, des, price, myNumber, id) => {
+    product = (title, imageUrl, des, price, myNumber, id,disscount,off) => {
         this.props.navigator.push({
-            screen: 'example.Types.offer',
+            screen: 'example.Types.subOffer',
             title: title,
             passProps: {
                 title: title,
@@ -62,7 +61,9 @@ class TypePage extends Component {
                 des: des,
                 price: price,
                 myNumber: myNumber === '0' ? '' : myNumber,
-                id: id
+                id: id,
+                disscount:disscount,
+                off:off,
 
             },
         });
@@ -246,9 +247,12 @@ class TypePage extends Component {
                                 columnData.long_description,
                                 columnData.price,
                                 columnData.count,
-                                columnData.id
+                                columnData.id,
+                                columnData.main_price,
+                                columnData.off,
                             )}
                             title={columnData.name}
+                            disscount={columnData.main_price}
                             price={columnData.price}
                             count={columnData.count}
                             onUp={() => this.onUp(columnData)}

@@ -107,7 +107,14 @@ class subOffer extends Component {
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <Text style={{color: '#17c408', fontFamily: 'B Yekan',fontSize:vw*4}}>{this.props.price} تومان</Text>
                                 <Text style={{fontSize:vw*4}}>قیمت :</Text>
+
                             </View>
+                            {(this.props.off !== 0) ? <View
+                                style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                <Text style={styles.discount}>{this.props.disscount} تومان</Text>
+                            </View> : null}
+
+
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <TextInput
@@ -248,7 +255,12 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
 
 
-    }
+    },
+    discount: {
+       fontFamily: 'B Yekan',
+        textDecorationLine: 'line-through', fontSize: vw * 4, color: '#d94c3d',
+    },
+
 });
 
 export default subOffer;

@@ -185,7 +185,7 @@ class NavigationTypes extends React.Component {
             animated: true
         });
     };
-    offer = (title, imageUrl, des, price, id) => {
+    offer = (title, imageUrl, des, price, id, disscount, off) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
             title: title,
@@ -194,7 +194,9 @@ class NavigationTypes extends React.Component {
                 imageUrl: imageUrl,
                 des: des,
                 price: price,
-                id: id
+                id: id,
+                disscount: disscount,
+                off: off
             },
 
 
@@ -317,10 +319,10 @@ class NavigationTypes extends React.Component {
                             <Item title={rowData.name}
                                   style={styles.item}
                                   price={rowData.price}
-                                  disscount={rowData.off}
+                                  disscount={(rowData.off !== 0) ? rowData.main_price : null}
                                   imageUrl={server.getServerAddress() + rowData.photo.file}
                                   onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo.file,
-                                      rowData.long_description, rowData.price, rowData.id)}
+                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
                             />}
                     />
 
@@ -334,10 +336,11 @@ class NavigationTypes extends React.Component {
                             <Item title={rowData.name}
                                   style={styles.item}
                                   price={rowData.price}
+                                  disscount={(rowData.off !== 0) ? rowData.main_price : null}
                                   onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
-                                      rowData.long_description, rowData.price, rowData.id)}
-                                  disscount={rowData.off}
-                                  imageUrl={'http://10.0.2.2/superserver/public' + rowData.photo.file}
+                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
+
+                                  imageUrl={server.getServerAddress() + rowData.photo.file}
                             />}
                     />
 

@@ -1,5 +1,5 @@
 class code {
-    static serverAddress = 'http://baghalimoon.ir';
+    static serverAddress =  'http://baghalimoon.ir';
     static timeOut =4000;
     //other relevant code here
 

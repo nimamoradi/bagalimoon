@@ -23,20 +23,35 @@ let Option = Radio.Option;
 let context;
 
 class mapView extends Component {
+    isAvailable = () => {
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, server.getTimeOut(), 'Request timed out');
+        });
 
+        const request = fetch(server.getServerAddress());
+
+        return Promise
+            .race([timeout, request])
+            .then(response => {
+                context.getAddresses();
+            })
+            .catch(error => {
+                server.retry(this.isAvailable, context)
+            });
+    };
 
     load_api_code = () => {
         AsyncStorage.getItem('api_code').then((item) => {
 
             context.setState({api_code: item}, () => {
-                context.getAddresses(item);
+                context.isAvailable();
 
             })
 
         })
     };
 
-    getAddresses(item) {
+    getAddresses() {
 
         console.log("get Addresses");
         fetch(server.getServerAddress() + '/api/getAddresses', {
@@ -46,14 +61,13 @@ class mapView extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                api_code: item,
+                api_code: context.state.api_code,
             })
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({oldAddresses: responseData})
+                 context.setState({oldAddresses: responseData, sendData: false})
             }).catch(error => {
-
-
+                server.retry(this.isAvailable, context)
             })
         );
 
@@ -106,7 +120,7 @@ class mapView extends Component {
             optionSelected: 0,
             error: null,
             myAddress: [],
-            sendData: false,
+            sendData: true,
             myAddressName: '',
             serverAdderss: '',
             oldAddresses: [],
@@ -139,33 +153,12 @@ class mapView extends Component {
 
     }
 
-    isAvailable = () => {
+    newAddresses = () => {
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, 2000, 'Request timed out');
+            setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
-        const request = fetch(server.getServerAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
-                context.setState({dataReady: true});
-                this.loadCategories();
-                this.getBestSellingProducts();
-                this.getSpecialOffer();
-                this.getBanners();
-            })
-            .catch(error => {
-                server.retry(this.isAvailable, context)
-            });
-    };
-
-
-    newAddresses() {
-
-        console.log("addNewAddress");
-
-        fetch(server.getServerAddress() + '/api/addNewAddress', {
+        const request = fetch(server.getServerAddress() + '/api/addNewAddress', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -183,16 +176,56 @@ class mapView extends Component {
                 }
             })
 
-        }).then((response) => response.json().then((responseData) => {
+        });
+        return Promise
+            .race([timeout, request])
+            .then((response) => response.json().then((responseData) => {
+                context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
+                console.log('respone' + responseData);
+                context.finalBasket();
+            }))
+            .catch(error => {
+                server.retry(this.newAddresses, context)
+            });
+    };
+
+    newAddresses2() {
+        const timeout = new Promise((resolve, reject) => {
+            setTimeout(reject, server.getTimeOut(), 'Request timed out');
+        });
+
+        const request = fetch(server.getServerAddress() + '/api/addNewAddress', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_code: context.state.api_code,
+                address: {
+                    name: context.state.myAddressName,
+                    city_id: "0",        //now select 0
+                    state_id: "0", //now select 0
+                    Address: context.state.myAddress,
+                    lat: context.state.myLocation.latitude,
+                    lng: context.state.myLocation.longitude,
+                }
+            })
+
+        });
+        console.log("addNewAddress");
+        return Promise
+            .race([timeout, request])
+            .then((response) => response.json().then((responseData) => {
 
                 context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
 
                 context.finalBasket();
-            }).catch(error => {
-
-
             })
-        );
+                .catch(error => {
+                    server.retry(this.newAddresses, context)
+                }));
+
         // context.finalBasket();
 
     }
@@ -207,109 +240,123 @@ class mapView extends Component {
         let oldAddresses = this.state.oldAddresses.map(function (x) {
             return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
         });
+        if (this.state.sendData) return <View style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
 
-        return (
-            <ScrollView>
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Loading/>
+        </View>;
+        else
+            return (
+                <ScrollView>
 
-                <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    {(this.state.sendData === true) ? <Loading/> : null}
-                </View>
-                <View style={{height: Dimensions.get('window').width - 100,}}>
-                    <View style={styles.container}>
-                        <MapView
-                            style={styles.map}
-                            region={{
-                                latitude: this.state.latitude,
-                                longitude: this.state.longitude,
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
-                            onLongPress={(e) => {
-                                this.setState({myLocation: e.nativeEvent.coordinate});
-                                this.setState({latitude: e.nativeEvent.coordinate.latitude});
-                                this.setState({longitude: e.nativeEvent.coordinate.longitude});
-                            }}>
-                            <MapView.Marker draggable
-                                            coordinate={this.state.myLocation}
-                                            onDragEnd={(e) => {
-                                                this.setState({myLocation: e.nativeEvent.coordinate});
-                                                this.setState({latitude: e.nativeEvent.coordinate.latitude});
-                                                this.setState({longitude: e.nativeEvent.coordinate.longitude});
-                                            }
-                                            }
-
-                            />
-                        </MapView>
+                    <View style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
                     </View>
-                </View>
-                <View>
-                    <Radio onSelect={this.onSelect.bind(this)} defaultSelect={this.state.optionSelected}>
-                        <Option color="gray" selectedColor="#008BEF">
-                            <View>
-                                <Text style={styles.Text}>نام آدرس</Text>
-                                <TextInput style={styles.borderText}
-                                           onChangeText={(text) => this.setState({myAddressName: text})}>
-                                    {this.state.myAddressName}
-                                </TextInput>
+                    <View style={{height: Dimensions.get('window').width - 100,}}>
+                        <View style={styles.container}>
+                            <MapView
+                                style={styles.map}
+                                region={{
+                                    latitude: this.state.latitude,
+                                    longitude: this.state.longitude,
+                                    latitudeDelta: 0.01,
+                                    longitudeDelta: 0.01,
+                                }}
+                                onLongPress={(e) => {
+                                    this.setState({myLocation: e.nativeEvent.coordinate});
+                                    this.setState({latitude: e.nativeEvent.coordinate.latitude});
+                                    this.setState({longitude: e.nativeEvent.coordinate.longitude});
+                                }}>
+                                <MapView.Marker draggable
+                                                coordinate={this.state.myLocation}
+                                                onDragEnd={(e) => {
+                                                    this.setState({myLocation: e.nativeEvent.coordinate});
+                                                    this.setState({latitude: e.nativeEvent.coordinate.latitude});
+                                                    this.setState({longitude: e.nativeEvent.coordinate.longitude});
+                                                }
+                                                }
 
-                                <Text style={styles.Text}>آدرس</Text>
-                                <TextInput style={styles.borderText}
-                                           onChangeText={(text) => this.setState({myAddress: text})}>
-                                    {this.state.myAddress}
-                                </TextInput>
+                                />
+                            </MapView>
+                        </View>
+                    </View>
+                    <View>
+                        <Radio onSelect={this.onSelect.bind(this)} defaultSelect={this.state.optionSelected}>
+                            <Option color="gray" selectedColor="#008BEF">
+                                <View>
+                                    <Text style={styles.Text}>نام آدرس</Text>
+                                    <TextInput style={styles.borderText}
+                                               onChangeText={(text) => this.setState({myAddressName: text})}>
+                                        {this.state.myAddressName}
+                                    </TextInput>
 
-                            </View>
-                        </Option>
-                        <Option color="gray" selectedColor="#008BEF">
-                            <View>
-                                <Text style={styles.Text}>آدرس های قبلی</Text>
-                                <Picker
-                                    onValueChange={(itemValue, itemIndex) =>this.setState({serverAdderss:itemValue,myAddress_id:itemValue})}
-                                    style={styles.picker}
-                                    selectedValue={this.state.serverAdderss}>
-                                    <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
-                                    {oldAddresses}
-                                </Picker>
+                                    <Text style={styles.Text}>آدرس</Text>
+                                    <TextInput style={styles.borderText}
+                                               onChangeText={(text) => this.setState({myAddress: text})}>
+                                        {this.state.myAddress}
+                                    </TextInput>
 
-                            </View>
-                        </Option>
+                                </View>
+                            </Option>
+                            <Option color="gray" selectedColor="#008BEF">
+                                <View>
+                                    <Text style={styles.Text}>آدرس های قبلی</Text>
+                                    <Picker
+                                        onValueChange={(itemValue, itemIndex) => this.setState({
+                                            serverAdderss: itemValue,
+                                            myAddress_id: itemValue
+                                        })}
+                                        style={styles.picker}
+                                        selectedValue={this.state.serverAdderss}>
+                                        <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
+                                        {oldAddresses}
+                                    </Picker>
 
-                    </Radio>
-                </View>
+                                </View>
+                            </Option>
 
-                <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity
-                        onPress={this.offlineSale}
-                        style={styles.bigButton}>
-                        <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
-                    </TouchableOpacity>
-                    <View style={{flex: 1}}>
-                        <Text style={{
-                            fontSize: vw * 4,
-                            fontFamily: 'B Yekan', textAlign: 'center'
-                        }}>نام تحویل گیرنده</Text>
-                        <TextInput
-                            style={{
+                        </Radio>
+                    </View>
+
+                    <View style={{flexDirection: 'row'}}>
+                        <TouchableOpacity
+                            onPress={this.offlineSale}
+                            style={styles.bigButton}>
+                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
+                        </TouchableOpacity>
+                        <View style={{flex: 1}}>
+                            <Text style={{
                                 fontSize: vw * 4,
                                 fontFamily: 'B Yekan', textAlign: 'center'
-                            }}
-                            onChangeText={(text) => this.setState({senderName: text})}
-                            placeholder="نام">
-                            {context.state.senderName}
-                        </TextInput>
+                            }}>نام تحویل گیرنده</Text>
+                            <TextInput
+                                style={{
+                                    fontSize: vw * 4,
+                                    fontFamily: 'B Yekan', textAlign: 'center'
+                                }}
+                                onChangeText={(text) => this.setState({senderName: text})}
+                                placeholder="نام">
+                                {context.state.senderName}
+                            </TextInput>
+                        </View>
                     </View>
-                </View>
 
-            </ScrollView>
-        );
+                </ScrollView>
+            );
     }
 
 

@@ -126,7 +126,7 @@ class mapView extends Component {
             oldAddresses: [],
             api_code: '',
             senderName: '',
-            myAddress_id: 0,
+            myAddress_id: -1,
         };
 
 
@@ -375,18 +375,14 @@ class mapView extends Component {
                 }
             }
             else if (context.state.optionSelected === 2) {
-                if (context.state.serverAdderss === '' && context.state.serverAdderss === null) {
-                    alert('ادرسی از قبل وجود ندارد');
-                }
 
-                else {
                     if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
 
                         alert("لطفا آدرس را انتخاب کنید");
                     else
                         this.finalBasket();
 
-                }
+
             }
 
         }

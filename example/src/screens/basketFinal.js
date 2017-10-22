@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
+
 let context;
 
 class basketFinal extends React.Component {
@@ -132,7 +133,7 @@ class basketFinal extends React.Component {
                 <ScrollView>
                     <View style={styles.container}>
 
-                        <View style={{flexDirection: 'row', width: '100%', height: 10 * vh}}>
+                        <View style={{flexDirection: 'row',alignItems: 'flex-start', width: '100%', height: 10 * vh}}>
                             <Text style={styles.tableHeader}>قیمت نهایی</Text>
                             <Text style={styles.tableHeader}>قیمت عادی</Text>
                             <Text style={styles.tableHeader}>تعداد</Text>
@@ -141,7 +142,9 @@ class basketFinal extends React.Component {
 
 
                         <ListView
-                            style={{flexDirection: 'column', width: '100%', height: '70%'}}
+                            contentInset={{bottom:49}}
+                            automaticallyAdjustContentInsets={false}
+                            contentContainerStyle={{flexDirection: 'column',  alignItems: 'flex-start',width: '100%',}}
                             horizontal={false}
                             showsHorizontalScrollIndicator={false}
                             dataSource={this.state.dataSourceBasket}
@@ -277,7 +280,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 100 * vh,
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
     },

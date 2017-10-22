@@ -33,6 +33,7 @@ class basketPreview extends React.Component {
     }
 
     address = () => {
+        this.props.navigator.pop();
         this.props.navigator.push({
             screen: 'example.mapView',
             title: 'آدرس',

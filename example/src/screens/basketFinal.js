@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
-
 let context;
 
 class basketFinal extends React.Component {
@@ -92,24 +91,25 @@ class basketFinal extends React.Component {
 
     }
 
-
+    // address = () => {
+    //     this.props.navigator.push({
+    //         screen: 'example.mapView',
+    //         title: 'آدرس',
+    //         passProps: {
+    //             basket:this.state.basket
+    //         },
+    //     });
+    // };
 
 
     renderRow = (rowData) => {
         return (
             <View style={{flexDirection: 'row'}}>
 
-                <View style={{flexDirection: 'column', flex: 1}}>
-                    <TouchableOpacity onPress={() => this.onUp(rowData)}>
-                        <Icon name="plus" size={vw * 4} color="#17C408" style={styles.text}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.onDown(rowData)}>
-                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={styles.text}/>
-                    </TouchableOpacity>
-                </View>
-                <Text style={styles.price}>{rowData.price}</Text>
+                <Text style={styles.price}>{rowData.final_price}</Text>
+                <Text style={styles.price}>{rowData.regular_price}</Text>
                 <Text style={styles.price}>{rowData.count}</Text>
-                <Text style={styles.text}>{rowData['name']}</Text>
+                <Text style={styles.text}>{rowData['product']['name']}</Text>
             </View>
         );
     };
@@ -133,11 +133,12 @@ class basketFinal extends React.Component {
                     <View style={styles.container}>
 
                         <View style={{flexDirection: 'row', width: '100%', height: 10 * vh}}>
-                            <View style={styles.tableHeader}/>
                             <Text style={styles.tableHeader}>قیمت نهایی</Text>
+                            <Text style={styles.tableHeader}>قیمت عادی</Text>
                             <Text style={styles.tableHeader}>تعداد</Text>
                             <Text style={styles.tableHeader}>نام</Text>
                         </View>
+
 
                         <ListView
                             style={{flexDirection: 'column', width: '100%', height: '70%'}}

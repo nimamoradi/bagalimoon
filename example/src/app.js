@@ -1,18 +1,44 @@
-import {Platform, Text, StyleSheet, View, TouchableOpacity,AsyncStorage, Button} from 'react-native';
+import {Platform, Text, StyleSheet, View, TouchableOpacity, AsyncStorage, Button} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
+import {vw, vh, vmin, vmax} from './viewport'
 
 
 // screen related book keeping
 registerScreens();
 registerScreenVisibilityListener();
+const styles = StyleSheet.create({
+    button: {
+        overflow: 'hidden',
+        width: 34,
+        height: 34,
+        borderRadius: 34 / 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
+// Our custom component we want as a button in the nav bar
+const CustomButton = () =>
+    <TouchableOpacity
+        style={[styles.button, {backgroundColor: 'tomato'}]}
+        onPress={() => console.log('pressed me!')}
+    >
+        <View style={styles.button}>
+            <Text style={{color: 'blac'}}>
+                hi
+            </Text>
+        </View>
+    </TouchableOpacity>;
+
+// Register the component
+Navigation.registerComponent('CustomButton', () => CustomButton);
 console.log('api code reading');
 AsyncStorage.getItem('api_code').then((item) => {
 
     let startAppdata;
-    if(item===null)
-        startAppdata={
+    if (item === null)
+        startAppdata = {
             screen: {
                 screen: 'example.Types.loginScreen', // unique ID registered with Navigation.registerScreen
                 navigatorStyle: {
@@ -21,7 +47,8 @@ AsyncStorage.getItem('api_code').then((item) => {
 
             },
             appStyle: {
-                orientation: 'portrait',},
+                orientation: 'portrait',
+            },
             drawer: { // optional, add this if you want a side menu drawer in your app
                 right: { // optional, define if you want a drawer from the right
                     screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
@@ -41,10 +68,9 @@ AsyncStorage.getItem('api_code').then((item) => {
             },
 
 
-
         };
     else //user is logined before
-        startAppdata={
+        startAppdata = {
             screen: {
                 screen: 'example.Types', // unique ID registered with Navigation.registerScreen
                 title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -56,11 +82,13 @@ AsyncStorage.getItem('api_code').then((item) => {
                         {
                             id: 'ShoppingBasket',
                             icon: require('../img/ShoppingBasket.png'),
-                            style:{width:5,height:5}
+                            style: {width: 5 * vw, height: 5 * vw},
+
                         },
                     ],
                     rightButtons: [
                         {
+                            style: {width: 5 * vw, height: 5 * vw},
                             id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
                             icon: require('../img/menu.png'), // for icon button, provide the local image asset name
                         }
@@ -68,7 +96,8 @@ AsyncStorage.getItem('api_code').then((item) => {
                 } // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
             },
             appStyle: {
-                orientation: 'portrait',},
+                orientation: 'portrait',
+            },
             drawer: { // optional, add this if you want a side menu drawer in your app
                 right: { // optional, define if you want a drawer from the right
                     screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
@@ -85,7 +114,7 @@ AsyncStorage.getItem('api_code').then((item) => {
                 // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
                 disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
-            passProps: {api_code:item}, // simple serializable object that will pass as props to all top screens (optional)
+            passProps: {api_code: item}, // simple serializable object that will pass as props to all top screens (optional)
 
 
         };

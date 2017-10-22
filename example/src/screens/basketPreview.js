@@ -93,10 +93,10 @@ class basketPreview extends React.Component {
             <View style={{flexDirection: 'column'}}>
                 <View>
                     <View style={{flexDirection: 'row'}}>
-                        <Text style={styles.tableHeader}>نام</Text>
-                        <Text style={styles.tableHeader}>قیمت واحد</Text>
-                        <Text style={styles.tableHeader}>تعداد</Text>
                         <View style={{flex: 1}}/>
+                        <Text style={styles.tableHeader}>تعداد</Text>
+                        <Text style={styles.tableHeader}>قیمت واحد</Text>
+                        <Text style={styles.tableHeader}>نام</Text>
 
                     </View>
 

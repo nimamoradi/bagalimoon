@@ -9,6 +9,7 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
+import alertBox from "../components/alertBox";
 
 let context;
 let isFirstTime;
@@ -51,7 +52,7 @@ class TypePage extends Component {
             },
         });
     };
-    product = (title, imageUrl, des, price, myNumber, id,disscount,off) => {
+    product = (title, imageUrl, des, price, myNumber, id, disscount, off) => {
         this.props.navigator.push({
             screen: 'example.Types.subOffer',
             title: title,
@@ -62,8 +63,8 @@ class TypePage extends Component {
                 price: price,
                 myNumber: myNumber === '0' ? '' : myNumber,
                 id: id,
-                disscount:disscount,
-                off:off,
+                disscount: disscount,
+                off: off,
 
             },
         });
@@ -93,7 +94,7 @@ class TypePage extends Component {
                 context.setState({dataReady: true});
                 let index = context.getIndex(context.state.mainSelected, context.state.Categories, 'name');
                 let parent_id = context.state.Categories[index].id;
-                let sub = context.getIndex(parent_id,context.state.Categories, 'parent_category_id');
+                let sub = context.getIndex(parent_id, context.state.Categories, 'parent_category_id');
                 if (sub > -1)
                     context.loadRenderRowData(0, context.props.Categories[sub].id);
                 else context.setState({viewDate: []}, () => {
@@ -150,8 +151,8 @@ class TypePage extends Component {
 
 
             }).catch(error => {
-                server.retryParam(this.loadRenderRowData, context,)
-            });
+            server.retryParam(this.loadRenderRowData, context,)
+        });
     };
     addToCart = () => {
 
@@ -169,9 +170,10 @@ class TypePage extends Component {
             console.log(basket[i]);
             orderBasket = orderBasket.concat(basket[i]);
         }
-        console.log(orderBasket);
-        this.shop(JSON.stringify(orderBasket));
-
+        if (orderBasket.length > 0) {
+            console.log(orderBasket);
+            this.shop(JSON.stringify(orderBasket));
+        } else server.alert('توجه', 'محصولی انتخاب نشده', context)
         // AsyncStorage.getItem('@CurrentBasket').then((item) => {
         //
         //     item=  item.concat(basket);
@@ -221,7 +223,7 @@ class TypePage extends Component {
                         <Picker
                             style={styles.picker}
                             selectedValue={this.state.subSelected}
-                            onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex,itemValue)}>
+                            onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex, itemValue)}>
                             {subItems}
                         </Picker>
 
@@ -325,8 +327,8 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
     },
     viewPickerText: {
-        width: 15 * vw,
-        height: 10 * vh,
+        width: vw * 15,
+        height: vw * 15,
         margin: 10,
         backgroundColor: '#aeb3ae20',
         borderRadius: 5,

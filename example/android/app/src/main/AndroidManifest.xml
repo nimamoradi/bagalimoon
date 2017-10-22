@@ -1,10 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.moonShop">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
+        android:supportsRtl="false"
+        tools:replace="android:supportsRtl"
         android:name=".MainApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_icon"

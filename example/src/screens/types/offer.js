@@ -273,10 +273,9 @@ const styles = StyleSheet.create({
     }
     , des: {},
     image: {
-        flex: 1,
         alignSelf: 'stretch',
-        width: Dimensions.get('window').width / 2,
-        height: Dimensions.get('window').height / 2.5,
+        width: vw * 45,
+        height: vh * 40,
         borderRadius: 20,
         borderColor: '#bec4be',
         borderWidth: 0.5,

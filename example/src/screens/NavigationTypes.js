@@ -75,7 +75,10 @@ class NavigationTypes extends React.Component {
                 context.setState({Categories: responseData}, function () {
 
                     maunal = true;
-                    context.setState({dataSourceTypes: this.state.ds.cloneWithRows(this.state.Categories),})
+                    let cat=this.state.Categories.filter(function (x) {
+                        return x.parent_category_id === 0;
+                    });
+                    context.setState({dataSourceTypes: this.state.ds.cloneWithRows(cat),})
                 })
             }).catch(error => {
                 server.retry(context.isAvailable, context)
@@ -293,17 +296,15 @@ class NavigationTypes extends React.Component {
 
                     <ListView
                         style={{
-                            flexDirection: 'row', width: '100%', height: vh * 22,
-                            margin: 5,
-                            borderRadius: 2 * vh, borderColor: '#c495c1', borderWidth: vw / 1.75,
+                            flexDirection: 'row',  height: vh * 22,
+                            margin: 5,flex:1,
+                            borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceTypes}
                         renderRow={(rowData) => {
-                            if (rowData.parent_category_id === 0)
-                                return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
-                            else return null;
+                            return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
                         }
                         }
                     />

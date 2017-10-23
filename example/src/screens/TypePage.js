@@ -48,6 +48,7 @@ class TypePage extends Component {
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
+                isDynamic:true,
                 basket: basket
             },
         });

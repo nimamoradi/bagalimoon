@@ -1,5 +1,13 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View, ListView, Dimensions, ViewPagerAndroid} from 'react-native';
+import {
+    StyleSheet,
+    ScrollView,
+    View,
+    TouchableOpacity,
+    ListView,
+    Dimensions,
+    ViewPagerAndroid
+} from 'react-native';
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
@@ -11,7 +19,6 @@ import {vw, vh, vmin, vmax} from '../viewport'
 
 let context;
 let maunal = false;
-let isFirstTime = true;
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -75,7 +82,7 @@ class NavigationTypes extends React.Component {
                 context.setState({Categories: responseData}, function () {
 
                     maunal = true;
-                    let cat=this.state.Categories.filter(function (x) {
+                    let cat = this.state.Categories.filter(function (x) {
                         return x.parent_category_id === 0;
                     });
                     context.setState({dataSourceTypes: this.state.ds.cloneWithRows(cat),})
@@ -296,8 +303,8 @@ class NavigationTypes extends React.Component {
 
                     <ListView
                         style={{
-                            flexDirection: 'row',  height: vh * 22,
-                            margin: 5,flex:1,
+                            flexDirection: 'row', height: vh * 22,
+                            margin: 5, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         horizontal={true}
@@ -365,6 +372,12 @@ const styles = StyleSheet.create({
     item: {
         width: 380,
         height: 150,
+    },
+    buttonContainer: {
+        width: 10*vw,
+        height:8*vw,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     row: {
 

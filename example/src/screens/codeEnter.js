@@ -141,12 +141,13 @@ class codeEnter extends React.Component {
                     {
                         id: 'ShoppingBasket',
                         icon: require('../../img/ShoppingBasket.png'),
-                        style: {width: 5, height: 5}
+                        style: {width: 5 * vw, height: 5 * vw},
                     },
                 ],
                 rightButtons: [
 
                     {
+                        style: {width: 5 * vw, height: 5 * vw},
                         id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
                         icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
                     }

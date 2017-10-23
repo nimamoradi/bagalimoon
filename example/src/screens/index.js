@@ -20,12 +20,14 @@ import alert from '../components/alertBox'
 import finalBasket from './basketFinal'
 import reTry from '../components/reTry'
 import subOffer from './types/subOffer';
-
+import about_us from './aboutus';
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
 
     Navigation.registerComponent('example.Types', () => Types);
     Navigation.registerComponent('example.alert', () => alert);
+
+    Navigation.registerComponent('example.about_us', () => about_us);
 
     Navigation.registerComponent('example.Types.basketFinal', () => finalBasket);
     Navigation.registerComponent('example.Types.OrderItem', () => OrderItem);

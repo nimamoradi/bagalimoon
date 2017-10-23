@@ -23,7 +23,7 @@ class MyClass extends React.Component {
         this.state = {user_number: ''};
         context = this;
         AsyncStorage.getItem('user_number').then((item) => {
-            context.setState ({user_number: item})
+            context.setState({user_number: item})
         });
     }
 
@@ -62,7 +62,22 @@ class MyClass extends React.Component {
                         </View>
 
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.toggleDrawer();
+                            this.props.navigator.push({
+                                screen: 'example.about_us',
+                                title: 'درباره ما',
+                            });
+                        }}>
+                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                            <Icon name="info-circle" size={vw * 6} color="#72bcd4"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>درباره ما</Text>
 
+                        </View>
+
+                    </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
                             AsyncStorage.clear();
@@ -77,6 +92,8 @@ class MyClass extends React.Component {
                         </View>
 
                     </TouchableOpacity>
+
+
                 </View>
 
             </View>

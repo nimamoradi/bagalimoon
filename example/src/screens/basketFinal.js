@@ -133,7 +133,7 @@ class basketFinal extends React.Component {
                 <ScrollView>
                     <View style={styles.container}>
 
-                        <View style={{flexDirection: 'row',alignItems: 'flex-start', width: '100%', height: 10 * vh}}>
+                        <View style={{flexDirection: 'row',alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
                             <Text style={styles.tableHeader}>قیمت نهایی</Text>
                             <Text style={styles.tableHeader}>قیمت عادی</Text>
                             <Text style={styles.tableHeader}>تعداد</Text>

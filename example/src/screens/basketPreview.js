@@ -85,8 +85,8 @@ class basketPreview extends React.Component {
                         <Icon name="minus" size={vw * 4} color="#C42B2D" style={styles.text}/>
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.price}>{rowData.price}</Text>
                 <Text style={styles.price}>{rowData.count}</Text>
+                <Text style={styles.price}>{rowData.price}</Text>
                 <Text style={styles.text}>{rowData['name']}</Text>
 
 
@@ -99,10 +99,11 @@ class basketPreview extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
 
-                    <View style={{flexDirection: 'row', width: '100%', height: 10 * vh}}>
+                    <View style={{flexDirection: 'row', width: '100%', height: 15 * vh}}>
                         <View style={styles.tableHeader}/>
-                        <Text style={styles.tableHeader}>قیمت نهایی</Text>
                         <Text style={styles.tableHeader}>تعداد</Text>
+                        <Text style={styles.tableHeader}>قیمت نهایی</Text>
+
                         <Text style={styles.tableHeader}>نام</Text>
                     </View>
 
@@ -137,7 +138,8 @@ class basketPreview extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                           onPress={() => {
-                                              AsyncStorage.setItem('@CurrentBasket', '');
+                                              if (this.props.isDynamic === undefined)
+                                                  AsyncStorage.setItem('@CurrentBasket', '');
                                               this.props.navigator.pop();
                                           }}>
                             <View style={styles.buttonCancel}>

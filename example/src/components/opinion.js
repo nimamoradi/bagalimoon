@@ -31,7 +31,7 @@ const CustomButton = () => (
         style={[styles.buttonContainer]}
         onPress={() => showLightBox()}>
 
-        <Icon name="plus" size={vw*4} color="#FF4500" />
+        <Icon name="plus" size={vw*6} color="#FF4500" />
 
     </TouchableOpacity>);
 Navigation.registerComponent('plus', () => CustomButton);

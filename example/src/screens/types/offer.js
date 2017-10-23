@@ -14,7 +14,9 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../../viewport'
 
+
 class offer extends Component {
+
     constructor(props) {
         super(props);
 

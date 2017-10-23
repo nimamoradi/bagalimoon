@@ -7,32 +7,7 @@ import {vw, vh, vmin, vmax} from './viewport'
 // screen related book keeping
 registerScreens();
 registerScreenVisibilityListener();
-const styles = StyleSheet.create({
-    button: {
-        overflow: 'hidden',
-        width: 34,
-        height: 34,
-        borderRadius: 34 / 2,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
 
-// Our custom component we want as a button in the nav bar
-const CustomButton = () =>
-    <TouchableOpacity
-        style={[styles.button, {backgroundColor: 'tomato'}]}
-        onPress={() => console.log('pressed me!')}
-    >
-        <View style={styles.button}>
-            <Text style={{color: 'blac'}}>
-                hi
-            </Text>
-        </View>
-    </TouchableOpacity>;
-
-// Register the component
-Navigation.registerComponent('CustomButton', () => CustomButton);
 console.log('api code reading');
 AsyncStorage.getItem('api_code').then((item) => {
 

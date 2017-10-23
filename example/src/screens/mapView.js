@@ -65,7 +65,7 @@ class mapView extends Component {
             })
         }).then((response) => response.json().then((responseData) => {
 
-                 context.setState({oldAddresses: responseData, sendData: false})
+                context.setState({oldAddresses: responseData, sendData: false})
             }).catch(error => {
                 server.retry(this.isAvailable, context)
             })
@@ -89,6 +89,10 @@ class mapView extends Component {
                     (position) => {
                         console.log(position);
                         this.setState({
+                                myLocation: {
+                                    latitude:position.coords.latitude,
+                                    longitude: position.coords.longitude,
+                                },
                             latitude: position.coords.latitude,
                             longitude: position.coords.longitude,
                             error: null,
@@ -100,7 +104,7 @@ class mapView extends Component {
                     {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
                 ;
             } else {
-                console.log("Location permission denied")
+                alert('مجوز داده نشد')
             }
         } catch (err) {
             console.warn(err)
@@ -136,20 +140,7 @@ class mapView extends Component {
     componentDidMount() {
         this.requestLocationPermission();
         this.load_api_code();
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                console.log(position);
-                this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    error: null,
-                });
-            },
-            (error) => {
-                console.log(error)
-            }),
-            {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
-        ;
+
 
     }
 
@@ -376,11 +367,11 @@ class mapView extends Component {
             }
             else if (context.state.optionSelected === 2) {
 
-                    if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
+                if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
 
-                        alert("لطفا آدرس را انتخاب کنید");
-                    else
-                        this.finalBasket();
+                    alert("لطفا آدرس را انتخاب کنید");
+                else
+                    this.finalBasket();
 
 
             }

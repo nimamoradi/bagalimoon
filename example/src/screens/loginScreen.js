@@ -40,7 +40,7 @@ class loginScreen extends React.Component {
             }
             else {
                 // your call back function
-                newText = '';
+                newText = '09';
                 server.alert('هشدار', "فقط عدد وارد کنید", context);
                 break;
             }
@@ -146,7 +146,7 @@ class loginScreen extends React.Component {
         context.props.navigator.push({
             screen: 'example.Types.codeEnter',
             navigatorStyle: {
-                navBarBackgroundColor: 'transparent', // the background is black
+                navBarBackgroundColor: 'transparent', // the background is white
                 drawUnderNavBar: true,
                 drawUnderTabBar: true,
                 navBarTranslucent: false

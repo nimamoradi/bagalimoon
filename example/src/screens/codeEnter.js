@@ -129,12 +129,13 @@ class codeEnter extends React.Component {
 
     pushMainScreen(api) {
         context.props.navigator.push({
+            backButtonTitle:'',
             screen: 'example.Types',
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
             navigatorStyle: {
                 navBarTranslucent: false
             }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-
+            backButtonHidden: true,
             overrideBackPress: true,
             navigatorButtons: {
                 // leftButtons: [

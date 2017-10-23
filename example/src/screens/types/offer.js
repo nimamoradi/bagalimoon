@@ -177,7 +177,7 @@ class offer extends Component {
                         <View style={styles.flexRow}>
                             <TouchableOpacity
                                 style={styles.flex}
-                                onPress={this.opinion}
+                                // onPress={this.opinion}
                             >
                                 <Text style={styles.buttonText}>
                                     نظرات کاربران
@@ -185,7 +185,8 @@ class offer extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.flex}
-                                onPress={this.desPan}>
+                                // onPress={this.desPan}
+                            >
                                 <Text style={styles.buttonText}>
                                     مشخصات محصول
                                 </Text>

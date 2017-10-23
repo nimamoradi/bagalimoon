@@ -130,7 +130,6 @@ class basketFinal extends React.Component {
         </View>;
         else
             return (
-                <ScrollView>
                     <View style={styles.container}>
 
                         <View style={{flexDirection: 'row',alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
@@ -140,9 +139,8 @@ class basketFinal extends React.Component {
                             <Text style={styles.tableHeader}>نام</Text>
                         </View>
 
-
                         <ListView
-                            contentInset={{bottom:49}}
+
                             automaticallyAdjustContentInsets={false}
                             contentContainerStyle={{flexDirection: 'column',  alignItems: 'flex-start',width: '100%',}}
                             horizontal={false}
@@ -203,7 +201,7 @@ class basketFinal extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </ScrollView>
+
             );
 
     }

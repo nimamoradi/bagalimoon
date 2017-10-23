@@ -222,7 +222,7 @@ class TypePage extends Component {
                     </TouchableOpacity>
                     <View style={styles.viewPicker}>
                         <Picker
-                            style={styles.picker}
+                            style={styles.picker} itemStyle={{height:  9 * vh,}}
                             selectedValue={this.state.subSelected}
                             onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex, itemValue)}>
                             {subItems}
@@ -231,7 +231,7 @@ class TypePage extends Component {
                     </View>
                     <View style={styles.viewPicker}>
                         <Picker
-                            style={styles.picker}
+                            style={styles.picker} itemStyle={{height: 9 * vh,fontSize:5*vw}}
                             selectedValue={this.state.mainSelected}
                             onValueChange={(itemValue, itemIndex) => this.setState({mainSelected: itemValue})}>
                             {mainItems}
@@ -316,11 +316,12 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10,
         width: 35 * vw,
-        height: 15 * vh,
+        height: 25 * vh,
 
     },
     viewPicker: {
         flex: 1,
+        height: 9 * vh,
         margin: 10,
         backgroundColor: '#aeb3ae20',
         borderRadius: 20,

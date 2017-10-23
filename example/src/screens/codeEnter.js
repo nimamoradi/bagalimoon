@@ -137,13 +137,13 @@ class codeEnter extends React.Component {
 
             overrideBackPress: true,
             navigatorButtons: {
-                leftButtons: [
-                    {
-                        id: 'ShoppingBasket',
-                        icon: require('../../img/ShoppingBasket.png'),
-                        style: {width: 5 * vw, height: 5 * vw},
-                    },
-                ],
+                // leftButtons: [
+                //     {
+                //         id: 'ShoppingBasket',
+                //         icon: require('../../img/ShoppingBasket.png'),
+                //         style: {width: 5 * vw, height: 5 * vw},
+                //     },
+                // ],
                 rightButtons: [
 
                     {

@@ -61,7 +61,6 @@ class basketPreview extends React.Component {
         }
         console.log(updatedState);
         this.setState({basket: updatedState});
-
     };
     onCountChanged = (rowdata, down) => {
         let priceChange;
@@ -96,7 +95,7 @@ class basketPreview extends React.Component {
 
     render() {
         return (
-            <ScrollView>
+
                 <View style={styles.container}>
 
                     <View style={{flexDirection: 'row', width: '100%', height: 15 * vh}}>
@@ -116,6 +115,7 @@ class basketPreview extends React.Component {
                         renderRow={(rowData) =>
                             this.renderRow(rowData)}
                     />
+
                     <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
                         <View style={{flex: 1}}/>
                         <Text style={styles.price}>
@@ -127,7 +127,7 @@ class basketPreview extends React.Component {
                         <View style={{flex: 1}}/>
                     </View>
 
-                    <View style={{flexDirection: 'row', alignContent: 'center', marginBottom: 5 * vh}}>
+                    <View style={{flexDirection: 'row', alignContent: 'center',}}>
                         <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                           onPress={this.address}>
                             <View style={styles.button}>
@@ -149,7 +149,7 @@ class basketPreview extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </ScrollView>
+
         );
 
     }

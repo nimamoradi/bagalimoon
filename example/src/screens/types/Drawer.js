@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 
 let context;
@@ -58,6 +59,31 @@ class MyClass extends React.Component {
                             <Icon name="shopping-cart" size={vw * 6} color="green"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
                             <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>سبد خرید</Text>
+
+                        </View>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                    onPress={() => {
+
+                    }}>
+                    <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                        <MaterialIcon name="history" size={vw * 6} color="#ff5500"
+                                      style={{margin: 10, alignSelf: 'flex-start'}}/>
+                        <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> سوابق سفارش</Text>
+
+                    </View>
+
+                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+
+                        }}>
+                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                            <Ionicons name="ios-call-outline" size={vw * 6} color="#11ff11"
+                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> ارتباط با ما</Text>
 
                         </View>
 

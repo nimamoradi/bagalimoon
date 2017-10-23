@@ -53,14 +53,14 @@ AsyncStorage.getItem('api_code').then((item) => {
                     navBarTranslucent: false
                 }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                 navigatorButtons: {
-                    leftButtons: [
-                        {
-                            id: 'ShoppingBasket',
-                            icon: require('../img/ShoppingBasket.png'),
-                            style: {width: 5 * vw, height: 5 * vw},
-
-                        },
-                    ],
+                    // leftButtons: [
+                    //     {
+                    //         id: 'ShoppingBasket',
+                    //         icon: require('../img/ShoppingBasket.png'),
+                    //         style: {width: 5 * vw, height: 5 * vw},
+                    //
+                    //     },
+                    // ],
                     rightButtons: [
                         {
                             style: {width: 5 * vw, height: 5 * vw},

@@ -11,12 +11,13 @@ if(backgroundColor===null)
         <TouchableOpacity
             underlayColor={'rgba(0, 0, 0, 0.054)'}
             style={{
-                paddingHorizontal: 16,
+                paddingHorizontal:5*vw,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderBottomWidth: 1,
                 margin: 5,
+                height:9*vh,
                 borderRadius: 15,
                 borderColor: '#349630',
                 backgroundColor: backgroundColorOriginal,

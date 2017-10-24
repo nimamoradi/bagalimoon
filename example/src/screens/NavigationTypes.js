@@ -97,7 +97,7 @@ class NavigationTypes extends React.Component {
 
     isAvailable = () => {
         const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, 4000, 'Request timed out');
+            setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
         const request = fetch(server.getServerAddress());
@@ -251,7 +251,7 @@ class NavigationTypes extends React.Component {
 
     _renderItem({item, index}) {
         return (
-            <View>
+            <View style={{height:45*vh}}>
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
@@ -275,15 +275,7 @@ class NavigationTypes extends React.Component {
         </View>;
         else
             return (
-                <ScrollView
-                    onLayout={() => {
-                        this.setState({
-                            viewport: {
-                                width: Dimensions.get('window').width,
-                                height: Dimensions.get('window').height / 2.25
-                            }
-                        });
-                    }}>
+                <ScrollView>
 
 
                     <Carousel
@@ -295,16 +287,17 @@ class NavigationTypes extends React.Component {
                         }}
                         data={this.state.dataSourceOffer}
                         renderItem={this._renderItem}
-                        sliderHeight={vh * 40}
-                        itemHeight={vh * 40}
+                        sliderHeight={vh * 45}
+                        itemHeight={vh * 45}
                         sliderWidth={this.state.viewport.width}
                         itemWidth={this.state.viewport.width}
                     />
 
                     <ListView
                         style={{
-                            flexDirection: 'row', height: vh * 22,
-                            margin: 5, flex: 1,
+
+                            flexDirection: 'row', height:16*vh,
+                            margin: 1*vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         horizontal={true}
@@ -319,17 +312,17 @@ class NavigationTypes extends React.Component {
 
 
                     <ListView
-                        style={{flexDirection: 'row', width: '100%', height: '35%'}}
+                        style={{flexDirection: 'row', width: 100*vw, height:45*vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceSpecialOffer}
                         renderRow={(rowData) =>
+
                             <Item title={rowData.name}
-                                  style={styles.item}
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress() + rowData.photo.file}
-                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo.file,
+                                  imageUrl={server.getServerAddress()+'/' + rowData.photo}
+                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
                             />}
                     />
@@ -342,13 +335,12 @@ class NavigationTypes extends React.Component {
                         dataSource={this.state.dataSourceBestSellingProducts}
                         renderRow={(rowData) =>
                             <Item title={rowData.name}
-                                  style={styles.item}
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  onPress={() => this.offer(rowData.name, 'http://10.0.2.2/superserver/public' + rowData.photo.file,
+                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
 
-                                  imageUrl={server.getServerAddress() + rowData.photo.file}
+                                  imageUrl={server.getServerAddress() + rowData.photo}
                             />}
                     />
 
@@ -369,10 +361,7 @@ const styles = StyleSheet.create({
     },
 
 
-    item: {
-        width: 380,
-        height: 150,
-    },
+
     buttonContainer: {
         width: 10*vw,
         height:8*vw,

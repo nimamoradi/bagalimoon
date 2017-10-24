@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     row: {
-
+        height:50*vw,
         paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     price: { fontFamily: 'B Yekan',flex: 1, fontSize: vw*4, color: '#17c408', textAlign: 'left'},
     discount: {flex: 1, textDecorationLine: 'line-through', fontFamily: 'B Yekan', fontSize: vw*4, color: '#d94c3d', textAlign: 'right'},
     image: {
-        height: 150, minWidth: 100, borderRadius: 20,
+        height: 25*vh, width:30*vw, borderRadius: 20,
         borderColor: '#bec4be',
         borderWidth: 0.5,
     }

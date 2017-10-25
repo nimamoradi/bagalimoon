@@ -110,7 +110,7 @@ basketLightBox.PropTypes = {};
 const styles = StyleSheet.create({
     container: {
         width: vw*75,
-        height:vw*40,
+        height:vh*40,
         backgroundColor: '#ffffff',
         borderRadius: 5,
         padding: 16,

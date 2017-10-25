@@ -8,6 +8,7 @@ function ImageRow({title, onPress, imageUrl}) {
 
     return (
         <TouchableHighlight
+            style={styles.row}
             onPress={onPress}
             underlayColor={'rgba(0, 0, 0, 0.0)'}
         >
@@ -30,7 +31,7 @@ ImageRow.propTypes = {
 const styles = StyleSheet.create({
     row: {
         height:vh*35,
-        // paddingHorizontal: 16,
+         // paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -38,7 +39,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
      image: {
-        flex: 1, width: Dimensions.get('window').width, height:vh*40,
+         height:vh*35, width: Dimensions.get('window').width,
+
 
 
     }

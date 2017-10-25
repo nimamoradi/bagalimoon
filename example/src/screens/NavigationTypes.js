@@ -205,6 +205,7 @@ class NavigationTypes extends React.Component {
                 des: des,
                 price: price,
                 id: id,
+                myNumber:0,
                 disscount: disscount,
                 off: off
             },
@@ -251,7 +252,7 @@ class NavigationTypes extends React.Component {
 
     _renderItem({item, index}) {
         return (
-            <View style={{height:45*vh}}>
+            <View style={{height:35*vh}}>
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
@@ -279,6 +280,7 @@ class NavigationTypes extends React.Component {
 
 
                     <Carousel
+
                         autoplayInterval={5000}
                         autoplayDelay={5000}
                         autoplay={true}
@@ -287,16 +289,16 @@ class NavigationTypes extends React.Component {
                         }}
                         data={this.state.dataSourceOffer}
                         renderItem={this._renderItem}
-                        sliderHeight={vh * 45}
-                        itemHeight={vh * 45}
-                        sliderWidth={this.state.viewport.width}
-                        itemWidth={this.state.viewport.width}
+                        sliderHeight={vh * 2}
+                        itemHeight={vh * 35}
+                        sliderWidth={100*vw}
+                        itemWidth={100*vw}
                     />
 
                     <ListView
                         style={{
 
-                            flexDirection: 'row', height:16*vh,
+                            flexDirection: 'row', height:11*vh,
                             margin: 1*vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
@@ -312,10 +314,29 @@ class NavigationTypes extends React.Component {
 
 
                     <ListView
-                        style={{flexDirection: 'row', width: 100*vw, height:45*vh}}
+                        style={{flexDirection: 'row', width: 100*vw, height:40*vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceSpecialOffer}
+                        renderRow={(rowData) =>
+
+                            <Item title={rowData.name}
+
+                                  price={rowData.price}
+                                  disscount={(rowData.off !== 0) ? rowData.main_price : null}
+                                  imageUrl={server.getServerAddress()+'/' + rowData.photo}
+                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
+                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
+                            />}
+                    />
+
+                    <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
+
+                    <ListView
+                        style={{flexDirection: 'row', width: 100*vw, height:40*vh}}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        dataSource={this.state.dataSourceBestSellingProducts}
                         renderRow={(rowData) =>
 
                             <Item title={rowData.name}
@@ -326,24 +347,6 @@ class NavigationTypes extends React.Component {
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
                             />}
                     />
-
-                    <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
-                    <ListView
-                        style={{flexDirection: 'row', width: '100%', height: '35%'}}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        dataSource={this.state.dataSourceBestSellingProducts}
-                        renderRow={(rowData) =>
-                            <Item title={rowData.name}
-                                  price={rowData.price}
-                                  disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
-                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
-
-                                  imageUrl={server.getServerAddress() + rowData.photo}
-                            />}
-                    />
-
 
                 </ScrollView>
             );

@@ -108,7 +108,7 @@ class loginScreen extends React.Component {
 
     doSignUp() {
 
-        console.log("inside post register");
+        console.log("inside login form");
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
             headers: {
@@ -122,7 +122,7 @@ class loginScreen extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log("inside responsejson");
+                console.log("inside login responsejson");
                 console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {

@@ -8,7 +8,9 @@ function item({title, onPress, imageUrl, price, disscount}) {
 
     if (disscount === null) {
         return (
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity
+
+                onPress={onPress}>
                 <View style={styles.row}>
                     <Image source={{uri: imageUrl}} style={styles.image}/>
                     <Text style={styles.text}>{title}</Text>
@@ -21,7 +23,9 @@ function item({title, onPress, imageUrl, price, disscount}) {
     } else {
 
         return (
-            <TouchableOpacity onPress={onPress} >
+            <TouchableOpacity
+
+                onPress={onPress} >
             <View style={styles.row}>
                 <Image source={{uri: imageUrl}} style={styles.image}/>
                 <Text style={styles.text}>{title}</Text>
@@ -52,12 +56,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     row: {
-        height:50*vw,
+        height:38*vh,
+        margin:vh,
+        backgroundColor:'#ffffff',
         paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         borderBottomWidth: 1,
+        borderRadius: 5*vh,
+        borderColor: '#e8f0e8',
+        borderWidth: 0.5,
         borderBottomColor: 'rgba(0, 0, 0, 0.0)',
     },
     text: {

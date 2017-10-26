@@ -1,6 +1,7 @@
 class code {
     static serverAddress ='http://baghalimoon.ir';
     static timeOut =4000;
+    static retryCount =5;
     //other relevant code here
 
     static getServerAddress() {
@@ -8,6 +9,9 @@ class code {
     }
     static getTimeOut() {
         return this.timeOut;
+    }
+    static getReTry() {
+        return this.retryCount;
     }
     static showLightBox(screen, passProps, context) {
         context.props.navigator.showLightBox({
@@ -37,6 +41,7 @@ class code {
         context.props.navigator.dismissLightBox();
     };
 
+
     static retryParam(task,context,param) {
         context.props.navigator.push({
             screen: 'example.Types.reTry',
@@ -47,6 +52,7 @@ class code {
             passProps: {
                 task:task,
                 param:param,
+                backScreen:context
             },
         });
     }

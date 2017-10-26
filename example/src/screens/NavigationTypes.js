@@ -8,6 +8,7 @@ import {
     Dimensions,
     ViewPagerAndroid
 } from 'react-native';
+
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
@@ -17,9 +18,9 @@ import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
 
-let context;
-let maunal = false;
 
+let maunal = false;
+let context;
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -143,17 +144,6 @@ class NavigationTypes extends React.Component {
 
     }
 
-    showLightBox = (screen, passProps) => (
-        this.props.navigator.showLightBox({
-            screen: screen,
-            passProps: passProps,
-            style: {
-                backgroundBlur: 'dark',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                tapBackgroundToDismiss: true
-            }
-        }));
-
     componentDidMount() {
 
         this.isAvailable();
@@ -241,11 +231,11 @@ class NavigationTypes extends React.Component {
                 this.toggleDrawer()
             }
             if (event.id === 'ShoppingBasket') {
-                this.showLightBox('example.Types.basketLightBox', {
+                server.showLightBox('example.Types.basketLightBox', {
                     title: this.props.title,
 
                     onClose: this.dismissLightBox,
-                },);
+                },context);
             }
         }
     }
@@ -314,7 +304,7 @@ class NavigationTypes extends React.Component {
 
 
                     <ListView
-                        style={{flexDirection: 'row', width: 100*vw, height:40*vh}}
+                        style={{flexDirection: 'row', width: 100*vw, height:50*vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceSpecialOffer}
@@ -333,7 +323,7 @@ class NavigationTypes extends React.Component {
                     <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <ListView
-                        style={{flexDirection: 'row', width: 100*vw, height:40*vh}}
+                        style={{flexDirection: 'row', width: 100*vw, height:50*vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceBestSellingProducts}
@@ -352,36 +342,34 @@ class NavigationTypes extends React.Component {
             );
 
     }
+    onUp = (rowdata) => {
 
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.viewDate;
+        let updatedbasket = this.state.basket;
+        updatedState[updatedState.indexOf(rowdata)]['count']++;
+        updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        console.log(updatedState);
+
+        this.setState({viewDate: updatedState, basket: updatedbasket});
+
+    };
+    onDown = (rowdata) => {
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.viewDate;
+        let updatedbasket = this.state.basket;
+        let data = this.state.viewDate;
+        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
+            updatedState[data.indexOf(rowdata)]['count']--;
+            updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        }
+        console.log(updatedState);
+        this.setState({viewDate: updatedState, basket: updatedbasket});
+
+    };
 
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#eeeceb'
-    },
 
-
-
-    buttonContainer: {
-        width: 10*vw,
-        height:8*vw,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    row: {
-
-        height: 50,
-        paddingHorizontal: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
-    },
-
-});
 
 export default NavigationTypes;

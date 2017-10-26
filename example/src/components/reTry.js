@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 class reTry extends React.Component {
@@ -13,11 +14,31 @@ class reTry extends React.Component {
 
     }
 
+    backScreen = () => {
+        this.props.navigator.pop();
+
+    };
+
     render() {
         return (
             <View style={styles.container}>
+                <TouchableOpacity
+                    style={{
+                        position: 'absolute',
+                        top: 5 * vw,
+                        left: 5 * vw,
+                        right: 0,
+                        bottom: 0,
+
+                        justifyContent: 'flex-start',
+
+                    }}
+                    onPress={this.backScreen}>
+                    <Ionicons name="md-arrow-back" size={vw * 10} color="#777777" style={{margin: 2 * vw}}/>
+                </TouchableOpacity>
                 <Text style={styles.text}>اتصال قطع شد</Text>
                 <TouchableOpacity
+
                     onPress={() => {
                         if (this.state.parms === null)
                             this.state.task();

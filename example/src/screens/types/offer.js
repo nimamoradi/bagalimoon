@@ -260,13 +260,7 @@ const styles = StyleSheet.create({
 
     },
     flexRow: {flexDirection: 'row'},
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
-    },
+
     title: {
         fontFamily: 'B Yekan',
         padding: 15,

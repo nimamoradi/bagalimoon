@@ -21,6 +21,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 
 let maunal = false;
 let context;
+
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -195,7 +196,7 @@ class NavigationTypes extends React.Component {
                 des: des,
                 price: price,
                 id: id,
-                myNumber:0,
+                myNumber: 0,
                 disscount: disscount,
                 off: off
             },
@@ -235,14 +236,14 @@ class NavigationTypes extends React.Component {
                     title: this.props.title,
 
                     onClose: this.dismissLightBox,
-                },context);
+                }, context);
             }
         }
     }
 
     _renderItem({item, index}) {
         return (
-            <View style={{height:35*vh}}>
+            <View style={{height: 35 * vh}}>
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
@@ -281,15 +282,15 @@ class NavigationTypes extends React.Component {
                         renderItem={this._renderItem}
                         sliderHeight={vh * 2}
                         itemHeight={vh * 35}
-                        sliderWidth={100*vw}
-                        itemWidth={100*vw}
+                        sliderWidth={100 * vw}
+                        itemWidth={100 * vw}
                     />
 
                     <ListView
                         style={{
 
-                            flexDirection: 'row', height:11*vh,
-                            margin: 1*vh, flex: 1,
+                            flexDirection: 'row', height: 11 * vh,
+                            margin: 1 * vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         horizontal={true}
@@ -304,17 +305,19 @@ class NavigationTypes extends React.Component {
 
 
                     <ListView
-                        style={{flexDirection: 'row', width: 100*vw, height:50*vh}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceSpecialOffer}
                         renderRow={(rowData) =>
 
                             <Item title={rowData.name}
-
+                                  count={rowData.count}
+                                  onUp={() => this.onUpSpecialOffer(rowData)}
+                                  onDown={() => this.onDownSpecialOffer(rowData)}
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress()+'/' + rowData.photo}
+                                  imageUrl={server.getServerAddress() + '/' + rowData.photo}
                                   onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
                             />}
@@ -323,16 +326,19 @@ class NavigationTypes extends React.Component {
                     <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <ListView
-                        style={{flexDirection: 'row', width: 100*vw, height:50*vh}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         dataSource={this.state.dataSourceBestSellingProducts}
                         renderRow={(rowData) =>
 
                             <Item title={rowData.name}
+                                  count={rowData.count}
+                                  onUp={() => this.onUpBestSellingProducts(rowData)}
+                                  onDown={() => this.onDownBestSellingProducts(rowData)}
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress()+'/' + rowData.photo}
+                                  imageUrl={server.getServerAddress() + '/' + rowData.photo}
                                   onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
                             />}
@@ -342,34 +348,58 @@ class NavigationTypes extends React.Component {
             );
 
     }
-    onUp = (rowdata) => {
+
+    onUpSpecialOffer = (rowdata) => {
 
         rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.viewDate;
-        let updatedbasket = this.state.basket;
+        let updatedState = this.state.SpecialOffer;
+        // let updatedbasket = this.state.basket;
         updatedState[updatedState.indexOf(rowdata)]['count']++;
-        updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         console.log(updatedState);
 
-        this.setState({viewDate: updatedState, basket: updatedbasket});
+        this.setState({SpecialOffer: updatedState});
 
     };
-    onDown = (rowdata) => {
+    onDownSpecialOffer = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.viewDate;
-        let updatedbasket = this.state.basket;
-        let data = this.state.viewDate;
+        let updatedState = this.state.SpecialOffer;
+        // let updatedbasket = this.state.basket;
+        let data = this.state.SpecialOffer;
         if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
             updatedState[data.indexOf(rowdata)]['count']--;
-            updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+            // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         }
         console.log(updatedState);
-        this.setState({viewDate: updatedState, basket: updatedbasket});
+        this.setState({SpecialOffer: updatedState,});
 
     };
+    onUpBestSellingProducts = (rowdata) => {
 
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.BestSellingProducts;
+        // let updatedbasket = this.state.basket;
+        updatedState[updatedState.indexOf(rowdata)]['count']++;
+        // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        console.log(updatedState);
+
+        this.setState({BestSellingProducts: updatedState});
+
+    };
+    onDownBestSellingProducts = (rowdata) => {
+        rowdata.count = Number.parseInt(rowdata.count);
+        let updatedState = this.state.BestSellingProducts;
+        // let updatedbasket = this.state.basket;
+        let data = this.state.BestSellingProducts;
+        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
+            updatedState[data.indexOf(rowdata)]['count']--;
+            // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        }
+        console.log(updatedState);
+        this.setState({BestSellingProducts: updatedState,});
+
+    };
 }
-
 
 
 export default NavigationTypes;

@@ -3,6 +3,7 @@ import {
     StyleSheet,
     ScrollView,
     View,
+    Text,
     TouchableOpacity,
     ListView,
     Dimensions,
@@ -38,11 +39,12 @@ class NavigationTypes extends React.Component {
 
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({BestSellingProducts: responseData}, () => {
-                    maunal = true;
-                    context.setState({dataSourceBestSellingProducts: this.state.ds.cloneWithRows(this.state.BestSellingProducts),})
 
+                context.setState({
+                    BestSellingProducts: responseData,
+                    dataSourceBestSellingProducts: this.state.ds.cloneWithRows(responseData),
                 })
+
             }).catch(error => {
                 console.log(error);
 
@@ -60,10 +62,11 @@ class NavigationTypes extends React.Component {
 
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({SpecialOffer: responseData}, () => {
-                    maunal = true;
-                    context.setState({dataSourceSpecialOffer: this.state.ds.cloneWithRows(this.state.SpecialOffer),})
+                context.setState({
+                    SpecialOffer: responseData,
+                    dataSourceSpecialOffer: this.state.ds.cloneWithRows(responseData),
                 })
+
             }).catch(error => {
                 server.retry(context.isAvailable, context)
             })
@@ -132,12 +135,12 @@ class NavigationTypes extends React.Component {
                 api_code: context.props.api_code,
             })
         }).then((response) => response.json().then((responseData) => {
-            context.setState({banners: responseData}, function () {
-                console.log("get Banners" + responseData);
-                maunal = true;
 
-                context.setState({dataSourceOffer: this.state.banners})
-            })
+            console.log("get Banners" + responseData);
+
+
+            context.setState({dataSourceOffer: responseData, banners: responseData})
+
         }).catch(error => {
             server.retry(context.isAvailable, context)
         }));
@@ -186,7 +189,43 @@ class NavigationTypes extends React.Component {
             animated: true
         });
     };
-    offer = (title, imageUrl, des, price, id, disscount, off) => {
+    onUp_SpecialOffer = (countNumber, id) => {
+        let updatedState = context.state.SpecialOffer;
+        // let updatedbasket = this.state.basket;
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']++;
+
+        context.setState({SpecialOffer: updatedState});
+    };
+    onDown_SpecialOffer = (countNumber, id) => {
+        let updatedState = context.state.SpecialOffer;
+        // let updatedbasket = this.state.basket;
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']--;
+
+        context.setState({SpecialOffer: updatedState});
+    };
+    onUp_BestSellingProducts = (countNumber, id) => {
+        let updatedState = context.state.BestSellingProducts;
+        // let updatedbasket = this.state.basket;
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']++;
+
+        context.setState({BestSellingProducts: updatedState});
+    };
+    onDown_BestSellingProducts = (countNumber, id) => {
+        let updatedState = context.state.BestSellingProducts;
+        // let updatedbasket = this.state.basket;
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']--;
+
+        context.setState({BestSellingProducts: updatedState});
+    };
+    offerBestSellingProducts = (title, imageUrl, des, price, id, disscount, off, count) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
             title: title,
@@ -196,15 +235,36 @@ class NavigationTypes extends React.Component {
                 des: des,
                 price: price,
                 id: id,
-                myNumber: 0,
+                myNumber: count,
                 disscount: disscount,
-                off: off
+                off: off,
+                onUP: this.onUp_BestSellingProducts,
+                onDown:this.onDown_BestSellingProducts,
             },
 
 
         });
     };
+    offerSpecialOffer = (title, imageUrl, des, price, id, disscount, off, count) => {
+        this.props.navigator.push({
+            screen: 'example.Types.offer',
+            title: title,
+            passProps: {
+                title: title,
+                imageUrl: imageUrl,
+                des: des,
+                price: price,
+                id: id,
+                myNumber: count,
+                disscount: disscount,
+                off: off,
+                onUP: this.onUp_SpecialOffer,
+                onDown:this.onDown_SpecialOffer,
+            },
 
+
+        });
+    };
 
     pushScreen = (screen, title, passProps) => {
         this.props.navigator.push({
@@ -271,7 +331,6 @@ class NavigationTypes extends React.Component {
 
 
                     <Carousel
-
                         autoplayInterval={5000}
                         autoplayDelay={5000}
                         autoplay={true}
@@ -318,8 +377,8 @@ class NavigationTypes extends React.Component {
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
                                   imageUrl={server.getServerAddress() + '/' + rowData.photo}
-                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
-                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
+                                  onPress={() => this.offerSpecialOffer(rowData.name, server.getServerAddress() + rowData.photo,
+                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off, rowData.count)}
                             />}
                     />
 
@@ -339,11 +398,10 @@ class NavigationTypes extends React.Component {
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
                                   imageUrl={server.getServerAddress() + '/' + rowData.photo}
-                                  onPress={() => this.offer(rowData.name, server.getServerAddress() + rowData.photo,
-                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off)}
+                                  onPress={() => this.offerBestSellingProducts(rowData.name, server.getServerAddress() + rowData.photo,
+                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off, rowData.count)}
                             />}
                     />
-
                 </ScrollView>
             );
 

@@ -17,6 +17,7 @@ import Loading from '../components/loadScreen'
 import MapView from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
+import fetch from '../fetch'
 
 let Radio = require('../components/index');
 let Option = Radio.Option;

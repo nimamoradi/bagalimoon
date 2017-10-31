@@ -10,6 +10,7 @@ import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
+import fetch from '../fetch'
 
 let context;
 let isFirstTime;

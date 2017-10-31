@@ -5,9 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {vw, vh, vmin, vmax} from '../viewport'
 
-function item({title, onPress, imageUrl, price, disscount,count,onUp,onDown}) {
-
-    if (disscount === null) {
+function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown}) {
+    if (count === 0)
         return (
             <TouchableOpacity
 
@@ -17,34 +16,13 @@ function item({title, onPress, imageUrl, price, disscount,count,onUp,onDown}) {
                     <Text style={styles.text}>{title}</Text>
 
                     <Text style={styles.price}>{price} تومان </Text>
-                    <TouchableOpacity onPress={onUp}>
-                        <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
-                    </TouchableOpacity>
-                </View>
-            </TouchableOpacity>
-        );
-    } else {
-
-        return (
-            <TouchableOpacity
-
-                onPress={onPress}>
-                <View style={styles.row}>
-                    <Image source={{uri: imageUrl}} style={styles.image}/>
-                    <Text style={styles.text}>{title}</Text>
-
-                    <Text style={styles.price}>{price} تومان </Text>
-
-                    <Text style={styles.discount}>{disscount} تومان </Text>
+                    {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                     <View style={{flexDirection: 'row'}}>
-                        <TouchableOpacity  onPress={onDown}>
+                        <TouchableOpacity onPress={onDown}>
                             <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
                         </TouchableOpacity>
                         <Text style={styles.countText}>{count}</Text>
-                        <TouchableOpacity  onPress={onUp}>
+                        <TouchableOpacity onPress={onUp}>
                             <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
                         </TouchableOpacity>
 
@@ -52,7 +30,31 @@ function item({title, onPress, imageUrl, price, disscount,count,onUp,onDown}) {
                 </View>
             </TouchableOpacity>
         );
-    }
+    else
+        return (
+            <TouchableOpacity
+
+                onPress={onPress}>
+                <View style={styles.selrow}>
+                    <Image source={{uri: imageUrl}} style={styles.image}/>
+                    <Text style={styles.text}>{title}</Text>
+
+                    <Text style={styles.price}>{price} تومان </Text>
+                    {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
+                    <View style={{flexDirection: 'row'}}>
+                        <TouchableOpacity onPress={onDown}>
+                            <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
+                        </TouchableOpacity>
+                        <Text style={styles.countText}>{count}</Text>
+                        <TouchableOpacity onPress={onUp}>
+                            <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
+                        </TouchableOpacity>
+
+                    </View>
+                </View>
+            </TouchableOpacity>
+        );
+
 }
 
 item.propTypes = {
@@ -82,6 +84,20 @@ const styles = StyleSheet.create({
         borderRadius: 5 * vh,
         borderColor: '#e8f0e8',
         borderWidth: 0.5,
+        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
+    },
+    selrow: {
+        height: 45 * vh,
+        margin: vh,
+        backgroundColor: '#F8222E04',
+        paddingHorizontal: 16,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottomWidth: 1,
+        borderRadius: vw / 1.5,
+        borderColor: '#ee323260',
+        borderWidth: vw / 1.5,
         borderBottomColor: 'rgba(0, 0, 0, 0.0)',
     },
     text: {

@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import server from '../code'
 import Loading from '../components/loadScreen'
+import fetch from '../fetch'
 
 let context;
 

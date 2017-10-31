@@ -1,38 +1,35 @@
-/* global fetch */
-export default function (url, options = {retries: 3, rejectCodes: []}) {
-    const retries = options.retries;
-    const rejectCodes = options.rejectCodes.join(' ');
-    let delay;
+'use strict';
 
-    delete options.rejectCodes;
-    delete options.retries;
 
-    if (options.delay) {
-        delay = options.delay;
-        delete options.delay
+module.exports = function(url, options) {
+
+    let retries = 3;
+    let retryDelay = 500;
+
+    if (options && options.retries) {
+        retries = options.retries;
     }
 
-    return new Promise((resolve, reject) => {
-        let count = 1;
-        const attempt = () => {
-            return fetch(url, options)
-                .then(response => {
-                    if (rejectCodes.includes(response.status.toString()) && count < retries) {
-                        count++;
-                        delay ? setTimeout(attempt, delay) : attempt()
-                    } else {
-                        resolve(response)
-                    }
+    if (options && options.retryDelay) {
+        retryDelay = options.retryDelay;
+    }
+
+    return new Promise(function(resolve, reject) {
+        let wrappedFetch = function(n) {
+            fetch(url, options)
+                .then(function(response) {
+                    resolve(response);
                 })
-                .catch((error) => {
-                    if (count < retries) {
-                        count++;
-                        delay ? setTimeout(attempt, delay) : attempt()
+                .catch(function(error) {
+                    if (n > 0) {
+                        setTimeout(function() {
+                            wrappedFetch(--n);
+                        }, retryDelay);
                     } else {
-                        reject(error)
+                        reject(error);
                     }
-                })
+                });
         };
-        attempt()
-    })
-}
+        wrappedFetch(retries);
+    });
+};

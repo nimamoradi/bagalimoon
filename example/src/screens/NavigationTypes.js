@@ -9,7 +9,7 @@ import {
     Dimensions,
     ViewPagerAndroid
 } from 'react-native';
-
+import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
@@ -20,7 +20,7 @@ import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 
-let maunal = false;
+let loaded = false;
 let context;
 
 class NavigationTypes extends React.Component {
@@ -35,19 +35,19 @@ class NavigationTypes extends React.Component {
 
         console.log("get data");
         fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
-            method: 'POST',
+            method: 'POST',retries:5
 
         }).then((response) => response.json().then((responseData) => {
-
-
-                context.setState({
+             context.setState({
                     BestSellingProducts: responseData,
                     dataSourceBestSellingProducts: this.state.ds.cloneWithRows(responseData),
                 })
 
             }).catch(error => {
-                console.log(error);
-
+                if (!loaded) {
+                    server.retry(context.isAvailable, context);
+                    loaded = true;
+                }
             })
         );
 
@@ -68,7 +68,11 @@ class NavigationTypes extends React.Component {
                 })
 
             }).catch(error => {
-                server.retry(context.isAvailable, context)
+                if (!loaded) {
+                    server.retry(context.isAvailable, context);
+                    loaded = true;
+                }
+
             })
         );
         context.setState({});
@@ -86,14 +90,18 @@ class NavigationTypes extends React.Component {
 
                 context.setState({Categories: responseData}, function () {
 
-                    maunal = true;
+
                     let cat = this.state.Categories.filter(function (x) {
                         return x.parent_category_id === 0;
                     });
                     context.setState({dataSourceTypes: this.state.ds.cloneWithRows(cat),})
                 })
             }).catch(error => {
-                server.retry(context.isAvailable, context)
+                if (!loaded) {
+                    server.retry(context.isAvailable, context);
+                    loaded = true;
+                }
+
             })
         );
 
@@ -101,6 +109,8 @@ class NavigationTypes extends React.Component {
     }
 
     isAvailable = () => {
+        context.setState({dataReady: false});
+        loaded = false;
         const timeout = new Promise((resolve, reject) => {
             setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
@@ -117,7 +127,11 @@ class NavigationTypes extends React.Component {
                 this.getBanners();
             })
             .catch(error => {
-                server.retry(this.isAvailable, context)
+                if (!loaded) {
+                    server.retry(context.isAvailable, context);
+                    loaded = true;
+                }
+
             });
     };
 
@@ -142,7 +156,11 @@ class NavigationTypes extends React.Component {
             context.setState({dataSourceOffer: responseData, banners: responseData})
 
         }).catch(error => {
-            server.retry(context.isAvailable, context)
+            if (!loaded) {
+                server.retry(context.isAvailable, context);
+                loaded = true;
+            }
+
         }));
 
 
@@ -239,7 +257,7 @@ class NavigationTypes extends React.Component {
                 disscount: disscount,
                 off: off,
                 onUP: this.onUp_BestSellingProducts,
-                onDown:this.onDown_BestSellingProducts,
+                onDown: this.onDown_BestSellingProducts,
             },
 
 
@@ -259,7 +277,7 @@ class NavigationTypes extends React.Component {
                 disscount: disscount,
                 off: off,
                 onUP: this.onUp_SpecialOffer,
-                onDown:this.onDown_SpecialOffer,
+                onDown: this.onDown_SpecialOffer,
             },
 
 

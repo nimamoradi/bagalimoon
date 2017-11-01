@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown}) {
-    if (count === 0)
+
         return (
             <TouchableOpacity
 
@@ -14,7 +14,19 @@ function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown})
                 <View style={styles.row}>
                     <Image source={{uri: imageUrl}} style={styles.image}/>
                     <Text style={styles.text}>{title}</Text>
-
+                    {(count!==0) ? <View style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        backgroundColor: '#F8222E20',
+                        right: 0,
+                        bottom: 0,
+                        borderBottomWidth: 1,
+                        borderRadius: 5 * vh,
+                        borderColor: '#e8f0e8',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}/>: null}
                     <Text style={styles.price}>{price} تومان </Text>
                     {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                     <View style={{flexDirection: 'row'}}>
@@ -30,30 +42,8 @@ function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown})
                 </View>
             </TouchableOpacity>
         );
-    else
-        return (
-            <TouchableOpacity
 
-                onPress={onPress}>
-                <View style={styles.selrow}>
-                    <Image source={{uri: imageUrl}} style={styles.image}/>
-                    <Text style={styles.text}>{title}</Text>
 
-                    <Text style={styles.price}>{price} تومان </Text>
-                    {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
-                    <View style={{flexDirection: 'row'}}>
-                        <TouchableOpacity onPress={onDown}>
-                            <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
-                        </TouchableOpacity>
-                        <Text style={styles.countText}>{count}</Text>
-                        <TouchableOpacity onPress={onUp}>
-                            <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
-                        </TouchableOpacity>
-
-                    </View>
-                </View>
-            </TouchableOpacity>
-        );
 
 }
 

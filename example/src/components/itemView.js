@@ -9,22 +9,22 @@ function itemView({title, onUp, onDown, imageUrl, price, count, onPress, disscou
 
     return (
         <View style={{}}>
-            {(count!==0) ? <View style={{
+            {(count !== 0) ? <View style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
-                padding: 4*vw,
+                padding: 4 * vw,
                 backgroundColor: '#F8222E20',
                 right: 0,
                 bottom: 0,
                 borderWidth: 0.5,
-                margin:2*vw,
+                margin: 2 * vw,
                 borderBottomWidth: vw,
                 borderRadius: 5 * vh,
                 borderColor: '#e8f0e8',
                 justifyContent: 'center',
                 alignItems: 'center'
-            }}/>: null}
+            }}/> : null}
             <View style={styles.row}>
                 <View style={{flexDirection: 'row', alignSelf: 'flex-end',}}>
 
@@ -50,18 +50,17 @@ function itemView({title, onUp, onDown, imageUrl, price, count, onPress, disscou
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.priceView}>
-                    <View style={{flexDirection: 'row', alignContent: 'center'}}>
-
-                        <Text style={styles.discount}>{disscount}تومان </Text>
-                        <Text style={styles.price}>{price} تومان </Text>
-                        <Text style={{fontSize: vw * 4, fontFamily: 'B Yekan',}}>قیمت:</Text>
-                    </View>
-
-
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.price}>{price} تومان </Text>
+                    <Text style={{fontSize: vw * 4, fontFamily: 'B Yekan',}}>قیمت:</Text>
                 </View>
+
+                {(disscount) && <Text style={styles.discount}>{disscount}تومان </Text>}
+
             </View>
+
         </View>
+
     );
 
 }
@@ -82,13 +81,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     row: {
-        borderRadius: 5*vh,
+        borderRadius: 5 * vh,
         borderColor: '#bec4be',
         borderWidth: 0.5,
         backgroundColor: '#e8f0e820',
-        padding: 4*vw,
-        margin:2*vw,
-        width: Dimensions.get('window').width * 0.95,
+        padding: 4 * vw,
+        margin: 2 * vw,
+        width: 70 * vw,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',

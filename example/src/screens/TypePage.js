@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
+    StyleSheet, FlatList, View, Text, TouchableOpacity, AsyncStorage,
     ListView, Image, Picker, Dimensions
 } from 'react-native';
 import ItemView from '../components/itemView'
@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
 import fetch from '../fetch'
+import TypeButton from '../components/TypeButton'
 
 let context;
 let isFirstTime;
@@ -49,7 +50,7 @@ class TypePage extends Component {
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                isDynamic:true,
+                isDynamic: true,
                 basket: basket
             },
         });
@@ -194,75 +195,60 @@ class TypePage extends Component {
     };
 
     render() {
-        let mainItems = this.state.Categories.filter(function (x) {
-            return x.parent_category_id === 0;
-        }).map(function (x) {
-            return <Picker.Item key={x.id} value={x.name} label={x.name}/>
-        });
 
+        let FlatListMainItem = this.state.Categories.filter(function (x) {
+            return x.parent_category_id === 0;
+        });
 
         let index = this.getIndex(this.state.mainSelected, this.state.Categories, 'name');
         let parent_id = this.props.Categories[index].id;
 
-        let subItems = this.state.Categories.filter(function (x) {
+        let FlatListSubItem =this.state.Categories.filter(function (x) {
             return x.parent_category_id === parent_id;
-        }).map(function (x) {
-
-            return <Picker.Item key={x.id} value={x.id} label={x.name}/>
         });
-
         return (
 
-            <View style={{flexDirection: 'column', height: '100%', backgroundColor: '#ffffff'}}>
+            <View style={{flexDirection: 'column', height: 100 * vh, backgroundColor: '#ffffff'}}>
+                <View style={{flexDirection: 'row',height:11*vh}}>
 
-                <View style={{flexDirection: 'row', flex: 0.13,}}>
-                    <TouchableOpacity
-                        onPress={this.addToCart}
-                        style={styles.viewPickerText}>
-                        <Icon name="add-shopping-cart" size={vw * 10} color="#00aa00" style={{margin: 10}}/>
-                    </TouchableOpacity>
-                    <View style={styles.viewPicker}>
-                        <Picker
-                            style={styles.picker} itemStyle={{height:  9 * vh,}}
-                            selectedValue={this.state.subSelected}
-                            onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex, itemValue)}>
-                            {subItems}
-                        </Picker>
-
-                    </View>
-                    <View style={styles.viewPicker}>
-                        <Picker
-                            style={styles.picker} itemStyle={{height: 9 * vh,fontSize:5*vw}}
-                            selectedValue={this.state.mainSelected}
-                            onValueChange={(itemValue, itemIndex) => this.setState({mainSelected: itemValue})}>
-                            {mainItems}
-                        </Picker>
-                    </View>
+                    <FlatList
+                        horizontal={true}
+                        data={FlatListMainItem}
+                        renderItem={({item}) => <TypeButton title={item.name}/>}
+                    />
 
                 </View>
+                <View style={{flexDirection: 'row', flex: 3}}>
 
-                <ListView
-                    style={{flex: 3}}
-                    dataSource={this.state.dataSourceView}
-                    renderRow={(columnData) =>
-                        <ItemView
-                            onPress={() => this.product(columnData.name,
-                                server.getServerAddress() + columnData.photo,
-                                columnData.long_description,
-                                columnData.price,
-                                columnData.count,
-                                columnData.id,
-                                columnData.main_price,
-                                columnData.off,
-                            )}
-                            title={columnData.name}
-                            disscount={columnData.main_price}
-                            price={columnData.price}
-                            count={columnData.count}
-                            onUp={() => this.onUp(columnData)}
-                            onDown={() => this.onDown(columnData)}
-                            imageUrl={server.getServerAddress() + columnData.photo}/>}
-                />
+                    <ListView
+                        style={{width:70*vw}}
+                        dataSource={this.state.dataSourceView}
+                        renderRow={(columnData) =>
+                            <ItemView
+                                onPress={() => this.product(columnData.name,
+                                    server.getServerAddress() + columnData.photo,
+                                    columnData.long_description,
+                                    columnData.price,
+                                    columnData.count,
+                                    columnData.id,
+                                    columnData.main_price,
+                                    columnData.off,
+                                )}
+                                title={columnData.name}
+                                disscount={columnData.main_price}
+                                price={columnData.price}
+                                count={columnData.count}
+                                onUp={() => this.onUp(columnData)}
+                                onDown={() => this.onDown(columnData)}
+                                imageUrl={server.getServerAddress() + columnData.photo}/>}
+                    />
+                    <FlatList
+                        style={{width:25*vw}}
+                        horizontal={false}
+                        data={FlatListSubItem}
+                        renderItem={({item}) => <TypeButton title={item.name}/>}
+                    />
+                </View>
 
                 {(!this.state.dataReady ) && <View style={{
                     position: 'absolute',

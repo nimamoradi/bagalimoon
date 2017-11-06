@@ -70,6 +70,26 @@ class TypePage extends Component {
         });
     };
 
+    componentWillUnmount() {
+        let basket = this.state.basket.map(
+            function (x) {
+                return x.value.filter(
+                    function (y) {
+                        return y.count > 0
+                    }
+                )
+            }
+        );
+        let orderBasket = [];
+        for (let i = 0; i < basket.length; i++) {
+            console.log(basket[i]);
+            orderBasket = orderBasket.concat(basket[i]);
+        }
+
+        AsyncStorage.setItem('@CurrentBasket', JSON.stringify(orderBasket));
+
+    }
+
     componentDidMount() {
         if (isFirstTime) {
 
@@ -130,7 +150,12 @@ class TypePage extends Component {
             body: JSON.stringify({})
         }).then((response) => response.json())
             .then((responseData) => {
-
+                let lastBasket = this.props.basket;
+                for (let i = 0; i < responseData.length; i++) {
+                    if (lastBasket[i].id === responseData[i].id) {
+                        responseData[i].count=lastBasket[i].count;
+                    }
+                }
                 console.log("inside response json");
                 let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
                     context.state.basket, 'name');
@@ -173,6 +198,7 @@ class TypePage extends Component {
         if (orderBasket.length > 0) {
             console.log(orderBasket);
             this.shop(JSON.stringify(orderBasket));
+            console.log('basket is:' + JSON.stringify(orderBasket))
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
         // AsyncStorage.getItem('@CurrentBasket').then((item) => {
         //

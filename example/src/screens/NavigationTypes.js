@@ -298,6 +298,7 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: title,
+                basket:this.props.basket,
                 Categories: this.state.Categories,
             },
         });

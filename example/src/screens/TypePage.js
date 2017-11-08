@@ -4,12 +4,14 @@ import {
     StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
     ListView, Image, Picker, Dimensions
 } from 'react-native';
+import _ from 'lodash'
 import ItemView from '../components/itemView'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
+import basketFile from '../basketFile'
 
 let context;
 let isFirstTime;
@@ -73,20 +75,15 @@ class TypePage extends Component {
     componentWillUnmount() {
         let basket = this.state.basket.map(
             function (x) {
-                return x.value.filter(
-                    function (y) {
-                        return y.count > 0
-                    }
-                )
+                return x.value
             }
         );
         let orderBasket = [];
         for (let i = 0; i < basket.length; i++) {
-            console.log(basket[i]);
             orderBasket = orderBasket.concat(basket[i]);
         }
 
-        AsyncStorage.setItem('@CurrentBasket', JSON.stringify(orderBasket));
+        basketFile.writeAndUpdata(orderBasket)
 
     }
 
@@ -150,32 +147,36 @@ class TypePage extends Component {
             body: JSON.stringify({})
         }).then((response) => response.json())
             .then((responseData) => {
-                let lastBasket = this.props.basket;
-                for (let i = 0; i < responseData.length; i++) {
-                    if (lastBasket[i].id === responseData[i].id) {
-                        responseData[i].count=lastBasket[i].count;
+                    let lastBasket = basketFile.getBasket();
+
+                    for (let j = 0; j < lastBasket.length; j++) {
+                        for (let i = 0; i < responseData.length; i++) {
+                            if (lastBasket[j].id === responseData[i].id) {
+                                responseData[i].count = lastBasket[j].count;
+                            }
+                        }
                     }
-                }
-                console.log("inside response json");
-                let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
-                    context.state.basket, 'name');
+                    console.log("inside response json");
+                    let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
+                        context.state.basket, 'name');
 
-                let oldbasket = context.state.basket;
-                if (index_of_data === -1)
-                    oldbasket.push({
-                        'name': context.state.mainSelected + context.state.subSelected,
-                        'value': responseData
+                    let oldbasket = context.state.basket;
+                    if (index_of_data === -1)
+                        oldbasket.push({
+                            'name': context.state.mainSelected + context.state.subSelected,
+                            'value': responseData
+                        });
+                    else
+                        responseData = oldbasket[index_of_data].value;
+                    context.setState({viewDate: responseData, dataReady: true, basket: oldbasket}, () => {
+                        context.componentDidMount();
                     });
-                else
-                    responseData = oldbasket[index_of_data].value;
-                context.setState({viewDate: responseData, dataReady: true, basket: oldbasket}, () => {
-                    context.componentDidMount();
-                });
 
-                console.log('response object:', responseData);
+                    console.log('response object:', responseData);
 
 
-            }).catch(error => {
+                }
+            ).catch(error => {
             server.retryParam(this.loadRenderRowData, context,)
         });
     };
@@ -183,36 +184,28 @@ class TypePage extends Component {
 
         let basket = this.state.basket.map(
             function (x) {
-                return x.value.filter(
-                    function (y) {
-                        return y.count > 0
-                    }
-                )
+                return x.value
             }
         );
         let orderBasket = [];
         for (let i = 0; i < basket.length; i++) {
-            console.log(basket[i]);
             orderBasket = orderBasket.concat(basket[i]);
         }
+
+        let lastBasket = basketFile.getBasket();
+
+        orderBasket= _.unionBy(orderBasket, lastBasket, "id");
+
+
+          orderBasket = orderBasket.filter(
+            function (y) {
+                return y.count > 0
+            }
+        );
         if (orderBasket.length > 0) {
-            console.log(orderBasket);
+
             this.shop(JSON.stringify(orderBasket));
-            console.log('basket is:' + JSON.stringify(orderBasket))
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-        // AsyncStorage.getItem('@CurrentBasket').then((item) => {
-        //
-        //     item=  item.concat(basket);
-        //     for(let i=0; i<item.length; ++i) {
-        //         for(let j=i+1; j<item.length; ++j) {
-        //             if(item[i].id === item[j].id)
-        //                 item.splice(j--, 1);
-        //         }
-        //     }
-        //
-        //
-        //     alert(JSON.stringify(item));
-        // });
 
 
     };

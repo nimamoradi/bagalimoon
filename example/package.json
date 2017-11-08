@@ -11,13 +11,13 @@
         "e2e-release": "detox test --configuration ios.sim.release"
     },
     "dependencies": {
+        "lodash": "^4.17.4",
         "react": "16.0.0-alpha.12",
         "react-native": "0.45.1",
         "react-native-maps": "^0.16.4",
         "react-native-navigation": "latest",
         "react-native-snap-carousel": "^3.2.3",
         "react-native-vector-icons": "^4.4.0"
-
     },
     "devDependencies": {
         "detox": "^5.0.0",

@@ -19,6 +19,7 @@ import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
 
+import basketFile from '../basketFile'
 
 let loaded = false;
 let context;
@@ -31,14 +32,20 @@ class NavigationTypes extends React.Component {
 
     };
 
+    componentWillUnmount() {
+        basketFile.writeBasket();
+        console.log(JSON.stringify(basketFile.getBasket()));
+
+    }
+
     getBestSellingProducts() {
 
         console.log("get data");
         fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
-            method: 'POST',retries:5
+            method: 'POST', retries: 5
 
         }).then((response) => response.json().then((responseData) => {
-             context.setState({
+                context.setState({
                     BestSellingProducts: responseData,
                     dataSourceBestSellingProducts: this.state.ds.cloneWithRows(responseData),
                 })
@@ -167,7 +174,7 @@ class NavigationTypes extends React.Component {
     }
 
     componentDidMount() {
-
+        basketFile.setBasket(this.props.basket);
         this.isAvailable();
     }
 
@@ -298,7 +305,7 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: title,
-                basket:this.props.basket,
+                basket: this.props.basket,
                 Categories: this.state.Categories,
             },
         });

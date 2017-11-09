@@ -18,7 +18,7 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
-
+import _ from 'lodash'
 import basketFile from '../basketFile'
 
 let loaded = false;
@@ -33,8 +33,8 @@ class NavigationTypes extends React.Component {
     };
 
     componentWillUnmount() {
-        basketFile.writeBasket();
-        console.log(JSON.stringify(basketFile.getBasket()));
+        // basketFile.writeBasket();
+        // console.log(JSON.stringify(basketFile.getBasket()));
 
     }
 
@@ -45,6 +45,15 @@ class NavigationTypes extends React.Component {
             method: 'POST', retries: 5
 
         }).then((response) => response.json().then((responseData) => {
+                let lastBasket = basketFile.getBasket();
+
+                for (let j = 0; j < lastBasket.length; j++) {
+                    for (let i = 0; i < responseData.length; i++) {
+                        if (lastBasket[j].id === responseData[i].id) {
+                            responseData[i].count = lastBasket[j].count;
+                        }
+                    }
+                }
                 context.setState({
                     BestSellingProducts: responseData,
                     dataSourceBestSellingProducts: this.state.ds.cloneWithRows(responseData),
@@ -68,7 +77,15 @@ class NavigationTypes extends React.Component {
             method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
+                let lastBasket = basketFile.getBasket();
 
+                for (let j = 0; j < lastBasket.length; j++) {
+                    for (let i = 0; i < responseData.length; i++) {
+                        if (lastBasket[j].id === responseData[i].id) {
+                            responseData[i].count = lastBasket[j].count;
+                        }
+                    }
+                }
                 context.setState({
                     SpecialOffer: responseData,
                     dataSourceSpecialOffer: this.state.ds.cloneWithRows(responseData),
@@ -216,7 +233,7 @@ class NavigationTypes extends React.Component {
     };
     onUp_SpecialOffer = (countNumber, id) => {
         let updatedState = context.state.SpecialOffer;
-        // let updatedbasket = this.state.basket;
+
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']++;
@@ -225,7 +242,7 @@ class NavigationTypes extends React.Component {
     };
     onDown_SpecialOffer = (countNumber, id) => {
         let updatedState = context.state.SpecialOffer;
-        // let updatedbasket = this.state.basket;
+
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']--;
@@ -234,7 +251,7 @@ class NavigationTypes extends React.Component {
     };
     onUp_BestSellingProducts = (countNumber, id) => {
         let updatedState = context.state.BestSellingProducts;
-        // let updatedbasket = this.state.basket;
+
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']++;
@@ -243,7 +260,7 @@ class NavigationTypes extends React.Component {
     };
     onDown_BestSellingProducts = (countNumber, id) => {
         let updatedState = context.state.BestSellingProducts;
-        // let updatedbasket = this.state.basket;
+
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']--;
@@ -300,6 +317,17 @@ class NavigationTypes extends React.Component {
     };
 
     TypePage = (title) => {
+
+
+       let SpecialOffer=context.state.SpecialOffer;//.filter(function (item) {
+       //    return item.count>0;
+       // });
+        let BestSellingProducts=context.state.BestSellingProducts;//.filter(function (item) {
+        //     return item.count>0;
+        // });
+
+        BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
@@ -437,7 +465,7 @@ class NavigationTypes extends React.Component {
 
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.SpecialOffer;
-        // let updatedbasket = this.state.basket;
+
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         console.log(updatedState);
@@ -448,7 +476,7 @@ class NavigationTypes extends React.Component {
     onDownSpecialOffer = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.SpecialOffer;
-        // let updatedbasket = this.state.basket;
+
         let data = this.state.SpecialOffer;
         if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
             updatedState[data.indexOf(rowdata)]['count']--;
@@ -462,7 +490,7 @@ class NavigationTypes extends React.Component {
 
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.BestSellingProducts;
-        // let updatedbasket = this.state.basket;
+
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         console.log(updatedState);
@@ -473,7 +501,7 @@ class NavigationTypes extends React.Component {
     onDownBestSellingProducts = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
         let updatedState = this.state.BestSellingProducts;
-        // let updatedbasket = this.state.basket;
+
         let data = this.state.BestSellingProducts;
         if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
             updatedState[data.indexOf(rowdata)]['count']--;

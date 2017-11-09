@@ -229,7 +229,6 @@ class TypePage extends Component {
         });
 
         return (
-
             <View style={{flexDirection: 'column', height: '100%', backgroundColor: '#ffffff'}}>
 
                 <View style={{flexDirection: 'row', flex: 0.13,}}>

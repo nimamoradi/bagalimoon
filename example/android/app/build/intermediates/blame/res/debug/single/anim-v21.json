@@ -1,13 +1,5 @@
 [
     {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     },

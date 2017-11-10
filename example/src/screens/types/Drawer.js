@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../../viewport'
+import server from "../../code";
 
 let context;
 
@@ -51,10 +52,10 @@ class MyClass extends React.Component {
                 </View>
                 <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
                     <TouchableOpacity
-                        onPress={() => this.showLightBox('example.Types.basketLightBox', {
+                        onPress={() => server.showLightBox('example.Types.basketLightBox', {
                             title: this.props.title,
                             onClose: this.dismissLightBox,
-                        },)}>
+                        },context)}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <Icon name="shopping-cart" size={vw * 6} color="green"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
@@ -126,18 +127,7 @@ class MyClass extends React.Component {
         );
     }
 
-    showLightBox = (screen, passProps) => {
-        this.toggleDrawer();
-        this.props.navigator.showLightBox({
-            screen: screen,
-            passProps: passProps,
-            style: {
-                backgroundBlur: 'dark',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                tapBackgroundToDismiss: true
-            }
-        })
-    };
+
 
 }
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TableRow from '../components/tableRow'
 import BasketPreView from './basketPreview'
 import {vw, vh, vmin, vmax} from '../viewport'
-
+import basketFile from '../basketFile'
 class basketLightBox extends React.Component {
     constructor(props) {
         super(props);
@@ -20,16 +20,14 @@ class basketLightBox extends React.Component {
     }
 
     async loadData() {
-        const data = await AsyncStorage.getItem('@CurrentBasket');
-        if (data !== null) {
-            const json = await  JSON.parse(data);
-            await console.log(json);
+        let json = basketFile.getBasket();
+        if (json !== null) {
             let totalPrice = 0;
 
             for (let i = 0; i < json.length; i++) {
                 totalPrice += Number.parseInt(json[i]['price'], 10) * Number.parseInt(json[i]['count'], 10);
             }
-            let length = json.length
+            let length = json.length;
             let basket = JSON.stringify(json);
             this.setState({basket, totalPrice, length})
         }

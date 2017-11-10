@@ -58,12 +58,12 @@ class offer extends Component {
         });
     };
 
-
-    componentDidMount() {
-        if (this.props.myNumber === null || this.props.myNumber === 0 || this.props.myNumber === '0')
-            this.loadData();
-
-    }
+    //
+    // componentDidMount() {
+    //     if (this.props.myNumber === null || this.props.myNumber === 0 || this.props.myNumber === '0')
+    //         this.loadData();
+    //
+    // }
 
     loadData = async () => {
         const data = await AsyncStorage.getItem('@CurrentBasket');
@@ -105,13 +105,18 @@ class offer extends Component {
         this.setState({myNumber: newText});
     };
     onUp = () => {
-
-        this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) + 1)});
+        let num = Number.parseInt(this.state.myNumber, 10);
+        this.setState({myNumber: String(num + 1)}, () => {
+            this.props.onUP(num,this.props.id);
+        });
 
     };
     onDown = () => {
-        if (Number.parseInt(this.state.myNumber, 10) !== 0)
-            this.setState({myNumber: String(Number.parseInt(this.state.myNumber, 10) - 1)});
+        let num = Number.parseInt(this.state.myNumber, 10);
+        if (num !== 0){
+            this.props.onDown(num,this.props.id);
+            this.setState({myNumber: String(num- 1)});}
+
         else this.setState({myNumber: '0'});
 
 
@@ -260,13 +265,7 @@ const styles = StyleSheet.create({
 
     },
     flexRow: {flexDirection: 'row'},
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
-    },
+
     title: {
         fontFamily: 'B Yekan',
         padding: 15,

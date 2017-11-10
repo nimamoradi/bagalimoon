@@ -4,14 +4,6 @@
         "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\menu\\search_item.xml"
     },
     {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\menu\\stub.xml",
-        "source": "E:\\projects\\superMan\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\menu\\stub.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\menu\\search_item.xml",
-        "source": "E:\\projects\\superMan\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\menu\\search_item.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\menu\\stub.xml",
         "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\menu\\stub.xml"
     }

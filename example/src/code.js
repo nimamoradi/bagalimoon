@@ -1,6 +1,7 @@
 class code {
-    static serverAddress ='http://baghalimoon.ir';
+    static serverAddress ='http://10.0.2.2/superserver/public';
     static timeOut =4000;
+    static retryCount =5;
     //other relevant code here
 
     static getServerAddress() {
@@ -8,6 +9,9 @@ class code {
     }
     static getTimeOut() {
         return this.timeOut;
+    }
+    static getReTry() {
+        return this.retryCount;
     }
     static showLightBox(screen, passProps, context) {
         context.props.navigator.showLightBox({
@@ -37,6 +41,7 @@ class code {
         context.props.navigator.dismissLightBox();
     };
 
+
     static retryParam(task,context,param) {
         context.props.navigator.push({
             screen: 'example.Types.reTry',
@@ -47,6 +52,7 @@ class code {
             passProps: {
                 task:task,
                 param:param,
+                backScreen:context
             },
         });
     }
@@ -63,6 +69,14 @@ class code {
             },
         });
     }
+    static  getIndex = (value, arr, prop) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i][prop] === value) {
+                return i;
+            }
+        }
+        return -1; //to handle the case where the value doesn't exist
+    };
 
 //     import { Dimensions } from 'react-native';
 // const { width, height } = Dimensions.get('window');

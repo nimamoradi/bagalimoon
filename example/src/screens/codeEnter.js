@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 import Loading from '../components/loadScreen'
+import fetch from '../fetch'
 
 let context;
 import server from '../code'
@@ -154,7 +155,7 @@ class codeEnter extends React.Component {
                     }
                 ],
             }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-            passProps: {api_code: api},
+            passProps: {api_code: api,basket:[]},
 
         });
     }

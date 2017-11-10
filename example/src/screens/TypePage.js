@@ -4,12 +4,14 @@ import {
     StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
     ListView, Image, Picker, Dimensions
 } from 'react-native';
+import _ from 'lodash'
 import ItemView from '../components/itemView'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
+import basketFile from '../basketFile'
 
 let context;
 let isFirstTime;
@@ -48,7 +50,6 @@ class TypePage extends Component {
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                isDynamic:true,
                 basket: basket
             },
         });
@@ -70,6 +71,21 @@ class TypePage extends Component {
             },
         });
     };
+
+    componentWillUnmount() {
+        let basket = this.state.basket.map(
+            function (x) {
+                return x.value
+            }
+        );
+        let orderBasket = [];
+        for (let i = 0; i < basket.length; i++) {
+            orderBasket = orderBasket.concat(basket[i]);
+        }
+
+        basketFile.writeAndUpdata(orderBasket)
+
+    }
 
     componentDidMount() {
         if (isFirstTime) {
@@ -131,27 +147,36 @@ class TypePage extends Component {
             body: JSON.stringify({})
         }).then((response) => response.json())
             .then((responseData) => {
+                    let lastBasket = basketFile.getBasket();
 
-                console.log("inside response json");
-                let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
-                    context.state.basket, 'name');
+                    for (let j = 0; j < lastBasket.length; j++) {
+                        for (let i = 0; i < responseData.length; i++) {
+                            if (lastBasket[j].id === responseData[i].id) {
+                                responseData[i].count = lastBasket[j].count;
+                            }
+                        }
+                    }
+                    console.log("inside response json");
+                    let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
+                        context.state.basket, 'name');
 
-                let oldbasket = context.state.basket;
-                if (index_of_data === -1)
-                    oldbasket.push({
-                        'name': context.state.mainSelected + context.state.subSelected,
-                        'value': responseData
+                    let oldbasket = context.state.basket;
+                    if (index_of_data === -1)
+                        oldbasket.push({
+                            'name': context.state.mainSelected + context.state.subSelected,
+                            'value': responseData
+                        });
+                    else
+                        responseData = oldbasket[index_of_data].value;
+                    context.setState({viewDate: responseData, dataReady: true, basket: oldbasket}, () => {
+                        context.componentDidMount();
                     });
-                else
-                    responseData = oldbasket[index_of_data].value;
-                context.setState({viewDate: responseData, dataReady: true, basket: oldbasket}, () => {
-                    context.componentDidMount();
-                });
 
-                console.log('response object:', responseData);
+                    console.log('response object:', responseData);
 
 
-            }).catch(error => {
+                }
+            ).catch(error => {
             server.retryParam(this.loadRenderRowData, context,)
         });
     };
@@ -159,35 +184,28 @@ class TypePage extends Component {
 
         let basket = this.state.basket.map(
             function (x) {
-                return x.value.filter(
-                    function (y) {
-                        return y.count > 0
-                    }
-                )
+                return x.value
             }
         );
         let orderBasket = [];
         for (let i = 0; i < basket.length; i++) {
-            console.log(basket[i]);
             orderBasket = orderBasket.concat(basket[i]);
         }
+
+        let lastBasket = basketFile.getBasket();
+
+        orderBasket= _.unionBy(orderBasket, lastBasket, "id");
+
+
+          orderBasket = orderBasket.filter(
+            function (y) {
+                return y.count > 0
+            }
+        );
         if (orderBasket.length > 0) {
-            console.log(orderBasket);
+
             this.shop(JSON.stringify(orderBasket));
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-        // AsyncStorage.getItem('@CurrentBasket').then((item) => {
-        //
-        //     item=  item.concat(basket);
-        //     for(let i=0; i<item.length; ++i) {
-        //         for(let j=i+1; j<item.length; ++j) {
-        //             if(item[i].id === item[j].id)
-        //                 item.splice(j--, 1);
-        //         }
-        //     }
-        //
-        //
-        //     alert(JSON.stringify(item));
-        // });
 
 
     };
@@ -211,7 +229,6 @@ class TypePage extends Component {
         });
 
         return (
-
             <View style={{flexDirection: 'column', height: '100%', backgroundColor: '#ffffff'}}>
 
                 <View style={{flexDirection: 'row', flex: 0.13,}}>
@@ -222,7 +239,7 @@ class TypePage extends Component {
                     </TouchableOpacity>
                     <View style={styles.viewPicker}>
                         <Picker
-                            style={styles.picker} itemStyle={{height:  9 * vh,}}
+                            style={styles.picker}
                             selectedValue={this.state.subSelected}
                             onValueChange={(itemValue, itemIndex) => this.loadRenderRowData(itemIndex, itemValue)}>
                             {subItems}
@@ -231,7 +248,7 @@ class TypePage extends Component {
                     </View>
                     <View style={styles.viewPicker}>
                         <Picker
-                            style={styles.picker} itemStyle={{height: 9 * vh,fontSize:5*vw}}
+                            style={styles.picker}
                             selectedValue={this.state.mainSelected}
                             onValueChange={(itemValue, itemIndex) => this.setState({mainSelected: itemValue})}>
                             {mainItems}
@@ -316,12 +333,11 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10,
         width: 35 * vw,
-        height: 25 * vh,
+        height: 15 * vh,
 
     },
     viewPicker: {
         flex: 1,
-        height: 9 * vh,
         margin: 10,
         backgroundColor: '#aeb3ae20',
         borderRadius: 20,

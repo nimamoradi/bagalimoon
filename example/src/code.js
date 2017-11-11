@@ -1,5 +1,5 @@
 class code {
-    static serverAddress ='http://10.0.2.2/superserver/public';
+    static serverAddress ='http://reactnative.onlinewebshop.net';
     static timeOut =4000;
     static retryCount =5;
     //other relevant code here

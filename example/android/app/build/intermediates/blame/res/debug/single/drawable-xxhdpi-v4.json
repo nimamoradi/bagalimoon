@@ -8,12 +8,12 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\messenger_bubble_large_white.png",
         "source": "C:\\Users\\nima\\.android\\build-cache\\b1655f356424b2da67a112aba9d23ab8ca3e14c1\\output\\res\\drawable-xxhdpi-v4\\messenger_bubble_large_white.png"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
@@ -140,12 +140,12 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\googleg_disabled_color_18.png",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable-xxhdpi-v4\\googleg_disabled_color_18.png"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\googleg_disabled_color_18.png",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable-xxhdpi-v4\\googleg_disabled_color_18.png"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png",

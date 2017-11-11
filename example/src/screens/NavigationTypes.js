@@ -20,6 +20,7 @@ import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
 import _ from 'lodash'
 import basketFile from '../basketFile'
+import  HockeyApp from'react-native-hockeyapp'
 
 let loaded = false;
 let context;
@@ -189,8 +190,12 @@ class NavigationTypes extends React.Component {
 
 
     }
-
+    componentWillMount() {
+        HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
+    }
     componentDidMount() {
+        HockeyApp.start();
+        HockeyApp.checkForUpdate(); // optional
         basketFile.setBasket(this.props.basket);
         this.isAvailable();
     }
@@ -327,7 +332,7 @@ class NavigationTypes extends React.Component {
         // });
 
         BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
-        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
+         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',

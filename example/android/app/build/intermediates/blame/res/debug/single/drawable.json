@@ -1,15 +1,15 @@
 [
     {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_disabled.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable\\common_google_signin_btn_icon_disabled.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_tab_indicator_material.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
@@ -68,6 +68,10 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_item_background_holo_light.xml"
     },
     {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+    },
+    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\item_background.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\03f019c860cb30f93b271174fdd93043e23af52e\\output\\res\\drawable\\item_background.xml"
     },
@@ -76,8 +80,8 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ic_search_api_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\hockeyapp_btn_background.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\\output\\res\\drawable\\hockeyapp_btn_background.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_light_normal.xml",
@@ -104,12 +108,12 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ic_menu_overflow_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_snackbar_background.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\drawable\\design_snackbar_background.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_snackbar_background.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\drawable\\design_snackbar_background.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml",
@@ -224,12 +228,12 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_go_search_api_material.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ic_go_search_api_material.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable\\common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ic_go_search_api_material.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ic_go_search_api_material.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_dark_focused.xml",
@@ -244,12 +248,12 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_text_cursor_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light_normal.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable\\common_google_signin_btn_icon_light_normal.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\notification_bg.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\notification_bg.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light_normal.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\2f52960ae7165c5a2417220a7e001ee760daa28d\\output\\res\\drawable\\common_google_signin_btn_icon_light_normal.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\com_facebook_auth_dialog_header_background.xml",
@@ -260,12 +264,12 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\com_facebook_button_background.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\b1655f356424b2da67a112aba9d23ab8ca3e14c1\\output\\res\\drawable\\com_facebook_button_background.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\com_facebook_button_icon.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\b1655f356424b2da67a112aba9d23ab8ca3e14c1\\output\\res\\drawable\\com_facebook_button_icon.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\com_facebook_button_background.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\b1655f356424b2da67a112aba9d23ab8ca3e14c1\\output\\res\\drawable\\com_facebook_button_background.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
@@ -292,11 +296,11 @@
         "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_ic_voice_search_api_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_vector_test.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_vector_test.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\com_facebook_button_send_background.xml",
         "source": "C:\\Users\\nima\\.android\\build-cache\\b1655f356424b2da67a112aba9d23ab8ca3e14c1\\output\\res\\drawable\\com_facebook_button_send_background.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_vector_test.xml",
+        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\drawable\\abc_vector_test.xml"
     }
 ]

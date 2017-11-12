@@ -7,7 +7,7 @@ import {
 
 class basketfile {
     static serverAddress = [];
-    static basket;
+     basket;
 
 
     static upDateBasket(addItems) {
@@ -26,23 +26,23 @@ class basketfile {
     }
 
     static writeAndUpdateAutoDec(addItems) {
-        let basket = basketfile.basket;
-        basket=    _.unionBy(basketfile.basket, addItems, "id");
+        let basket_ =basketfile.basket;
+        basket_= _.unionBy(basket_, addItems, "id");
 
 
-        for (let j = 0; j < basket.length; j++) {
+        for (let j = 0; j < basket_.length; j++) {
             for (let i = 0; i < addItems.length; i++) {
-                if (basket[j].id === addItems[i].id) {
-                    basket[i].count = addItems[j].count;
+                if (basket_[j].id === addItems[i].id) {
+                    basket_[j].count = addItems[i].count;
                 }
             }
         }
-        basket = basket.filter(function (item) {
+        basket_ = basket_.filter(function (item) {
             return item.count > 0;
         });
-        console.log(basket);
-        basketfile.basket = basket;
-        AsyncStorage.setItem('@CurrentBasket', JSON.stringify(basket));
+        console.log(basket_);
+        basketfile.basket = basket_;
+        AsyncStorage.setItem('@CurrentBasket', JSON.stringify(basket_));
 
     }
 

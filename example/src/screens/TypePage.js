@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
+    StyleSheet, FlatList, View, Text, TouchableOpacity, AsyncStorage,
     ListView, Image, Picker, Dimensions
 } from 'react-native';
 import _ from 'lodash'
@@ -194,10 +194,10 @@ class TypePage extends Component {
 
         let lastBasket = basketFile.getBasket();
 
-        orderBasket= _.unionBy(orderBasket, lastBasket, "id");
+        orderBasket = _.unionBy(orderBasket, lastBasket, "id");
 
 
-          orderBasket = orderBasket.filter(
+        orderBasket = orderBasket.filter(
             function (y) {
                 return y.count > 0
             }

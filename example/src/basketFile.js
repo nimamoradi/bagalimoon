@@ -26,7 +26,7 @@ class basketfile {
     }
 
     static writeAndUpdateAutoDec(addItems) {
-        let basket_ =basketfile.basket;
+        let basket_ =Object.assign({},basketfile.basket);
         basket_= _.unionBy(basket_, addItems, "id");
 
 

@@ -146,10 +146,11 @@ class NavigationTypes extends React.Component {
             .race([timeout, request])
             .then(response => {
                 context.setState({dataReady: true});
-                this.loadCategories();
-                this.getBestSellingProducts();
-                this.getSpecialOffer();
                 this.getBanners();
+                this.loadCategories();
+                this.getSpecialOffer();
+                this.getBestSellingProducts();
+
             })
             .catch(error => {
                 if (!loaded) {
@@ -456,8 +457,8 @@ class NavigationTypes extends React.Component {
                                   onDown={() => this.onDownBestSellingProducts(rowData)}
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress() + '/' + rowData.photo}
-                                  onPress={() => this.offerBestSellingProducts(rowData.name, server.getServerAddress() + rowData.photo,
+                                  imageUrl={server.getServerAddress() + '/' +rowData.photo.substring(0, rowData.photo.length - 4) }
+                                  onPress={() => this.offerBestSellingProducts(rowData.name, server.getServerAddress() + (rowData.photo).substring( 0,(rowData.photo).indexOf( ".css" ) ),
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off, rowData.count)}
                             />}
                     />

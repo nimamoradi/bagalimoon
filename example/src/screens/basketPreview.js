@@ -7,6 +7,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 class basketPreview extends React.Component {
     constructor(props) {
         super(props);
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         let basket = JSON.parse(this.props.basket);
         console.log(basket);
 

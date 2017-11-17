@@ -11,7 +11,7 @@ let context;
 class basketFinal extends React.Component {
     constructor(props) {
         super(props);
-
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             basket: [],

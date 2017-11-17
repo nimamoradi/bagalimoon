@@ -114,7 +114,7 @@ class mapView extends Component {
 
     constructor(props) {
         super(props);
-
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.state = {
             latitude: 36.288022,
             longitude: 59.616075,

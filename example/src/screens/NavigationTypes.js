@@ -1,14 +1,10 @@
 import React from 'react';
 import {
-    StyleSheet,
     ScrollView,
     View,
-    Text,
-    TouchableOpacity,
     ListView,
     Dimensions,
-    ViewPagerAndroid
-} from 'react-native';
+   } from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
@@ -34,14 +30,20 @@ class NavigationTypes extends React.Component {
     };
 
     componentWillUnmount() {
-        // basketFile.writeBasket();
-        // console.log(JSON.stringify(basketFile.getBasket()));
+        let SpecialOffer=context.state.SpecialOffer;//.filter(function (item) {
+        //    return item.count>0;
+        // });
+        let BestSellingProducts=context.state.BestSellingProducts;//.filter(function (item) {
+        //     return item.count>0;
+        // });
 
+        BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
     }
 
     getBestSellingProducts() {
 
-        console.log("get data");
+        // console.log("get data");
         fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
             method: 'POST', retries: 5
 
@@ -73,7 +75,7 @@ class NavigationTypes extends React.Component {
 
     getSpecialOffer() {
 
-        console.log("get data");
+        // console.log("get data");
         fetch(server.getServerAddress() + '/api/getSpecialOffer', {
             method: 'POST',
 
@@ -106,7 +108,7 @@ class NavigationTypes extends React.Component {
 
     loadCategories() {
 
-        console.log("get Categories");
+        // console.log("get Categories");
 
         fetch(server.getServerAddress() + '/api/getAllCategories', {
             method: 'POST',
@@ -122,7 +124,7 @@ class NavigationTypes extends React.Component {
                     context.setState({dataSourceTypes: this.state.ds.cloneWithRows(cat),})
                 })
             }).catch(error => {
-                if (!loaded) {
+                if (!loaded) {//check that is it in retry page
                     server.retry(context.isAvailable, context);
                     loaded = true;
                 }
@@ -176,7 +178,7 @@ class NavigationTypes extends React.Component {
             })
         }).then((response) => response.json().then((responseData) => {
 
-            console.log("get Banners" + responseData);
+            // console.log("get Banners" + responseData);
 
 
             context.setState({dataSourceOffer: responseData, banners: responseData})
@@ -205,7 +207,7 @@ class NavigationTypes extends React.Component {
         super(props);
 
 
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -232,6 +234,16 @@ class NavigationTypes extends React.Component {
 
 
     toggleDrawer = () => {
+        let SpecialOffer=context.state.SpecialOffer;//.filter(function (item) {
+        //    return item.count>0;
+        // });
+        let BestSellingProducts=context.state.BestSellingProducts;//.filter(function (item) {
+        //     return item.count>0;
+        // });
+
+        BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
+
         this.props.navigator.toggleDrawer({
             side: 'right',
             animated: true
@@ -361,7 +373,7 @@ class NavigationTypes extends React.Component {
         }
     }
 
-    _renderItem({item, index}) {
+    static _renderItem({item, index}) {
         return (
             <View style={{height: 35 * vh}}>
                 <ImageRow className='indent' key={item.id}
@@ -398,7 +410,7 @@ class NavigationTypes extends React.Component {
                             this._carousel = c;
                         }}
                         data={this.state.dataSourceOffer}
-                        renderItem={this._renderItem}
+                        renderItem={NavigationTypes._renderItem}
                         sliderHeight={vh * 2}
                         itemHeight={vh * 35}
                         sliderWidth={100 * vw}
@@ -474,7 +486,7 @@ class NavigationTypes extends React.Component {
 
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
-        console.log(updatedState);
+        // console.log(updatedState);
 
         this.setState({SpecialOffer: updatedState});
 
@@ -488,7 +500,7 @@ class NavigationTypes extends React.Component {
             updatedState[data.indexOf(rowdata)]['count']--;
             // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         }
-        console.log(updatedState);
+        // console.log(updatedState);
         this.setState({SpecialOffer: updatedState,});
 
     };
@@ -499,7 +511,7 @@ class NavigationTypes extends React.Component {
 
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
-        console.log(updatedState);
+        // console.log(updatedState);
 
         this.setState({BestSellingProducts: updatedState});
 
@@ -513,7 +525,7 @@ class NavigationTypes extends React.Component {
             updatedState[data.indexOf(rowdata)]['count']--;
             // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         }
-        console.log(updatedState);
+        // console.log(updatedState);
         this.setState({BestSellingProducts: updatedState,});
 
     };

@@ -20,6 +20,7 @@ class TypePage extends Component {
 
     constructor(props) {
         super(props);
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         isFirstTime = true;
         let Categories = props.Categories;

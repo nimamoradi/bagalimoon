@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {ActivityIndicator,BackHandler, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -15,7 +15,7 @@ class reTry extends React.Component {
     }
 
     backScreen = () => {
-        this.props.navigator.pop();
+        BackHandler.exitApp();
 
     };
 
@@ -26,15 +26,13 @@ class reTry extends React.Component {
                     style={{
                         position: 'absolute',
                         top: 5 * vw,
-                        left: 5 * vw,
-                        right: 0,
+                        left: 0,
+                        right: 85 * vw,
                         bottom: 0,
-
-                        justifyContent: 'flex-start',
 
                     }}
                     onPress={this.backScreen}>
-                    <Ionicons name="md-arrow-back" size={vw * 10} color="#777777" style={{margin: 2 * vw}}/>
+                    <Ionicons name="ios-exit-outline" size={vw * 10} color="#777777" style={{margin: 2 * vw , transform: [{ rotate: '180deg'}]}}/>
                 </TouchableOpacity>
                 <Text style={styles.text}>اتصال قطع شد</Text>
                 <TouchableOpacity

@@ -55,32 +55,17 @@ AsyncStorage.getItem('api_code').then((item) => {
             }
             else {
                 basket = JSON.parse(basket_);
-                console.log('basket '+basket)
+                console.log('basket ' + basket)
             }
             startAppdata = {
                 screen: {
                     screen: 'example.Types', // unique ID registered with Navigation.registerScreen
                     title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
                     navigatorStyle: {
-                        navBarTranslucent: false
-                    }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-                    navigatorButtons: {
-                        // leftButtons: [
-                        //     {
-                        //         id: 'ShoppingBasket',
-                        //         icon: require('../img/ShoppingBasket.png'),
-                        //         style: {width: 5 * vw, height: 5 * vw},
-                        //
-                        //     },
-                        // ],
-                        rightButtons: [
-                            {
-                                style: {width: 5 * vw, height: 5 * vw},
-                                id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                                icon: require('../img/menu.png'), // for icon button, provide the local image asset name
-                            }
-                        ],
-                    } // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+                        navBarTranslucent: false,
+                        navBarHidden: true,
+                    },
+
                 },
                 appStyle: {
                     orientation: 'portrait',

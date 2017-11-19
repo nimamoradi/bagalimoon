@@ -255,21 +255,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="090803e9eb6588971f788c5a5790be117fc836eb">
+        <dex dex="E:\projects\superMan-gitlab\example\android\app\build\intermediates\pre-dexed\release\classes_474c55d85df140da57c66b3546338cf5e44a76f3.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\nima\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
         <dex dex="E:\projects\superMan-gitlab\example\android\app\build\intermediates\pre-dexed\debug\bolts-tasks-1.4.0_6d2bdd77c308558b161771808be98e127ae4cedb.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="3f17aa7e2799a291d04a1927e7a39448fd03655d">
-        <dex dex="E:\projects\superMan-gitlab\example\android\app\build\intermediates\pre-dexed\debug\classes_474c55d85df140da57c66b3546338cf5e44a76f3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -354,21 +354,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6bfc50848753579af131f3f68aa4bfa032029592">
+        <dex dex="E:\projects\superMan-gitlab\example\android\app\build\intermediates\pre-dexed\release\classes_76dacefcd3426d8033f69a576e3d9115b0f6d32b.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\nima\.android\build-cache\1c33024c7f988eec4aaef85277d719e2f1d5d18d\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
         <dex dex="E:\projects\superMan-gitlab\example\android\app\build\intermediates\pre-dexed\debug\classes_a0e4cb34f4793fb69f80a663e3abfd5ae47f8370.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="30c3ca7b317f179a6c98c75ecbbbc5c1d7e7c679">
-        <dex dex="E:\projects\superMan-gitlab\example\android\app\build\intermediates\pre-dexed\debug\classes_76dacefcd3426d8033f69a576e3d9115b0f6d32b.jar" />
     </item>
 
 </items>

@@ -34,7 +34,7 @@ function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown})
                             <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
                         </TouchableOpacity>
                         <Text style={styles.countText}>{count}</Text>
-                        <TouchableOpacity onPress={onUp}>
+                        <TouchableOpacity onPress={onUp} style={{borderRadius:20}}>
                             <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
                         </TouchableOpacity>
 
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     row: {
+        borderColor: '#bec4be',
         height: 45 * vh,
         margin: vh,
         backgroundColor: '#ffffff',
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderBottomWidth: 1,
         borderRadius: 5 * vh,
-        borderColor: '#e8f0e8',
+
         borderWidth: 0.5,
         borderBottomColor: 'rgba(0, 0, 0, 0.0)',
     },
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 25 * vh, width: 30 * vw, borderRadius: 20,
-        borderColor: '#bec4be',
         borderWidth: 0.5,
     }, countText: {
         fontSize: vw * 4.5,

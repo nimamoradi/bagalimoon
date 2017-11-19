@@ -4,7 +4,7 @@ import {
     View,
     ListView,
     Dimensions,
-   } from 'react-native';
+} from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
@@ -16,7 +16,8 @@ import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
 import _ from 'lodash'
 import basketFile from '../basketFile'
-import  HockeyApp from'react-native-hockeyapp'
+import HockeyApp from 'react-native-hockeyapp'
+import NavBar from '../components/navBar'
 
 let loaded = false;
 let context;
@@ -30,14 +31,14 @@ class NavigationTypes extends React.Component {
     };
 
     componentWillUnmount() {
-        let SpecialOffer=context.state.SpecialOffer;//.filter(function (item) {
+        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
         //    return item.count>0;
         // });
-        let BestSellingProducts=context.state.BestSellingProducts;//.filter(function (item) {
+        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
         //     return item.count>0;
         // });
 
-        BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
     }
 
@@ -193,9 +194,11 @@ class NavigationTypes extends React.Component {
 
 
     }
+
     componentWillMount() {
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
     }
+
     componentDidMount() {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
@@ -208,7 +211,7 @@ class NavigationTypes extends React.Component {
 
 
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 
@@ -234,14 +237,14 @@ class NavigationTypes extends React.Component {
 
 
     toggleDrawer = () => {
-        let SpecialOffer=context.state.SpecialOffer;//.filter(function (item) {
+        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
         //    return item.count>0;
         // });
-        let BestSellingProducts=context.state.BestSellingProducts;//.filter(function (item) {
+        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
         //     return item.count>0;
         // });
 
-        BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
 
         this.props.navigator.toggleDrawer({
@@ -337,15 +340,15 @@ class NavigationTypes extends React.Component {
     TypePage = (title) => {
 
 
-       let SpecialOffer=context.state.SpecialOffer;//.filter(function (item) {
-       //    return item.count>0;
-       // });
-        let BestSellingProducts=context.state.BestSellingProducts;//.filter(function (item) {
+        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
+        //    return item.count>0;
+        // });
+        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
         //     return item.count>0;
         // });
 
-        BestSellingProducts= _.unionBy(BestSellingProducts, SpecialOffer, "id");
-         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
+        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
@@ -357,21 +360,24 @@ class NavigationTypes extends React.Component {
         });
     };
 
-    onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    basket=()=> {
+        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
+        //    return item.count>0;
+        // });
+        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
+        //     return item.count>0;
+        // });
 
-        if (event.type === 'NavBarButtonPress') { // this is the event type for button presses
-            if (event.id === 'back') { // this is the same id field from the static navigatorButtons definition
-                this.toggleDrawer()
-            }
-            if (event.id === 'ShoppingBasket') {
+        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
+        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
+
                 server.showLightBox('example.Types.basketLightBox', {
                     title: this.props.title,
-
                     onClose: this.dismissLightBox,
                 }, context);
-            }
-        }
-    }
+
+        };
+
 
     static _renderItem({item, index}) {
         return (
@@ -391,7 +397,6 @@ class NavigationTypes extends React.Component {
             left: 0,
             right: 0,
             bottom: 0,
-
             justifyContent: 'center',
             alignItems: 'center'
         }}>
@@ -400,8 +405,7 @@ class NavigationTypes extends React.Component {
         else
             return (
                 <ScrollView>
-
-
+                    <NavBar menu={this.toggleDrawer} basket={this.basket}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -469,8 +473,8 @@ class NavigationTypes extends React.Component {
                                   onDown={() => this.onDownBestSellingProducts(rowData)}
                                   price={rowData.price}
                                   disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress() + '/' +rowData.photo.substring(0, rowData.photo.length - 4) }
-                                  onPress={() => this.offerBestSellingProducts(rowData.name, server.getServerAddress() + (rowData.photo).substring( 0,(rowData.photo).indexOf( ".css" ) ),
+                                  imageUrl={server.getServerAddress() + '/' + rowData.photo}
+                                  onPress={() => this.offerBestSellingProducts(rowData.name, server.getServerAddress() + rowData.photo,
                                       rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off, rowData.count)}
                             />}
                     />

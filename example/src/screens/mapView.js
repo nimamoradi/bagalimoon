@@ -90,10 +90,10 @@ class mapView extends Component {
                     (position) => {
                         console.log(position);
                         this.setState({
-                                myLocation: {
-                                    latitude:position.coords.latitude,
-                                    longitude: position.coords.longitude,
-                                },
+                            myLocation: {
+                                latitude: position.coords.latitude,
+                                longitude: position.coords.longitude,
+                            },
                             latitude: position.coords.latitude,
                             longitude: position.coords.longitude,
                             error: null,
@@ -118,10 +118,7 @@ class mapView extends Component {
         this.state = {
             latitude: 36.288022,
             longitude: 59.616075,
-            myLocation: {
-                latitude: 36.288022,
-                longitude: 59.616075,
-            },
+            myLocation: [],
             optionSelected: 0,
             error: null,
             myAddress: [],
@@ -359,7 +356,14 @@ class mapView extends Component {
 
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
                         && context.state.myAddressName !== null)) {
-                    alert('همه فیلدها پر نشده اند');
+                    server.alert('اخطار',
+                        'همه فیلدها پر نشده اند',
+                        context);
+                }
+                else if (context.state.myLocation === null && context.state.myAddress === [] && context.state.myAddress.size === 0) {
+                    server.alert('اخطار',
+                        'موقیت خود را انتخاب کنید',
+                        context);
                 }
                 else {
                     context.setState({sendData: true});
@@ -369,8 +373,10 @@ class mapView extends Component {
             else if (context.state.optionSelected === 2) {
 
                 if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
+                    server.alert('اخطار',
+                        "لطفا آدرس را انتخاب کنید",
+                        context);
 
-                    alert("لطفا آدرس را انتخاب کنید");
                 else
                     this.finalBasket();
 
@@ -379,9 +385,16 @@ class mapView extends Component {
 
         }
         else if (context.state.senderName.search(/[a-zA-Z]/) !== -1) {
-            alert('نام تحویل گیرنده باید فارسی باشد');
+            server.alert('اخطار',
+                'نام تحویل گیرنده باید فارسی باشد',
+                context);
+
         }
-        else alert('نام تحویل گیرنده الزامی است');
+        else
+            server.alert('اخطار',
+                'نام تحویل گیرنده الزامی است',
+                context);
+
         console.log('saved' + this.state.myLocation);
 
     };

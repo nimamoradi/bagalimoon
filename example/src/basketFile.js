@@ -7,7 +7,7 @@ import {
 
 class basketfile {
     static serverAddress = [];
-     basket;
+    basket;
 
 
     static upDateBasket(addItems) {

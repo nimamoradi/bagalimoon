@@ -44,7 +44,7 @@ class basketLightBox extends React.Component {
     };
 
     render() {
-        if (this.state.basket !== '?')
+        if (this.state.length !== 0)
             return (
                 <View style={styles.container}>
                     <View style={{flex: 8}}>

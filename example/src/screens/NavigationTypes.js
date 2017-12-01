@@ -164,6 +164,43 @@ class NavigationTypes extends React.Component {
             });
     };
 
+    goToBanner = (LinkTo, Link_id) => {
+        let title;
+
+        if (LinkTo === 'categories') {
+            let cat = context.state.Categories;
+            for (let key in cat) {
+                if (cat[key].id === Link_id) {
+                    title = cat[key].name;
+                    break;
+                }
+            }
+            context.TypePage(title);
+        } else {
+
+            alert('این جا رو درست کن')
+            // this.props.navigator.push({
+            //     screen: 'example.Types.offer',
+            //     title: title,
+            //     passProps: {
+            //         title: title,
+            //         imageUrl: imageUrl,
+            //         des: des,
+            //         price: price,
+            //         id: id,
+            //         myNumber: count,
+            //         disscount: disscount,
+            //         off: off,
+            //         onUP: this.onUp_SpecialOffer,
+            //         onDown: this.onDown_SpecialOffer,
+            //     },
+            //
+            //
+            // });
+        }
+
+
+    };
 
     getBanners() {
 
@@ -360,7 +397,7 @@ class NavigationTypes extends React.Component {
         });
     };
 
-    basket=()=> {
+    basket = () => {
         let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
         //    return item.count>0;
         // });
@@ -371,12 +408,12 @@ class NavigationTypes extends React.Component {
         BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
 
-                server.showLightBox('example.Types.basketLightBox', {
-                    title: this.props.title,
-                    onClose: this.dismissLightBox,
-                }, context);
+        server.showLightBox('example.Types.basketLightBox', {
+            title: this.props.title,
+            onClose: this.dismissLightBox,
+        }, context);
 
-        };
+    };
 
 
     static _renderItem({item, index}) {
@@ -385,6 +422,7 @@ class NavigationTypes extends React.Component {
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
+                          onPress={() => context.goToBanner(item.LinkTo, item.Link_id)}
                 />
             </View>
         );

@@ -26,21 +26,29 @@ class basketfile {
     }
 
     static writeAndUpdateAutoDec(addItems) {
-        let basket_ =Object.assign({},basketfile.basket);
-        basket_= _.unionBy(basket_, addItems, "id");
+        let basket_ = Object.assign({}, basketfile.basket);
+        basket_ = _.unionBy(basket_, addItems, "id");
 
 
         for (let j = 0; j < basket_.length; j++) {
             for (let i = 0; i < addItems.length; i++) {
                 if (basket_[j].id === addItems[i].id) {
                     basket_[j].count = addItems[i].count;
+                    basket_[j].price = addItems[i].price;
+                    addItems[i].counted=false;
+                } else {
+                    addItems[i].counted=true;
                 }
             }
         }
+        addItems = addItems.filter(function (item) {
+            return item.counted&&item.count > 0;
+        });
         basket_ = basket_.filter(function (item) {
             return item.count > 0;
         });
-        console.log(basket_);
+        basket_.push.apply(basket_,addItems);
+        // console.log(basket_);
         basketfile.basket = basket_;
         AsyncStorage.setItem('@CurrentBasket', JSON.stringify(basket_));
 

@@ -31,12 +31,9 @@ class NavigationTypes extends React.Component {
     };
 
     componentWillUnmount() {
-        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
-        //    return item.count>0;
-        // });
-        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
-        //     return item.count>0;
-        // });
+        let SpecialOffer = context.state.SpecialOffer;
+
+        let BestSellingProducts = context.state.BestSellingProducts;
 
         BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
@@ -239,7 +236,7 @@ class NavigationTypes extends React.Component {
     componentDidMount() {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
-        basketFile.setBasket(this.props.basket);
+        // basketFile.setBasket(this.props.basket);
         this.isAvailable();
     }
 
@@ -377,12 +374,9 @@ class NavigationTypes extends React.Component {
     TypePage = (title) => {
 
 
-        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
-        //    return item.count>0;
-        // });
+        let SpecialOffer = context.state.SpecialOffer;
+
         let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
-        //     return item.count>0;
-        // });
 
         BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
         basketFile.writeAndUpdateAutoDec(BestSellingProducts);
@@ -391,19 +385,16 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: title,
-                basket: this.props.basket,
+                basket: basketFile.getBasket(),
                 Categories: this.state.Categories,
             },
         });
     };
 
     basket = () => {
-        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
-        //    return item.count>0;
-        // });
-        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
-        //     return item.count>0;
-        // });
+        let SpecialOffer = context.state.SpecialOffer;
+
+        let BestSellingProducts = context.state.BestSellingProducts;
 
         BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
         basketFile.writeAndUpdateAutoDec(BestSellingProducts);

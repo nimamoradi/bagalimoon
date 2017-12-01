@@ -3,6 +3,7 @@ import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
 import {vw, vh, vmin, vmax} from './viewport'
 
+import basketFile from './basketFile'
 
 // screen related book keeping
 registerScreens();
@@ -52,10 +53,12 @@ AsyncStorage.getItem('api_code').then((item) => {
         AsyncStorage.getItem('@CurrentBasket').then((basket_) => {
             if (basket_ === null) {
                 basket = [];
+                basketFile.setBasket([]);
             }
             else {
                 basket = JSON.parse(basket_);
-                console.log('basket ' + basket)
+                basketFile.setBasket(basket);
+                // console.log('basket ' + basket)
             }
             startAppdata = {
                 screen: {
@@ -86,7 +89,7 @@ AsyncStorage.getItem('api_code').then((item) => {
                     // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
                     disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
                 },
-                passProps: {api_code: item, basket: basket}, // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {api_code: item,}, // simple serializable object that will pass as props to all top screens (optional)
 
 
             };

@@ -20,18 +20,27 @@ class TypePage extends Component {
 
     constructor(props) {
         super(props);
+        let id = 0;
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         isFirstTime = true;
         let Categories = props.Categories;
-        let subCategories = this.getIndex(this.props.title, this.props.Categories, 'name');
-        let parent_id = Categories[subCategories].id;
-        let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-        let id = 0;
-        if (sub > -1)
-            id = Categories[sub].id;
+        let index = this.getIndex(this.props.title, this.props.Categories, 'name');
+        let mainSelected = this.props.title;
+        let parent_id = Categories[index].id;
+        if (Categories[index].parent_category_id !== 0) {
+            let sub = this.getIndex(Categories[index].parent_category_id, this.props.Categories, 'id');
+            mainSelected = Categories[sub].name;
+            id = parent_id;
+        } else {
+            let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
+
+            if (sub > -1)
+                id = Categories[sub].id;
+        }
+
         this.state = {
-            mainSelected: this.props.title,
+            mainSelected: mainSelected,
             subSelected: id,
             dataSourceView: ds.cloneWithRows([]),
             fields: ds,
@@ -47,6 +56,7 @@ class TypePage extends Component {
 
 
     shop = (basket) => {
+        basketFile.writeAndUpdata(basket);
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
@@ -74,17 +84,14 @@ class TypePage extends Component {
     };
 
     componentWillUnmount() {
+
+
         let basket = this.state.basket.map(
             function (x) {
                 return x.value
             }
         );
-        let orderBasket = [];
-        for (let i = 0; i < basket.length; i++) {
-            orderBasket = orderBasket.concat(basket[i]);
-        }
-
-        basketFile.writeAndUpdata(orderBasket)
+        basketFile.writeAndUpdateAutoDec(basket)
 
     }
 
@@ -193,7 +200,7 @@ class TypePage extends Component {
             orderBasket = orderBasket.concat(basket[i]);
         }
 
-        let lastBasket = basketFile.getBasket();
+
 
         orderBasket = _.unionBy(orderBasket, lastBasket, "id");
 

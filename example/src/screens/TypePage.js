@@ -201,7 +201,6 @@ class TypePage extends Component {
         }
 
 
-
         orderBasket = _.unionBy(orderBasket, lastBasket, "id");
 
 

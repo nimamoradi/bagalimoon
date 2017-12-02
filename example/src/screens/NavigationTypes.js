@@ -4,6 +4,8 @@ import {
     View,
     ListView,
     Dimensions,
+    FlatList,
+    Text
 } from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
@@ -57,7 +59,6 @@ class NavigationTypes extends React.Component {
                 }
                 context.setState({
                     BestSellingProducts: responseData,
-                    dataSourceBestSellingProducts: this.state.ds.cloneWithRows(responseData),
                 })
 
             }).catch(error => {
@@ -89,7 +90,6 @@ class NavigationTypes extends React.Component {
                 }
                 context.setState({
                     SpecialOffer: responseData,
-                    dataSourceSpecialOffer: this.state.ds.cloneWithRows(responseData),
                 })
 
             }).catch(error => {
@@ -119,7 +119,7 @@ class NavigationTypes extends React.Component {
                     let cat = this.state.Categories.filter(function (x) {
                         return x.parent_category_id === 0;
                     });
-                    context.setState({dataSourceTypes: this.state.ds.cloneWithRows(cat),})
+                    context.setState({Types: cat})
                 })
             }).catch(error => {
                 if (!loaded) {//check that is it in retry page
@@ -246,24 +246,14 @@ class NavigationTypes extends React.Component {
 
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
-
         this.state = {
-            ds: ds,
             dataReady: false,
             SpecialOffer: '',
-            BestSellingProducts: '',
+            BestSellingProducts: [],
             Categories: '',
-            dataSourceBestSellingProducts: ds.cloneWithRows({}),
-            dataSourceSpecialOffer: ds.cloneWithRows({}),
-            dataSourceTypes: ds.cloneWithRows({}),
+            Types:[],
             dataSourceOffer: [],
             banners: [],
-            viewport: {
-                width: Dimensions.get('window').width,
-                height: Dimensions.get('window').height / 2.5
-            }
         };
         context = this;
 
@@ -449,64 +439,57 @@ class NavigationTypes extends React.Component {
                         sliderWidth={100 * vw}
                         itemWidth={100 * vw}
                     />
-
-                    <ListView
+                    <FlatList
                         style={{
-
                             flexDirection: 'row', height: 11 * vh,
                             margin: 1 * vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        dataSource={this.state.dataSourceTypes}
-                        renderRow={(rowData) => {
-                            return <TypeButton title={rowData.name} onPress={() => this.TypePage(rowData.name)}/>
-                        }
-                        }
+                        data={this.state.Types}
+                        renderItem={({item}) =><TypeButton title={item.name} onPress={() => this.TypePage(item.name)}/>}
                     />
+
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
-                    <ListView
+                    <FlatList
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        dataSource={this.state.dataSourceSpecialOffer}
-                        renderRow={(rowData) =>
-
-                            <Item title={rowData.name}
-                                  count={rowData.count}
-                                  onUp={() => this.onUpSpecialOffer(rowData)}
-                                  onDown={() => this.onDownSpecialOffer(rowData)}
-                                  price={rowData.price}
-                                  disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress() + '/' + rowData.photo}
-                                  onPress={() => this.offerSpecialOffer(rowData.name, server.getServerAddress() + rowData.photo,
-                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off, rowData.count)}
-                            />}
+                        data={this.state.SpecialOffer}
+                        renderItem={({item}) => <Item title={item.name}
+                                                      count={item.count}
+                                                      onUp={() => this.onUpSpecialOffer(item)}
+                                                      onDown={() => this.onDownSpecialOffer(item)}
+                                                      price={item.price}
+                                                      disscount={(item.off !== 0) ? item.main_price : null}
+                                                      imageUrl={server.getServerAddress() + '/' + item.photo}
+                                                      onPress={() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
+                                                          item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
+                        />}
                     />
-
                     <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
 
-                    <ListView
+                    <FlatList
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        dataSource={this.state.dataSourceBestSellingProducts}
-                        renderRow={(rowData) =>
-
-                            <Item title={rowData.name}
-                                  count={rowData.count}
-                                  onUp={() => this.onUpBestSellingProducts(rowData)}
-                                  onDown={() => this.onDownBestSellingProducts(rowData)}
-                                  price={rowData.price}
-                                  disscount={(rowData.off !== 0) ? rowData.main_price : null}
-                                  imageUrl={server.getServerAddress() + '/' + rowData.photo}
-                                  onPress={() => this.offerBestSellingProducts(rowData.name, server.getServerAddress() + rowData.photo,
-                                      rowData.long_description, rowData.price, rowData.id, rowData.main_price, rowData.off, rowData.count)}
-                            />}
+                        data={this.state.BestSellingProducts}
+                        renderItem={({item}) => <Item title={item.name}
+                                                      count={item.count}
+                                                      onUp={() => this.onUpBestSellingProducts(item)}
+                                                      onDown={() => this.onDownBestSellingProducts(item)}
+                                                      price={item.price}
+                                                      disscount={(item.off !== 0) ? item.main_price : null}
+                                                      imageUrl={server.getServerAddress() + '/' + item.photo}
+                                                      onPress={() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
+                                                          item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
+                        />}
                     />
+
+
                 </ScrollView>
             );
 

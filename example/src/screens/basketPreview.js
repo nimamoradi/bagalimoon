@@ -4,13 +4,14 @@ import {StyleSheet, View, Text, ScrollView, TouchableOpacity, AsyncStorage, List
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
+import basketfile from "../basketFile";
 
 class basketPreview extends React.Component {
     constructor(props) {
         super(props);
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         let basket = JSON.parse(this.props.basket);
-        console.log(basket);
+        // console.log(basket);
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
@@ -28,6 +29,9 @@ class basketPreview extends React.Component {
             totalPrice += Number.parseInt(basket[i]['price']) * Number.parseInt(basket[i]['count'])
 
         }
+        basket.filter(function (item) {
+         return item.count>0;
+        });
         this.setState({
             dataSourceProducts: this.state.dataSourceProducts.cloneWithRows(this.state.basket),
             totalPrice: totalPrice,
@@ -35,7 +39,7 @@ class basketPreview extends React.Component {
     }
 
     address = () => {
-        if (this.state.totalPrice === 0 ) {
+        if (this.state.totalPrice !== 0 ) {
             this.props.navigator.pop();
             this.props.navigator.push({
                 screen: 'example.mapView',
@@ -143,8 +147,11 @@ class basketPreview extends React.Component {
                     <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                       onPress={() => {
                                           if (this.props.isDynamic === undefined)
-                                              AsyncStorage.setItem('@CurrentBasket', []);
+
+                                          basketfile.setBasket([]);
+                                          basketfile.writeBasket();
                                           this.props.navigator.pop();
+
                                       }}>
                         <View style={styles.buttonCancel}>
 

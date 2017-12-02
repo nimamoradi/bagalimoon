@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, ScrollView, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
+import {StyleSheet, View, Text,FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
@@ -13,10 +13,10 @@ class basketPreview extends React.Component {
         let basket = JSON.parse(this.props.basket);
         // console.log(basket);
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
         this.state = {
             basket: basket,
-            dataSourceProducts: ds,
+
             totalPrice: '?'
         };
         // console.log(dataArray)
@@ -33,7 +33,6 @@ class basketPreview extends React.Component {
          return item.count>0;
         });
         this.setState({
-            dataSourceProducts: this.state.dataSourceProducts.cloneWithRows(this.state.basket),
             totalPrice: totalPrice,
         });
     }
@@ -113,16 +112,16 @@ class basketPreview extends React.Component {
 
                     <Text style={styles.tableHeader}>نام</Text>
                 </View>
-
-
-                <ListView
+                <FlatList
                     style={{flexDirection: 'column', width: '100%',}}
                     horizontal={false}
                     showsHorizontalScrollIndicator={false}
-                    dataSource={this.state.dataSourceProducts}
-                    renderRow={(rowData) =>
-                        this.renderRow(rowData)}
+                    data={this.state.basket}
+                    renderItem={({item}) =>
+                        this.renderRow(item)}
                 />
+
+
 
                 <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
                     <View style={{flex: 1}}/>

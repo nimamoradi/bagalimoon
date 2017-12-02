@@ -2,11 +2,9 @@ import React from 'react';
 import {
     ScrollView,
     View,
-    ListView,
     Dimensions,
     FlatList,
-    Text
-} from 'react-native';
+    } from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'

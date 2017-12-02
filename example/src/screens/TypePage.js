@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    StyleSheet, FlatList, View, Text, TouchableOpacity, AsyncStorage,
-    ListView, Image, Picker, Dimensions
+    StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
+   FlatList, Image, Picker, Dimensions
 } from 'react-native';
 import _ from 'lodash'
 import ItemView from '../components/itemView'
@@ -13,6 +13,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
 import basketFile from '../basketFile'
 
+
 let context;
 let isFirstTime;
 
@@ -22,7 +23,8 @@ class TypePage extends Component {
         super(props);
         let id = 0;
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+
         isFirstTime = true;
         let Categories = props.Categories;
         let index = this.getIndex(this.props.title, this.props.Categories, 'name');
@@ -42,8 +44,6 @@ class TypePage extends Component {
         this.state = {
             mainSelected: mainSelected,
             subSelected: id,
-            dataSourceView: ds.cloneWithRows([]),
-            fields: ds,
             dataReady: true,
             viewDate: [],
             basket: [],
@@ -101,9 +101,7 @@ class TypePage extends Component {
             this.isAvailable();
             isFirstTime = false;
         }
-        this.setState({
-            dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
-        });
+
     }
 
     isAvailable = () => {
@@ -122,11 +120,7 @@ class TypePage extends Component {
                 let sub = context.getIndex(parent_id, context.state.Categories, 'parent_category_id');
                 if (sub > -1)
                     context.loadRenderRowData(0, context.props.Categories[sub].id);
-                else context.setState({viewDate: []}, () => {
-                    context.setState({
-                        dataSourceView: context.state.fields.cloneWithRows(this.state.viewDate),
-                    });
-                });
+                else context.setState({viewDate: []});
             })
             .catch(error => {
                 server.retry(this.isAvailable, context)
@@ -263,30 +257,28 @@ class TypePage extends Component {
                     </View>
 
                 </View>
-
-                <ListView
+                <FlatList
                     style={{flex: 3}}
-                    dataSource={this.state.dataSourceView}
-                    renderRow={(columnData) =>
+                    data={this.state.viewDate}
+                    renderItem={({item}) =>
                         <ItemView
-                            onPress={() => this.product(columnData.name,
-                                server.getServerAddress() + columnData.photo,
-                                columnData.long_description,
-                                columnData.price,
-                                columnData.count,
-                                columnData.id,
-                                columnData.main_price,
-                                columnData.off,
+                            onPress={() => this.product(item.name,
+                                server.getServerAddress() + item.photo,
+                                item.long_description,
+                                item.price,
+                                item.count,
+                                item.id,
+                                item.main_price,
+                                item.off,
                             )}
-                            title={columnData.name}
-                            disscount={columnData.main_price}
-                            price={columnData.price}
-                            count={columnData.count}
-                            onUp={() => this.onUp(columnData)}
-                            onDown={() => this.onDown(columnData)}
-                            imageUrl={server.getServerAddress() + columnData.photo}/>}
+                            title={item.name}
+                            disscount={item.main_price}
+                            price={item.price}
+                            count={item.count}
+                            onUp={() => this.onUp(item)}
+                            onDown={() => this.onDown(item)}
+                            imageUrl={server.getServerAddress() + item.photo}/>}
                 />
-
                 {(!this.state.dataReady ) && <View style={{
                     position: 'absolute',
                     top: 0,

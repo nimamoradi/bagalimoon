@@ -21,6 +21,8 @@ import finalBasket from './basketFinal'
 import reTry from '../components/reTry'
 import subOffer from './types/subOffer';
 import about_us from './aboutus';
+
+import orderHistroy from './orderHistroy'
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
 
@@ -53,6 +55,8 @@ export function registerScreens() {
     Navigation.registerComponent('example.Types.test', () => test);
 
     Navigation.registerComponent('example.Types.subOffer', () => subOffer);
+    Navigation.registerComponent('example.Types.orderHistroy', () => orderHistroy);
+
 }
 
 export function registerScreenVisibilityListener() {

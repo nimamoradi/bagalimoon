@@ -1,18 +1,22 @@
 class code {
-    static serverAddress ='http://reactnative.onlinewebshop.net';
-    static timeOut =4000;
-    static retryCount =5;
+    static serverAddress = 'http://reactnative.onlinewebshop.net';
+    static timeOut = 4000;
+    static retryCount = 5;
+
     //other relevant code here
 
     static getServerAddress() {
         return this.serverAddress;
     }
+
     static getTimeOut() {
         return this.timeOut;
     }
+
     static getReTry() {
         return this.retryCount;
     }
+
     static showLightBox(screen, passProps, context) {
         context.props.navigator.showLightBox({
             screen: screen,
@@ -42,7 +46,7 @@ class code {
     };
 
 
-    static retryParam(task,context,param) {
+    static retryParam(task, context, param) {
         context.props.navigator.push({
             screen: 'example.Types.reTry',
             navigatorStyle: {
@@ -50,14 +54,14 @@ class code {
             },
             overrideBackPress: true,
             passProps: {
-                task:task,
-                param:param,
-                backScreen:context
+                task: task,
+                param: param,
+                backScreen: context
             },
         });
     }
 
-    static retry(task,context) {
+    static retry(task, context) {
         context.props.navigator.push({
             screen: 'example.Types.reTry',
             navigatorStyle: {
@@ -65,10 +69,11 @@ class code {
             },
             overrideBackPress: true,
             passProps: {
-                task:task,
+                task: task,
             },
         });
     }
+
     static  getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i][prop] === value) {
@@ -77,6 +82,14 @@ class code {
         }
         return -1; //to handle the case where the value doesn't exist
     };
+
+    static performTasks = (input, tasks) =>{
+        if (tasks.length === 1)
+            return tasks[0](input);
+        tasks[0](input, function (output) {
+            performTasks(output, tasks.slice(2)); //Performs the tasks in the 'tasks[]' array }); }
+        });
+    }
 
 //     import { Dimensions } from 'react-native';
 // const { width, height } = Dimensions.get('window');
@@ -88,6 +101,6 @@ class code {
 // const scale = size => width / guidelineBaseWidth * size;
 // const verticalScale = size => height / guidelineBaseHeight * size;
 // const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
-}
+        }
 
-export default code;
+        export default code;

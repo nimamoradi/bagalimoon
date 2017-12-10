@@ -270,17 +270,22 @@ class mapView extends Component {
                                     this.setState({latitude: e.nativeEvent.coordinate.latitude});
                                     this.setState({longitude: e.nativeEvent.coordinate.longitude});
                                 }}>
-                                <MapView.Marker draggable
-                                                coordinate={this.state.myLocation}
-                                                onDragEnd={(e) => {
-                                                    this.setState({myLocation: e.nativeEvent.coordinate});
-                                                    this.setState({latitude: e.nativeEvent.coordinate.latitude});
-                                                    this.setState({longitude: e.nativeEvent.coordinate.longitude});
-                                                }
-                                                }
 
-                                />
-                            </MapView>
+
+                                {(this.state.myLocation !== null) ?
+                                    <MapView.Marker draggable
+                                                    coordinate={this.state.myLocation}
+                                                    onDragEnd={(e) => {
+                                                        this.setState({myLocation: e.nativeEvent.coordinate});
+                                                        this.setState({latitude: e.nativeEvent.coordinate.latitude});
+                                                        this.setState({longitude: e.nativeEvent.coordinate.longitude});
+                                                    }
+                                                    }
+
+                                    /> : null}
+                            </MapView>}
+
+
                         </View>
                     </View>
                     <View>
@@ -395,7 +400,6 @@ class mapView extends Component {
                 'نام تحویل گیرنده الزامی است',
                 context);
 
-        console.log('saved' + this.state.myLocation);
 
     };
     finalBasket = () => {

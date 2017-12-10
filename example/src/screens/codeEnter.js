@@ -17,6 +17,7 @@ import fetch from '../fetch'
 
 let context;
 import server from '../code'
+import basketFile from '../basketFile'
 
 let data;
 let Categories;
@@ -130,6 +131,7 @@ class codeEnter extends React.Component {
     };
 
     pushMainScreen(api) {
+        basketFile.setBasket([]);
         context.props.navigator.push({
             backButtonTitle: '',
             screen: 'example.Types',
@@ -160,7 +162,6 @@ const styles = StyleSheet.create({
     subRow: {
         flex: 1,
         margin: 50,
-
         flexDirection: 'column',
         alignItems: 'flex-end'
 

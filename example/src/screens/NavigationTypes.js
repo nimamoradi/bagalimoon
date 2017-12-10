@@ -2,9 +2,8 @@ import React from 'react';
 import {
     ScrollView,
     View,
-    Dimensions,
     FlatList,
-    } from 'react-native';
+} from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
@@ -131,7 +130,7 @@ class NavigationTypes extends React.Component {
 
     }
 
-    isAvailable = () => {
+     isAvailable = () => {
         context.setState({dataReady: false});
         loaded = false;
         const timeout = new Promise((resolve, reject) => {
@@ -144,10 +143,26 @@ class NavigationTypes extends React.Component {
             .race([timeout, request])
             .then(response => {
                 context.setState({dataReady: true});
-                this.getBanners();
-                this.loadCategories();
-                this.getSpecialOffer();
-                this.getBestSellingProducts();
+                // server.performTasks([], [
+                //     this.loadCategories,
+                //     this.getBanners,
+                //     this.getSpecialOffer,
+                //     this.getBestSellingProducts]);
+
+                setTimeout(() => {
+                    this.getBanners();
+                }, 20);
+                setTimeout(() => {
+                    this.loadCategories();
+                }, 20);
+                setTimeout(() => {
+                    this.getSpecialOffer();
+                }, 20);
+                setTimeout(() => {
+                    this.getBestSellingProducts();
+                }, 20);
+
+
 
             })
             .catch(error => {
@@ -158,6 +173,13 @@ class NavigationTypes extends React.Component {
 
             });
     };
+    resolveAfter2(x) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(x);
+            }, 20);
+        });
+    }
 
     goToBanner = (LinkTo, Link_id) => {
         let title;
@@ -249,7 +271,7 @@ class NavigationTypes extends React.Component {
             SpecialOffer: '',
             BestSellingProducts: [],
             Categories: '',
-            Types:[],
+            Types: [],
             dataSourceOffer: [],
             banners: [],
         };
@@ -271,7 +293,8 @@ class NavigationTypes extends React.Component {
 
         this.props.navigator.toggleDrawer({
             side: 'right',
-            animated: true
+            animated: true,
+            api_code: context.props.api_code
         });
     };
     onUp_SpecialOffer = (countNumber, id) => {
@@ -446,7 +469,8 @@ class NavigationTypes extends React.Component {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.Types}
-                        renderItem={({item}) =><TypeButton title={item.name} onPress={() => this.TypePage(item.name)}/>}
+                        renderItem={({item}) => <TypeButton title={item.name}
+                                                            onPress={() => this.TypePage(item.name)}/>}
                     />
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>

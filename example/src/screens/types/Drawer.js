@@ -43,6 +43,17 @@ class MyClass extends React.Component {
         });
     };
 
+    orderHistroy() {
+        this.props.navigator.push({
+            screen: 'example.Types.orderHistroy',
+            passProps: {
+                api_code:this.props.api_code
+            },
+
+
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -55,7 +66,7 @@ class MyClass extends React.Component {
                         onPress={() => server.showLightBox('example.Types.basketLightBox', {
                             title: this.props.title,
                             onClose: this.dismissLightBox,
-                        },context)}>
+                        }, context)}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <Icon name="shopping-cart" size={vw * 6} color="green"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
@@ -66,24 +77,22 @@ class MyClass extends React.Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                    onPress={() => {
+                        onPress={(() => this.orderHistroy())}>
+                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                            <MaterialIcon name="history" size={vw * 6} color="#ff5500"
+                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> سوابق سفارش</Text>
 
-                    }}>
-                    <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                        <MaterialIcon name="history" size={vw * 6} color="#ff5500"
-                                      style={{margin: 10, alignSelf: 'flex-start'}}/>
-                        <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> سوابق سفارش</Text>
+                        </View>
 
-                    </View>
-
-                </TouchableOpacity>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
 
                         }}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <Ionicons name="ios-call-outline" size={vw * 6} color="#11ff11"
-                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
+                                      style={{margin: 10, alignSelf: 'flex-start'}}/>
                             <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> ارتباط با ما</Text>
 
                         </View>
@@ -126,7 +135,6 @@ class MyClass extends React.Component {
             </View>
         );
     }
-
 
 
 }

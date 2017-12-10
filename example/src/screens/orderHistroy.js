@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
+import {StyleSheet, View, ScrollView, Text, TouchableOpacity, AsyncStorage, FlatList,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
+import fetch from '../fetch'
+import SmallRow from '../components/smallRow'
 
 let context;
 
 class orderHistroy extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            orderData: [],
+            sendData: true
+        };
         context = this;
-        AsyncStorage.getItem('api_code').then((item) => {
-            this.state = {
-                api_code: item,
-                sendData: true
-            };
-        });
-
     }
 
     isAvailable = () => {
@@ -34,14 +32,14 @@ class orderHistroy extends React.Component {
             .race([timeout, request])
             .then(response => {
 
-                context.getOrderHistory();
+                context.getOrderHistory(context.props.api_code);
             })
             .catch(error => {
                 server.retry(this.isAvailable, context)
             });
     };
 
-    getOrderHistory = () => {
+    getOrderHistory = (api_code) => {
 
 
         fetch(server.getServerAddress() + '/api/orderList', {
@@ -51,27 +49,19 @@ class orderHistroy extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                api_code: context.state.api_code,
+                api_code: '$2y$10$kCRfPJxYsjYaJqw/SYZsAewhiloZAF7WK.9JjLaxjh3xCcgdWEklWry3EKqsIwDNlQ2Q40eAMmCtOCR8IYt',
             })
         }).then((response) => response.json())
             .then((responseData) => {
+                console.log(responseData);
 
-                context.setState({sendData: false});
-                let totalPrice = 0;
-                let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'
-                    + responseData['address'].city_name + ' ،' + responseData['address'].Address;
-                let basket = responseData.items;
-                for (let i = 0; i < basket.length; i++) {
-                    totalPrice += Number.parseInt(basket[i]['final_price']) * Number.parseInt(basket[i]['count'])
-                }
                 this.setState({
-                    dataSourceBasket: this.state.dataSourceProducts.cloneWithRows(basket),
-                    totalPrice: totalPrice,
-                    myAddress: address,
-                    customer_receiver_name: responseData.customer_receiver_name
+                    orderData: responseData,
+                    sendData: false
                 });
 
             }).catch(error => {
+            console.log(error);
             server.retry(this.isAvailable, context)
         });
 
@@ -80,71 +70,18 @@ class orderHistroy extends React.Component {
 
     componentDidMount() {
         this.isAvailable();
+        // context.getOrderHistory();
     }
 
 
     renderRow = (rowData) => {
         return (
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', height: 5 * vh}}>
 
-                <Text style={styles.price}>{rowData.final_price}</Text>
-                <Text style={styles.price}>{rowData.regular_price}</Text>
-                <Text style={styles.price}>{rowData.count}</Text>
-                <Text style={styles.text}>{rowData['product']['name']}</Text>
+                <Text style={styles.price}>{rowData.sum_price}</Text>
+
             </View>
         );
-    };
-    renderOrder = () => {
-        return (<View>
-
-            <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
-                <Text style={styles.tableHeader}>قیمت نهایی</Text>
-                <Text style={styles.tableHeader}>قیمت عادی</Text>
-                <Text style={styles.tableHeader}>تعداد</Text>
-                <Text style={styles.tableHeader}>نام</Text>
-            </View>
-
-            <ListView
-
-                automaticallyAdjustContentInsets={false}
-                contentContainerStyle={{flexDirection: 'column', alignItems: 'flex-start', width: '100%',}}
-                horizontal={false}
-                showsHorizontalScrollIndicator={false}
-                dataSource={this.state.dataSourceBasket}
-                renderRow={(rowData) =>
-                    this.renderRow(rowData)}
-            />
-            <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
-                <View style={{flex: 1}}/>
-                <Text style={styles.price}>
-                    {this.state.totalPrice} تومان
-                </Text>
-                <Text style={styles.text}>
-                    جمع خرید
-                </Text>
-                <View style={{flex: 1}}/>
-            </View>
-            <View style={{flexDirection: 'column', alignItems: 'center', width: 100 * vw}}>
-                <Text>آدرس:</Text>
-                <Text style={{
-                    fontSize: vw * 4,
-                    fontFamily: 'B Yekan',
-                }}>
-                    {this.state.myAddress}
-                </Text>
-
-            </View>
-            <View style={{flexDirection: 'column', alignItems: 'center', width: 100 * vw}}>
-                <Text>نام مشتری:</Text>
-                <Text style={{
-                    fontSize: vw * 4,
-                    fontFamily: 'B Yekan',
-                }}>
-                    {this.state.customer_receiver_name}
-                </Text>
-
-            </View>
-        </View>);
     };
 
 
@@ -164,24 +101,48 @@ class orderHistroy extends React.Component {
         else
             return (
                 <View style={styles.container}>
+                    <FlatList
+                        data={this.state.orderData}
+                        renderItem={({item}) => <View>
+                            <SmallRow title={'نام دریافت کننده'} des={item.receiver_name}/>
+                            <SmallRow des={item.mobile_phone_number} title={'شماره تماس'}/>
 
+                            <SmallRow title={'مبلغ قابل پرداخت'} des={item.paid_price}/>
+                            <SmallRow title={'مبلغ بدون تخفیف'} des={item.sum_price}/>
+                            <SmallRow title={'آدرس'} des={item.address.name + ' : ' + item.address.Address}/>
+                            <FlatList
+                                data={item.ordered_products}
+                                renderItem={({item}) => <View>
+                                    <SmallRow title={'نام محصول'} des={item.product.name}/>
+                                    <SmallRow title={'تعداد'} des={item.count}/>
+                                    <SmallRow title={'قیمت عادی'} des={item.regular_price}/>
+                                    <SmallRow title={'قیمت بعد از تخفیف'} des={item.final_price}/>
+                                </View>}
+                            />
+                            <SmallRow />
+                        </View>
+                        }
+
+                    />
 
                 </View>
 
             );
 
     }
+
+
 }
 
 orderHistroy.propTypes = {
-    api_code: PropTypes.string.isRequired,//encoded array in json
+    // api_code: PropTypes.string.isRequired,//encoded array in json
 
 };
 
 const styles = StyleSheet.create({
     row: {
-
-        paddingHorizontal: 16,
+        width: 100 * vw,
+        paddingHorizontal: 2 * vw,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -248,6 +209,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#ffffff',
     },
+    item: {width: 40 * vw},
 
 });
 

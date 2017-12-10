@@ -1,4 +1,4 @@
-#Sun Nov 19 21:26:03 IRST 2017
+#Sun Dec 10 23:27:09 IRST 2017
 base.0=E\:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=E\:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

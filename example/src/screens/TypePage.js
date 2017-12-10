@@ -56,12 +56,12 @@ class TypePage extends Component {
 
 
     shop = (basket) => {
-        basketFile.writeAndUpdata(basket);
+        basketFile.writeAndUpdateAutoDec(basket);
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                basket: basket
+                basket: JSON.stringify(basketFile.getBasket())
             },
         });
     };
@@ -189,26 +189,20 @@ class TypePage extends Component {
                 return x.value
             }
         );
-        let orderBasket = [];
-        for (let i = 0; i < basket.length; i++) {
-            orderBasket = orderBasket.concat(basket[i]);
-        }
 
+        let arr = [];
 
-        orderBasket = _.unionBy(orderBasket, lastBasket, "id");
+        basket.forEach(function(element) {
 
+            element.forEach(function (item) {
+                console.log(item);
+                arr.push(item)
+            })
 
-        orderBasket = orderBasket.filter(
-            function (y) {
-                return y.count > 0
-            }
-        );
-        if (orderBasket.length > 0) {
-
-            this.shop(JSON.stringify(orderBasket));
+        });
+        if (arr.length > 0) {
+            this.shop(arr);
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-
-
     };
 
     render() {

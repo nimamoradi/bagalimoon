@@ -17,7 +17,8 @@ class basketfile {
         basketfile.basket = addItems
     }
 
-    static writeAndUpdata(addItems) {
+    static writeAndUpdata(input) {
+        let addItems = _.unionBy(input, [], "id");
         addItems = addItems.filter(function (item) {
             return item.count > 0;
         });
@@ -25,10 +26,10 @@ class basketfile {
         basketfile.basket = addItems
     }
 
-    static writeAndUpdateAutoDec(addItems) {
-        let basket_ =  basketfile.basket;//copy basket
-        // basket_ = _.unionBy(basket_, [], "id");
-
+    static writeAndUpdateAutoDec(input) {
+        let basket_ = basketfile.basket;//copy basket
+         basket_ = _.unionBy(basket_, [], "id");
+        let addItems = _.unionBy(input, [], "id");
 //updating basket
         for (let j = 0; j < basket_.length; j++) {
             for (let i = 0; i < addItems.length; i++) {
@@ -50,7 +51,7 @@ class basketfile {
                 return shouldUpdate;
             } else return false;
         });
-        basket_=   basket_.concat(addItems);
+        basket_ = basket_.concat(addItems);
         basket_ = basket_.filter(function (item) {
             return item.count > 0;
         });

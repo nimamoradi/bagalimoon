@@ -37,6 +37,7 @@ class mapView extends Component {
                 context.getAddresses();
             })
             .catch(error => {
+                console.log('error is' + error);
                 server.retry(this.isAvailable, context)
             });
     };
@@ -68,6 +69,7 @@ class mapView extends Component {
 
                 context.setState({oldAddresses: responseData, sendData: false})
             }).catch(error => {
+                console.log('error is getAddresses ' + error);
                 server.retry(this.isAvailable, context)
             })
         );
@@ -80,6 +82,7 @@ class mapView extends Component {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
                 {
+
                     'title': 'مجوز دسترسی به موقیت',
                     'message': 'برنامه برای رساندن محصول نیاز به ادرس شماست'
                 }
@@ -105,7 +108,10 @@ class mapView extends Component {
                     {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
                 ;
             } else {
-                alert('مجوز داده نشد')
+                this.setState({
+                    error: null,
+                });
+                server.alert('اخطار', 'مجوز داده نشد', context)
             }
         } catch (err) {
             console.warn(err)
@@ -118,7 +124,7 @@ class mapView extends Component {
         this.state = {
             latitude: 36.288022,
             longitude: 59.616075,
-            myLocation: [],
+            myLocation: null,
             optionSelected: 0,
             error: null,
             myAddress: [],
@@ -130,15 +136,12 @@ class mapView extends Component {
             senderName: '',
             myAddress_id: -1,
         };
-
-
         context = this;
     }
 
     componentDidMount() {
-        this.requestLocationPermission();
         this.load_api_code();
-
+        this.requestLocationPermission();
 
     }
 
@@ -178,46 +181,6 @@ class mapView extends Component {
             });
     };
 
-    newAddresses2() {
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
-
-        const request = fetch(server.getServerAddress() + '/api/addNewAddress', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                api_code: context.state.api_code,
-                address: {
-                    name: context.state.myAddressName,
-                    city_id: "0",        //now select 0
-                    state_id: "0", //now select 0
-                    Address: context.state.myAddress,
-                    lat: context.state.myLocation.latitude,
-                    lng: context.state.myLocation.longitude,
-                }
-            })
-
-        });
-        console.log("addNewAddress");
-        return Promise
-            .race([timeout, request])
-            .then((response) => response.json().then((responseData) => {
-
-                context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
-
-                context.finalBasket();
-            })
-                .catch(error => {
-                    server.retry(this.newAddresses, context)
-                }));
-
-        // context.finalBasket();
-
-    }
 
     onSelect(index) {
         this.setState({
@@ -266,24 +229,28 @@ class mapView extends Component {
                                     longitudeDelta: 0.01,
                                 }}
                                 onLongPress={(e) => {
-                                    this.setState({myLocation: e.nativeEvent.coordinate});
-                                    this.setState({latitude: e.nativeEvent.coordinate.latitude});
-                                    this.setState({longitude: e.nativeEvent.coordinate.longitude});
+                                    this.setState({
+                                        myLocation: e.nativeEvent.coordinate,
+                                        latitude: e.nativeEvent.coordinate.latitude,
+                                        longitude: e.nativeEvent.coordinate.longitude
+                                    });
                                 }}>
 
 
-                                {(this.state.myLocation !== null) ?
+                                {((context.state.myLocation!== null)) ?
                                     <MapView.Marker draggable
                                                     coordinate={this.state.myLocation}
                                                     onDragEnd={(e) => {
-                                                        this.setState({myLocation: e.nativeEvent.coordinate});
-                                                        this.setState({latitude: e.nativeEvent.coordinate.latitude});
-                                                        this.setState({longitude: e.nativeEvent.coordinate.longitude});
+                                                        this.setState({
+                                                            myLocation: e.nativeEvent.coordinate,
+                                                            latitude: e.nativeEvent.coordinate.latitude,
+                                                            longitude: e.nativeEvent.coordinate.longitude
+                                                        });
                                                     }
                                                     }
 
                                     /> : null}
-                            </MapView>}
+                            </MapView>
 
 
                         </View>
@@ -355,7 +322,7 @@ class mapView extends Component {
 
 
     offlineSale = () => {
-
+        console.log(context.state.myLocation);
         if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
             if (context.state.optionSelected === 1 || context.state.optionSelected === 0) {
 
@@ -365,7 +332,7 @@ class mapView extends Component {
                         'همه فیلدها پر نشده اند',
                         context);
                 }
-                else if (context.state.myLocation === null && context.state.myAddress === [] && context.state.myAddress.size === 0) {
+                else if (context.state.myLocation === null) {
                     server.alert('اخطار',
                         'موقیت خود را انتخاب کنید',
                         context);

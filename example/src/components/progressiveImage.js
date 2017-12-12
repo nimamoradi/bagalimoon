@@ -43,7 +43,8 @@ class progressiveImage extends React.Component {
             >
 
                 <Animated.Image
-                    resizeMode={'contain'}
+                    resizeMethod='scale'
+                    resizeMode='stretch'
                     key={this.props.key}
                     style={[
                         {
@@ -55,7 +56,8 @@ class progressiveImage extends React.Component {
                     onLoad={(event) => this.onThumbnailLoad(event)}
                 />
                 <Animated.Image
-                    resizeMode={'contain'}
+                    resizeMethod='scale'
+                    resizeMode='stretch'
                     key={this.props.key}
                     style={[
                         {

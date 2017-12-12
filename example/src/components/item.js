@@ -12,7 +12,7 @@ function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown})
 
                 onPress={onPress}>
                 <View style={styles.row}>
-                    <ProgressiveImage source={{uri:  imageUrl}} height={25 * vh} width={30 * vw}  style={styles.image} key={imageUrl}
+                    <ProgressiveImage source={{uri:  imageUrl}} height={25 * vh} width={35 * vw}  style={styles.image} key={imageUrl}
                                       thumbnail={require("../../img/load.png")}/>
 
                     <Text style={styles.text}>{title}</Text>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         textAlign: 'right'
     },
     image: {
-        height: 25 * vh, width: 30 * vw, borderRadius: 20,
+        height: 25 * vh, width: 35 * vw, borderRadius: 20,
         borderWidth: 0.5,
     }, countText: {
         fontSize: vw * 4.5,

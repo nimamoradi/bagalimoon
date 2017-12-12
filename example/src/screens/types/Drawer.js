@@ -44,6 +44,7 @@ class MyClass extends React.Component {
     };
 
     orderHistroy() {
+        this.toggleDrawer();
         this.props.navigator.push({
             screen: 'example.Types.orderHistroy',
             passProps: {

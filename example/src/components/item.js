@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import ProgressiveImage from './progressiveImage'
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown}) {
@@ -12,7 +12,9 @@ function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown})
 
                 onPress={onPress}>
                 <View style={styles.row}>
-                    <Image source={{uri: imageUrl}} style={styles.image}/>
+                    <ProgressiveImage source={{uri:  imageUrl}} height={25 * vh} width={30 * vw}  style={styles.image} key={imageUrl}
+                                      thumbnail={require("../../img/load.png")}/>
+
                     <Text style={styles.text}>{title}</Text>
                     {(count!==0) ? <View style={{
                         position: 'absolute',

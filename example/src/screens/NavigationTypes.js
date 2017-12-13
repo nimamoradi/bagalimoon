@@ -17,6 +17,7 @@ import _ from 'lodash'
 import basketFile from '../basketFile'
 import HockeyApp from 'react-native-hockeyapp'
 import NavBar from '../components/navBar'
+import dataHandeling from '../dataHandeling'
 
 let loaded = false;
 let context;
@@ -45,20 +46,18 @@ class NavigationTypes extends React.Component {
             method: 'POST', retries: 5
 
         }).then((response) => response.json().then((responseData) => {
-                let lastBasket = basketFile.getBasket();
 
-                for (let j = 0; j < lastBasket.length; j++) {
-                    for (let i = 0; i < responseData.length; i++) {
-                        if (lastBasket[j].id === responseData[i].id) {
-                            responseData[i].count = lastBasket[j].count;
-                        }
-                    }
-                }
+                responseData = responseData.map(function (item) {
+                    item.isBestSellingProduct = true;
+                    return item;
+                });
+
                 context.setState({
-                    BestSellingProducts: responseData,
+                    superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
                 })
 
             }).catch(error => {
+                console.log(error);
                 if (!loaded) {
                     server.retry(context.isAvailable, context);
                     loaded = true;
@@ -85,9 +84,16 @@ class NavigationTypes extends React.Component {
                         }
                     }
                 }
+
+                responseData = responseData.map(function (item) {
+                    item.isSpecialOffer = true;
+                    return item;
+                });
+
                 context.setState({
-                    SpecialOffer: responseData,
+                    superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
                 })
+
 
             }).catch(error => {
                 if (!loaded) {
@@ -130,7 +136,7 @@ class NavigationTypes extends React.Component {
 
     }
 
-     isAvailable = () => {
+    isAvailable = () => {
         context.setState({dataReady: false});
         loaded = false;
         const timeout = new Promise((resolve, reject) => {
@@ -163,7 +169,6 @@ class NavigationTypes extends React.Component {
                 }, 20);
 
 
-
             })
             .catch(error => {
                 if (!loaded) {
@@ -173,13 +178,7 @@ class NavigationTypes extends React.Component {
 
             });
     };
-    resolveAfter2(x) {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve(x);
-            }, 20);
-        });
-    }
+
 
     goToBanner = (LinkTo, Link_id) => {
         let title;
@@ -274,6 +273,7 @@ class NavigationTypes extends React.Component {
             Types: [],
             dataSourceOffer: [],
             banners: [],
+            superBasket: []
         };
         context = this;
 
@@ -298,40 +298,40 @@ class NavigationTypes extends React.Component {
         });
     };
     onUp_SpecialOffer = (countNumber, id) => {
-        let updatedState = context.state.SpecialOffer;
+        let updatedState = context.state.superBasket;
 
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']++;
 
-        context.setState({SpecialOffer: updatedState});
+        context.setState({superBasket: updatedState});
     };
     onDown_SpecialOffer = (countNumber, id) => {
-        let updatedState = context.state.SpecialOffer;
+        let updatedState = context.state.superBasket;
 
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']--;
 
-        context.setState({SpecialOffer: updatedState});
+        context.setState({superBasket: updatedState});
     };
     onUp_BestSellingProducts = (countNumber, id) => {
-        let updatedState = context.state.BestSellingProducts;
+        let updatedState = context.state.superBasket;
 
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']++;
 
-        context.setState({BestSellingProducts: updatedState});
+        context.setState({superBasket: updatedState});
     };
     onDown_BestSellingProducts = (countNumber, id) => {
-        let updatedState = context.state.BestSellingProducts;
+        let updatedState = context.state.superBasket;
 
         let index = server.getIndex(id, updatedState, 'id');
 
         updatedState[index]['count']--;
 
-        context.setState({BestSellingProducts: updatedState});
+        context.setState({superBasket: updatedState});
     };
     offerBestSellingProducts = (title, imageUrl, des, price, id, disscount, off, count) => {
         this.props.navigator.push({
@@ -481,17 +481,8 @@ class NavigationTypes extends React.Component {
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        data={this.state.SpecialOffer}
-                        renderItem={({item}) => <Item title={item.name}
-                                                      count={item.count}
-                                                      onUp={() => this.onUpSpecialOffer(item)}
-                                                      onDown={() => this.onDownSpecialOffer(item)}
-                                                      price={item.price}
-                                                      disscount={(item.off !== 0) ? item.main_price : null}
-                                                      imageUrl={server.getServerAddress() + '/' + item.photo}
-                                                      onPress={() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
-                                                          item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
-                        />}
+                        data={this.state.superBasket}
+                        renderItem={({item}) => this.renderSpecialOffer(item)}
                     />
                     <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
 
@@ -499,17 +490,8 @@ class NavigationTypes extends React.Component {
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        data={this.state.BestSellingProducts}
-                        renderItem={({item}) => <Item title={item.name}
-                                                      count={item.count}
-                                                      onUp={() => this.onUpBestSellingProducts(item)}
-                                                      onDown={() => this.onDownBestSellingProducts(item)}
-                                                      price={item.price}
-                                                      disscount={(item.off !== 0) ? item.main_price : null}
-                                                      imageUrl={server.getServerAddress() + '/' + item.photo}
-                                                      onPress={() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
-                                                          item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
-                        />}
+                        data={this.state.superBasket}
+                        renderItem={({item}) => this.renderBestSellingProducts(item)}
                     />
 
 
@@ -518,54 +500,89 @@ class NavigationTypes extends React.Component {
 
     }
 
+    renderSpecialOffer(item) {
+
+        if (item.hasOwnProperty('isSpecialOffer')) {
+            return <Item title={item.name}
+                         count={item.count}
+                         onUp={() => this.onUpSpecialOffer(item)}
+                         onDown={() => this.onDownSpecialOffer(item)}
+                         price={item.price}
+                         disscount={(item.off !== 0) ? item.main_price : null}
+                         imageUrl={server.getServerAddress() + '/' + item.photo}
+                         onPress={() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
+                             item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
+            />
+        }
+        return null;
+    }
+
+    renderBestSellingProducts(item) {
+        if (item.hasOwnProperty('isBestSellingProduct')) {
+
+            return <Item title={item.name}
+                         count={item.count}
+                         onUp={() => this.onUpBestSellingProducts(item)}
+                         onDown={() => this.onDownBestSellingProducts(item)}
+                         price={item.price}
+                         disscount={(item.off !== 0) ? item.main_price : null}
+                         imageUrl={server.getServerAddress() + '/' + item.photo}
+                         onPress={() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
+                             item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
+            />
+            //Do this
+        }
+        return null;
+    }
+
     onUpSpecialOffer = (rowdata) => {
 
         rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.SpecialOffer;
+        let updatedState = this.state.superBasket;
 
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         // console.log(updatedState);
 
-        this.setState({SpecialOffer: updatedState});
+        this.setState({superBasket: updatedState});
 
     };
     onDownSpecialOffer = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.SpecialOffer;
+        let updatedState = this.state.superBasket;
 
-        let data = this.state.SpecialOffer;
+        let data = this.state.superBasket;
         if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
             updatedState[data.indexOf(rowdata)]['count']--;
             // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         }
         // console.log(updatedState);
-        this.setState({SpecialOffer: updatedState,});
+        this.setState({superBasket: updatedState,});
 
     };
     onUpBestSellingProducts = (rowdata) => {
 
         rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.BestSellingProducts;
+        let updatedState = this.state.superBasket;
 
         updatedState[updatedState.indexOf(rowdata)]['count']++;
         // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         // console.log(updatedState);
 
-        this.setState({BestSellingProducts: updatedState});
+        this.setState({superBasket: updatedState});
 
     };
     onDownBestSellingProducts = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.BestSellingProducts;
+        let updatedState = this.state.superBasket;
 
-        let data = this.state.BestSellingProducts;
+        let data = this.state.superBasket;
         if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
             updatedState[data.indexOf(rowdata)]['count']--;
             // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
         }
         // console.log(updatedState);
-        this.setState({BestSellingProducts: updatedState,});
+        this.setState({superBasket: updatedState,});
 
     };
 }

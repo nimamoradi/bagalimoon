@@ -15,10 +15,24 @@ class orderHistroy extends React.Component {
         super(props);
         this.state = {
             orderData: [],
-            sendData: true
+            sendData: true,
+            api_code:''
         };
         context = this;
+
     }
+
+    load_api_code = () => {
+        AsyncStorage.getItem('api_code').then((item) => {
+
+            context.setState({api_code: item}, () => {
+                context.isAvailable();
+
+            })
+
+        })
+    };
+
 
     isAvailable = () => {
         context.setState({sendData: true});
@@ -32,7 +46,7 @@ class orderHistroy extends React.Component {
             .race([timeout, request])
             .then(response => {
 
-                context.getOrderHistory(context.props.api_code);
+                context.getOrderHistory(context.state.api_code);
             })
             .catch(error => {
                 server.retry(this.isAvailable, context)
@@ -41,7 +55,7 @@ class orderHistroy extends React.Component {
 
     getOrderHistory = (api_code) => {
 
-
+console.log('apicode '+JSON.stringify(api_code));
         fetch(server.getServerAddress() + '/api/orderList', {
             method: 'POST',
             headers: {
@@ -49,7 +63,7 @@ class orderHistroy extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                api_code: '$2y$10$kCRfPJxYsjYaJqw/SYZsAewhiloZAF7WK.9JjLaxjh3xCcgdWEklWry3EKqsIwDNlQ2Q40eAMmCtOCR8IYt',
+                api_code:api_code,
             })
         }).then((response) => response.json())
             .then((responseData) => {
@@ -70,7 +84,7 @@ class orderHistroy extends React.Component {
 
     componentDidMount() {
         this.isAvailable();
-        // context.getOrderHistory();
+        this.load_api_code();
     }
 
 
@@ -92,7 +106,6 @@ class orderHistroy extends React.Component {
             left: 0,
             right: 0,
             bottom: 0,
-
             justifyContent: 'center',
             alignItems: 'center'
         }}>

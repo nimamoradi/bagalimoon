@@ -459,7 +459,7 @@ class NavigationTypes extends React.Component {
                         itemHeight={vh * 35}
                         sliderWidth={100 * vw}
                         itemWidth={100 * vw}
-                        loop={true}
+                        loop={false}
                     />
                     <FlatList
                         style={{

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
+import {StyleSheet, View, ScrollView,FlatList, Text, TouchableOpacity, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
@@ -11,12 +11,10 @@ let context;
 class basketFinal extends React.Component {
     constructor(props) {
         super(props);
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             basket: [],
-            dataSourceProducts: ds,
-            dataSourceBasket: ds.cloneWithRows([]),
             totalPrice: '?',
             sendData: true,
             customer_receiver_name: ''
@@ -73,7 +71,7 @@ class basketFinal extends React.Component {
                     totalPrice += Number.parseInt(basket[i]['final_price']) * Number.parseInt(basket[i]['count'])
                 }
                 this.setState({
-                    dataSourceBasket: this.state.dataSourceProducts.cloneWithRows(basket),
+                    basket:basket,
                     totalPrice: totalPrice,
                     myAddress: address,
                     customer_receiver_name: responseData.customer_receiver_name
@@ -87,20 +85,8 @@ class basketFinal extends React.Component {
     };
 
     componentDidMount() {
-
         this.isAvailable();
-
     }
-
-    // address = () => {
-    //     this.props.navigator.push({
-    //         screen: 'example.mapView',
-    //         title: 'آدرس',
-    //         passProps: {
-    //             basket:this.state.basket
-    //         },
-    //     });
-    // };
 
 
     renderRow = (rowData) => {
@@ -139,16 +125,17 @@ class basketFinal extends React.Component {
                             <Text style={styles.tableHeader}>نام</Text>
                         </View>
 
-                        <ListView
 
+                        <FlatList
                             automaticallyAdjustContentInsets={false}
                             contentContainerStyle={{flexDirection: 'column',  alignItems: 'flex-start',width: '100%',}}
                             horizontal={false}
                             showsHorizontalScrollIndicator={false}
-                            dataSource={this.state.dataSourceBasket}
-                            renderRow={(rowData) =>
-                                this.renderRow(rowData)}
+                            data={this.state.basket}
+                            renderItem={({item}) =>
+                                this.renderRow(item)}
                         />
+
                         <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
                             <View style={{flex: 1}}/>
                             <Text style={styles.price}>
@@ -191,7 +178,9 @@ class basketFinal extends React.Component {
                             </TouchableOpacity>
                             <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                               onPress={() => {
-                                                  AsyncStorage.setItem('@CurrentBasket', '');
+
+                                                  basketfile.setBasket([]);
+                                                  basketfile.writeBasket();
                                                   this.props.navigator.pop();
                                               }}>
                                 <View style={styles.buttonCancel}>

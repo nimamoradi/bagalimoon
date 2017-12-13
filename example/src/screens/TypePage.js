@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
-    ListView, Image, Picker, Dimensions
+   FlatList, Image, Picker, Dimensions
 } from 'react-native';
 import _ from 'lodash'
 import ItemView from '../components/itemView'
@@ -13,6 +13,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
 import basketFile from '../basketFile'
 
+
 let context;
 let isFirstTime;
 
@@ -20,20 +21,29 @@ class TypePage extends Component {
 
     constructor(props) {
         super(props);
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        let id = 0;
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
+
         isFirstTime = true;
         let Categories = props.Categories;
-        let subCategories = this.getIndex(this.props.title, this.props.Categories, 'name');
-        let parent_id = Categories[subCategories].id;
-        let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-        let id = 0;
-        if (sub > -1)
-            id = Categories[sub].id;
+        let index = this.getIndex(this.props.title, this.props.Categories, 'name');
+        let mainSelected = this.props.title;
+        let parent_id = Categories[index].id;
+        if (Categories[index].parent_category_id !== 0) {
+            let sub = this.getIndex(Categories[index].parent_category_id, this.props.Categories, 'id');
+            mainSelected = Categories[sub].name;
+            id = parent_id;
+        } else {
+            let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
+
+            if (sub > -1)
+                id = Categories[sub].id;
+        }
+
         this.state = {
-            mainSelected: this.props.title,
+            mainSelected: mainSelected,
             subSelected: id,
-            dataSourceView: ds.cloneWithRows([]),
-            fields: ds,
             dataReady: true,
             viewDate: [],
             basket: [],
@@ -46,11 +56,12 @@ class TypePage extends Component {
 
 
     shop = (basket) => {
+        basketFile.writeAndUpdateAutoDec(basket);
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                basket: basket
+                basket: JSON.stringify(basketFile.getBasket())
             },
         });
     };
@@ -73,17 +84,14 @@ class TypePage extends Component {
     };
 
     componentWillUnmount() {
+
+
         let basket = this.state.basket.map(
             function (x) {
                 return x.value
             }
         );
-        let orderBasket = [];
-        for (let i = 0; i < basket.length; i++) {
-            orderBasket = orderBasket.concat(basket[i]);
-        }
-
-        basketFile.writeAndUpdata(orderBasket)
+        basketFile.writeAndUpdateAutoDec(basket)
 
     }
 
@@ -93,9 +101,7 @@ class TypePage extends Component {
             this.isAvailable();
             isFirstTime = false;
         }
-        this.setState({
-            dataSourceView: this.state.fields.cloneWithRows(this.state.viewDate),
-        });
+
     }
 
     isAvailable = () => {
@@ -114,11 +120,7 @@ class TypePage extends Component {
                 let sub = context.getIndex(parent_id, context.state.Categories, 'parent_category_id');
                 if (sub > -1)
                     context.loadRenderRowData(0, context.props.Categories[sub].id);
-                else context.setState({viewDate: []}, () => {
-                    context.setState({
-                        dataSourceView: context.state.fields.cloneWithRows(this.state.viewDate),
-                    });
-                });
+                else context.setState({viewDate: []});
             })
             .catch(error => {
                 server.retry(this.isAvailable, context)
@@ -187,27 +189,20 @@ class TypePage extends Component {
                 return x.value
             }
         );
-        let orderBasket = [];
-        for (let i = 0; i < basket.length; i++) {
-            orderBasket = orderBasket.concat(basket[i]);
-        }
 
-        let lastBasket = basketFile.getBasket();
+        let arr = [];
 
-        orderBasket= _.unionBy(orderBasket, lastBasket, "id");
+        basket.forEach(function(element) {
 
+            element.forEach(function (item) {
+                console.log(item);
+                arr.push(item)
+            })
 
-          orderBasket = orderBasket.filter(
-            function (y) {
-                return y.count > 0
-            }
-        );
-        if (orderBasket.length > 0) {
-
-            this.shop(JSON.stringify(orderBasket));
+        });
+        if (arr.length > 0) {
+            this.shop(arr);
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-
-
     };
 
     render() {
@@ -256,30 +251,28 @@ class TypePage extends Component {
                     </View>
 
                 </View>
-
-                <ListView
+                <FlatList
                     style={{flex: 3}}
-                    dataSource={this.state.dataSourceView}
-                    renderRow={(columnData) =>
+                    data={this.state.viewDate}
+                    renderItem={({item}) =>
                         <ItemView
-                            onPress={() => this.product(columnData.name,
-                                server.getServerAddress() + columnData.photo,
-                                columnData.long_description,
-                                columnData.price,
-                                columnData.count,
-                                columnData.id,
-                                columnData.main_price,
-                                columnData.off,
+                            onPress={() => this.product(item.name,
+                                server.getServerAddress() + item.photo,
+                                item.long_description,
+                                item.price,
+                                item.count,
+                                item.id,
+                                item.main_price,
+                                item.off,
                             )}
-                            title={columnData.name}
-                            disscount={columnData.main_price}
-                            price={columnData.price}
-                            count={columnData.count}
-                            onUp={() => this.onUp(columnData)}
-                            onDown={() => this.onDown(columnData)}
-                            imageUrl={server.getServerAddress() + columnData.photo}/>}
+                            title={item.name}
+                            disscount={item.main_price}
+                            price={item.price}
+                            count={item.count}
+                            onUp={() => this.onUp(item)}
+                            onDown={() => this.onDown(item)}
+                            imageUrl={server.getServerAddress() + item.photo}/>}
                 />
-
                 {(!this.state.dataReady ) && <View style={{
                     position: 'absolute',
                     top: 0,

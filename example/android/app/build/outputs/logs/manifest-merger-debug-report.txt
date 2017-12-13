@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-28:12
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12
 	package
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:3:5-27
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
@@ -23,10 +23,11 @@ uses-permission#android.permission.INTERNET
 ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:5:5-67
 MERGED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:9:5-67
 MERGED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:20:5-66
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:12:5-67
 	android:name
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:7:5-26:19
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:7:5-34:19
 MERGED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:24:5-19
 MERGED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:18:5-20:19
 MERGED from [com.google.android.gms:play-services-tasks:10.2.6] C:\Users\nima\.android\build-cache\24ee21ca8d5daddb2b5246874441fcc73dbc35dd\output\AndroidManifest.xml:4:5-19
@@ -35,13 +36,12 @@ MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.an
 MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:22:5-20
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:11:5-18:19
-MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:13:5-20
-MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:3:3-17
-MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.android\build-cache\a7f03022832eaf97df1a7696f3b7a5e704d83134\output\AndroidManifest.xml:2:3-17
 MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:11:5-20
 MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:26:5-20
 MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.android\build-cache\16b9119ad7871710a9f17d178eb18afef7a5eeb0\output\AndroidManifest.xml:12:5-20
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:12:5-20
+MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:29:5-20
@@ -51,7 +51,9 @@ MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.andro
 MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:26:5-20
 MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:26:5-20
 MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:29:5-20
-MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:12:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:3:3-17
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.android\build-cache\a7f03022832eaf97df1a7696f3b7a5e704d83134\output\AndroidManifest.xml:2:3-17
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:15:5-21:19
 	android:label
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:13:9-41
 	android:supportsRtl
@@ -88,6 +90,16 @@ category#android.intent.category.LAUNCHER
 ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:23:17-77
 	android:name
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:23:27-74
+activity#net.hockeyapp.android.UpdateActivity
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:30:3-67
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:16:9-73
+	android:name
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:30:13-64
+activity#net.hockeyapp.android.FeedbackActivity
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:31:3-69
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:17:9-75
+	android:name
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:31:13-66
 uses-sdk
 INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:5:5-7:41
@@ -100,20 +112,14 @@ MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.an
 MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:20:5-44
 MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41
-MERGED from [com.facebook.fresco:fresco:1.0.1] C:\Users\nima\.android\build-cache\edf05249fdf7a41fd6f248f1e2a2b9af6029a7b9\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.0.1] C:\Users\nima\.android\build-cache\491d73c6b3c676ab89687e2530d4a195211039c6\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.0.1] C:\Users\nima\.android\build-cache\26a47423188fd82c75a25a16303e8ec8d2142916\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.0.1] C:\Users\nima\.android\build-cache\1c33024c7f988eec4aaef85277d719e2f1d5d18d\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.0.1] C:\Users\nima\.android\build-cache\49df4f68ca39094bf62dd0f87ad497330c8ec879\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.0.1] C:\Users\nima\.android\build-cache\b346dbb1858d4c7fe4112c02068087ccfc1950a2\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:2:3-70
 MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:20:5-44
 MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.android\build-cache\16b9119ad7871710a9f17d178eb18afef7a5eeb0\output\AndroidManifest.xml:8:5-10:41
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:8:5-10:41
+MERGED from [example:react-native-hockeyapp:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-hockeyapp\android\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:21:5-23:60
@@ -123,7 +129,15 @@ MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.andro
 MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:8:5-10:41
+MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41
+MERGED from [com.facebook.fresco:fresco:1.0.1] C:\Users\nima\.android\build-cache\edf05249fdf7a41fd6f248f1e2a2b9af6029a7b9\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.0.1] C:\Users\nima\.android\build-cache\491d73c6b3c676ab89687e2530d4a195211039c6\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.0.1] C:\Users\nima\.android\build-cache\26a47423188fd82c75a25a16303e8ec8d2142916\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.0.1] C:\Users\nima\.android\build-cache\1c33024c7f988eec4aaef85277d719e2f1d5d18d\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.0.1] C:\Users\nima\.android\build-cache\49df4f68ca39094bf62dd0f87ad497330c8ec879\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.0.1] C:\Users\nima\.android\build-cache\b346dbb1858d4c7fe4112c02068087ccfc1950a2\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:2:3-70
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:7:5-9:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
@@ -138,6 +152,7 @@ ADDED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\e
 		ADDED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:10:22-78
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:19:5-78
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:19:22-76
 uses-feature#0x00020000
@@ -192,16 +207,6 @@ ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gi
 		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:17:13-37
 	android:name
 		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:16:13-77
-uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:11:5-78
-	android:name
-		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:11:22-75
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-28:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-28:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-28:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
 meta-data#android.support.VERSION
 ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:25:5-27:34
 MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:22:5-24:34
@@ -219,3 +224,26 @@ MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\b
 		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:27:9-31
 	android:name
 		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:26:9-47
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:11:5-78
+	android:name
+		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:11:22-75
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:13:5-81
+uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+activity#net.hockeyapp.android.PaintActivity
+ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:18:9-72
+	android:name
+		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:18:19-69
+activity#net.hockeyapp.android.LoginActivity
+ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:19:9-72
+	android:name
+		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:19:19-69
+activity#net.hockeyapp.android.ExpiryInfoActivity
+ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:20:9-77
+	android:name
+		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:20:19-74

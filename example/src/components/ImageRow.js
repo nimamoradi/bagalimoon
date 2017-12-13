@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform, Image, Dimensions} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
+import ProgressiveImage from './progressiveImage'
 
 function ImageRow({title, onPress, imageUrl}) {
 
@@ -13,10 +14,11 @@ function ImageRow({title, onPress, imageUrl}) {
             underlayColor={'rgba(0, 0, 0, 0.0)'}
         >
             <View style={styles.row}>
-                <Image source={{uri: imageUrl}}
-                       resizeMethod='scale'
-                       resizeMode='stretch'
-                       style={styles.image} />
+                <ProgressiveImage source={{uri:  imageUrl}}
+                                  height={35 * vw} width={1000 * vw}
+                                  style={styles.image} key={imageUrl}
+                                  thumbnail={require("../../img/load.png")}/>
+             
             </View>
         </TouchableHighlight>
     );

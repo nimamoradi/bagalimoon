@@ -3,6 +3,7 @@ import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
 import {vw, vh, vmin, vmax} from './viewport'
 
+import basketFile from './basketFile'
 
 // screen related book keeping
 registerScreens();
@@ -52,35 +53,22 @@ AsyncStorage.getItem('api_code').then((item) => {
         AsyncStorage.getItem('@CurrentBasket').then((basket_) => {
             if (basket_ === null) {
                 basket = [];
+                basketFile.setBasket([]);
             }
             else {
                 basket = JSON.parse(basket_);
-                console.log('basket '+basket)
+                basketFile.setBasket(basket);
+                // console.log('basket ' + basket)
             }
             startAppdata = {
                 screen: {
                     screen: 'example.Types', // unique ID registered with Navigation.registerScreen
                     title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
                     navigatorStyle: {
-                        navBarTranslucent: false
-                    }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-                    navigatorButtons: {
-                        // leftButtons: [
-                        //     {
-                        //         id: 'ShoppingBasket',
-                        //         icon: require('../img/ShoppingBasket.png'),
-                        //         style: {width: 5 * vw, height: 5 * vw},
-                        //
-                        //     },
-                        // ],
-                        rightButtons: [
-                            {
-                                style: {width: 5 * vw, height: 5 * vw},
-                                id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                                icon: require('../img/menu.png'), // for icon button, provide the local image asset name
-                            }
-                        ],
-                    } // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+                        navBarTranslucent: false,
+                        navBarHidden: true,
+                    },
+
                 },
                 appStyle: {
                     orientation: 'portrait',
@@ -101,7 +89,7 @@ AsyncStorage.getItem('api_code').then((item) => {
                     // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
                     disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
                 },
-                passProps: {api_code: item, basket: basket}, // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {api_code: item,}, // simple serializable object that will pass as props to all top screens (optional)
 
 
             };

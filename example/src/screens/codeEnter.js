@@ -17,6 +17,7 @@ import fetch from '../fetch'
 
 let context;
 import server from '../code'
+import basketFile from '../basketFile'
 
 let data;
 let Categories;
@@ -64,7 +65,7 @@ class codeEnter extends React.Component {
                                 padding: 10,
                                 margin: 40,
                                 fontFamily: 'B Yekan',
-                                fontSize: vw*6,
+                                fontSize: vw * 6,
                                 color: '#ffffff'
                             }}>تایید</Text>
                         </TouchableOpacity>
@@ -76,6 +77,7 @@ class codeEnter extends React.Component {
             </Image>
         );
     }
+
     isAvailable = () => {
         context.setState({sendData: true});
         const timeout = new Promise((resolve, reject) => {
@@ -116,10 +118,10 @@ class codeEnter extends React.Component {
                     AsyncStorage.setItem('api_code', responseData.api_code);
                     context.pushMainScreen(responseData.api_code);
                 } else if (responseData.successful === false) {
-                    server.alert('هشدار','کد اشتباه است',context);
+                    server.alert('هشدار', 'کد اشتباه است', context);
                 }
                 else if (responseData.sms_code !== null) {
-                    server.alert('هشدار','شماره کد را وارد کنید',context);
+                    server.alert('هشدار', 'شماره کد را وارد کنید', context);
                 }
 
 
@@ -129,33 +131,18 @@ class codeEnter extends React.Component {
     };
 
     pushMainScreen(api) {
+        basketFile.setBasket([]);
         context.props.navigator.push({
-            backButtonTitle:'',
+            backButtonTitle: '',
             screen: 'example.Types',
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
             navigatorStyle: {
-                navBarTranslucent: false
+                navBarTranslucent: false,
+                navBarHidden: true,
             }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             backButtonHidden: true,
             overrideBackPress: true,
-            navigatorButtons: {
-                // leftButtons: [
-                //     {
-                //         id: 'ShoppingBasket',
-                //         icon: require('../../img/ShoppingBasket.png'),
-                //         style: {width: 5 * vw, height: 5 * vw},
-                //     },
-                // ],
-                rightButtons: [
-
-                    {
-                        style: {width: 5 * vw, height: 5 * vw},
-                        id: 'back', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-                        icon: require('../../img/menu.png'), // for icon button, provide the local image asset name
-                    }
-                ],
-            }, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-            passProps: {api_code: api,basket:[]},
+            passProps: {api_code: api, basket: []},
 
         });
     }
@@ -175,20 +162,19 @@ const styles = StyleSheet.create({
     subRow: {
         flex: 1,
         margin: 50,
-
         flexDirection: 'column',
         alignItems: 'flex-end'
 
     },
     text: {
-        fontSize:vw*5,
+        fontSize: vw * 5,
         fontFamily: 'B Yekan',
         margin: 50,
         marginBottom: 10,
         marginLeft: 10,
     },
     textInput: {
-        fontSize:vw*5,
+        fontSize: vw * 5,
         borderRadius: 10,
         borderColor: '#bec4be',
         borderWidth: 0.5,

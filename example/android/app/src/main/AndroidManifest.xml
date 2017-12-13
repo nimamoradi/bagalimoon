@@ -23,6 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+		
+		
+		
+		
+		<activity android:name="net.hockeyapp.android.UpdateActivity" />
+		<activity android:name="net.hockeyapp.android.FeedbackActivity" />
+		
+		
     </application>
 
 </manifest>

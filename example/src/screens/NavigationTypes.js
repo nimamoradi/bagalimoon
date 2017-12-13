@@ -30,14 +30,14 @@ class NavigationTypes extends React.Component {
 
     };
 
-    componentWillUnmount() {
-        let SpecialOffer = context.state.SpecialOffer;
-
-        let BestSellingProducts = context.state.BestSellingProducts;
-
-        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
-        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
-    }
+    // componentWillUnmount() {
+    //     let SpecialOffer = context.state.SpecialOffer;
+    //
+    //     let BestSellingProducts = context.state.BestSellingProducts;
+    //
+    //     BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
+    //     basketFile.writeAndUpdateAutoDec(BestSellingProducts);
+    // }
 
     getBestSellingProducts() {
 
@@ -149,11 +149,7 @@ class NavigationTypes extends React.Component {
             .race([timeout, request])
             .then(response => {
                 context.setState({dataReady: true});
-                // server.performTasks([], [
-                //     this.loadCategories,
-                //     this.getBanners,
-                //     this.getSpecialOffer,
-                //     this.getBestSellingProducts]);
+
 
                 setTimeout(() => {
                     this.getBanners();
@@ -281,15 +277,6 @@ class NavigationTypes extends React.Component {
 
 
     toggleDrawer = () => {
-        let SpecialOffer = context.state.SpecialOffer;//.filter(function (item) {
-        //    return item.count>0;
-        // });
-        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
-        //     return item.count>0;
-        // });
-
-        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
-        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
 
         this.props.navigator.toggleDrawer({
             side: 'right',
@@ -385,31 +372,18 @@ class NavigationTypes extends React.Component {
     TypePage = (title) => {
 
 
-        let SpecialOffer = context.state.SpecialOffer;
-
-        let BestSellingProducts = context.state.BestSellingProducts;//.filter(function (item) {
-
-        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
-        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
             passProps: {
                 title: title,
-                basket: basketFile.getBasket(),
+                basket: this.state.superBasket,
                 Categories: this.state.Categories,
             },
         });
     };
 
     basket = () => {
-        let SpecialOffer = context.state.SpecialOffer;
-
-        let BestSellingProducts = context.state.BestSellingProducts;
-
-        BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
-        basketFile.writeAndUpdateAutoDec(BestSellingProducts);
-
         server.showLightBox('example.Types.basketLightBox', {
             title: this.props.title,
             onClose: this.dismissLightBox,

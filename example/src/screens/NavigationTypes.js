@@ -507,18 +507,17 @@ class NavigationTypes extends React.Component {
     // updatedState[updatedState.indexOf(rowdata)]['count']++;
     // this.setState({superBasket: updatedState});
     onUpSpecialOffer = (rowdata) => {
-        let rowDataCopy=Object.assign({},rowdata)
+        let rowDataCopy = Object.assign({}, rowdata);
         rowDataCopy.count++;
         let list = this.state.superBasket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
 
         this.setState({
             superBasket: [...list.slice(0, index),
-                            rowDataCopy,
-                         ...list.slice(index + 1)]
+                rowDataCopy,
+                ...list.slice(index + 1)]
 
         });
-
     };
     onDownSpecialOffer = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);
@@ -534,16 +533,17 @@ class NavigationTypes extends React.Component {
 
     };
     onUpBestSellingProducts = (rowdata) => {
+        let rowDataCopy = Object.assign({}, rowdata);
+        rowDataCopy.count++;
+        let list = this.state.superBasket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.superBasket;
+        this.setState({
+            superBasket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
 
-        updatedState[updatedState.indexOf(rowdata)]['count']++;
-        // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
-        // console.log(updatedState);
-
-        this.setState({superBasket: updatedState});
-
+        });
     };
     onDownBestSellingProducts = (rowdata) => {
         rowdata.count = Number.parseInt(rowdata.count);

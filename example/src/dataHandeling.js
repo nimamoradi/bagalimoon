@@ -3,7 +3,7 @@ import _ from 'lodash'
 class dataHandeling {
 
 
-    AddBasketWithNumHandel(newItems, oldbasket) {
+    static AddBasketWithNumHandel(newItems, oldbasket) {
         let basket_ = oldbasket;//copy basket
         // basket_ = _.unionBy(basket_, [], "id");
         let addItems = newItems;
@@ -44,6 +44,13 @@ class dataHandeling {
 
     };
 
+
+    static AddBasketTypePage(newItems, basket) {//update and mearge basket
+
+
+
+    };
+
     static arrayUnique(array) {
         let a = array.concat();
         for (let i = 0; i < a.length; ++i) {
@@ -71,13 +78,7 @@ class dataHandeling {
         }
         return -1;
     }
-    static indexOfIdAndCount(ar, id) {
-        for (let i = 0; i < ar.length; i++) {
-            if (ar[i].id === id) {
-                return i,ar[i].count;
-            }
-        }
-    }
+
 
 }
 

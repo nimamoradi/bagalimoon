@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
     StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
-   FlatList, Image, Picker, Dimensions
+    FlatList, Image, Picker, Dimensions
 } from 'react-native';
 import _ from 'lodash'
 import ItemView from '../components/itemView'
@@ -11,8 +11,8 @@ import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import alertBox from "../components/alertBox";
-import basketFile from '../basketFile'
-
+import basketFile from '../basketFile';
+import dataHandeling from '../dataHandeling';
 
 let context;
 let isFirstTime;
@@ -56,12 +56,11 @@ class TypePage extends Component {
 
 
     shop = (basket) => {
-        basketFile.writeAndUpdateAutoDec(basket);
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                basket: JSON.stringify(basketFile.getBasket())
+                basket: dataHandeling.basketFilter(basket)
             },
         });
     };
@@ -91,7 +90,11 @@ class TypePage extends Component {
                 return x.value
             }
         );
-        basketFile.writeAndUpdateAutoDec(basket)
+
+        basket = basket[0];
+
+        this.props.UpdateBasket(basket
+        );
 
     }
 
@@ -149,7 +152,7 @@ class TypePage extends Component {
             body: JSON.stringify({})
         }).then((response) => response.json())
             .then((responseData) => {
-                    let lastBasket = basketFile.getBasket();
+                    let lastBasket = this.props.basket;
 
                     for (let j = 0; j < lastBasket.length; j++) {
                         for (let i = 0; i < responseData.length; i++) {
@@ -192,10 +195,10 @@ class TypePage extends Component {
 
         let arr = [];
 
-        basket.forEach(function(element) {
+        basket.forEach(function (element) {
 
             element.forEach(function (item) {
-                console.log(item);
+
                 arr.push(item)
             })
 

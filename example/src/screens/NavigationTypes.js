@@ -16,6 +16,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import HockeyApp from 'react-native-hockeyapp'
 import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
+import _ from 'lodash'
 
 let loaded = false;
 let context;
@@ -37,6 +38,31 @@ class NavigationTypes extends React.Component {
     //     BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
     //     basketFile.writeAndUpdateAutoDec(BestSellingProducts);
     // }
+    basketUpdater(newItems) {
+        let basket = context.state.superBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({},  basket[i], newItems[j]);
+                    newItems[j].wasInBasket = true;
+                }
+            }
+        }
+        newItems = newItems.filter(function (item) {
+            if (!item.hasOwnProperty('wasInBasket')) {
+                return item.count > 0;
+
+            } else {
+                delete item.wasInBasket;
+                return false;
+            }
+
+        });
+        context.setState({superBasket: basket.concat(newItems)})
+
+    }
 
     getBestSellingProducts() {
 
@@ -368,6 +394,7 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: title,
+                UpdateBasket: this.basketUpdater,
                 basket: this.state.superBasket,
                 Categories: this.state.Categories,
             },
@@ -470,7 +497,7 @@ class NavigationTypes extends React.Component {
 
     renderSpecialOffer(item) {
 
-        if (item.hasOwnProperty('isSpecialOffer')) {
+        if (item.hasOwnProperty('isSpecialOffer')) {//item.hasOwnProperty('isSpecialOffer')
             return <Item title={item.name}
                          count={item.count}
                          onUp={() => this.onUpSpecialOffer(item)}
@@ -520,16 +547,21 @@ class NavigationTypes extends React.Component {
         });
     };
     onDownSpecialOffer = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.superBasket;
 
-        let data = this.state.superBasket;
-        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
-            updatedState[data.indexOf(rowdata)]['count']--;
-            // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        let rowDataCopy = Object.assign({}, rowdata);
+        if (rowDataCopy.count !== 0) {
+            rowDataCopy.count--;
         }
-        // console.log(updatedState);
-        this.setState({superBasket: updatedState,});
+        let list = this.state.superBasket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
+
+        this.setState({
+            superBasket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
+
 
     };
     onUpBestSellingProducts = (rowdata) => {
@@ -546,16 +578,19 @@ class NavigationTypes extends React.Component {
         });
     };
     onDownBestSellingProducts = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.superBasket;
-
-        let data = this.state.superBasket;
-        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
-            updatedState[data.indexOf(rowdata)]['count']--;
-            // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
+        let rowDataCopy = Object.assign({}, rowdata);
+        if (rowDataCopy.count !== 0) {
+            rowDataCopy.count--;
         }
-        // console.log(updatedState);
-        this.setState({superBasket: updatedState,});
+        let list = this.state.superBasket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
+
+        this.setState({
+            superBasket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
 
     };
 }

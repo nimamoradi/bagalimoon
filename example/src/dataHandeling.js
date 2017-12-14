@@ -3,8 +3,8 @@ import _ from 'lodash'
 class dataHandeling {
 
 
-     AddBasketWithNumHandel(newItems,oldbasket) {
-        let basket_ =oldbasket;//copy basket
+    AddBasketWithNumHandel(newItems, oldbasket) {
+        let basket_ = oldbasket;//copy basket
         // basket_ = _.unionBy(basket_, [], "id");
         let addItems = newItems;
 //updating basket
@@ -36,22 +36,47 @@ class dataHandeling {
         return basket_;
 
     };
-   static AddBasket(newItems,basket) {//update and mearge basket
-       return this.arrayUnique((_.map(basket, function (item) {
-           return _.assign(item, _.find(newItems, ['id', item.id]));
-       })).concat(newItems));
+
+    static AddBasket(newItems, basket) {//update and mearge basket
+        return this.arrayUnique((_.map(basket, function (item) {
+            return _.assign(item, _.find(newItems, ['id', item.id]));
+        })).concat(newItems));
 
     };
-     static arrayUnique(array) {
+
+    static arrayUnique(array) {
         let a = array.concat();
-        for(let i=0; i<a.length; ++i) {
-            for(let j=i+1; j<a.length; ++j) {
-                if(a[i].id === a[j].id)
+        for (let i = 0; i < a.length; ++i) {
+            for (let j = i + 1; j < a.length; ++j) {
+                if (a[i].id === a[j].id)
                     a.splice(j--, 1);
             }
         }
 
         return a;
+    }
+
+    static basketFilter(basket) {
+        return basket.filter(function (item) {
+            return item.count > 0;
+
+        })
+    }
+
+    static indexOfId(ar, id) {
+        for (let i = 0; i < ar.length; i++) {
+            if (ar[i].id === id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    static indexOfIdAndCount(ar, id) {
+        for (let i = 0; i < ar.length; i++) {
+            if (ar[i].id === id) {
+                return i,ar[i].count;
+            }
+        }
     }
 
 }

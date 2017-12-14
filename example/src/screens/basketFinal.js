@@ -91,7 +91,7 @@ class basketFinal extends React.Component {
 
     renderRow = (rowData) => {
         return (
-            <View style={{flexDirection: 'row'}}>
+            <View style={styles.row}>
 
                 <Text style={styles.price}>{rowData.final_price}</Text>
                 <Text style={styles.price}>{rowData.regular_price}</Text>
@@ -128,7 +128,7 @@ class basketFinal extends React.Component {
 
                         <FlatList
                             automaticallyAdjustContentInsets={false}
-                            contentContainerStyle={{flexDirection: 'column',  alignItems: 'flex-start',width: '100%',}}
+                            contentContainerStyle={{flexDirection: 'column',  }}
                             horizontal={false}
                             showsHorizontalScrollIndicator={false}
                             data={this.state.basket}
@@ -265,9 +265,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#d46e6220'
     }, container: {
         flex: 1,
-        height: 100 * vh,
-        flexDirection: 'column',
-        alignItems: 'flex-start',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
     },

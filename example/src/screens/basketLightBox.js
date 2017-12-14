@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, Text, Dimensions, Button, TouchableHighlight, AsyncStorage} from 'react-native';
-import PropTypes from 'prop-types';
+
 import TableRow from '../components/tableRow'
-import BasketPreView from './basketPreview'
+
 import {vw, vh, vmin, vmax} from '../viewport'
-import basketFile from '../basketFile'
+import dataHandeling from '../dataHandeling'
+
 class basketLightBox extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,7 @@ class basketLightBox extends React.Component {
     }
 
     async loadData() {
-        let json = basketFile.getBasket();
+        let json = dataHandeling.basketFilter(this.props.basket);
         if (json !== null) {
             let totalPrice = 0;
 

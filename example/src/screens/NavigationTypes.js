@@ -13,14 +13,13 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh, vmin, vmax} from '../viewport'
-import _ from 'lodash'
-import basketFile from '../basketFile'
 import HockeyApp from 'react-native-hockeyapp'
 import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
 
 let loaded = false;
 let context;
+
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -75,15 +74,7 @@ class NavigationTypes extends React.Component {
             method: 'POST',
 
         }).then((response) => response.json().then((responseData) => {
-                let lastBasket = basketFile.getBasket();
 
-                for (let j = 0; j < lastBasket.length; j++) {
-                    for (let i = 0; i < responseData.length; i++) {
-                        if (lastBasket[j].id === responseData[i].id) {
-                            responseData[i].count = lastBasket[j].count;
-                        }
-                    }
-                }
 
                 responseData = responseData.map(function (item) {
                     item.isSpecialOffer = true;
@@ -385,6 +376,7 @@ class NavigationTypes extends React.Component {
 
     basket = () => {
         server.showLightBox('example.Types.basketLightBox', {
+            basket: this.state.superBasket,
             title: this.props.title,
             onClose: this.dismissLightBox,
         }, context);
@@ -441,6 +433,7 @@ class NavigationTypes extends React.Component {
                             margin: 1 * vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
+                        keyExtractor={(item) => item.id}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.Types}
@@ -454,6 +447,7 @@ class NavigationTypes extends React.Component {
                     <FlatList
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
+                        keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderSpecialOffer(item)}
@@ -509,16 +503,21 @@ class NavigationTypes extends React.Component {
         return null;
     }
 
+    // let updatedState = this.state.superBasket;
+    // updatedState[updatedState.indexOf(rowdata)]['count']++;
+    // this.setState({superBasket: updatedState});
     onUpSpecialOffer = (rowdata) => {
+        let rowDataCopy=Object.assign({},rowdata)
+        rowDataCopy.count++;
+        let list = this.state.superBasket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.superBasket;
+        this.setState({
+            superBasket: [...list.slice(0, index),
+                            rowDataCopy,
+                         ...list.slice(index + 1)]
 
-        updatedState[updatedState.indexOf(rowdata)]['count']++;
-        // updatedbasket[updatedbasket.indexOf(updatedState)] = updatedState;
-        // console.log(updatedState);
-
-        this.setState({superBasket: updatedState});
+        });
 
     };
     onDownSpecialOffer = (rowdata) => {

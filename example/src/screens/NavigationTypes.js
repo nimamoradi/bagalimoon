@@ -18,6 +18,7 @@ import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
+import TimerMixin from "react-timer-mixin";
 
 let loaded = false;
 let context;
@@ -188,7 +189,7 @@ class NavigationTypes extends React.Component {
     };
 
 
-    goToBanner = (LinkTo, Link_id) => {
+    goToBanner = (LinkTo, Link_id, response) => {
         let title;
 
         if (LinkTo === 'categories') {
@@ -200,27 +201,47 @@ class NavigationTypes extends React.Component {
                 }
             }
             context.TypePage(title);
-        } else {
+        } else if (LinkTo === 'product') {
+            let item;
+            let index = dataHandeling.indexOfId(context.state.superBasket, response.product.id);
+            if (index !== -1) {
+                item = context.state.superBasket[index];
+            } else {
+                item = {
+                    title: response.product.name,
+                    imageUrl: server.getServerAddress() + response.product.photo.file,
+                    des: response.product.long_description,
+                    price: response.product.min_price,
+                    id: response.product.id,
+                    count: 0,
+                    disscount: response.product.price,
+                    off: response.product.off,
+                    shouldShow: false
+                };
+                context.setState({
+                    superBasket: context.state.superBasket.push(item)
+                })
+            }
 
-            alert('این جا رو درست کن')
-            // this.props.navigator.push({
-            //     screen: 'example.Types.offer',
-            //     title: title,
-            //     passProps: {
-            //         title: title,
-            //         imageUrl: imageUrl,
-            //         des: des,
-            //         price: price,
-            //         id: id,
-            //         myNumber: count,
-            //         disscount: disscount,
-            //         off: off,
-            //         onUP: this.onUp_SpecialOffer,
-            //         onDown: this.onDown_SpecialOffer,
-            //     },
-            //
-            //
-            // });
+            this.props.navigator.push({
+                screen: 'example.Types.offer',
+                title: response.product.name,
+                passProps: {
+                    title: response.product.name,
+                    imageUrl: server.getServerAddress() + response.product.photo.file,
+                    des: response.product.long_description,
+                    price: response.product.min_price,
+                    id: response.product.id,
+                    myNumber: item.count,
+                    disscount: response.product.price,
+                    off: response.product.off,
+                    onUP: this.onUp_SpecialOffer,
+                    onDown: this.onDown_SpecialOffer,
+
+                },
+
+
+            });
         }
 
 
@@ -425,7 +446,7 @@ class NavigationTypes extends React.Component {
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
-                          onPress={() => context.goToBanner(item.LinkTo, item.Link_id)}
+                          onPress={() => context.goToBanner(item.LinkTo, item.Link_id, item)}
                 />
             </View>
         );

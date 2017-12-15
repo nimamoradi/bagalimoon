@@ -58,12 +58,7 @@ class offer extends Component {
         });
     };
 
-    //
-    // componentDidMount() {
-    //     if (this.props.myNumber === null || this.props.myNumber === 0 || this.props.myNumber === '0')
-    //         this.loadData();
-    //
-    // }
+
 
     loadData = async () => {
         const data = await AsyncStorage.getItem('@CurrentBasket');
@@ -81,7 +76,7 @@ class offer extends Component {
 
     };
 
-    findIndex(array, id, id_number) {
+    static findIndex(array, id, id_number) {
         return array.map(function (e) {
             return e.id;
         }).indexOf(id_number);

@@ -17,6 +17,7 @@ import HockeyApp from 'react-native-hockeyapp'
 import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
+import basketFile from "../basketFile";
 
 let loaded = false;
 let context;
@@ -30,22 +31,15 @@ class NavigationTypes extends React.Component {
 
     };
 
-    // componentWillUnmount() {
-    //     let SpecialOffer = context.state.SpecialOffer;
-    //
-    //     let BestSellingProducts = context.state.BestSellingProducts;
-    //
-    //     BestSellingProducts = _.unionBy(BestSellingProducts, SpecialOffer, "id");
-    //     basketFile.writeAndUpdateAutoDec(BestSellingProducts);
-    // }
-    basketUpdater(newItems) {
+
+    static basketUpdater(newItems) {
         let basket = context.state.superBasket.slice();
 
         for (let i = 0; i < basket.length; i++) {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
                     basket[i] =
-                        Object.assign({},  basket[i], newItems[j]);
+                        Object.assign({}, basket[i], newItems[j]);
                     newItems[j].wasInBasket = true;
                 }
             }
@@ -74,9 +68,9 @@ class NavigationTypes extends React.Component {
 
                 responseData = responseData.map(function (item) {
                     item.isBestSellingProduct = true;
+                    item.shouldShow = true;
                     return item;
                 });
-
                 context.setState({
                     superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
                 })
@@ -104,11 +98,12 @@ class NavigationTypes extends React.Component {
 
                 responseData = responseData.map(function (item) {
                     item.isSpecialOffer = true;
+                    item.shouldShow = true;
                     return item;
                 });
 
                 context.setState({
-                    superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
+                    superBasket: dataHandeling.AddBasket(responseData,this.state.superBasket),
                 })
 
 
@@ -261,11 +256,20 @@ class NavigationTypes extends React.Component {
 
     }
 
+    componentWillUnmount() {
+        basketFile.writeBasket(context.state.superBasket)
+    }
+
+
     componentWillMount() {
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
     }
 
     componentDidMount() {
+        basketFile.readBasket().then(data => {
+            context.setState({superBasket: JSON.parse(data)})
+        });
+
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         // basketFile.setBasket(this.props.basket);
@@ -394,7 +398,7 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: title,
-                UpdateBasket: this.basketUpdater,
+                UpdateBasket: NavigationTypes.basketUpdater,
                 basket: this.state.superBasket,
                 Categories: this.state.Categories,
             },
@@ -497,7 +501,7 @@ class NavigationTypes extends React.Component {
 
     renderSpecialOffer(item) {
 
-        if (item.hasOwnProperty('isSpecialOffer')) {//item.hasOwnProperty('isSpecialOffer')
+        if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {//item.hasOwnProperty('isSpecialOffer')
             return <Item title={item.name}
                          count={item.count}
                          onUp={() => this.onUpSpecialOffer(item)}
@@ -513,7 +517,8 @@ class NavigationTypes extends React.Component {
     }
 
     renderBestSellingProducts(item) {
-        if (item.hasOwnProperty('isBestSellingProduct')) {
+
+        if (item.hasOwnProperty('isBestSellingProduct') && item.shouldShow === true) {
 
             return <Item title={item.name}
                          count={item.count}
@@ -530,9 +535,7 @@ class NavigationTypes extends React.Component {
         return null;
     }
 
-    // let updatedState = this.state.superBasket;
-    // updatedState[updatedState.indexOf(rowdata)]['count']++;
-    // this.setState({superBasket: updatedState});
+
     onUpSpecialOffer = (rowdata) => {
         let rowDataCopy = Object.assign({}, rowdata);
         rowDataCopy.count++;

@@ -3,43 +3,11 @@ import _ from 'lodash'
 class dataHandeling {
 
 
-    static AddBasketWithNumHandel(newItems, oldbasket) {
-        let basket_ = oldbasket;//copy basket
-        // basket_ = _.unionBy(basket_, [], "id");
-        let addItems = newItems;
-//updating basket
-        for (let j = 0; j < basket_.length; j++) {
-            for (let i = 0; i < addItems.length; i++) {
-                if (basket_[j].id === addItems[i].id) {
-                    basket_[j] = addItems[i]
-                }
-            }
-        }
-//adding new items
-        addItems = addItems.filter(function (item) {
-            let shouldUpdate = true;
-            if (item.count > 0) {
-                for (let i = 0; i < basket_.length; i++) //if it is not in old basket
-                    if (item.id === basket_[i].id) {
-                        shouldUpdate = false;
-                        break;
-                    }
 
-                return shouldUpdate;
-            } else return false;
-        });
-        basket_ = basket_.concat(addItems);
-        basket_ = basket_.filter(function (item) {
-            return item.count > 0;
-        });
-        // console.log(basket_);
-        return basket_;
+    static AddBasket(newItems, basket) {//update and merge basket
+        return this.arrayUnique((_.map(basket, function (basketitem) {//it first update basket values with newItems then add missing items
+            return _.assign(basketitem,_.find(newItems, ['id', basketitem.id]), {count:basketitem.count})
 
-    };
-
-    static AddBasket(newItems, basket) {//update and mearge basket
-        return this.arrayUnique((_.map(basket, function (item) {
-            return _.assign(item, _.find(newItems, ['id', item.id]));
         })).concat(newItems));
 
     };
@@ -48,11 +16,10 @@ class dataHandeling {
     static AddBasketTypePage(newItems, basket) {//update and mearge basket
 
 
-
     };
 
     static arrayUnique(array) {
-        let a = array.concat();
+        let a = array;
         for (let i = 0; i < a.length; ++i) {
             for (let j = i + 1; j < a.length; ++j) {
                 if (a[i].id === a[j].id)

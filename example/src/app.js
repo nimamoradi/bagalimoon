@@ -20,7 +20,6 @@ AsyncStorage.getItem('api_code').then((item) => {
                 navigatorStyle: {
                     navBarHidden: true,
                 }
-
             },
             appStyle: {
                 orientation: 'portrait',

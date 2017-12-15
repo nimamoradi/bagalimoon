@@ -53,13 +53,38 @@ class TypePage extends Component {
 
     }
 
+    addToCart = () => {
+
+        let basket = this.state.basket.map(
+            function (x) {
+                return x.value
+            }
+        );
+
+        let arr = [];
+
+        basket.forEach(function (element) {
+
+            element.forEach(function (item) {
+
+                arr.push(item)
+            })
+
+        });
+        if (arr.length > 0) {
+            this.shop(arr);
+        } else server.alert('توجه', 'محصولی انتخاب نشده', context)
+    };
 
     shop = (basket) => {
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                basket: dataHandeling.basketFilter(basket)
+                basket:   dataHandeling.AddBasket(basket, this.props.basket),
+                isParsed: true,
+                UpdateBasket: this.props.UpdateBasket,
+                setBasket:this.props.setBasket
             },
         });
     };
@@ -184,28 +209,6 @@ class TypePage extends Component {
             server.retryParam(this.loadRenderRowData, context,)
         });
     };
-    addToCart = () => {
-
-        let basket = this.state.basket.map(
-            function (x) {
-                return x.value
-            }
-        );
-
-        let arr = [];
-
-        basket.forEach(function (element) {
-
-            element.forEach(function (item) {
-
-                arr.push(item)
-            })
-
-        });
-        if (arr.length > 0) {
-            this.shop(arr);
-        } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-    };
 
     render() {
         let mainItems = this.state.Categories.filter(function (x) {
@@ -275,7 +278,7 @@ class TypePage extends Component {
                             onDown={() => this.onDown(item)}
                             imageUrl={server.getServerAddress() + item.photo}/>}
                 />
-                {(!this.state.dataReady ) && <View style={{
+                {(!this.state.dataReady) && <View style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,

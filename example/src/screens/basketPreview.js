@@ -13,7 +13,10 @@ class basketPreview extends React.Component {
     constructor(props) {
         super(props);
         props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        let basket = JSON.parse((this.props.basket));
+        let basket;
+        if (props.isParsed !== true)
+            basket = JSON.parse((this.props.basket));
+        else basket = (this.props.basket);
         // console.log(basket);
 
 
@@ -26,22 +29,27 @@ class basketPreview extends React.Component {
 
 
     componentWillUnmount() {
-        let basket = this.state.basket;
 
-        this.props.UpdateBasket(basket);
+            let basket = this.state.basket;
+
+            this.props.UpdateBasket(basket);
+
 
     }
 
 
     componentDidMount() {
         let totalPrice = 0;
-        let basket = this.state.basket;
+        let basket = this.state.basket.filter(function (item) {
+            return item.count > 0
+        });
         for (let i = 0; i < basket.length; i++) {
             totalPrice += Number.parseInt(basket[i]['price']) * Number.parseInt(basket[i]['count'])
 
         }
 
         this.setState({
+            basket: basket,
             totalPrice: totalPrice,
         });
     }
@@ -59,24 +67,32 @@ class basketPreview extends React.Component {
         } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);
     };
     onUp = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.basket;
-        let data = this.state.basket;
-        updatedState[data.indexOf(rowdata)]['count']++;
-        console.log(updatedState);
-        this.setState({basket: updatedState});
-        this.onCountChanged(rowdata, false);
+        let rowDataCopy = Object.assign({}, rowdata);
+        rowDataCopy.count++;
+        let list = this.state.basket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
+
+        this.setState({
+            basket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
     };
     onDown = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.basket;
-        let data = this.state.basket;
-        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
-            updatedState[data.indexOf(rowdata)]['count']--;
-            this.onCountChanged(rowdata, true);
+        let rowDataCopy = Object.assign({}, rowdata);
+        if (rowDataCopy.count !== 0) {
+            rowDataCopy.count--;
         }
-        console.log(updatedState);
-        this.setState({basket: updatedState});
+        let list = this.state.basket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
+
+        this.setState({
+            basket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
     };
     onCountChanged = (rowdata, down) => {
         let priceChange;
@@ -153,9 +169,9 @@ class basketPreview extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                       onPress={() => {
-                                          basketfile.writeBasket([])
+                                          basketfile.writeBasket([]);
                                           this.props.UpdateBasket(this.state.basket.map(function (item) {
-                                              item.count=0;
+                                              item.count = 0;
                                               return item;
                                           }));
                                           this.props.navigator.pop();

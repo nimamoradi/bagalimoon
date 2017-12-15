@@ -31,8 +31,9 @@ class NavigationTypes extends React.Component {
         //     this.props.navigator.pop();
 
     };
-
-
+    static setBasket(basket) {
+        context.setState({superBasket: basket})
+    }
     static basketUpdater(newItems) {
         let basket = context.state.superBasket.slice();
 
@@ -40,13 +41,13 @@ class NavigationTypes extends React.Component {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
                     basket[i] =
-                        Object.assign({}, basket[i], newItems[j]);
+                        Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
                     newItems[j].wasInBasket = true;
                 }
             }
         }
         newItems = newItems.filter(function (item) {
-            if (!item.hasOwnProperty('wasInBasket')) {
+            if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
                 return item.count > 0;
 
             } else {
@@ -425,6 +426,7 @@ class NavigationTypes extends React.Component {
                 UpdateBasket: NavigationTypes.basketUpdater,
                 basket: this.state.superBasket,
                 Categories: this.state.Categories,
+                setBasket:NavigationTypes.setBasket
             },
         });
     };
@@ -435,6 +437,7 @@ class NavigationTypes extends React.Component {
             title: this.props.title,
             onClose: this.dismissLightBox,
             UpdateBasket: NavigationTypes.basketUpdater,
+            setBasket:NavigationTypes.setBasket
         }, context);
 
     };

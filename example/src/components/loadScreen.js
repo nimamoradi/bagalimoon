@@ -3,7 +3,7 @@ import {ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Dimensions}
 
 function loadScreen() {
     return (
-        <View >
+        <View style={styles.background}>
             <ActivityIndicator
                 color='#bc2b78'
                 size="large"
@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#99999910'
+    },
+    background:{
+        flex:1,
+        color:'#a5aaa970'
     }
 });
 export default loadScreen;

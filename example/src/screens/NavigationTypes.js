@@ -26,8 +26,8 @@ let context;
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
-        if (sendTOHome)
-            this.props.navigator.pop();
+        // if (sendTOHome)
+        //     this.props.navigator.pop();
 
     };
 
@@ -103,7 +103,7 @@ class NavigationTypes extends React.Component {
                 });
 
                 context.setState({
-                    superBasket: dataHandeling.AddBasket(responseData,this.state.superBasket),
+                    superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
                 })
 
 
@@ -155,7 +155,7 @@ class NavigationTypes extends React.Component {
             setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
-        const request = fetch(server.getServerAddress());
+        const request = fetch(server.getInternetCheckAddress());
 
         return Promise
             .race([timeout, request])
@@ -266,21 +266,22 @@ class NavigationTypes extends React.Component {
     }
 
     componentDidMount() {
-        basketFile.readBasket().then(data => {
-            context.setState({superBasket: JSON.parse(data)})
-        });
 
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         // basketFile.setBasket(this.props.basket);
         this.isAvailable();
+        basketFile.readBasket().then((item) => {
+            context.setState({superBasket: item})
+        })
+
     }
 
     constructor(props) {
         super(props);
 
 
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
 
         this.state = {
             dataReady: false,
@@ -296,12 +297,16 @@ class NavigationTypes extends React.Component {
 
     }
 
+    static getBasket() {
+        return context.state.getBasket;
+    }
 
     toggleDrawer = () => {
 
         this.props.navigator.toggleDrawer({
             side: 'right',
             animated: true,
+            basket: context.getBasket,
             api_code: context.props.api_code
         });
     };
@@ -391,8 +396,6 @@ class NavigationTypes extends React.Component {
     };
 
     TypePage = (title) => {
-
-
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
@@ -410,6 +413,7 @@ class NavigationTypes extends React.Component {
             basket: this.state.superBasket,
             title: this.props.title,
             onClose: this.dismissLightBox,
+            UpdateBasket: NavigationTypes.basketUpdater,
         }, context);
 
     };
@@ -442,7 +446,7 @@ class NavigationTypes extends React.Component {
         else
             return (
                 <ScrollView>
-                    <NavBar menu={this.toggleDrawer} basket={this.basket}/>
+                    <NavBar menu={() => this.toggleDrawer()} basket={this.basket}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}

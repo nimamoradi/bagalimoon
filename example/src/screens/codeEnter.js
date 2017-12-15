@@ -131,7 +131,7 @@ class codeEnter extends React.Component {
     };
 
     pushMainScreen(api) {
-        basketFile.setBasket([]);
+
         context.props.navigator.push({
             backButtonTitle: '',
             screen: 'example.Types',

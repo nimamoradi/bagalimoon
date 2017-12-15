@@ -65,7 +65,10 @@ class basketLightBox extends React.Component {
                             style={styles.button1}
                             onPress={() => this.pushScreen('example.Types.basketPreview', 'لیست خرید',
                                 {
-                                    basket: this.state.basket
+                                    UpdateBasket:this.props.UpdateBasket,
+                                    basket: this.state.basket,
+
+
                                 })}
                         ><Text  style={{ fontSize: vw*4,}}>{'خرید'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>

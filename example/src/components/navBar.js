@@ -18,7 +18,7 @@ function navBar({menu,basket}) {
 
             </Text>
             <View style={{flex:1}}/>
-            <TouchableOpacity onPress={menu}>
+            <TouchableOpacity onPress={()=>menu()}>
             <Icon name="menu" size={vw * 8} color="#000000" style={{margin: 10,flex:1}}/>
             </TouchableOpacity>
 

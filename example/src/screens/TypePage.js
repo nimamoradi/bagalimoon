@@ -4,14 +4,13 @@ import {
     StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
     FlatList, Image, Picker, Dimensions
 } from 'react-native';
-import _ from 'lodash'
+
 import ItemView from '../components/itemView'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
-import alertBox from "../components/alertBox";
-import basketFile from '../basketFile';
+
 import dataHandeling from '../dataHandeling';
 
 let context;
@@ -112,7 +111,7 @@ class TypePage extends Component {
             setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
-        const request = fetch(server.getServerAddress());
+        const request = fetch(server.getInternetCheckAddress());
 
         return Promise
             .race([timeout, request])

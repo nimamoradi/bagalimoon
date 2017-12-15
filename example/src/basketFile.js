@@ -6,80 +6,32 @@ import {
 } from 'react-native';
 
 class basketfile {
-    static serverAddress = [];
-    basket;
+
+
     static basketKey = '@CurrentBasket';
-
-    // static upDateBasket(addItems) {
-    //     // basketfile.basket = _.map(addItems, function (item) {
-    //     //     return _.extend(item, _.findWhere(basketfile.basket, {id: item.id}));
-    //     // });
-    //     basketfile.basket = addItems
-    // }
-
-    // static writeAndUpdata(input) {
-    //     let addItems = _.unionBy(input, [], "id");
-    //     addItems = addItems.filter(function (item) {
-    //         return item.count > 0;
-    //     });
-    //     AsyncStorage.setItem('@CurrentBasket', JSON.stringify(addItems));
-    //     basketfile.basket = addItems
-    // }
-
-//     static writeAndUpdateAutoDec(input) {
-//         let basket_ = basketfile.basket;//copy basket
-//          basket_ = _.unionBy(basket_, [], "id");
-//         let addItems = _.unionBy(input, [], "id");
-// //updating basket
-//         for (let j = 0; j < basket_.length; j++) {
-//             for (let i = 0; i < addItems.length; i++) {
-//                 if (basket_[j].id === addItems[i].id) {
-//                     basket_[j] = addItems[i]
-//                 }
-//             }
-//         }
-// //adding new items
-//         addItems = addItems.filter(function (item) {
-//             let shouldUpdate = true;
-//             if (item.count > 0) {
-//                 for (let i = 0; i < basket_.length; i++) //if it is not in old basket
-//                     if (item.id === basket_[i].id) {
-//                         shouldUpdate = false;
-//                         break;
-//                     }
-//
-//                 return shouldUpdate;
-//             } else return false;
-//         });
-//         basket_ = basket_.concat(addItems);
-//         basket_ = basket_.filter(function (item) {
-//             return item.count > 0;
-//         });
-//         // console.log(basket_);
-//         basketfile.basket = basket_;
-//         AsyncStorage.setItem('@CurrentBasket', JSON.stringify(basket_));
-//
-//     }
-
-    static setBasket(basket_) {
-        basketfile.basket = basket_;
-    }
 
 
     static writeBasket(basket) {
-        basket = basket.filter(function (item) {
+        let bas;
+        bas = basket.filter(function (item) {
             return item.count > 0
         });
-        basket = basket.map(function (item) {
+        bas = bas.map(function (item) {
             item.shouldShow = false;
             return item;
         });
 
-        AsyncStorage.setItem(basketfile.basketKey, JSON.stringify(basket));
+        AsyncStorage.setItem(basketfile.basketKey, JSON.stringify(bas));
     }
 
     static readBasket() {
-       return AsyncStorage.getItem(basketfile.basketKey)
+        return new Promise((resolve) => {
+            AsyncStorage.getItem(basketfile.basketKey).then((item) => {
+                resolve(JSON.parse(item))
+            });
+        })
+
+
     }
 
 }

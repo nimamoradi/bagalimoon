@@ -179,8 +179,6 @@ class basketFinal extends React.Component {
                             <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                               onPress={() => {
 
-                                                  basketfile.setBasket([]);
-                                                  basketfile.writeBasket();
                                                   this.props.navigator.pop();
                                               }}>
                                 <View style={styles.buttonCancel}>

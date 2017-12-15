@@ -1,26 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text,FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
+import {StyleSheet, View, Text, FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
+import dataHandeling from "../dataHandeling";
 import basketfile from "../basketFile";
+
+let context;
 
 class basketPreview extends React.Component {
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        let basket = JSON.parse(this.props.basket);
+        props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+        let basket = JSON.parse((this.props.basket));
         // console.log(basket);
 
 
         this.state = {
             basket: basket,
-
             totalPrice: '?'
         };
-        // console.log(dataArray)
+        context = this;
     }
+
+
+    componentWillUnmount() {
+        let basket = this.state.basket;
+
+        this.props.UpdateBasket(basket);
+
+    }
+
 
     componentDidMount() {
         let totalPrice = 0;
@@ -29,16 +40,14 @@ class basketPreview extends React.Component {
             totalPrice += Number.parseInt(basket[i]['price']) * Number.parseInt(basket[i]['count'])
 
         }
-        basket.filter(function (item) {
-         return item.count>0;
-        });
+
         this.setState({
             totalPrice: totalPrice,
         });
     }
 
     address = () => {
-        if (this.state.totalPrice !== 0 ) {
+        if (this.state.totalPrice !== 0) {
             this.props.navigator.pop();
             this.props.navigator.push({
                 screen: 'example.mapView',
@@ -122,7 +131,6 @@ class basketPreview extends React.Component {
                 />
 
 
-
                 <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
                     <View style={{flex: 1}}/>
                     <Text style={styles.price}>
@@ -145,10 +153,11 @@ class basketPreview extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                       onPress={() => {
-                                          if (this.props.isDynamic === undefined)
-
-                                          basketfile.setBasket([]);
-                                          basketfile.writeBasket();
+                                          basketfile.writeBasket([])
+                                          this.props.UpdateBasket(this.state.basket.map(function (item) {
+                                              item.count=0;
+                                              return item;
+                                          }));
                                           this.props.navigator.pop();
 
                                       }}>
@@ -165,10 +174,6 @@ class basketPreview extends React.Component {
     }
 }
 
-basketPreview.propTypes = {
-    basket: PropTypes.string.isRequired,//encoded array in json
-
-};
 
 const styles = StyleSheet.create({
 

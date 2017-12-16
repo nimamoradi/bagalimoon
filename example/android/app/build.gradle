@@ -69,4 +69,7 @@ dependencies {
     compile 'com.facebook.react:react-native:+'
     compile project(':react-native-navigation')
 	compile project(":react-native-hockeyapp") // <--- add this
+    compile project(path: ':appcenter-crashes')
+    compile project(path: ':appcenter-analytics')
+    compile project(path: ':appcenter')
 }

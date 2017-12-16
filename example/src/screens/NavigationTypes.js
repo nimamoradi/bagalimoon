@@ -31,9 +31,11 @@ class NavigationTypes extends React.Component {
         //     this.props.navigator.pop();
 
     };
+
     static setBasket(basket) {
         context.setState({superBasket: basket})
     }
+
     static basketUpdater(newItems) {
         let basket = context.state.superBasket.slice();
 
@@ -426,7 +428,7 @@ class NavigationTypes extends React.Component {
                 UpdateBasket: NavigationTypes.basketUpdater,
                 basket: this.state.superBasket,
                 Categories: this.state.Categories,
-                setBasket:NavigationTypes.setBasket
+                setBasket: NavigationTypes.setBasket
             },
         });
     };
@@ -437,7 +439,7 @@ class NavigationTypes extends React.Component {
             title: this.props.title,
             onClose: this.dismissLightBox,
             UpdateBasket: NavigationTypes.basketUpdater,
-            setBasket:NavigationTypes.setBasket
+            setBasket: NavigationTypes.setBasket
         }, context);
 
     };
@@ -516,6 +518,7 @@ class NavigationTypes extends React.Component {
                     <FlatList
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
                         horizontal={true}
+                        keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderBestSellingProducts(item)}

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MoonShop</string>
+    <string name="appcenterCrashes_whenToSendCrashes">always</string>
+    <string name="appcenterAnalytics_whenToEnableAnalytics">always</string>
 </resources>

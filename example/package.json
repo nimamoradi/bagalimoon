@@ -1,6 +1,6 @@
 {
     "name": "bagali",
-    "version": "0.0.6",
+    "version": "0.0.8",
     "private": true,
     "scripts": {
         "postinstall": "node ./scripts/postinstall.js",
@@ -11,7 +11,9 @@
         "e2e-release": "detox test --configuration ios.sim.release"
     },
     "dependencies": {
-        "immutability-helper": "^2.6.0",
+        "appcenter": "^1.1.0",
+        "appcenter-analytics": "^1.1.0",
+        "appcenter-crashes": "^1.1.0",
         "lodash": "^4.17.4",
         "react": "16.0.0-alpha.12",
         "react-native": "0.45.1",

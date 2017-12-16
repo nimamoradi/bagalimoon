@@ -61,27 +61,32 @@ class TypePage extends Component {
             }
         );
 
-        let arr = [];
+        // let arr = [];
 
-        basket.forEach(function (element) {
 
-            element.forEach(function (item) {
-
-                arr.push(item)
-            })
-
-        });
-        if (arr.length > 0) {
-            this.shop(arr);
+        //
+        // basket.forEach(function (element) {
+        //
+        //     element.forEach(function (item) {
+        //
+        //         arr.push(item)
+        //     })
+        //
+        // });
+        if (basket[0].length > 0) {
+            this.shop(basket[0]);
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
     };
 
     shop = (basket) => {
+        let newBasket=dataHandeling.AddBasket(basket, this.props.basket);
+        if(newBasket.length===0)
+            server.alert('توجه','سبد خرید خالی است',context);
         this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
-                basket:   dataHandeling.AddBasket(basket, this.props.basket),
+                basket:newBasket ,
                 isParsed: true,
                 UpdateBasket: this.props.UpdateBasket,
                 setBasket:this.props.setBasket
@@ -185,7 +190,7 @@ class TypePage extends Component {
                             }
                         }
                     }
-                    console.log("inside response json");
+
                     let index_of_data = context.getIndex(context.state.mainSelected + context.state.subSelected,
                         context.state.basket, 'name');
 
@@ -295,7 +300,7 @@ class TypePage extends Component {
 
     onUp = (rowdata) => {
 
-        rowdata.count = Number.parseInt(rowdata.count);
+
         let updatedState = this.state.viewDate;
         let updatedbasket = this.state.basket;
         updatedState[updatedState.indexOf(rowdata)]['count']++;
@@ -306,7 +311,7 @@ class TypePage extends Component {
 
     };
     onDown = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
+
         let updatedState = this.state.viewDate;
         let updatedbasket = this.state.basket;
         let data = this.state.viewDate;

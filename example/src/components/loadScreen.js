@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     background:{
         flex:1,
-        color:'#a5aaa970'
+        backgroundColor:'#a5aaa970'
     }
 });
 export default loadScreen;

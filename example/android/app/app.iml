@@ -109,10 +109,12 @@
     <orderEntry type="library" exported="" name="com.facebook.react:react-native-0.45.1" level="project" />
     <orderEntry type="library" exported="" name="com.squareup.okhttp3:okhttp-urlconnection:3.4.1@jar" level="project" />
     <orderEntry type="library" exported="" name="com.facebook.soloader:soloader-0.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.microsoft.appcenter:appcenter-crashes-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-v4-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.facebook.fresco:fresco-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-fragment-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="com.microsoft.appcenter:appcenter-analytics-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-media-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.facebook.fresco:imagepipeline-okhttp3-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:customtabs-25.0.0" level="project" />
@@ -130,6 +132,8 @@
     <orderEntry type="library" exported="" name="com.facebook.fbui.textlayoutbuilder:staticlayout-proxy:1.0@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.balysv.materialmenu:material-menu-toolbar-1.5.4" level="project" />
+    <orderEntry type="library" exported="" name="com.microsoft.appcenter:appcenter-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="com.microsoft.appcenter.reactnative:appcenter-react-native-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.google.android.gms:play-services-maps-10.2.6" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.facebook.fbui.textlayoutbuilder:textlayoutbuilder-1.0.0" level="project" />
@@ -140,8 +144,11 @@
     <orderEntry type="library" exported="" name="com.facebook.android:facebook-android-sdk-4.22.1" level="project" />
     <orderEntry type="library" exported="" name="com.squareup.okio:okio:1.9.0@jar" level="project" />
     <orderEntry type="module" module-name="react-native-navigation" exported="" />
+    <orderEntry type="module" module-name="appcenter-analytics" exported="" />
+    <orderEntry type="module" module-name="appcenter-crashes" exported="" />
     <orderEntry type="module" module-name="react-native-maps" exported="" />
     <orderEntry type="module" module-name="react-native-hockeyapp" exported="" />
     <orderEntry type="module" module-name="react-native-vector-icons" exported="" />
+    <orderEntry type="module" module-name="appcenter" exported="" />
   </component>
 </module>

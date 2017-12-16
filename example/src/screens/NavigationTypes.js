@@ -286,19 +286,17 @@ class NavigationTypes extends React.Component {
 
 
     componentWillMount() {
+        basketFile.readBasket().then((item) => {
+            context.setState({superBasket: item})
+        });
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
     }
 
     componentDidMount() {
-
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         // basketFile.setBasket(this.props.basket);
         this.isAvailable();
-        basketFile.readBasket().then((item) => {
-            context.setState({superBasket: item})
-        })
-
     }
 
     constructor(props) {

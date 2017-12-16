@@ -4,7 +4,7 @@
 module.exports = function(url, options) {
 
     let retries = 3;
-    let retryDelay = 0;
+    let retryDelay = 5;
 
     if (options && options.retries) {
         retries = options.retries;

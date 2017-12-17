@@ -1,110 +1,126 @@
 [
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\slide_down.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\slide_down.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_down.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim\\design_snackbar_in.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\anim\\design_snackbar_in.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\catalyst_push_up_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\4bbd1fc6846d5600d9420c79be47abfa79e74e15\\output\\res\\anim\\catalyst_push_up_out.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\anim\\catalyst_push_up_out.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\catalyst_slide_up.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\anim\\catalyst_slide_up.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_slide_in_top.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_slide_in_top.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_fade_in.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_fade_in.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_popup_enter.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\catalyst_fade_in.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\anim\\catalyst_fade_in.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\pop.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\pop.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\pop.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\anim\\design_bottom_sheet_slide_in.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_slide_out_top.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\catalyst_slide_down.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\anim\\catalyst_slide_down.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_slide_out_bottom.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_slide_out_bottom.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\lightbox_enter.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\lightbox_enter.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\lightbox_enter.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_fade_out.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fade_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\4bbd1fc6846d5600d9420c79be47abfa79e74e15\\output\\res\\anim\\fade_out.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_fade_out.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim\\design_snackbar_out.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\anim\\design_snackbar_out.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\slide_in_right.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\slide_in_right.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_right.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\slide_out_right.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\slide_out_right.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_right.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\catalyst_push_up_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\4bbd1fc6846d5600d9420c79be47abfa79e74e15\\output\\res\\anim\\catalyst_push_up_in.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\anim\\catalyst_push_up_in.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\no_animation.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\no_animation.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\no_animation.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_popup_exit.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_popup_exit.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\slide_up.xml",
-        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\default\\res\\anim\\slide_up.xml"
+        "source": "E:\\projects\\superMan-gitlab\\example\\node_modules\\react-native-navigation\\android\\app\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_up.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim\\design_fab_out.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\anim\\design_fab_out.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\tooltip_exit.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fd9682f833193bf21961dcaafe34fc1f\\res\\anim\\tooltip_exit.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\catalyst_fade_out.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\anim\\catalyst_fade_out.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\tooltip_enter.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fd9682f833193bf21961dcaafe34fc1f\\res\\anim\\tooltip_enter.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\3e55e8572c9d4445268c6fd1a4133151859b49de\\output\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fade_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\4bbd1fc6846d5600d9420c79be47abfa79e74e15\\output\\res\\anim\\fade_in.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_in.xml",
-        "source": "C:\\Users\\nima\\.android\\build-cache\\c5dc46d68dd02cf09316c43d7fef0191277e2959\\output\\res\\anim\\design_fab_in.xml"
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\anim\\design_fab_in.xml"
     }
 ]

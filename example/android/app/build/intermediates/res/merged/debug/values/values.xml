@@ -454,7 +454,7 @@
 <enum name="auto" value="2"/>
 
 </attr><attr format="reference|string" name="scopeUris"/></declare-styleable>
-    <declare-styleable name="SimpleDraweeView"><attr format="string" name="actualImageUri"/></declare-styleable>
+    <declare-styleable name="SimpleDraweeView"><attr format="string" name="actualImageUri"/><attr format="reference" name="actualImageResource"/></declare-styleable>
     <declare-styleable name="SnackbarLayout"><attr name="android:maxWidth"/><attr name="elevation"/><attr format="dimension" name="maxActionInlineWidth"/></declare-styleable>
     <declare-styleable name="Spinner"><attr name="android:prompt"/><attr name="popupTheme"/><attr name="android:popupBackground"/><attr name="android:dropDownWidth"/><attr name="android:entries"/></declare-styleable>
     <declare-styleable name="SwitchCompat"><attr name="android:thumb"/><attr format="color" name="thumbTint"/><attr name="thumbTintMode">
@@ -492,7 +492,7 @@
             <enum name="fill" value="0"/>
             <enum name="center" value="1"/>
         </attr><attr format="dimension" name="tabMinWidth"/><attr format="dimension" name="tabMaxWidth"/><attr format="reference" name="tabTextAppearance"/><attr format="color" name="tabTextColor"/><attr format="color" name="tabSelectedTextColor"/><attr format="dimension" name="tabPaddingStart"/><attr format="dimension" name="tabPaddingTop"/><attr format="dimension" name="tabPaddingEnd"/><attr format="dimension" name="tabPaddingBottom"/><attr format="dimension" name="tabPadding"/></declare-styleable>
-    <declare-styleable name="TextAppearance"><attr name="android:textSize"/><attr name="android:textColor"/><attr name="android:textColorHint"/><attr name="android:textStyle"/><attr name="android:typeface"/><attr name="textAllCaps"/><attr name="android:shadowColor"/><attr name="android:shadowDy"/><attr name="android:shadowDx"/><attr name="android:shadowRadius"/></declare-styleable>
+    <declare-styleable name="TextAppearance"><attr name="android:textColor"/><attr name="android:textSize"/><attr name="android:textStyle"/><attr name="android:shadowColor"/><attr name="android:shadowDx"/><attr name="android:shadowDy"/><attr name="android:shadowRadius"/><attr name="android:textColorHint"/><attr name="android:typeface"/><attr name="textAllCaps"/></declare-styleable>
     <declare-styleable name="TextInputLayout"><attr format="reference" name="hintTextAppearance"/><attr name="android:hint"/><attr format="boolean" name="hintEnabled"/><attr format="boolean" name="errorEnabled"/><attr format="reference" name="errorTextAppearance"/><attr format="boolean" name="counterEnabled"/><attr format="integer" name="counterMaxLength"/><attr format="reference" name="counterTextAppearance"/><attr format="reference" name="counterOverflowTextAppearance"/><attr name="android:textColorHint"/><attr format="boolean" name="hintAnimationEnabled"/><attr format="boolean" name="passwordToggleEnabled"/><attr format="reference" name="passwordToggleDrawable"/><attr format="string" name="passwordToggleContentDescription"/><attr format="color" name="passwordToggleTint"/><attr name="passwordToggleTintMode">
             
             <enum name="src_over" value="3"/>
@@ -756,7 +756,7 @@
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="config_activityDefaultDur">250</integer>
     <integer name="design_snackbar_text_max_lines">2</integer>
-    <integer name="google_play_services_version">10260000</integer>
+    <integer name="google_play_services_version">10240000</integer>
     <integer name="hide_password_duration">320</integer>
     <integer name="show_password_duration">200</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
@@ -1996,13 +1996,19 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
+    <style name="ClockTimePickerDialog" ns2:targetApi="lollipop" parent="Theme.AppCompat.Light.Dialog">
+      <item name="android:timePickerStyle">@style/ClockTimePickerStyle</item>
+    </style>
+    <style name="ClockTimePickerStyle" ns2:targetApi="lollipop" parent="android:Widget.Material.Light.TimePicker">
+      <item name="android:timePickerMode">clock</item>
+    </style>
     <style name="DialogAnimationFade">
-    <item name="android:windowEnterAnimation">@anim/fade_in</item>
-    <item name="android:windowExitAnimation">@anim/fade_out</item>
+    <item name="android:windowEnterAnimation">@anim/catalyst_fade_in</item>
+    <item name="android:windowExitAnimation">@anim/catalyst_fade_out</item>
   </style>
     <style name="DialogAnimationSlide">
-    <item name="android:windowEnterAnimation">@anim/slide_up</item>
-    <item name="android:windowExitAnimation">@anim/slide_down</item>
+    <item name="android:windowEnterAnimation">@anim/catalyst_slide_up</item>
+    <item name="android:windowExitAnimation">@anim/catalyst_slide_down</item>
   </style>
     <style name="HockeyApp.ButtonStyle" parent="android:Widget.Button">
         <item name="android:textColor">@color/hockeyapp_text_white</item>
@@ -2264,6 +2270,12 @@
     <style name="SpinnerDatePickerStyle" ns2:targetApi="lollipop" parent="android:Widget.Material.Light.DatePicker">
         <item name="android:datePickerMode">spinner</item>
     </style>
+    <style name="SpinnerTimePickerDialog" ns2:targetApi="lollipop" parent="Theme.AppCompat.Light.Dialog">
+      <item name="android:timePickerStyle">@style/SpinnerTimePickerStyle</item>
+    </style>
+    <style name="SpinnerTimePickerStyle" ns2:targetApi="lollipop" parent="android:Widget.Material.Light.TimePicker">
+      <item name="android:timePickerMode">spinner</item>
+    </style>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
     <style name="TextAppearance.AppCompat.Body2" parent="Base.TextAppearance.AppCompat.Body2"/>
@@ -2405,7 +2417,7 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.Catalyst"/>
-    <style name="Theme.Catalyst.RedBox" parent="@style/Theme.AppCompat.DialogWhenLarge">
+    <style name="Theme.Catalyst.RedBox">
     <item name="android:windowBackground">@color/catalyst_redbox_background</item>
     <item name="android:windowAnimationStyle">@style/Animation.Catalyst.RedBox</item>
     <item name="android:inAnimation">@android:anim/fade_in</item>

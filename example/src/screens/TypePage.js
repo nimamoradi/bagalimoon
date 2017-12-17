@@ -282,7 +282,7 @@ class TypePage extends Component {
                                                 return x.parent_category_id === item.id;
                                             });
 
-                                            context.setState({subItems: subItems});
+                                            context.setState({subItems: subItems,mainSelected:item.name});
                                             this.loadRenderRowData(context.state.Categories[sub].id,
                                                 context.state.Categories[sub].name)
                                         }}
@@ -338,7 +338,7 @@ class TypePage extends Component {
 
 }
 
-TypePage.propTypes = {
+TypePage.PropTypes = {
     title: PropTypes.string.isRequired,
 
 };

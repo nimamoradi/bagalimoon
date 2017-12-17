@@ -29,8 +29,7 @@ public class MainActivity extends SplashActivity {
         sharedI18nUtilInstance.allowRTL(getApplicationContext(), false);
         LinearLayout view = new LinearLayout(this);
         ImageView imageView1 = new ImageView(this);
-        ImageView imageView2 = new ImageView(this);
-        ImageView imageView3 = new ImageView(this);
+
         view.setBackgroundColor(Color.parseColor("#ffffff"));
         view.setOrientation(LinearLayout.VERTICAL);
         imageView1.setImageResource(R.drawable.login);

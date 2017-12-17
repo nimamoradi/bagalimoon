@@ -452,7 +452,9 @@ class NavigationTypes extends React.Component {
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
-                          onPress={() => context.goToBanner(item.LinkTo, item.Link_id, item)}
+                          onPress={_.debounce(() => context.goToBanner(item.LinkTo, item.Link_id, item),
+                              1000, {leading: true,trailing: false})}
+
                 />
             </View>
         );
@@ -500,7 +502,9 @@ class NavigationTypes extends React.Component {
                         showsHorizontalScrollIndicator={false}
                         data={this.state.Types}
                         renderItem={({item}) => <TypeButton title={item.name}
-                                                            onPress={() => this.TypePage(item.name)}/>}
+                                                            onPress={_.debounce(() => this.TypePage(item.name),
+                                                                1000, {leading: true,trailing: false})}
+                                                            />}
                     />
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
@@ -541,8 +545,11 @@ class NavigationTypes extends React.Component {
                          price={item.price}
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
-                         onPress={() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
-                             item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
+
+                         onPress={_.debounce(() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
+                             item.long_description, item.price, item.id, item.main_price, item.off, item.count),
+                             1000, {leading: true,trailing: false})}
+
             />
         }
         return null;
@@ -559,8 +566,10 @@ class NavigationTypes extends React.Component {
                          price={item.price}
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
-                         onPress={() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
-                             item.long_description, item.price, item.id, item.main_price, item.off, item.count)}
+
+                         onPress={_.debounce(() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
+                             item.long_description, item.price, item.id, item.main_price, item.off, item.count),
+                             1000, {leading: true,trailing: false})}
             />
             //Do this
         }

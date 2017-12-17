@@ -192,20 +192,12 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\drawable\\abc_ic_clear_material.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tooltip_frame_dark.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fd9682f833193bf21961dcaafe34fc1f\\res\\drawable\\tooltip_frame_dark.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_tick_mark_material.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\com_facebook_auth_dialog_background.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-android-sdk-4.22.1.aar\\77aa304eb3ba77f69a25535313055064\\res\\drawable\\com_facebook_auth_dialog_background.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tooltip_frame_light.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fd9682f833193bf21961dcaafe34fc1f\\res\\drawable\\tooltip_frame_light.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",

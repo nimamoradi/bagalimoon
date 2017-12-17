@@ -8,3 +8,10 @@ to update app
 npm i -g npm-check-updates
 npm-check-updates -u
 npm install
+
+//a bug is wix add this to lightbox class
+
+  public void destroy() {
+        // content.unmountReactView();
+        dismiss();
+    }

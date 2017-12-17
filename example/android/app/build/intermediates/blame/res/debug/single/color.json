@@ -72,12 +72,12 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\color\\abc_tint_seek_thumb.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_switch_track.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\color\\abc_tint_switch_track.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_dark.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\color\\abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_switch_track.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\color\\abc_tint_switch_track.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_light.xml",

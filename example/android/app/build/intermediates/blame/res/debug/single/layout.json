@@ -4,10 +4,6 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\fd6fa7717fce6725e7a1f2d65eef9b83\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
@@ -104,10 +100,6 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\fd6fa7717fce6725e7a1f2d65eef9b83\\res\\layout\\notification_template_big_media_narrow.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
@@ -116,20 +108,12 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-android-sdk-4.22.1.aar\\77aa304eb3ba77f69a25535313055064\\res\\layout\\messenger_button_send_white_small.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\fd6fa7717fce6725e7a1f2d65eef9b83\\res\\layout\\notification_media_action.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\redbox_item_title.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\layout\\redbox_item_title.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\redbox_view.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\layout\\redbox_view.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_custom.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\fd6fa7717fce6725e7a1f2d65eef9b83\\res\\layout\\notification_template_big_media_custom.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\messenger_button_send_blue_small.xml",
@@ -178,10 +162,6 @@
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\14c5f699315e79fefea5aebef5189e31\\res\\layout\\design_menu_item_action_area.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tooltip.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\fd9682f833193bf21961dcaafe34fc1f\\res\\layout\\tooltip.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
@@ -300,16 +280,8 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.51.0.aar\\7243cc7705f5812f68f8a0a689e4b678\\res\\layout\\fps_view.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow_custom.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\fd6fa7717fce6725e7a1f2d65eef9b83\\res\\layout\\notification_template_big_media_narrow_custom.xml"
-    },
-    {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\fd6fa7717fce6725e7a1f2d65eef9b83\\res\\layout\\notification_template_big_media.xml"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout\\hockeyapp_activity_update.xml",

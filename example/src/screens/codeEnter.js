@@ -6,7 +6,7 @@ import {
     View,
     Text,
     TextInput,
-    Image,
+    ImageBackground,
     Dimensions,
     AsyncStorage
 
@@ -37,7 +37,7 @@ class codeEnter extends React.Component {
 
     render() {
         return (
-            <Image
+            <ImageBackground
                 style={{
                     width: Dimensions.get('window').width,
                     height: Dimensions.get('window').height,
@@ -74,7 +74,7 @@ class codeEnter extends React.Component {
                 <View style={styles.absolote}>
                     {(this.state.sendData === true) ? <Loading/> : null}
                 </View>
-            </Image>
+            </ImageBackground>
         );
     }
 

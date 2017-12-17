@@ -162,7 +162,7 @@ class loginScreen extends React.Component {
             setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
-        const request = fetch(server.getServerAddress());
+        const request = fetch(server.getInternetCheckAddress());
 
         return Promise
             .race([timeout, request])

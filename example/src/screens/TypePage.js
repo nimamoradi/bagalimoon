@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 import dataHandeling from '../dataHandeling';
+import _ from 'lodash'
 
 let context;
 let isFirstTime;
@@ -135,10 +136,9 @@ class TypePage extends Component {
 
         let basket = this.state.basket.filter(
             function (x) {
-                return x.count>0
+                return x.count > 0
             }
         );
-
 
 
         this.props.UpdateBasket(basket
@@ -252,15 +252,19 @@ class TypePage extends Component {
                         })}
                         renderItem={({item}) =>
                             <ItemView
-                                onPress={() => this.product(item.name,
-                                    server.getServerAddress() + item.photo,
-                                    item.long_description,
-                                    item.price,
-                                    item.count,
-                                    item.id,
-                                    item.main_price,
-                                    item.off,
-                                )}
+                                onPress={_.debounce(
+                                    () => this.product(item.name,
+                                        server.getServerAddress() + item.photo,
+                                        item.long_description,
+                                        item.price,
+                                        item.count,
+                                        item.id,
+                                        item.main_price,
+                                        item.off,
+                                    )
+                                    ,
+                                    1000, {leading: true, trailing: false})}
+
                                 title={item.name}
                                 disscount={item.main_price}
                                 price={item.price}
@@ -282,7 +286,7 @@ class TypePage extends Component {
                                                 return x.parent_category_id === item.id;
                                             });
 
-                                            context.setState({subItems: subItems,mainSelected:item.name});
+                                            context.setState({subItems: subItems, mainSelected: item.name});
                                             this.loadRenderRowData(context.state.Categories[sub].id,
                                                 context.state.Categories[sub].name)
                                         }}

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import _ from 'lodash'
 import {StyleSheet, View, Text, FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -30,9 +30,9 @@ class basketPreview extends React.Component {
 
     componentWillUnmount() {
 
-            let basket = this.state.basket;
+        let basket = this.state.basket;
 
-            this.props.UpdateBasket(basket);
+        this.props.UpdateBasket(basket);
 
 
     }
@@ -160,7 +160,9 @@ class basketPreview extends React.Component {
 
                 <View style={{flexDirection: 'row', alignContent: 'center',}}>
                     <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                      onPress={this.address}>
+                                      onPress={_.debounce(this.address,
+                                          1000, {leading: true, trailing: false})}
+                    >
                         <View style={styles.button}>
                             <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
                             <View style={{flex: 0.5}}/>

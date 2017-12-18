@@ -15,3 +15,8 @@ npm install
         // content.unmountReactView();
         dismiss();
     }
+
+//codepush
+Release an update
+Release an update using the "release-react" command:
+$ code-push release-react superman Android -d Production

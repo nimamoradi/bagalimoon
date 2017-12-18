@@ -143,7 +143,7 @@ class TypePage extends Component {
 
         this.props.UpdateBasket(basket
         );
-
+        super.componentWillUnmount();
     }
 
     componentDidMount() {

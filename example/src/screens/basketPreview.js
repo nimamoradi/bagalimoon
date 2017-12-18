@@ -33,7 +33,7 @@ class basketPreview extends React.Component {
         let basket = this.state.basket;
 
         this.props.UpdateBasket(basket);
-
+        super.componentWillUnmount();
 
     }
 

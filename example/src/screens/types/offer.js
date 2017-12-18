@@ -126,7 +126,7 @@ class offer extends Component {
                     alignItems: "stretch",
                 }}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
-                        <View style={{flex: 0.6, flexDirection: 'column'}}>
+                        <View style={{flex: 55*vw, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <Text style={{
@@ -163,9 +163,7 @@ class offer extends Component {
                             </View>
 
                         </View>
-                        <Image source={{
-                            uri: this.props.imageUrl
-                        }}
+                        <Image source={{uri: this.props.imageUrl}}
                                style={styles.image}/>
 
                     </View>
@@ -233,7 +231,7 @@ const styles = StyleSheet.create({
     }
     , des: {},
     image: {
-        alignSelf: 'stretch',
+        flexDirection:'row',
         width: vw * 45,
         height: vh * 40,
         borderRadius: 20,

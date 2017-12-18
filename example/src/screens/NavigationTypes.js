@@ -19,7 +19,7 @@ import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
 import TimerMixin from "react-timer-mixin";
-
+import codePush from "react-native-code-push";
 let loaded = false;
 let context;
 
@@ -282,6 +282,7 @@ class NavigationTypes extends React.Component {
 
     componentWillUnmount() {
         basketFile.writeBasket(context.state.superBasket)
+        super.componentWillUnmount();
     }
 
 
@@ -294,7 +295,7 @@ class NavigationTypes extends React.Component {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         basketFile.readBasket().then((item) => {
-            context.setState({superBasket: item},()=>{
+            context.setState({superBasket: item}, () => {
                 this.isAvailable();
             });
 
@@ -453,7 +454,7 @@ class NavigationTypes extends React.Component {
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
                           onPress={_.debounce(() => context.goToBanner(item.LinkTo, item.Link_id, item),
-                              1000, {leading: true,trailing: false})}
+                              1000, {leading: true, trailing: false})}
 
                 />
             </View>
@@ -503,15 +504,15 @@ class NavigationTypes extends React.Component {
                         data={this.state.Types}
                         renderItem={({item}) => <TypeButton title={item.name}
                                                             onPress={_.debounce(() => this.TypePage(item.name),
-                                                                1000, {leading: true,trailing: false})}
-                                                            />}
+                                                                1000, {leading: true, trailing: false})}
+                        />}
                     />
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 55 * vh}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
@@ -538,17 +539,17 @@ class NavigationTypes extends React.Component {
     renderSpecialOffer(item) {
 
         if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {//item.hasOwnProperty('isSpecialOffer')
-            return <Item title={item.name}
-                         count={item.count}
-                         onUp={() => this.onUpSpecialOffer(item)}
-                         onDown={() => this.onDownSpecialOffer(item)}
-                         price={item.price}
-                         disscount={(item.off !== 0) ? item.main_price : null}
-                         imageUrl={server.getServerAddress() + '/' + item.photo}
-
-                         onPress={_.debounce(() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
-                             item.long_description, item.price, item.id, item.main_price, item.off, item.count),
-                             1000, {leading: true,trailing: false})}
+            return <Item
+                title={item.name}
+                count={item.count}
+                onUp={() => this.onUpSpecialOffer(item)}
+                onDown={() => this.onDownSpecialOffer(item)}
+                price={item.price}
+                disscount={(item.off !== 0) ? item.main_price : null}
+                imageUrl={server.getServerAddress() + '/' + item.photo}
+                onPress={_.debounce(() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
+                    item.long_description, item.price, item.id, item.main_price, item.off, item.count),
+                    1000, {leading: true, trailing: false})}
 
             />
         }
@@ -569,7 +570,7 @@ class NavigationTypes extends React.Component {
 
                          onPress={_.debounce(() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
                              item.long_description, item.price, item.id, item.main_price, item.off, item.count),
-                             1000, {leading: true,trailing: false})}
+                             1000, {leading: true, trailing: false})}
             />
             //Do this
         }
@@ -639,5 +640,4 @@ class NavigationTypes extends React.Component {
     };
 }
 
-
-export default NavigationTypes;
+export default codePush(NavigationTypes);

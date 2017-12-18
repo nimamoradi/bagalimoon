@@ -7,7 +7,7 @@ import basketFile from './basketFile'
 
 // screen related book keeping
 registerScreens();
-registerScreenVisibilityListener();
+// registerScreenVisibilityListener();
 
 console.log('api code reading');
 AsyncStorage.getItem('api_code').then((item) => {

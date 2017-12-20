@@ -44,6 +44,8 @@
 		7961096120934F998E97E04F /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28B5891EB89F483F9B4DE528 /* AppCenter-Config.plist */; };
 		647051E9CA6A43B8832A48A4 /* libAppCenterReactNativeAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301FF87E3F704B0391AA90D2 /* libAppCenterReactNativeAnalytics.a */; };
 		844E0BE22EF145FD93E4E34E /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C32A9CA311044DCA665D435 /* libAppCenterReactNativeCrashes.a */; };
+		A489ACF4288B4EA7A66506F8 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EDF5EC7CE2486F9C0CAA56 /* libCodePush.a */; };
+		4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 437BEDC205DB4E7AB9882EEB /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +291,9 @@
 		301FF87E3F704B0391AA90D2 /* libAppCenterReactNativeAnalytics.a */ = {isa = PBXFileReference; name = "libAppCenterReactNativeAnalytics.a"; path = "libAppCenterReactNativeAnalytics.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		99EFEE531726453AA19BC034 /* AppCenterReactNativeCrashes.xcodeproj */ = {isa = PBXFileReference; name = "AppCenterReactNativeCrashes.xcodeproj"; path = "../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		1C32A9CA311044DCA665D435 /* libAppCenterReactNativeCrashes.a */ = {isa = PBXFileReference; name = "libAppCenterReactNativeCrashes.a"; path = "libAppCenterReactNativeCrashes.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2D00A1C6EF1F423EA1E50AEC /* CodePush.xcodeproj */ = {isa = PBXFileReference; name = "CodePush.xcodeproj"; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		01EDF5EC7CE2486F9C0CAA56 /* libCodePush.a */ = {isa = PBXFileReference; name = "libCodePush.a"; path = "libCodePush.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		437BEDC205DB4E7AB9882EEB /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +326,8 @@
 				D640DF54F2D6440B89DFD34B /* libAppCenterReactNative.a in Frameworks */,
 				647051E9CA6A43B8832A48A4 /* libAppCenterReactNativeAnalytics.a in Frameworks */,
 				844E0BE22EF145FD93E4E34E /* libAppCenterReactNativeCrashes.a in Frameworks */,
+				A489ACF4288B4EA7A66506F8 /* libCodePush.a in Frameworks */,
+				4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +487,7 @@
 				3479FBD338464773AC01F547 /* AppCenterReactNative.xcodeproj */,
 				38BF5090ED7C426FB9EC422C /* AppCenterReactNativeAnalytics.xcodeproj */,
 				99EFEE531726453AA19BC034 /* AppCenterReactNativeCrashes.xcodeproj */,
+				2D00A1C6EF1F423EA1E50AEC /* CodePush.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -502,6 +510,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A9FEBCC2E8024C5DA24915C1 /* Resources */,
 				28B5891EB89F483F9B4DE528 /* AppCenter-Config.plist */,
+				40B90220BDDC4825B43FE4DA /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -535,6 +544,15 @@
 				E99DE7A60F8B4446AB137E19 /* B Yekan.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
+		40B90220BDDC4825B43FE4DA /* Frameworks */ = {
+			isa = "PBXGroup";
+			children = (
+				437BEDC205DB4E7AB9882EEB /* libz.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 			path = "";
 		};
@@ -963,6 +981,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -983,6 +1002,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

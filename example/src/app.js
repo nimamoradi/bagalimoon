@@ -1,15 +1,13 @@
 import {AsyncStorage} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
-import {vw, vh, vmin, vmax} from './viewport'
 
-import basketFile from './basketFile'
+
 
 // screen related book keeping
 registerScreens();
 // registerScreenVisibilityListener();
 
-console.log('api code reading');
 AsyncStorage.getItem('api_code').then((item) => {
 
     let startAppdata;

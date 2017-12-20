@@ -12,14 +12,14 @@ import TypeButton from '../components/TypeButton'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh} from '../viewport'
 import HockeyApp from 'react-native-hockeyapp'
 import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
-import TimerMixin from "react-timer-mixin";
-import codePush from "react-native-code-push";
+import CodePushComponent from "../components/CodePushComponent";
+
 let loaded = false;
 let context;
 
@@ -27,8 +27,7 @@ let context;
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
-        // if (sendTOHome)
-        //     this.props.navigator.pop();
+
 
     };
 
@@ -267,7 +266,7 @@ class NavigationTypes extends React.Component {
             // console.log("get Banners" + responseData);
 
 
-            context.setState({dataSourceOffer: responseData, banners: responseData})
+            context.setState({dataSourceOffer: responseData})
 
         }).catch(error => {
             if (!loaded) {
@@ -281,8 +280,8 @@ class NavigationTypes extends React.Component {
     }
 
     componentWillUnmount() {
-        basketFile.writeBasket(context.state.superBasket)
-        super.componentWillUnmount();
+        basketFile.writeBasket(context.state.superBasket);
+        // super.componentWillUnmount();
     }
 
 
@@ -315,8 +314,13 @@ class NavigationTypes extends React.Component {
             BestSellingProducts: [],
             Categories: '',
             Types: [],
-            dataSourceOffer: [],
-            banners: [],
+            dataSourceOffer: [{
+                "photo": "/images_goodcss/1513712747picture12685564606487.jpg.css",
+                "id": 0,
+                "LinkTo": "none",
+
+            }],
+
             superBasket: []
         };
         context = this;
@@ -476,6 +480,7 @@ class NavigationTypes extends React.Component {
         else
             return (
                 <ScrollView>
+                    <CodePushComponent />
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}/>
                     <Carousel
                         autoplayInterval={5000}
@@ -640,4 +645,4 @@ class NavigationTypes extends React.Component {
     };
 }
 
-export default codePush(NavigationTypes);
+export default (NavigationTypes);

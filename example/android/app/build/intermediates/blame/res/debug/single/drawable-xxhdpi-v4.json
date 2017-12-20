@@ -8,16 +8,16 @@
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.2.4.aar\\81b00d9b30156c84ab68c1b5a5064821\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\messenger_bubble_large_white.png",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-android-sdk-4.22.1.aar\\77aa304eb3ba77f69a25535313055064\\res\\drawable-xxhdpi-v4\\messenger_bubble_large_white.png"
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\77524c0b795aecb5a8ad2b7976594df1\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
+        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\messenger_bubble_large_white.png",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-android-sdk-4.22.1.aar\\77aa304eb3ba77f69a25535313055064\\res\\drawable-xxhdpi-v4\\messenger_bubble_large_white.png"
     },
     {
         "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",

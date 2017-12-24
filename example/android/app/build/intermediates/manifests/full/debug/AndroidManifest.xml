@@ -35,6 +35,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <meta-data
+            android:name="com.bugsnag.android.API_KEY"
+            android:value="5f45db649910437512e28e8e41d260cf" />
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCbanJoTBSE1zrOtrKfUbfFG_4EJk7HUnM" />
 

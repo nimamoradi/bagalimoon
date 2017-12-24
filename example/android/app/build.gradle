@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 
+apply plugin: 'com.bugsnag.android.gradle'
 import com.android.build.OutputFile
 
 /**
@@ -73,6 +74,7 @@ dependencies {
     compile project(path: ':appcenter')
     compile project(':react-native-code-push')
 
+    compile project(path: ':bugsnag-react-native')
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

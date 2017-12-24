@@ -22,7 +22,9 @@ import CodePushComponent from "../components/CodePushComponent";
 
 let loaded = false;
 let context;
+import { Client } from 'bugsnag-react-native';
 
+const bugsnag = new Client();
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -203,7 +205,7 @@ class NavigationTypes extends React.Component {
                 }
             }
             context.TypePage(title);
-        } else if (LinkTo === 'product') {
+        } else if (LinkTo === 'product'||LinkTo === 'products') {
             let item;
             let index = dataHandeling.indexOfId(context.state.superBasket, response.product.id);
             if (index !== -1) {
@@ -315,7 +317,7 @@ class NavigationTypes extends React.Component {
             Categories: '',
             Types: [],
             dataSourceOffer: [{
-                "photo": "/images_goodcss/1513712747picture12685564606487.jpg.css",
+                "photo": "images_goodcss/1514127298grocery.png.css",
                 "id": 0,
                 "LinkTo": "none",
 
@@ -340,42 +342,8 @@ class NavigationTypes extends React.Component {
             api_code: context.props.api_code
         });
     };
-    onUp_SpecialOffer = (countNumber, id) => {
-        let updatedState = context.state.superBasket;
 
-        let index = server.getIndex(id, updatedState, 'id');
 
-        updatedState[index]['count']++;
-
-        context.setState({superBasket: updatedState});
-    };
-    onDown_SpecialOffer = (countNumber, id) => {
-        let updatedState = context.state.superBasket;
-
-        let index = server.getIndex(id, updatedState, 'id');
-
-        updatedState[index]['count']--;
-
-        context.setState({superBasket: updatedState});
-    };
-    onUp_BestSellingProducts = (countNumber, id) => {
-        let updatedState = context.state.superBasket;
-
-        let index = server.getIndex(id, updatedState, 'id');
-
-        updatedState[index]['count']++;
-
-        context.setState({superBasket: updatedState});
-    };
-    onDown_BestSellingProducts = (countNumber, id) => {
-        let updatedState = context.state.superBasket;
-
-        let index = server.getIndex(id, updatedState, 'id');
-
-        updatedState[index]['count']--;
-
-        context.setState({superBasket: updatedState});
-    };
     offerBestSellingProducts = (title, imageUrl, des, price, id, disscount, off, count) => {
         this.props.navigator.push({
             screen: 'example.Types.offer',
@@ -389,8 +357,7 @@ class NavigationTypes extends React.Component {
                 myNumber: count,
                 disscount: disscount,
                 off: off,
-                onUP: this.onUp_BestSellingProducts,
-                onDown: this.onDown_BestSellingProducts,
+
             },
 
 
@@ -409,8 +376,7 @@ class NavigationTypes extends React.Component {
                 myNumber: count,
                 disscount: disscount,
                 off: off,
-                onUP: this.onUp_SpecialOffer,
-                onDown: this.onDown_SpecialOffer,
+
             },
 
 
@@ -552,9 +518,7 @@ class NavigationTypes extends React.Component {
                 price={item.price}
                 disscount={(item.off !== 0) ? item.main_price : null}
                 imageUrl={server.getServerAddress() + '/' + item.photo}
-                onPress={_.debounce(() => this.offerSpecialOffer(item.name, server.getServerAddress() + item.photo,
-                    item.long_description, item.price, item.id, item.main_price, item.off, item.count),
-                    1000, {leading: true, trailing: false})}
+
 
             />
         }
@@ -573,9 +537,6 @@ class NavigationTypes extends React.Component {
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
 
-                         onPress={_.debounce(() => this.offerBestSellingProducts(item.name, server.getServerAddress() + item.photo,
-                             item.long_description, item.price, item.id, item.main_price, item.off, item.count),
-                             1000, {leading: true, trailing: false})}
             />
             //Do this
         }

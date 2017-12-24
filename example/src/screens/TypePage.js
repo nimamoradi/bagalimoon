@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    StyleSheet, View, Text, TouchableOpacity, AsyncStorage,
-    FlatList, Image, Picker, Dimensions
+    StyleSheet, View,
+    FlatList,
 } from 'react-native';
 import TypeButton from '../components/TypeButton'
 
 import ItemView from '../components/itemView'
 import server from '../code'
 import Loading from '../components/loadScreen'
-import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import {vw, vh, vmin, vmax} from '../viewport'
 
 import dataHandeling from '../dataHandeling';
-import _ from 'lodash'
+
 
 let context;
 let isFirstTime;
@@ -35,13 +35,13 @@ class TypePage extends Component {
 
         if (Categories[index].parent_category_id !== 0) {
 
-            let sub = this.getIndex(Categories[index].parent_category_id, this.props.Categories, 'id');
+            let sub = this.getIndex(Categories[index].parent_category_id,Categories, 'id');
             mainSelected = Categories[sub].name;
-            sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
-            id = Categories[sub].name;
-            Category_id = Categories[sub].id;
+            id = Categories[index].name;
+            Category_id = Categories[index].id;
+            parent_id=Categories[index].parent_category_id;
         } else {
-            let sub = this.getIndex(parent_id, this.props.Categories, 'parent_category_id');
+            let sub = this.getIndex(parent_id, Categories, 'parent_category_id');
 
             if (sub > -1) {
                 id = Categories[sub].name;
@@ -252,19 +252,6 @@ class TypePage extends Component {
                         })}
                         renderItem={({item}) =>
                             <ItemView
-                                onPress={_.debounce(
-                                    () => this.product(item.name,
-                                        server.getServerAddress() + item.photo,
-                                        item.long_description,
-                                        item.price,
-                                        item.count,
-                                        item.id,
-                                        item.main_price,
-                                        item.off,
-                                    )
-                                    ,
-                                    1000, {leading: true, trailing: false})}
-
                                 title={item.name}
                                 disscount={item.main_price}
                                 price={item.price}

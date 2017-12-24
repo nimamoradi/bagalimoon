@@ -5,12 +5,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ProgressiveImage from './progressiveImage'
 import {vw, vh, vmin, vmax} from '../viewport'
 
-function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown}) {
+function item({title, imageUrl, price, disscount, count, onUp, onDown}) {
 
         return (
-            <TouchableOpacity
-
-                onPress={onPress}>
+            <View>
                 <View style={styles.row}>
                     <Image source={{uri:  imageUrl}}  style={styles.image} key={imageUrl}
                                       thumbnail={require("../../img/load.png")}/>
@@ -42,7 +40,7 @@ function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown})
 
                     </View>
                 </View>
-            </TouchableOpacity>
+            </View>
         );
 
 
@@ -54,7 +52,7 @@ item.propTypes = {
     price: PropTypes.string.isRequired,
     disscount: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired,
+
 };
 
 const styles = StyleSheet.create({

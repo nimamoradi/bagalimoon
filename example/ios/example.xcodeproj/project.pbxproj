@@ -46,6 +46,7 @@
 		844E0BE22EF145FD93E4E34E /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C32A9CA311044DCA665D435 /* libAppCenterReactNativeCrashes.a */; };
 		A489ACF4288B4EA7A66506F8 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EDF5EC7CE2486F9C0CAA56 /* libCodePush.a */; };
 		4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 437BEDC205DB4E7AB9882EEB /* libz.tbd */; };
+		1BC32C24EFC941ACAF949B69 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB853E66B6A4768B4026DF9 /* libBugsnagReactNative.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,6 +295,8 @@
 		2D00A1C6EF1F423EA1E50AEC /* CodePush.xcodeproj */ = {isa = PBXFileReference; name = "CodePush.xcodeproj"; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		01EDF5EC7CE2486F9C0CAA56 /* libCodePush.a */ = {isa = PBXFileReference; name = "libCodePush.a"; path = "libCodePush.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		437BEDC205DB4E7AB9882EEB /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		73584A15068245349CF43975 /* BugsnagReactNative.xcodeproj */ = {isa = PBXFileReference; name = "BugsnagReactNative.xcodeproj"; path = "../node_modules/bugsnag-react-native/cocoa/BugsnagReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		DAB853E66B6A4768B4026DF9 /* libBugsnagReactNative.a */ = {isa = PBXFileReference; name = "libBugsnagReactNative.a"; path = "libBugsnagReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +331,7 @@
 				844E0BE22EF145FD93E4E34E /* libAppCenterReactNativeCrashes.a in Frameworks */,
 				A489ACF4288B4EA7A66506F8 /* libCodePush.a in Frameworks */,
 				4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */,
+				1BC32C24EFC941ACAF949B69 /* libBugsnagReactNative.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +492,7 @@
 				38BF5090ED7C426FB9EC422C /* AppCenterReactNativeAnalytics.xcodeproj */,
 				99EFEE531726453AA19BC034 /* AppCenterReactNativeCrashes.xcodeproj */,
 				2D00A1C6EF1F423EA1E50AEC /* CodePush.xcodeproj */,
+				73584A15068245349CF43975 /* BugsnagReactNative.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -982,6 +987,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1002,6 +1008,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

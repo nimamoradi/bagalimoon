@@ -34,6 +34,9 @@
 		<activity android:name="net.hockeyapp.android.FeedbackActivity" />
 		
 		
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6e18fe6e83aa76c48707cec6e42bf5b5fd6b6951" />
     </application>
 
 </manifest>

@@ -1,24 +1,31 @@
 package com.moonShop;
 
-import com.facebook.react.ReactInstanceManager;
+
+import com.crashlytics.android.Crashlytics;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
-import com.microsoft.appcenter.reactnative.crashes.BuildConfig;
+
 import com.reactnativenavigation.controllers.SplashActivity;
 
+
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.graphics.Color;
-import android.widget.TextView;
-import android.view.Gravity;
-import android.util.TypedValue;
+
 import android.widget.ImageView;
-// 1. Import the plugin class.
+
 import com.microsoft.codepush.react.CodePush;
 import com.reactnativenavigation.controllers.SplashActivity;
 
+import io.fabric.sdk.android.Fabric;
+
 public class MainActivity extends SplashActivity {
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+    }
 
     @Override
     public LinearLayout createSplashLayout() {
@@ -37,8 +44,19 @@ public class MainActivity extends SplashActivity {
 
 
         view.addView(imageView1);
+        // TODO: Move this to where you establish a user session
+        // logUser();
 
         return view;
     }
+
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.setUserIdentifier("12345");
+        Crashlytics.setUserEmail("user@fabric.io");
+        Crashlytics.setUserName("Test User");
+    }
+
 
 }

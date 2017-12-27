@@ -22,9 +22,7 @@ import CodePushComponent from "../components/CodePushComponent";
 
 let loaded = false;
 let context;
-import { Client } from 'bugsnag-react-native';
 
-const bugsnag = new Client();
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -280,7 +278,24 @@ class NavigationTypes extends React.Component {
 
 
     }
+    onDown_SpecialOffer = (countNumber, id) => {
+        let updatedState = context.state.superBasket;
 
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']--;
+
+        context.setState({superBasket: updatedState});
+    };
+    onUp_BestSellingProducts = (countNumber, id) => {
+        let updatedState = context.state.superBasket;
+
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']++;
+
+        context.setState({superBasket: updatedState});
+    };
     componentWillUnmount() {
         basketFile.writeBasket(context.state.superBasket);
         // super.componentWillUnmount();

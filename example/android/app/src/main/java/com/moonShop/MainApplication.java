@@ -2,7 +2,9 @@ package com.moonShop;
 
 import android.support.annotation.Nullable;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.bugsnag.BugsnagReactNative;
+
+import com.crashlytics.android.Crashlytics;
+
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -20,6 +22,8 @@ import com.reactnativenavigation.bridge.NavigationReactPackage;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;  // <--- import
 
 import com.facebook.soloader.SoLoader;
+import io.fabric.sdk.android.Fabric;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,9 +36,10 @@ public class MainApplication extends NavigationApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        BugsnagReactNative.start(this);
+        Fabric.with(this, new Crashlytics());
         SoLoader.init(this, /* native exopackage */ false);
     }
+
 
     @Nullable
     @Override
@@ -42,7 +47,6 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
             new RNHockeyAppPackage(this),
-            BugsnagReactNative.getPackage(),
             new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
             new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),
             new AppCenterReactNativePackage(MainApplication.this),
@@ -50,6 +54,7 @@ public class MainApplication extends NavigationApplication {
             new VectorIconsPackage(),
             new NavigationReactPackage(),
             new MapsPackage()
+
 
 
         );

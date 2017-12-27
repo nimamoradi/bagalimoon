@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
-
-apply plugin: 'com.bugsnag.android.gradle'
+apply plugin: 'io.fabric'
 import com.android.build.OutputFile
 
 /**
@@ -21,7 +20,9 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
-
+    dexOptions {
+        jumboMode true
+    }
     defaultConfig {
         applicationId "com.moonShop"
         minSdkVersion 16
@@ -62,6 +63,7 @@ android {
 }
 
 dependencies {
+
     compile project(':react-native-maps')
     compile project(':react-native-vector-icons')
     compile('com.facebook.android:facebook-android-sdk:4.22.1')
@@ -73,9 +75,14 @@ dependencies {
     compile project(path: ':appcenter-analytics')
     compile project(path: ':appcenter')
     compile project(':react-native-code-push')
+    // Crashlytics Kit
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true
+    }
 
-    compile project(path: ':bugsnag-react-native')
+
 }
+
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

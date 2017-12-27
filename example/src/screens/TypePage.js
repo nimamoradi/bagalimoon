@@ -235,6 +235,7 @@ class TypePage extends Component {
                     style={{height: 10 * vh}}
                     horizontal={true}
                     data={this.state.subItems}
+                    keyExtractor={(item) => item.name}
                     renderItem={({item}) =>
                         <TypeButton title={item.name}
                                     onPress={() => this.loadRenderRowData(item.id, item.name)}
@@ -250,6 +251,7 @@ class TypePage extends Component {
                         data={this.state.basket.filter((item) => {
                             return item.Category_id === this.state.Category_id;
                         })}
+                        keyExtractor={(item) => item.name}
                         renderItem={({item}) =>
                             <ItemView
                                 title={item.name}
@@ -264,6 +266,7 @@ class TypePage extends Component {
                         style={{height: 100 * vh, width: 30 * vh}}
                         horizontal={false}
                         data={this.state.mainItems}
+                        keyExtractor={(item) => item.id}
                         renderItem={({item}) =>
                             <TypeButton title={item.name}
                                         onPress={() => {
@@ -329,7 +332,7 @@ class TypePage extends Component {
 
 }
 
-TypePage.PropTypes = {
+TypePage.propTypes = {
     title: PropTypes.string.isRequired,
 
 };

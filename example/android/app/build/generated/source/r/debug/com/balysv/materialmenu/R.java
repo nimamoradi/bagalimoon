@@ -21,10 +21,10 @@ public final class R {
     public static final class styleable {
         public static final int[] MaterialMenuView = { 0x7f010118, 0x7f010119, 0x7f01011a, 0x7f01011b, 0x7f01011c, 0x7f01011d };
         public static final int MaterialMenuView_mm_color = 0;
-        public static final int MaterialMenuView_mm_rtlEnabled = 5;
-        public static final int MaterialMenuView_mm_scale = 2;
-        public static final int MaterialMenuView_mm_strokeWidth = 4;
-        public static final int MaterialMenuView_mm_transformDuration = 3;
         public static final int MaterialMenuView_mm_visible = 1;
+        public static final int MaterialMenuView_mm_scale = 2;
+        public static final int MaterialMenuView_mm_transformDuration = 3;
+        public static final int MaterialMenuView_mm_strokeWidth = 4;
+        public static final int MaterialMenuView_mm_rtlEnabled = 5;
     }
 }

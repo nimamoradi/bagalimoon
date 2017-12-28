@@ -58,12 +58,7 @@ class offer extends Component {
         });
     };
 
-    //
-    // componentDidMount() {
-    //     if (this.props.myNumber === null || this.props.myNumber === 0 || this.props.myNumber === '0')
-    //         this.loadData();
-    //
-    // }
+
 
     loadData = async () => {
         const data = await AsyncStorage.getItem('@CurrentBasket');
@@ -81,7 +76,7 @@ class offer extends Component {
 
     };
 
-    findIndex(array, id, id_number) {
+    static findIndex(array, id, id_number) {
         return array.map(function (e) {
             return e.id;
         }).indexOf(id_number);
@@ -131,7 +126,7 @@ class offer extends Component {
                     alignItems: "stretch",
                 }}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
-                        <View style={{flex: 0.6, flexDirection: 'column'}}>
+                        <View style={{flex: 55*vw, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <Text style={{
@@ -166,15 +161,9 @@ class offer extends Component {
                                 </View>
 
                             </View>
-                            <TouchableOpacity
-                                onPress={this.addToCart}>
 
-                                <Icon name="cart-plus" size={vw * 5} color="#17C408" style={{margin: 10}}/>
-                            </TouchableOpacity>
                         </View>
-                        <Image source={{
-                            uri: this.props.imageUrl
-                        }}
+                        <Image source={{uri: this.props.imageUrl}}
                                style={styles.image}/>
 
                     </View>
@@ -209,39 +198,6 @@ class offer extends Component {
         );
     }
 
-    addToCart = () => {
-        if (this.state.myNumber !== '0')
-            this.props.navigator.showLightBox({
-                screen: "example.Types.OrderItem",
-                passProps: {
-                    title: this.props.title,
-                    price: this.props.price,
-                    imageUrl: this.props.imageUrl,
-                    count: this.state.myNumber,
-                    content: 'به سبد خرید اضافه شد',
-                    id: this.props.id,
-                    onClose: this.dismissLightBox,
-                },
-                style: {
-                    backgroundBlur: 'dark',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    tapBackgroundToDismiss: true
-                }
-            });
-        else this.props.navigator.showLightBox({
-            screen: "example.Types.LightBox",
-            passProps: {
-                title: 'توجه',
-                content: 'مقدار کالا صفر است',
-                onClose: this.dismissLightBox,
-            },
-            style: {
-                backgroundBlur: 'red',
-                backgroundColor: 'rgba(20, 0, 0, 0.5)',
-                tapBackgroundToDismiss: true
-            }
-        });
-    };
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
         if (sendTOHome)
@@ -275,7 +231,7 @@ const styles = StyleSheet.create({
     }
     , des: {},
     image: {
-        alignSelf: 'stretch',
+        flexDirection:'row',
         width: vw * 45,
         height: vh * 40,
         borderRadius: 20,

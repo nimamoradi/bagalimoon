@@ -1,44 +1,61 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {StyleSheet, View, Text,FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
+import _ from 'lodash'
+import {StyleSheet, View, Text, FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
+import dataHandeling from "../dataHandeling";
 import basketfile from "../basketFile";
+
+let context;
 
 class basketPreview extends React.Component {
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        let basket = JSON.parse(this.props.basket);
+        props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+        let basket;
+        if (props.isParsed !== true)
+            basket = JSON.parse((this.props.basket));
+        else basket = (this.props.basket);
         // console.log(basket);
 
 
         this.state = {
             basket: basket,
-
             totalPrice: '?'
         };
-        // console.log(dataArray)
+        context = this;
     }
+
+
+    componentWillUnmount() {
+
+        let basket = this.state.basket;
+
+        this.props.UpdateBasket(basket);
+        // super.componentWillUnmount();
+
+    }
+
 
     componentDidMount() {
         let totalPrice = 0;
-        let basket = this.state.basket;
+        let basket = this.state.basket.filter(function (item) {
+            return item.count > 0
+        });
         for (let i = 0; i < basket.length; i++) {
             totalPrice += Number.parseInt(basket[i]['price']) * Number.parseInt(basket[i]['count'])
 
         }
-        basket.filter(function (item) {
-         return item.count>0;
-        });
+
         this.setState({
+            basket: basket,
             totalPrice: totalPrice,
         });
     }
 
     address = () => {
-        if (this.state.totalPrice !== 0 ) {
+        if (this.state.totalPrice !== 0) {
             this.props.navigator.pop();
             this.props.navigator.push({
                 screen: 'example.mapView',
@@ -50,24 +67,32 @@ class basketPreview extends React.Component {
         } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);
     };
     onUp = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.basket;
-        let data = this.state.basket;
-        updatedState[data.indexOf(rowdata)]['count']++;
-        console.log(updatedState);
-        this.setState({basket: updatedState});
-        this.onCountChanged(rowdata, false);
+        let rowDataCopy = Object.assign({}, rowdata);
+        rowDataCopy.count++;
+        let list = this.state.basket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
+
+        this.setState({
+            basket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
     };
     onDown = (rowdata) => {
-        rowdata.count = Number.parseInt(rowdata.count);
-        let updatedState = this.state.basket;
-        let data = this.state.basket;
-        if (updatedState[data.indexOf(rowdata)]['count'] !== 0) {
-            updatedState[data.indexOf(rowdata)]['count']--;
-            this.onCountChanged(rowdata, true);
+        let rowDataCopy = Object.assign({}, rowdata);
+        if (rowDataCopy.count !== 0) {
+            rowDataCopy.count--;
         }
-        console.log(updatedState);
-        this.setState({basket: updatedState});
+        let list = this.state.basket;
+        let index = dataHandeling.indexOfId(list, rowdata.id);
+
+        this.setState({
+            basket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
     };
     onCountChanged = (rowdata, down) => {
         let priceChange;
@@ -122,7 +147,6 @@ class basketPreview extends React.Component {
                 />
 
 
-
                 <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
                     <View style={{flex: 1}}/>
                     <Text style={styles.price}>
@@ -136,7 +160,9 @@ class basketPreview extends React.Component {
 
                 <View style={{flexDirection: 'row', alignContent: 'center',}}>
                     <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                      onPress={this.address}>
+                                      onPress={_.debounce(this.address,
+                                          1000, {leading: true, trailing: false})}
+                    >
                         <View style={styles.button}>
                             <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
                             <View style={{flex: 0.5}}/>
@@ -145,10 +171,11 @@ class basketPreview extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
                                       onPress={() => {
-                                          if (this.props.isDynamic === undefined)
-
-                                          basketfile.setBasket([]);
-                                          basketfile.writeBasket();
+                                          basketfile.writeBasket([]);
+                                          this.props.UpdateBasket(this.state.basket.map(function (item) {
+                                              item.count = 0;
+                                              return item;
+                                          }));
                                           this.props.navigator.pop();
 
                                       }}>
@@ -165,10 +192,6 @@ class basketPreview extends React.Component {
     }
 }
 
-basketPreview.propTypes = {
-    basket: PropTypes.string.isRequired,//encoded array in json
-
-};
 
 const styles = StyleSheet.create({
 

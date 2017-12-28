@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+
 import {
     StyleSheet,
     View,
@@ -18,6 +18,7 @@ import MapView from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
+import _ from 'lodash'
 
 let Radio = require('../components/index');
 let Option = Radio.Option;
@@ -295,7 +296,8 @@ class mapView extends Component {
 
                     <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity
-                            onPress={this.offlineSale}
+                            onPress={_.debounce(this.offlineSale,
+                                1000, {leading: true, trailing: false})}
                             style={styles.bigButton}>
                             <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
                         </TouchableOpacity>

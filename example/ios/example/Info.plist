@@ -59,5 +59,7 @@
 		<string>bnazanin.ttf</string>
 		<string>B Yekan.ttf</string>
 	</array>
+	<key>CodePushDeploymentKey</key>
+	<string>deployment-key-here</string>
 </dict>
 </plist>

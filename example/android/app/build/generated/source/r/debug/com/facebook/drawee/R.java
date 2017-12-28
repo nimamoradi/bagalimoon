@@ -8,6 +8,7 @@ package com.facebook.drawee;
 
 public final class R {
     public static final class attr {
+        public static final int actualImageResource = 0x7f010145;
         public static final int actualImageScaleType = 0x7f0100ed;
         public static final int actualImageUri = 0x7f010144;
         public static final int backgroundImage = 0x7f0100ee;
@@ -48,32 +49,33 @@ public final class R {
     }
     public static final class styleable {
         public static final int[] GenericDraweeHierarchy = { 0x7f0100e2, 0x7f0100e3, 0x7f0100e4, 0x7f0100e5, 0x7f0100e6, 0x7f0100e7, 0x7f0100e8, 0x7f0100e9, 0x7f0100ea, 0x7f0100eb, 0x7f0100ec, 0x7f0100ed, 0x7f0100ee, 0x7f0100ef, 0x7f0100f0, 0x7f0100f1, 0x7f0100f2, 0x7f0100f3, 0x7f0100f4, 0x7f0100f5, 0x7f0100f6, 0x7f0100f7, 0x7f0100f8, 0x7f0100f9, 0x7f0100fa };
-        public static final int GenericDraweeHierarchy_actualImageScaleType = 11;
-        public static final int GenericDraweeHierarchy_backgroundImage = 12;
         public static final int GenericDraweeHierarchy_fadeDuration = 0;
-        public static final int GenericDraweeHierarchy_failureImage = 6;
-        public static final int GenericDraweeHierarchy_failureImageScaleType = 7;
-        public static final int GenericDraweeHierarchy_overlayImage = 13;
+        public static final int GenericDraweeHierarchy_viewAspectRatio = 1;
         public static final int GenericDraweeHierarchy_placeholderImage = 2;
         public static final int GenericDraweeHierarchy_placeholderImageScaleType = 3;
-        public static final int GenericDraweeHierarchy_pressedStateOverlayImage = 14;
-        public static final int GenericDraweeHierarchy_progressBarAutoRotateInterval = 10;
-        public static final int GenericDraweeHierarchy_progressBarImage = 8;
-        public static final int GenericDraweeHierarchy_progressBarImageScaleType = 9;
         public static final int GenericDraweeHierarchy_retryImage = 4;
         public static final int GenericDraweeHierarchy_retryImageScaleType = 5;
+        public static final int GenericDraweeHierarchy_failureImage = 6;
+        public static final int GenericDraweeHierarchy_failureImageScaleType = 7;
+        public static final int GenericDraweeHierarchy_progressBarImage = 8;
+        public static final int GenericDraweeHierarchy_progressBarImageScaleType = 9;
+        public static final int GenericDraweeHierarchy_progressBarAutoRotateInterval = 10;
+        public static final int GenericDraweeHierarchy_actualImageScaleType = 11;
+        public static final int GenericDraweeHierarchy_backgroundImage = 12;
+        public static final int GenericDraweeHierarchy_overlayImage = 13;
+        public static final int GenericDraweeHierarchy_pressedStateOverlayImage = 14;
         public static final int GenericDraweeHierarchy_roundAsCircle = 15;
-        public static final int GenericDraweeHierarchy_roundBottomLeft = 20;
-        public static final int GenericDraweeHierarchy_roundBottomRight = 19;
+        public static final int GenericDraweeHierarchy_roundedCornerRadius = 16;
         public static final int GenericDraweeHierarchy_roundTopLeft = 17;
         public static final int GenericDraweeHierarchy_roundTopRight = 18;
+        public static final int GenericDraweeHierarchy_roundBottomRight = 19;
+        public static final int GenericDraweeHierarchy_roundBottomLeft = 20;
         public static final int GenericDraweeHierarchy_roundWithOverlayColor = 21;
-        public static final int GenericDraweeHierarchy_roundedCornerRadius = 16;
+        public static final int GenericDraweeHierarchy_roundingBorderWidth = 22;
         public static final int GenericDraweeHierarchy_roundingBorderColor = 23;
         public static final int GenericDraweeHierarchy_roundingBorderPadding = 24;
-        public static final int GenericDraweeHierarchy_roundingBorderWidth = 22;
-        public static final int GenericDraweeHierarchy_viewAspectRatio = 1;
-        public static final int[] SimpleDraweeView = { 0x7f010144 };
+        public static final int[] SimpleDraweeView = { 0x7f010144, 0x7f010145 };
         public static final int SimpleDraweeView_actualImageUri = 0;
+        public static final int SimpleDraweeView_actualImageResource = 1;
     }
 }

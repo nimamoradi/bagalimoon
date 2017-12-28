@@ -6,7 +6,7 @@ import {
     View,
     Text,
     TextInput,
-    Image,
+    ImageBackground ,
     Dimensions,
     AsyncStorage
 
@@ -65,7 +65,7 @@ class loginScreen extends React.Component {
         </View>;
         else
             return (
-                <Image
+                <ImageBackground
                     style={{
                         width: Dimensions.get('window').width,
                         height: Dimensions.get('window').height,
@@ -104,7 +104,7 @@ class loginScreen extends React.Component {
                     <View style={styles.absolote}>
                         {(this.state.sendData === true) ? <Loading/> : null}
                     </View>
-                </Image>        );
+                </ImageBackground>        );
     }
 
     doSignUp() {
@@ -162,7 +162,7 @@ class loginScreen extends React.Component {
             setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
-        const request = fetch(server.getServerAddress());
+        const request = fetch(server.getInternetCheckAddress());
 
         return Promise
             .race([timeout, request])

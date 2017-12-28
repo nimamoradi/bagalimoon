@@ -15,6 +15,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 import server from "../../code";
+import basketfile from "../../basketFile";
 
 let context;
 
@@ -27,6 +28,7 @@ class MyClass extends React.Component {
         AsyncStorage.getItem('user_number').then((item) => {
             context.setState({user_number: item})
         });
+
     }
 
     dismissLightBox = async (sendTOHome) => {
@@ -63,19 +65,7 @@ class MyClass extends React.Component {
                     <Text style={{alignSelf: 'flex-end', fontSize: vw * 4}}>{this.state.user_number}</Text>
                 </View>
                 <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
-                    <TouchableOpacity
-                        onPress={() => server.showLightBox('example.Types.basketLightBox', {
-                            title: this.props.title,
-                            onClose: this.dismissLightBox,
-                        }, context)}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Icon name="shopping-cart" size={vw * 6} color="green"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>سبد خرید</Text>
 
-                        </View>
-
-                    </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={(() => this.orderHistroy())}>
@@ -118,6 +108,7 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={() => {
                             AsyncStorage.clear();
+                            basketfile.writeBasket([])
                             BackHandler.exitApp();
 
                         }}>

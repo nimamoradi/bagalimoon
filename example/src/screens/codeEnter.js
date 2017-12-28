@@ -6,7 +6,7 @@ import {
     View,
     Text,
     TextInput,
-    Image,
+    ImageBackground,
     Dimensions,
     AsyncStorage
 
@@ -37,7 +37,7 @@ class codeEnter extends React.Component {
 
     render() {
         return (
-            <Image
+            <ImageBackground
                 style={{
                     width: Dimensions.get('window').width,
                     height: Dimensions.get('window').height,
@@ -74,7 +74,7 @@ class codeEnter extends React.Component {
                 <View style={styles.absolote}>
                     {(this.state.sendData === true) ? <Loading/> : null}
                 </View>
-            </Image>
+            </ImageBackground>
         );
     }
 
@@ -84,7 +84,7 @@ class codeEnter extends React.Component {
             setTimeout(reject, server.getTimeOut(), 'Request timed out');
         });
 
-        const request = fetch(server.getServerAddress());
+        const request = fetch(server.getInternetCheckAddress());
 
         return Promise
             .race([timeout, request])
@@ -131,7 +131,7 @@ class codeEnter extends React.Component {
     };
 
     pushMainScreen(api) {
-        basketFile.setBasket([]);
+
         context.props.navigator.push({
             backButtonTitle: '',
             screen: 'example.Types',

@@ -65,3 +65,4 @@
 # stetho
 
 -dontwarn com.facebook.stetho.**
+-keepattributes LineNumberTable,SourceFile

@@ -3,6 +3,8 @@ import {ActivityIndicator,BackHandler, View, Text, TouchableOpacity, StyleSheet,
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../viewport'
+import server from "../code";
+import _ from 'lodash'
 
 class reTry extends React.Component {
     constructor(props) {
@@ -37,14 +39,18 @@ class reTry extends React.Component {
                 <Text style={styles.text}>اتصال قطع شد</Text>
                 <TouchableOpacity
 
-                    onPress={() => {
-                        if (this.state.parms === null)
-                            this.state.task();
-                        else {
-                            this.state.task(this.state.parms);
-                        }
-                        this.props.navigator.pop();
-                    }}>
+                    onPress={_.debounce(
+                        () => {
+                            if (this.state.parms === null)
+                                this.state.task();
+                            else {
+                                this.state.task(this.state.parms);
+                            }
+                            this.props.navigator.pop();
+                        },
+                        1000, {leading: true, trailing: false}
+                        )}
+                    >
                     <Icon name="redo" size={vw * 20} color="#777777" style={{margin: 2 * vw}}/>
                 </TouchableOpacity>
                 <Text style={styles.text}>دوباره امتحان کنید</Text>

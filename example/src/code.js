@@ -1,5 +1,6 @@
 class code {
-    static serverAddress = 'http://reactnative.onlinewebshop.net';
+    static serverAddress = 'https://baghali.cf/';
+    static InternetCheckAddress = 'https://www.google.com/';
     static timeOut = 4000;
     static retryCount = 5;
 
@@ -7,6 +8,9 @@ class code {
 
     static getServerAddress() {
         return this.serverAddress;
+    }
+    static getInternetCheckAddress() {
+        return this.InternetCheckAddress;
     }
 
     static getTimeOut() {

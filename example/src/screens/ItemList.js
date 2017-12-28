@@ -16,7 +16,7 @@ class offer extends Component {
 
 }
 
-offer.propTypes = {
+offer.PropTypes = {
     title: PropTypes.string.isRequired,
 
 };

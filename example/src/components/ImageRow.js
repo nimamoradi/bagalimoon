@@ -14,10 +14,9 @@ function ImageRow({title, onPress, imageUrl}) {
             underlayColor={'rgba(0, 0, 0, 0.0)'}
         >
             <View style={styles.row}>
-                <ProgressiveImage source={{uri:  imageUrl}}
-                                  height={35 * vw} width={1000 * vw}
-                                  style={styles.image} key={imageUrl}
-                                  thumbnail={require("../../img/load.png")}/>
+                <Image source={{uri:  imageUrl}}
+
+                                  style={styles.image}/>
              
             </View>
         </TouchableHighlight>
@@ -41,8 +40,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
      image: {
-         height:vh*35, width: Dimensions.get('window').width,
-
+         height:vh*35, width: 100*vw,
+         resizeMode:'stretch'
 
 
     }

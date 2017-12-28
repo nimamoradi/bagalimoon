@@ -5,10 +5,11 @@ import {
     View,
     TouchableWithoutFeedback
 } from "react-native";
+import PropTypes from 'prop-types';
 
-var window = Dimensions.get('window');
+let window = Dimensions.get('window');
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
     outerCircle: {
         height: 20,
         width: 20,
@@ -31,7 +32,7 @@ class Circle extends Component {
     }
 
     render() {
-        var { color, isSelected, selectedColor } = this.props;
+        let { color, isSelected, selectedColor } = this.props;
 
         let innerCircle;
         let appliedColor;
@@ -55,9 +56,9 @@ class Circle extends Component {
 }
 
 Circle.propTypes = {
-    color: React.PropTypes.string,
-    selectedColor: React.PropTypes.string,
-    isSelected: React.PropTypes.bool
+    color: PropTypes.string,
+    selectedColor:PropTypes.string,
+    isSelected: PropTypes.bool
 };
 
 Circle.defaultProps = {
@@ -71,7 +72,7 @@ class Radio extends Component {
     }
 
     _onSelect(index) {
-        var { onSelect } = this.props;
+        let { onSelect } = this.props;
         this.setState({
             selectedIndex: index
         });
@@ -79,10 +80,10 @@ class Radio extends Component {
     }
 
     render() {
-        var { selectedIndex } = this.state;
-        var targetIndex = selectedIndex !== -1? selectedIndex : this.props.defaultSelect;
+        let { selectedIndex } = this.state;
+        let targetIndex = selectedIndex !== -1? selectedIndex : this.props.defaultSelect;
 
-        var children = React.Children.map(this.props.children, (child, index) => {
+        let children = React.Children.map(this.props.children, (child, index) => {
             if (child.type === Option) {
                 return React.cloneElement(child, {
                     onPress: () => this._onSelect(index),
@@ -102,8 +103,8 @@ class Radio extends Component {
 }
 
 Radio.propTypes = {
-    onSelect: React.PropTypes.func.isRequired,
-    defaultSelect: React.PropTypes.number
+    onSelect: PropTypes.func.isRequired,
+    defaultSelect: PropTypes.number
 };
 
 Radio.defaultProps = {
@@ -116,7 +117,7 @@ class Option extends Component {
     }
 
     render() {
-        var { onPress, isSelected, color, selectedColor, children } = this.props;
+        let { onPress, isSelected, color, selectedColor, children } = this.props;
 
         return (
             <TouchableWithoutFeedback onPress={onPress}>
@@ -132,10 +133,10 @@ class Option extends Component {
 }
 
 Option.propTypes = {
-    onPress: React.PropTypes.func,
-    isSelected: React.PropTypes.bool,
-    color: React.PropTypes.string,
-    selectedColor: React.PropTypes.string
+    onPress: PropTypes.func,
+    isSelected: PropTypes.bool,
+    color: PropTypes.string,
+    selectedColor: PropTypes.string
 };
 
 Radio.Option = Option;

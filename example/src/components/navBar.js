@@ -11,14 +11,12 @@ function navBar({menu,basket}) {
             <TouchableOpacity onPress={basket}>
                 <IconAwesome name="shopping-basket" size={vw * 6} color="#00aa00" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <IconAwesome name="search" size={vw * 6}  style={{margin: 10, flex: 1}}/>
-            </TouchableOpacity>
-            <Text style={{flex:6,textAlign:'center',fontSize:6*vw,fontFamily:'B Yekan'}}>بقالی مون
+
+            <Text style={{flex:10,textAlign:'center',fontSize:6*vw,fontFamily:'B Yekan'}}>بقالی مون
 
             </Text>
             <View style={{flex:1}}/>
-            <TouchableOpacity onPress={menu}>
+            <TouchableOpacity onPress={()=>menu()}>
             <Icon name="menu" size={vw * 8} color="#000000" style={{margin: 10,flex:1}}/>
             </TouchableOpacity>
 

@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, TouchableOpacity, Image, TextInput, Dimensions} 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 
-function itemView({title, onUp, onDown, imageUrl, price, count, onPress, disscount,}) {
+function itemView({title, onUp, onDown, imageUrl, price, count,  disscount,}) {
 
 
     return (
@@ -45,9 +45,9 @@ function itemView({title, onUp, onDown, imageUrl, price, count, onPress, disscou
                         </View>
 
                     </View>
-                    <TouchableOpacity onPress={onPress}>
+
                         <Image source={{uri: imageUrl}} style={styles.image}/>
-                    </TouchableOpacity>
+
                 </View>
 
                 <View style={styles.priceView}>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8f0e820',
         padding: 4*vw,
         margin:2*vw,
-        width: Dimensions.get('window').width * 0.95,
+        width: 69*vw,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {
+        fontFamily: 'B Yekan',
         alignSelf: 'flex-end',
         fontSize: vw * 5,
         marginRight: 20,

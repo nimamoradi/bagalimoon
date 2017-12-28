@@ -1,15 +1,13 @@
-import {Platform, Text, StyleSheet, View, TouchableOpacity, AsyncStorage, Button} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {registerScreens, registerScreenVisibilityListener} from './screens';
-import {vw, vh, vmin, vmax} from './viewport'
 
-import basketFile from './basketFile'
+
 
 // screen related book keeping
 registerScreens();
-registerScreenVisibilityListener();
+// registerScreenVisibilityListener();
 
-console.log('api code reading');
 AsyncStorage.getItem('api_code').then((item) => {
 
     let startAppdata;
@@ -20,7 +18,6 @@ AsyncStorage.getItem('api_code').then((item) => {
                 navigatorStyle: {
                     navBarHidden: true,
                 }
-
             },
             appStyle: {
                 orientation: 'portrait',
@@ -49,52 +46,42 @@ AsyncStorage.getItem('api_code').then((item) => {
     }
     else //user is logined before
     {
-        let basket;
-        AsyncStorage.getItem('@CurrentBasket').then((basket_) => {
-            if (basket_ === null) {
-                basket = [];
-                basketFile.setBasket([]);
-            }
-            else {
-                basket = JSON.parse(basket_);
-                basketFile.setBasket(basket);
-                // console.log('basket ' + basket)
-            }
-            startAppdata = {
-                screen: {
-                    screen: 'example.Types', // unique ID registered with Navigation.registerScreen
-                    title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
-                    navigatorStyle: {
-                        navBarTranslucent: false,
-                        navBarHidden: true,
-                    },
 
+        startAppdata = {
+            screen: {
+                screen: 'example.Types', // unique ID registered with Navigation.registerScreen
+                title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
+                navigatorStyle: {
+                    navBarTranslucent: false,
+                    navBarHidden: true,
                 },
-                appStyle: {
-                    orientation: 'portrait',
+
+            },
+            appStyle: {
+                orientation: 'portrait',
+            },
+            drawer: { // optional, add this if you want a side menu drawer in your app
+                right: { // optional, define if you want a drawer from the right
+                    screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
+                    passProps: {} // simple serializable object that will pass as props to all top screens (optional)
                 },
-                drawer: { // optional, add this if you want a side menu drawer in your app
-                    right: { // optional, define if you want a drawer from the right
-                        screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                        passProps: {} // simple serializable object that will pass as props to all top screens (optional)
-                    },
-                    style: { // ( iOS only )
-                        drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                        contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                        leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                        rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
-                    },
-                    type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-                    animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-                    // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-                    disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
+                style: { // ( iOS only )
+                    drawerShadow: true, // optional, add this if you want a side menu drawer shadow
+                    contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
+                    leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
+                    rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
                 },
-                passProps: {api_code: item,}, // simple serializable object that will pass as props to all top screens (optional)
+                type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
+                animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
+                // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
+                disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
+            },
+            passProps: {api_code: item,}, // simple serializable object that will pass as props to all top screens (optional)
 
 
-            };
-            Navigation.startSingleScreenApp(startAppdata);
-        });
+        };
+        Navigation.startSingleScreenApp(startAppdata);
+
     }
 
 

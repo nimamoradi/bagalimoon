@@ -1,4 +1,0 @@
-#Tue Dec 12 14:57:03 IRST 2017
-base.0=E\:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
-renamed.0=classes.dex
-file.0=E\:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

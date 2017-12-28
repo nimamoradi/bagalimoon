@@ -5,46 +5,46 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ProgressiveImage from './progressiveImage'
 import {vw, vh, vmin, vmax} from '../viewport'
 
-function item({title, onPress, imageUrl, price, disscount, count, onUp, onDown}) {
+function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown}) {
 
-        return (
-            <TouchableOpacity
+    return (
+        <TouchableOpacity onPress={onPress}>
+            <View style={styles.row}>
 
-                onPress={onPress}>
-                <View style={styles.row}>
-                    <ProgressiveImage source={{uri:  imageUrl}} height={25 * vh} width={35 * vw}  style={styles.image} key={imageUrl}
-                                      thumbnail={require("../../img/load.png")}/>
+                <Image source={{uri: imageUrl}} style={styles.image} key={imageUrl}
+                       thumbnail={require("../../img/load.png")}/>
 
-                    <Text style={styles.text}>{title}</Text>
-                    {(count!==0) ? <View style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        backgroundColor: '#F8222E20',
-                        right: 0,
-                        bottom: 0,
-                        borderBottomWidth: 1,
-                        borderRadius: 5 * vh,
-                        borderColor: '#e8f0e8',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}/>: null}
-                    <Text style={styles.price}>{price} تومان </Text>
-                    {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
-                    <View style={{flexDirection: 'row'}}>
-                        <TouchableOpacity onPress={onDown}>
-                            <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
-                        </TouchableOpacity>
-                        <Text style={styles.countText}>{count}</Text>
-                        <TouchableOpacity onPress={onUp} style={{borderRadius:20}}>
-                            <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
-                        </TouchableOpacity>
 
-                    </View>
+                <Text style={styles.text}>{title}</Text>
+                {(count !== 0) ? <View style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    backgroundColor: '#F8222E20',
+                    right: 0,
+                    bottom: 0,
+                    borderBottomWidth: 1,
+                    borderRadius: 5 * vh,
+                    borderColor: '#e8f0e8',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}/> : null}
+                <Text style={styles.price}>{price} تومان </Text>
+                {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={onDown}>
+                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
+                    </TouchableOpacity>
+                    <Text style={styles.countText}>{count}</Text>
+                    <TouchableOpacity onPress={onUp} style={{borderRadius: 20}}>
+                        <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
+                    </TouchableOpacity>
+
                 </View>
-            </TouchableOpacity>
-        );
 
+            </View>
+        </TouchableOpacity>
+    );
 
 
 }
@@ -54,7 +54,7 @@ item.propTypes = {
     price: PropTypes.string.isRequired,
     disscount: PropTypes.string,
     imageUrl: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired,
+
 };
 
 const styles = StyleSheet.create({
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     row: {
+        paddingBottom: vh,
         borderColor: '#bec4be',
         height: 45 * vh,
         margin: vh,

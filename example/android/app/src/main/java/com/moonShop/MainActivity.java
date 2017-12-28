@@ -1,8 +1,11 @@
 package com.moonShop;
 
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
+import com.microsoft.appcenter.reactnative.crashes.BuildConfig;
 import com.reactnativenavigation.controllers.SplashActivity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.graphics.Color;
@@ -10,18 +13,12 @@ import android.widget.TextView;
 import android.view.Gravity;
 import android.util.TypedValue;
 import android.widget.ImageView;
-
+// 1. Import the plugin class.
+import com.microsoft.codepush.react.CodePush;
 import com.reactnativenavigation.controllers.SplashActivity;
 
 public class MainActivity extends SplashActivity {
-//    @Override
-//    public void onCreate() {
-//        super.onCreate();
-//
-//        // FORCE LTR
-//
-//
-//    }
+
 
     @Override
     public LinearLayout createSplashLayout() {
@@ -29,8 +26,7 @@ public class MainActivity extends SplashActivity {
         sharedI18nUtilInstance.allowRTL(getApplicationContext(), false);
         LinearLayout view = new LinearLayout(this);
         ImageView imageView1 = new ImageView(this);
-        ImageView imageView2 = new ImageView(this);
-        ImageView imageView3 = new ImageView(this);
+
         view.setBackgroundColor(Color.parseColor("#ffffff"));
         view.setOrientation(LinearLayout.VERTICAL);
         imageView1.setImageResource(R.drawable.login);

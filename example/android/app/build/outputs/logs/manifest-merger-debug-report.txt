@@ -1,249 +1,430 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
+MERGED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-12:12
+MERGED from [:react-native-vector-icons] E:\projects\superMan-gitlab\example\node_modules\react-native-vector-icons\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:21:1-50:12
+MERGED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-20:12
+MERGED from [:react-native-hockeyapp] E:\projects\superMan-gitlab\example\node_modules\react-native-hockeyapp\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:appcenter-crashes] E:\projects\superMan-gitlab\example\node_modules\appcenter-crashes\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:appcenter-analytics] E:\projects\superMan-gitlab\example\node_modules\appcenter-analytics\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:appcenter] E:\projects\superMan-gitlab\example\node_modules\appcenter\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-17:12
+MERGED from [:bugsnag-react-native] E:\projects\superMan-gitlab\example\node_modules\bugsnag-react-native\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:2:1-15:12
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:16:1-25:12
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:16:1-21:12
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-tasks-10.2.4.aar\064ff15a4986a05da1b9bf0b747ffc34\AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:16:1-23:12
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-toolbar-1.5.4.aar\b6f1c06f2b97b5eae5e3f2bf0c4d6b32\AndroidManifest.xml:2:1-14:12
+MERGED from [com.microsoft.appcenter.reactnative:appcenter-react-native:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-react-native-1.1.0.aar\299586f0fcdf6a9dc11323b62432a524\AndroidManifest.xml:2:1-11:12
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\ahbottomnavigation-2.0.6.aar\921601b7f751c0cde8639cfcfb902e50\AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\cardview-v7-25.0.0.aar\f60c2ad0a379df60654911743475d7e6\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\customtabs-25.0.0.aar\ce02b99a791cd5ab947ac631eb337caa\AndroidManifest.xml:17:1-24:12
+MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\textlayoutbuilder-1.0.0.aar\6b7b565e2587d1c205b19cb2332d3dc6\AndroidManifest.xml:10:1-18:12
+MERGED from [com.facebook.fresco:fresco:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\fresco-1.3.0.aar\43de81ef6165b92421f7f0dcafdbd21f\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.3.0.aar\961ac0a16646f553ed1599a090800965\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\soloader-0.1.0.aar\ded9e817a990421be8b94468f71cc345\AndroidManifest.xml:1:1-4:12
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\android-jsc-r174650.aar\4c65f32499435e3304f9a9b4a4efd844\AndroidManifest.xml:1:1-3:12
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:2:1-23:12
+MERGED from [com.microsoft.appcenter:appcenter-crashes:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-crashes-1.1.0.aar\8e87b13fbd4bc5db550acae8e942a850\AndroidManifest.xml:2:1-12:12
+MERGED from [com.microsoft.appcenter:appcenter-analytics:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-analytics-1.1.0.aar\d2493cd5188a505d1fdda8ccf5953139\AndroidManifest.xml:2:1-12:12
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:2:1-14:12
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-25.3.1.aar\88ad4c1b9f78f4650a0eb1f23c885259\AndroidManifest.xml:17:1-26:12
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:17:1-31:12
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.3.0.aar\a72120f12471c4e287ea69cd8c99cf39\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.3.0.aar\75c1bbd3679444b05cdb02042235db8f\AndroidManifest.xml:2:1-9:12
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-1.5.4.aar\02345d7c0ea6f7fa0f417721c661f729\AndroidManifest.xml:2:1-14:12
+MERGED from [com.facebook.fresco:drawee:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\drawee-1.3.0.aar\59f2845b820e23e7ba06708610a15dca\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:fbcore:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\fbcore-1.3.0.aar\11aca81be3285935702e59056c0d44ff\AndroidManifest.xml:2:1-9:12
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
 	package
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:3:5-27
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:2:5-51
-	xmlns:android
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:11-69
 	android:versionCode
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:4:5-79
 	android:name
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:4:22-76
 uses-permission#android.permission.INTERNET
 ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:5:5-67
-MERGED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:9:5-67
-MERGED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:20:5-66
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:12:5-67
+MERGED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:9:5-67
+MERGED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:9:5-67
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:11:5-67
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:20:5-66
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:20:5-66
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:12:5-67
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:12:5-67
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:11:5-67
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:11:5-67
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:10:5-67
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:10:5-67
 	android:name
 		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:7:5-34:19
-MERGED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:24:5-19
-MERGED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:18:5-20:19
-MERGED from [com.google.android.gms:play-services-tasks:10.2.6] C:\Users\nima\.android\build-cache\24ee21ca8d5daddb2b5246874441fcc73dbc35dd\output\AndroidManifest.xml:4:5-19
-MERGED from [com.google.android.gms:play-services-basement:10.2.6] C:\Users\nima\.android\build-cache\444c97a11364a9540b6a4cfc72c5c24b50f2139e\output\AndroidManifest.xml:19:5-21:19
-MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:28:5-48:19
-MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:22:5-20
-MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:11:5-18:19
-MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:11:5-20
-MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:26:5-20
-MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.android\build-cache\16b9119ad7871710a9f17d178eb18afef7a5eeb0\output\AndroidManifest.xml:12:5-20
-MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:12:5-20
-MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:13:5-20
-MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.android\build-cache\4617bf6e491a61ffe107144a5702ececbc74ac8b\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.android\build-cache\5201409396e9112d3f53643b0912e4ac3382027f\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.android\build-cache\0cf40cd41d187e29d86476fe979dceb809b48402\output\AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:29:5-20
-MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:3:3-17
-MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.android\build-cache\a7f03022832eaf97df1a7696f3b7a5e704d83134\output\AndroidManifest.xml:2:3-17
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:15:5-21:19
-	android:label
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:13:9-41
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:7:5-37:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:28:5-48:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:28:5-48:19
+MERGED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:11:5-18:19
+MERGED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:11:5-18:19
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:13:5-15:19
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:13:5-15:19
+MERGED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:13:5-20
+MERGED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:13:5-20
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:24:5-19
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:24:5-19
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-tasks-10.2.4.aar\064ff15a4986a05da1b9bf0b747ffc34\AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-tasks-10.2.4.aar\064ff15a4986a05da1b9bf0b747ffc34\AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:19:5-21:19
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:19:5-21:19
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-toolbar-1.5.4.aar\b6f1c06f2b97b5eae5e3f2bf0c4d6b32\AndroidManifest.xml:12:5-20
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-toolbar-1.5.4.aar\b6f1c06f2b97b5eae5e3f2bf0c4d6b32\AndroidManifest.xml:12:5-20
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\ahbottomnavigation-2.0.6.aar\921601b7f751c0cde8639cfcfb902e50\AndroidManifest.xml:11:5-20
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\ahbottomnavigation-2.0.6.aar\921601b7f751c0cde8639cfcfb902e50\AndroidManifest.xml:11:5-20
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\cardview-v7-25.0.0.aar\f60c2ad0a379df60654911743475d7e6\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\cardview-v7-25.0.0.aar\f60c2ad0a379df60654911743475d7e6\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\customtabs-25.0.0.aar\ce02b99a791cd5ab947ac631eb337caa\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\customtabs-25.0.0.aar\ce02b99a791cd5ab947ac631eb337caa\AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\soloader-0.1.0.aar\ded9e817a990421be8b94468f71cc345\AndroidManifest.xml:3:3-17
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\soloader-0.1.0.aar\ded9e817a990421be8b94468f71cc345\AndroidManifest.xml:3:3-17
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\android-jsc-r174650.aar\4c65f32499435e3304f9a9b4a4efd844\AndroidManifest.xml:2:3-17
+MERGED from [org.webkit:android-jsc:r174650] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\android-jsc-r174650.aar\4c65f32499435e3304f9a9b4a4efd844\AndroidManifest.xml:2:3-17
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:15:5-21:19
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:15:5-21:19
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:29:5-20
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-1.5.4.aar\02345d7c0ea6f7fa0f417721c661f729\AndroidManifest.xml:12:5-20
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-1.5.4.aar\02345d7c0ea6f7fa0f417721c661f729\AndroidManifest.xml:12:5-20
 	android:supportsRtl
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:8:9-36
-	android:allowBackup
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:11:9-36
-	android:icon
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:12:9-41
-	android:theme
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:14:9-65
-	tools:replace
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:9:9-44
-	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:10:9-40
-meta-data#com.google.android.geo.API_KEY
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:15:9-17:74
-	android:value
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:17:17-72
-	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:16:17-62
-activity#com.moonShop.MainActivity
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:18:9-25:20
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:9:9-36
 	android:label
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:20:13-45
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:14:9-41
+	android:icon
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:13:9-41
+	android:allowBackup
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:12:9-36
+	android:theme
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:15:9-65
+	tools:replace
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:10:9-44
 	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:19:13-41
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:11:9-40
+meta-data#com.bugsnag.android.API_KEY
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:16:9-17:70
+	android:value
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:17:20-68
+	android:name
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:16:20-62
+meta-data#com.google.android.geo.API_KEY
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:18:9-20:74
+	android:value
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:20:17-72
+	android:name
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:19:17-62
+activity#com.moonShop.MainActivity
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:21:9-28:20
+	android:label
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:23:13-45
+	android:name
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:22:13-41
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:21:13-24:29
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:24:13-27:29
 action#android.intent.action.MAIN
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:22:17-69
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:22:25-66
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:23:17-77
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:23:27-74
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:26:27-74
 activity#net.hockeyapp.android.UpdateActivity
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:30:3-67
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:16:9-73
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:33:3-67
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:16:9-73
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:16:9-73
 	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:30:13-64
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:33:13-64
 activity#net.hockeyapp.android.FeedbackActivity
-ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:31:3-69
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:17:9-75
+ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:34:3-69
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:17:9-75
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:17:9-75
 	android:name
-		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:31:13-66
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:34:13-66
 uses-sdk
 INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:23:5-43
-MERGED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:17:5-43
-MERGED from [com.google.android.gms:play-services-tasks:10.2.6] C:\Users\nima\.android\build-cache\24ee21ca8d5daddb2b5246874441fcc73dbc35dd\output\AndroidManifest.xml:3:5-43
-MERGED from [com.google.android.gms:play-services-basement:10.2.6] C:\Users\nima\.android\build-cache\444c97a11364a9540b6a4cfc72c5c24b50f2139e\output\AndroidManifest.xml:17:5-43
-MERGED from [example:react-native-vector-icons:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-vector-icons\android\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:24:5-26:41
-MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.android\build-cache\9420e9a77b1c0da63df4022e186999d8857d6322\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.android\build-cache\c44956344033c1150940eec3a37d10d70619369f\output\AndroidManifest.xml:20:5-44
-MERGED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
-MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.android\build-cache\03f019c860cb30f93b271174fdd93043e23af52e\output\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:21:5-23:62
-MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:20:5-44
-MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.android\build-cache\16b9119ad7871710a9f17d178eb18afef7a5eeb0\output\AndroidManifest.xml:8:5-10:41
-MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.android\build-cache\05e284538f9d20b9241fb8a5f95b8334ffde0bb2\output\AndroidManifest.xml:8:5-10:41
-MERGED from [example:react-native-hockeyapp:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-hockeyapp\android\build\intermediates\bundles\default\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.android\build-cache\4617bf6e491a61ffe107144a5702ececbc74ac8b\output\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.android\build-cache\5201409396e9112d3f53643b0912e4ac3382027f\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.android\build-cache\0cf40cd41d187e29d86476fe979dceb809b48402\output\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.android\build-cache\82238edc01bb85f5bf384bfac126005b448a69f1\output\AndroidManifest.xml:14:5-16:41
-MERGED from [com.facebook.fresco:fresco:1.0.1] C:\Users\nima\.android\build-cache\edf05249fdf7a41fd6f248f1e2a2b9af6029a7b9\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.0.1] C:\Users\nima\.android\build-cache\491d73c6b3c676ab89687e2530d4a195211039c6\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.0.1] C:\Users\nima\.android\build-cache\26a47423188fd82c75a25a16303e8ec8d2142916\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.0.1] C:\Users\nima\.android\build-cache\1c33024c7f988eec4aaef85277d719e2f1d5d18d\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.0.1] C:\Users\nima\.android\build-cache\49df4f68ca39094bf62dd0f87ad497330c8ec879\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.0.1] C:\Users\nima\.android\build-cache\b346dbb1858d4c7fe4112c02068087ccfc1950a2\output\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.android\build-cache\548b97e9bfcf02ee11645af3c0de101b36bea478\output\AndroidManifest.xml:2:3-70
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:7:5-9:41
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+MERGED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-vector-icons] E:\projects\superMan-gitlab\example\node_modules\react-native-vector-icons\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] E:\projects\superMan-gitlab\example\node_modules\react-native-vector-icons\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:24:5-26:41
+MERGED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-hockeyapp] E:\projects\superMan-gitlab\example\node_modules\react-native-hockeyapp\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-hockeyapp] E:\projects\superMan-gitlab\example\node_modules\react-native-hockeyapp\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:appcenter-crashes] E:\projects\superMan-gitlab\example\node_modules\appcenter-crashes\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:appcenter-crashes] E:\projects\superMan-gitlab\example\node_modules\appcenter-crashes\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:appcenter-analytics] E:\projects\superMan-gitlab\example\node_modules\appcenter-analytics\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:appcenter-analytics] E:\projects\superMan-gitlab\example\node_modules\appcenter-analytics\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:appcenter] E:\projects\superMan-gitlab\example\node_modules\appcenter\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:appcenter] E:\projects\superMan-gitlab\example\node_modules\appcenter\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:bugsnag-react-native] E:\projects\superMan-gitlab\example\node_modules\bugsnag-react-native\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:bugsnag-react-native] E:\projects\superMan-gitlab\example\node_modules\bugsnag-react-native\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:23:5-43
+MERGED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:23:5-43
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-tasks-10.2.4.aar\064ff15a4986a05da1b9bf0b747ffc34\AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-tasks:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-tasks-10.2.4.aar\064ff15a4986a05da1b9bf0b747ffc34\AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:17:5-43
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-toolbar-1.5.4.aar\b6f1c06f2b97b5eae5e3f2bf0c4d6b32\AndroidManifest.xml:8:5-10:41
+MERGED from [com.balysv.materialmenu:material-menu-toolbar:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-toolbar-1.5.4.aar\b6f1c06f2b97b5eae5e3f2bf0c4d6b32\AndroidManifest.xml:8:5-10:41
+MERGED from [com.microsoft.appcenter.reactnative:appcenter-react-native:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-react-native-1.1.0.aar\299586f0fcdf6a9dc11323b62432a524\AndroidManifest.xml:7:5-9:41
+MERGED from [com.microsoft.appcenter.reactnative:appcenter-react-native:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-react-native-1.1.0.aar\299586f0fcdf6a9dc11323b62432a524\AndroidManifest.xml:7:5-9:41
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\ahbottomnavigation-2.0.6.aar\921601b7f751c0cde8639cfcfb902e50\AndroidManifest.xml:7:5-9:41
+MERGED from [com.aurelhubert:ahbottomnavigation:2.0.6] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\ahbottomnavigation-2.0.6.aar\921601b7f751c0cde8639cfcfb902e50\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\cardview-v7-25.0.0.aar\f60c2ad0a379df60654911743475d7e6\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\cardview-v7-25.0.0.aar\f60c2ad0a379df60654911743475d7e6\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\customtabs-25.0.0.aar\ce02b99a791cd5ab947ac631eb337caa\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:25.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\customtabs-25.0.0.aar\ce02b99a791cd5ab947ac631eb337caa\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\textlayoutbuilder-1.0.0.aar\6b7b565e2587d1c205b19cb2332d3dc6\AndroidManifest.xml:14:5-16:41
+MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\textlayoutbuilder-1.0.0.aar\6b7b565e2587d1c205b19cb2332d3dc6\AndroidManifest.xml:14:5-16:41
+MERGED from [com.facebook.fresco:fresco:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\fresco-1.3.0.aar\43de81ef6165b92421f7f0dcafdbd21f\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\fresco-1.3.0.aar\43de81ef6165b92421f7f0dcafdbd21f\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.3.0.aar\961ac0a16646f553ed1599a090800965\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.3.0.aar\961ac0a16646f553ed1599a090800965\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\soloader-0.1.0.aar\ded9e817a990421be8b94468f71cc345\AndroidManifest.xml:2:3-70
+MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\soloader-0.1.0.aar\ded9e817a990421be8b94468f71cc345\AndroidManifest.xml:2:3-70
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:7:5-9:41
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:7:5-9:41
+MERGED from [com.microsoft.appcenter:appcenter-crashes:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-crashes-1.1.0.aar\8e87b13fbd4bc5db550acae8e942a850\AndroidManifest.xml:8:5-10:41
+MERGED from [com.microsoft.appcenter:appcenter-crashes:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-crashes-1.1.0.aar\8e87b13fbd4bc5db550acae8e942a850\AndroidManifest.xml:8:5-10:41
+MERGED from [com.microsoft.appcenter:appcenter-analytics:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-analytics-1.1.0.aar\d2493cd5188a505d1fdda8ccf5953139\AndroidManifest.xml:8:5-10:41
+MERGED from [com.microsoft.appcenter:appcenter-analytics:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-analytics-1.1.0.aar\d2493cd5188a505d1fdda8ccf5953139\AndroidManifest.xml:8:5-10:41
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:7:5-9:41
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:7:5-9:41
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:7:5-44
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:7:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-25.3.1.aar\88ad4c1b9f78f4650a0eb1f23c885259\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-25.3.1.aar\88ad4c1b9f78f4650a0eb1f23c885259\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:21:5-23:58
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.3.0.aar\a72120f12471c4e287ea69cd8c99cf39\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.3.0.aar\a72120f12471c4e287ea69cd8c99cf39\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.3.0.aar\75c1bbd3679444b05cdb02042235db8f\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.3.0.aar\75c1bbd3679444b05cdb02042235db8f\AndroidManifest.xml:5:5-7:41
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-1.5.4.aar\02345d7c0ea6f7fa0f417721c661f729\AndroidManifest.xml:8:5-10:41
+MERGED from [com.balysv.materialmenu:material-menu:1.5.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\material-menu-1.5.4.aar\02345d7c0ea6f7fa0f417721c661f729\AndroidManifest.xml:8:5-10:41
+MERGED from [com.facebook.fresco:drawee:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\drawee-1.3.0.aar\59f2845b820e23e7ba06708610a15dca\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\drawee-1.3.0.aar\59f2845b820e23e7ba06708610a15dca\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\fbcore-1.3.0.aar\11aca81be3285935702e59056c0d44ff\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.3.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\fbcore-1.3.0.aar\11aca81be3285935702e59056c0d44ff\AndroidManifest.xml:5:5-7:41
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 	tools:overrideLibrary
-		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:23:9-59
+		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:10:5-81
+ADDED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:10:5-81
 	android:name
-		ADDED from [example:react-native-maps:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\bundles\default\AndroidManifest.xml:10:22-78
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:19:5-78
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:11:5-79
-	android:name
-		ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:19:22-76
-uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:21:5-77
-	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:21:19-51
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:10.2.6] C:\Users\nima\.android\build-cache\b1bd4b6941306742a1fafa2e8d43eee980dbaa14\output\AndroidManifest.xml:21:52-75
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:19:9-172
-	android:exported
-		ADDED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:19:146-170
-	android:theme
-		ADDED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:19:86-145
-	android:name
-		ADDED from [com.google.android.gms:play-services-base:10.2.6] C:\Users\nima\.android\build-cache\2f52960ae7165c5a2417220a7e001ee760daa28d\output\AndroidManifest.xml:19:19-85
-meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:10.2.6] C:\Users\nima\.android\build-cache\444c97a11364a9540b6a4cfc72c5c24b50f2139e\output\AndroidManifest.xml:20:9-121
-	android:value
-		ADDED from [com.google.android.gms:play-services-basement:10.2.6] C:\Users\nima\.android\build-cache\444c97a11364a9540b6a4cfc72c5c24b50f2139e\output\AndroidManifest.xml:20:66-119
-	android:name
-		ADDED from [com.google.android.gms:play-services-basement:10.2.6] C:\Users\nima\.android\build-cache\444c97a11364a9540b6a4cfc72c5c24b50f2139e\output\AndroidManifest.xml:20:20-65
+		ADDED from [:react-native-maps] E:\projects\superMan-gitlab\example\node_modules\react-native-maps\lib\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:10:22-78
 activity#com.facebook.FacebookActivity
-ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:29:9-32:66
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:29:9-32:66
 	android:configChanges
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:31:13-96
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:31:13-96
 	android:theme
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:32:13-63
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:32:13-63
 	android:name
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:30:13-57
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:30:13-57
 activity#com.facebook.CustomTabMainActivity
-ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:33:9-71
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:33:9-71
 	android:name
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:33:19-68
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:33:19-68
 provider#com.facebook.internal.FacebookInitProvider
-ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:44:9-47:40
+ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:44:9-47:40
 	android:authorities
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:46:13-72
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:46:13-72
 	android:exported
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:47:13-37
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:47:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.android\build-cache\b1655f356424b2da67a112aba9d23ab8ca3e14c1\output\AndroidManifest.xml:45:13-70
+		ADDED from [com.facebook.android:facebook-android-sdk:4.22.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\facebook-android-sdk-4.22.1.aar\4bfceb9e138eced537133e3009abb9db\AndroidManifest.xml:45:13-70
 activity#com.reactnativenavigation.controllers.NavigationActivity
-ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:12:9-14:86
+ADDED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:12:9-14:86
 	android:configChanges
-		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:14:13-83
+		ADDED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:14:13-83
 	android:name
-		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:13:13-84
+		ADDED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:13:13-84
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:15:9-17:40
+ADDED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:15:9-17:40
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:14:9-86
+MERGED from [:react-native-code-push] E:\projects\superMan-gitlab\example\node_modules\react-native-code-push\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:14:9-86
 	android:exported
-		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:17:13-37
+		ADDED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:17:13-37
 	android:name
-		ADDED from [example:react-native-navigation:unspecified] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\bundles\default\AndroidManifest.xml:16:13-77
-meta-data#android.support.VERSION
-ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.android\build-cache\14d4a3df9d926ebc7dbe141cfef8fcd392dd3aa0\output\AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.android\build-cache\cae452e5b6320a7f50bef4f2ffc725f62139dc78\output\AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.android\build-cache\3e55e8572c9d4445268c6fd1a4133151859b49de\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.android\build-cache\f746ca3698f7dc800d97cf9d149abaed7a511da1\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.android\build-cache\55d0d7218ac975ae3f81f3bf1d419283620ad0dd\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.android\build-cache\4617bf6e491a61ffe107144a5702ececbc74ac8b\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.android\build-cache\5201409396e9112d3f53643b0912e4ac3382027f\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.android\build-cache\0cf40cd41d187e29d86476fe979dceb809b48402\output\AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\787dddd428173ff93f5bfcc6d93f07e44165c948\output\AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.android\build-cache\ff71d075ba6f4784e1939e815f9a7276cd12b7a2\output\AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.android\build-cache\877d2bc3709d3308a649264d14586d02a2f7430c\output\AndroidManifest.xml:25:5-27:34
-	android:value
-		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:27:9-31
-	android:name
-		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.android\build-cache\c5dc46d68dd02cf09316c43d7fef0191277e2959\output\AndroidManifest.xml:26:9-47
+		ADDED from [:react-native-navigation] E:\projects\superMan-gitlab\example\node_modules\react-native-navigation\android\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:16:13-77
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:11:5-78
+ADDED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:11:5-78
 	android:name
-		ADDED from [com.facebook.react:react-native:0.45.1] C:\Users\nima\.android\build-cache\4bbd1fc6846d5600d9420c79be47abfa79e74e15\output\AndroidManifest.xml:11:22-75
+		ADDED from [com.facebook.react:react-native:0.51.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\react-native-0.51.0.aar\18693d4c6af866a34d6a0b8acb7eb4c2\AndroidManifest.xml:11:22-75
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:19:5-78
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:11:5-79
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:11:5-79
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:12:5-79
+MERGED from [com.microsoft.appcenter:appcenter:1.1.0] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcenter-1.1.0.aar\997e06ee6c48f3fa6d5fc2244f631cdc\AndroidManifest.xml:12:5-79
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:11:5-79
+MERGED from [com.bugsnag:bugsnag-android:4.1.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\bugsnag-android-4.1.4.aar\2fd9871d177d5758437a2b1e67b4ef8b\AndroidManifest.xml:11:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:19:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:21:5-77
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:21:19-51
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-maps-10.2.4.aar\f5621ba6e6b3dd243abe241a761903d5\AndroidManifest.xml:21:52-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-base-10.2.4.aar\f19e4e4f8a1b3b6025048e766674a3ca\AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:10.2.4] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\play-services-basement-10.2.4.aar\555d12c054fe423ff7005fe8946d88a5\AndroidManifest.xml:20:20-65
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\3255d1a09e4b936f5f2930767a3075c5\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\55d87b3edbfb26bba2dceb098d85634f\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\4abbd1f0bf1f68b153f7119cb5d38d0a\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\1f86a2828bbc2161abedaa768c5895ca\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\6088197947cd2cba151fd40c2f6c42ef\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-25.3.1.aar\88ad4c1b9f78f4650a0eb1f23c885259\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-25.3.1.aar\88ad4c1b9f78f4650a0eb1f23c885259\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\ca2bd098f5c8b201da6f682a3cf91643\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\5eb3537d2ad37ee89150bcf4f1d45137\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\749fc4ca08de577b72cb91f326e46b20\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\ae888dd2be777f27e98eb7ef81be15f9\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\1fe1c662ec98f5da45620f1b4e7038fa\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\966c370f3fff5515c220cc01645ab04e\AndroidManifest.xml:26:9-47
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:13:5-81
+IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:13:5-81
+MERGED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:13:5-81
 uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-36:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from E:\projects\superMan-gitlab\example\android\app\src\main\AndroidManifest.xml:1:1-39:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
 activity#net.hockeyapp.android.PaintActivity
-ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:18:9-72
+ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:18:9-72
 	android:name
-		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:18:19-69
+		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:18:19-69
 activity#net.hockeyapp.android.LoginActivity
-ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:19:9-72
+ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:19:9-72
 	android:name
-		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:19:19-69
+		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:19:19-69
 activity#net.hockeyapp.android.ExpiryInfoActivity
-ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:20:9-77
+ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:20:9-77
 	android:name
-		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.android\build-cache\d82aa54f363c2590dfa4a6df03adfd6df9c5fb42\output\AndroidManifest.xml:20:19-74
+		ADDED from [net.hockeyapp.android:HockeySDK:4.1.2] C:\Users\nima\.gradle\caches\transforms-1\files-1.1\HockeySDK-4.1.2.aar\ee3fb0318029e2104c56d09a24bfecb9\AndroidManifest.xml:20:19-74

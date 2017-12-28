@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize:vw*6,
         padding:10,
+        fontFamily: 'B Yekan',
         borderRadius: 2*vh, borderColor: '#ebe22860', borderWidth: vw/1.75,
         fontWeight:'900'
     },

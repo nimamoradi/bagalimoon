@@ -22,7 +22,7 @@ import CodePushComponent from "../components/CodePushComponent";
 
 let loaded = false;
 let context;
-import { Client } from 'bugsnag-react-native';
+import {Client} from 'bugsnag-react-native';
 
 const bugsnag = new Client();
 
@@ -205,7 +205,7 @@ class NavigationTypes extends React.Component {
                 }
             }
             context.TypePage(title);
-        } else if (LinkTo === 'product'||LinkTo === 'products') {
+        } else if (LinkTo === 'product' || LinkTo === 'products') {
             let item;
             let index = dataHandeling.indexOfId(context.state.superBasket, response.product.id);
             if (index !== -1) {
@@ -249,6 +249,24 @@ class NavigationTypes extends React.Component {
         }
 
 
+    };
+    onDown_SpecialOffer = (countNumber, id) => {
+        let updatedState = context.state.superBasket;
+
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']--;
+
+        context.setState({superBasket: updatedState});
+    };
+    onUp_SpecialOffer = (countNumber, id) => {
+        let updatedState = context.state.superBasket;
+
+        let index = server.getIndex(id, updatedState, 'id');
+
+        updatedState[index]['count']++;
+
+        context.setState({superBasket: updatedState});
     };
 
     getBanners() {
@@ -446,7 +464,7 @@ class NavigationTypes extends React.Component {
         else
             return (
                 <ScrollView>
-                    <CodePushComponent />
+                    <CodePushComponent/>
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}/>
                     <Carousel
                         autoplayInterval={5000}
@@ -507,6 +525,11 @@ class NavigationTypes extends React.Component {
 
     }
 
+    gotoCategoryFromItem(item) {
+        let Categories = context.state.Categories;
+        this.TypePage(Categories[server.getIndex(item.Category_id, Categories, 'id')].name);
+    }
+
     renderSpecialOffer(item) {
 
         if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {//item.hasOwnProperty('isSpecialOffer')
@@ -518,8 +541,8 @@ class NavigationTypes extends React.Component {
                 price={item.price}
                 disscount={(item.off !== 0) ? item.main_price : null}
                 imageUrl={server.getServerAddress() + '/' + item.photo}
-
-
+                onPress={_.debounce(() =>this.gotoCategoryFromItem(item),
+                    1000, {leading: true, trailing: false})}
             />
         }
         return null;
@@ -536,7 +559,8 @@ class NavigationTypes extends React.Component {
                          price={item.price}
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
-
+                         onPress={_.debounce(() =>this.gotoCategoryFromItem(item),
+                             1000, {leading: true, trailing: false})}
             />
             //Do this
         }

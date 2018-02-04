@@ -2,7 +2,7 @@ import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
 import test from '../screens/text';
 import Types from './NavigationTypes';
 import basketLightBox from './basketLightBox'
-import Push from './types/Push';
+
 import LightBox from './types/LightBox';
 import basketPreview from './basketPreview'
 import mapView from './mapView'
@@ -19,7 +19,7 @@ import codeEnter from './codeEnter'
 import alert from '../components/alertBox'
 import finalBasket from './basketFinal'
 import reTry from '../components/reTry'
-import subOffer from './types/subOffer';
+
 import about_us from './aboutus';
 
 import orderHistroy from './orderHistroy'
@@ -33,7 +33,7 @@ export function registerScreens() {
 
     Navigation.registerComponent('example.Types.basketFinal', () => finalBasket);
     Navigation.registerComponent('example.Types.OrderItem', () => OrderItem);
-    Navigation.registerComponent('example.Types.Push', () => Push);
+
     Navigation.registerComponent('example.Types.Drawer', () => Drawer);
     Navigation.registerComponent('example.Types.LightBox', () => LightBox);
     Navigation.registerComponent('example.Types.Notification', () => Notification);

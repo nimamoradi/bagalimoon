@@ -1,6 +1,6 @@
 class code {
     static serverAddress = 'https://baghali.cf/';
-    static InternetCheckAddress = 'https://www.google.com/';
+    static InternetCheckAddress = 'https://my.shatel.ir';
     static timeOut = 4000;
     static retryCount = 5;
 

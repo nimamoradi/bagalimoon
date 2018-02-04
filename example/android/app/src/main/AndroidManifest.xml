@@ -3,7 +3,7 @@
     package="com.moonShop">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
 
         android:supportsRtl="false"
@@ -13,12 +13,12 @@
         android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <meta-data android:name="com.bugsnag.android.API_KEY"
-                   android:value="5f45db649910437512e28e8e41d260cf"/>
+
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCbanJoTBSE1zrOtrKfUbfFG_4EJk7HUnM"/>
         <activity
+            android:launchMode="singleTop"
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>

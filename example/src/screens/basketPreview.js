@@ -110,10 +110,10 @@ class basketPreview extends React.Component {
 
                 <View style={{flexDirection: 'column', flex: 1}}>
                     <TouchableOpacity onPress={() => this.onUp(rowData)}>
-                        <Icon name="plus" size={vw * 4} color="#17C408" style={styles.text}/>
+                        <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.onDown(rowData)}>
-                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={styles.text}/>
+                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.price}>{rowData.count}</Text>
@@ -164,7 +164,7 @@ class basketPreview extends React.Component {
                                           1000, {leading: true, trailing: false})}
                     >
                         <View style={styles.button}>
-                            <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
+                            <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{margin: 10}}/>
                             <View style={{flex: 0.5}}/>
                             <Text style={{flex: 1, fontSize: vw * 4,}}>پرداخت</Text>
                         </View>
@@ -236,20 +236,18 @@ const styles = StyleSheet.create({
         margin: 2,
         marginLeft: 20,
         marginBottom: 60,
-        fontFamily: 'B Yekan',
         alignContent: 'center',
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
     },
     buttonCancel: {
         flex: 1,
-        fontFamily: 'B Yekan',
+
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
         margin: 2,
-
         marginTop: 20,
         alignContent: 'center',
         marginRight: 20,

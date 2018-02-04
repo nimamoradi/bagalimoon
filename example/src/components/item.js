@@ -12,7 +12,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
             <View style={styles.row}>
 
                 <Image source={{uri: imageUrl}} style={styles.image} key={imageUrl}
-                       thumbnail={require("../../img/load.png")}/>
+                      />
 
 
                 <Text style={styles.text}>{title}</Text>

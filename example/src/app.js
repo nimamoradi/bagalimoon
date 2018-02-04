@@ -9,7 +9,7 @@ registerScreens();
 // registerScreenVisibilityListener();
 
 AsyncStorage.getItem('api_code').then((item) => {
-
+console.log(item);
     let startAppdata;
     if (item === null) {
         startAppdata = {

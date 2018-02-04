@@ -14,12 +14,8 @@ class basketfile {
     mixins: [TimerMixin]
     static writeBasket(basket) {
 
-        AsyncStorage.setItem(basketfile.basketKey, JSON.stringify(basket.map(function (item) {
-            if (item.count > 0) {
-                item.shouldShow = false;
-                return item;
-            }
-            return item;
+        AsyncStorage.setItem(basketfile.basketKey, JSON.stringify(basket.filter(function (item) {
+           return (item.count > 0) ;
         })));
     }
 

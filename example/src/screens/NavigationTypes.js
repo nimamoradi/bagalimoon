@@ -20,11 +20,8 @@ import _ from 'lodash'
 import basketFile from "../basketFile";
 import CodePushComponent from "../components/CodePushComponent";
 
-let loaded = false;
-let context;
-import {Client} from 'bugsnag-react-native';
 
-const bugsnag = new Client();
+let context;
 
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
@@ -63,134 +60,68 @@ class NavigationTypes extends React.Component {
 
     }
 
-    getBestSellingProducts() {
+    getBestSellingProducts(responseData) {
 
-        // console.log("get data");
-        fetch(server.getServerAddress() + '/api/getBestSellingProducts', {
-            method: 'POST', retries: 5
-
-        }).then((response) => response.json().then((responseData) => {
-
-                responseData = responseData.map(function (item) {
-                    item.isBestSellingProduct = true;
-                    item.shouldShow = true;
-                    return item;
-                });
-                context.setState({
-                    superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
-                })
-
-            }).catch(error => {
-                console.log(error);
-                if (!loaded) {
-                    server.retry(context.isAvailable, context);
-                    loaded = true;
-                }
-            })
-        );
-
-
+        responseData = responseData.map(function (item) {
+            item.isBestSellingProduct = true;
+            item.shouldShow = true;
+            return item;
+        });
+        context.setState({
+            superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
+        })
     }
 
-    getSpecialOffer() {
-
-        // console.log("get data");
-        fetch(server.getServerAddress() + '/api/getSpecialOffer', {
-            method: 'POST',
-
-        }).then((response) => response.json().then((responseData) => {
-
-
-                responseData = responseData.map(function (item) {
-                    item.isSpecialOffer = true;
-                    item.shouldShow = true;
-                    return item;
-                });
-
-                context.setState({
-                    superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
-                })
-
-
-            }).catch(error => {
-                if (!loaded) {
-                    server.retry(context.isAvailable, context);
-                    loaded = true;
-                }
-
-            })
-        );
-        context.setState({});
-
-    }
-
-    loadCategories() {
-
-        // console.log("get Categories");
-
-        fetch(server.getServerAddress() + '/api/getAllCategories', {
-            method: 'POST',
-
-        }).then((response) => response.json().then((responseData) => {
-
-                context.setState({Categories: responseData}, function () {
-
-
-                    let cat = this.state.Categories.filter(function (x) {
-                        return x.parent_category_id === 0;
-                    });
-                    context.setState({Types: cat})
-                })
-            }).catch(error => {
-                if (!loaded) {//check that is it in retry page
-                    server.retry(context.isAvailable, context);
-                    loaded = true;
-                }
-
-            })
-        );
-
-
-    }
-
-    isAvailable = () => {
-        context.setState({dataReady: false});
-        loaded = false;
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
+    getSpecialOffer(responseData) {
+        responseData = responseData.map(function (item) {
+            item.isSpecialOffer = true;
+            item.shouldShow = true;
+            return item;
         });
 
-        const request = fetch(server.getInternetCheckAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
-                context.setState({dataReady: true});
+        context.setState({
+            superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
+        })
 
 
-                setTimeout(() => {
-                    this.getBanners();
-                }, 20);
-                setTimeout(() => {
-                    this.loadCategories();
-                }, 20);
-                setTimeout(() => {
-                    this.getSpecialOffer();
-                }, 20);
-                setTimeout(() => {
-                    this.getBestSellingProducts();
-                }, 20);
+    }
 
-
+    loadMainPage() {        // console.log("get Categories");
+        context.setState({dataReady: false});
+        fetch(server.getServerAddress() + '/api/getMainPage', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_code: context.props.api_code,
             })
-            .catch(error => {
-                if (!loaded) {
-                    server.retry(context.isAvailable, context);
-                    loaded = true;
-                }
+        }).then((response) => response.json().then((responseData) => {
 
+            this.getBanners(responseData.Banners);
+            this.getBestSellingProducts(JSON.parse(responseData.BestSellingProducts));
+            this.getSpecialOffer(JSON.parse(responseData.SpecialOffer));
+            this.loadCategories(JSON.parse(responseData.AllCategories));
+
+        })).catch(error => {
+            server.retry(context.loadMainPage, context);
+
+        }).catch(error => {
+            server.retry(context.loadMainPage, context);
+        });
+
+
+    }
+
+    loadCategories(responseData) {
+        context.setState({Categories: responseData}, function () {
+            let cat = this.state.Categories.filter(function (x) {
+                return x.parent_category_id === 0;
             });
-    };
+            context.setState({Types: cat})
+        })
+    }
 
 
     goToBanner = (LinkTo, Link_id, response) => {
@@ -269,34 +200,8 @@ class NavigationTypes extends React.Component {
         context.setState({superBasket: updatedState});
     };
 
-    getBanners() {
-
-
-        fetch(server.getServerAddress() + '/api/getBanners', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                api_code: context.props.api_code,
-            })
-        }).then((response) => response.json().then((responseData) => {
-
-            // console.log("get Banners" + responseData);
-
-
-            context.setState({dataSourceOffer: responseData})
-
-        }).catch(error => {
-            if (!loaded) {
-                server.retry(context.isAvailable, context);
-                loaded = true;
-            }
-
-        }));
-
-
+    getBanners(responseData) {
+        context.setState({dataSourceOffer: responseData, dataReady: true})
     }
 
     componentWillUnmount() {
@@ -315,7 +220,7 @@ class NavigationTypes extends React.Component {
         HockeyApp.checkForUpdate(); // optional
         basketFile.readBasket().then((item) => {
             context.setState({superBasket: item}, () => {
-                this.isAvailable();
+                this.loadMainPage();
             });
 
         });
@@ -335,7 +240,7 @@ class NavigationTypes extends React.Component {
             Categories: '',
             Types: [],
             dataSourceOffer: [{
-                "photo": "images_goodcss/1514127298grocery.png.css",
+                "photo": "/images_goodcss/1513455563digibannershampo.jpg.css",
                 "id": 0,
                 "LinkTo": "none",
 
@@ -416,8 +321,8 @@ class NavigationTypes extends React.Component {
             passProps: {
                 title: title,
                 UpdateBasket: NavigationTypes.basketUpdater,
-                basket: this.state.superBasket,
-                Categories: this.state.Categories,
+                basket: context.state.superBasket,
+                Categories: context.state.Categories,
                 setBasket: NavigationTypes.setBasket
             },
         });
@@ -425,9 +330,9 @@ class NavigationTypes extends React.Component {
 
     basket = () => {
         server.showLightBox('example.Types.basketLightBox', {
-            basket: this.state.superBasket,
-            title: this.props.title,
-            onClose: this.dismissLightBox,
+            basket: context.state.superBasket,
+            title: context.props.title,
+            onClose: context.dismissLightBox,
             UpdateBasket: NavigationTypes.basketUpdater,
             setBasket: NavigationTypes.setBasket
         }, context);
@@ -464,7 +369,7 @@ class NavigationTypes extends React.Component {
         else
             return (
                 <ScrollView>
-                    <CodePushComponent/>
+
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}/>
                     <Carousel
                         autoplayInterval={5000}
@@ -541,7 +446,7 @@ class NavigationTypes extends React.Component {
                 price={item.price}
                 disscount={(item.off !== 0) ? item.main_price : null}
                 imageUrl={server.getServerAddress() + '/' + item.photo}
-                onPress={_.debounce(() =>this.gotoCategoryFromItem(item),
+                onPress={_.debounce(() => this.gotoCategoryFromItem(item),
                     1000, {leading: true, trailing: false})}
             />
         }
@@ -559,7 +464,7 @@ class NavigationTypes extends React.Component {
                          price={item.price}
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
-                         onPress={_.debounce(() =>this.gotoCategoryFromItem(item),
+                         onPress={_.debounce(() => this.gotoCategoryFromItem(item),
                              1000, {leading: true, trailing: false})}
             />
             //Do this

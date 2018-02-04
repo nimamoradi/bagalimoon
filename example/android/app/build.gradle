@@ -1,6 +1,8 @@
+plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin' version '0.8.0'
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: "com.android.application"
-
-apply plugin: 'com.bugsnag.android.gradle'
 import com.android.build.OutputFile
 
 /**
@@ -17,11 +19,15 @@ def enableSeparateBuildPerCPUArchitecture = false
  * Run Proguard to shrink the Java bytecode in release builds.
  */
 def enableProguardInReleaseBuilds = false
-
+repositories {
+    maven { url 'https://maven.google.com' }
+}
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
-
+    dexOptions {
+        jumboMode true
+    }
     defaultConfig {
         applicationId "com.moonShop"
         minSdkVersion 16
@@ -31,6 +37,9 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [onesignal_app_id: "12637e49-1ef9-44d3-b902-de1f14e4cd5c",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
     }
     splits {
         abi {
@@ -73,8 +82,7 @@ dependencies {
     compile project(path: ':appcenter-analytics')
     compile project(path: ':appcenter')
     compile project(':react-native-code-push')
-
-    compile project(path: ':bugsnag-react-native')
+    compile 'com.onesignal:OneSignal:[3.6.5, 3.99.99]'
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

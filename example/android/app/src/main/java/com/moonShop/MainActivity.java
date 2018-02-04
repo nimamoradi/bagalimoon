@@ -2,7 +2,8 @@ package com.moonShop;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
-import com.microsoft.appcenter.reactnative.crashes.BuildConfig;
+
+import com.onesignal.OneSignal;
 import com.reactnativenavigation.controllers.SplashActivity;
 
 import android.os.Bundle;

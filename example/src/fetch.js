@@ -1,6 +1,3 @@
-'use strict';
-
-
 import server from "./code";
 
 module.exports = function (url, options) {

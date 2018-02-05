@@ -45,12 +45,9 @@ class mapView extends Component {
 
     load_api_code = () => {
         AsyncStorage.getItem('api_code').then((item) => {
-
             context.setState({api_code: item}, () => {
                 context.isAvailable();
-
             })
-
         })
     };
 

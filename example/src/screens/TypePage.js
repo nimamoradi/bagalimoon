@@ -30,32 +30,31 @@ class TypePage extends Component {
         let Categories = props.Categories;
         let index = this.getIndex(this.props.title, this.props.Categories, 'name');
         let mainSelected = this.props.title;
-        let parent_id = Categories[index].id;
+        let titleCategory_id = Categories[index].id;
         let Category_id;
+        let subItems=[];
+        if (Categories[index].parent_category_id !== 0) {//have parent
 
-        if (Categories[index].parent_category_id !== 0) {
-
-            let sub = this.getIndex(Categories[index].parent_category_id,Categories, 'id');
-            mainSelected = Categories[sub].name;
+            let parentId = this.getIndex(Categories[index].parent_category_id, Categories, 'id');//find parent
+            mainSelected = Categories[parentId].name;//add correct title
             id = Categories[index].name;
             Category_id = Categories[index].id;
-            parent_id=Categories[index].parent_category_id;
-        } else {
-            let sub = this.getIndex(parent_id, Categories, 'parent_category_id');
+            titleCategory_id = Categories[index].parent_category_id;
+            subItems = Categories.filter(function (x) {
+                return x.parent_category_id === titleCategory_id;
+            });
+        } else {//don't have parent
+            // let sub = this.getIndex(titleCategory_id, Categories, 'parent_category_id');
 
-            if (sub > -1) {
-                id = Categories[sub].name;
-                Category_id = Categories[sub].id;
-            }
+            subItems=this.findSubItems(Categories,titleCategory_id);
+
+            id=subItems[0].name;
+            Category_id =subItems[0].id;
         }
         let mainItems = Categories.filter(function (x) {
             return x.parent_category_id === 0;
         });
 
-
-        let subItems = Categories.filter(function (x) {
-            return x.parent_category_id === parent_id;
-        });
 
         this.state = {
             Category_id: Category_id,
@@ -64,7 +63,6 @@ class TypePage extends Component {
             mainItems: mainItems,
             subItems: subItems,
             dataReady: false,
-            viewDate: [],
             basket: [],
             Categories: Categories,
         };
@@ -73,6 +71,27 @@ class TypePage extends Component {
 
     }
 
+    findSubItems(Categories,parent_id){
+        let Items = Categories.filter(function (x) {//find first child's
+            return x.parent_category_id === parent_id;
+        });
+
+
+        return [].concat(...Items.map(item => {
+                let inde = this.getIndex(item.id, Categories, 'parent_category_id');//
+
+                if (inde > -1){
+                    // alert(Categories[inde].name);
+                    return Categories.filter((x) => {
+                        return x.parent_category_id === item.id;//find second child's
+                    });
+                }
+                else
+                    return item;
+            }
+        ));
+
+    }
     addToCart = () => {
 
         let basket = this.state.basket.map(
@@ -171,8 +190,8 @@ class TypePage extends Component {
                 let parent_id = context.state.Categories[index].id;
                 let sub = context.getIndex(parent_id, context.state.Categories, 'parent_category_id');
                 if (sub > -1)
-                    context.loadRenderRowData(context.state.Category_id, context.state.Categories[sub].name);
-                else context.setState({viewDate: []});
+                    context.loadRenderRowData(context.state.Category_id);
+
             })
             .catch(error => {
                 server.retry(this.isAvailable, context)
@@ -188,7 +207,7 @@ class TypePage extends Component {
         return -1; //to handle the case where the value doesn't exist
     };
 
-    loadRenderRowData = async (category_id, subSelected) => {
+    loadRenderRowData = async (category_id) => {
 
         context.setState({dataReady: false});
         fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
@@ -215,12 +234,10 @@ class TypePage extends Component {
                     context.setState({
                         basket: dataHandeling.AddBasket(responseData, this.state.basket),
                         dataReady: true,
-                        Category_id: category_id,
-                        subSelected: subSelected
                     });
                 }
             ).catch(error => {
-            server.retryParam(this.loadRenderRowData, context,)
+            server.retryParam(this.loadRenderRowData, context)
         });
     };
 
@@ -237,7 +254,11 @@ class TypePage extends Component {
                     data={this.state.subItems}
                     renderItem={({item}) =>
                         <TypeButton title={item.name}
-                                    onPress={() => this.loadRenderRowData(item.id, item.name)}
+                                    onPress={() =>
+                                    {this.loadRenderRowData(item.id);
+                                    this.setState({ Category_id: item.id,
+                                                   subSelected: item.name})
+                                       }}
                                     isSelected={this.state.subSelected === item.name}
                         />}
 
@@ -267,15 +288,15 @@ class TypePage extends Component {
                         renderItem={({item}) =>
                             <TypeButton title={item.name}
                                         onPress={() => {
-                                            let sub = context.getIndex(item.id,
-                                                context.state.Categories, 'parent_category_id');
-                                            let subItems = context.state.Categories.filter(function (x) {
-                                                return x.parent_category_id === item.id;
-                                            });
+                                            // let main = context.getIndex(item.id,
+                                            //     context.state.Categories, 'parent_category_id');
 
-                                            context.setState({subItems: subItems, mainSelected: item.name});
-                                            this.loadRenderRowData(context.state.Categories[sub].id,
-                                                context.state.Categories[sub].name)
+                                            let subItems = this.findSubItems(context.state.Categories,
+                                                item.id);
+
+                                            context.setState({subItems: subItems, mainSelected: item.name,
+                                                Category_id:subItems[0].id,subSelected: subItems[0].id});
+                                            this.loadRenderRowData(item.id)
                                         }}
                                         isSelected={this.state.mainSelected === item.name}
                             />}

@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import com.microsoft.codepush.react.CodePush;
 import com.reactnativenavigation.controllers.SplashActivity;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class MainActivity extends SplashActivity {
 
 

@@ -391,6 +391,9 @@ class NavigationTypes extends React.Component {
                             flexDirection: 'row', height: 11 * vh,
                             margin: 1 * vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
+                            flexDirection: 'row', height: 13 * vh,
+                            margin: 1, flex: 1,
+                          //  borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         keyExtractor={(item) => item.id}
                         horizontal={true}

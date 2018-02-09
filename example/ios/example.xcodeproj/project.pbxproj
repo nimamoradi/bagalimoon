@@ -23,7 +23,6 @@
 		2647D65F1DB175C200B23722 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2647D65E1DB175B300B23722 /* libReactNativeNavigation.a */; };
 		7B9B39861DEB4091004A6281 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9B39631DEB4076004A6281 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		D29C73ADF6454CFFB970F994 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A833754E4C48AABA365297 /* libRNSVG.a */; };
 		5862F270E6B14137A4D72D67 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08BD21E8331043F5BF44895F /* libRNVectorIcons.a */; };
 		B918E606D93644C6B2D4C4A8 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A8952C790B5419093A60556 /* Entypo.ttf */; };
 		1751B6F9B0094E0BB94C1E1F /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E2745D220AA4EB7AF37BFD6 /* EvilIcons.ttf */; };
@@ -47,6 +46,8 @@
 		A489ACF4288B4EA7A66506F8 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EDF5EC7CE2486F9C0CAA56 /* libCodePush.a */; };
 		4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 437BEDC205DB4E7AB9882EEB /* libz.tbd */; };
 		1BC32C24EFC941ACAF949B69 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB853E66B6A4768B4026DF9 /* libBugsnagReactNative.a */; };
+		5103F849F93B4B3A904D7FD8 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0777938A7EEE4658927BFB8F /* libRNSVG.a */; };
+		AE1AF651DCD3499FA5778AB9 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC45CF628B31412D8C4C9F2A /* libRNSVG-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,8 +266,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7B9B395C1DEB4076004A6281 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		E6D38FCADC3A45B0B53E8A4D /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		A4A833754E4C48AABA365297 /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		E0D7BF9483ED4BD49282CF5F /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		08BD21E8331043F5BF44895F /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		9A8952C790B5419093A60556 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -297,6 +296,9 @@
 		437BEDC205DB4E7AB9882EEB /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 		73584A15068245349CF43975 /* BugsnagReactNative.xcodeproj */ = {isa = PBXFileReference; name = "BugsnagReactNative.xcodeproj"; path = "../node_modules/bugsnag-react-native/cocoa/BugsnagReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		DAB853E66B6A4768B4026DF9 /* libBugsnagReactNative.a */ = {isa = PBXFileReference; name = "libBugsnagReactNative.a"; path = "libBugsnagReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		92957BB0AA32459A9E219F5D /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0777938A7EEE4658927BFB8F /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		EC45CF628B31412D8C4C9F2A /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,7 +325,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				D29C73ADF6454CFFB970F994 /* libRNSVG.a in Frameworks */,
 				5862F270E6B14137A4D72D67 /* libRNVectorIcons.a in Frameworks */,
 				8A157BD9DB4C4FD398357358 /* libAirMaps.a in Frameworks */,
 				D640DF54F2D6440B89DFD34B /* libAppCenterReactNative.a in Frameworks */,
@@ -332,6 +333,8 @@
 				A489ACF4288B4EA7A66506F8 /* libCodePush.a in Frameworks */,
 				4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */,
 				1BC32C24EFC941ACAF949B69 /* libBugsnagReactNative.a in Frameworks */,
+				5103F849F93B4B3A904D7FD8 /* libRNSVG.a in Frameworks */,
+				AE1AF651DCD3499FA5778AB9 /* libRNSVG-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,7 +488,6 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				E6D38FCADC3A45B0B53E8A4D /* RNSVG.xcodeproj */,
 				E0D7BF9483ED4BD49282CF5F /* RNVectorIcons.xcodeproj */,
 				7F8AC9967B124AF6A8079B5E /* AirMaps.xcodeproj */,
 				3479FBD338464773AC01F547 /* AppCenterReactNative.xcodeproj */,
@@ -493,6 +495,7 @@
 				99EFEE531726453AA19BC034 /* AppCenterReactNativeCrashes.xcodeproj */,
 				2D00A1C6EF1F423EA1E50AEC /* CodePush.xcodeproj */,
 				73584A15068245349CF43975 /* BugsnagReactNative.xcodeproj */,
+				92957BB0AA32459A9E219F5D /* RNSVG.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -982,12 +985,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1008,12 +1005,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

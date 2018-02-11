@@ -385,12 +385,12 @@ class NavigationTypes extends React.Component {
                         sliderWidth={100 * vw}
                         itemWidth={100 * vw}
                         loop={false}
+                        
+                        firstItem={this.state.dataSourceOffer.length-1}
+                    
                     />
                     <FlatList
                         style={{
-                            flexDirection: 'row', height: 11 * vh,
-                            margin: 1 * vh, flex: 1,
-                            borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                             flexDirection: 'row', height: 13 * vh,
                             margin: 1, flex: 1,
                           //  borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
@@ -402,6 +402,7 @@ class NavigationTypes extends React.Component {
                         renderItem={({item}) => <TypeButton title={item.name}
                                                             onPress={_.debounce(() => this.TypePage(item.name),
                                                                 1000, {leading: true, trailing: false})}
+                        
                         />}
                     />
 

@@ -87,6 +87,7 @@ class NavigationTypes extends React.Component {
     }
 
     loadMainPage() {        // console.log("get Categories");
+
         context.setState({dataReady: false});
         fetch(server.getServerAddress() + '/api/getMainPage', {
             method: 'POST',
@@ -115,12 +116,13 @@ class NavigationTypes extends React.Component {
     }
 
     loadCategories(responseData) {
-        context.setState({Categories: responseData}, function () {
-            let cat = this.state.Categories.filter(function (x) {
-                return x.parent_category_id === 0;
-            });
-            context.setState({Types: cat})
-        })
+
+        let cat = responseData.filter(function (x) {
+            return x.parent_category_id === 0;
+        });
+        context.setState({Categories: responseData,
+          Types: cat});
+
     }
 
 
@@ -388,11 +390,11 @@ class NavigationTypes extends React.Component {
                     />
                     <FlatList
                         style={{
-                            flexDirection: 'row', height: 11 * vh,
-                            margin: 1 * vh, flex: 1,
+                            flexDirection: 'row',
+                            margin: vh, flex: 1,
                             borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
-                            flexDirection: 'row', height: 13 * vh,
-                            margin: 1, flex: 1,
+                            height: 13 * vh,
+
                           //  borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
                         }}
                         keyExtractor={(item) => item.id}
@@ -409,7 +411,8 @@ class NavigationTypes extends React.Component {
 
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 55 * vh}}
+                        style={{ flexDirection: 'row',
+                            width: 100 * vw, height: 55 * vh}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}

@@ -41,6 +41,9 @@ class basketLightBox extends React.Component {
             screen: screen,
             title: title,
             passProps: passProps,
+            navigatorStyle: {
+                navBarHidden: true,
+            }
         });
     };
 
@@ -50,8 +53,8 @@ class basketLightBox extends React.Component {
                 <View style={styles.container}>
                     <View style={{flex: 8}}>
                         <Text style={styles.title}>سبد خرید</Text>
-                        <TableRow title="تعداد کالا" des={this.state.length+' عدد'}/>
-                        <TableRow title="قیمت کل" des={String(this.state.totalPrice)+' تومان'}/>
+                        <TableRow title="تعداد کالا" des={this.state.length + ' عدد'}/>
+                        <TableRow title="قیمت کل" des={String(this.state.totalPrice) + ' تومان'}/>
 
                         <View>
 
@@ -65,26 +68,26 @@ class basketLightBox extends React.Component {
                             style={styles.button1}
                             onPress={() => this.pushScreen('example.Types.basketPreview', 'لیست خرید',
                                 {
-                                    UpdateBasket:this.props.UpdateBasket,
+                                    UpdateBasket: this.props.UpdateBasket,
                                     basket: this.state.basket,
 
 
                                 })}
-                        ><Text  style={{ fontSize: vw*4,}}>{'خرید'}</Text></TouchableHighlight>
+                        ><Text style={{fontSize: vw * 4,}}>{'خرید'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>
                         <TouchableHighlight
                             style={styles.button}
 
 
                             onPress={() => this.props.onClose(false)}
-                        ><Text  style={{ fontSize: vw*4,  fontFamily: 'B Yekan',}}>{'انصراف'}</Text></TouchableHighlight>
+                        ><Text style={{fontSize: vw * 4, fontFamily: 'B Yekan',}}>{'انصراف'}</Text></TouchableHighlight>
                         <View style={{flex: 1}}/>
 
                     </View>
 
                 </View>
             );
-        else return ( <View style={styles.container}>
+        else return (<View style={styles.container}>
                 <View style={{flex: 8}}>
                     <Text style={styles.title}>سبد خرید خالی است</Text>
 
@@ -97,7 +100,7 @@ class basketLightBox extends React.Component {
                     <TouchableHighlight
                         style={styles.button}
                         onPress={() => this.props.onClose(false)}
-                    ><Text style={{ fontSize: vw*4,  fontFamily: 'B Yekan',}}>{'بستن'}</Text></TouchableHighlight>
+                    ><Text style={{fontSize: vw * 4, fontFamily: 'B Yekan',}}>{'بستن'}</Text></TouchableHighlight>
                     <View style={{flex: 1}}/>
 
                 </View>
@@ -111,8 +114,8 @@ class basketLightBox extends React.Component {
 basketLightBox.PropTypes = {};
 const styles = StyleSheet.create({
     container: {
-        width: vw*75,
-        height:vh*40,
+        width: vw * 75,
+        height: vh * 40,
         backgroundColor: '#ffffff',
         borderRadius: 5,
         padding: 16,
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'B Yekan',
-        fontSize: vw*4,
+        fontSize: vw * 4,
         fontWeight: '700',
     },
     content: {

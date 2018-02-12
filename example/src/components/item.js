@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import ProgressiveImage from './progressiveImage'
+import Icon from 'react-native-vector-icons/EvilIcons';
+
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown}) {
@@ -12,32 +12,24 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
             <View style={styles.row}>
 
                 <Image source={{uri: imageUrl}} style={styles.image} key={imageUrl}
-                      />
+                />
 
 
                 <Text style={styles.text}>{title}</Text>
-                {(count !== 0) ? <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    backgroundColor: '#F8222E20',
-                    right: 0,
-                    bottom: 0,
-                    borderBottomWidth: 1,
-                    borderRadius: 5 * vh,
-                    borderColor: '#e8f0e8',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}/> : null}
+
                 <Text style={styles.price}>{price} تومان </Text>
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                 <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
+                        <Icon name="minus" size={vw * 8} style={{}}
+                              color="black" />
                     </TouchableOpacity>
-                    <Text style={styles.countText}>{count}</Text>
+
+
+                    {(count !== 0) ? <Text style={styles.countText}>{count}</Text> :
+                        <Text style={styles.countTextHidden}>0</Text>}
                     <TouchableOpacity onPress={onUp} style={{borderRadius: 20}}>
-                        <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
+                        <Icon name="plus" size={vw * 8} color="black" style={{}}/>
                     </TouchableOpacity>
 
                 </View>
@@ -59,48 +51,40 @@ item.propTypes = {
 
 const styles = StyleSheet.create({
     priceView: {
-
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     row: {
+        elevation: 5 * vw,
         paddingBottom: vh,
-        borderColor: '#bec4be',
+        borderColor: '#00000035',
         height: 45 * vh,
-        margin: vh,
-        backgroundColor: '#ffffff',
+        margin: 2*vh,
+        padding:2*vw,
+        backgroundColor: '#ebebeb',
         paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         borderBottomWidth: 1,
         borderRadius: 5 * vh,
-
+        shadowColor: '#eeeeee',
         borderWidth: 0.5,
-        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
-    },
-    selrow: {
-        height: 45 * vh,
-        margin: vh,
-        backgroundColor: '#F8222E04',
-        paddingHorizontal: 16,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 1,
-        borderRadius: vw / 1.5,
-        borderColor: '#ee323260',
-        borderWidth: vw / 1.5,
-        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
     },
     text: {
         width: '100%',
         fontSize: vw * 4.5,
         textAlign: 'center',
         fontFamily: 'B Yekan',
+        color: 'black',
     },
-    price: {fontFamily: 'B Yekan', flex: 1, fontSize: vw * 4, color: '#17c408', textAlign: 'left'},
+    price: {
+        fontFamily: 'B Yekan',
+        flex: 1, fontSize: vw * 4,
+        color: 'black',
+        textAlign: 'left'
+    },
     discount: {
         flex: 1,
         textDecorationLine: 'line-through',
@@ -110,12 +94,29 @@ const styles = StyleSheet.create({
         textAlign: 'right'
     },
     image: {
-        height: 25 * vh, width: 35 * vw, borderRadius: 20,
+        height: 25 * vh,
+        width: 35 * vw,
+        borderRadius: 20,
         borderWidth: 0.5,
-    }, countText: {
+    },
+    countText: {
+        backgroundColor:'red',
+        color:'white',
         fontSize: vw * 4.5,
-        textAlign: 'center',
         fontFamily: 'B Yekan',
+        width:6*vw,
+        height:6*vw,
+        textAlign: 'center',
+        borderRadius:3*vw
+    },
+    countTextHidden: {
+        backgroundColor:'red',
+        fontSize: vw * 4.5,
+        width:6*vw,
+        height:6*vw,
+        borderRadius:3*vw,
+        fontFamily: 'B Yekan',
+        opacity:0
     }
 });
 

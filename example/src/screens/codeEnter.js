@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+
 import {
     StyleSheet,
     TouchableOpacity,
@@ -17,11 +17,7 @@ import fetch from '../fetch'
 
 let context;
 import server from '../code'
-import basketFile from '../basketFile'
 
-let data;
-let Categories;
-let isDataReady = 0;
 
 class codeEnter extends React.Component {
     constructor(props) {
@@ -80,20 +76,8 @@ class codeEnter extends React.Component {
 
     isAvailable = () => {
         context.setState({sendData: true});
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
+        context.enterCode();
 
-        const request = fetch(server.getInternetCheckAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
-                context.enterCode();
-            })
-            .catch(error => {
-                server.retry(context.isAvailable, context)
-            });
     };
 
     enterCode = () => {
@@ -116,7 +100,7 @@ class codeEnter extends React.Component {
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
-                    context.pushMainScreen(responseData.api_code);
+                    codeEnter.pushMainScreen(responseData.api_code);
                 } else if (responseData.successful === false) {
                     server.alert('هشدار', 'کد اشتباه است', context);
                 }
@@ -127,10 +111,12 @@ class codeEnter extends React.Component {
 
             }).catch(error => {
             server.retry(context.isAvailable, context)
+        }).catch(error => {
+            server.retry(context.isAvailable, context)
         });
     };
 
-    pushMainScreen(api) {
+    static pushMainScreen(api) {
 
         context.props.navigator.push({
             backButtonTitle: '',

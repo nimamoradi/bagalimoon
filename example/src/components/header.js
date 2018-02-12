@@ -14,25 +14,25 @@ function header({title}) {
 
 header.propTypes = {
     title: PropTypes.string.isRequired,
-
 };
 
 const styles = StyleSheet.create({
     row: {
 
-        paddingHorizontal: 16,
+        marginRight:2*vw,
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(5, 5, 5, 0.0)',
+
     },
     text: {
         fontSize:vw*6,
-        padding:10,
+        backgroundColor:'#ff1d1e',
+        padding:2*vw,
+        color:'white',
         fontFamily: 'B Yekan',
-        borderRadius: 2*vh, borderColor: '#ebe22860', borderWidth: vw/1.75,
-        fontWeight:'900'
+        borderRadius: 2*vh,
+
     },
 });
 

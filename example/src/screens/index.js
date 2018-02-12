@@ -2,7 +2,7 @@ import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
 import test from '../screens/text';
 import Types from './NavigationTypes';
 import basketLightBox from './basketLightBox'
-
+import SimpleNavbar from '../components/SimpleNavbar'
 import LightBox from './types/LightBox';
 import basketPreview from './basketPreview'
 import mapView from './mapView'
@@ -23,6 +23,7 @@ import reTry from '../components/reTry'
 import about_us from './aboutus';
 
 import orderHistroy from './orderHistroy'
+
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
 
@@ -56,7 +57,7 @@ export function registerScreens() {
 
     Navigation.registerComponent('example.Types.subOffer', () => subOffer);
     Navigation.registerComponent('example.Types.orderHistroy', () => orderHistroy);
-
+    Navigation.registerComponent('example.Types.SimpleNavbar', () => SimpleNavbar);
 }
 
 export function registerScreenVisibilityListener() {

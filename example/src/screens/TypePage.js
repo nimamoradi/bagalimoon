@@ -35,11 +35,11 @@ class TypePage extends Component {
 
         if (Categories[index].parent_category_id !== 0) {
 
-            let sub = this.getIndex(Categories[index].parent_category_id,Categories, 'id');
+            let sub = this.getIndex(Categories[index].parent_category_id, Categories, 'id');
             mainSelected = Categories[sub].name;
             id = Categories[index].name;
             Category_id = Categories[index].id;
-            parent_id=Categories[index].parent_category_id;
+            parent_id = Categories[index].parent_category_id;
         } else {
             let sub = this.getIndex(parent_id, Categories, 'parent_category_id');
 

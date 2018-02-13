@@ -14,6 +14,8 @@ import {vw, vh, vmin, vmax} from '../viewport'
 
 import dataHandeling from '../dataHandeling';
 
+import RightProductCorner from '../Shapes/rightProductCorner'
+
 
 let context;
 let isFirstTime;
@@ -81,18 +83,7 @@ class TypePage extends Component {
             }
         );
 
-        // let arr = [];
 
-
-        //
-        // basket.forEach(function (element) {
-        //
-        //     element.forEach(function (item) {
-        //
-        //         arr.push(item)
-        //     })
-        //
-        // });
         if (basket[0].length > 0) {
             this.shop(basket[0]);
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
@@ -228,7 +219,7 @@ class TypePage extends Component {
 
 
         return (
-            <View style={{flexDirection: 'column', height: 100 * vh, backgroundColor: '#ffffff'}}>
+            <View style={{flexDirection: 'column', height: 100 * vh, backgroundColor: '#f2f2f2'}}>
 
 
                 <FlatList
@@ -264,20 +255,21 @@ class TypePage extends Component {
                         style={{height: 100 * vh, width: 30 * vh}}
                         horizontal={false}
                         data={this.state.mainItems}
-                        renderItem={({item}) =>
-                            <TypeButton title={item.name}
-                                        onPress={() => {
-                                            let sub = context.getIndex(item.id,
-                                                context.state.Categories, 'parent_category_id');
-                                            let subItems = context.state.Categories.filter(function (x) {
-                                                return x.parent_category_id === item.id;
-                                            });
+                        renderItem={({item, index}) =>
+                            <RightProductCorner title={item.name}
+                                                index={index}
+                                                onPress={() => {
+                                                    let sub = context.getIndex(item.id,
+                                                        context.state.Categories, 'parent_category_id');
+                                                    let subItems = context.state.Categories.filter(function (x) {
+                                                        return x.parent_category_id === item.id;
+                                                    });
 
-                                            context.setState({subItems: subItems, mainSelected: item.name});
-                                            this.loadRenderRowData(context.state.Categories[sub].id,
-                                                context.state.Categories[sub].name)
-                                        }}
-                                        isSelected={this.state.mainSelected === item.name}
+                                                    context.setState({subItems: subItems, mainSelected: item.name});
+                                                    this.loadRenderRowData(context.state.Categories[sub].id,
+                                                        context.state.Categories[sub].name)
+                                                }}
+                                                isSelected={this.state.mainSelected === item.name}
                             />}
 
                     />
@@ -334,31 +326,5 @@ TypePage.PropTypes = {
 
 };
 
-const styles = StyleSheet.create({
-    picker: {
-        flex: 1,
-        margin: 10,
-        width: 35 * vw,
-        height: 15 * vh,
-
-    },
-    viewPicker: {
-        flex: 1,
-        margin: 10,
-        backgroundColor: '#aeb3ae20',
-        borderRadius: 20,
-        borderColor: '#bec4be',
-        borderWidth: 0.5,
-    },
-    viewPickerText: {
-        width: vw * 15,
-        height: vw * 15,
-        margin: 10,
-        backgroundColor: '#aeb3ae20',
-        borderRadius: 5,
-        borderColor: '#bec4be',
-        borderWidth: 0.5,
-    }
-});
 
 export default TypePage;

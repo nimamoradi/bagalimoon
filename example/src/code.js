@@ -1,5 +1,5 @@
 class code {
-    static serverAddress = 'https://baghali.cf/';
+    static serverAddress = 'https://www.baghali.amins.ir/';
     static InternetCheckAddress = 'https://my.shatel.ir';
     static timeOut = 8000;
     static retryCount = 5;

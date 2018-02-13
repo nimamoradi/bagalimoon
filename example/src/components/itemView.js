@@ -11,8 +11,10 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
     return (
         <View style={styles.container}>
             <ImageBackground
-                resizeMode="cover"
-                style={{width: 70 * vw, height: 21 * vh, flexDirection: 'row', alignItems: 'center'}}
+                resizeMode="stretch"
+                style={{width: 68 * vw, height: 23 * vh,
+                   flexDirection: 'row',
+                  alignItems: 'center'}}
                 source={require('../../img/itemViewBack.png')}
             >
                 <Image source={{uri: imageUrl}} style={styles.image}/>
@@ -22,7 +24,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
                     <Text style={styles.price}>{price} تومان </Text>
                 </View>
 
-                <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 1.2, flexDirection: 'column'}}>
 
                     <TouchableOpacity onPress={onUp}>
                         <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
@@ -59,12 +61,13 @@ itemView.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
+        elevation: 2 * vw,
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         margin: 2 * vw,
-
+        backgroundColor:'#f2f2f2'
 
     },
     priceView: {

@@ -11,7 +11,7 @@ function SimpleNavbar({back, title}) {
                 <Ionicons name="ios-arrow-back" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
-            <Text style={{flex:1,align:'center',fontSize:5*vw}}>{title}</Text>
+            <Text style={{flex:1,align:'center',fontSize:5*vw,color:'white'}}>{title}</Text>
             <View style={{flex:0.75}}/>
         </View>
     )

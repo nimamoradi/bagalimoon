@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
-import SvgUri from 'react-native-svg-uri';
+import {Polygon, Svg} from "react-native-svg";
+import Rect from "react-native-svg/elements/Rect";
+
 
 function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
@@ -13,8 +15,8 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
             <ImageBackground
                 resizeMode="stretch"
                 style={{width: 68 * vw, height: 23 * vh,
-                   flexDirection: 'row',
-                  alignItems: 'center'}}
+                    flexDirection: 'row',
+                    alignItems: 'center'}}
                 source={require('../../img/itemViewBack.png')}
             >
                 <Image source={{uri: imageUrl}} style={styles.image}/>
@@ -67,7 +69,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 2 * vw,
-        backgroundColor:'#f2f2f2'
+        backgroundColor:'#f2f2f2',
+        shadowOffset:{width: 0,height: -50}
 
     },
     priceView: {

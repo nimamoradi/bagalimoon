@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
-function navBar({menu,basket}) {
+function navBar({menu,basket,search}) {
     return (
         <View style={styles.container}>
             <TouchableOpacity >
@@ -17,7 +17,7 @@ function navBar({menu,basket}) {
                 <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
-            <TouchableOpacity >
+            <TouchableOpacity onPress={search}>
                 <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
@@ -49,5 +49,6 @@ container:{
 navBar.propTypes = {
     menu: PropTypes.func.isRequired,
     basket: PropTypes.func.isRequired,
+    search: PropTypes.func.isRequired,
 };
 export default navBar;

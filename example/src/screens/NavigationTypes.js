@@ -18,7 +18,7 @@ import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
-import CodePushComponent from "../components/CodePushComponent";
+import MyFlatList from "../components/myFlatList";
 
 
 let context;
@@ -26,8 +26,6 @@ let context;
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
-
-
     };
 
     static setBasket(basket) {
@@ -94,6 +92,7 @@ class NavigationTypes extends React.Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding':"gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
@@ -282,10 +281,7 @@ class NavigationTypes extends React.Component {
                 myNumber: count,
                 disscount: disscount,
                 off: off,
-
             },
-
-
         });
     };
     offerSpecialOffer = (title, imageUrl, des, price, id, disscount, off, count) => {
@@ -301,10 +297,7 @@ class NavigationTypes extends React.Component {
                 myNumber: count,
                 disscount: disscount,
                 off: off,
-
             },
-
-
         });
     };
 
@@ -372,7 +365,8 @@ class NavigationTypes extends React.Component {
             return (
                 <ScrollView>
 
-                    <NavBar menu={() => this.toggleDrawer()} basket={this.basket}/>
+                    <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
+                            search={()=>this.pushScreen('example.FlatListSearch','جستجو',{basket:this.state.basket})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -390,12 +384,7 @@ class NavigationTypes extends React.Component {
                     />
                     <FlatList
                         style={{
-                            flexDirection: 'row',
-                            margin: vh, flex: 1,
-                            borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
-                            height: 13 * vh,
-
-                          //  borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
+                            height: 11 * vh,
                         }}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
@@ -406,6 +395,10 @@ class NavigationTypes extends React.Component {
                                                                 1000, {leading: true, trailing: false})}
                         />}
                     />
+                    <MyFlatList
+                        data={this.state.Types}
+                    />
+
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 

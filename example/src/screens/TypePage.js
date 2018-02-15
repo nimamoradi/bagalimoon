@@ -15,6 +15,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import dataHandeling from '../dataHandeling';
 
 import RightProductCorner from '../Shapes/rightProductCorner'
+import ProductPageNavBar from '../navBars/productPageNavBar'
 
 
 let context;
@@ -27,7 +28,9 @@ class TypePage extends Component {
         let id = 0;
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
 
-
+        this.props.navigator.setStyle({
+            navBarHidden: true,
+        });
         isFirstTime = true;
         let Categories = props.Categories;
         let index = this.getIndex(this.props.title, this.props.Categories, 'name');
@@ -77,14 +80,10 @@ class TypePage extends Component {
 
     addToCart = () => {
 
-        let basket = this.state.basket.map(
-            function (x) {
-                return x.value
-            }
-        );
+        let basket = this.state.basket;
 
 
-        if (basket[0].length > 0) {
+        if (basket.length > 0) {
             this.shop(basket[0]);
         } else server.alert('توجه', 'محصولی انتخاب نشده', context)
     };
@@ -102,6 +101,9 @@ class TypePage extends Component {
                 UpdateBasket: this.props.UpdateBasket,
                 setBasket: this.props.setBasket
             },
+            navigatorStyle: {
+                navBarHidden: true,
+            }
         });
     };
     product = (title, imageUrl, des, price, myNumber, id, disscount, off) => {
@@ -219,8 +221,8 @@ class TypePage extends Component {
 
 
         return (
-            <View style={{flexDirection: 'column', height: 100 * vh, backgroundColor: '#f2f2f2'}}>
-
+            <View style={{backgroundColor: '#f2f2f2'}}>
+                <ProductPageNavBar style={{flex: 1}} basket={this.addToCart} context={this}/>
 
                 <FlatList
                     style={{height: 10 * vh}}

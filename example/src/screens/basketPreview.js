@@ -6,7 +6,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import dataHandeling from "../dataHandeling";
 import basketfile from "../basketFile";
-import SimpleNavbar from '../components/SimpleNavbar'
+import SimpleNavbar from '../navBars/SimpleNavbar'
 
 let context;
 
@@ -30,12 +30,8 @@ class basketPreview extends React.Component {
 
 
     componentWillUnmount() {
-
         let basket = this.state.basket;
-
         this.props.UpdateBasket(basket);
-        // super.componentWillUnmount();
-
     }
 
 
@@ -45,8 +41,7 @@ class basketPreview extends React.Component {
             return item.count > 0
         });
         for (let i = 0; i < basket.length; i++) {
-            totalPrice += Number.parseInt(basket[i]['price']) * Number.parseInt(basket[i]['count'])
-
+            totalPrice += basket[i]['price'] * basket[i]['count']
         }
 
         this.setState({
@@ -72,7 +67,7 @@ class basketPreview extends React.Component {
         rowDataCopy.count++;
         let list = this.state.basket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
-
+        this.onCountChanged(rowdata, false);
         this.setState({
             basket: [...list.slice(0, index),
                 rowDataCopy,
@@ -84,6 +79,7 @@ class basketPreview extends React.Component {
         let rowDataCopy = Object.assign({}, rowdata);
         if (rowDataCopy.count !== 0) {
             rowDataCopy.count--;
+            this.onCountChanged(rowdata, true);
         }
         let list = this.state.basket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
@@ -98,9 +94,9 @@ class basketPreview extends React.Component {
     onCountChanged = (rowdata, down) => {
         let priceChange;
         if (down)
-            priceChange = -Number.parseInt(rowdata.price, 10);
-        else priceChange = Number.parseInt(rowdata.price, 10);
-        priceChange = priceChange + Number.parseInt(this.state.totalPrice, 10);
+            priceChange = -rowdata.price;
+        else priceChange = rowdata.price;
+        priceChange = priceChange + this.state.totalPrice;
         this.setState({totalPrice: priceChange});
 
     };
@@ -109,7 +105,10 @@ class basketPreview extends React.Component {
 
         return (
             <View style={styles.rowItem}>
-                <TouchableOpacity onPress={() => this.onDown(rowData)}>
+                <TouchableOpacity onPress={() => {
+                    this.onDown(rowData);
+
+                }}>
                     <Icon name="minus" size={vw * 8} color="black"/>
                 </TouchableOpacity>
 
@@ -118,7 +117,10 @@ class basketPreview extends React.Component {
                     <Text style={styles.price}>تومان</Text>
                     <Text style={styles.price}>{rowData.count}</Text>
                 </View>
-                <TouchableOpacity onPress={() => this.onUp(rowData)}>
+                <TouchableOpacity onPress={() => {
+                    this.onUp(rowData);
+                }
+                }>
                     <Icon name="plus" size={vw * 8} color="black"/>
                 </TouchableOpacity>
                 <Text style={styles.text}>{rowData.name}</Text>
@@ -129,12 +131,15 @@ class basketPreview extends React.Component {
             </View>
         );
     };
+
 //
     render() {
         return (
 
             <View style={styles.container}>
-                <SimpleNavbar back={() =>{this.props.navigator.pop({animated: true})}}
+                <SimpleNavbar back={() => {
+                    this.props.navigator.pop({animated: true})
+                }}
                               title={'لیست خرید'}/>
                 <FlatList
                     style={{flexDirection: 'column', width: 85 * vw,}}

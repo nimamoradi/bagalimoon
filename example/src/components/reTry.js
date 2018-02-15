@@ -13,29 +13,30 @@ class reTry extends React.Component {
             task: this.props.task,
             parms: this.props.parms
         };
-
+        props.navigator.onNavigatorEvent((event) => {
+            if (event.id === 'backPress') {
+                alert('j')
+                BackHandler.exitApp();
+            }
+        })
     }
 
-    backScreen = () => {
-        BackHandler.exitApp();
-
-    };
 
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity
-                    style={{
-                        position: 'absolute',
-                        top: 5 * vw,
-                        left: 0,
-                        right: 85 * vw,
-                        bottom: 0,
+                {/*<TouchableOpacity*/}
+                    {/*style={{*/}
+                        {/*position: 'absolute',*/}
+                        {/*top: 5 * vw,*/}
+                        {/*left: 0,*/}
+                        {/*right: 85 * vw,*/}
+                        {/*bottom: 0,*/}
 
-                    }}
-                    onPress={this.backScreen}>
-                    <Ionicons name="ios-exit-outline" size={vw * 10} color="#777777" style={{margin: 2 * vw , transform: [{ rotate: '180deg'}]}}/>
-                </TouchableOpacity>
+                    {/*}}*/}
+                    {/*onPress={this.backScreen}>*/}
+                    {/*<Ionicons name="ios-exit-outline" size={vw * 10} color="#777777" style={{margin: 2 * vw , transform: [{ rotate: '180deg'}]}}/>*/}
+                {/*</TouchableOpacity>*/}
                 <Text style={styles.text}>اتصال قطع شد</Text>
                 <TouchableOpacity
 

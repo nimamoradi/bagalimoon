@@ -11,8 +11,12 @@ function SimpleNavbar({back, title}) {
                 <Ionicons name="ios-arrow-back" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
-            <Text style={{flex:1,align:'center',fontSize:5*vw,color:'white'}}>{title}</Text>
-            <View style={{flex:0.75}}/>
+            <Text style={{
+                flex: 1, align: 'center',
+                justifyContent: 'center',
+                alignItems: 'center', fontSize: 5 * vw, color: 'white'
+            }}>{title}</Text>
+            <View style={{flex: 0.75}}/>
         </View>
     )
 
@@ -20,8 +24,10 @@ function SimpleNavbar({back, title}) {
 
 const styles = StyleSheet.create({
     container: {
-        width:90*vw,
-        height:8*vh,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 90 * vw,
+        height: 8 * vh,
         flexDirection: 'row',
         backgroundColor: '#ff0030',
         borderRadius: vw * 3,
@@ -33,7 +39,7 @@ const styles = StyleSheet.create({
 
 
 SimpleNavbar.propTypes = {
-    menu: PropTypes.func.isRequired,
-    basket: PropTypes.func.isRequired,
+    back: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
 };
 export default SimpleNavbar;

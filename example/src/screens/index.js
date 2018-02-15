@@ -2,7 +2,7 @@ import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
 import test from '../screens/text';
 import Types from './NavigationTypes';
 import basketLightBox from './basketLightBox'
-import SimpleNavbar from '../components/SimpleNavbar'
+import SimpleNavbar from '../navBars/SimpleNavbar'
 import LightBox from './types/LightBox';
 import basketPreview from './basketPreview'
 import mapView from './mapView'
@@ -19,14 +19,16 @@ import codeEnter from './codeEnter'
 import alert from '../components/alertBox'
 import finalBasket from './basketFinal'
 import reTry from '../components/reTry'
+import FlatListSearch from './FlatListSearch'
 
 import about_us from './aboutus';
 
 import orderHistroy from './orderHistroy'
+import productPageNavBar from "../navBars/productPageNavBar";
 
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
-
+    Navigation.registerComponent('example.bars.productPageNavBar', () => productPageNavBar);
     Navigation.registerComponent('example.Types', () => Types);
     Navigation.registerComponent('example.alert', () => alert);
 
@@ -53,7 +55,7 @@ export function registerScreens() {
 
     Navigation.registerComponent('example.Types.basketLightBox', () => basketLightBox);
 
-    Navigation.registerComponent('example.Types.test', () => test);
+    Navigation.registerComponent('example.FlatListSearch', () => FlatListSearch);
 
     Navigation.registerComponent('example.Types.subOffer', () => subOffer);
     Navigation.registerComponent('example.Types.orderHistroy', () => orderHistroy);

@@ -17,12 +17,16 @@ import dataHandeling from '../dataHandeling';
 import RightProductCorner from '../Shapes/rightProductCorner'
 import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
-
+import _ from 'lodash'
 
 let context;
 let isFirstTime;
 
 class TypePage extends Component {
+
+    static setBasket(basket) {
+        context.setState({basket: basket})
+    }
 
     constructor(props) {
         super(props);
@@ -101,26 +105,35 @@ class TypePage extends Component {
 
     addToCart = () => {
 
-        let basket = this.state.basket;
-
-
-        if (basket.length > 0) {
-            this.shop(basket[0]);
-        } else server.alert('توجه', 'محصولی انتخاب نشده', context)
+        // let basket = this.state.basket;
+        // if (basket.length > 0) {
+        this.shop();
+        // alert(JSON.stringify(dataHandeling.basketFilter(this.state.basket)))
+        // } else server.alert('توجه', 'محصولی انتخاب نشده', context)
     };
 
-    shop = (basket) => {
-        let newBasket = dataHandeling.AddBasket(basket, this.props.basket);
+    shop = () => {
+
+        // todo clean up
+        let newBasket = dataHandeling.arrayUnique((context.props.basket.map((basketItem) => {
+            //update first  basket values with new items then add missing items
+            return {
+                ..._.assign(context.props.basket, _.find(context.state.basket, ['id', basketItem.id]),
+                    {count: basketItem.count})
+            };
+
+        })).concat(context.state.basket));
         if (newBasket.length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
-        this.props.navigator.push({
+        else this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
                 basket: newBasket,
                 isParsed: true,
                 UpdateBasket: this.props.UpdateBasket,
-                setBasket: this.props.setBasket
+                setBasket: this.props.setBasket,
+                setBasketProduct:TypePage.setBasket
             },
             navigatorStyle: {
                 navBarHidden: true,

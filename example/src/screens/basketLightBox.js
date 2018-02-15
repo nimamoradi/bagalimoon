@@ -26,7 +26,7 @@ class basketLightBox extends React.Component {
             let totalPrice = 0;
 
             for (let i = 0; i < json.length; i++) {
-                totalPrice += Number.parseInt(json[i]['price'], 10) * Number.parseInt(json[i]['count'], 10);
+                totalPrice += json[i]['price'] * json[i]['count'];
             }
             let length = json.length;
             let basket = JSON.stringify(json);

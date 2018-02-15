@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Button, Image, Dimensions, AsyncStorage} from 'react-native';
-import TableRow from '../../../components/tableRow';
-import {vw, vh, vmin, vmax} from '../../../viewport'
+import TableRow from '../components/tableRow';
+import {vw, vh, vmin, vmax} from '../viewport'
 class orderItem extends React.Component {
 
     render() {

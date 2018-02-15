@@ -12,7 +12,7 @@ function SimpleNavbar({back, title}) {
             </TouchableOpacity>
 
             <Text style={{
-                flex: 1, align: 'center',
+                flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center', fontSize: 5 * vw, color: 'white'
             }}>{title}</Text>

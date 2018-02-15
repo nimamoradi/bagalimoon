@@ -14,7 +14,7 @@ import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh} from '../viewport'
 import HockeyApp from 'react-native-hockeyapp'
-import NavBar from '../components/navBar'
+import NavBar from '../navBars/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
@@ -32,7 +32,7 @@ class NavigationTypes extends React.Component {
         context.setState({superBasket: basket})
     }
 
-    static basketUpdater(newItems) {
+    static basketUpdater(newItems) {//won't remove zero index
         let basket = context.state.superBasket.slice();
 
         for (let i = 0; i < basket.length; i++) {
@@ -54,8 +54,9 @@ class NavigationTypes extends React.Component {
             }
 
         });
-        context.setState({superBasket: basket.concat(newItems)})
-
+        let bas = basket.concat(newItems);
+        context.setState({superBasket: bas})
+        return bas;
     }
 
     getBestSellingProducts(responseData) {
@@ -92,7 +93,7 @@ class NavigationTypes extends React.Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'content-encoding':"gzip, deflate, br"
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
@@ -119,8 +120,10 @@ class NavigationTypes extends React.Component {
         let cat = responseData.filter(function (x) {
             return x.parent_category_id === 0;
         });
-        context.setState({Categories: responseData,
-          Types: cat});
+        context.setState({
+            Categories: responseData,
+            Types: cat
+        });
 
     }
 
@@ -366,7 +369,7 @@ class NavigationTypes extends React.Component {
                 <ScrollView>
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
-                            search={()=>this.pushScreen('example.FlatListSearch','جستجو',{basket:this.state.basket})}/>
+                            search={() => this.pushScreen('example.FlatListSearch', 'جستجو', {basket: this.state.basket})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -395,17 +398,16 @@ class NavigationTypes extends React.Component {
                                                                 1000, {leading: true, trailing: false})}
                         />}
                     />
-                    <MyFlatList
-                        data={this.state.Types}
-                    />
 
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
                     <FlatList
-                        style={{ flexDirection: 'row',
-                            width: 100 * vw, height: 55 * vh}}
+                        style={{
+                            flexDirection: 'row',
+                            width: 100 * vw, height: 55 * vh
+                        }}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}

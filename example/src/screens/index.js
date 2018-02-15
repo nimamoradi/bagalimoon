@@ -14,7 +14,7 @@ import opinion from '../components/opinion'
 import newComment from './types/newComment'
 import TypePage from './TypePage'
 import loginScreen from './loginScreen'
-import OrderItem from './types/tabs/orderItem'
+
 import codeEnter from './codeEnter'
 import alert from '../components/alertBox'
 import finalBasket from './basketFinal'
@@ -35,7 +35,7 @@ export function registerScreens() {
     Navigation.registerComponent('example.about_us', () => about_us);
 
     Navigation.registerComponent('example.Types.basketFinal', () => finalBasket);
-    Navigation.registerComponent('example.Types.OrderItem', () => OrderItem);
+
 
     Navigation.registerComponent('example.Types.Drawer', () => Drawer);
     Navigation.registerComponent('example.Types.LightBox', () => LightBox);

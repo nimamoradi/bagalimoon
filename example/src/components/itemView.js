@@ -1,66 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, TextInput, Dimensions} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
+import {Polygon, Svg} from "react-native-svg";
+import Rect from "react-native-svg/elements/Rect";
 
-function itemView({title, onUp, onDown, imageUrl, price, count,  disscount,}) {
+
+function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
 
     return (
-        <View style={{}}>
-            {(count!==0) ? <View style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                padding: 4*vw,
-                backgroundColor: '#F8222E20',
-                right: 0,
-                bottom: 0,
-                borderWidth: 0.5,
-                margin:2*vw,
-                borderBottomWidth: vw,
-                borderRadius: 5 * vh,
-                borderColor: '#e8f0e8',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}/>: null}
-            <View style={styles.row}>
-                <View style={{flexDirection: 'row', alignSelf: 'flex-end',}}>
+        <View style={styles.container}>
+            <ImageBackground
+                resizeMode="stretch"
+                style={{width: 68 * vw, height: 23 * vh,
+                    flexDirection: 'row',
+                    alignItems: 'center'}}
+                source={require('../../img/itemViewBack.png')}
+            >
+                <Image source={{uri: imageUrl}} style={styles.image}/>
 
-                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{flexDirection: 'column',}}>
+                    <Text style={styles.text}>{title}</Text>
+                    <Text style={styles.price}>{price} تومان </Text>
+                </View>
+
+                <View style={{flex: 1.2, flexDirection: 'column'}}>
+
+                    <TouchableOpacity onPress={onUp}>
+                        <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
+                    </TouchableOpacity>
+
+                    {(count !== 0) ?
                         <Text
-                            editable={false} selectTextOnFocus={false}
-                            style={{textAlign: 'center', fontFamily: 'B Yekan', fontSize: vw * 4}}>
+                            style={{textAlign: 'center', color: 'black', fontFamily: 'B Yekan', fontSize: vw * 4}}>
                             {count}
-                        </Text>
-                        <View style={{flex: 1, flexDirection: 'column'}}>
-                            <Text style={styles.text}>{title}</Text>
-                            <TouchableOpacity onPress={onUp}>
-                                <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={onDown}>
-                                <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
-                            </TouchableOpacity>
-                        </View>
+                        </Text> :
+                        <Text style={styles.countTextHidden}>0</Text>}
 
-                    </View>
-
-                        <Image source={{uri: imageUrl}} style={styles.image}/>
+                    <TouchableOpacity onPress={onDown}>
+                        <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
+                    </TouchableOpacity>
 
                 </View>
 
-                <View style={styles.priceView}>
-                    <View style={{flexDirection: 'row', alignContent: 'center'}}>
 
-                        <Text style={styles.discount}>{disscount}تومان </Text>
-                        <Text style={styles.price}>{price} تومان </Text>
-                        <Text style={{fontSize: vw * 4, fontFamily: 'B Yekan',}}>قیمت:</Text>
-                    </View>
-
-
-                </View>
-            </View>
+            </ImageBackground>
         </View>
     );
 
@@ -76,34 +62,42 @@ itemView.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        elevation: 2 * vw,
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 2 * vw,
+        backgroundColor:'#f2f2f2',
+        shadowOffset:{width: 0,height: -50}
+
+    },
     priceView: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     row: {
-        borderRadius: 5*vh,
+        borderRadius: 5 * vh,
         borderColor: '#bec4be',
         borderWidth: 0.5,
-        backgroundColor: '#e8f0e820',
-        padding: 4*vw,
-        margin:2*vw,
-        width: 69*vw,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#e7e6e6',
+        padding: 4 * vw,
+        margin: 2 * vw,
+        width: 69 * vw,
+        flexDirection: 'row',
         borderBottomWidth: vw,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {
         fontFamily: 'B Yekan',
-        alignSelf: 'flex-end',
-        fontSize: vw * 5,
-        marginRight: 20,
-        textAlign: 'center'
+        fontSize: vw * 4,
+        color: 'black',
+        width: 25 * vw
 
     },
-    price: {fontSize: vw * 4, color: '#17c408', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
+    price: {fontSize: vw * 4, color: 'black', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
     discount: {
         textDecorationLine:
             'line-through',
@@ -113,11 +107,18 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        alignSelf: 'flex-end',
-        height: Dimensions.get('window').width / 3, width: Dimensions.get('window').width / 4,
-        borderRadius: 20,
-        borderColor: '#bec4be',
-        borderWidth: 0.5,
+        height: Dimensions.get('window').width / 3,
+        width: Dimensions.get('window').width / 4,
+        margin: 2 * vw,
+    },
+    countTextHidden: {
+        backgroundColor:'red',
+        fontSize: vw * 4.5,
+        width:6*vw,
+        height:6*vw,
+        borderRadius:3*vw,
+        fontFamily: 'B Yekan',
+        opacity:0
     }
 });
 

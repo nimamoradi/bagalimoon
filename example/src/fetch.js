@@ -6,7 +6,7 @@ import server from "./code";
 module.exports = function (url, options) {
 
     let retries = 3;
-    let retryDelay = 5;
+    let retryDelay = 500;
 
     if (options && options.retries) {
         retries = options.retries;

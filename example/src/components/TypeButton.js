@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, ImageBackground, TouchableHighlight} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function TypeButton({title, onPress, isSelected}) {
@@ -10,7 +10,7 @@ function TypeButton({title, onPress, isSelected}) {
         <View>
 
             {(isSelected) ?
-                <TouchableOpacity
+                <TouchableHighlight
                     underlayColor={'rgba(0, 0, 0, 0.054)'}
                     style={{
                         paddingHorizontal: 5 * vw,
@@ -22,34 +22,32 @@ function TypeButton({title, onPress, isSelected}) {
                         height: 9 * vh,
                         borderRadius: 15,
                         borderColor: '#297626',
-                        backgroundColor: '#10620f',
+                        backgroundColor: '#ff7778',
                         borderWidth: 0.5,
                         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
                     }}
                     onPress={onPress}
                 >
                     <Text style={styles.text}>{title}</Text>
-                </TouchableOpacity> :
-                <TouchableOpacity
-                    underlayColor={'rgba(0, 0, 0, 0.054)'}
+                </TouchableHighlight> :
+                <TouchableHighlight
+                    onPress={onPress}
                     style={{
-                        paddingHorizontal: 5 * vw,
-                        flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        borderBottomWidth: 1,
-                        margin: 5,
-                        height: 9 * vh,
-                        borderRadius: 15,
-                        borderColor: '#349630',
-                        backgroundColor: '#3bad37',
-                        borderWidth: 0.5,
-                        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
                     }}
-                    onPress={onPress}
                 >
-                    <Text style={styles.text}>{title}</Text>
-                </TouchableOpacity>}
+                    <ImageBackground
+                        resizeMode="stretch"
+                        style={{height: 8 * vh, marginLeft: -15}}
+                        source={require('../../img/corner/flatListItem.png')}>
+
+                        <Text numberOfLines={2}
+                              style={styles.text}>{title}</Text>
+
+                    </ImageBackground>
+                </TouchableHighlight>
+            }
         </View>
 
     );
@@ -62,23 +60,12 @@ TypeButton.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    row: {
-        fontSize: vw * 3,
-        paddingHorizontal: 16,
-        flexDirection: 'row',
+
+    text: {
+
+        marginLeft: 9 * vw,
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomWidth: 1,
-        margin: 15,
-        borderRadius: 15,
-        borderColor: '#3db139',
-        borderWidth: 0.5,
-
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
-    },
-    text: {
-        flex: 1,
-        textAlign: 'center',
         fontSize: 4 * vw,
         color: 'white',
         fontFamily: 'B Yekan',

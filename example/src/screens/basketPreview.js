@@ -1,11 +1,12 @@
 import React from 'react';
 import _ from 'lodash'
-import {StyleSheet, View, Text, FlatList, ScrollView, TouchableOpacity, AsyncStorage,} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {StyleSheet, ImageBackground, View, Text, FlatList, Image, TouchableOpacity,} from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import dataHandeling from "../dataHandeling";
 import basketfile from "../basketFile";
+import SimpleNavbar from '../navBars/SimpleNavbar'
 
 let context;
 
@@ -29,12 +30,8 @@ class basketPreview extends React.Component {
 
 
     componentWillUnmount() {
-
         let basket = this.state.basket;
-
         this.props.UpdateBasket(basket);
-        // super.componentWillUnmount();
-
     }
 
 
@@ -44,8 +41,7 @@ class basketPreview extends React.Component {
             return item.count > 0
         });
         for (let i = 0; i < basket.length; i++) {
-            totalPrice += Number.parseInt(basket[i]['price']) * Number.parseInt(basket[i]['count'])
-
+            totalPrice += basket[i]['price'] * basket[i]['count']
         }
 
         this.setState({
@@ -71,7 +67,7 @@ class basketPreview extends React.Component {
         rowDataCopy.count++;
         let list = this.state.basket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
-
+        this.onCountChanged(rowdata, false);
         this.setState({
             basket: [...list.slice(0, index),
                 rowDataCopy,
@@ -83,6 +79,7 @@ class basketPreview extends React.Component {
         let rowDataCopy = Object.assign({}, rowdata);
         if (rowDataCopy.count !== 0) {
             rowDataCopy.count--;
+            this.onCountChanged(rowdata, true);
         }
         let list = this.state.basket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
@@ -97,48 +94,55 @@ class basketPreview extends React.Component {
     onCountChanged = (rowdata, down) => {
         let priceChange;
         if (down)
-            priceChange = -Number.parseInt(rowdata.price, 10);
-        else priceChange = Number.parseInt(rowdata.price, 10);
-        priceChange = priceChange + Number.parseInt(this.state.totalPrice, 10);
+            priceChange = -rowdata.price;
+        else priceChange = rowdata.price;
+        priceChange = priceChange + this.state.totalPrice;
         this.setState({totalPrice: priceChange});
 
     };
 
     renderRow = (rowData) => {
+
         return (
-            <View style={{flexDirection: 'row'}}>
+            <View style={styles.rowItem}>
+                <TouchableOpacity onPress={() => {
+                    this.onDown(rowData);
 
-                <View style={{flexDirection: 'column', flex: 1}}>
-                    <TouchableOpacity onPress={() => this.onUp(rowData)}>
-                        <Icon name="plus" size={vw * 4} color="#17C408" style={{margin: 10}}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.onDown(rowData)}>
-                        <Icon name="minus" size={vw * 4} color="#C42B2D" style={{margin: 10}}/>
-                    </TouchableOpacity>
+                }}>
+                    <Icon name="minus" size={vw * 8} color="black"/>
+                </TouchableOpacity>
+
+                <View style={{flexDirection: 'column',}}>
+                    <Text style={styles.price}>{rowData.price}</Text>
+                    <Text style={styles.price}>تومان</Text>
+                    <Text style={styles.price}>{rowData.count}</Text>
                 </View>
-                <Text style={styles.price}>{rowData.count}</Text>
-                <Text style={styles.price}>{rowData.price}</Text>
-                <Text style={styles.text}>{rowData['name']}</Text>
-
+                <TouchableOpacity onPress={() => {
+                    this.onUp(rowData);
+                }
+                }>
+                    <Icon name="plus" size={vw * 8} color="black"/>
+                </TouchableOpacity>
+                <Text style={styles.text}>{rowData.name}</Text>
+                <Image source={{uri: server.getServerAddress() + '/' + rowData.photo}}
+                       style={{width: 16 * vw, height: 16 * vw, margin: 2 * vw}}
+                />
 
             </View>
         );
     };
 
+//
     render() {
         return (
 
             <View style={styles.container}>
-
-                <View style={{flexDirection: 'row', width: '100%', height: 15 * vh}}>
-                    <View style={styles.tableHeader}/>
-                    <Text style={styles.tableHeader}>تعداد</Text>
-                    <Text style={styles.tableHeader}>قیمت نهایی</Text>
-
-                    <Text style={styles.tableHeader}>نام</Text>
-                </View>
+                <SimpleNavbar back={() => {
+                    this.props.navigator.pop({animated: true})
+                }}
+                              title={'لیست خرید'}/>
                 <FlatList
-                    style={{flexDirection: 'column', width: '100%',}}
+                    style={{flexDirection: 'column', width: 85 * vw,}}
                     horizontal={false}
                     showsHorizontalScrollIndicator={false}
                     data={this.state.basket}
@@ -146,45 +150,45 @@ class basketPreview extends React.Component {
                         this.renderRow(item)}
                 />
 
+                <ImageBackground
+                    resizeMode="stretch"
+                    style={{width: 90 * vw, height: 15 * vh, flexDirection: 'row',}}
+                    source={require('../../img/basketPreview.png')}
+                >
 
-                <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
-                    <View style={{flex: 1}}/>
-                    <Text style={styles.price}>
-                        {this.state.totalPrice} تومان
-                    </Text>
-                    <Text style={styles.text}>
-                        جمع خرید
-                    </Text>
-                    <View style={{flex: 1}}/>
-                </View>
-
-                <View style={{flexDirection: 'row', alignContent: 'center',}}>
-                    <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                      onPress={_.debounce(this.address,
-                                          1000, {leading: true, trailing: false})}
-                    >
-                        <View style={styles.button}>
-                            <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{margin: 10}}/>
-                            <View style={{flex: 0.5}}/>
-                            <Text style={{flex: 1, fontSize: vw * 4,}}>پرداخت</Text>
+                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={{flex: 1}}/>
+                        <View>
+                            <Text style={styles.price}>
+                                {this.state.totalPrice}
+                            </Text>
+                            <Text style={styles.price}>
+                                تومان
+                            </Text>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                      onPress={() => {
-                                          basketfile.writeBasket([]);
-                                          this.props.UpdateBasket(this.state.basket.map(function (item) {
-                                              item.count = 0;
-                                              return item;
-                                          }));
-                                          this.props.navigator.pop();
+                        <Text style={styles.text}>
+                            جمع خرید
+                        </Text>
+                    </View>
 
-                                      }}>
-                        <View style={styles.buttonCancel}>
-
-                            <Text style={{flex: 1, fontSize: vw * 4,}}>حذف سفارش</Text>
-                        </View>
+                    <TouchableOpacity onPress={_.debounce(this.address,
+                        1000, {leading: true, trailing: false})}>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={{
+                                width: 35 * vw, height: 15 * vh, borderBottomColor: 'black',
+                                flexDirection: 'row', alignItems: 'center'
+                            }}
+                            source={require('../../img/green.png')}
+                        >
+                            <View style={{flex: 1}}/>
+                            <Text style={{fontSize: vw * 4, color: 'black', flex: 1, alignSelf: 'center'}}>پرداخت</Text>
+                            <View style={{flex: 1}}/>
+                        </ImageBackground>
                     </TouchableOpacity>
-                </View>
+                </ImageBackground>
+
+
             </View>
 
         );
@@ -194,7 +198,14 @@ class basketPreview extends React.Component {
 
 
 const styles = StyleSheet.create({
+    Rhombus: {
+        width: 85 * vw, height: 20 * vh,
 
+        elevation: 2 * vw,
+        borderRadius: 2 * vw,
+        margin: 5 * vw,
+
+    },
     row: {
 
         paddingHorizontal: 16,
@@ -204,17 +215,30 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
+    rowItem: {
+        elevation: 2 * vw,
+        borderColor: '#00000035',
+        borderWidth: 0.75,
+        margin: vw,
+        flexDirection: 'row',
+        borderRadius: 2 * vw,
+        backgroundColor: '#e7e6e6',
+        shadowOpacity: 0.6,
+        shadowColor: '#e7e6e650',
+        shadowOffset: {width: 10, height: 10},
+    },
     text: {
+
         fontSize: vw * 4,
         flex: 1,
         fontFamily: 'B Yekan',
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'black'
     },
     price: {
-        margin: 10,
+        color: 'black',
         fontSize: vw * 4,
-        flex: 1,
         fontFamily: 'B Yekan',
         textAlign: 'center'
     },
@@ -240,27 +264,14 @@ const styles = StyleSheet.create({
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
     },
-    buttonCancel: {
-        flex: 1,
 
-        flexDirection: 'row',
-        borderWidth: 0.5,
-        borderRadius: 10,
-        padding: 5,
-        margin: 2,
-        marginTop: 20,
-        alignContent: 'center',
-        marginRight: 20,
-        marginBottom: 60,
-        borderColor: '#d46e62',
-        backgroundColor: '#d46e6220'
-    }, container: {
+    container: {
         flex: 1,
         height: 100 * vh,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f2f2f2',
     },
 
 });

@@ -18,7 +18,7 @@ import NavBar from '../components/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
-import CodePushComponent from "../components/CodePushComponent";
+import MyFlatList from "../components/myFlatList";
 
 
 let context;
@@ -26,8 +26,6 @@ let context;
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
-
-
     };
 
     static setBasket(basket) {
@@ -87,12 +85,14 @@ class NavigationTypes extends React.Component {
     }
 
     loadMainPage() {        // console.log("get Categories");
+
         context.setState({dataReady: false});
         fetch(server.getServerAddress() + '/api/getMainPage', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding':"gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
@@ -115,12 +115,13 @@ class NavigationTypes extends React.Component {
     }
 
     loadCategories(responseData) {
-        context.setState({Categories: responseData}, function () {
-            let cat = this.state.Categories.filter(function (x) {
-                return x.parent_category_id === 0;
-            });
-            context.setState({Types: cat})
-        })
+
+        let cat = responseData.filter(function (x) {
+            return x.parent_category_id === 0;
+        });
+        context.setState({Categories: responseData,
+          Types: cat});
+
     }
 
 
@@ -280,10 +281,7 @@ class NavigationTypes extends React.Component {
                 myNumber: count,
                 disscount: disscount,
                 off: off,
-
             },
-
-
         });
     };
     offerSpecialOffer = (title, imageUrl, des, price, id, disscount, off, count) => {
@@ -299,10 +297,7 @@ class NavigationTypes extends React.Component {
                 myNumber: count,
                 disscount: disscount,
                 off: off,
-
             },
-
-
         });
     };
 
@@ -370,7 +365,8 @@ class NavigationTypes extends React.Component {
             return (
                 <ScrollView>
 
-                    <NavBar menu={() => this.toggleDrawer()} basket={this.basket}/>
+                    <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
+                            search={()=>this.pushScreen('example.FlatListSearch','جستجو',{basket:this.state.basket})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -388,9 +384,7 @@ class NavigationTypes extends React.Component {
                     />
                     <FlatList
                         style={{
-                            flexDirection: 'row', height: 11 * vh,
-                            margin: 1 * vh, flex: 1,
-                            borderRadius: 2 * vh, borderColor: '#c495c150', borderWidth: vw / 1.75,
+                            height: 11 * vh,
                         }}
                         keyExtractor={(item) => item.id}
                         horizontal={true}
@@ -401,12 +395,17 @@ class NavigationTypes extends React.Component {
                                                                 1000, {leading: true, trailing: false})}
                         />}
                     />
+                    <MyFlatList
+                        data={this.state.Types}
+                    />
+
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 55 * vh}}
+                        style={{ flexDirection: 'row',
+                            width: 100 * vw, height: 55 * vh}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}

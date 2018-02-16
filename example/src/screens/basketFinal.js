@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
-
+import fetch from '../fetch'
 let context;
 
 class basketFinal extends React.Component {
@@ -25,21 +25,7 @@ class basketFinal extends React.Component {
 
     isAvailable = () => {
         context.setState({sendData: true});
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
-
-        const request = fetch(server.getServerAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
-
                 context.getLastBasket();
-            })
-            .catch(error => {
-                server.retry(this.isAvailable, context)
-            });
     };
 
     getLastBasket = () => {
@@ -78,6 +64,8 @@ class basketFinal extends React.Component {
                 });
 
             }).catch(error => {
+            server.retry(this.isAvailable, context)
+        }).catch(error => {
             server.retry(this.isAvailable, context)
         });
 

@@ -33,7 +33,8 @@ class basketPreview extends React.Component {
         let items = this.props.UpdateBasket(basket);
         if (this.props.isParsed === true) {
             this.props.setBasketProduct(dataHandeling.AddBasket(this.props.basket,basket));
-        }
+        }else
+            this.props.UpdateBasket(basket);
     }
 
 
@@ -52,7 +53,7 @@ class basketPreview extends React.Component {
 
     address = () => {
         if (this.state.totalPrice !== 0) {
-            this.props.navigator.pop();
+            // this.props.navigator.pop();
             this.props.navigator.push({
                 screen: 'example.mapView',
                 title: 'آدرس',

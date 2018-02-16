@@ -1,3 +1,6 @@
+import * as DeviceInfo from 'react-native-device-info';
+import {vw, vh, vmin, vmax} from './viewport'
+
 class code {
     static serverAddress = 'https://www.baghali.amins.ir/';
     static InternetCheckAddress = 'https://my.shatel.ir';
@@ -95,16 +98,46 @@ class code {
         });
     }
 
-//     import { Dimensions } from 'react-native';
-// const { width, height } = Dimensions.get('window');
-//
-// //Guideline sizes are based on standard ~5" screen mobile device
-// const guidelineBaseWidth = 350;
-// const guidelineBaseHeight = 680;
-//
-// const scale = size => width / guidelineBaseWidth * size;
-// const verticalScale = size => height / guidelineBaseHeight * size;
-// const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
+static deviceInfo(phoneNumber){
+        return  {
+            'screenHeight': 100 * vh,
+            'screenWidth': 100 * vw,
+            'isEmulator': DeviceInfo.isEmulator(),
+            'Application_name': DeviceInfo.getApplicationName(),
+            'APILevel': DeviceInfo.getAPILevel(),
+            'Brand': DeviceInfo.getBrand(),
+            'BuildNumber': DeviceInfo.getBuildNumber().toString(),
+            'BundleId': DeviceInfo.getBundleId(),
+            'Carrier': DeviceInfo.getCarrier(),
+            'DeviceCountry': DeviceInfo.getDeviceCountry(),
+            'DeviceId': DeviceInfo.getDeviceId(),
+            'DeviceLocale': DeviceInfo.getDeviceLocale(),
+            'DeviceName': DeviceInfo.getDeviceName(),
+            'FirstInstallTime': DeviceInfo.getFirstInstallTime(),
+            'FontScale': DeviceInfo.getFontScale(),
+            'FreeDiskStorage': DeviceInfo.getFreeDiskStorage(),
+            'IPAddress': DeviceInfo.getIPAddress().toString(),
+            'InstanceID': DeviceInfo.getInstanceID(),
+            'LastUpdateTime': DeviceInfo.getLastUpdateTime(),
+            'MACAddress': DeviceInfo.getMACAddress().toString(),
+            'Manufacturer': DeviceInfo.getManufacturer(),
+            'MaxMemory': DeviceInfo.getMaxMemory(),
+            'Model': DeviceInfo.getModel(),
+            'PhoneNumber':phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
+            'ReadableVersion': DeviceInfo.getReadableVersion(),
+            'SerialNumber': DeviceInfo.getSerialNumber(),
+            'SystemName': DeviceInfo.getSystemName(),
+            'SystemVersion': DeviceInfo.getSystemVersion(),
+            'Timezone': DeviceInfo.getTimezone(),
+            'TotalDiskCapacity': DeviceInfo.getTotalDiskCapacity(),
+            'TotalMemory': DeviceInfo.getTotalMemory(),
+            'UniqueID': DeviceInfo.getUniqueID(),
+            'Version': DeviceInfo.getVersion(),
+            'is24Hour': DeviceInfo.is24Hour(),
+            'isPinOrFingerprintSet':false,
+            'isTablet':DeviceInfo.isTablet(),
+        };
+}
         }
 
         export default code;

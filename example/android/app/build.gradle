@@ -34,6 +34,9 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        lintOptions {
+            abortOnError false
+        }
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -85,6 +88,7 @@ dependencies {
     compile 'com.onesignal:OneSignal:[3.6.5, 3.99.99]'
     compile(project(':react-native-svg')) {
         exclude group: "com.android.support", module: "appcompat-v7"}
+    compile project(':react-native-device-info')
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

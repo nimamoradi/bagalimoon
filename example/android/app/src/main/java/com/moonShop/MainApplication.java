@@ -7,6 +7,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
 import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
 import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends NavigationApplication {
     public boolean isDebug() {
         return BuildConfig.DEBUG;
     }
+
     // MainApplication class
     @Override
     public void onCreate() {
@@ -44,22 +46,22 @@ public class MainApplication extends NavigationApplication {
     }
 
 
-
     @Nullable
     @Override
     public List<ReactPackage> createAdditionalReactPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+                new RNDeviceInfo(),
                 new SvgPackage(),
-            new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
-            new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),
-            new AppCenterReactNativePackage(MainApplication.this),
-            new RNHockeyAppPackage(this),
+                new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
+                new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),
+                new AppCenterReactNativePackage(MainApplication.this),
+                new RNHockeyAppPackage(this),
 
-            new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey),this, BuildConfig.DEBUG),
-            new VectorIconsPackage(),
-            new NavigationReactPackage(),
-            new MapsPackage()
+                new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), this, BuildConfig.DEBUG),
+                new VectorIconsPackage(),
+                new NavigationReactPackage(),
+                new MapsPackage()
 
 
         );

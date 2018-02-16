@@ -11,6 +11,7 @@
         "e2e-release": "detox test --configuration ios.sim.release"
     },
     "dependencies": {
+        "@types/react": "^16.0.38",
         "appcenter": "^1.1.0",
         "appcenter-analytics": "^1.1.0",
         "appcenter-crashes": "^1.1.0",
@@ -19,6 +20,7 @@
         "react": "16.2.0",
         "react-native": "0.51.0",
         "react-native-code-push": "^5.2.1",
+        "react-native-device-info": "^0.15.3",
         "react-native-elements": "^0.19.0",
         "react-native-gesture-handler": "^1.0.0-alpha.40",
         "react-native-hockeyapp": "^0.5.1",

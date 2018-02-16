@@ -55,7 +55,7 @@ class NavigationTypes extends React.Component {
 
         });
         let bas = basket.concat(newItems);
-        context.setState({superBasket: bas})
+        context.setState({superBasket: bas});
         return bas;
     }
 
@@ -105,10 +105,11 @@ class NavigationTypes extends React.Component {
             this.getSpecialOffer(JSON.parse(responseData.SpecialOffer));
             this.loadCategories(JSON.parse(responseData.AllCategories));
 
-        })).catch(error => {
-            server.retry(context.loadMainPage, context);
+        }))
+            .catch(error => {
+                server.retry(context.loadMainPage, context);
 
-        }).catch(error => {
+            }).catch(error => {
             server.retry(context.loadMainPage, context);
         });
 
@@ -243,13 +244,7 @@ class NavigationTypes extends React.Component {
             BestSellingProducts: [],
             Categories: '',
             Types: [],
-            dataSourceOffer: [{
-                "photo": "/images_goodcss/1513455563digibannershampo.jpg.css",
-                "id": 0,
-                "LinkTo": "none",
-
-            }],
-
+            dataSourceOffer: [],
             superBasket: []
         };
         context = this;

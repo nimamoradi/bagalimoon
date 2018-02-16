@@ -20,10 +20,9 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
 import _ from 'lodash'
 import SimpleNavbar from "../navBars/SimpleNavbar";
-import {SceneMap, TabBar, TabViewAnimated, TabViewPagerExperimental, TabViewPagerScroll} from "react-native-tab-view";
+import { TabBar, TabViewAnimated, } from "react-native-tab-view";
 
-let Radio = require('../components/index');
-let Option = Radio.Option;
+
 let context;
 
 class mapView extends Component {
@@ -381,7 +380,7 @@ class mapView extends Component {
     offlineSale = () => {
         // console.log(context.state.myLocation);
         if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
-            if (context.state.optionSelected === 1 || context.state.optionSelected === 0) {
+            if (context.state.index === 0) {
 
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
                         && context.state.myAddressName !== null)) {
@@ -399,7 +398,7 @@ class mapView extends Component {
                     this.newAddresses();
                 }
             }
-            else if (context.state.optionSelected === 2) {
+            else if (context.state.index === 1) {
 
                 if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
                     server.alert('اخطار',

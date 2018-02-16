@@ -123,7 +123,7 @@ class TypePage extends Component {
             };
 
         })).concat(context.state.basket));
-        if (newBasket.length === 0)
+        if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
         else this.props.navigator.push({
             screen: 'example.Types.basketPreview',

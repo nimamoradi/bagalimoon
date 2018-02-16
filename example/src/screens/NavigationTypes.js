@@ -224,6 +224,8 @@ class NavigationTypes extends React.Component {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         basketFile.readBasket().then((item) => {
+            if(item===null)
+                item=[];
             context.setState({superBasket: item}, () => {
                 this.loadMainPage();
             });
@@ -234,10 +236,7 @@ class NavigationTypes extends React.Component {
 
     constructor(props) {
         super(props);
-
-
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
-
         this.state = {
             dataReady: false,
             SpecialOffer: '',

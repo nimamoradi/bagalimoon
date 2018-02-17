@@ -1,6 +1,6 @@
 import {AsyncStorage} from 'react-native';
 import {Navigation} from 'react-native-navigation';
-import {registerScreens, login, mainPage, registerScreenVisibilityListener} from './screens';
+import {registerScreens, login, loginCheck, mainPage, registerScreenVisibilityListener} from './screens';
 import fetch from "./fetch";
 import server from "./code";
 
@@ -16,9 +16,11 @@ AsyncStorage.multiGet(['api_code', 'user_number']).then((data) => {
     if (api_code !== null) {
         fetch(server.getServerAddress() + '/api/UserDetails', {
             method: 'POST',
+            retries:100,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
                 'phone_number': user_number,
@@ -36,19 +38,11 @@ AsyncStorage.multiGet(['api_code', 'user_number']).then((data) => {
                     Navigation.startSingleScreenApp(login());
 
 
-            }).catch(error => {
+            })
 
-        }).catch(error => {
-
-        });
-
-    }
-
-    else //user is not  login ed before
-    {
+    } else
         Navigation.startSingleScreenApp(login());
-    }
-
 });
+
 
 

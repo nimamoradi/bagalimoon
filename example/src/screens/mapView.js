@@ -163,6 +163,7 @@ class mapView extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.state.api_code,

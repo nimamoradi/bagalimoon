@@ -205,6 +205,7 @@ class TypePage extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({})
         }).then((response) => response.json())

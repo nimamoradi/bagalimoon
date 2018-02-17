@@ -25,6 +25,8 @@ import about_us from './aboutus';
 
 import orderHistroy from './orderHistroy'
 import productPageNavBar from "../navBars/productPageNavBar";
+import server from "../code";
+import fetch from "../fetch";
 
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
@@ -140,4 +142,25 @@ export function mainPage(api_code) {
 
     };
    return(startAppdata);
+}
+export function loginCheck(api_code,user_number) {
+    fetch(server.getServerAddress() + '/api/UserDetails', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'phone_number': user_number,
+            "device_info": server.deviceInfo(user_number),
+            'api_code': api_code,
+        })
+    }).then((response) => response.json())
+        .then((responseData) => {
+            // console.log('inside app ');
+            // console.log('response object:', responseData);
+            return (!responseData.hasOwnProperty("error"))
+
+        })
+
 }

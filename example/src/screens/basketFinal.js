@@ -30,12 +30,13 @@ class basketFinal extends React.Component {
 
     getLastBasket = () => {
 
-        console.log("inside basket");
+        // console.log("inside basket");
         fetch(server.getServerAddress() + '/api/order', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
@@ -46,8 +47,8 @@ class basketFinal extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
+                // console.log("inside responsejson");
+                // console.log('response object:', responseData);
                 context.setState({sendData: false});
                 let totalPrice = 0;
                 let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'

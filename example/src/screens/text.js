@@ -102,7 +102,7 @@ export default class test extends Component {
 
 
     handleClick(field) {
-        console.log(field);
+        // console.log(field);
         var dataClone = this.state.data;
 
         for(let i=0;i<dataClone.length;i++){
@@ -116,7 +116,7 @@ export default class test extends Component {
         field.selected = !field.selected;
 
 
-        console.log(dataClone);
+        // console.log(dataClone);
 
         dataClone[field.id] = field;
 

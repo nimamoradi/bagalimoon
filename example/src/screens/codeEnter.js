@@ -96,8 +96,8 @@ class codeEnter extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
+                // console.log("inside responsejson");
+                // console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);

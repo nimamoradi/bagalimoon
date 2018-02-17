@@ -54,8 +54,8 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
 itemView.propTypes = {
     title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    disscount: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    disscount: PropTypes.number,
     imageUrl: PropTypes.string.isRequired,
     onUp: PropTypes.func.isRequired,
     onDown: PropTypes.func.isRequired,

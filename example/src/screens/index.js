@@ -11,7 +11,7 @@ import offer from './types/offer';
 import loadScreen from '../components/loadScreen'
 import descriptionPan from '../components/descriptionPan';
 import opinion from '../components/opinion'
-import newComment from './types/newComment'
+
 import TypePage from './TypePage'
 import loginScreen from './loginScreen'
 
@@ -53,7 +53,7 @@ export function registerScreens() {
     Navigation.registerComponent('example.Types.offer', () => offer);
     Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
     Navigation.registerComponent('example.Types.opinion', () => opinion);
-    Navigation.registerComponent('example.Types.newComment', () => newComment);
+
 
     Navigation.registerComponent('example.Types.basketLightBox', () => basketLightBox);
 

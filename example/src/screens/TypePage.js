@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
     StyleSheet, View,
     FlatList,
@@ -122,7 +122,7 @@ class TypePage extends Component {
                     {count: basketItem.count})
             };
 
-        })).concat(context.state.basket));
+        })).concat(context.props.basket));
         if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
         else this.props.navigator.push({
@@ -133,7 +133,7 @@ class TypePage extends Component {
                 isParsed: true,
                 UpdateBasket: this.props.UpdateBasket,
                 setBasket: this.props.setBasket,
-                setBasketProduct:TypePage.setBasket
+                setBasketProduct: TypePage.setBasket
             },
             navigatorStyle: {
                 navBarHidden: true,
@@ -236,63 +236,68 @@ class TypePage extends Component {
 
         return (
             <View style={{backgroundColor: '#f2f2f2'}}>
-                <ProductPageNavBar style={{flex: 1}} basket={this.addToCart} context={this}/>
-
-                <FlatList
-                    style={{height: 10 * vh}}
-                    horizontal={true}
-                    data={this.state.subItems}
-                    renderItem={({item}) =>
-                        <TypeButton title={item.name}
-                                    onPress={() => {
-                                        this.loadRenderRowData(item.id);
-                                        this.setState({
-                                            Category_id: item.id,
-                                            subSelected: item.name
-                                        })
-                                    }}
-                                    isSelected={this.state.subSelected === item.name}
-                        />}
-
-
-                />
-                <View style={{height: 90 * vh, flexDirection: 'row'}}>
-
+                <ProductPageNavBar style={{flex: 1,height:10*vh}} basket={this.addToCart} context={this}/>
+                <View style={{width:100*vw,height:90*vh}}>
                     <FlatList
-                        style={{width: 75 * vh, height: 78 * vh}}
-                        data={this.state.basket.filter((item) => {
-                            return item.Category_id === this.state.Category_id;
-                        })}
+                        style={{height: 8 * vh}}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={this.state.subItems}
                         renderItem={({item}) =>
-                            <ItemView
-                                title={item.name}
-                                disscount={item.main_price}
-                                price={item.price}
-                                count={item.count}
-                                onUp={() => this.onUp(item)}
-                                onDown={() => this.onDown(item)}
-                                imageUrl={server.getServerAddress() + item.photo}/>}
-                    />
-                    <FlatList
-                        style={{height: 100 * vh, width: 30 * vh}}
-                        horizontal={false}
-                        data={this.state.mainItems}
-                        renderItem={({item, index}) =>
-                            <RightProductCorner title={item.name}
-                                                index={index}
-                                                onPress={() => {
-                                                    let subItems = this.findSubItems(context.state.Categories,
-                                                        item.id);
-                                                    context.setState({
-                                                        subItems: subItems, mainSelected: item.name,
-                                                        Category_id: subItems[0].id, subSelected: subItems[0].id
-                                                    });
-                                                    this.loadRenderRowData(item.id)
-                                                }}
-                                                isSelected={this.state.mainSelected === item.name}
+                            <TypeButton title={item.name}
+                                        onPress={() => {
+                                            this.loadRenderRowData(item.id);
+                                            this.setState({
+                                                Category_id: item.id,
+                                                subSelected: item.name
+                                            })
+                                        }}
+                                        isSelected={this.state.subSelected === item.name}
                             />}
 
+
                     />
+                    <View style={{height: 80 * vh, flexDirection: 'row'}}>
+
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            style={{width: 75 * vh, height: 78 * vh,}}
+                            data={this.state.basket.filter((item) => {
+                                return item.Category_id === this.state.Category_id;
+                            })}
+                            renderItem={({item}) =>
+                                <ItemView
+                                    keyExtractor={this._keyExtractor}
+                                    title={item.name}
+                                    disscount={item.main_price}
+                                    price={item.price}
+                                    count={item.count}
+                                    onUp={() => this.onUp(item)}
+                                    onDown={() => this.onDown(item)}
+                                    imageUrl={server.getServerAddress() + item.photo}/>}
+                        />
+                        <FlatList
+                            style={{width: 51 * vw,marginBottom:4*vh}}
+                            showsVerticalScrollIndicator={false}
+                            horizontal={false}
+                            data={this.state.mainItems}
+                            renderItem={({item, index}) =>
+                                <RightProductCorner title={item.name}
+                                                    index={index}
+                                                    onPress={() => {
+                                                        let subItems = this.findSubItems(context.state.Categories,
+                                                            item.id);
+                                                        context.setState({
+                                                            subItems: subItems, mainSelected: item.name,
+                                                            Category_id: subItems[0].id, subSelected: subItems[0].name
+                                                        });
+                                                        this.loadRenderRowData(subItems[0].id)
+                                                    }}
+                                                    isSelected={this.state.mainSelected === item.name}
+                                />}
+
+                        />
+                    </View>
                 </View>
                 {(!this.state.dataReady) && <View style={{
                     position: 'absolute',
@@ -338,11 +343,11 @@ class TypePage extends Component {
 
         });
     };
-
+    _keyExtractor = (item, index) => item.id;
 }
 
-TypePage.PropTypes = {
-    title: PropTypes.string.isRequired,
+TypePage.propTypes = {
+    title: propTypes.string.isRequired,
 
 };
 

@@ -15,7 +15,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
                 />
 
 
-                <Text style={styles.text}>{title}</Text>
+                <Text numberOfLines={2} style={styles.text}>{title}</Text>
 
                 <Text style={styles.price}>{price} تومان </Text>
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
@@ -43,8 +43,8 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
 
 item.propTypes = {
     title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    disscount: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    disscount: PropTypes.number,
     imageUrl: PropTypes.string.isRequired,
 
 };
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
     },
     text: {
-        width: '100%',
+        width: 40*vw,
         fontSize: vw * 4.5,
         textAlign: 'center',
         fontFamily: 'B Yekan',

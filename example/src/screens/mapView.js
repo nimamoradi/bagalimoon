@@ -20,28 +20,14 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
 import _ from 'lodash'
 import SimpleNavbar from "../navBars/SimpleNavbar";
-import { TabBar, TabViewAnimated, } from "react-native-tab-view";
+import {TabBar, TabViewAnimated,} from "react-native-tab-view";
 
 
 let context;
 
 class mapView extends Component {
     isAvailable = () => {
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
-
-        const request = fetch(server.getServerAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
                 context.getAddresses();
-            })
-            .catch(error => {
-                // console.log('error is' + error);
-                server.retry(this.isAvailable, context)
-            });
     };
 
     load_api_code = () => {
@@ -69,12 +55,16 @@ class mapView extends Component {
             })
         }).then((response) => response.json().then((responseData) => {
 
-                context.setState({oldAddresses: responseData, sendData: false})
-            }).catch(error => {
+            context.setState({oldAddresses: responseData, sendData: false})
+
+        })).catch(error => {
+            // console.log('error is getAddresses ' + error);
+            server.retry(this.isAvailable, context)
+        }).catch(error => {
                 // console.log('error is getAddresses ' + error);
                 server.retry(this.isAvailable, context)
-            })
-        );
+            });
+
 
 
     }
@@ -154,11 +144,9 @@ class mapView extends Component {
     }
 
     newAddresses = () => {
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
 
-        const request = fetch(server.getServerAddress() + '/api/addNewAddress', {
+
+        ( fetch(server.getServerAddress() + '/api/addNewAddress', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -176,18 +164,19 @@ class mapView extends Component {
                     lng: context.state.myLocation.longitude,
                 }
             })
-
-        });
-        return Promise
-            .race([timeout, request])
-            .then((response) => response.json().then((responseData) => {
-                context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
-                // console.log('respone' + responseData);
-                context.finalBasket();
-            }))
+        }).then((response) => response.json().then((responseData) => {
+            context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
+            // console.log('respone' + responseData);
+            context.finalBasket();
+        }))
             .catch(error => {
                 server.retry(this.newAddresses, context)
-            });
+            }).catch(error => {
+            server.retry(this.newAddresses, context)
+        })).catch(error => {
+            server.retry(this.newAddresses, context)
+        })
+
     };
 
 
@@ -504,9 +493,9 @@ const styles = StyleSheet.create({
             borderRadius: 2 * vw,
             height: 6 * vh,
             width: 50 * vw,
-            padding:5,
-            borderColor:'black',
-            borderWidth:0.75
+            padding: 5,
+            borderColor: 'black',
+            borderWidth: 0.75
         },
         bigButtonText: {
             color: 'black',

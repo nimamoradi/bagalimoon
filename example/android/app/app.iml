@@ -176,6 +176,7 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-tasks-license-11.8.0" level="project" />
     <orderEntry type="module" module-name="react-native-navigation" />
     <orderEntry type="module" module-name="appcenter-analytics" />
+    <orderEntry type="module" module-name="react-native-exception-handler" />
     <orderEntry type="module" module-name="appcenter-crashes" />
     <orderEntry type="module" module-name="react-native-hockeyapp" />
     <orderEntry type="module" module-name="react-native-maps" />

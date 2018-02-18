@@ -33,7 +33,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
-        versionName "1.21"
+        versionName "1.22"
         lintOptions {
             abortOnError false
         }
@@ -89,6 +89,7 @@ dependencies {
     compile(project(':react-native-svg')) {
         exclude group: "com.android.support", module: "appcompat-v7"}
     compile project(':react-native-device-info')
+    compile project(path: ':react-native-exception-handler')
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

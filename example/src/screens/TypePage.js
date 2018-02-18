@@ -18,7 +18,7 @@ import RightProductCorner from '../Shapes/rightProductCorner'
 import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
 import _ from 'lodash'
-
+import ListViewCustum from "../components/listViewCustum";
 let context;
 let isFirstTime;
 
@@ -104,16 +104,6 @@ class TypePage extends Component {
     }
 
     addToCart = () => {
-
-        // let basket = this.state.basket;
-        // if (basket.length > 0) {
-        this.shop();
-        // alert(JSON.stringify(dataHandeling.basketFilter(this.state.basket)))
-        // } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-    };
-
-    shop = () => {
-
         // todo clean up
         let newBasket = dataHandeling.arrayUnique((context.props.basket.map((basketItem) => {
             //update first  basket values with new items then add missing items
@@ -122,7 +112,7 @@ class TypePage extends Component {
                     {count: basketItem.count})
             };
 
-        })).concat(context.props.basket));
+        })).concat(context.state.basket));
         if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
         else this.props.navigator.push({
@@ -166,7 +156,7 @@ class TypePage extends Component {
         );
         this.props.UpdateBasket(basket
         );
-        // super.componentWillUnmount();
+
     }
 
     componentDidMount() {
@@ -199,7 +189,7 @@ class TypePage extends Component {
     loadRenderRowData = async (category_id) => {
 
         context.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
+        (fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
 
             method: 'POST',
             headers: {
@@ -207,7 +197,7 @@ class TypePage extends Component {
                 'Content-Type': 'application/json',
                 'content-encoding': "gzip, deflate, br"
             },
-            body: JSON.stringify({})
+
         }).then((response) => response.json())
             .then((responseData) => {
                     let lastBasket = this.props.basket;
@@ -225,8 +215,10 @@ class TypePage extends Component {
                     });
                 }
             ).catch(error => {
-            server.retryParam(this.loadRenderRowData, context,)
-        }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context,)
+            }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context,)
+            })).catch(error => {
             server.retryParam(this.loadRenderRowData, context,)
         });
     };
@@ -236,32 +228,24 @@ class TypePage extends Component {
 
         return (
             <View style={{backgroundColor: '#f2f2f2'}}>
-                <ProductPageNavBar style={{flex: 1,height:10*vh}} basket={this.addToCart} context={this}/>
-                <View style={{width:100*vw,height:90*vh}}>
-                    <FlatList
-                        style={{height: 8 * vh}}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        data={this.state.subItems}
-                        renderItem={({item}) =>
-                            <TypeButton title={item.name}
-                                        onPress={() => {
-                                            this.loadRenderRowData(item.id);
-                                            this.setState({
-                                                Category_id: item.id,
-                                                subSelected: item.name
-                                            })
-                                        }}
-                                        isSelected={this.state.subSelected === item.name}
-                            />}
+                <ProductPageNavBar style={{ height: 10 * vh}} basket={this.addToCart} context={this}/>
+                <View style={{width: 100 * vw, height: 90 * vh}}>
+                    <ListViewCustum
+                        style={{ height: 12 * vh}}
+                        subSelected={this.state.subSelected}
+                        data={this.state.subItems} action={(item) => {
+                        this.loadRenderRowData(item.id);
+                        this.setState({
+                            Category_id: item.id,
+                            subSelected: item.name
+                        })
+                    }} />
 
-
-                    />
-                    <View style={{height: 80 * vh, flexDirection: 'row'}}>
+                    <View style={{height: 75 * vh, flexDirection: 'row'}}>
 
                         <FlatList
                             showsVerticalScrollIndicator={false}
-                            style={{width: 75 * vh, height: 78 * vh,}}
+                            style={{width: 70 * vw,}}
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}
@@ -277,7 +261,7 @@ class TypePage extends Component {
                                     imageUrl={server.getServerAddress() + item.photo}/>}
                         />
                         <FlatList
-                            style={{width: 51 * vw,marginBottom:4*vh}}
+                            style={{width: 30* vw,marginBottom:4*vh}}
                             showsVerticalScrollIndicator={false}
                             horizontal={false}
                             data={this.state.mainItems}

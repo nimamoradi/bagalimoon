@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.graphics.Color;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.view.Gravity;
 import android.util.TypedValue;
@@ -37,10 +38,13 @@ public class MainActivity extends SplashActivity {
 //setting image position
         imageView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
+        ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
         view.addView(imageView1);
-
+        view.addView(progressBar);
         return view;
     }
 

@@ -1,6 +1,6 @@
 {
     "name": "bagali",
-    "version": "0.1.5",
+    "version": "0.1.7",
     "private": true,
     "scripts": {
         "postinstall": "node ./scripts/postinstall.js",
@@ -22,6 +22,7 @@
         "react-native-code-push": "^5.2.1",
         "react-native-device-info": "^0.15.3",
         "react-native-elements": "^0.19.0",
+        "react-native-exception-handler": "^2.7.1",
         "react-native-gesture-handler": "^1.0.0-alpha.40",
         "react-native-hockeyapp": "^0.5.1",
         "react-native-maps": "^0.19.0",

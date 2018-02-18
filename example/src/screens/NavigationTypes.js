@@ -8,7 +8,6 @@ import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
-import TypeButton from '../components/TypeButton'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
@@ -18,7 +17,7 @@ import NavBar from '../navBars/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
-import MyFlatList from "../components/myFlatList";
+import ListViewCustum from "../components/listViewCustum";
 
 
 let context;
@@ -88,7 +87,7 @@ class NavigationTypes extends React.Component {
     loadMainPage() {        // console.log("get Categories");
 
         context.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/getMainPage', {
+        (  fetch(server.getServerAddress() + '/api/getMainPage', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -111,8 +110,9 @@ class NavigationTypes extends React.Component {
 
             }).catch(error => {
             server.retry(context.loadMainPage, context);
+        })).catch(error => {
+            server.retryParam(this.loadRenderRowData, context,)
         });
-
 
     }
 
@@ -306,12 +306,12 @@ class NavigationTypes extends React.Component {
         });
     };
 
-    TypePage = (title) => {
+    TypePage = (item) => {
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
             passProps: {
-                title: title,
+                title: item.name,
                 UpdateBasket: NavigationTypes.basketUpdater,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
@@ -379,20 +379,9 @@ class NavigationTypes extends React.Component {
                         itemWidth={100 * vw}
                         loop={false}
                     />
-                    <FlatList
-                        style={{
-                            height: 11 * vh,
-                        }}
-                        keyExtractor={(item) => item.id}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        data={this.state.Types}
-                        renderItem={({item}) => <TypeButton title={item.name}
-                                                            onPress={_.debounce(() => this.TypePage(item.name),
-                                                                1000, {leading: true, trailing: false})}
-                        />}
-                    />
 
+                    <ListViewCustum
+                        data={this.state.Types} action={this.TypePage}/>
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 

@@ -26,14 +26,16 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                             opacity={0.60}
                             style={styles.image}
                             source={require('../../img/corner/corner_edge_up.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text   numberOfLines={2}
+                                    style={styles.text}>{title}</Text>
                         </ImageBackground> :
                         <ImageBackground
                             resizeMode="stretch"
                             opacity={0.60}
                             style={styles.image}
                             source={require('../../img/corner/corner_edge_down.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text   numberOfLines={2}
+                                    style={styles.text}>{title}</Text>
                         </ImageBackground>}
                 </TouchableOpacity> :
                 <TouchableOpacity
@@ -51,13 +53,17 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                             resizeMode="stretch"
                             style={styles.image}
                             source={require('../../img/corner/corner_edge_up.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text
+                                numberOfLines={2}
+                                style={styles.text}>{title}</Text>
                         </ImageBackground> :
                         <ImageBackground
                             resizeMode="stretch"
                             style={styles.image}
                             source={require('../../img/corner/corner_edge_down.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text
+                                numberOfLines={2}
+                                style={styles.text}>{title}</Text>
                         </ImageBackground>}
 
 
@@ -98,6 +104,7 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
+        width:25*vw,
         textAlign: 'center',
         fontSize: 4 * vw,
         color: 'white',

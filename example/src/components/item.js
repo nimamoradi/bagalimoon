@@ -15,13 +15,13 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
                 />
 
 
-                <Text style={styles.text}>{title}</Text>
+                <Text numberOfLines={2} style={styles.text}>{title}</Text>
 
                 <Text style={styles.price}>{price} تومان </Text>
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                 <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 8} style={{}}
+                        <Icon name="minus" size={vw * 8}
                               color="black" />
                     </TouchableOpacity>
 
@@ -43,8 +43,8 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
 
 item.propTypes = {
     title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    disscount: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    disscount: PropTypes.number,
     imageUrl: PropTypes.string.isRequired,
 
 };
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         elevation: 5 * vw,
         paddingBottom: vh,
         borderColor: '#00000035',
-        height: 45 * vh,
+        height: 48 * vh,
         margin: 2*vh,
         padding:2*vw,
         backgroundColor: '#ebebeb',
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
     },
     text: {
-        width: '100%',
+        width: 40*vw,
         fontSize: vw * 4.5,
         textAlign: 'center',
         fontFamily: 'B Yekan',
@@ -104,17 +104,17 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize: vw * 4.5,
         fontFamily: 'B Yekan',
-        width:6*vw,
-        height:6*vw,
+        width:8*vw,
+        height:8*vw,
         textAlign: 'center',
-        borderRadius:3*vw
+        borderRadius:4*vw
     },
     countTextHidden: {
         backgroundColor:'red',
         fontSize: vw * 4.5,
-        width:6*vw,
-        height:6*vw,
-        borderRadius:3*vw,
+        width:8*vw,
+        height:8*vw,
+        borderRadius:4*vw,
         fontFamily: 'B Yekan',
         opacity:0
     }

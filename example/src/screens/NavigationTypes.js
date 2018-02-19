@@ -8,17 +8,16 @@ import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/item'
-import TypeButton from '../components/TypeButton'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh} from '../viewport'
 import HockeyApp from 'react-native-hockeyapp'
-import NavBar from '../components/navBar'
+import NavBar from '../navBars/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../basketFile";
-import MyFlatList from "../components/myFlatList";
+import ListViewCustum from "../components/listViewCustum";
 
 
 let context;
@@ -32,7 +31,7 @@ class NavigationTypes extends React.Component {
         context.setState({superBasket: basket})
     }
 
-    static basketUpdater(newItems) {
+    static basketUpdater(newItems) {//won't remove zero index
         let basket = context.state.superBasket.slice();
 
         for (let i = 0; i < basket.length; i++) {
@@ -54,7 +53,8 @@ class NavigationTypes extends React.Component {
             }
 
         });
-        context.setState({superBasket: basket.concat(newItems)})
+
+        context.setState({superBasket: basket.concat(newItems)});
 
     }
 
@@ -87,12 +87,12 @@ class NavigationTypes extends React.Component {
     loadMainPage() {        // console.log("get Categories");
 
         context.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/getMainPage', {
+        (fetch(server.getServerAddress() + '/api/getMainPage', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'content-encoding':"gzip, deflate, br"
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
@@ -104,13 +104,15 @@ class NavigationTypes extends React.Component {
             this.getSpecialOffer(JSON.parse(responseData.SpecialOffer));
             this.loadCategories(JSON.parse(responseData.AllCategories));
 
-        })).catch(error => {
-            server.retry(context.loadMainPage, context);
+        }))
+            .catch(error => {
+                server.retry(context.loadMainPage, context);
 
-        }).catch(error => {
-            server.retry(context.loadMainPage, context);
+            }).catch(error => {
+                server.retry(context.loadMainPage, context);
+            })).catch(error => {
+            server.retryParam(this.loadRenderRowData, context,)
         });
-
 
     }
 
@@ -119,8 +121,10 @@ class NavigationTypes extends React.Component {
         let cat = responseData.filter(function (x) {
             return x.parent_category_id === 0;
         });
-        context.setState({Categories: responseData,
-          Types: cat});
+        context.setState({
+            Categories: responseData,
+            Types: cat
+        });
 
     }
 
@@ -205,8 +209,8 @@ class NavigationTypes extends React.Component {
         context.setState({dataSourceOffer: responseData, dataReady: true})
     }
 
-    componentWillUnmount() {
-        basketFile.writeBasket(context.state.superBasket);
+    async componentWillUnmount() {
+    await   basketFile.writeBasket(context.state.superBasket);
         // super.componentWillUnmount();
     }
 
@@ -220,6 +224,8 @@ class NavigationTypes extends React.Component {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         basketFile.readBasket().then((item) => {
+            if (item === null)
+                item = [];
             context.setState({superBasket: item}, () => {
                 this.loadMainPage();
             });
@@ -230,23 +236,14 @@ class NavigationTypes extends React.Component {
 
     constructor(props) {
         super(props);
-
-
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
-
         this.state = {
             dataReady: false,
             SpecialOffer: '',
             BestSellingProducts: [],
             Categories: '',
             Types: [],
-            dataSourceOffer: [{
-                "photo": "/images_goodcss/1513455563digibannershampo.jpg.css",
-                "id": 0,
-                "LinkTo": "none",
-
-            }],
-
+            dataSourceOffer: [],
             superBasket: []
         };
         context = this;
@@ -304,17 +301,35 @@ class NavigationTypes extends React.Component {
     pushScreen = (screen, title, passProps) => {
         this.props.navigator.push({
             screen: screen,
+            navigatorStyle: {
+                navBarHidden: true,
+            },
             title: title,
             passProps: passProps,
         });
+
     };
 
-    TypePage = (title) => {
+    dummyTypePage=(item) =>{
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
             passProps: {
-                title: title,
+                title: item.name,
+                UpdateBasket: NavigationTypes.basketUpdater,
+                basket: context.state.superBasket,
+                Categories: context.state.Categories,
+                setBasket: NavigationTypes.setBasket
+            },
+        });
+    };
+
+    TypePage = (item) => {
+        this.props.navigator.push({
+            screen: 'example.TypePage',
+            title: 'لیست محصولات',
+            passProps: {
+                title: item,
                 UpdateBasket: NavigationTypes.basketUpdater,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
@@ -363,10 +378,11 @@ class NavigationTypes extends React.Component {
         </View>;
         else
             return (
-                <ScrollView>
+                <ScrollView >
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
-                            search={()=>this.pushScreen('example.FlatListSearch','جستجو',{basket:this.state.basket})}/>
+                            search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
+                                {basket: this.state.basket})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -382,30 +398,18 @@ class NavigationTypes extends React.Component {
                         itemWidth={100 * vw}
                         loop={false}
                     />
-                    <FlatList
-                        style={{
-                            height: 11 * vh,
-                        }}
-                        keyExtractor={(item) => item.id}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        data={this.state.Types}
-                        renderItem={({item}) => <TypeButton title={item.name}
-                                                            onPress={_.debounce(() => this.TypePage(item.name),
-                                                                1000, {leading: true, trailing: false})}
-                        />}
-                    />
-                    <MyFlatList
-                        data={this.state.Types}
-                    />
 
+                    <ListViewCustum
+                        data={this.state.Types} action={this.dummyTypePage}/>
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
 
                     <FlatList
-                        style={{ flexDirection: 'row',
-                            width: 100 * vw, height: 55 * vh}}
+                        style={{
+                            flexDirection: 'row',
+                            width: 100 * vw, height: 55 * vh
+                        }}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
@@ -415,7 +419,7 @@ class NavigationTypes extends React.Component {
                     <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh,}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
@@ -436,7 +440,8 @@ class NavigationTypes extends React.Component {
 
     renderSpecialOffer(item) {
 
-        if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {//item.hasOwnProperty('isSpecialOffer')
+        if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {
+            //item.hasOwnProperty('isSpecialOffer')
             return <Item
                 title={item.name}
                 count={item.count}

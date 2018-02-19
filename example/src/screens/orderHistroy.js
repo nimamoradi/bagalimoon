@@ -36,26 +36,14 @@ class orderHistroy extends React.Component {
 
     isAvailable = () => {
         context.setState({sendData: true});
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
-
-        const request = fetch(server.getServerAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
 
                 context.getOrderHistory(context.state.api_code);
-            })
-            .catch(error => {
-                server.retry(this.isAvailable, context)
-            });
+
     };
 
     getOrderHistory = (api_code) => {
 
-console.log('apicode '+JSON.stringify(api_code));
+// console.log('apicode '+JSON.stringify(api_code));
         fetch(server.getServerAddress() + '/api/orderList', {
             method: 'POST',
             headers: {
@@ -67,7 +55,7 @@ console.log('apicode '+JSON.stringify(api_code));
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData);
+                // console.log(responseData);
 
                 this.setState({
                     orderData: responseData,
@@ -75,7 +63,10 @@ console.log('apicode '+JSON.stringify(api_code));
                 });
 
             }).catch(error => {
-            console.log(error);
+            // console.log(error);
+            server.retry(this.isAvailable, context)
+        }).catch(error => {
+            // console.log(error);
             server.retry(this.isAvailable, context)
         });
 

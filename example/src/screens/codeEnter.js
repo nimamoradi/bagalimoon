@@ -82,7 +82,7 @@ class codeEnter extends React.Component {
 
     enterCode = () => {
         context.setState({sendData: true});
-        console.log("inside post smsVerify");
+        // console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',
             headers: {
@@ -92,11 +92,12 @@ class codeEnter extends React.Component {
             body: JSON.stringify({
                 api_code: context.props.api_code,
                 sms_code: context.state.code,
+                phone_number:context.props.phone_number
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
+                // console.log("inside responsejson");
+                // console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
@@ -128,7 +129,7 @@ class codeEnter extends React.Component {
             }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             backButtonHidden: true,
             overrideBackPress: true,
-            passProps: {api_code: api, basket: []},
+            passProps: {api_code: api,},
 
         });
     }

@@ -3,22 +3,19 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
-import {Polygon, Svg} from "react-native-svg";
-import Rect from "react-native-svg/elements/Rect";
+
 
 
 function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
 
     return (
-        <View style={styles.container}>
-            <ImageBackground
-                resizeMode="stretch"
-                style={{width: 68 * vw, height: 23 * vh,
-                    flexDirection: 'row',
-                    alignItems: 'center'}}
-                source={require('../../img/itemViewBack.png')}
-            >
+
+        <ImageBackground
+            resizeMode="stretch"
+            style={styles.container}
+            source={require('../../img/itemViewBack.png')}
+        >
                 <Image source={{uri: imageUrl}} style={styles.image}/>
 
                 <View style={{flexDirection: 'column',}}>
@@ -26,51 +23,54 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
                     <Text style={styles.price}>{price} تومان </Text>
                 </View>
 
-                <View style={{flex: 1.2, flexDirection: 'column'}}>
+            <View style={{flex: 1.2, flexDirection: 'column'}}>
 
-                    <TouchableOpacity onPress={onUp}>
-                        <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={onUp}>
+                    <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
+                </TouchableOpacity>
 
-                    {(count !== 0) ?
-                        <Text
-                            style={{textAlign: 'center', color: 'black', fontFamily: 'B Yekan', fontSize: vw * 4}}>
-                            {count}
-                        </Text> :
-                        <Text style={styles.countTextHidden}>0</Text>}
+                {(count !== 0) ?
+                    <Text
+                        style={{textAlign: 'center', color: 'black', fontFamily: 'B Yekan', fontSize: vw * 4}}>
+                        {count}
+                    </Text> :
+                    <Text style={styles.countTextHidden}>0</Text>}
 
-                    <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={onDown}>
+                    <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
+                </TouchableOpacity>
 
-                </View>
+            </View>
 
 
-            </ImageBackground>
-        </View>
+        </ImageBackground>
+
     );
 
 }
 
 itemView.propTypes = {
     title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    disscount: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    disscount: PropTypes.number,
     imageUrl: PropTypes.string.isRequired,
     onUp: PropTypes.func.isRequired,
     onDown: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
+    shadowMaker: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     container: {
-        elevation: 2 * vw,
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 2 * vw,
-        backgroundColor:'#f2f2f2',
-        shadowOffset:{width: 0,height: -50}
+        width:68*vw,
+        height:45*vw
+
 
     },
     priceView: {
@@ -112,13 +112,13 @@ const styles = StyleSheet.create({
         margin: 2 * vw,
     },
     countTextHidden: {
-        backgroundColor:'red',
+        backgroundColor: 'red',
         fontSize: vw * 4.5,
-        width:6*vw,
-        height:6*vw,
-        borderRadius:3*vw,
+        width: 6 * vw,
+        height: 6 * vw,
+        borderRadius: 3 * vw,
         fontFamily: 'B Yekan',
-        opacity:0
+        opacity: 0
     }
 });
 

@@ -3,20 +3,27 @@ import _ from 'lodash'
 class dataHandeling {
 
 
-
     static AddBasket(newItems, basket) {//update and merge basket
-        return this.arrayUnique((_.map(basket, function (basketitem) {//it first update basket values with newItems then add missing items
-            return _.assign(basketitem,_.find(newItems, ['id', basketitem.id]), {count:basketitem.count})
+        return this.arrayUnique((basket.map(function (basketItem) {
+            //update first  basket values with newItems then add missing items
+            return _.assign(basketItem, _.find(newItems, ['id', basketItem.id]), {count: basketItem.count})
 
         })).concat(newItems));
 
     };
 
-
-    static AddBasketTypePage(newItems, basket) {//update and mearge basket
-
-
-    };
+    // static AddBasketNoMutation(newItems, basket) {//update and merge basket
+    //
+    //     return this.arrayUnique((basket.map((basketItem) => {
+    //         //update first  basket values with new items then add missing items
+    //         return {
+    //             ..._.assign(bas, _.find(newItems, ['id', basketItem.id]),
+    //                 {count: basketItem.count})
+    //         };
+    //
+    //     })).concat(newItems));
+    //
+    // };
 
     static arrayUnique(array) {
         let a = array;
@@ -34,7 +41,7 @@ class dataHandeling {
         return basket.filter(function (item) {
             return item.count > 0;
 
-        })
+        });
     }
 
     static indexOfId(ar, id) {

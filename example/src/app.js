@@ -1,90 +1,48 @@
 import {AsyncStorage} from 'react-native';
 import {Navigation} from 'react-native-navigation';
-import {registerScreens, registerScreenVisibilityListener} from './screens';
-
+import {registerScreens, login, loginCheck, mainPage, registerScreenVisibilityListener} from './screens';
+import fetch from "./fetch";
+import server from "./code";
 
 
 // screen related book keeping
 registerScreens();
 // registerScreenVisibilityListener();
 
-AsyncStorage.getItem('api_code').then((item) => {
-console.log(item);
-    let startAppdata;
-    if (item === null) {
-        startAppdata = {
-            screen: {
-                screen: 'example.Types.loginScreen', // unique ID registered with Navigation.registerScreen
-                navigatorStyle: {
-                    navBarHidden: true,
-                }
+
+AsyncStorage.multiGet(['api_code', 'user_number']).then((data) => {
+    let api_code = data[0][1];
+    let user_number = data[1][1];
+    if (api_code !== null) {
+        fetch(server.getServerAddress() + '/api/UserDetails', {
+            method: 'POST',
+            retries:100,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
-            appStyle: {
-                orientation: 'portrait',
-            },
-            drawer: { // optional, add this if you want a side menu drawer in your app
-                right: { // optional, define if you want a drawer from the right
-                    screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                    passProps: {} // simple serializable object that will pass as props to all top screens (optional)
-                },
+            body: JSON.stringify({
+                'phone_number': user_number,
+                "device_info": server.deviceInfo(user_number),
+                'api_code': api_code,
+            })
+        }).then((response) => response.json())
+            .then((responseData) => {
+                console.log('inside app ');
+                console.log('response object:', responseData);
+                if (!responseData.hasOwnProperty("error"))
 
-                style: { // ( iOS only )
-                    drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                    contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                    leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                    rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
-                },
-                type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-                animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-                // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-                disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
-            },
+                    Navigation.startSingleScreenApp(mainPage(api_code));
+                else
+                    Navigation.startSingleScreenApp(login());
 
 
-        };
-        Navigation.startSingleScreenApp(startAppdata);
-    }
-    else //user is logined before
-    {
+            })
 
-        startAppdata = {
-            screen: {
-                screen: 'example.Types', // unique ID registered with Navigation.registerScreen
-                title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
-                navigatorStyle: {
-                    navBarTranslucent: false,
-                    navBarHidden: true,
-                },
-
-            },
-            appStyle: {
-                orientation: 'portrait',
-            },
-            drawer: { // optional, add this if you want a side menu drawer in your app
-                right: { // optional, define if you want a drawer from the right
-                    screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                    passProps: {} // simple serializable object that will pass as props to all top screens (optional)
-                },
-                style: { // ( iOS only )
-                    drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                    contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                    leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                    rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
-                },
-                type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-                animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-                // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-                disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
-            },
-            passProps: {api_code: item,}, // simple serializable object that will pass as props to all top screens (optional)
-
-
-        };
-        Navigation.startSingleScreenApp(startAppdata);
-
-    }
-
-
+    } else
+        Navigation.startSingleScreenApp(login());
 });
+
 
 

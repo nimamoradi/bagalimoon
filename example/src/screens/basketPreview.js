@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import dataHandeling from "../dataHandeling";
-import basketfile from "../basketFile";
 import SimpleNavbar from '../navBars/SimpleNavbar'
 
 let context;
@@ -31,15 +30,17 @@ class basketPreview extends React.Component {
 
     componentWillUnmount() {
         let basket = this.state.basket;
-        this.props.UpdateBasket(basket);
+        let items = this.props.UpdateBasket(basket);
+        if (this.props.isParsed === true) {
+            this.props.setBasketProduct(dataHandeling.AddBasket(this.props.basket,basket));
+        }else
+            this.props.UpdateBasket(basket);
     }
 
 
     componentDidMount() {
         let totalPrice = 0;
-        let basket = this.state.basket.filter(function (item) {
-            return item.count > 0
-        });
+        let basket = dataHandeling.basketFilter(context.state.basket);
         for (let i = 0; i < basket.length; i++) {
             totalPrice += basket[i]['price'] * basket[i]['count']
         }
@@ -52,7 +53,7 @@ class basketPreview extends React.Component {
 
     address = () => {
         if (this.state.totalPrice !== 0) {
-            this.props.navigator.pop();
+            // this.props.navigator.pop();
             this.props.navigator.push({
                 screen: 'example.mapView',
                 title: 'آدرس',

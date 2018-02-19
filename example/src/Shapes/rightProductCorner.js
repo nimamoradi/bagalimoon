@@ -24,42 +24,46 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                         <ImageBackground
                             resizeMode="stretch"
                             opacity={0.60}
-                            style={{width: 25 * vw, height: 8 * vh,}}
+                            style={styles.image}
                             source={require('../../img/corner/corner_edge_up.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text   numberOfLines={2}
+                                    style={styles.text}>{title}</Text>
                         </ImageBackground> :
                         <ImageBackground
                             resizeMode="stretch"
                             opacity={0.60}
-                            style={{width: 25 * vw, height: 8 * vh,}}
+                            style={styles.image}
                             source={require('../../img/corner/corner_edge_down.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text   numberOfLines={2}
+                                    style={styles.text}>{title}</Text>
                         </ImageBackground>}
                 </TouchableOpacity> :
                 <TouchableOpacity
                     underlayColor={'rgba(0, 0, 0, 0.054)'}
                     style={{
-
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
                         margin: 5,
-
                     }}
                     onPress={onPress}
                 >
                     {(index % 2 === 0) ?
                         <ImageBackground
                             resizeMode="stretch"
-                            style={{width: 25 * vw, height: 8 * vh}}
+                            style={styles.image}
                             source={require('../../img/corner/corner_edge_up.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text
+                                numberOfLines={2}
+                                style={styles.text}>{title}</Text>
                         </ImageBackground> :
                         <ImageBackground
                             resizeMode="stretch"
-                            style={{width: 25 * vw, height: 8 * vh}}
+                            style={styles.image}
                             source={require('../../img/corner/corner_edge_down.png')}>
-                            <Text style={styles.text}>{title}</Text>
+                            <Text
+                                numberOfLines={2}
+                                style={styles.text}>{title}</Text>
                         </ImageBackground>}
 
 
@@ -78,6 +82,13 @@ rightProductCorner.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    image:{
+        width: 25 * vw,
+        height: 8 * vh,
+        alignItems:'center',
+        flex:1,
+        alignContent:'center'
+    },
     row: {
         fontSize: vw * 3,
         paddingHorizontal: 16,
@@ -93,6 +104,7 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
+        width:25*vw,
         textAlign: 'center',
         fontSize: 4 * vw,
         color: 'white',

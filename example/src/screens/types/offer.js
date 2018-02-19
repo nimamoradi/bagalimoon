@@ -72,7 +72,7 @@ class offer extends Component {
         if (index !== -1) {
             this.setState({myNumber: '' + json[index]['count'], wasEmpty: false});
         }
-        console.log(json);
+        // console.log(json);
 
     };
 

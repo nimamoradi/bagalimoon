@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
-
+import fetch from '../fetch'
 let context;
 
 class basketFinal extends React.Component {
@@ -25,31 +25,18 @@ class basketFinal extends React.Component {
 
     isAvailable = () => {
         context.setState({sendData: true});
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
-
-        const request = fetch(server.getServerAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
-
                 context.getLastBasket();
-            })
-            .catch(error => {
-                server.retry(this.isAvailable, context)
-            });
     };
 
     getLastBasket = () => {
 
-        console.log("inside basket");
+        // console.log("inside basket");
         fetch(server.getServerAddress() + '/api/order', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
                 api_code: context.props.api_code,
@@ -60,8 +47,8 @@ class basketFinal extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log("inside responsejson");
-                console.log('response object:', responseData);
+                // console.log("inside responsejson");
+                // console.log('response object:', responseData);
                 context.setState({sendData: false});
                 let totalPrice = 0;
                 let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'
@@ -78,6 +65,8 @@ class basketFinal extends React.Component {
                 });
 
             }).catch(error => {
+            server.retry(this.isAvailable, context)
+        }).catch(error => {
             server.retry(this.isAvailable, context)
         });
 

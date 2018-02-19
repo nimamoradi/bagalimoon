@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Button, Image, Dimensions, AsyncStorage} from 'react-native';
-import TableRow from '../../../components/tableRow';
-import {vw, vh, vmin, vmax} from '../../../viewport'
+import TableRow from '../components/tableRow';
+import {vw, vh, vmin, vmax} from '../viewport'
 class orderItem extends React.Component {
 
     render() {
@@ -49,11 +49,11 @@ class orderItem extends React.Component {
 
         let value;
         try {
-            console.log('adding product');
+            // console.log('adding product');
             value = JSON.parse(await AsyncStorage.getItem('@CurrentBasket'));
-            console.log('loading');
+            // console.log('loading');
             if (value === null) {
-                console.log('don\'t have previews value');
+                // console.log('don\'t have previews value');
                 value = [];
                 value.push({
                     'name': this.props.title,
@@ -65,7 +65,7 @@ class orderItem extends React.Component {
             else
             {
                 let index=this.getIndex(this.props.id,value,'id');
-                console.log('have previews value '+index);
+                // console.log('have previews value '+index);
                 value[index]=({
                     'name': this.props.title,
                     'count': this.props.count,
@@ -76,11 +76,11 @@ class orderItem extends React.Component {
             }
 
 
-            console.log('new basket: ' + JSON.stringify(value));
+            // console.log('new basket: ' + JSON.stringify(value));
             await  AsyncStorage.setItem('@CurrentBasket', JSON.stringify(value));
 
         } catch (error) {
-            console.log('can\'t save data ' + error);
+            // console.log('can\'t save data ' + error);
         }
         this.props.onClose(true);
 

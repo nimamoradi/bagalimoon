@@ -33,13 +33,17 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.23"
+        lintOptions {
+            abortOnError false
+        }
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [onesignal_app_id: "12637e49-1ef9-44d3-b902-de1f14e4cd5c",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
+
     }
     splits {
         abi {
@@ -75,16 +79,16 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile('com.facebook.android:facebook-android-sdk:4.22.1')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.facebook.react:react-native:0.51.0'
+    compile 'com.facebook.react:react-native:0.51.1'
     compile project(':react-native-navigation')
 	compile project(":react-native-hockeyapp") // <--- add this
     compile project(path: ':appcenter-crashes')
     compile project(path: ':appcenter-analytics')
     compile project(path: ':appcenter')
     compile project(':react-native-code-push')
-    compile 'com.onesignal:OneSignal:[3.6.5, 3.99.99]'
-    compile(project(':react-native-svg')) {
-        exclude group: "com.android.support", module: "appcompat-v7"}
+    compile 'com.onesignal:OneSignal:[3.8.0, 3.99.99]'
+    compile project(':react-native-device-info')
+    compile project(path: ':react-native-exception-handler')
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

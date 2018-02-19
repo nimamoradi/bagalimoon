@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {
     StyleSheet, View,
     FlatList,
@@ -17,12 +17,17 @@ import dataHandeling from '../dataHandeling';
 import RightProductCorner from '../Shapes/rightProductCorner'
 import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
-
+import _ from 'lodash'
+import ListViewCustum from "../components/listViewCustum";
 
 let context;
 let isFirstTime;
 
 class TypePage extends Component {
+
+    static setBasket(basket) {
+        context.setState({basket: basket})
+    }
 
     constructor(props) {
         super(props);
@@ -42,7 +47,11 @@ class TypePage extends Component {
         if (Categories[index].parent_category_id !== 0) {//have parent
 
             let parentId = this.getIndex(Categories[index].parent_category_id, Categories, 'id');//find parent
+            if (Categories[parentId].parent_category_id !== 0)
+                parentId = this.getIndex(Categories[parentId].parent_category_id, Categories, 'id');//find parent
             mainSelected = Categories[parentId].name;//add correct title
+
+
             id = Categories[index].name;
             Category_id = Categories[index].id;
             titleCategory_id = Categories[index].parent_category_id;
@@ -100,27 +109,26 @@ class TypePage extends Component {
     }
 
     addToCart = () => {
+        // todo clean up
+        let newBasket = dataHandeling.arrayUnique((context.props.basket.map((basketItem) => {
+            //update first  basket values with new items then add missing items
+            return {
+                ..._.assign(context.props.basket, _.find(context.state.basket, ['id', basketItem.id]),
+                    {count: basketItem.count})
+            };
 
-        let basket = this.state.basket;
-
-
-        if (basket.length > 0) {
-            this.shop(basket[0]);
-        } else server.alert('توجه', 'محصولی انتخاب نشده', context)
-    };
-
-    shop = (basket) => {
-        let newBasket = dataHandeling.AddBasket(basket, this.props.basket);
-        if (newBasket.length === 0)
+        })).concat(context.state.basket));
+        if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
-        this.props.navigator.push({
+        else this.props.navigator.push({
             screen: 'example.Types.basketPreview',
             title: 'خرید را نهایی کنید',
             passProps: {
                 basket: newBasket,
                 isParsed: true,
                 UpdateBasket: this.props.UpdateBasket,
-                setBasket: this.props.setBasket
+                setBasket: this.props.setBasket,
+                setBasketProduct: TypePage.setBasket
             },
             navigatorStyle: {
                 navBarHidden: true,
@@ -153,7 +161,7 @@ class TypePage extends Component {
         );
         this.props.UpdateBasket(basket
         );
-        // super.componentWillUnmount();
+
     }
 
     componentDidMount() {
@@ -186,14 +194,15 @@ class TypePage extends Component {
     loadRenderRowData = async (category_id) => {
 
         context.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
+        (fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
 
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
-            body: JSON.stringify({})
+
         }).then((response) => response.json())
             .then((responseData) => {
                     let lastBasket = this.props.basket;
@@ -211,74 +220,74 @@ class TypePage extends Component {
                     });
                 }
             ).catch(error => {
-            server.retryParam(this.loadRenderRowData, context,)
-        }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context,)
+            }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context,)
+            })).catch(error => {
             server.retryParam(this.loadRenderRowData, context,)
         });
     };
 
+    topLoadData(item){
+        context.loadRenderRowData(item.id);
+        context.setState({
+            Category_id: item.id,
+            subSelected: item.name
+        })
+    }
     render() {
 
 
         return (
             <View style={{backgroundColor: '#f2f2f2'}}>
-                <ProductPageNavBar style={{flex: 1}} basket={this.addToCart} context={this}/>
+                <ProductPageNavBar style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
+                <View style={{width: 100 * vw, height: 90 * vh}}>
+                    <ListViewCustum
+                        style={{height: 12 * vh}}
+                        subSelected={this.state.subSelected}
+                        data={this.state.subItems} action={this.topLoadData}/>
 
-                <FlatList
-                    style={{height: 10 * vh}}
-                    horizontal={true}
-                    data={this.state.subItems}
-                    renderItem={({item}) =>
-                        <TypeButton title={item.name}
-                                    onPress={() => {
-                                        this.loadRenderRowData(item.id);
-                                        this.setState({
-                                            Category_id: item.id,
-                                            subSelected: item.name
-                                        })
-                                    }}
-                                    isSelected={this.state.subSelected === item.name}
-                        />}
+                    <View style={{height: 75 * vh, flexDirection: 'row'}}>
 
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            style={{width: 70 * vw,}}
+                            data={this.state.basket.filter((item) => {
+                                return item.Category_id === this.state.Category_id;
+                            })}
+                            renderItem={({item}) =>
+                                <ItemView
+                                    keyExtractor={this._keyExtractor}
+                                    title={item.name}
+                                    disscount={item.main_price}
+                                    price={item.price}
+                                    count={item.count}
+                                    onUp={() => this.onUp(item)}
+                                    onDown={() => this.onDown(item)}
+                                    imageUrl={server.getServerAddress() + item.photo}/>}
+                        />
+                        <FlatList
+                            style={{width: 30 * vw, marginBottom: 4 * vh}}
+                            showsVerticalScrollIndicator={false}
+                            horizontal={false}
+                            data={this.state.mainItems}
+                            renderItem={({item, index}) =>
+                                <RightProductCorner title={item.name}
+                                                    index={index}
+                                                    onPress={() => {
+                                                        let subItems = this.findSubItems(context.state.Categories,
+                                                            item.id);
+                                                        context.setState({
+                                                            subItems: subItems, mainSelected: item.name,
+                                                            Category_id: subItems[0].id, subSelected: subItems[0].name
+                                                        });
+                                                        this.loadRenderRowData(subItems[0].id)
+                                                    }}
+                                                    isSelected={this.state.mainSelected === item.name}
+                                />}
 
-                />
-                <View style={{height: 90 * vh, flexDirection: 'row'}}>
-
-                    <FlatList
-                        style={{width: 75 * vh, height: 78 * vh}}
-                        data={this.state.basket.filter((item) => {
-                            return item.Category_id === this.state.Category_id;
-                        })}
-                        renderItem={({item}) =>
-                            <ItemView
-                                title={item.name}
-                                disscount={item.main_price}
-                                price={item.price}
-                                count={item.count}
-                                onUp={() => this.onUp(item)}
-                                onDown={() => this.onDown(item)}
-                                imageUrl={server.getServerAddress() + item.photo}/>}
-                    />
-                    <FlatList
-                        style={{height: 100 * vh, width: 30 * vh}}
-                        horizontal={false}
-                        data={this.state.mainItems}
-                        renderItem={({item, index}) =>
-                            <RightProductCorner title={item.name}
-                                                index={index}
-                                                onPress={() => {
-                                                    let subItems = this.findSubItems(context.state.Categories,
-                                                        item.id);
-                                                    context.setState({
-                                                        subItems: subItems, mainSelected: item.name,
-                                                        Category_id: subItems[0].id, subSelected: subItems[0].id
-                                                    });
-                                                    this.loadRenderRowData(item.id)
-                                                }}
-                                                isSelected={this.state.mainSelected === item.name}
-                            />}
-
-                    />
+                        />
+                    </View>
                 </View>
                 {(!this.state.dataReady) && <View style={{
                     position: 'absolute',
@@ -324,11 +333,11 @@ class TypePage extends Component {
 
         });
     };
-
+    _keyExtractor = (item, index) => item.id;
 }
 
-TypePage.PropTypes = {
-    title: PropTypes.string.isRequired,
+TypePage.propTypes = {
+    title: propTypes.string.isRequired,
 
 };
 

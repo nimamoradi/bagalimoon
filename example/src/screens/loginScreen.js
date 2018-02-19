@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {vw, vh, vmin, vmax} from '../viewport'
+
 import {
     StyleSheet,
     TouchableOpacity,
     View,
     Text,
     TextInput,
-    ImageBackground ,
+    ImageBackground,
     Dimensions,
     AsyncStorage
 
@@ -15,6 +17,7 @@ import {
 import server from '../code'
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
+import * as DeviceInfo from 'react-native-device-info';
 
 let context;
 
@@ -42,7 +45,7 @@ class loginScreen extends React.Component {
             else {
                 // your call back function
                 newText = '09';
-                server.alert('هشدار', "فقط عدد وارد کنید", context);
+                server.alert('هشدار', 'فقط عدد وارد کنید', context);
                 break;
             }
 
@@ -104,39 +107,46 @@ class loginScreen extends React.Component {
                     <View style={styles.absolote}>
                         {(this.state.sendData === true) ? <Loading/> : null}
                     </View>
-                </ImageBackground>        );
+                </ImageBackground>);
     }
 
     doSignUp() {
-
-        console.log("inside login form");
+        let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
+            pin = (isSet)
+        })
+        // console.log('inside login form');
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
             },
-
-
             body: JSON.stringify({
-                phone_number: context.state.phoneNumber,
+                'phone_number': context.state.phoneNumber,
+                "device_info": server.deviceInfo(context.state.phoneNumber)
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log("inside login responsejson");
+                console.log('inside login responsejson');
                 console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
-                    context.login({api_code: responseData.api_code});
+                    context.login({
+                        api_code: responseData.api_code,
+                        phone_number: context.state.phoneNumber
+                    });
                     AsyncStorage.setItem('user_number', context.state.phoneNumber);
                 } else if (responseData.successful === false) {
                     server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
                 }
                 else if (responseData.phone_number !== null) {
                     server.alert('هشدار', 'شماره معتبر نمی باشد', context);
-                }
+                } else server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
 
             }).catch(error => {
+            server.retry(context.isAvailable, context)
+        }).catch(error => {
             server.retry(context.isAvailable, context)
         });
     }
@@ -158,21 +168,8 @@ class loginScreen extends React.Component {
 
     isAvailable = () => {
         context.setState({sendData: true});
-        const timeout = new Promise((resolve, reject) => {
-            setTimeout(reject, server.getTimeOut(), 'Request timed out');
-        });
+        context.doSignUp();
 
-        const request = fetch(server.getInternetCheckAddress());
-
-        return Promise
-            .race([timeout, request])
-            .then(response => {
-                context.doSignUp();
-
-            })
-            .catch(error => {
-                server.retry(context.isAvailable, context)
-            });
     };
 
 
@@ -199,13 +196,13 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'B Yekan',
         margin: 50,
-        fontSize: 16,
+        fontSize: 5 * vw,
         marginBottom: 10,
         marginLeft: 10,
     },
     textInput: {
         fontFamily: 'B Yekan',
-        borderRadius: 10,
+        borderRadius: 2 * vw,
         borderColor: '#bec4be',
         borderWidth: 0.5,
         alignSelf: 'center',

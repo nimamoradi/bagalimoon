@@ -48,6 +48,9 @@
 		1BC32C24EFC941ACAF949B69 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB853E66B6A4768B4026DF9 /* libBugsnagReactNative.a */; };
 		5103F849F93B4B3A904D7FD8 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0777938A7EEE4658927BFB8F /* libRNSVG.a */; };
 		AE1AF651DCD3499FA5778AB9 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC45CF628B31412D8C4C9F2A /* libRNSVG-tvOS.a */; };
+		CDE9266AC0E94FB49A061753 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4EDE5E9EC374F5694336A4E /* libRNDeviceInfo.a */; };
+		74CC01F41CAB4791BAE0A768 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199CA516C6C44A5A0DBC93D /* libRNDeviceInfo-tvOS.a */; };
+		5E77F12228BB4597A43F84EC /* libReactNativeExceptionHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9E405387FA415CAFE6DDE9 /* libReactNativeExceptionHandler.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +302,11 @@
 		92957BB0AA32459A9E219F5D /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		0777938A7EEE4658927BFB8F /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		EC45CF628B31412D8C4C9F2A /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		16EFB405C8D24850B3E70301 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceInfo.xcodeproj"; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A4EDE5E9EC374F5694336A4E /* libRNDeviceInfo.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo.a"; path = "libRNDeviceInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		1199CA516C6C44A5A0DBC93D /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo-tvOS.a"; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A35487BFD4444346A9ABCA06 /* ReactNativeExceptionHandler.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeExceptionHandler.xcodeproj"; path = "../node_modules/react-native-exception-handler/ios/ReactNativeExceptionHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		8F9E405387FA415CAFE6DDE9 /* libReactNativeExceptionHandler.a */ = {isa = PBXFileReference; name = "libReactNativeExceptionHandler.a"; path = "libReactNativeExceptionHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +343,9 @@
 				1BC32C24EFC941ACAF949B69 /* libBugsnagReactNative.a in Frameworks */,
 				5103F849F93B4B3A904D7FD8 /* libRNSVG.a in Frameworks */,
 				AE1AF651DCD3499FA5778AB9 /* libRNSVG-tvOS.a in Frameworks */,
+				CDE9266AC0E94FB49A061753 /* libRNDeviceInfo.a in Frameworks */,
+				74CC01F41CAB4791BAE0A768 /* libRNDeviceInfo-tvOS.a in Frameworks */,
+				5E77F12228BB4597A43F84EC /* libReactNativeExceptionHandler.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +507,8 @@
 				2D00A1C6EF1F423EA1E50AEC /* CodePush.xcodeproj */,
 				73584A15068245349CF43975 /* BugsnagReactNative.xcodeproj */,
 				92957BB0AA32459A9E219F5D /* RNSVG.xcodeproj */,
+				16EFB405C8D24850B3E70301 /* RNDeviceInfo.xcodeproj */,
+				A35487BFD4444346A9ABCA06 /* ReactNativeExceptionHandler.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -985,6 +998,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1005,6 +1021,9 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

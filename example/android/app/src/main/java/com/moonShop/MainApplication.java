@@ -6,7 +6,7 @@ import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.horcrux.svg.SvgPackage;
+
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
@@ -54,12 +54,10 @@ public class MainApplication extends NavigationApplication {
                 new MainReactPackage(),
             new ReactNativeExceptionHandlerPackage(),
                 new RNDeviceInfo(),
-                new SvgPackage(),
                 new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
                 new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),
                 new AppCenterReactNativePackage(MainApplication.this),
                 new RNHockeyAppPackage(this),
-
                 new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), this, BuildConfig.DEBUG),
                 new VectorIconsPackage(),
                 new NavigationReactPackage(),

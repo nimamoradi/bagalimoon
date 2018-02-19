@@ -7,6 +7,7 @@ import {
 import _ from 'lodash'
 import TypeButton from "./TypeButton";
 import {vh, vw} from "../viewport";
+import HockeyApp from "react-native-hockeyapp";
 
 class listViewCustum extends React.Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class listViewCustum extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop:2*vh, marginBottom:2*vh,
+        marginTop: 2 * vh, marginBottom: 2 * vh,
     },
 
 });

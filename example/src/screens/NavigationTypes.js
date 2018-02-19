@@ -87,7 +87,7 @@ class NavigationTypes extends React.Component {
     loadMainPage() {        // console.log("get Categories");
 
         context.setState({dataReady: false});
-        (  fetch(server.getServerAddress() + '/api/getMainPage', {
+        (fetch(server.getServerAddress() + '/api/getMainPage', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -109,8 +109,8 @@ class NavigationTypes extends React.Component {
                 server.retry(context.loadMainPage, context);
 
             }).catch(error => {
-            server.retry(context.loadMainPage, context);
-        })).catch(error => {
+                server.retry(context.loadMainPage, context);
+            })).catch(error => {
             server.retryParam(this.loadRenderRowData, context,)
         });
 
@@ -209,8 +209,8 @@ class NavigationTypes extends React.Component {
         context.setState({dataSourceOffer: responseData, dataReady: true})
     }
 
-    componentWillUnmount() {
-        basketFile.writeBasket(context.state.superBasket);
+    async componentWillUnmount() {
+    await   basketFile.writeBasket(context.state.superBasket);
         // super.componentWillUnmount();
     }
 
@@ -224,8 +224,8 @@ class NavigationTypes extends React.Component {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
         basketFile.readBasket().then((item) => {
-            if(item===null)
-                item=[];
+            if (item === null)
+                item = [];
             context.setState({superBasket: item}, () => {
                 this.loadMainPage();
             });
@@ -301,8 +301,26 @@ class NavigationTypes extends React.Component {
     pushScreen = (screen, title, passProps) => {
         this.props.navigator.push({
             screen: screen,
+            navigatorStyle: {
+                navBarHidden: true,
+            },
             title: title,
             passProps: passProps,
+        });
+
+    };
+
+    dummyTypePage=(item) =>{
+        this.props.navigator.push({
+            screen: 'example.TypePage',
+            title: 'لیست محصولات',
+            passProps: {
+                title: item.name,
+                UpdateBasket: NavigationTypes.basketUpdater,
+                basket: context.state.superBasket,
+                Categories: context.state.Categories,
+                setBasket: NavigationTypes.setBasket
+            },
         });
     };
 
@@ -311,7 +329,7 @@ class NavigationTypes extends React.Component {
             screen: 'example.TypePage',
             title: 'لیست محصولات',
             passProps: {
-                title: item.name,
+                title: item,
                 UpdateBasket: NavigationTypes.basketUpdater,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
@@ -360,10 +378,11 @@ class NavigationTypes extends React.Component {
         </View>;
         else
             return (
-                <ScrollView>
+                <ScrollView >
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
-                            search={() => this.pushScreen('example.FlatListSearch', 'جستجو', {basket: this.state.basket})}/>
+                            search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
+                                {basket: this.state.basket})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -381,7 +400,7 @@ class NavigationTypes extends React.Component {
                     />
 
                     <ListViewCustum
-                        data={this.state.Types} action={this.TypePage}/>
+                        data={this.state.Types} action={this.dummyTypePage}/>
 
                     <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
 
@@ -400,7 +419,7 @@ class NavigationTypes extends React.Component {
                     <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh,}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
@@ -421,7 +440,8 @@ class NavigationTypes extends React.Component {
 
     renderSpecialOffer(item) {
 
-        if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {//item.hasOwnProperty('isSpecialOffer')
+        if (item.hasOwnProperty('isSpecialOffer') && item.shouldShow === true) {
+            //item.hasOwnProperty('isSpecialOffer')
             return <Item
                 title={item.name}
                 count={item.count}

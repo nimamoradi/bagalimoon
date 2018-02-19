@@ -1,14 +1,15 @@
 import React from 'react';
 
-import {StyleSheet, View, Text, FlatList, Dimensions, AsyncStorage} from 'react-native';
-import _ from 'lodash'
+import {StyleSheet, View, FlatList, TextInput} from 'react-native';
+
 
 import {vw, vh, vmin, vmax} from '../viewport'
 
 import ItemView from '../components/itemView'
-import {List, ListItem, SearchBar} from "react-native-elements";
+
 import fetch from "../fetch";
 import server from "../code";
+import SimpleNavbar from "../navBars/SimpleNavbar";
 
 class FlatListSearch extends React.Component {
     constructor(props) {
@@ -17,10 +18,7 @@ class FlatListSearch extends React.Component {
         this.state = {
             loading: false,
             data: [],
-            page: 1,
-            seed: 1,
-            error: null,
-            refreshing: false,
+            query: '',
         };
     }
 
@@ -29,7 +27,7 @@ class FlatListSearch extends React.Component {
 
         this.setState({loading: true});
 
-        fetch(server.getServerAddress() + '/api/search/' + item, {
+        (fetch(server.getServerAddress() + '/api/search/' + item, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -45,15 +43,16 @@ class FlatListSearch extends React.Component {
 
         }).catch(error => {
             server.retry(context.makeRemoteRequest, context);
+        })).catch(error => {
+            server.retry(context.makeRemoteRequest, context);
         });
     };
 
 
     render() {
         return (
-            <List
-                containerStyle={{borderTopWidth: 0, borderBottomWidth: 0}}
-            >
+            <View>
+                <SimpleNavbar back={()=>this.props.navigator.pop()} title='جستجو'/>
                 <FlatList
                     data={this.state.data}
                     ItemSeparatorComponent={this.renderSeparator}
@@ -69,19 +68,23 @@ class FlatListSearch extends React.Component {
                             imageUrl={server.getServerAddress() + item.photo}/>
                     )}
                 />
+            </View>
 
-            </List>
         );
     }
 
     renderHeader = () => {
-        return <SearchBar
-            onChangeText={() => this.makeRemoteRequest('ماست')}
-            lightTheme
-            icon={{type: 'font-awesome', name: 'search'}}
-            placeholder="جستجو..."
-            platform="android"
-        />;
+        return <View style={{margin: 4 * vw, padding: 8 * vw}}>
+            <TextInput
+                placeholder='جستجو'
+                style={{
+                    height: 40, borderColor: 'gray',
+                    borderRadius: 2 * vw, borderWidth: 1
+                }}
+                onChangeText={(text) => this.setState({text})}
+                value={this.state.query}
+            />
+        </View>
     };
     renderFooter = () => {
         if (!this.state.loading) return null;

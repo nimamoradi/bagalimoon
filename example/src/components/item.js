@@ -21,7 +21,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                 <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 8} style={{}}
+                        <Icon name="minus" size={vw * 8}
                               color="black" />
                     </TouchableOpacity>
 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         elevation: 5 * vw,
         paddingBottom: vh,
         borderColor: '#00000035',
-        height: 45 * vh,
+        height: 48 * vh,
         margin: 2*vh,
         padding:2*vw,
         backgroundColor: '#ebebeb',
@@ -104,17 +104,17 @@ const styles = StyleSheet.create({
         color:'white',
         fontSize: vw * 4.5,
         fontFamily: 'B Yekan',
-        width:6*vw,
-        height:6*vw,
+        width:8*vw,
+        height:8*vw,
         textAlign: 'center',
-        borderRadius:3*vw
+        borderRadius:4*vw
     },
     countTextHidden: {
         backgroundColor:'red',
         fontSize: vw * 4.5,
-        width:6*vw,
-        height:6*vw,
-        borderRadius:3*vw,
+        width:8*vw,
+        height:8*vw,
+        borderRadius:4*vw,
         fontFamily: 'B Yekan',
         opacity:0
     }

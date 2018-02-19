@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
-import {Polygon, Svg} from "react-native-svg";
-import Rect from "react-native-svg/elements/Rect";
+
 
 
 function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
@@ -61,19 +60,14 @@ itemView.propTypes = {
 
 const styles = StyleSheet.create({
     shadowMaker: {
-
         flexDirection: 'row',
         alignItems: 'center',
-
-
-
     },
     container: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 2 * vw,
         width:68*vw,
         height:45*vw
 

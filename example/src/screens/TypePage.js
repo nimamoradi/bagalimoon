@@ -19,6 +19,7 @@ import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
 import _ from 'lodash'
 import ListViewCustum from "../components/listViewCustum";
+
 let context;
 let isFirstTime;
 
@@ -46,7 +47,11 @@ class TypePage extends Component {
         if (Categories[index].parent_category_id !== 0) {//have parent
 
             let parentId = this.getIndex(Categories[index].parent_category_id, Categories, 'id');//find parent
+            if (Categories[parentId].parent_category_id !== 0)
+                parentId = this.getIndex(Categories[parentId].parent_category_id, Categories, 'id');//find parent
             mainSelected = Categories[parentId].name;//add correct title
+
+
             id = Categories[index].name;
             Category_id = Categories[index].id;
             titleCategory_id = Categories[index].parent_category_id;
@@ -223,23 +228,24 @@ class TypePage extends Component {
         });
     };
 
+    topLoadData(item){
+        context.loadRenderRowData(item.id);
+        context.setState({
+            Category_id: item.id,
+            subSelected: item.name
+        })
+    }
     render() {
 
 
         return (
             <View style={{backgroundColor: '#f2f2f2'}}>
-                <ProductPageNavBar style={{ height: 10 * vh}} basket={this.addToCart} context={this}/>
+                <ProductPageNavBar style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
                     <ListViewCustum
-                        style={{ height: 12 * vh}}
+                        style={{height: 12 * vh}}
                         subSelected={this.state.subSelected}
-                        data={this.state.subItems} action={(item) => {
-                        this.loadRenderRowData(item.id);
-                        this.setState({
-                            Category_id: item.id,
-                            subSelected: item.name
-                        })
-                    }} />
+                        data={this.state.subItems} action={this.topLoadData}/>
 
                     <View style={{height: 75 * vh, flexDirection: 'row'}}>
 
@@ -261,7 +267,7 @@ class TypePage extends Component {
                                     imageUrl={server.getServerAddress() + item.photo}/>}
                         />
                         <FlatList
-                            style={{width: 30* vw,marginBottom:4*vh}}
+                            style={{width: 30 * vw, marginBottom: 4 * vh}}
                             showsVerticalScrollIndicator={false}
                             horizontal={false}
                             data={this.state.mainItems}

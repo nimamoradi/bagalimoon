@@ -1,10 +1,10 @@
 [
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\966c370f3fff5515c220cc01645ab04e\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+        "merged": "D:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\898a821ea5a138c78588e4d9185e6116\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "E:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-25.3.1.aar\\966c370f3fff5515c220cc01645ab04e\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+        "merged": "D:\\projects\\superMan-gitlab\\example\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\nima\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\898a821ea5a138c78588e4d9185e6116\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
     }
 ]

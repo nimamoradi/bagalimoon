@@ -24,9 +24,11 @@
         "react-native-hockeyapp": "^0.5.1",
         "react-native-maps": "^0.20.1",
         "react-native-navigation": "latest",
+        "react-native-progress": "^3.4.0",
         "react-native-snap-carousel": "^3.2.3",
         "react-native-tab-view": "0.0.74",
-        "react-native-vector-icons": "^4.4.0"
+        "react-native-vector-icons": "^4.4.0",
+        "yarn": "^1.3.2"
     },
     "devDependencies": {
         "mocha": "^5.0.1"

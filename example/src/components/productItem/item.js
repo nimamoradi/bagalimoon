@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import ProgressBar from 'react-native-progress/Bar';
 
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
 
 function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown}) {
 
@@ -11,7 +12,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
         <TouchableOpacity onPress={onPress}>
             <View style={styles.row}>
 
-                <Image source={{uri: imageUrl}} style={styles.image} key={imageUrl}
+                <Image   indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
                 />
 
 

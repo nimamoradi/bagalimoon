@@ -7,7 +7,7 @@ import {
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
-import Item from '../components/item'
+import Item from '../components/productItem/item'
 import server from '../code'
 import Loading from '../components/loadScreen'
 import Carousel from 'react-native-snap-carousel';
@@ -53,8 +53,9 @@ class NavigationTypes extends React.Component {
             }
 
         });
-
-        context.setState({superBasket: basket.concat(newItems)});
+        let bas = basket.concat(newItems);
+        context.setState({superBasket:bas});
+        return bas;
 
     }
 
@@ -209,8 +210,8 @@ class NavigationTypes extends React.Component {
         context.setState({dataSourceOffer: responseData, dataReady: true})
     }
 
-    async componentWillUnmount() {
-    await   basketFile.writeBasket(context.state.superBasket);
+    componentWillUnmount() {
+        basketFile.writeBasket(context.state.superBasket);
         // super.componentWillUnmount();
     }
 
@@ -310,7 +311,7 @@ class NavigationTypes extends React.Component {
 
     };
 
-    dummyTypePage=(item) =>{
+    dummyTypePage = (item) => {
         this.props.navigator.push({
             screen: 'example.TypePage',
             title: 'لیست محصولات',
@@ -378,11 +379,11 @@ class NavigationTypes extends React.Component {
         </View>;
         else
             return (
-                <ScrollView >
+                <ScrollView>
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
                             search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
-                                {basket: this.state.basket})}/>
+                                {basket: this.state.basket, UpdateBasket: NavigationTypes.basketUpdater})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}

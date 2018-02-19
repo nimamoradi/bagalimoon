@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import TypeButton from '../components/TypeButton'
 
-import ItemView from '../components/itemView'
+import ItemView from '../components/productItem/itemView'
 import server from '../code'
 import Loading from '../components/loadScreen'
 
@@ -322,16 +322,17 @@ class TypePage extends Component {
         let rowDataCopy = Object.assign({}, rowdata);
         if (rowDataCopy.count !== 0) {
             rowDataCopy.count--;
+            let list = this.state.basket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+
+            this.setState({
+                basket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
         }
-        let list = this.state.basket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        this.setState({
-            basket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
-
-        });
     };
     _keyExtractor = (item, index) => item.id;
 }

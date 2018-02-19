@@ -1,27 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground,  Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
+import ProgressBar from 'react-native-progress/Bar';
 
 
-
-function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
+function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
 
     return (
 
-        <ImageBackground
-            resizeMode="stretch"
+        <View
             style={styles.container}
-            source={require('../../img/itemViewBack.png')}
         >
-                <Image source={{uri: imageUrl}} style={styles.image}/>
-
-                <View style={{flexDirection: 'column',}}>
-                    <Text style={styles.text}>{title}</Text>
-                    <Text style={styles.price}>{price} تومان </Text>
-                </View>
+            <Image
+                indicator={ProgressBar}
+                source={{uri: imageUrl}} style={styles.image}/>
 
             <View style={{flex: 1.2, flexDirection: 'column'}}>
 
@@ -42,14 +37,19 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
             </View>
 
+            <View style={{flexDirection: 'column',}}>
+                <Text style={styles.text}>{title}</Text>
+                <Text style={styles.price}>{price} تومان </Text>
+            </View>
 
-        </ImageBackground>
+
+        </View>
 
     );
 
 }
 
-itemView.propTypes = {
+RectProduct.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     disscount: PropTypes.number,
@@ -68,8 +68,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:68*vw,
-        height:45*vw
+        width:90*vw,
+        height:45*vw,
+        backgroundColor: '#e7e6e6',
+        marginRight:5*vw,
+        marginLeft:5*vw,
+        borderRadius:4*vw,
+        padding:4*vw
 
 
     },
@@ -122,4 +127,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default itemView;
+export default RectProduct;

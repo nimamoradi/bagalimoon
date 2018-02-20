@@ -243,15 +243,14 @@ class TypePage extends Component {
                 <ProductPageNavBar style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
                     <ListViewCustum
-                        style={{height: 12 * vh}}
                         subSelected={this.state.subSelected}
                         data={this.state.subItems} action={this.topLoadData}/>
 
-                    <View style={{height: 75 * vh, flexDirection: 'row'}}>
+                    <View style={{height: 74 * vh, flexDirection: 'row'}}>
 
                         <FlatList
                             showsVerticalScrollIndicator={false}
-                            style={{width: 70 * vw,}}
+                            style={{width: 75 * vw,}}
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}

@@ -12,7 +12,9 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
         <TouchableOpacity onPress={onPress}>
             <View style={styles.row}>
 
-                <Image   indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
+                <Image
+                    resizeMode="stretch"
+                    indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
                 />
 
 

@@ -15,6 +15,7 @@ function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) 
             style={styles.container}
         >
             <Image
+                resizeMode="stretch"
                 indicator={ProgressBar}
                 source={{uri: imageUrl}} style={styles.image}/>
 

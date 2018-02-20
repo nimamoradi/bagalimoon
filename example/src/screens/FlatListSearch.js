@@ -13,6 +13,7 @@ import SimpleNavbar from "../navBars/SimpleNavbar";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import dataHandeling from "../dataHandeling";
+import basketFile from "../basketFile";
 
 let context;
 
@@ -31,11 +32,19 @@ class FlatListSearch extends React.Component {
         context = this;
     }
 
-    makeList = (Data) => {
+    makeList = (responseData) => {
+        let lastBasket = this.state.lastBasket;
 
+        for (let j = 0; j < lastBasket.length; j++) {
+            for (let i = 0; i < responseData.length; i++) {
+                if (lastBasket[j].id === responseData[i].id) {
+                    responseData[i].count = lastBasket[j].count;
+                }
+            }
+        }
 
         context.setState({
-            data: Data,
+            data: dataHandeling.AddBasket(this.state.lastBasket,responseData),
             loading: true,
         });
     };
@@ -58,29 +67,34 @@ class FlatListSearch extends React.Component {
         }
 
     };
-
+    componentWillUnmount() {
+        if (this.state.data.length > 0) {
+            context.setState({lastBasket: this.props.UpdateBasket(this.state.data)});
+        }
+    }
     makeRemoteRequest = (item) => {
 
         this.setState({loading: false, noData: false});
-        // if (this.state.data.length > 0)
-        //     this.props.UpdateBasket(this.state.data)
+        if (this.state.data.length > 0) {
+            context.setState({lastBasket: this.props.UpdateBasket(this.state.data)});
+        }
 
-            (fetch(server.getServerAddress() + '/api/search/' + item, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
+        (fetch(server.getServerAddress() + '/api/search/' + item, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
 
-            }).then((response) => response.json().then((responseData) => {
-                this.makeList(responseData.product)
-            })).catch(error => {
-                server.retryParam(this.makeRemoteRequest, context,)
-            }).catch(error => {
-                server.retryParam(this.makeRemoteRequest, context,)
-            })).catch(error => {
-                server.retryParam(this.makeRemoteRequest, context,)
-            });
+        }).then((response) => response.json().then((responseData) => {
+            this.makeList(responseData.product)
+        })).catch(error => {
+            server.retryParam(this.makeRemoteRequest, context,)
+        }).catch(error => {
+            server.retryParam(this.makeRemoteRequest, context,)
+        })).catch(error => {
+            server.retryParam(this.makeRemoteRequest, context,)
+        });
     };
 
 
@@ -90,7 +104,7 @@ class FlatListSearch extends React.Component {
                 <SimpleNavbar back={() => this.props.navigator.pop()} title='جستجو'/>
                 <FlatList
                     data={this.state.data}
-                    style={{marginBottom: 5}}
+                    style={{marginBottom: 10 * vh}}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
                     ListFooterComponent={this.renderFooter}

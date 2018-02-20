@@ -17,6 +17,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
             source={require('../../../img/itemViewBack.png')}
         >
                 <Image
+                    resizeMode="stretch"
                     indicator={ProgressBar}
                     source={{uri: imageUrl}} style={styles.image}/>
 
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:68*vw,
+        width:70*vw,
         height:45*vw
 
 

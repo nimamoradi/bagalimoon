@@ -383,7 +383,7 @@ class NavigationTypes extends React.Component {
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
                             search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
-                                {basket: this.state.basket, UpdateBasket: NavigationTypes.basketUpdater})}/>
+                                {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
                     <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}

@@ -15,7 +15,9 @@ class listViewCustum extends React.Component {
         // this.state = {data:props.data}
 
     }
-
+    scrollListToStart(contentWidth, contentHeight) {
+            this.scrollView.scrollTo({x: contentWidth});
+    }
 
     render() {
         let listItem = this.props.data.map((item) => {
@@ -24,13 +26,13 @@ class listViewCustum extends React.Component {
                                isSelected={this.props.subSelected === item.name}
                                onPress={_.debounce(() => this.props.action(item),
                                    1000, {leading: true, trailing: false})}
-
             />
         });
 
         return (
             <ScrollView
-                inverted={true}
+                ref={ref => this.scrollView = ref}
+                onContentSizeChange={this.scrollListToStart.bind(this)}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

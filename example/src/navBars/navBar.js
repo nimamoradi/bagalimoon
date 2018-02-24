@@ -9,9 +9,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 function navBar({menu,basket,search}) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity >
-                <MaterialCommunityIcons name="account" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
-            </TouchableOpacity>
+
 
             <TouchableOpacity onPress={basket}>
                 <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>

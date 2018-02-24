@@ -21,7 +21,7 @@ AsyncStorage.multiGet(['api_code', 'user_number']).then((data) => {
     if (api_code !== null) {
         fetch(server.getServerAddress() + '/api/UserDetails', {
             method: 'POST',
-            retries: 1,
+            retries: 3,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -44,13 +44,7 @@ AsyncStorage.multiGet(['api_code', 'user_number']).then((data) => {
 
 
             })).catch(error => {
-            // Navigation.startSingleScreenApp(login());
-
-             Navigation.startSingleScreenApp(serverCheckFailed(api_code, user_number));
-        }).catch(error => {
-            // Navigation.startSingleScreenApp(login());
-
-          Navigation.startSingleScreenApp(serverCheckFailed(api_code, user_number));
+            Navigation.startSingleScreenApp(serverCheckFailed(api_code, user_number));
         });
 
     } else

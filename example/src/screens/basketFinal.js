@@ -65,9 +65,9 @@ class basketFinal extends React.Component {
                 });
 
             }).catch(error => {
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         }).catch(error => {
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         });
 
 

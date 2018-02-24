@@ -64,10 +64,10 @@ class orderHistroy extends React.Component {
 
             }).catch(error => {
             // console.log(error);
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         }).catch(error => {
             // console.log(error);
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         });
 
 

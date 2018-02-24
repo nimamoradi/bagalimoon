@@ -107,10 +107,10 @@ class NavigationTypes extends React.Component {
 
         }))
             .catch(error => {
-                server.retry(context.loadMainPage, context);
+                server.retryParam(context.loadMainPage, context);
 
             }).catch(error => {
-                server.retry(context.loadMainPage, context);
+                server.retryParam(context.loadMainPage, context);
             })).catch(error => {
             server.retryParam(this.loadRenderRowData, context,)
         });
@@ -217,7 +217,6 @@ class NavigationTypes extends React.Component {
 
 
     componentWillMount() {
-
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
     }
 

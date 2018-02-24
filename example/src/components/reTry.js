@@ -9,6 +9,7 @@ import _ from 'lodash'
 class reTry extends React.Component {
     constructor(props) {
         super(props);
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.state = {
             task: this.props.task,
             param: this.props.param

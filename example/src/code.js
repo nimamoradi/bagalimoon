@@ -78,18 +78,6 @@ class code {
         });
     }
 
-    static retry(task, context) {
-        context.props.navigator.push({
-            screen: 'example.Types.reTry',
-            navigatorStyle: {
-                navBarHidden: true,
-            },
-            overrideBackPress: true,
-            passProps: {
-                task: task,
-            },
-        });
-    }
 
     static  getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {

@@ -59,10 +59,10 @@ class mapView extends Component {
 
         })).catch(error => {
             // console.log('error is getAddresses ' + error);
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         }).catch(error => {
             // console.log('error is getAddresses ' + error);
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         });
 
 
@@ -169,11 +169,11 @@ class mapView extends Component {
             context.finalBasket();
         }))
             .catch(error => {
-                server.retry(this.newAddresses, context)
+                server.retryParam(this.newAddresses, context)
             }).catch(error => {
-                server.retry(this.newAddresses, context)
+                server.retryParam(this.newAddresses, context)
             })).catch(error => {
-            server.retry(this.newAddresses, context)
+            server.retryParam(this.newAddresses, context)
         })
 
     };

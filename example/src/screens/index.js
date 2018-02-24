@@ -25,8 +25,9 @@ import about_us from './aboutus';
 
 import orderHistroy from './orderHistroy'
 import productPageNavBar from "../navBars/productPageNavBar";
-import server from "../code";
-import fetch from "../fetch";
+
+
+import ServerCheck from "./ServerCheck";
 
 export function registerScreens() {
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
@@ -35,7 +36,7 @@ export function registerScreens() {
     Navigation.registerComponent('example.alert', () => alert);
 
     Navigation.registerComponent('example.about_us', () => about_us);
-
+    Navigation.registerComponent('example.ServerCheck', () => ServerCheck);
     Navigation.registerComponent('example.Types.basketFinal', () => finalBasket);
 
 
@@ -97,7 +98,7 @@ export function login() {
                 leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
                 rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
             },
-            type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
+            type: 'TheSideBar', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
             animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
@@ -105,8 +106,9 @@ export function login() {
 
 
     };
-   return(startAppdata);
+    return (startAppdata);
 }
+
 export function mainPage(api_code) {
     let startAppdata = {
         screen: {
@@ -141,47 +143,44 @@ export function mainPage(api_code) {
 
 
     };
-   return(startAppdata);
-}
-export function loginCheck(api_code,user_number) {
-    fetch(server.getServerAddress() + '/api/UserDetails', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'phone_number': user_number,
-            "device_info": server.deviceInfo(user_number),
-            'api_code': api_code,
-        })
-    }).then((response) => response.json())
-        .then((responseData) => {
-            // console.log('inside app ');
-            // console.log('response object:', responseData);
-            return (!responseData.hasOwnProperty("error"))
-
-        })
-
+    return (startAppdata);
 }
 
-export function serverCheckFailed(api_code,user_number){
-    return {
+
+
+export function serverCheckFailed(api_code, user_number) {
+    let startAppdata = {
         screen: {
-            screen: 'example.Types.reTry',
+            screen: 'example.ServerCheck', // unique ID registered with Navigation.registerScreen
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
             navigatorStyle: {
+                navBarTranslucent: false,
                 navBarHidden: true,
             },
         },
-
         appStyle: {
             orientation: 'portrait',
         },
-        overrideBackPress: true,
-        passProps: {
-            task: this.loginCheck(api_code,user_number),
+        drawer: { // optional, add this if you want a side menu drawer in your app
+            right: { // optional, define if you want a drawer from the right
+                screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
+                passProps: {} // simple serializable object that will pass as props to all top screens (optional)
+            },
+            style: { // ( iOS only )
+                drawerShadow: true, // optional, add this if you want a side menu drawer shadow
+                contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
+                leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
+                rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
+            },
+            type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
+            animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
+            // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
+            disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
+        passProps: {api_code:api_code,user_number: user_number}, // simple serializable object that will pass as props to all top screens (optional)
+
+
     };
+    return startAppdata;
 
 }

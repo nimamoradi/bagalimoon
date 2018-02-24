@@ -7,7 +7,7 @@ import {
 import _ from 'lodash'
 import TypeButton from "./TypeButton";
 import {vh, vw} from "../viewport";
-import HockeyApp from "react-native-hockeyapp";
+
 
 class listViewCustum extends React.Component {
     constructor(props) {
@@ -20,6 +20,7 @@ class listViewCustum extends React.Component {
     render() {
         let listItem = this.props.data.map((item) => {
             return <TypeButton title={item.name}
+                               key={item.id}
                                isSelected={this.props.subSelected === item.name}
                                onPress={_.debounce(() => this.props.action(item),
                                    1000, {leading: true, trailing: false})}
@@ -29,6 +30,7 @@ class listViewCustum extends React.Component {
 
         return (
             <ScrollView
+                inverted={true}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

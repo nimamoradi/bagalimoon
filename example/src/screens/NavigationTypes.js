@@ -54,7 +54,7 @@ class NavigationTypes extends React.Component {
 
         });
         let bas = basket.concat(newItems);
-        context.setState({superBasket:bas});
+        context.setState({superBasket: bas});
         return bas;
 
     }

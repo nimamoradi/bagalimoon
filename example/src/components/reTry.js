@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator,BackHandler, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {ActivityIndicator, BackHandler, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -11,11 +11,10 @@ class reTry extends React.Component {
         super(props);
         this.state = {
             task: this.props.task,
-            parms: this.props.parms
+            param: this.props.param
         };
         props.navigator.onNavigatorEvent((event) => {
             if (event.id === 'backPress') {
-                alert('j')
                 BackHandler.exitApp();
             }
         })
@@ -25,33 +24,25 @@ class reTry extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {/*<TouchableOpacity*/}
-                    {/*style={{*/}
-                        {/*position: 'absolute',*/}
-                        {/*top: 5 * vw,*/}
-                        {/*left: 0,*/}
-                        {/*right: 85 * vw,*/}
-                        {/*bottom: 0,*/}
+                {(this.props.massage !== null) ?
+                    <Text style={styles.text}>{this.props.massage}</Text> :
+                    <Text style={styles.text}>اتصال قطع شد</Text>}
 
-                    {/*}}*/}
-                    {/*onPress={this.backScreen}>*/}
-                    {/*<Ionicons name="ios-exit-outline" size={vw * 10} color="#777777" style={{margin: 2 * vw , transform: [{ rotate: '180deg'}]}}/>*/}
-                {/*</TouchableOpacity>*/}
-                <Text style={styles.text}>اتصال قطع شد</Text>
+
                 <TouchableOpacity
 
                     onPress={_.debounce(
                         () => {
-                            if (this.state.parms === null)
+                            if (this.state.param === null)
                                 this.state.task();
                             else {
-                                this.state.task(this.state.parms);
+                                this.state.task(this.state.param);
                             }
                             this.props.navigator.pop();
                         },
                         1000, {leading: true, trailing: false}
-                        )}
-                    >
+                    )}
+                >
                     <Icon name="redo" size={vw * 20} color="#777777" style={{margin: 2 * vw}}/>
                 </TouchableOpacity>
                 <Text style={styles.text}>دوباره امتحان کنید</Text>

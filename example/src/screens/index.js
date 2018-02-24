@@ -164,3 +164,24 @@ export function loginCheck(api_code,user_number) {
         })
 
 }
+
+export function serverCheckFailed(api_code,user_number){
+    return {
+        screen: {
+            screen: 'example.Types.reTry',
+            title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
+            navigatorStyle: {
+                navBarHidden: true,
+            },
+        },
+
+        appStyle: {
+            orientation: 'portrait',
+        },
+        overrideBackPress: true,
+        passProps: {
+            task: this.loginCheck(api_code,user_number),
+        },
+    };
+
+}

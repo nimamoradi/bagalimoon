@@ -19,6 +19,7 @@ import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
 import _ from 'lodash'
 import ListViewCustum from "../components/listViewCustum";
+import * as axios from "axios";
 
 let context;
 let isFirstTime;
@@ -194,7 +195,7 @@ class TypePage extends Component {
     loadRenderRowData = async (category_id) => {
 
         context.setState({dataReady: false});
-        (fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
+        fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
 
             method: 'POST',
             headers: {
@@ -205,6 +206,7 @@ class TypePage extends Component {
 
         }).then((response) => response.json())
             .then((responseData) => {
+
                     let lastBasket = this.props.basket;
 
                     for (let j = 0; j < lastBasket.length; j++) {
@@ -218,29 +220,59 @@ class TypePage extends Component {
                         basket: dataHandeling.AddBasket(responseData, this.state.basket),
                         dataReady: true,
                     });
+
                 }
-            ).catch(error => {
-                server.retryParam(this.loadRenderRowData, context,)
-            }).catch(error => {
-                server.retryParam(this.loadRenderRowData, context,)
-            })).catch(error => {
-            server.retryParam(this.loadRenderRowData, context,)
-        });
+            ).catch(error =>{
+                server.retryParam(this.loadRenderRowData, context,category_id,error)}
+            )
+
     };
 
-    topLoadData(item){
+    topLoadData(item) {
         context.loadRenderRowData(item.id);
         context.setState({
             Category_id: item.id,
             subSelected: item.name
         })
     }
+
+    static basketUpdater(newItems) {//won't remove zero index
+        let basket = context.state.basket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
+                    newItems[j].wasInBasket = true;
+                }
+            }
+        }
+        newItems = newItems.filter(function (item) {
+            if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
+                return item.count > 0;
+
+            } else {
+                delete item.wasInBasket;
+                return false;
+            }
+
+        });
+        let bas = basket.concat(newItems);
+        context.setState({basket: bas});
+        return bas;
+
+    }
+
     render() {
 
 
         return (
             <View style={{backgroundColor: '#f2f2f2'}}>
-                <ProductPageNavBar style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
+                <ProductPageNavBar
+                    search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
+                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}
+                    style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
                     <ListViewCustum
                         subSelected={this.state.subSelected}

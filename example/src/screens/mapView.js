@@ -4,14 +4,15 @@ import {
     StyleSheet,
     View,
     Text,
+    ScrollView,
     TouchableOpacity,
-    Image,
     ImageBackground,
     TextInput,
     AsyncStorage,
     PermissionsAndroid,
     Dimensions,
-    Picker
+    Picker,
+
 } from 'react-native';
 import Loading from '../components/loadScreen'
 import MapView from 'react-native-maps';
@@ -27,7 +28,7 @@ let context;
 
 class mapView extends Component {
     isAvailable = () => {
-                context.getAddresses();
+        context.getAddresses();
     };
 
     load_api_code = () => {
@@ -59,12 +60,11 @@ class mapView extends Component {
 
         })).catch(error => {
             // console.log('error is getAddresses ' + error);
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         }).catch(error => {
-                // console.log('error is getAddresses ' + error);
-                server.retry(this.isAvailable, context)
-            });
-
+            // console.log('error is getAddresses ' + error);
+            server.retryParam(this.isAvailable, context)
+        });
 
 
     }
@@ -140,13 +140,12 @@ class mapView extends Component {
     componentDidMount() {
         this.load_api_code();
         this.requestLocationPermission();
-
     }
 
     newAddresses = () => {
 
 
-        ( fetch(server.getServerAddress() + '/api/addNewAddress', {
+        (fetch(server.getServerAddress() + '/api/addNewAddress', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -170,11 +169,11 @@ class mapView extends Component {
             context.finalBasket();
         }))
             .catch(error => {
-                server.retry(this.newAddresses, context)
+                server.retryParam(this.newAddresses, context)
             }).catch(error => {
-            server.retry(this.newAddresses, context)
-        })).catch(error => {
-            server.retry(this.newAddresses, context)
+                server.retryParam(this.newAddresses, context)
+            })).catch(error => {
+            server.retryParam(this.newAddresses, context)
         })
 
     };
@@ -215,6 +214,7 @@ class mapView extends Component {
                             <Text style={styles.Text}>آدرس</Text>
                         </ImageBackground>
                     </View>
+
                     <View style={styles.center}>
                         <TouchableOpacity
                             onPress={_.debounce(this.offlineSale,
@@ -278,91 +278,99 @@ class mapView extends Component {
         </View>;
         else
             return (
-                <View style={{
+                <ScrollView contentContainerStyle ={{
                     flex: 1,
                 }}>
-                    <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
-
                     <View style={{
-                        backgroundColor: '#f2f2f2',
-                        elevation: vw * 2,
-                        top: 0, left: 5 * vw, right: 0, bottom: 0,
-                        height: vw * 100, width: 90 * vw,
-                        borderRadius: 4 * vw,
-                        flex: 2.5,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        overflow: 'hidden'
+                        flex: 1,
                     }}>
+                        <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
 
-                        <MapView
-                            style={styles.map}
-                            region={{
-                                latitude: this.state.latitude,
-                                longitude: this.state.longitude,
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
-                            onLongPress={(e) => {
-                                this.setState({
-                                    myLocation: e.nativeEvent.coordinate,
-                                    latitude: e.nativeEvent.coordinate.latitude,
-                                    longitude: e.nativeEvent.coordinate.longitude
-                                });
-                            }}>
+                        <View style={{
+                            backgroundColor: '#f2f2f2',
+                            elevation: vw * 2,
+                            top: 0, left: 5 * vw, right: 0, bottom: 0,
+                            width: 90 * vw,
+                            borderRadius: 4 * vw,
+                            flex: 3.5,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            overflow: 'hidden'
+                        }}>
 
-
-                            {((context.state.myLocation !== null)) ?
-                                <MapView.Marker draggable
-                                                coordinate={this.state.myLocation}
-                                                onDragEnd={(e) => {
-                                                    this.setState({
-                                                        myLocation: e.nativeEvent.coordinate,
-                                                        latitude: e.nativeEvent.coordinate.latitude,
-                                                        longitude: e.nativeEvent.coordinate.longitude
-                                                    });
-                                                }
-                                                }
-
-                                /> : null}
-                        </MapView>
+                            <MapView
+                                style={styles.map}
+                                region={{
+                                    latitude: this.state.latitude,
+                                    longitude: this.state.longitude,
+                                    latitudeDelta: 0.01,
+                                    longitudeDelta: 0.01,
+                                }}
+                                onLongPress={(e) => {
+                                    this.setState({
+                                        myLocation: e.nativeEvent.coordinate,
+                                        latitude: e.nativeEvent.coordinate.latitude,
+                                        longitude: e.nativeEvent.coordinate.longitude
+                                    });
+                                }}>
 
 
-                    </View>
-                    <View
-                        style={{flex: 1.5, flexDirection: 'column', alignContent: 'center', alignItems: 'flex-start'}}>
-                        <View style={styles.rowItem}>
+                                {((context.state.myLocation !== null)) ?
+                                    <MapView.Marker draggable
+                                                    coordinate={this.state.myLocation}
+                                                    onDragEnd={(e) => {
+                                                        this.setState({
+                                                            myLocation: e.nativeEvent.coordinate,
+                                                            latitude: e.nativeEvent.coordinate.latitude,
+                                                            longitude: e.nativeEvent.coordinate.longitude
+                                                        });
+                                                    }
+                                                    }
 
-                            <TextInput style={styles.borderText}
-                                       placeholder="نام"
-                                       onChangeText={(text) => this.setState({senderName: text})}>
-                                {context.state.senderName}
-                            </TextInput>
-                            <ImageBackground
-                                resizeMode="stretch"
-                                style={styles.imageBack}
-                                source={require('../../img/label.png')}>
-                                <Text style={styles.Text}>نام تحویل گیرنده</Text>
-                            </ImageBackground>
+                                    /> : null}
+                            </MapView>
+
+
                         </View>
+                        <View
+                            style={{
+                                flex: 1.5,
+                                flexDirection: 'column',
+                                alignContent: 'center',
+                                alignItems: 'flex-start'
+                            }}>
+                            <View style={styles.rowItem}>
 
+                                <TextInput style={styles.borderText}
+                                           placeholder="نام"
+                                           onChangeText={(text) => this.setState({senderName: text})}>
+                                    {context.state.senderName}
+                                </TextInput>
+                                <ImageBackground
+                                    resizeMode="stretch"
+                                    style={styles.imageBack}
+                                    source={require('../../img/label.png')}>
+                                    <Text style={styles.Text}>نام تحویل گیرنده</Text>
+                                </ImageBackground>
+                            </View>
+
+
+                        </View>
+                        <TabViewAnimated
+                            style={{flex: 4}}
+                            navigationState={this.state}
+                            renderScene={this._renderScene}
+                            renderFooter={this._renderHeader}
+                            onIndexChange={this._handleIndexChange}
+                            initialLayout={{
+                                height: 20 * vh,
+                                width: vw * 100,
+                            }}
+                            useNativeDriver
+                        />
 
                     </View>
-                    <TabViewAnimated
-                        style={{flex: 5}}
-                        navigationState={this.state}
-                        renderScene={this._renderScene}
-                        renderFooter={this._renderHeader}
-                        onIndexChange={this._handleIndexChange}
-                        initialLayout={{
-                            height: 25 * vh,
-                            width: vw * 100,
-                        }}
-                        useNativeDriver
-                    />
-
-                </View>
-
+                </ScrollView>
             );
     }
 
@@ -433,7 +441,6 @@ class mapView extends Component {
 
 const styles = StyleSheet.create({
         center: {
-            marginTop: 10 * vh,
             alignContent: 'center',
             alignItems: 'center',
             flex: 1,
@@ -475,7 +482,7 @@ const styles = StyleSheet.create({
         borderText: {
             width: 60 * vw,
             fontSize: vw * 4,
-            margin: 10,
+
             color: 'black',
             fontFamily: 'B Yekan',
             height: vh * 6,
@@ -491,7 +498,7 @@ const styles = StyleSheet.create({
             backgroundColor: '#cbe6a3',
             elevation: 2 * vw,
             borderRadius: 2 * vw,
-            height: 6 * vh,
+            height: 8 * vh,
             width: 50 * vw,
             padding: 5,
             borderColor: 'black',

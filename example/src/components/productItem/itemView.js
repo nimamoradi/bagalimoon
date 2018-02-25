@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import {vw, vh, vmin, vmax} from '../viewport'
-
+import {vw, vh, vmin, vmax} from '../../viewport'
+import ProgressBar from 'react-native-progress/Pie';
 
 
 function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
@@ -14,9 +14,12 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
         <ImageBackground
             resizeMode="stretch"
             style={styles.container}
-            source={require('../../img/itemViewBack.png')}
+            source={require('../../../img/itemViewBack.png')}
         >
-                <Image source={{uri: imageUrl}} style={styles.image}/>
+                <Image
+                    resizeMode="stretch"
+                    indicator={ProgressBar}
+                    source={{uri: imageUrl}} style={styles.image}/>
 
                 <View style={{flexDirection: 'column',}}>
                     <Text style={styles.text}>{title}</Text>
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:68*vw,
+        width:70*vw,
         height:45*vw
 
 

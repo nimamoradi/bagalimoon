@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, ScrollView,FlatList, Text, TouchableOpacity, AsyncStorage} from 'react-native';
+import {StyleSheet, Image, View, ScrollView, FlatList, Text, TouchableOpacity, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
+
 let context;
 
 class basketFinal extends React.Component {
@@ -25,7 +26,7 @@ class basketFinal extends React.Component {
 
     isAvailable = () => {
         context.setState({sendData: true});
-                context.getLastBasket();
+        context.getLastBasket();
     };
 
     getLastBasket = () => {
@@ -58,16 +59,16 @@ class basketFinal extends React.Component {
                     totalPrice += Number.parseInt(basket[i]['final_price']) * Number.parseInt(basket[i]['count'])
                 }
                 this.setState({
-                    basket:basket,
+                    basket: basket,
                     totalPrice: totalPrice,
                     myAddress: address,
                     customer_receiver_name: responseData.customer_receiver_name
                 });
 
             }).catch(error => {
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         }).catch(error => {
-            server.retry(this.isAvailable, context)
+            server.retryParam(this.isAvailable, context)
         });
 
 
@@ -105,78 +106,76 @@ class basketFinal extends React.Component {
         </View>;
         else
             return (
-                    <View style={styles.container}>
+                <View style={styles.container}>
 
-                        <View style={{flexDirection: 'row',alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
-                            <Text style={styles.tableHeader}>قیمت نهایی</Text>
-                            <Text style={styles.tableHeader}>قیمت عادی</Text>
-                            <Text style={styles.tableHeader}>تعداد</Text>
-                            <Text style={styles.tableHeader}>نام</Text>
-                        </View>
-
-
-                        <FlatList
-                            automaticallyAdjustContentInsets={false}
-                            contentContainerStyle={{flexDirection: 'column',  }}
-                            horizontal={false}
-                            showsHorizontalScrollIndicator={false}
-                            data={this.state.basket}
-                            renderItem={({item}) =>
-                                this.renderRow(item)}
-                        />
-
-                        <View style={{flexDirection: 'row', alignItems: 'center', height: '10%'}}>
-                            <View style={{flex: 1}}/>
-                            <Text style={styles.price}>
-                                {this.state.totalPrice} تومان
-                            </Text>
-                            <Text style={styles.text}>
-                                جمع خرید
-                            </Text>
-                            <View style={{flex: 1}}/>
-                        </View>
-                        <View style={{flexDirection: 'column', alignItems: 'center', width: 100 * vw}}>
-                            <Text>آدرس:</Text>
-                            <Text style={{
-                                fontSize: vw * 4,
-                                fontFamily: 'B Yekan',
-                            }}>
-                                {this.state.myAddress}
-                            </Text>
-
-                        </View>
-                        <View style={{flexDirection: 'column', alignItems: 'center', width: 100 * vw}}>
-                            <Text>نام مشتری:</Text>
-                            <Text style={{
-                                fontSize: vw * 4,
-                                fontFamily: 'B Yekan',
-                            }}>
-                                {this.state.customer_receiver_name}
-                            </Text>
-
-                        </View>
-
-                        <View style={{flexDirection: 'row', alignContent: 'center', height: 20 * vh,}}>
-                            <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                              onPress={this.address}>
-                                <View style={styles.button}>
-                                    <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
-                                    <View style={{flex: 0.5}}/>
-                                    <Text style={{flex: 1, fontSize: vw * 4,}}>پرداخت</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                              onPress={() => {
-
-                                                  this.props.navigator.pop();
-                                              }}>
-                                <View style={styles.buttonCancel}>
-
-                                    <Text style={{flex: 1, fontSize: vw * 4,}}>حذف سفارش</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
+                        <Text style={styles.tableHeader}>قیمت نهایی</Text>
+                        <Text style={styles.tableHeader}>قیمت عادی</Text>
+                        <Text style={styles.tableHeader}>تعداد</Text>
+                        <Text style={styles.tableHeader}>نام</Text>
                     </View>
+
+
+                    <FlatList
+                        automaticallyAdjustContentInsets={false}
+                        contentContainerStyle={{flexDirection: 'column',}}
+                        horizontal={false}
+                        showsHorizontalScrollIndicator={false}
+                        data={this.state.basket}
+                        renderItem={({item}) =>
+                            this.renderRow(item)}
+                    />
+
+                    <View style={{flexDirection: 'row', alignItems: 'center',flex: 1}}>
+                        <View style={{flex: 1}}/>
+                        <Text style={styles.price}>
+                            {this.state.totalPrice} تومان
+                        </Text>
+                        <Text style={styles.text}>
+                            جمع خرید
+                        </Text>
+                        <View style={{flex: 1}}/>
+                    </View>
+                    <View style={{flexDirection: 'column', alignItems: 'center',flex: 1, width: 100 * vw}}>
+                        <Text>آدرس:</Text>
+                        <Text style={{
+                            fontSize: vw * 4,
+                            fontFamily: 'B Yekan',
+                        }}>
+                            {this.state.myAddress}
+                        </Text>
+
+                    </View>
+                    <View style={{flexDirection: 'column', alignItems: 'center',flex: 1, width: 100 * vw}}>
+                        <Text>نام مشتری:</Text>
+                        <Text style={{
+                            fontSize: vw * 4,
+                            fontFamily: 'B Yekan',
+                        }}>
+                            {this.state.customer_receiver_name}
+                        </Text>
+
+                    </View>
+
+                    <View style={{flexDirection: 'row',flex:2, }}>
+                        <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
+                                          onPress={this.address}>
+                            <View style={styles.button}>
+                                <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
+                                <View style={{flex: 0.5}}/>
+                                <Text style={{flex: 1, fontSize: vw * 4,}}>پرداخت</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
+                                          onPress={() => {
+                                              this.props.navigator.pop();
+                                          }}>
+                            <View style={styles.buttonCancel}>
+                                <Text style={{flex: 1, fontSize: vw * 4,}}>حذف سفارش</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
             );
 
@@ -184,18 +183,24 @@ class basketFinal extends React.Component {
 }
 
 basketFinal.propTypes = {
-    basket: PropTypes.string.isRequired,//encoded array in json
+    basket: PropTypes.array.isRequired,//encoded array in json
 
 };
 
 const styles = StyleSheet.create({
-    row: {
 
+    row: {
+        elevation: 2 * vw,
+        borderColor: '#00000035',
+        borderWidth: 0.75,
+        margin: vw,
+        borderRadius: 2 * vw,
         paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
         borderBottomWidth: 1,
+        backgroundColor: '#e7e6e6',
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {

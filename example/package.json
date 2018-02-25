@@ -13,6 +13,7 @@
         "appcenter": "^1.1.0",
         "appcenter-analytics": "^1.1.0",
         "appcenter-crashes": "^1.1.0",
+        "axios": "^0.18.0",
         "lodash": "^4.17.4",
         "prop-types": "^15.6.0",
         "react": "16.2.0",
@@ -22,11 +23,14 @@
         "react-native-exception-handler": "^2.7.1",
         "react-native-gesture-handler": "^1.0.0-alpha.40",
         "react-native-hockeyapp": "^0.5.1",
+        "react-native-keyboard-aware-scroll-view": "^0.4.4",
         "react-native-maps": "^0.20.1",
         "react-native-navigation": "latest",
+        "react-native-progress": "^3.4.0",
         "react-native-snap-carousel": "^3.2.3",
         "react-native-tab-view": "0.0.74",
-        "react-native-vector-icons": "^4.4.0"
+        "react-native-vector-icons": "^4.4.0",
+        "yarn": "^1.3.2"
     },
     "devDependencies": {
         "mocha": "^5.0.1"

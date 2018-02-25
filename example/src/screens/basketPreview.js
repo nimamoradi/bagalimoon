@@ -199,14 +199,7 @@ class basketPreview extends React.Component {
 
 
 const styles = StyleSheet.create({
-    Rhombus: {
-        width: 85 * vw, height: 20 * vh,
 
-        elevation: 2 * vw,
-        borderRadius: 2 * vw,
-        margin: 5 * vw,
-
-    },
     row: {
 
         paddingHorizontal: 16,

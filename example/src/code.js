@@ -4,11 +4,21 @@ import {vw, vh, vmin, vmax} from './viewport'
 class code {
     static serverAddress = 'https://www.baghali.amins.ir/';
     static InternetCheckAddress = 'https://my.shatel.ir';
-    static timeOut = 8000;
+    static timeOut = 1000;
     static retryCount = 5;
 
     //other relevant code here
+    static pushScreen  (screen, title, passProps,context)  {
+        context.props.navigator.push({
+            screen: screen,
+            navigatorStyle: {
+                navBarHidden: true,
+            },
+            title: title,
+            passProps: passProps,
+        });
 
+    };
     static getServerAddress() {
         return this.serverAddress;
     }
@@ -53,7 +63,7 @@ class code {
     };
 
 
-    static retryParam(task, context, param) {
+    static retryParam(task, context, param,massage) {
         context.props.navigator.push({
             screen: 'example.Types.reTry',
             navigatorStyle: {
@@ -63,23 +73,11 @@ class code {
             passProps: {
                 task: task,
                 param: param,
-                backScreen: context
+                massage:massage
             },
         });
     }
 
-    static retry(task, context) {
-        context.props.navigator.push({
-            screen: 'example.Types.reTry',
-            navigatorStyle: {
-                navBarHidden: true,
-            },
-            overrideBackPress: true,
-            passProps: {
-                task: task,
-            },
-        });
-    }
 
     static  getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {

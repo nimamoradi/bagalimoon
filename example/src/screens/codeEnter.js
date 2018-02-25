@@ -101,7 +101,7 @@ class codeEnter extends React.Component {
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
-                    codeEnter.pushMainScreen(responseData.api_code);
+                    this.pushMainScreen(responseData.api_code);
                 } else if (responseData.successful === false) {
                     server.alert('هشدار', 'کد اشتباه است', context);
                 }
@@ -111,13 +111,13 @@ class codeEnter extends React.Component {
 
 
             }).catch(error => {
-            server.retry(context.isAvailable, context)
+            server.retryParam(context.isAvailable, context)
         }).catch(error => {
-            server.retry(context.isAvailable, context)
+            server.retryParam(context.isAvailable, context)
         });
     };
 
-    static pushMainScreen(api) {
+     pushMainScreen(api) {
 
         context.props.navigator.push({
             backButtonTitle: '',

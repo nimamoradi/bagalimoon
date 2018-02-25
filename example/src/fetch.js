@@ -3,6 +3,7 @@
 
 import server from "./code";
 
+
 module.exports = function (url, options) {
 
     let retries = 3;
@@ -16,7 +17,7 @@ module.exports = function (url, options) {
         retryDelay = options.retryDelay;
     }
     let timeout = new Promise((resolve, reject) => {
-        setTimeout(reject, server.getTimeOut(), 'Request timed out');
+        setTimeout(reject, server.getTimeOut(), 'اینترنت قطع شد');
     });
 
     return Promise

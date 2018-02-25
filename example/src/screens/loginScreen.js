@@ -145,9 +145,9 @@ class loginScreen extends React.Component {
                 } else server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
 
             }).catch(error => {
-            server.retry(context.isAvailable, context)
+            server.retryParam(context.isAvailable, context)
         }).catch(error => {
-            server.retry(context.isAvailable, context)
+            server.retryParam(context.isAvailable, context)
         });
     }
 

@@ -478,63 +478,43 @@ class NavigationTypes extends React.Component {
 
 
     onUpSpecialOffer = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
+
+        rowdata.count++;
         let list = this.state.superBasket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
-
+        list[index] = rowdata;
         this.setState({
-            superBasket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
+            superBasket: list
 
         });
     };
     onDownSpecialOffer = (rowdata) => {
-
-        let rowDataCopy = Object.assign({}, rowdata);
-        if (rowDataCopy.count !== 0) {
-            rowDataCopy.count--;
+        if (rowdata.count !== 0) {
+            rowdata.count--;
+            let list = this.state.superBasket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+            list[index] = rowdata;
+            this.setState({
+                superBasket: list
+            });
         }
-        let list = this.state.superBasket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-
-        this.setState({
-            superBasket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
-
-        });
-
-
     };
     onUpBestSellingProducts = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
+
+        rowdata.count++;
         let list = this.state.superBasket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
-
-        this.setState({
-            superBasket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
-
-        });
+        list[index] = rowdata;
+        this.setState({superBasket: list});
     };
     onDownBestSellingProducts = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        if (rowDataCopy.count !== 0) {
-            rowDataCopy.count--;
+        if (rowdata.count !== 0) {
+            rowdata.count--;
+            let list = this.state.superBasket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+            list[index] = rowdata;
+            this.setState({superBasket: list});
         }
-        let list = this.state.superBasket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-
-        this.setState({
-            superBasket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
-
-        });
 
     };
 }

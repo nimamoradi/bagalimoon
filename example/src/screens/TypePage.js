@@ -222,9 +222,10 @@ class TypePage extends Component {
                     });
 
                 }
-            ).catch(error =>{
-                server.retryParam(this.loadRenderRowData, context,category_id,error)}
-            )
+            ).catch(error => {
+                server.retryParam(this.loadRenderRowData, context, category_id, error)
+            }
+        )
 
     };
 
@@ -274,6 +275,7 @@ class TypePage extends Component {
                         {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}
                     style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
+
                     <ListViewCustum
                         subSelected={this.state.subSelected}
                         data={this.state.subItems} action={this.topLoadData}/>

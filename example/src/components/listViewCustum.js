@@ -12,11 +12,10 @@ import {vh, vw} from "../viewport";
 class listViewCustum extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {data:props.data}
-
     }
+
     scrollListToStart(contentWidth, contentHeight) {
-            this.scrollView.scrollTo({x: contentWidth});
+        this.scrollView.scrollTo({x: contentWidth});
     }
 
     render() {

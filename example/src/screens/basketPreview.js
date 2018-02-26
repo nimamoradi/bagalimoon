@@ -13,10 +13,7 @@ class basketPreview extends React.Component {
     constructor(props) {
         super(props);
         props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        let basket;
-        if (props.isParsed !== true)
-            basket = JSON.parse((this.props.basket));
-        else basket = (this.props.basket);
+        let basket = (this.props.basket);
         // console.log(basket);
 
 
@@ -32,8 +29,8 @@ class basketPreview extends React.Component {
         let basket = this.state.basket;
         let items = this.props.UpdateBasket(basket);
         if (this.props.isParsed === true) {
-            this.props.setBasketProduct(dataHandeling.AddBasket(this.props.basket,basket));
-        }else
+            this.props.setBasketProduct(dataHandeling.AddBasket(this.props.basket, basket));
+        } else
             this.props.UpdateBasket(basket);
     }
 

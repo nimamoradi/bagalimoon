@@ -339,13 +339,22 @@ class NavigationTypes extends React.Component {
     };
 
     basket = () => {
-        server.showLightBox('example.Types.basketLightBox', {
-            basket: context.state.superBasket,
-            title: context.props.title,
-            onClose: context.dismissLightBox,
-            UpdateBasket: NavigationTypes.basketUpdater,
-            setBasket: NavigationTypes.setBasket
-        }, context);
+        let json = dataHandeling.basketFilter(this.state.superBasket);
+        if (json.length > 0) {
+            server.pushScreen('example.Types.basketPreview', 'لیست خرید',
+                {
+                    UpdateBasket:  NavigationTypes.basketUpdater,
+                    basket: json,
+                }, this)
+        } else {
+            server.showLightBox('example.Types.basketLightBox', {
+                basket: context.state.superBasket,
+                title: context.props.title,
+                onClose: context.dismissLightBox,
+                UpdateBasket: NavigationTypes.basketUpdater,
+                setBasket: NavigationTypes.setBasket
+            }, context);
+        }
 
     };
 
@@ -478,43 +487,65 @@ class NavigationTypes extends React.Component {
 
 
     onUpSpecialOffer = (rowdata) => {
-
-        rowdata.count++;
+        let rowDataCopy = Object.assign({}, rowdata);
+        rowDataCopy.count++;
         let list = this.state.superBasket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
-        list[index] = rowdata;
+
         this.setState({
-            superBasket: list
+            superBasket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
 
         });
     };
     onDownSpecialOffer = (rowdata) => {
+        let rowDataCopy = Object.assign({}, rowdata);
         if (rowdata.count !== 0) {
-            rowdata.count--;
+            rowDataCopy.count--;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index] = rowdata;
+
             this.setState({
-                superBasket: list
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
             });
+
         }
+
+
     };
     onUpBestSellingProducts = (rowdata) => {
 
-        rowdata.count++;
+        let rowDataCopy = Object.assign({}, rowdata);
+        rowDataCopy.count++;
         let list = this.state.superBasket;
         let index = dataHandeling.indexOfId(list, rowdata.id);
-        list[index] = rowdata;
-        this.setState({superBasket: list});
+
+        this.setState({
+            superBasket: [...list.slice(0, index),
+                rowDataCopy,
+                ...list.slice(index + 1)]
+
+        });
     };
     onDownBestSellingProducts = (rowdata) => {
+        let rowDataCopy = Object.assign({}, rowdata);
         if (rowdata.count !== 0) {
-            rowdata.count--;
+            rowDataCopy.count--;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index] = rowdata;
-            this.setState({superBasket: list});
+
+            this.setState({
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
         }
+
 
     };
 }

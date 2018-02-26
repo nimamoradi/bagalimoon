@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
-
+import _ from 'lodash'
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function productPageNavBar({basket, context,search}) {
@@ -18,10 +18,14 @@ function productPageNavBar({basket, context,search}) {
             <View style={{flex: 2}}/>
             <Text style={styles.text}>لیست محصولات</Text>
             <View style={{flex: 1}}/>
-            <TouchableOpacity onPress={search}>
+            <TouchableOpacity onPress={_.debounce(() => search(),
+                1000, {leading: true, trailing: false})
+            }>
                 <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={basket}>
+            <TouchableOpacity onPress={_.debounce(() => basket(),
+                1000, {leading: true, trailing: false})
+            }>
                 <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
         </View>

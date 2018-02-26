@@ -44,7 +44,7 @@ class FlatListSearch extends React.Component {
         }
 
         context.setState({
-            data: dataHandeling.AddBasket(this.state.lastBasket,responseData),
+            data: dataHandeling.AddBasket(this.state.lastBasket, responseData),
             loading: true,
         });
     };
@@ -67,11 +67,13 @@ class FlatListSearch extends React.Component {
         }
 
     };
+
     componentWillUnmount() {
         if (this.state.data.length > 0) {
             context.setState({lastBasket: this.props.UpdateBasket(this.state.data)});
         }
     }
+
     makeRemoteRequest = (item) => {
 
         this.setState({loading: false, noData: false});
@@ -125,19 +127,22 @@ class FlatListSearch extends React.Component {
     }
 
     renderHeader = () => {
-        return <View style={{margin: 4 * vw, flexDirection: 'row', flex: 1}}>
+        return <View style={{
+            margin: 4 * vw, flexDirection: 'row', flex: 1, borderColor: 'gray',
+            borderRadius: 2 * vw, borderWidth: 1
+        }}>
             <TouchableOpacity
+                style={{backgroundColor: '#62bfc7',}}
                 onPress={() => {
                     this.makeRemoteRequest(this.state.query);
                 }}>
-                <MaterialIcons name="search" size={vw * 8} color="red" style={{flex: 1}}/>
+                <MaterialIcons name="search" size={vw * 12} color="red" style={{flex: 1}}/>
             </TouchableOpacity>
             <TextInput
                 placeholder='نام کالا را وارد کنید'
                 style={{
                     flex: 10,
-                    height: 16 * vw, borderColor: 'gray',
-                    borderRadius: 2 * vw, borderWidth: 1
+                    height: 16 * vw,
                 }}
                 onChangeText={(text) => {
                     this.setState({query: text});

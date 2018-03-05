@@ -1,6 +1,6 @@
 /node_modules/
-example/android/app/build/
-example/android/build/
+/example/android/app/build/
+/example/android/build/
 .idea/inspectionProfiles/
 .idea/workspace.xml
 example/.vscode/

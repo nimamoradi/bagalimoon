@@ -3,12 +3,11 @@ import {vw, vh, vmin, vmax} from './viewport'
 
 class code {
     static serverAddress = 'https://www.baghali.amins.ir/';
-    static InternetCheckAddress = 'https://my.shatel.ir';
-    static timeOut = 1000;
-    static retryCount = 5;
 
-    //other relevant code here
-    static pushScreen  (screen, title, passProps,context)  {
+    static timeOut = 10000;
+    static retryCount = 5;
+      //other relevant code here
+    static pushScreen(screen, title, passProps, context) {
         context.props.navigator.push({
             screen: screen,
             navigatorStyle: {
@@ -19,11 +18,9 @@ class code {
         });
 
     };
+
     static getServerAddress() {
         return this.serverAddress;
-    }
-    static getInternetCheckAddress() {
-        return this.InternetCheckAddress;
     }
 
     static getTimeOut() {
@@ -63,7 +60,7 @@ class code {
     };
 
 
-    static retryParam(task, context, param,massage) {
+    static retryParam(task, context, param, massage) {
         context.props.navigator.push({
             screen: 'example.Types.reTry',
             navigatorStyle: {
@@ -73,7 +70,7 @@ class code {
             passProps: {
                 task: task,
                 param: param,
-                massage:massage
+                massage: massage
             },
         });
     }
@@ -88,16 +85,16 @@ class code {
         return -1; //to handle the case where the value doesn't exist
     };
 
-    static performTasks = (input, tasks) =>{
+    static performTasks = (input, tasks) => {
         if (tasks.length === 1)
             return tasks[0](input);
         tasks[0](input, function (output) {
             performTasks(output, tasks.slice(2)); //Performs the tasks in the 'tasks[]' array }); }
         });
-    }
+    };
 
-static deviceInfo(phoneNumber){
-        return  {
+    static deviceInfo(phoneNumber) {
+        return {
             'screenHeight': 100 * vh,
             'screenWidth': 100 * vw,
             'isEmulator': DeviceInfo.isEmulator(),
@@ -121,7 +118,7 @@ static deviceInfo(phoneNumber){
             'Manufacturer': DeviceInfo.getManufacturer(),
             'MaxMemory': DeviceInfo.getMaxMemory(),
             'Model': DeviceInfo.getModel(),
-            'PhoneNumber':phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
+            'PhoneNumber': phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
             'ReadableVersion': DeviceInfo.getReadableVersion(),
             'SerialNumber': DeviceInfo.getSerialNumber(),
             'SystemName': DeviceInfo.getSystemName(),
@@ -132,10 +129,10 @@ static deviceInfo(phoneNumber){
             'UniqueID': DeviceInfo.getUniqueID(),
             'Version': DeviceInfo.getVersion(),
             'is24Hour': DeviceInfo.is24Hour(),
-            'isPinOrFingerprintSet':false,
-            'isTablet':DeviceInfo.isTablet(),
+            'isPinOrFingerprintSet': false,
+            'isTablet': DeviceInfo.isTablet(),
         };
+    }
 }
-        }
 
-        export default code;
+export default code;

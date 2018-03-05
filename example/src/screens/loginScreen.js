@@ -11,8 +11,6 @@ import {
     ImageBackground,
     Dimensions,
     AsyncStorage
-
-
 } from 'react-native';
 import server from '../code'
 import Loading from '../components/loadScreen'
@@ -113,7 +111,7 @@ class loginScreen extends React.Component {
     doSignUp() {
         let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
             pin = (isSet)
-        })
+        });
         // console.log('inside login form');
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',

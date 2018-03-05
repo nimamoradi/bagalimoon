@@ -16,7 +16,7 @@ import {
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
@@ -253,7 +253,7 @@ class mapView extends Component {
                         </ImageBackground>
                     </View>
                     <View style={styles.space}/>
-                    <View style={styles.center}>
+                    <View style={[styles.center,{opacity:this.state.buttonHeight}]}>
                         <TouchableOpacity
                             onPress={_.debounce(this.offlineSale,
                                 1000, {leading: true, trailing: false})}
@@ -315,6 +315,7 @@ class mapView extends Component {
                     }, {flex: this.state.flexSize}]}>
 
                         <MapView
+                          provider={PROVIDER_GOOGLE}
                             style={styles.map}
                             region={{
                                 latitude: this.state.latitude,

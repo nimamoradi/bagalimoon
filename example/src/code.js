@@ -4,9 +4,9 @@ import {vw, vh, vmin, vmax} from './viewport'
 class code {
     static serverAddress = 'https://www.baghali.amins.ir/';
 
-    static timeOut = 10000;
+    static timeOut = 8000;
     static retryCount = 5;
-      //other relevant code here
+      //push screen relevant code here
     static pushScreen(screen, title, passProps, context) {
         context.props.navigator.push({
             screen: screen,

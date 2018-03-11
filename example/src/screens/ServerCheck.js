@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, BackHandler, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {
+    ActivityIndicator,
+    Image,
+    BackHandler,
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Dimensions
+} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Loading from '../components/loadScreen'
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -12,14 +21,17 @@ class ServerCheck extends React.Component {
         super(props);
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.state = {
-            dataReady: true,
+            dataReady: false,
+            isFirstTime: true,
             param: {api_code: props.api_code, user_number: props.user_number}
         };
         props.navigator.onNavigatorEvent((event) => {
             if (event.id === 'backPress') {
                 BackHandler.exitApp();
             }
-        })
+        });
+        this.loginCheck({api_code: props.api_code, user_number: props.user_number});
+
     }
 
     loginCheck(param) {
@@ -75,17 +87,19 @@ class ServerCheck extends React.Component {
                         title: '',
                         passProps: passProps,
                     });
-                    // this.props.navigator.pop();
+                    this.props.navigator.pop();
                 }
             }).catch(error => {
-            this.setState({dataReady: true})
+            this.setState({dataReady: true, isFirstTime: false,})
         })
 
     }
 
     render() {
 
-        if (!this.state.dataReady) return <View style={{
+        if (this.state.isFirstTime) {
+            return <Image style={{width:100*vw,height:100*vh}} source={require('../../img/login.png')}/>
+        } else if (!this.state.dataReady) return <View style={{
             position: 'absolute',
             top: 0,
             left: 0,

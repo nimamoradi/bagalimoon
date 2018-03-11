@@ -24,7 +24,9 @@ class dataHandeling {
     //     })).concat(newItems));
     //
     // };
-
+/*
+* remove duplicates based on id
+* */
     static arrayUnique(array) {
         let a = array;
         for (let i = 0; i < a.length; ++i) {

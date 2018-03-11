@@ -27,7 +27,7 @@ class basketPreview extends React.Component {
 
     componentWillUnmount() {
         let basket = this.state.basket;
-        let items = this.props.UpdateBasket(basket);
+
         if (this.props.isParsed === true) {
             this.props.setBasketProduct(dataHandeling.AddBasket(this.props.basket, basket));
         } else

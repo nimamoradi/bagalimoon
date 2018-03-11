@@ -3,6 +3,7 @@ import {
     ScrollView,
     View,
     FlatList,
+    AppState
 } from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
@@ -29,6 +30,22 @@ class NavigationTypes extends React.Component {
 
     static setBasket(basket) {
         context.setState({superBasket: basket})
+    }
+
+    static basketUpdaterNoConcat(newItems) {//won't remove zero index and don't have concat
+        let basket = context.state.superBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
+                }
+            }
+        }
+
+        context.setState({superBasket: basket});
+        return basket;
     }
 
     static basketUpdater(newItems) {//won't remove zero index
@@ -79,6 +96,7 @@ class NavigationTypes extends React.Component {
         });
 
         context.setState({
+
             superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
         })
 
@@ -106,12 +124,11 @@ class NavigationTypes extends React.Component {
             this.loadCategories(JSON.parse(responseData.AllCategories));
 
         }))
-            .catch(error => {
+            .catch(ignored => {
                 server.retryParam(context.loadMainPage, context);
-
-            }).catch(error => {
+            }).catch(ignored => {
                 server.retryParam(context.loadMainPage, context);
-            })).catch(error => {
+            })).catch(ignored => {
             server.retryParam(this.loadRenderRowData, context,)
         });
 
@@ -210,11 +227,6 @@ class NavigationTypes extends React.Component {
         context.setState({dataSourceOffer: responseData, dataReady: true})
     }
 
-    componentWillUnmount() {
-        basketFile.writeBasket(context.state.superBasket);
-        // super.componentWillUnmount();
-    }
-
 
     componentWillMount() {
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
@@ -223,14 +235,7 @@ class NavigationTypes extends React.Component {
     componentDidMount() {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
-        basketFile.readBasket().then((item) => {
-            if (item === null)
-                item = [];
-            context.setState({superBasket: item}, () => {
-                this.loadMainPage();
-            });
 
-        });
 
     }
 
@@ -245,10 +250,29 @@ class NavigationTypes extends React.Component {
             Types: [],
             dataSourceOffer: [],
             superBasket: []
-        };
-        context = this;
 
+        };
+        basketFile.readBasket().then((item) => {
+            if (item === null) {
+                this.loadMainPage();
+            }
+            else
+                context.setState({superBasket: item}, () => {
+                    this.loadMainPage();
+                });
+
+        });
+
+        context = this;
+        AppState.addEventListener('change', state => {
+            if (state === 'background') {
+                basketFile.writeBasket(context.state.superBasket)
+            } else if (state === 'inactive') {
+                basketFile.writeBasket(context.state.superBasket)
+            }
+        });
     }
+
 
     static getBasket() {
         return context.state.getBasket;
@@ -343,7 +367,7 @@ class NavigationTypes extends React.Component {
         if (json.length > 0) {
             server.pushScreen('example.Types.basketPreview', 'لیست خرید',
                 {
-                    UpdateBasket:  NavigationTypes.basketUpdater,
+                    UpdateBasket: NavigationTypes.basketUpdaterNoConcat,
                     basket: json,
                 }, this)
         } else {
@@ -351,7 +375,7 @@ class NavigationTypes extends React.Component {
                 basket: context.state.superBasket,
                 title: context.props.title,
                 onClose: context.dismissLightBox,
-                UpdateBasket: NavigationTypes.basketUpdater,
+                UpdateBasket: NavigationTypes.basketUpdaterNoConcat,
                 setBasket: NavigationTypes.setBasket
             }, context);
         }

@@ -8,16 +8,19 @@ module.exports = function (url, options) {
 
     let retries = 3;
     let retryDelay = 500;
-
+    let time;
     if (options && options.retries) {
         retries = options.retries;
     }
-
     if (options && options.retryDelay) {
         retryDelay = options.retryDelay;
     }
+    if (options && options.time) {
+        time = options.time;
+    }
+    else time = server.getTimeOut();
     let timeout = new Promise((resolve, reject) => {
-        setTimeout(reject, server.getTimeOut(), 'اینترنت قطع شد');
+        setTimeout(reject, time, 'اینترنت قطع شد');
     });
 
     return Promise
@@ -25,7 +28,12 @@ module.exports = function (url, options) {
             let wrappedFetch = function (n) {
                 fetch(url, options)
                     .then(function (response) {
-                        resolve(response);
+                        if (response.ok)
+                            resolve(response);
+                        else {
+                            console.log("error "+error)
+                            throw error('bad error code');
+                        }
                     })
                     .catch(function (error) {
                         if (n > 0) {
@@ -33,6 +41,7 @@ module.exports = function (url, options) {
                                 wrappedFetch(--n);
                             }, retryDelay);
                         } else {
+                            console.log("error "+error)
                             reject(error);
                         }
                     });

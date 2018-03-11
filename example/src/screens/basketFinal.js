@@ -108,7 +108,7 @@ class basketFinal extends React.Component {
             return (
                 <View style={styles.container}>
 
-                    <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 10 * vh}}>
                         <Text style={styles.tableHeader}>قیمت نهایی</Text>
                         <Text style={styles.tableHeader}>قیمت عادی</Text>
                         <Text style={styles.tableHeader}>تعداد</Text>
@@ -117,26 +117,24 @@ class basketFinal extends React.Component {
 
 
                     <FlatList
-                        automaticallyAdjustContentInsets={false}
-                        contentContainerStyle={{flexDirection: 'column',}}
                         horizontal={false}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
                             this.renderRow(item)}
                     />
+                    <View style={{flexDirection: 'column', alignItems: 'center', flex: 1, width: 100 * vw}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
+                            <View style={{flex: 1}}/>
+                            <Text style={styles.price}>
+                                {this.state.totalPrice} تومان
+                            </Text>
+                            <Text style={styles.text}>
+                                جمع خرید
+                            </Text>
+                            <View style={{flex: 1}}/>
+                        </View>
 
-                    <View style={{flexDirection: 'row', alignItems: 'center',flex: 1}}>
-                        <View style={{flex: 1}}/>
-                        <Text style={styles.price}>
-                            {this.state.totalPrice} تومان
-                        </Text>
-                        <Text style={styles.text}>
-                            جمع خرید
-                        </Text>
-                        <View style={{flex: 1}}/>
-                    </View>
-                    <View style={{flexDirection: 'column', alignItems: 'center',flex: 1, width: 100 * vw}}>
                         <Text>آدرس:</Text>
                         <Text style={{
                             fontSize: vw * 4,
@@ -145,28 +143,30 @@ class basketFinal extends React.Component {
                             {this.state.myAddress}
                         </Text>
 
-                    </View>
-                    <View style={{flexDirection: 'column', alignItems: 'center',flex: 1, width: 100 * vw}}>
-                        <Text>نام مشتری:</Text>
-                        <Text style={{
-                            fontSize: vw * 4,
-                            fontFamily: 'B Yekan',
-                        }}>
-                            {this.state.customer_receiver_name}
-                        </Text>
+
+                        <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
+                            <Text style={{
+                                fontSize: vw * 4,
+                                fontFamily: 'B Yekan',
+                            }}>
+                                {this.state.customer_receiver_name}
+                            </Text>
+
+                            <Text style={{
+                                fontSize: vw * 4,
+                            }}>نام مشتری:</Text>
+                        </View>
 
                     </View>
-
-                    <View style={{flexDirection: 'row',flex:2, }}>
-                        <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
+                    <View style={{flexDirection: 'row', flex: 2,}}>
+                        <TouchableOpacity style={{height: 20 * vh, width: 50 * vw}}
                                           onPress={this.address}>
                             <View style={styles.button}>
                                 <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
-                                <View style={{flex: 0.5}}/>
-                                <Text style={{flex: 1, fontSize: vw * 4,}}>پرداخت</Text>
+                                <Text style={{fontSize: vw * 4,}}>پرداخت</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
+                        <TouchableOpacity style={{height: 20 * vh, width: 50 * vw}}
                                           onPress={() => {
                                               this.props.navigator.pop();
                                           }}>

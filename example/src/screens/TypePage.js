@@ -111,14 +111,7 @@ class TypePage extends Component {
 
     addToCart = () => {
         // todo clean up
-        let newBasket = dataHandeling.arrayUnique((context.props.basket.map((basketItem) => {
-            //update first  basket values with new items then add missing items
-            return {
-                ..._.assign(context.props.basket, _.find(context.state.basket, ['id', basketItem.id]),
-                    {count: basketItem.count})
-            };
-
-        })).concat(context.state.basket));
+        let newBasket = dataHandeling.arrayUnique((context.props.basket.concat(context.state.basket)));
         if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
         else this.props.navigator.push({
@@ -127,8 +120,6 @@ class TypePage extends Component {
             passProps: {
                 basket: newBasket,
                 isParsed: true,
-                UpdateBasket: this.props.UpdateBasket,
-                setBasket: this.props.setBasket,
                 setBasketProduct: TypePage.setBasket
             },
             navigatorStyle: {
@@ -155,11 +146,12 @@ class TypePage extends Component {
     };
 
     componentWillUnmount() {
-        let basket = this.state.basket.filter(
-            function (x) {
-                return x.count > 0
-            }
-        );
+        let basket = this.state.basket;
+        // .filter(
+        //     function (x) {
+        //         return x.count > 0
+        //     }
+        // );
         this.props.UpdateBasket(basket
         );
 
@@ -272,7 +264,7 @@ class TypePage extends Component {
             <View style={{backgroundColor: '#f2f2f2'}}>
                 <ProductPageNavBar
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
-                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}
+                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
                     style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
 

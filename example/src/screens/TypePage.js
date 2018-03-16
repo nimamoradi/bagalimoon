@@ -30,6 +30,7 @@ class TypePage extends Component {
         context.setState({basket: basket})
     }
 
+
     constructor(props) {
         super(props);
         let id = 0;
@@ -147,11 +148,6 @@ class TypePage extends Component {
 
     componentWillUnmount() {
         let basket = this.state.basket;
-        // .filter(
-        //     function (x) {
-        //         return x.count > 0
-        //     }
-        // );
         this.props.UpdateBasket(basket
         );
 
@@ -265,7 +261,23 @@ class TypePage extends Component {
                 <ProductPageNavBar
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
                         {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
-                    style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
+                    style={{height: 10 * vh}} basket={this.addToCart} context={this}
+                    sortAs={() => context.setState({
+                        basket: context.state.basket.sort(function (a, b) {
+
+                            if (a.price < b.price) return -1;
+                            if (a.price > b.price) return 1;
+                            return 0;
+                        })
+                    })}
+                    sortDe={() => context.setState({
+                        basket: context.state.basket.sort(function (a, b) {
+
+                            if (a.price > b.price) return -1;
+                            if (a.price < b.price) return 1;
+                            return 0;
+                        })
+                    })}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
 
                     <ListViewCustum

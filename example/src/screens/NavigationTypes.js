@@ -76,6 +76,34 @@ class NavigationTypes extends React.Component {
 
     }
 
+    static basketUpdaterForTypePage(newItems) {//won't remove zero index
+        let basket = context.state.superBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
+                    newItems[j] = Object.assign({}, newItems[j], {wasInBasket: true});
+                }
+            }
+        }
+               newItems = newItems.filter(function (item) {
+            if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
+                return item.count > 0;
+
+            } else {
+                // delete item.wasInBasket;
+                return false;
+            }
+
+        });
+        let bas = basket.concat(newItems);
+        context.setState({superBasket: bas});
+        return bas;
+
+    }
+
     getBestSellingProducts(responseData) {
 
         responseData = responseData.map(function (item) {
@@ -340,7 +368,7 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: item.name,
-                UpdateBasket: NavigationTypes.basketUpdater,
+                UpdateBasket: NavigationTypes.basketUpdaterForTypePage,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
                 setBasket: NavigationTypes.setBasket

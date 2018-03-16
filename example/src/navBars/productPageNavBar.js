@@ -7,31 +7,44 @@ import PropTypes from 'prop-types';
 import _ from 'lodash'
 import {vw, vh, vmin, vmax} from '../viewport'
 
-function productPageNavBar({basket, context,search}) {
-    return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                onPress={() => context.props.navigator.pop()}>
-                <Ionicons name="ios-arrow-back" size={vw * 8} color="white" style={{margin: 10,}}/>
-            </TouchableOpacity>
+class productPageNavBar extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <TouchableOpacity
+                    onPress={() => this.props.context.props.navigator.pop()}>
+                    <Ionicons name="ios-arrow-back" size={vw * 8} color="white" style={{margin: 10,}}/>
+                </TouchableOpacity>
 
-            <View style={{flex: 2}}/>
-            <Text style={styles.text}>لیست محصولات</Text>
-            <View style={{flex: 1}}/>
-            <TouchableOpacity onPress={_.debounce(() => search(),
-                1000, {leading: true, trailing: false})
-            }>
-                <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_.debounce(() => basket(),
-                1000, {leading: true, trailing: false})
-            }>
-                <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
-            </TouchableOpacity>
-        </View>
-    )
+                <TouchableOpacity onPress={_.debounce(() => this.props.sortAs(),
+                    1000, {leading: true, trailing: false})
+                }>
+                    <Icon name="arrow-bold-up" size={vw * 8} color="white" style={{margin: 5, flex: 1}}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={_.debounce(() => this.props.sortDe(),
+                    1000, {leading: true, trailing: false})
+                }>
+                    <Icon name="arrow-bold-down" size={vw * 8} color="white" style={{margin: 5, flex: 1}}/>
+                </TouchableOpacity>
 
+
+                <Text style={styles.text}>لیست محصولات</Text>
+                <View style={{flex: 1}}/>
+                <TouchableOpacity onPress={_.debounce(() => this.props.search(),
+                    1000, {leading: true, trailing: false})
+                }>
+                    <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={_.debounce(() => this.props.basket(),
+                    1000, {leading: true, trailing: false})
+                }>
+                    <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -56,5 +69,9 @@ const styles = StyleSheet.create({
 
 productPageNavBar.propTypes = {
     basket: PropTypes.func.isRequired,
+    context:PropTypes.func.isRequired,
+    search:PropTypes.func.isRequired,
+    sortAs:PropTypes.func.isRequired,
+    sortDe:PropTypes.func.isRequired,
 };
 export default productPageNavBar;

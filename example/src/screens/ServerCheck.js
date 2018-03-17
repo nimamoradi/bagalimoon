@@ -98,7 +98,7 @@ class ServerCheck extends React.Component {
     render() {
 
         if (this.state.isFirstTime) {
-            return <Image style={{width:100*vw,height:100*vh}} source={require('../../img/login.png')}/>
+            return <Image style={{width: 100 * vw, height: 100 * vh}} source={require('../../img/login.png')}/>
         } else if (!this.state.dataReady) return <View style={{
             position: 'absolute',
             top: 0,

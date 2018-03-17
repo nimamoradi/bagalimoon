@@ -27,7 +27,7 @@ class basketPreview extends React.Component {
 
     componentWillUnmount() {
         let basket = this.state.basket;
-
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
         if (this.props.isParsed === true) {
             this.props.setBasketProduct(dataHandeling.AddBasket(this.props.basket, basket));
         } else

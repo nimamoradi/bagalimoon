@@ -88,7 +88,7 @@ class NavigationTypes extends React.Component {
                 }
             }
         }
-               newItems = newItems.filter(function (item) {
+        newItems = newItems.filter(function (item) {
             if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
                 return item.count > 0;
 
@@ -124,7 +124,6 @@ class NavigationTypes extends React.Component {
         });
 
         context.setState({
-
             superBasket: dataHandeling.AddBasket(responseData, this.state.superBasket),
         })
 
@@ -439,7 +438,8 @@ class NavigationTypes extends React.Component {
         </View>;
         else
             return (
-                <ScrollView>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}>
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
                             search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
@@ -463,8 +463,7 @@ class NavigationTypes extends React.Component {
                     <ListViewCustum
                         data={this.state.Types} action={this.dummyTypePage}/>
 
-                    <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
-
+                    <Header style={{height: vh * 10}} title="پیشنهاد ویژه"/>
 
                     <FlatList
                         style={{
@@ -477,7 +476,7 @@ class NavigationTypes extends React.Component {
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderSpecialOffer(item)}
                     />
-                    <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
+                    <Header style={{height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <FlatList
                         style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh,}}

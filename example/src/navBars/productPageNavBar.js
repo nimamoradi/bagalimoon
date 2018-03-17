@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
         padding: 2 * vw,
         color: 'white',
         fontFamily: 'B Yekan',
-
     },
 
 });
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
 
 productPageNavBar.propTypes = {
     basket: PropTypes.func.isRequired,
-    context:PropTypes.func.isRequired,
+    context:PropTypes.object.isRequired,
     search:PropTypes.func.isRequired,
     sortAs:PropTypes.func.isRequired,
     sortDe:PropTypes.func.isRequired,

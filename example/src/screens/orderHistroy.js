@@ -16,7 +16,7 @@ class orderHistroy extends React.Component {
         this.state = {
             orderData: [],
             sendData: true,
-            api_code:''
+            api_code: ''
         };
         context = this;
 
@@ -37,7 +37,7 @@ class orderHistroy extends React.Component {
     isAvailable = () => {
         context.setState({sendData: true});
 
-                context.getOrderHistory(context.state.api_code);
+        context.getOrderHistory(context.state.api_code);
 
     };
 
@@ -51,7 +51,7 @@ class orderHistroy extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                api_code:api_code,
+                api_code: api_code,
             })
         }).then((response) => response.json())
             .then((responseData) => {
@@ -62,11 +62,9 @@ class orderHistroy extends React.Component {
                     sendData: false
                 });
 
-            }).catch(error => {
-            // console.log(error);
+            }).catch(ignored => {
             server.retryParam(this.isAvailable, context)
-        }).catch(error => {
-            // console.log(error);
+        }).catch(ignored => {
             server.retryParam(this.isAvailable, context)
         });
 
@@ -77,17 +75,6 @@ class orderHistroy extends React.Component {
         this.isAvailable();
         this.load_api_code();
     }
-
-
-    renderRow = (rowData) => {
-        return (
-            <View style={{flexDirection: 'row', height: 5 * vh}}>
-
-                <Text style={styles.price}>{rowData.sum_price}</Text>
-
-            </View>
-        );
-    };
 
 
     render() {
@@ -107,8 +94,12 @@ class orderHistroy extends React.Component {
                 <View style={styles.container}>
                     <FlatList
                         data={this.state.orderData}
-                        renderItem={({item}) => <View>
-                            <SmallRow title={'نام دریافت کننده'} des={item.receiver_name}/>
+                        renderItem={({item}) => <View style={{
+                            backgroundColor: '#d2d2d2', borderRadius: 4 * vw,
+                            margin: 2 * vw,
+                        }}>
+                            <SmallRow style={{backgroundColor: 'red'}} title={'نام دریافت کننده'}
+                                      des={item.receiver_name}/>
                             <SmallRow des={item.mobile_phone_number} title={'شماره تماس'}/>
 
                             <SmallRow title={'مبلغ قابل پرداخت'} des={item.paid_price}/>
@@ -116,14 +107,15 @@ class orderHistroy extends React.Component {
                             <SmallRow title={'آدرس'} des={item.address.name + ' : ' + item.address.Address}/>
                             <FlatList
                                 data={item.ordered_products}
-                                renderItem={({item}) => <View>
-                                    <SmallRow title={'نام محصول'} des={item.product.name}/>
-                                    <SmallRow title={'تعداد'} des={item.count}/>
-                                    <SmallRow title={'قیمت عادی'} des={item.regular_price}/>
-                                    <SmallRow title={'قیمت بعد از تخفیف'} des={item.final_price}/>
-                                </View>}
+                                renderItem={({item}) =>
+                                    <View>
+                                        <SmallRow title={'نام محصول'} des={item.product.name}/>
+                                        <SmallRow title={'تعداد'} des={item.count}/>
+                                        <SmallRow title={'قیمت عادی'} des={item.regular_price}/>
+                                        <SmallRow title={'قیمت بعد از تخفیف'} des={item.final_price}/>
+                                    </View>}
                             />
-                            <SmallRow />
+
                         </View>
                         }
 
@@ -207,7 +199,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#d46e6220'
     }, container: {
         flex: 1,
-        height: 100 * vh,
+        margin: 8,
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'center',

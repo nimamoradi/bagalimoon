@@ -19,11 +19,7 @@ AsyncStorage.multiGet(['api_code', 'user_number']).then((data) => {
     let api_code = data[0][1];
     let user_number = data[1][1];
     if (api_code !== null && user_number !== null) {
-          Navigation.startSingleScreenApp(serverCheckFailed(api_code, user_number));
-        // let f=(()=>{error("hi")})
-        //     .catch((error) => {
-        //         Navigation.startSingleScreenApp(serverCheckFailed(api_code, user_number));
-        //     });
+        Navigation.startSingleScreenApp(serverCheckFailed(api_code, user_number));
     } else
         Navigation.startSingleScreenApp(login());
 });

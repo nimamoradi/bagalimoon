@@ -3,7 +3,7 @@ import {
     ScrollView,
     View,
     FlatList,
-    AppState
+    AppState, Text
 } from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
@@ -425,17 +425,7 @@ class NavigationTypes extends React.Component {
     }
 
     render() {
-        if (!this.state.dataReady) return <View style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Loading/>
-        </View>;
+        if (!this.state.dataReady) return null;
         else
             return (
                 <ScrollView
@@ -486,7 +476,24 @@ class NavigationTypes extends React.Component {
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderBestSellingProducts(item)}
                     />
-
+                    <View style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 41*vw,
+                        bottom: 0,
+                        right:41*vw,
+                        borderRadius:18*vw,
+                        width:18*vw,
+                        height:18*vw,
+                        backgroundColor:'blue',
+                        flex:1,
+                        alignContent:'center',
+                        justifyContent:'center'
+                    }}>
+                        <Text style={{
+                            textJustify:'center',
+                            backgroundColor:'green',}}>hi</Text>
+                    </View>
 
                 </ScrollView>
             );

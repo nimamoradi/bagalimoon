@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {
+    BallIndicator,
+    BarIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
+} from 'react-native-indicators';
 
 function loadScreen() {
     return (
         <View style={styles.background}>
-            <ActivityIndicator
-                color='#bc2b78'
-                size="large"
+            <UIActivityIndicator color='red'
+
                 style={styles.activityIndicator}/>
         </View>
     )

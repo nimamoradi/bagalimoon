@@ -99,10 +99,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 26 Platform" jdkType="Android SDK" />
@@ -143,7 +141,8 @@
     <orderEntry type="library" name="com.android.support:design-26.1.0" level="project" />
     <orderEntry type="library" name="com.microsoft.appcenter.reactnative:appcenter-react-native-1.1.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-base-11.8.0" level="project" />
-    <orderEntry type="library" name="com.onesignal:OneSignal-3.8.1" level="project" />
+    <orderEntry type="library" name="com.onesignal:OneSignal-3.8.2" level="project" />
+    <orderEntry type="library" name="com.yqritc:android-scalablevideoview-1.0.4" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-26.1.0" level="project" />
     <orderEntry type="library" name="javax.inject:javax.inject:1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-26.1.0" level="project" />
@@ -177,6 +176,7 @@
     <orderEntry type="module" module-name="react-native-navigation" />
     <orderEntry type="module" module-name="appcenter-analytics" />
     <orderEntry type="module" module-name="react-native-exception-handler" />
+    <orderEntry type="module" module-name="react-native-video" />
     <orderEntry type="module" module-name="appcenter-crashes" />
     <orderEntry type="module" module-name="react-native-hockeyapp" />
     <orderEntry type="module" module-name="react-native-maps" />

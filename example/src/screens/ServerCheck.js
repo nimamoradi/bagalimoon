@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-    ActivityIndicator,
+    ImageBackground,
     Image,
     BackHandler,
     View,
@@ -10,11 +10,11 @@ import {
     Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import Loading from '../components/loadScreen'
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import _ from 'lodash'
 import fetch from "../fetch";
+import Video from "react-native-video";
 
 class ServerCheck extends React.Component {
     constructor(props) {
@@ -31,11 +31,13 @@ class ServerCheck extends React.Component {
             }
         });
         this.loginCheck({api_code: props.api_code, user_number: props.user_number});
+        this.player=null;
 
     }
 
     loginCheck(param) {
-        this.setState({dataReady: false});
+        if (!this.state.isFirstTime)
+            this.setState({dataReady: false});
         fetch(server.getServerAddress() + '/api/UserDetails', {
             method: 'POST',
             headers: {
@@ -97,19 +99,21 @@ class ServerCheck extends React.Component {
 
     render() {
 
-        if (this.state.isFirstTime) {
-            return <Image style={{width: 100 * vw, height: 100 * vh}} source={require('../../img/login.png')}/>
-        } else if (!this.state.dataReady) return <View style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Loading/>
-        </View>;
+        if (!this.state.dataReady)
+            return <Video source={require('../../assets/out.mp4')}  // Can be a URL or a local file.
+                          // poster="https://baconmockup.com/300/200/" // uri to an image to display until the video plays
+                          ref={(ref) => {
+                              this.player = ref
+                          }}                                      // Store reference
+                          rate={1.0}                              // 0 is paused, 1 is normal.
+                          volume={1.0}                            // 0 is muted, 1 is normal.
+                          muted={false}                           // Mutes the audio entirely.
+                          paused={false}                          // Pauses playback entirely.
+                          resizeMode="contains"                      // Fill the whole screen at aspect ratio.*
+                          repeat={true}                           // Repeat forever.
+                          playInBackground={false}                // Audio continues to play when app entering background.
+                          style={styles.backgroundVideo} />
+                ;
         else
             return <View style={styles.container}>
 
@@ -154,6 +158,9 @@ const styles = StyleSheet.create({
         fontSize: 5 * vw,
         fontFamily: 'B Yekan',
         margin: 5 * vw,
-    }
+    },
+    backgroundVideo: {
+      flex:1
+    },
 });
 export default ServerCheck;

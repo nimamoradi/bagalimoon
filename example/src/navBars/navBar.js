@@ -19,8 +19,8 @@ function navBar({menu, basket, search}) {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={_.debounce(() => search(),
-                                  1000, {leading: true, trailing: false})
-                              }>
+                1000, {leading: true, trailing: false})
+            }>
                 <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 

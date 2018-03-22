@@ -24,28 +24,4 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class MainActivity extends SplashActivity {
 
 
-    @Override
-    public LinearLayout createSplashLayout() {
-        I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
-        sharedI18nUtilInstance.allowRTL(getApplicationContext(), false);
-        LinearLayout view = new LinearLayout(this);
-        ImageView imageView1 = new ImageView(this);
-
-        view.setBackgroundColor(Color.parseColor("#ffffff"));
-        view.setOrientation(LinearLayout.VERTICAL);
-        imageView1.setImageResource(R.drawable.login);
-
-//setting image position
-        imageView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT));
-        ProgressBar progressBar = new ProgressBar(this);
-        progressBar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-
-
-        view.addView(imageView1);
-        view.addView(progressBar);
-        return view;
-    }
-
 }

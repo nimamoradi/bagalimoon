@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {
     ImageBackground,
-    Image,
     BackHandler,
     View,
     Text,
@@ -9,12 +8,15 @@ import {
     StyleSheet,
     Dimensions
 } from 'react-native';
+
 import Icon from 'react-native-vector-icons/EvilIcons';
+import Loading from '../components/loadScreen'
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import _ from 'lodash'
 import fetch from "../fetch";
-import Video from "react-native-video";
+
+const Spinner = require('react-native-spinkit');
 
 class ServerCheck extends React.Component {
     constructor(props) {
@@ -31,13 +33,11 @@ class ServerCheck extends React.Component {
             }
         });
         this.loginCheck({api_code: props.api_code, user_number: props.user_number});
-        this.player=null;
 
     }
 
     loginCheck(param) {
-        if (!this.state.isFirstTime)
-            this.setState({dataReady: false});
+        this.setState({dataReady: false});
         fetch(server.getServerAddress() + '/api/UserDetails', {
             method: 'POST',
             headers: {
@@ -100,20 +100,14 @@ class ServerCheck extends React.Component {
     render() {
 
         if (!this.state.dataReady)
-            return <Video source={require('../../assets/out.mp4')}  // Can be a URL or a local file.
-                          // poster="https://baconmockup.com/300/200/" // uri to an image to display until the video plays
-                          ref={(ref) => {
-                              this.player = ref
-                          }}                                      // Store reference
-                          rate={1.0}                              // 0 is paused, 1 is normal.
-                          volume={1.0}                            // 0 is muted, 1 is normal.
-                          muted={false}                           // Mutes the audio entirely.
-                          paused={false}                          // Pauses playback entirely.
-                          resizeMode="contains"                      // Fill the whole screen at aspect ratio.*
-                          repeat={true}                           // Repeat forever.
-                          playInBackground={false}                // Audio continues to play when app entering background.
-                          style={styles.backgroundVideo} />
-                ;
+            return <ImageBackground style={{width: 100 * vw, height: 100 * vh,justifyContent:'center',flex:1,
+            alignItems:'center'}} source={require('../../img/login.png')}>
+                <Spinner
+                    size={100}
+                    color={'red'}
+                    type={'WanderingCubes'}
+                />
+            </ImageBackground>;
         else
             return <View style={styles.container}>
 
@@ -147,20 +141,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    activityIndicator: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#99999910'
+    spinner: {
+        width: 10*vw,
+        height: 10*vw,
+
     },
     text: {
         fontSize: 5 * vw,
         fontFamily: 'B Yekan',
         margin: 5 * vw,
-    },
-    backgroundVideo: {
-      flex:1
-    },
+    }
 });
 export default ServerCheck;

@@ -91,7 +91,6 @@ class NavigationTypes extends React.Component {
         newItems = newItems.filter(function (item) {
             if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
                 return item.count > 0;
-
             } else {
                 // delete item.wasInBasket;
                 return false;
@@ -453,7 +452,7 @@ class NavigationTypes extends React.Component {
                     <ListViewCustum
                         data={this.state.Types} action={this.dummyTypePage}/>
 
-                    <Header style={{height: vh * 10}} title="پیشنهاد ویژه"/>
+                    <Header title="پیشنهاد ویژه"/>
 
                     <FlatList
                         style={{

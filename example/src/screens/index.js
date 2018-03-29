@@ -28,8 +28,11 @@ import productPageNavBar from "../navBars/productPageNavBar";
 
 
 import ServerCheck from "./ServerCheck";
+import checkoutPage from "./checkoutPage";
 
 export function registerScreens() {
+
+    Navigation.registerComponent('example.Types.checkoutPage', () => checkoutPage);
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
     Navigation.registerComponent('example.bars.productPageNavBar', () => productPageNavBar);
     Navigation.registerComponent('example.Types', () => Types);

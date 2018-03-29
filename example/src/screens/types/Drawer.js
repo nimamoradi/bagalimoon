@@ -62,7 +62,7 @@ class MyClass extends React.Component {
             <View style={styles.container}>
                 <View style={{backgroundColor: '#eeeceb', flex: 1, width: 300, justifyContent: 'center',}}>
                     <Image style={styles.image} source={require('../../../img/grocery.png')}/>
-                    <Text style={{alignSelf: 'flex-end', fontSize: vw * 4}}>{this.state.user_number}</Text>
+                    <Text style={{alignSelf: 'flex-end', fontSize: vw * 5}}>{this.state.user_number}</Text>
                 </View>
                 <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
 
@@ -70,9 +70,9 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={(() => this.orderHistroy())}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <MaterialIcon name="history" size={vw * 6} color="#ff5500"
+                            <MaterialIcon name="history" size={vw * 8} color="#ff5500"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> سوابق سفارش</Text>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}> سوابق سفارش</Text>
 
                         </View>
 
@@ -82,9 +82,9 @@ class MyClass extends React.Component {
 
                         }}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Ionicons name="ios-call-outline" size={vw * 6} color="#11ff11"
+                            <Ionicons name="ios-call-outline" size={vw * 8} color="#11ff11"
                                       style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}> ارتباط با ما</Text>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}> ارتباط با ما</Text>
 
                         </View>
 
@@ -98,9 +98,9 @@ class MyClass extends React.Component {
                             });
                         }}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Icon name="info-circle" size={vw * 6} color="#72bcd4"
+                            <Icon name="info-circle" size={vw * 8} color="#72bcd4"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>درباره ما</Text>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>درباره ما</Text>
 
                         </View>
 
@@ -113,9 +113,9 @@ class MyClass extends React.Component {
 
                         }}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <MaterialIcon name="logout" size={vw * 6} color="#C42B2D"
+                            <MaterialIcon name="logout" size={vw * 8} color="#C42B2D"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 4}}>خروج</Text>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>خروج</Text>
 
                         </View>
 

@@ -16,6 +16,7 @@ import com.microsoft.appcenter.reactnative.crashes.BuildConfig;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.onesignal.OneSignal;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.bridge.NavigationReactPackage;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;
@@ -52,7 +53,7 @@ public class MainApplication extends NavigationApplication {
     public List<ReactPackage> createAdditionalReactPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-            new ReactNativeExceptionHandlerPackage(),
+                new ReactNativeExceptionHandlerPackage(),
                 new RNDeviceInfo(),
                 new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
                 new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),
@@ -61,9 +62,8 @@ public class MainApplication extends NavigationApplication {
                 new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), this, BuildConfig.DEBUG),
                 new VectorIconsPackage(),
                 new NavigationReactPackage(),
-                new MapsPackage()
-
-
+                new MapsPackage(),
+                new RNSpinkitPackage()
         );
     }
 

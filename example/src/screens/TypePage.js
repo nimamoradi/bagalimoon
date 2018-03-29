@@ -26,11 +26,6 @@ let isFirstTime;
 
 class TypePage extends Component {
 
-    static setBasket(basket) {
-        context.setState({basket: basket})
-    }
-
-
     constructor(props) {
         super(props);
         let id = 0;
@@ -112,7 +107,7 @@ class TypePage extends Component {
 
     addToCart = () => {
         // todo clean up
-        let newBasket = dataHandeling.arrayUnique((context.props.basket.concat(context.state.basket)));
+        let newBasket = dataHandeling.arrayUnique((context.state.basket.concat(context.props.basket)));
         if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
         else this.props.navigator.push({
@@ -120,8 +115,8 @@ class TypePage extends Component {
             title: 'خرید را نهایی کنید',
             passProps: {
                 basket: newBasket,
-                isParsed: true,
-                setBasketProduct: TypePage.setBasket
+                isTypePage: true,
+                UpdateBasket: TypePage.basketUpdaterSimple,
             },
             navigatorStyle: {
                 navBarHidden: true,
@@ -151,6 +146,7 @@ class TypePage extends Component {
         let basket = this.state.basket;
         this.props.UpdateBasket(basket
         );
+        context.setState({basket: []});
 
     }
 
@@ -219,11 +215,13 @@ class TypePage extends Component {
     };
 
     topLoadData(item) {
-        context.loadRenderRowData(item.id);
+        let subItems = context.findSubItems(context.state.Categories,
+            item.id);
         context.setState({
-            Category_id: item.id,
-            subSelected: item.name
-        })
+            subItems: subItems, mainSelected: item.name,
+            Category_id: subItems[0].id, subSelected: subItems[0].name
+        });
+        context.loadRenderRowData(subItems[0].id)
     }
 
     static basketUpdater(newItems) {//won't remove zero index
@@ -241,9 +239,7 @@ class TypePage extends Component {
         newItems = newItems.filter(function (item) {
             if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
                 return item.count > 0;
-
             } else {
-                delete item.wasInBasket;
                 return false;
             }
 
@@ -251,6 +247,23 @@ class TypePage extends Component {
         let bas = basket.concat(newItems);
         context.setState({basket: bas});
         return bas;
+
+    }
+
+    static basketUpdaterSimple(newItems,oldBasket) {
+        let basket = oldBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j], {count: newItems[j].count});//upDating value of item in old basket
+                }
+            }
+        }
+
+        context.setState({basket: basket});
+        return basket;
 
     }
 
@@ -282,10 +295,10 @@ class TypePage extends Component {
                 <View style={{width: 100 * vw, height: 90 * vh}}>
 
                     <ListViewCustum
-                        subSelected={this.state.subSelected}
-                        data={this.state.subItems} action={this.topLoadData}/>
+                        subSelected={this.state.mainSelected}
+                        data={this.state.mainItems} action={this.topLoadData}/>
 
-                    <View style={{height: 74 * vh, flexDirection: 'row'}}>
+                    <View style={{height: 77 * vh, flexDirection: 'row'}}>
 
                         <FlatList
                             showsVerticalScrollIndicator={false}
@@ -308,26 +321,26 @@ class TypePage extends Component {
                             style={{width: 30 * vw, marginBottom: 4 * vh}}
                             showsVerticalScrollIndicator={false}
                             horizontal={false}
-                            data={this.state.mainItems}
+                            data={this.state.subItems}
                             renderItem={({item, index}) =>
                                 <RightProductCorner title={item.name}
                                                     index={index}
                                                     onPress={() => {
-                                                        let subItems = this.findSubItems(context.state.Categories,
-                                                            item.id);
+                                                        context.loadRenderRowData(item.id);
                                                         context.setState({
-                                                            subItems: subItems, mainSelected: item.name,
-                                                            Category_id: subItems[0].id, subSelected: subItems[0].name
+                                                            Category_id: item.id,
+                                                            subSelected: item.name
                                                         });
-                                                        this.loadRenderRowData(subItems[0].id)
+
                                                     }}
-                                                    isSelected={this.state.mainSelected === item.name}
+                                                    isSelected={this.state.subSelected === item.name}
                                 />}
 
                         />
                     </View>
                 </View>
-                {(!this.state.dataReady) && <View style={{
+                {(!this.state.dataReady) &&
+                <View style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,

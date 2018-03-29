@@ -117,13 +117,14 @@ class basketFinal extends React.Component {
 
 
                     <FlatList
+                        style={{flex: 4}}
                         horizontal={false}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
                             this.renderRow(item)}
                     />
-                    <View style={{flexDirection: 'column', alignItems: 'center', flex: 1, width: 100 * vw}}>
+                    <View style={{flexDirection: 'column', alignItems: 'center', flex: 0.5, width: 100 * vw}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
                             <View style={{flex: 1}}/>
                             <Text style={styles.price}>
@@ -158,23 +159,23 @@ class basketFinal extends React.Component {
                         </View>
 
                     </View>
-                    <View style={{flexDirection: 'row', flex: 2,}}>
-                        <TouchableOpacity style={{height: 20 * vh, width: 50 * vw}}
-                                          onPress={this.address}>
+                    <View style={{flexDirection: 'row',}}>
+                        <TouchableOpacity onPress={this.address}>
                             <View style={styles.button}>
-                                <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
+                                <Icon name="shopping-cart" size={vw * 5} color="#00ff0050"/>
                                 <Text style={{fontSize: vw * 4,}}>پرداخت</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{height: 20 * vh, width: 50 * vw}}
-                                          onPress={() => {
-                                              this.props.navigator.pop();
-                                          }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.props.navigator.pop();
+                            }}>
                             <View style={styles.buttonCancel}>
-                                <Text style={{flex: 1, fontSize: vw * 4,}}>حذف سفارش</Text>
+                                <Text style={{fontSize: vw * 4,}}>حذف سفارش</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
+
                 </View>
 
             );
@@ -221,44 +222,51 @@ const styles = StyleSheet.create({
         fontSize: vw * 5,
         fontFamily: 'B Yekan',
         flex: 1,
-        margin: 10,
+        margin: 8,
         color: '#000',
         textAlign: 'center'
     },
     button: {
-        flex: 1,
+        width: 50 * vw,
+        height:8*vh,
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        marginTop: 20,
         margin: 2,
-        marginLeft: 20,
-        marginBottom: 60,
         fontFamily: 'B Yekan',
         alignContent: 'center',
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
     },
     buttonCancel: {
-        flex: 1,
+        height: 8 * vh,
+        width: 50 * vw,
         fontFamily: 'B Yekan',
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
         margin: 2,
-
-        marginTop: 20,
         alignContent: 'center',
-        marginRight: 20,
-        marginBottom: 60,
         borderColor: '#d46e62',
         backgroundColor: '#d46e6220'
     }, container: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#ffffff',
+    },
+    rowItem: {
+        elevation: 2 * vw,
+        borderColor: '#00000035',
+        borderWidth: 0.75,
+        margin: vw,
+        flexDirection: 'row',
+        borderRadius: 2 * vw,
+        backgroundColor: '#e7e6e6',
+        shadowOpacity: 0.6,
+        shadowColor: '#e7e6e650',
+        shadowOffset: {width: 10, height: 10},
     },
 
 });

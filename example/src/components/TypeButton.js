@@ -13,7 +13,7 @@ function TypeButton({title, onPress, isSelected}) {
                 <ImageBackground
                     opacity={0.6}
                     resizeMode="stretch"
-                    style={{height: 12 * vh, marginLeft: -15,width:30*vw}}
+                    style={{height: 10 * vh, marginLeft: -15,width:30*vw}}
                     source={require('../../img/corner/flatListItem.png')}>
                     <TouchableOpacity
                         onPress={onPress}
@@ -32,7 +32,7 @@ function TypeButton({title, onPress, isSelected}) {
                 <ImageBackground
 
                     resizeMode="stretch"
-                    style={{height: 12 * vh, marginLeft: -15,width:30*vw}}
+                    style={{height: 10 * vh, marginLeft: -15,width:30*vw}}
                     source={require('../../img/corner/flatListItem.png')}>
                     <TouchableOpacity
                         onPress={onPress}

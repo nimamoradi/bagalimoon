@@ -86,9 +86,13 @@ dependencies {
     compile project(path: ':appcenter-analytics')
     compile project(path: ':appcenter')
     compile project(':react-native-code-push')
-    compile 'com.onesignal:OneSignal:[3.8.0, 3.99.99]'
+    compile 'com.onesignal:OneSignal:3.8.3'
     compile project(':react-native-device-info')
     compile project(path: ':react-native-exception-handler')
+    compile project(':react-native-spinkit')
+
+    compile project(path: ':react-native-gesture-handler')
+    compile project(path: ':react-native-spinkit')
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

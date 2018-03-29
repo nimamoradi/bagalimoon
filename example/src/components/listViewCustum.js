@@ -47,7 +47,7 @@ class listViewCustum extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop: 2 * vh, marginBottom: 2 * vh,
+        marginTop: vh, marginBottom: vh,
     },
 
 });

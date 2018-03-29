@@ -24,6 +24,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
                 <View style={{flexDirection: 'column',}}>
                     <Text style={styles.text}>{title}</Text>
                     <Text style={styles.price}>{price} تومان </Text>
+                    <Text style={styles.discount}>{disscount} تومان </Text>
                 </View>
 
             <View style={{flex: 1.2, flexDirection: 'column'}}>

@@ -1,23 +1,15 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
-import {
-    BallIndicator,
-    BarIndicator,
-    DotIndicator,
-    MaterialIndicator,
-    PacmanIndicator,
-    PulseIndicator,
-    SkypeIndicator,
-    UIActivityIndicator,
-    WaveIndicator,
-} from 'react-native-indicators';
+import {View, StyleSheet, Dimensions} from 'react-native';
+const Spinner = require('react-native-spinkit');
+
 
 function loadScreen() {
     return (
         <View style={styles.background}>
-            <UIActivityIndicator color='red'
-
-                style={styles.activityIndicator}/>
+            <Spinner color='#FF8500'
+                     size={50}
+                     type={'FadingCircleAlt'}
+                   />
         </View>
     )
 
@@ -25,16 +17,14 @@ function loadScreen() {
 
 const styles = StyleSheet.create({
 
-    activityIndicator: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+    background: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#99999910'
-    },
-    background:{
-        flex:1,
-        backgroundColor:'#a5aaa970'
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        flex: 1,
+        opacity:0.65,
+        backgroundColor: 'grey'
     }
 });
 export default loadScreen;

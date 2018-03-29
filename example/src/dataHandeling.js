@@ -12,21 +12,9 @@ class dataHandeling {
 
     };
 
-    // static AddBasketNoMutation(newItems, basket) {//update and merge basket
-    //
-    //     return this.arrayUnique((basket.map((basketItem) => {
-    //         //update first  basket values with new items then add missing items
-    //         return {
-    //             ..._.assign(bas, _.find(newItems, ['id', basketItem.id]),
-    //                 {count: basketItem.count})
-    //         };
-    //
-    //     })).concat(newItems));
-    //
-    // };
-/*
-* remove duplicates based on id
-* */
+    /*
+ * remove duplicates based on id
+ * */
     static arrayUnique(array) {
         let a = array;
         for (let i = 0; i < a.length; ++i) {

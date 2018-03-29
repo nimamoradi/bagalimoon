@@ -163,7 +163,7 @@ class basketFinal extends React.Component {
                         <TouchableOpacity onPress={this.address}>
                             <View style={styles.button}>
                                 <Icon name="shopping-cart" size={vw * 5} color="#00ff0050"/>
-                                <Text style={{fontSize: vw * 4,}}>پرداخت</Text>
+                                <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -180,6 +180,9 @@ class basketFinal extends React.Component {
 
             );
 
+    }
+    address(){
+        server.pushScreen('example.Types.checkoutPage','پرداخت',{},context);
     }
 }
 

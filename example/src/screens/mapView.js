@@ -378,6 +378,7 @@ class mapView extends Component {
                         style={{flex: 4}}
                         navigationState={this.state}
                         renderScene={this._renderScene}
+                        keyExtractor={this._keyExtractor}
                         renderFooter={this._renderHeader}
                         onIndexChange={this._handleIndexChange}
                         initialLayout={{
@@ -390,6 +391,7 @@ class mapView extends Component {
                 </View>
             );
     }
+    _keyExtractor = (item, index) => item.id;
 
 
     offlineSale = () => {

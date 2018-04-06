@@ -35,16 +35,16 @@ class FlatListSearch extends React.Component {
     makeList = (responseData) => {
         let lastBasket = this.state.lastBasket;
 
-        for (let j = 0; j < lastBasket.length; j++) {
-            for (let i = 0; i < responseData.length; i++) {
-                if (lastBasket[j].id === responseData[i].id) {
-                    responseData[i].count = lastBasket[j].count;
+        for (let j = 0; j < responseData.length; j++) {
+            for (let i = 0; i < lastBasket.length; i++) {
+                if (responseData[j].id === lastBasket[i].id) {
+                    responseData[j].count = lastBasket[i].count;
                 }
             }
         }
 
         context.setState({
-            data: dataHandeling.AddBasket(this.state.lastBasket, responseData),
+            data:  responseData,
             loading: true,
         });
     };
@@ -67,6 +67,7 @@ class FlatListSearch extends React.Component {
         }
 
     };
+    _keyExtractor = (item, index) => item.id;
 
     componentWillUnmount() {
         if (this.state.data.length > 0) {
@@ -105,6 +106,7 @@ class FlatListSearch extends React.Component {
             <View>
                 <SimpleNavbar back={() => this.props.navigator.pop()} title='جستجو'/>
                 <FlatList
+                    keyExtractor={this._keyExtractor}
                     data={this.state.data}
                     style={{marginBottom: 10 * vh}}
                     ItemSeparatorComponent={this.renderSeparator}

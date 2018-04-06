@@ -138,7 +138,7 @@ class basketPreview extends React.Component {
             </View>
         );
     };
-
+    _keyExtractor = (item, index) => item.id;
 //
     render() {
         return (
@@ -149,6 +149,7 @@ class basketPreview extends React.Component {
                 }}
                               title={'لیست خرید'}/>
                 <FlatList
+                    keyExtractor={this._keyExtractor}
                     style={{flexDirection: 'column', width: 85 * vw,}}
                     horizontal={false}
                     showsHorizontalScrollIndicator={false}

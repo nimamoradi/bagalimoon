@@ -315,6 +315,7 @@ class TypePage extends Component {
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({item}) =>
                                 <ItemView
                                     keyExtractor={this._keyExtractor}
@@ -331,6 +332,7 @@ class TypePage extends Component {
                             showsVerticalScrollIndicator={false}
                             horizontal={false}
                             data={this.state.subItems}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({item, index}) =>
                                 <RightProductCorner title={item.name}
                                                     index={index}

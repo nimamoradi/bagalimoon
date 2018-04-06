@@ -122,6 +122,7 @@ class basketFinal extends React.Component {
                     <FlatList
                         style={{flex: 4}}
                         horizontal={false}
+                        keyExtractor={this._keyExtractor}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
@@ -184,7 +185,7 @@ class basketFinal extends React.Component {
             );
 
     }
-
+    _keyExtractor = (item, index) => item.id;
     address() {
         server.pushScreen('example.Types.checkoutPage', 'پرداخت',
             {
@@ -251,7 +252,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
         margin: 2,
-        fontFamily: 'B Yekan',
         alignContent: 'center',
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
@@ -259,7 +259,6 @@ const styles = StyleSheet.create({
     buttonCancel: {
         height: 8 * vh,
         width: 50 * vw,
-        fontFamily: 'B Yekan',
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,

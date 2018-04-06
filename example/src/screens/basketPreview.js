@@ -19,18 +19,25 @@ class basketPreview extends React.Component {
 
         this.state = {
             basket: basket,
-            totalPrice: '?'
+            totalPrice: '?',
+            shouldUpdateBasket: true
         };
         context = this;
     }
 
+    shouldUpdateBasket(value) {
+        context.setState({shouldUpdateBasket: value});
+    }
 
     componentWillUnmount() {
-        let basket = this.state.basket;
+
 
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
-        this.props.UpdateBasket(basket,this.props.basket);
-        this.setState({basket: []});
+        if (context.state.shouldUpdateBasket) {
+            let basket = this.state.basket;
+            this.props.UpdateBasket(basket, this.props.basket);
+            this.setState({basket: []});
+        }
     }
 
 
@@ -54,7 +61,10 @@ class basketPreview extends React.Component {
                 screen: 'example.mapView',
                 title: 'آدرس',
                 passProps: {
-                    basket: this.state.basket
+                    setBasket: context.props.setBasket,
+                    fullBasket:context.props.fullBasket,
+                    basket: context.state.basket,
+                    shouldUpdateBasket: this.shouldUpdateBasket
                 },
             });
         } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);

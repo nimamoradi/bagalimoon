@@ -395,6 +395,8 @@ class NavigationTypes extends React.Component {
                 {
                     UpdateBasket: NavigationTypes.basketUpdaterNoConcat,
                     basket: json,
+                    fullBasket:this.state.superBasket,
+                    setBasket:NavigationTypes.setBasket
                 }, this)
         } else {
             server.showLightBox('example.Types.basketLightBox', {
@@ -490,7 +492,6 @@ class NavigationTypes extends React.Component {
                         justifyContent:'center'
                     }}>
                         <Text style={{
-                            textJustify:'center',
                             backgroundColor:'green',}}>hi</Text>
                     </View>
 

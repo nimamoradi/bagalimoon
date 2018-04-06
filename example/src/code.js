@@ -54,6 +54,17 @@ class code {
             }
         })
     };
+    static alertAdvanced(title, text, context,onclose) {
+        context.props.navigator.showLightBox({
+            screen: 'example.alert',
+            passProps: {title: title, text: text, onClose:onclose},
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: false
+            }
+        })
+    };
 
     static dismissLightBox(context) {
         context.props.navigator.dismissLightBox();

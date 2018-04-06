@@ -20,7 +20,7 @@ class alertBox extends React.Component {
                 <View style={{flex: 2}}>
                     <Button
                         large
-                        color="green"
+                        color="red"
                         buttonStyle={{size: vw * 5,}}
                         title={'بستن'}
                         onPress={() => this.props.onClose()}
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: '#bec4be',
         borderWidth: 0.5, flex: 2,
-        backgroundColor: '#28ff4950'
+        backgroundColor: '#ff3a00'
 
     },
     button: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: '#bec4be',
         borderWidth: 0.5, flex: 2,
-        backgroundColor: '#c4282250',
+        backgroundColor: '#c42822',
         fontSize: vw * 5,
     },
     title: {

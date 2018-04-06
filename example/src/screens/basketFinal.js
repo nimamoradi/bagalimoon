@@ -13,11 +13,12 @@ class basketFinal extends React.Component {
     constructor(props) {
         super(props);
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-
+        console.log(this.props.api_code);
         this.state = {
             basket: [],
             totalPrice: '?',
             sendData: true,
+            order_id: 0,
             customer_receiver_name: ''
         };
         context = this;
@@ -50,6 +51,7 @@ class basketFinal extends React.Component {
             .then((responseData) => {
                 // console.log("inside responsejson");
                 // console.log('response object:', responseData);
+                // alert (JSON.stringify(responseData));
                 context.setState({sendData: false});
                 let totalPrice = 0;
                 let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'
@@ -60,6 +62,7 @@ class basketFinal extends React.Component {
                 }
                 this.setState({
                     basket: basket,
+                    order_id: responseData.id,
                     totalPrice: totalPrice,
                     myAddress: address,
                     customer_receiver_name: responseData.customer_receiver_name
@@ -181,8 +184,19 @@ class basketFinal extends React.Component {
             );
 
     }
-    address(){
-        server.pushScreen('example.Types.checkoutPage','پرداخت',{},context);
+
+    address() {
+        server.pushScreen('example.Types.checkoutPage', 'پرداخت',
+            {
+                shouldUpdateBasket:context.props.shouldUpdateBasket,
+                setBasket: context.props.setBasket,
+                basket: context.props.basket,
+                fullBasket:context.props.fullBasket,
+                order_id: context.state.order_id,
+                api_code: context.props.api_code,
+                address_id: context.props.id,
+            }
+            , context);
     }
 }
 
@@ -231,7 +245,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 50 * vw,
-        height:8*vh,
+        height: 8 * vh,
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,

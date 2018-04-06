@@ -56,6 +56,7 @@ class mapView extends Component {
                 api_code: context.state.api_code,
             })
         }).then((response) => response.json().then((responseData) => {
+            console.log('response object:', responseData);
 
             context.setState({oldAddresses: responseData, sendData: false})
 
@@ -440,14 +441,18 @@ class mapView extends Component {
 
     };
     finalBasket = () => {
-
+        context.props.navigator.pop();
+        context.props.navigator.pop();
         this.props.navigator.push({
             screen: 'example.Types.basketFinal',
             title: 'خرید را نهایی کنید',
             passProps: {
+                shouldUpdateBasket:context.props.shouldUpdateBasket,
+                setBasket: context.props.setBasket,
+                basket: context.props.basket,
+                fullBasket:context.props.fullBasket,
                 api_code: context.state.api_code,
                 id: context.state.myAddress_id,
-                basket: context.props.basket,
                 senderName: context.state.senderName,
             },
         });

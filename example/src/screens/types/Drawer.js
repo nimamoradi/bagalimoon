@@ -8,7 +8,8 @@ import {
     AsyncStorage,
     Image,
     Text,
-    Dimensions
+    Dimensions,
+    Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -50,7 +51,7 @@ class MyClass extends React.Component {
         this.props.navigator.push({
             screen: 'example.Types.orderHistroy',
             passProps: {
-                api_code:this.props.api_code
+                api_code: this.props.api_code
             },
 
 
@@ -105,6 +106,23 @@ class MyClass extends React.Component {
                         </View>
 
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            Share.share({
+                                message: 'خرید اسان با قیمت مناسب',
+                                url: 'https://www.baghali.amins.ir',
+                                title: 'بقالمون'
+                            }, {});
+                        }}>
+                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
+                            <Icon name="share-square-o" size={vw * 8} color="#ff0d04"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>اشتراک</Text>
+                        </View>
+
+                    </TouchableOpacity>
+
                     <TouchableOpacity
                         onPress={() => {
                             AsyncStorage.clear();

@@ -25,6 +25,9 @@ let context;
 let isFirstTime;
 
 class TypePage extends Component {
+    setBasket(basket) {
+        context.setState({basket: basket})
+    }
 
     constructor(props) {
         super(props);
@@ -116,6 +119,8 @@ class TypePage extends Component {
             passProps: {
                 basket: newBasket,
                 isTypePage: true,
+                fullBasket: newBasket,
+                setBasket: this.setBasket,
                 UpdateBasket: TypePage.basketUpdaterSimple,
             },
             navigatorStyle: {
@@ -136,7 +141,6 @@ class TypePage extends Component {
                 id: id,
                 disscount: disscount,
                 off: off,
-
             },
         });
     };
@@ -250,7 +254,7 @@ class TypePage extends Component {
 
     }
 
-    static basketUpdaterSimple(newItems,oldBasket) {
+    static basketUpdaterSimple(newItems, oldBasket) {
         let basket = oldBasket.slice();
 
         for (let i = 0; i < basket.length; i++) {
@@ -276,22 +280,27 @@ class TypePage extends Component {
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
                         {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
                     style={{height: 10 * vh}} basket={this.addToCart} context={this}
-                    sortAs={() => context.setState({
-                        basket: context.state.basket.sort(function (a, b) {
-
-                            if (a.price < b.price) return -1;
-                            if (a.price > b.price) return 1;
-                            return 0;
+                    sortAs={() => {
+                        let bas = context.state.basket.slice();
+                        context.setState({
+                            basket: bas.sort(function (a, b) {
+                                if (a.price < b.price) return -1;
+                                if (a.price > b.price) return 1;
+                                return 0;
+                            })
                         })
-                    })}
-                    sortDe={() => context.setState({
-                        basket: context.state.basket.sort(function (a, b) {
+                    }}
+                    sortDe={() => {
+                        let bas = context.state.basket.slice();
+                        context.setState({
+                            basket: bas.sort(function (a, b) {
 
-                            if (a.price > b.price) return -1;
-                            if (a.price < b.price) return 1;
-                            return 0;
+                                if (a.price > b.price) return -1;
+                                if (a.price < b.price) return 1;
+                                return 0;
+                            })
                         })
-                    })}/>
+                    }}/>
                 <View style={{width: 100 * vw, height: 90 * vh}}>
 
                     <ListViewCustum

@@ -43,7 +43,7 @@ class basketLightBox extends React.Component {
     }
 }
 
-basketLightBox.PropTypes = {};
+basketLightBox.propTypes = {};
 const styles = StyleSheet.create({
     container: {
         width: vw * 75,
@@ -66,8 +66,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#bec4be',
-        borderWidth: 0.5, flex: 2,
-        backgroundColor: '#c4282250',
+        borderWidth: 0.5, flex: 4,
+        height:4*vh,
+        backgroundColor: '#c4282280',
     },
     title: {
         fontFamily: 'B Yekan',

@@ -51,7 +51,7 @@ class FlatListSearch extends React.Component {
 
     onUp = (rowdata) => {
 
-        rowdata.count++;
+        rowdata = Object.assign(rowdata, {count: rowdata.count + 1});
         let list = this.state.data;
         let index = dataHandeling.indexOfId(list, rowdata.id);
         list[index].count = rowdata.count;
@@ -62,7 +62,7 @@ class FlatListSearch extends React.Component {
 
             let list = this.state.data;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index].count = rowdata.count - 1;
+            list[index].count = Object.assign(rowdata, {count: rowdata.count - 1});
             this.setState({data: list});
         }
 
@@ -90,11 +90,11 @@ class FlatListSearch extends React.Component {
 
         }).then((response) => response.json().then((responseData) => {
             this.makeList(responseData.product)
-        })).catch(error => {
+        })).catch(ignored => {
             server.retryParam(this.makeRemoteRequest, context,)
-        }).catch(error => {
+        }).catch(ignored => {
             server.retryParam(this.makeRemoteRequest, context,)
-        })).catch(error => {
+        })).catch(ignored => {
             server.retryParam(this.makeRemoteRequest, context,)
         });
     };
@@ -132,7 +132,7 @@ class FlatListSearch extends React.Component {
             borderRadius: 2 * vw, borderWidth: 1
         }}>
             <TouchableOpacity
-                style={{backgroundColor: '#62bfc7',}}
+                style={{backgroundColor: '#4482c7', flex: 2, justifyContent: 'center', alignItems: 'center'}}
                 onPress={() => {
                     this.makeRemoteRequest(this.state.query);
                 }}>

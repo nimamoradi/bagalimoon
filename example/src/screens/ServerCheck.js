@@ -81,14 +81,6 @@ class ServerCheck extends React.Component {
                         passProps: {api_code: param.api_code,},
 
                     });
-                    this.props.navigator.push({
-                        screen: 'example.Types.loginScreen',
-                        navigatorStyle: {
-                            navBarHidden: true,
-                        },
-                        title: '',
-                        passProps: passProps,
-                    });
                     this.props.navigator.pop();
                 }
             }).catch(error => {

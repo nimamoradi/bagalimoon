@@ -20,21 +20,134 @@ class checkoutPage extends React.Component {
         super(props);
         this.state = {
             code: '',
-            sendData: false,
+            sendData: true,
+            order_checkout: null,
+            webRes: false,
+            webMassage: null
         };
 
         context = this;
     }
 
+    componentDidMount() {
+        this.getPayStatus();
+    }
+
+    getPayStatus = () => {
+
+        // console.log("inside basket", JSON.stringify({
+        //     api_code: context.props.api_code,
+        //     address_id: context.props.address_id,
+        //     order_id: context.props.order_id,
+        // }));
+        fetch(server.getServerAddress() + '/api/payOrder', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
+            },
+            body: JSON.stringify({
+                api_code: context.props.api_code,
+                address_id: context.props.address_id,
+                order_id: context.props.order_id,
+            })
+        }).then((response) => response.json())
+            .then((responseData) => {
+                // console.log("inside responsejson");
+                // console.log('response object:', responseData);
+                // alert(JSON.stringify(responseData));
+
+                if (responseData.ok === true)
+                    context.setState({sendData: false, order_checkout: responseData.authority});
+
+
+            }).catch(ignored => {
+            // console.log('response error:', ignored);
+            server.retryParam(this.getPayStatus, context)
+        }).catch(ignored => {
+            // console.log('response error:', ignored);
+
+            server.retryParam(this.getPayStatus, context)
+        });
+
+
+    };
+
+    onMessage(event) {
+
+        switch (event.nativeEvent.data) {
+            case'the paymant was unsuccessful':
+                context.setState({webMassage: 'پرداخت موفقیت نبود بعدا امتحان کنید'});
+                break;
+            case'pss':
+                context.setState({webMassage: 'پرداخت موفقیت آمیز بود '});
+                context.props.setBasket(context.props.fullBasket.map(item => {
+                    return Object.assign({}, item, {count: 0});
+                }));
+                context.props.shouldUpdateBasket(false);
+
+                break;
+            case'verified_before':
+                context.setState({webMassage: 'سفارش قبلا پرداخت شده'});
+                context.props.shouldUpdateBasket(false);
+                context.props.setBasket(context.props.fullBasket.map(item => {
+                    return Object.assign({}, item, {count: 0});
+                }));
+                break;
+        }
+        context.setState({webRes: true});
+    }
+
+    onClose() {
+        context.props.navigator.dismissLightBox();
+        switch (context.state.webMassage) {
+            case'پرداخت موفقیت نبود بعدا امتحان کنید':
+                context.props.navigator.pop();
+                context.props.navigator.pop();
+                break;
+            case'پرداخت موفقیت آمیز بود ':
+            case'سفارش قبلا پرداخت شده':
+                context.props.navigator.pop();
+                context.props.navigator.pop();
+                break;
+        }
+
+
+    }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <WebView
-                         source={{uri: 'https://www.zarinpal.com/pg/StartPay/$Authority'}}
-                />
-            </View>
-        );
+        if (this.state.webRes) {
+            server.alertAdvanced('توجه', this.state.webMassage, context, this.onClose)
+        }
+
+        if (this.state.sendData) return <View style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Loading/>
+        </View>;
+        else
+            return (
+                <View style={styles.container}>
+                    <WebView
+                        renderLoading={() => {
+                            return <Loading/>
+                        }}
+                        startInLoadingState={true}
+                        javaScriptEnabled={true}
+                        onMessage={this.onMessage}
+                        injectedJavaScript={'var imgs = document.getElementsByTagName("img");for(var i=0, l=imgs.length;i<l;i++){imgs[i].src = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";}'}
+                        source={{uri: 'https://sandbox.zarinpal.com/pg/StartPay/' + this.state.order_checkout}}
+                    />
+                </View>
+            );
+
     }
 
 

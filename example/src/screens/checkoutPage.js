@@ -103,13 +103,11 @@ class checkoutPage extends React.Component {
         context.props.navigator.dismissLightBox();
         switch (context.state.webMassage) {
             case'پرداخت موفقیت نبود بعدا امتحان کنید':
-                context.props.navigator.pop();
-                context.props.navigator.pop();
+                context.props.navigator.popToRoot();
                 break;
             case'پرداخت موفقیت آمیز بود ':
             case'سفارش قبلا پرداخت شده':
-                context.props.navigator.pop();
-                context.props.navigator.pop();
+                context.props.navigator.popToRoot();
                 break;
         }
 

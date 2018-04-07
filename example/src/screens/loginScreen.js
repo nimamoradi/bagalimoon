@@ -126,7 +126,7 @@ class loginScreen extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log('inside login responsejson');
+                console.log('inside login response json');
                 console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {

@@ -125,9 +125,7 @@ class MyClass extends React.Component {
 
                     <TouchableOpacity
                         onPress={() => {
-                            AsyncStorage.clear();
-                            basketfile.writeBasket([])
-                            BackHandler.exitApp();
+                            this.backPressed();
 
                         }}>
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
@@ -144,6 +142,21 @@ class MyClass extends React.Component {
 
             </View>
         );
+    }
+
+    backPressed = () => {
+        AsyncStorage.clear();
+        this.props.navigator.resetTo({
+            screen: 'example.Types.loginScreen', // unique ID registered with Navigation.registerScreen
+            navigatorStyle: {
+                navBarTranslucent: false,
+                navBarHidden: true,
+            },
+            animated: true, // does the resetTo have transition animation or does it happen immediately (optional)
+            animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the resetTo have different transition animation (optional)
+            navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+        });
+
     }
 
 

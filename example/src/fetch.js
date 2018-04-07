@@ -1,8 +1,5 @@
 'use strict';
-
-
 import server from "./code";
-
 
 module.exports = function (url, options) {
 
@@ -31,7 +28,7 @@ module.exports = function (url, options) {
                         if (response.ok)
                             resolve(response);
                         else {
-                            console.log("error "+error)
+                            console.log("error "+error);
                             throw error('bad error code');
                         }
                     })
@@ -41,7 +38,7 @@ module.exports = function (url, options) {
                                 wrappedFetch(--n);
                             }, retryDelay);
                         } else {
-                            console.log("error "+error)
+                            console.log("error :"+error);
                             reject(error);
                         }
                     });

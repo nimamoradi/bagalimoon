@@ -54,7 +54,8 @@ class ServerCheck extends React.Component {
                 console.log(JSON.stringify(responseData));
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
-                    this.props.navigator.push({
+
+                    this.props.navigator.resetTo({
                         backButtonTitle: '',
                         screen: 'example.Types',
                         title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -63,11 +64,12 @@ class ServerCheck extends React.Component {
                             navBarHidden: true,
                         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                         backButtonHidden: true,
-                        overrideBackPress: true,
+                        overrideBackPress: false,
                         passProps: {api_code: param.api_code,},
 
                     });
-                    this.props.navigator.pop();
+
+
                 } else {
                     this.props.navigator.push({
                         backButtonTitle: '',
@@ -81,7 +83,7 @@ class ServerCheck extends React.Component {
                         passProps: {api_code: param.api_code,},
 
                     });
-                    this.props.navigator.pop();
+
                 }
             }).catch(error => {
             this.setState({dataReady: true, isFirstTime: false,})
@@ -92,8 +94,10 @@ class ServerCheck extends React.Component {
     render() {
 
         if (!this.state.dataReady)
-            return <ImageBackground style={{width: 100 * vw, height: 100 * vh,justifyContent:'center',flex:1,
-            alignItems:'center'}} source={require('../../img/login.png')}>
+            return <ImageBackground style={{
+                width: 100 * vw, height: 100 * vh, justifyContent: 'center', flex: 1,
+                alignItems: 'center'
+            }} source={require('../../img/login.png')}>
                 <Spinner
                     size={100}
                     color={'red'}
@@ -134,8 +138,8 @@ const styles = StyleSheet.create({
 
     },
     spinner: {
-        width: 10*vw,
-        height: 10*vw,
+        width: 10 * vw,
+        height: 10 * vw,
 
     },
     text: {

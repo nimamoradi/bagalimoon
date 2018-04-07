@@ -443,8 +443,7 @@ class mapView extends Component {
 
     };
     finalBasket = () => {
-        context.props.navigator.pop();
-        context.props.navigator.pop();
+
         this.props.navigator.push({
             screen: 'example.Types.basketFinal',
             title: 'خرید را نهایی کنید',

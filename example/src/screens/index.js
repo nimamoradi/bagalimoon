@@ -150,7 +150,6 @@ export function mainPage(api_code) {
 }
 
 
-
 export function serverCheckFailed(api_code, user_number) {
     let startAppdata = {
         screen: {
@@ -180,7 +179,7 @@ export function serverCheckFailed(api_code, user_number) {
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
-        passProps: {api_code:api_code,user_number: user_number}, // simple serializable object that will pass as props to all top screens (optional)
+        passProps: {api_code: api_code, user_number: user_number}, // simple serializable object that will pass as props to all top screens (optional)
 
 
     };

@@ -9,36 +9,60 @@ import {vw, vh, vmin, vmax} from '../../viewport'
 function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown}) {
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <View style={styles.halfRow}
+              onPress={onPress}>
+            {(disscount) ?
+                <View
+                    style={{
+                        flex: 1,
+                        height: 16 * vw,
+                        width: 16 * vw,
+                        zIndex: 1,
+                    }}>
+                    <Image
+                        resizeMode="stretch"
+                        source={require('../../../img/mainPage/round.png')}
+                        style={{
+                            zIndex: 0,
+                            height: 16 * vw,
+                            width: 16 * vw,
+                        }}
+                    />
+                    <Text style={styles.discountText}>{price / disscount * 100} %</Text>
+                </View> : <View
+                    style={{
+                        flex: 1,
+                        height: 16 * vw,
+                        width: 16 * vw,
+                        zIndex: 1,
+                    }}/>}
             <View style={styles.row}>
 
                 <Image
                     resizeMode="stretch"
                     indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
                 />
-
-
                 <Text numberOfLines={2} style={styles.text}>{title}</Text>
-
-                <Text style={styles.price}>{price} تومان </Text>
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
+                <Text style={styles.price}>{price} تومان </Text>
+
                 <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 8}
-                              color="black" />
+                        <Icon name="minus" size={vw * 11}
+                              color="black"/>
                     </TouchableOpacity>
 
 
                     {(count !== 0) ? <Text style={styles.countText}>{count}</Text> :
                         <Text style={styles.countTextHidden}>0</Text>}
-                    <TouchableOpacity onPress={onUp} style={{borderRadius: 20}}>
-                        <Icon name="plus" size={vw * 8} color="black" style={{}}/>
+                    <TouchableOpacity onPress={onUp}>
+                        <Icon name="plus" size={vw * 11} color="black"/>
                     </TouchableOpacity>
 
                 </View>
 
             </View>
-        </TouchableOpacity>
+        </View>
     );
 
 
@@ -58,25 +82,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    row: {
-        elevation: 5 * vw,
-        paddingBottom: vh,
+    halfRow: {
+        flexDirection: 'row',
         borderColor: '#00000035',
-        height: 48 * vh,
-        margin: 2*vh,
-        padding:2*vw,
+        height: 40 * vh,
         backgroundColor: '#ebebeb',
-        paddingHorizontal: 16,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
         borderBottomWidth: 1,
         borderRadius: 5 * vh,
         shadowColor: '#eeeeee',
-        borderWidth: 0.5,
+        borderWidth: 0.75,
+        margin: vw,
+        elevation: 5 * vw,
+    },
+    row: {
+        zIndex: 0,
+        flex: 10,
+        right: 8 * vw,
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
     text: {
-        width: 40*vw,
+        width: 30 * vw,
         fontSize: vw * 4.5,
         textAlign: 'center',
         fontFamily: 'B Yekan',
@@ -97,29 +124,39 @@ const styles = StyleSheet.create({
         textAlign: 'right'
     },
     image: {
-        height: 25 * vh,
-        width: 35 * vw,
-        borderRadius: 20,
-        borderWidth: 0.5,
+        height: 20 * vh,
+        width: 28 * vw,
     },
     countText: {
-        backgroundColor:'red',
-        color:'white',
+        color: 'black',
         fontSize: vw * 4.5,
         fontFamily: 'B Yekan',
-        width:8*vw,
-        height:8*vw,
+        width: 8 * vw,
+        height: 8 * vw,
+        borderRadius: 4 * vw,
         textAlign: 'center',
-        borderRadius:4*vw
+        borderColor: 'black',
+        borderWidth: vw * 0.4,
     },
     countTextHidden: {
-        backgroundColor:'red',
+        backgroundColor: 'red',
         fontSize: vw * 4.5,
-        width:8*vw,
-        height:8*vw,
-        borderRadius:4*vw,
+        width: 8 * vw,
+        height: 8 * vw,
+        borderRadius: 4 * vw,
         fontFamily: 'B Yekan',
-        opacity:0
+        opacity: 0
+    },
+
+    discountText: {
+        zIndex: 1,
+        fontSize: vw * 3.5,
+        fontFamily: 'B Yekan',
+        position: 'absolute',
+        bottom: 7.5 * vw,
+        right: 4.5 * vw,
+        color: 'white',
+        transform: [{rotate: '315deg'}]
     }
 });
 

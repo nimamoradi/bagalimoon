@@ -3,7 +3,7 @@ import {
     ScrollView,
     View,
     FlatList,
-    AppState, Text
+    AppState, Text, Image
 } from 'react-native';
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
@@ -204,7 +204,7 @@ class NavigationTypes extends React.Component {
                 };
                 context.setState({
                     superBasket: context.state.superBasket.push(item)
-                })
+                });
             }
 
             this.props.navigator.push({
@@ -395,8 +395,8 @@ class NavigationTypes extends React.Component {
                 {
                     UpdateBasket: NavigationTypes.basketUpdaterNoConcat,
                     basket: json,
-                    fullBasket:this.state.superBasket,
-                    setBasket:NavigationTypes.setBasket
+                    fullBasket: this.state.superBasket,
+                    setBasket: NavigationTypes.setBasket
                 }, this)
         } else {
             server.showLightBox('example.Types.basketLightBox', {
@@ -413,7 +413,7 @@ class NavigationTypes extends React.Component {
 
     static _renderItem({item, index}) {
         return (
-            <View style={{height: 35 * vh}}>
+            <View style={{height: 30 * vh}}>
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
@@ -445,7 +445,7 @@ class NavigationTypes extends React.Component {
                         data={this.state.dataSourceOffer}
                         renderItem={NavigationTypes._renderItem}
                         sliderHeight={vh * 2}
-                        itemHeight={vh * 35}
+                        itemHeight={vh * 30}
                         sliderWidth={100 * vw}
                         itemWidth={100 * vw}
                         loop={false}
@@ -477,23 +477,21 @@ class NavigationTypes extends React.Component {
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderBestSellingProducts(item)}
                     />
-                    <View style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 41*vw,
-                        bottom: 0,
-                        right:41*vw,
-                        borderRadius:18*vw,
-                        width:18*vw,
-                        height:18*vw,
-                        backgroundColor:'blue',
-                        flex:1,
-                        alignContent:'center',
-                        justifyContent:'center'
-                    }}>
-                        <Text style={{
-                            backgroundColor:'green',}}>hi</Text>
-                    </View>
+
+                    <Image
+                        resizeMode="cover"
+                        style={{
+                            top: 0,
+                            left: 40 * vw,
+                            bottom: 2,
+                            right: 40 * vw,
+                            position: 'absolute',
+                            width: 24 * vw,
+                            height: 24 * vw,
+                        }}
+                        source={require('../../img/mainPage/icon.png')}/>
+
+
 
                 </ScrollView>
             );

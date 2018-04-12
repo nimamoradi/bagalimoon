@@ -16,7 +16,7 @@ import {
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
@@ -34,12 +34,9 @@ class mapView extends Component {
 
     load_api_code = () => {
         AsyncStorage.getItem('api_code').then((item) => {
-
             context.setState({api_code: item}, () => {
                 context.isAvailable();
-
             })
-
         })
     };
 
@@ -112,42 +109,82 @@ class mapView extends Component {
         }
     }
 
-    constructor(props) {
-        super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        this.state = {
-            latitude: 36.288022,
-            longitude: 59.616075,
-            myLocation: null,
-            optionSelected: 0,
-            error: null,
-            myAddress: [],
-            sendData: true,
-            myAddressName: '',
-            serverAdderss: '',
-            oldAddresses: [],
-            api_code: '',
-            senderName: '',
-            myAddress_id: -1,
-            index: 0,
-            routes: [
-                {key: 'first', title: 'آدرس جدید'},
-                {key: 'second', title: 'آدرس قدیمی'},
-            ],
-            flexSize: 3.5,
-            buttonHeight:1
-        };
-        context = this;
-        props.navigator.setStyle({navBarHidden: true,});
+    _renderScene = ({route}) => {
+        switch (route.key) {
+            case 'first':
+                return <View style={styles.columnItem}>
+                    <View style={styles.rowItem}>
+                        <TextInput style={styles.borderText}
+                                   onChangeText={(text) => this.setState({myAddressName: text})}>
+                            {this.state.myAddressName}
+                        </TextInput>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.imageBack}
+                            source={require('../../img/label.png')}>
+                            <Text style={styles.Text}>نام آدرس</Text>
+                        </ImageBackground>
+                    </View>
 
+                    <View style={styles.rowItem}>
+                        <TextInput style={styles.borderText}
+                                   onChangeText={(text) => this.setState({myAddress: text})}>
+                            {this.state.myAddress}
+                        </TextInput>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.imageBack}
+                            source={require('../../img/label.png')}>
+                            <Text style={styles.Text}>آدرس</Text>
+                        </ImageBackground>
+                    </View>
 
-    }
-
-    componentDidMount() {
-        this.load_api_code();
-        this.requestLocationPermission();
-    }
-
+                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                        <TouchableOpacity
+                            onPress={_.debounce(this.offlineSale,
+                                1000, {leading: true, trailing: false})}
+                            style={styles.bigButton}>
+                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>;
+            case 'second':
+                let oldAddresses = this.state.oldAddresses.map(function (x) {
+                    return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
+                });
+                return <View style={styles.columnItem}>
+                    <View style={styles.rowItem}>
+                        <Picker
+                            onValueChange={(itemValue, itemIndex) => this.setState({
+                                serverAdderss: itemValue,
+                                myAddress_id: itemValue
+                            })}
+                            style={{flex: 2}}
+                            selectedValue={this.state.serverAdderss}>
+                            <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
+                            {oldAddresses}
+                        </Picker>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.imageBack}
+                            source={require('../../img/label.png')}>
+                            <Text style={styles.Text}>آدرس های قبلی</Text>
+                        </ImageBackground>
+                    </View>
+                    <View style={styles.space}/>
+                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                        <TouchableOpacity
+                            onPress={_.debounce(this.offlineSale,
+                                1000, {leading: true, trailing: false})}
+                            style={styles.bigButton}>
+                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>;
+            default:
+                return null;
+        }
+    };
     newAddresses = () => {
 
 
@@ -183,89 +220,14 @@ class mapView extends Component {
         })
 
     };
-
-
     _handleIndexChange = index => this.setState({index});
-
     _renderHeader = props => <TabBar
         style={{backgroundColor: 'red', borderRadius: 2 * vw, margin: 2 * vw, elevation: 10}} {...props} />;
-
-
-    _renderScene = ({route}) => {
-        switch (route.key) {
-            case 'first':
-                return <View style={styles.columnItem}>
-                    <View style={styles.rowItem}>
-                        <TextInput style={styles.borderText}
-                                   onChangeText={(text) => this.setState({myAddressName: text})}>
-                            {this.state.myAddressName}
-                        </TextInput>
-                        <ImageBackground
-                            resizeMode="stretch"
-                            style={styles.imageBack}
-                            source={require('../../img/label.png')}>
-                            <Text style={styles.Text}>نام آدرس</Text>
-                        </ImageBackground>
-                    </View>
-
-                    <View style={styles.rowItem}>
-                        <TextInput style={styles.borderText}
-                                   onChangeText={(text) => this.setState({myAddress: text})}>
-                            {this.state.myAddress}
-                        </TextInput>
-                        <ImageBackground
-                            resizeMode="stretch"
-                            style={styles.imageBack}
-                            source={require('../../img/label.png')}>
-                            <Text style={styles.Text}>آدرس</Text>
-                        </ImageBackground>
-                    </View>
-
-                    <View style={[styles.center,{opacity:this.state.buttonHeight}]}>
-                        <TouchableOpacity
-                            onPress={_.debounce(this.offlineSale,
-                                1000, {leading: true, trailing: false})}
-                           style={styles.bigButton}>
-                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>;
-            case 'second':
-                let oldAddresses = this.state.oldAddresses.map(function (x) {
-                    return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
-                });
-                return <View style={styles.columnItem}>
-                    <View style={styles.rowItem}>
-                        <Picker
-                            onValueChange={(itemValue, itemIndex) => this.setState({
-                                serverAdderss: itemValue,
-                                myAddress_id: itemValue
-                            })}
-                            style={{flex: 2}}
-                            selectedValue={this.state.serverAdderss}>
-                            <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
-                            {oldAddresses}
-                        </Picker>
-                        <ImageBackground
-                            resizeMode="stretch"
-                            style={styles.imageBack}
-                            source={require('../../img/label.png')}>
-                            <Text style={styles.Text}>آدرس های قبلی</Text>
-                        </ImageBackground>
-                    </View>
-                    <View style={styles.space}/>
-                    <View style={[styles.center,{opacity:this.state.buttonHeight}]}>
-                        <TouchableOpacity
-                            onPress={_.debounce(this.offlineSale,
-                                1000, {leading: true, trailing: false})}
-                            style={styles.bigButton}>
-                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>;
-            default:
-                return null;
-        }
+    keyboardWillShow = (event) => {
+        this.setState({flexSize: 0, buttonHeight: 0});
+    };
+    keyboardWillHide = (event) => {
+        this.setState({flexSize: 3.5, buttonHeight: 1});
     };
 
     componentWillMount() {
@@ -278,13 +240,107 @@ class mapView extends Component {
         this.keyboardWillHideSub.remove();
     }
 
-    keyboardWillShow = (event) => {
-        this.setState({flexSize: 0,buttonHeight:0});
-    };
+    offlineSale = () => {
+        // console.log(context.state.myLocation);
+        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
+            if (context.state.index === 0) {
 
-    keyboardWillHide = (event) => {
-        this.setState({flexSize: 3.5,buttonHeight:1});
+                if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
+                    && context.state.myAddressName !== null)) {
+                    server.alert('اخطار',
+                        'همه فیلدها پر نشده اند',
+                        context);
+                }
+                else if (context.state.myLocation === null && context.state.myLocation.length > 0) {
+                    server.alert('اخطار',
+                        'موقیت خود را انتخاب کنید',
+                        context);
+                }
+                else {
+                    context.setState({sendData: true});
+                    this.newAddresses();
+                }
+            }
+            else if (context.state.index === 1) {
+
+                if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
+                    server.alert('اخطار',
+                        "لطفا آدرس را انتخاب کنید",
+                        context);
+
+                else
+                    this.finalBasket();
+
+
+            }
+
+        }
+        else if (context.state.senderName.search(/[a-zA-Z]/) !== -1) {
+            server.alert('اخطار',
+                'نام تحویل گیرنده باید فارسی باشد',
+                context);
+
+        }
+        else
+            server.alert('اخطار',
+                'نام تحویل گیرنده الزامی است',
+                context);
+
+
     };
+    finalBasket = () => {
+
+        this.props.navigator.push({
+            screen: 'example.Types.basketFinal',
+            title: 'خرید را نهایی کنید',
+            passProps: {
+                shouldUpdateBasket: context.props.shouldUpdateBasket,
+                setBasket: context.props.setBasket,
+                basket: context.props.basket,
+                fullBasket: context.props.fullBasket,
+                api_code: context.state.api_code,
+                id: context.state.myAddress_id,
+                senderName: context.state.senderName,
+            },
+        });
+    }
+    _keyExtractor = (item, index) => item.id;
+
+    constructor(props) {
+        super(props);
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+        this.state = {
+            latitude: 36.288022,
+            longitude: 59.616075,
+            myLocation: null,
+            optionSelected: 0,
+            error: null,
+            myAddress: [],
+            sendData: true,
+            myAddressName: '',
+            serverAdderss: '',
+            oldAddresses: [],
+            api_code: '',
+            senderName: '',
+            myAddress_id: -1,
+            index: 0,
+            routes: [
+                {key: 'first', title: 'آدرس جدید'},
+                {key: 'second', title: 'آدرس قدیمی'},
+            ],
+            flexSize: 3.5,
+            buttonHeight: 1
+        };
+        context = this;
+        props.navigator.setStyle({navBarHidden: true,});
+
+
+    }
+
+    componentDidMount() {
+        this.load_api_code();
+        this.requestLocationPermission();
+    }
 
     render() {
 
@@ -316,7 +372,7 @@ class mapView extends Component {
                     }, {flex: this.state.flexSize}]}>
 
                         <MapView
-                          provider={PROVIDER_GOOGLE}
+                            provider={PROVIDER_GOOGLE}
                             style={styles.map}
                             region={{
                                 latitude: this.state.latitude,
@@ -391,79 +447,12 @@ class mapView extends Component {
                 </View>
             );
     }
-    _keyExtractor = (item, index) => item.id;
-
-
-    offlineSale = () => {
-        // console.log(context.state.myLocation);
-        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
-            if (context.state.index === 0) {
-
-                if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
-                        && context.state.myAddressName !== null)) {
-                    server.alert('اخطار',
-                        'همه فیلدها پر نشده اند',
-                        context);
-                }
-                else if (context.state.myLocation === null) {
-                    server.alert('اخطار',
-                        'موقیت خود را انتخاب کنید',
-                        context);
-                }
-                else {
-                    context.setState({sendData: true});
-                    this.newAddresses();
-                }
-            }
-            else if (context.state.index === 1) {
-
-                if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
-                    server.alert('اخطار',
-                        "لطفا آدرس را انتخاب کنید",
-                        context);
-
-                else
-                    this.finalBasket();
-
-
-            }
-
-        }
-        else if (context.state.senderName.search(/[a-zA-Z]/) !== -1) {
-            server.alert('اخطار',
-                'نام تحویل گیرنده باید فارسی باشد',
-                context);
-
-        }
-        else
-            server.alert('اخطار',
-                'نام تحویل گیرنده الزامی است',
-                context);
-
-
-    };
-    finalBasket = () => {
-
-        this.props.navigator.push({
-            screen: 'example.Types.basketFinal',
-            title: 'خرید را نهایی کنید',
-            passProps: {
-                shouldUpdateBasket:context.props.shouldUpdateBasket,
-                setBasket: context.props.setBasket,
-                basket: context.props.basket,
-                fullBasket:context.props.fullBasket,
-                api_code: context.state.api_code,
-                id: context.state.myAddress_id,
-                senderName: context.state.senderName,
-            },
-        });
-    }
 
 }
 
 const styles = StyleSheet.create({
         center: {
-            flex:1,
+            flex: 1,
             alignContent: 'center',
             alignItems: 'center',
         },

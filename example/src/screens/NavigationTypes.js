@@ -3,8 +3,9 @@ import {
     ScrollView,
     View,
     FlatList,
-    AppState, Text, Image
+    AppState, Image
 } from 'react-native';
+
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
@@ -435,7 +436,7 @@ class NavigationTypes extends React.Component {
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
                             search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
                                 {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
-                    <Carousel
+                    {this.state.dataSourceOffer != null ? <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
                         autoplay={true}
@@ -449,7 +450,8 @@ class NavigationTypes extends React.Component {
                         sliderWidth={100 * vw}
                         itemWidth={100 * vw}
                         loop={false}
-                    />
+                    /> : null}
+
 
                     <ListViewCustum
                         data={this.state.Types} action={this.dummyTypePage}/>
@@ -490,7 +492,6 @@ class NavigationTypes extends React.Component {
                             height: 24 * vw,
                         }}
                         source={require('../../img/mainPage/icon.png')}/>
-
 
 
                 </ScrollView>

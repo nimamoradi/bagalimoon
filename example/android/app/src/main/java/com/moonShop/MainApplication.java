@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.i18nmanager.I18nUtil;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
@@ -41,7 +42,8 @@ public class MainApplication extends NavigationApplication {
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
-
+        I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
+        sharedI18nUtilInstance.allowRTL(this, false);
         // Call syncHashedEmail anywhere in your app if you have the user's email.
         // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
         // OneSignal.syncHashedEmail(userEmail);

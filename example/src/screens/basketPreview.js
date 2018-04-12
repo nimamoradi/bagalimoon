@@ -6,6 +6,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import dataHandeling from "../dataHandeling";
 import SimpleNavbar from '../navBars/SimpleNavbar'
+import CountCircle from '../components/productItem/countCircle';
 
 let context;
 
@@ -62,7 +63,7 @@ class basketPreview extends React.Component {
                 title: 'آدرس',
                 passProps: {
                     setBasket: context.props.setBasket,
-                    fullBasket:context.props.fullBasket,
+                    fullBasket: context.props.fullBasket,
                     basket: context.state.basket,
                     shouldUpdateBasket: this.shouldUpdateBasket
                 },
@@ -119,10 +120,13 @@ class basketPreview extends React.Component {
                     <Icon name="minus" size={vw * 8} color="black"/>
                 </TouchableOpacity>
 
-                <View style={{flexDirection: 'column',}}>
+                <View style={{
+                    flexDirection: 'column', justifyContent: 'center',
+                    alignItems: 'center', flex: 1
+                }}>
                     <Text style={styles.price}>{rowData.price}</Text>
                     <Text style={styles.price}>تومان</Text>
-                    <Text style={styles.price}>{rowData.count}</Text>
+                    <CountCircle count={rowData.count}/>
                 </View>
                 <TouchableOpacity onPress={() => {
                     this.onUp(rowData);
@@ -139,7 +143,7 @@ class basketPreview extends React.Component {
         );
     };
     _keyExtractor = (item, index) => item.id;
-//
+
     render() {
         return (
 
@@ -160,40 +164,48 @@ class basketPreview extends React.Component {
 
                 <ImageBackground
                     resizeMode="stretch"
-                    style={{width: 90 * vw, height: 15 * vh, flexDirection: 'row',}}
+                    style={{width: 90 * vw, height: 12 * vh, flexDirection: 'row',}}
                     source={require('../../img/basketPreview.png')}
                 >
 
-                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                        <View style={{flex: 1}}/>
-                        <View>
-                            <Text style={styles.price}>
-                                {this.state.totalPrice}
-                            </Text>
-                            <Text style={styles.price}>
-                                تومان
-                            </Text>
-                        </View>
-                        <Text style={styles.text}>
-                            جمع خرید
-                        </Text>
-                    </View>
 
                     <TouchableOpacity onPress={_.debounce(this.address,
                         1000, {leading: true, trailing: false})}>
                         <ImageBackground
                             resizeMode="stretch"
-                            style={{
-                                width: 35 * vw, height: 15 * vh, borderBottomColor: 'black',
-                                flexDirection: 'row', alignItems: 'center'
-                            }}
+                            style={styles.greenBox}
                             source={require('../../img/green.png')}
                         >
-                            <View style={{flex: 1}}/>
-                            <Text style={{fontSize: vw * 4, color: 'black', flex: 1, alignSelf: 'center'}}>پرداخت</Text>
-                            <View style={{flex: 1}}/>
+
+                            <Text style={{fontSize: vw * 5, color: 'black',}}>پرداخت</Text>
+
                         </ImageBackground>
                     </TouchableOpacity>
+                    <ImageBackground
+                        resizeMode="stretch"
+                        style={styles.rightEdge}
+                        source={require('../../img/basketPreview/rightEdge.png')}>
+                        <View style={styles.center}>
+                            <Text style={styles.price}>
+                                مبلغ اصلی
+                            </Text>
+                            <Text style={styles.price}>
+                                {this.state.totalPrice} تومان
+                            </Text>
+                        </View>
+                    </ImageBackground>
+                    <ImageBackground
+                        resizeMode="stretch"
+                        style={styles.rightEdge}
+                        source={require('../../img/basketPreview/rightEdge.png')}>
+                        <Text> ji </Text>
+                    </ImageBackground>
+                    <ImageBackground
+                        resizeMode="stretch"
+                        style={styles.rightEdge}
+                        source={require('../../img/basketPreview/rightEdge.png')}>
+                        <Text> ji </Text>
+                    </ImageBackground>
                 </ImageBackground>
 
 
@@ -206,7 +218,22 @@ class basketPreview extends React.Component {
 
 
 const styles = StyleSheet.create({
-
+    rightEdge: {
+        marginLeft: -4 * vw,
+        width: 24 * vw, height: 11 * vh,
+    },
+    greenBox: {
+        width: 30 * vw,
+        height: 12 * vh,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    center: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
     row: {
 
         paddingHorizontal: 16,
@@ -239,7 +266,7 @@ const styles = StyleSheet.create({
     },
     price: {
         color: 'black',
-        fontSize: vw * 4,
+        fontSize: vw * 3.75,
         fontFamily: 'B Yekan',
         textAlign: 'center'
     },

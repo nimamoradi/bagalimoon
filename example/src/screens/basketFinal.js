@@ -203,7 +203,6 @@ class basketFinal extends React.Component {
 
 basketFinal.propTypes = {
     basket: PropTypes.array.isRequired,//encoded array in json
-
 };
 
 const styles = StyleSheet.create({

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import ProgressBar from 'react-native-progress/Bar';
+import CountCircle from './countCircle';
 
 import {vw, vh, vmin, vmax} from '../../viewport'
 
@@ -53,8 +54,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
                     </TouchableOpacity>
 
 
-                    {(count !== 0) ? <Text style={styles.countText}>{count}</Text> :
-                        <Text style={styles.countTextHidden}>0</Text>}
+                    <CountCircle count={count}/>
                     <TouchableOpacity onPress={onUp}>
                         <Icon name="plus" size={vw * 11} color="black"/>
                     </TouchableOpacity>
@@ -126,26 +126,6 @@ const styles = StyleSheet.create({
     image: {
         height: 20 * vh,
         width: 28 * vw,
-    },
-    countText: {
-        color: 'black',
-        fontSize: vw * 4.5,
-        fontFamily: 'B Yekan',
-        width: 8 * vw,
-        height: 8 * vw,
-        borderRadius: 4 * vw,
-        textAlign: 'center',
-        borderColor: 'black',
-        borderWidth: vw * 0.4,
-    },
-    countTextHidden: {
-        backgroundColor: 'red',
-        fontSize: vw * 4.5,
-        width: 8 * vw,
-        height: 8 * vw,
-        borderRadius: 4 * vw,
-        fontFamily: 'B Yekan',
-        opacity: 0
     },
 
     discountText: {

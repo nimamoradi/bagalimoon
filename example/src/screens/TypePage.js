@@ -184,7 +184,7 @@ class TypePage extends Component {
     loadRenderRowData = async (category_id) => {
 
         context.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
+        (fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
 
             method: 'POST',
             headers: {
@@ -213,8 +213,10 @@ class TypePage extends Component {
                 }
             ).catch(error => {
                 server.retryParam(this.loadRenderRowData, context, category_id, error)
-            }
-        )
+            }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context, category_id, error)
+            }));
+
 
     };
 

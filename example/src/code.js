@@ -6,7 +6,8 @@ class code {
 
     static timeOut = 8000;
     static retryCount = 5;
-      //push screen relevant code here
+
+    //push screen relevant code here
     static pushScreen(screen, title, passProps, context) {
         context.props.navigator.push({
             screen: screen,
@@ -54,10 +55,11 @@ class code {
             }
         })
     };
-    static alertAdvanced(title, text, context,onclose) {
+
+    static alertAdvanced(title, text, context, onclose) {
         context.props.navigator.showLightBox({
             screen: 'example.alert',
-            passProps: {title: title, text: text, onClose:onclose},
+            passProps: {title: title, text: text, onClose: onclose},
             style: {
                 backgroundBlur: 'dark',
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',

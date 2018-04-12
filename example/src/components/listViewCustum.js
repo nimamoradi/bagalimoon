@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    ScrollView
+    ScrollView, Image
 } from 'react-native';
 
 import _ from 'lodash'
@@ -36,7 +36,11 @@ class listViewCustum extends React.Component {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 style={styles.container}>
+                <Image style={{width: 5 * vh, height: 10 * vh, marginRight:  vh}}
+                       source={require('../../img/leftCorner.png')}/>
                 {listItem}
+                <Image style={{width: 5 * vh, height: 10 * vh, marginLeft: -2 * vh}}
+                       source={require('../../img/cornerRight.png')}/>
             </ScrollView>
         )
     }

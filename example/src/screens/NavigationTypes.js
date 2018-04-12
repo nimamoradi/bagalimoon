@@ -461,7 +461,7 @@ class NavigationTypes extends React.Component {
                     <FlatList
                         style={{
                             flexDirection: 'row',
-                            width: 100 * vw, height: 55 * vh
+                            width: 100 * vw, height: 45 * vh
                         }}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
@@ -472,7 +472,7 @@ class NavigationTypes extends React.Component {
                     <Header style={{height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh,}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 45 * vh,}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}

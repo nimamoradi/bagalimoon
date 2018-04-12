@@ -10,7 +10,7 @@ import {vw, vh, vmin, vmax} from '../../viewport'
 function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown}) {
 
     return (
-        <View style={styles.halfRow}
+        <TouchableOpacity style={styles.halfRow}
               onPress={onPress}>
             {(disscount) ?
                 <View
@@ -62,7 +62,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
                 </View>
 
             </View>
-        </View>
+        </TouchableOpacity>
     );
 
 

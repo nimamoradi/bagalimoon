@@ -326,7 +326,7 @@ class TypePage extends Component {
                                 <ItemView
                                     keyExtractor={this._keyExtractor}
                                     title={item.name}
-                                    disscount={item.main_price}
+                                    disscount={(item.off !== 0) ? item.main_price : null}
                                     price={item.price}
                                     count={item.count}
                                     onUp={() => this.onUp(item)}

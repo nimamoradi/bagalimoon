@@ -21,6 +21,8 @@ class basketPreview extends React.Component {
         this.state = {
             basket: basket,
             totalPrice: '?',
+            discounted: '?',
+            wholePrice: '?',
             shouldUpdateBasket: true
         };
         context = this;
@@ -44,14 +46,20 @@ class basketPreview extends React.Component {
 
     componentDidMount() {
         let totalPrice = 0;
+        let wholePrice = 0;
+
         let basket = dataHandeling.basketFilter(context.state.basket);
-        for (let i = 0; i < basket.length; i++) {
-            totalPrice += basket[i]['price'] * basket[i]['count']
-        }
+        basket.map(function (item) {
+            totalPrice += item['price'] * item['count'];
+            wholePrice += ((item.off !== 0) ? item.main_price : 0) * item.count
+        });
+
 
         this.setState({
             basket: basket,
             totalPrice: totalPrice,
+            wholePrice: wholePrice,
+            discounted: wholePrice - totalPrice
         });
     }
 
@@ -71,41 +79,54 @@ class basketPreview extends React.Component {
         } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);
     };
     onUp = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
-        let list = this.state.basket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-        this.onCountChanged(rowdata, false);
-        this.setState({
-            basket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
+        if (rowdata.max_in_order > rowdata.count) {
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
+            let list = this.state.basket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+            this.onCountChanged(rowdata, false);
 
-        });
+            this.setState({
+                basket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context);
     };
     onDown = (rowdata) => {
         let rowDataCopy = Object.assign({}, rowdata);
         if (rowDataCopy.count !== 0) {
             rowDataCopy.count--;
             this.onCountChanged(rowdata, true);
+
+            let list = this.state.basket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+
+            this.setState({
+                basket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
         }
-        let list = this.state.basket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-
-        this.setState({
-            basket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
-
-        });
     };
     onCountChanged = (rowdata, down) => {
         let priceChange;
-        if (down)
+        let wholePrice;
+
+        if (down) {
             priceChange = -rowdata.price;
-        else priceChange = rowdata.price;
+            wholePrice = -rowdata.main_price;
+        }
+        else {
+            priceChange = rowdata.price;
+            wholePrice = rowdata.main_price;
+        }
         priceChange = priceChange + this.state.totalPrice;
-        this.setState({totalPrice: priceChange});
+        wholePrice = wholePrice + this.state.wholePrice;
+        this.setState({totalPrice: priceChange, wholePrice: wholePrice, discounted: wholePrice - priceChange});
 
     };
 
@@ -121,8 +142,10 @@ class basketPreview extends React.Component {
                 </TouchableOpacity>
 
                 <View style={{
-                    flexDirection: 'column', justifyContent: 'center',
-                    alignItems: 'center', flex: 1
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1
                 }}>
                     <Text style={styles.price}>{rowData.price}</Text>
                     <Text style={styles.price}>تومان</Text>
@@ -130,8 +153,7 @@ class basketPreview extends React.Component {
                 </View>
                 <TouchableOpacity onPress={() => {
                     this.onUp(rowData);
-                }
-                }>
+                }}>
                     <Icon name="plus" size={vw * 8} color="black"/>
                 </TouchableOpacity>
                 <Text style={styles.text}>{rowData.name}</Text>
@@ -167,8 +189,6 @@ class basketPreview extends React.Component {
                     style={{width: 90 * vw, height: 12 * vh, flexDirection: 'row',}}
                     source={require('../../img/basketPreview.png')}
                 >
-
-
                     <TouchableOpacity onPress={_.debounce(this.address,
                         1000, {leading: true, trailing: false})}>
                         <ImageBackground
@@ -190,7 +210,7 @@ class basketPreview extends React.Component {
                                 مبلغ اصلی
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.totalPrice} تومان
+                                {this.state.wholePrice} تومان
                             </Text>
                         </View>
                     </ImageBackground>
@@ -198,13 +218,29 @@ class basketPreview extends React.Component {
                         resizeMode="stretch"
                         style={styles.rightEdge}
                         source={require('../../img/basketPreview/rightEdge.png')}>
-                        <Text> ji </Text>
+                        <View style={styles.center}>
+                            <Text style={styles.price}>
+                                با تخفیف
+                            </Text>
+                            <Text style={styles.price}>
+                                {this.state.totalPrice}
+                            </Text>
+                        </View>
+
                     </ImageBackground>
                     <ImageBackground
                         resizeMode="stretch"
                         style={styles.rightEdge}
                         source={require('../../img/basketPreview/rightEdge.png')}>
-                        <Text> ji </Text>
+                        <View style={styles.center}>
+                            <Text style={styles.price}>
+                                سود شما
+                            </Text>
+                            <Text style={styles.price}>
+                                {this.state.discounted}
+                            </Text>
+                        </View>
+
                     </ImageBackground>
                 </ImageBackground>
 

@@ -50,7 +50,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
 
                     <View style={{flexDirection: 'column', width: 25 * vw}}>
                         <Text style={styles.text}>{title}</Text>
-                        <Text style={styles.discount}>{disscount} تومان </Text>
+                        {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                         <Text style={styles.price}>{price} تومان </Text>
                     </View>
 

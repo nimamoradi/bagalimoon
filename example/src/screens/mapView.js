@@ -11,7 +11,6 @@ import {
     PermissionsAndroid,
     Dimensions,
     Picker,
-    Animated,
     Keyboard,
 
 } from 'react-native';
@@ -115,9 +114,9 @@ class mapView extends Component {
                 return <View style={styles.columnItem}>
                     <View style={styles.rowItem}>
                         <TextInput style={styles.borderText}
-                                   onChangeText={(text) => this.setState({myAddressName: text})}>
-                            {this.state.myAddressName}
-                        </TextInput>
+                                   onChangeText={(text) => this.setState({myAddressName: text})}
+                                   value={this.state.myAddressName}
+                        />
                         <ImageBackground
                             resizeMode="stretch"
                             style={styles.imageBack}
@@ -128,9 +127,9 @@ class mapView extends Component {
 
                     <View style={styles.rowItem}>
                         <TextInput style={styles.borderText}
-                                   onChangeText={(text) => this.setState({myAddress: text})}>
-                            {this.state.myAddress}
-                        </TextInput>
+                                   onChangeText={(text) => this.setState({myAddress: text})}
+                                   value={this.state.myAddress}
+                        />
                         <ImageBackground
                             resizeMode="stretch"
                             style={styles.imageBack}
@@ -242,7 +241,7 @@ class mapView extends Component {
 
     offlineSale = () => {
         // console.log(context.state.myLocation);
-        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
+        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[ا-ی]/) === 1) {
             if (context.state.index === 0) {
 
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
@@ -303,7 +302,7 @@ class mapView extends Component {
                 senderName: context.state.senderName,
             },
         });
-    }
+    };
     _keyExtractor = (item, index) => item.id;
 
     constructor(props) {
@@ -315,7 +314,7 @@ class mapView extends Component {
             myLocation: null,
             optionSelected: 0,
             error: null,
-            myAddress: [],
+            myAddress: '',
             sendData: true,
             myAddressName: '',
             serverAdderss: '',
@@ -417,9 +416,9 @@ class mapView extends Component {
 
                             <TextInput style={styles.borderText}
                                        placeholder="نام"
-                                       onChangeText={(text) => this.setState({senderName: text})}>
-                                {context.state.senderName}
-                            </TextInput>
+                                       onChangeText={(text) => this.setState({senderName: text})}
+                                       value={context.state.senderName}
+                            />
                             <ImageBackground
                                 resizeMode="stretch"
                                 style={styles.imageBack}
@@ -493,10 +492,9 @@ const styles = StyleSheet.create({
         borderText: {
             width: 60 * vw,
             fontSize: vw * 4,
-
             color: 'black',
             fontFamily: 'B Yekan',
-            height: vh * 6,
+            height: vh * 7,
 
         },
         Text: {

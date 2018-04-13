@@ -15,6 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import dataHandeling from "../dataHandeling";
 import basketFile from "../basketFile";
 
+
 let context;
 
 class FlatListSearch extends React.Component {
@@ -44,7 +45,7 @@ class FlatListSearch extends React.Component {
         }
 
         context.setState({
-            data:  responseData,
+            data: responseData,
             loading: true,
         });
     };
@@ -115,7 +116,7 @@ class FlatListSearch extends React.Component {
                     renderItem={({item}) => (
                         <RectProduct
                             title={item.name}
-                            disscount={item.main_price}
+                            disscount={(item.off !== 0) ? item.main_price : null}
                             price={item.price}
                             count={item.count}
                             onUp={() => this.onUp(item)}
@@ -134,7 +135,7 @@ class FlatListSearch extends React.Component {
             borderRadius: 2 * vw, borderWidth: 1
         }}>
             <TouchableOpacity
-                style={{backgroundColor: '#4482c7', flex: 2, justifyContent: 'center', alignItems: 'center'}}
+                style={{backgroundColor: '#4482c7', height: 16 * vw, flex: 2, justifyContent: 'center', alignItems: 'center'}}
                 onPress={() => {
                     this.makeRemoteRequest(this.state.query);
                 }}>
@@ -149,7 +150,8 @@ class FlatListSearch extends React.Component {
                 onChangeText={(text) => {
                     this.setState({query: text});
                 }}
-            >{this.state.query}</TextInput>
+
+                value={this.state.query}/>
 
 
         </View>

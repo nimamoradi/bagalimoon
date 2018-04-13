@@ -51,7 +51,7 @@ class basketPreview extends React.Component {
         let basket = dataHandeling.basketFilter(context.state.basket);
         basket.map(function (item) {
             totalPrice += item['price'] * item['count'];
-            wholePrice += ((item.off !== 0) ? item.main_price : 0) * item.count
+            wholePrice += item.main_price * item.count
         });
 
 

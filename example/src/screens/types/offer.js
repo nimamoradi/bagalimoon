@@ -59,7 +59,6 @@ class offer extends Component {
     };
 
 
-
     loadData = async () => {
         const data = await AsyncStorage.getItem('@CurrentBasket');
         if (data === null) return 0;
@@ -102,15 +101,16 @@ class offer extends Component {
     onUp = () => {
         let num = Number.parseInt(this.state.myNumber, 10);
         this.setState({myNumber: String(num + 1)}, () => {
-            this.props.onUP(num,this.props.id);
+            this.props.onUP(num, this.props.id);
         });
 
     };
     onDown = () => {
         let num = Number.parseInt(this.state.myNumber, 10);
-        if (num !== 0){
-            this.props.onDown(num,this.props.id);
-            this.setState({myNumber: String(num- 1)});}
+        if (num !== 0) {
+            this.props.onDown(num, this.props.id);
+            this.setState({myNumber: String(num - 1)});
+        }
 
         else this.setState({myNumber: '0'});
 
@@ -126,7 +126,7 @@ class offer extends Component {
                     alignItems: "stretch",
                 }}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
-                        <View style={{flex: 55*vw, flexDirection: 'column'}}>
+                        <View style={{flex: 55 * vw, flexDirection: 'column'}}>
                             <View
                                 style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 <Text style={{
@@ -148,9 +148,9 @@ class offer extends Component {
                                     keyboardType='numeric' style={{
                                     fontSize: vw * 4,
                                     fontFamily: 'B Yekan', textAlign: 'center'
-                                }}>
-                                    {this.state.myNumber}
-                                </TextInput>
+                                }}
+                                    value={this.state.myNumber}
+                                />
                                 <View style={{flex: 1, flexDirection: 'column'}}>
                                     <TouchableOpacity onPress={this.onUp}>
                                         <Icon name="plus" size={vw * 5} color="#17C408" style={{margin: 10}}/>
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     }
     , des: {},
     image: {
-        flexDirection:'row',
+        flexDirection: 'row',
         width: vw * 45,
         height: vh * 40,
         borderRadius: 20,

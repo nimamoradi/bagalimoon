@@ -79,9 +79,9 @@ class loginScreen extends React.Component {
                             <Text style={styles.text}>شماره همراه</Text>
                             <TextInput
                                 onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                                keyboardType='numeric' style={styles.textInput}>
-                                {this.state.phoneNumber}
-                            </TextInput>
+                                keyboardType='numeric' style={styles.textInput}
+                                value={this.state.phoneNumber}
+                            />
 
                             <TouchableOpacity
                                 onPress={this.isAvailable}

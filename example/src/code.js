@@ -1,8 +1,9 @@
 import * as DeviceInfo from 'react-native-device-info';
 import {vw, vh, vmin, vmax} from './viewport'
+import {Navigation } from "react-native-navigation";
 
 class code {
-    static serverAddress = 'https://www.baghali.amins.ir/';
+    static serverAddress = 'http://www.baghali.amins.ir/';
 
     static timeOut = 8000;
     static retryCount = 5;
@@ -33,7 +34,7 @@ class code {
     }
 
     static showLightBox(screen, passProps, context) {
-        context.props.navigator.showLightBox({
+        Navigation.showLightBox({
             screen: screen,
             passProps: passProps,
             style: {
@@ -45,7 +46,7 @@ class code {
     };
 
     static alert(title, text, context) {
-        context.props.navigator.showLightBox({
+        Navigation.showLightBox({
             screen: 'example.alert',
             passProps: {title: title, text: text, onClose: () => this.dismissLightBox(context)},
             style: {

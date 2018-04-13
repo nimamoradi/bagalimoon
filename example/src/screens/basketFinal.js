@@ -163,10 +163,10 @@ class basketFinal extends React.Component {
                         </View>
 
                     </View>
-                    <View style={{flexDirection: 'row',}}>
+                    <View style={{flexDirection: 'row',height:8*vh }}>
                         <TouchableOpacity onPress={this.address}>
                             <View style={styles.button}>
-                                <Icon name="shopping-cart" size={vw * 5} color="#00ff0050"/>
+                                <Icon name="shopping-cart" size={vw * 5} color="green"/>
                                 <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
@@ -175,7 +175,7 @@ class basketFinal extends React.Component {
                                 this.props.navigator.pop();
                             }}>
                             <View style={styles.buttonCancel}>
-                                <Text style={{fontSize: vw * 4,}}>حذف سفارش</Text>
+                                <Text style={{fontSize: vw * 4,}}>پرداخت هنگام تحویل</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -185,14 +185,16 @@ class basketFinal extends React.Component {
             );
 
     }
+
     _keyExtractor = (item, index) => item.id;
+
     address() {
         server.pushScreen('example.Types.checkoutPage', 'پرداخت',
             {
-                shouldUpdateBasket:context.props.shouldUpdateBasket,
+                shouldUpdateBasket: context.props.shouldUpdateBasket,
                 setBasket: context.props.setBasket,
                 basket: context.props.basket,
-                fullBasket:context.props.fullBasket,
+                fullBasket: context.props.fullBasket,
                 order_id: context.state.order_id,
                 api_code: context.props.api_code,
                 address_id: context.props.id,
@@ -245,25 +247,27 @@ const styles = StyleSheet.create({
     },
     button: {
         width: 50 * vw,
-        height: 8 * vh,
+        height: 16 * vh,
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        margin: 2,
-        alignContent: 'center',
+        margin: 2,flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
     },
     buttonCancel: {
-        height: 8 * vh,
+        height: 16 * vh,
         width: 50 * vw,
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        margin: 2,
-        alignContent: 'center',
+        margin: 2,flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: '#d46e62',
         backgroundColor: '#d46e6220'
     }, container: {

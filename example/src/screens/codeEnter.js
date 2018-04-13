@@ -46,9 +46,9 @@ class codeEnter extends React.Component {
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}
-                            keyboardType='numeric' style={styles.textInput}>
-                            {this.state.code}
-                        </TextInput>
+                            keyboardType='numeric' style={styles.textInput}
+                            value=  {this.state.code}/>
+
 
                         <TouchableOpacity
                             onPress={this.isAvailable}

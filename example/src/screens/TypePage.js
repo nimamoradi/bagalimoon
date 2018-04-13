@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import {
-    StyleSheet, View,
-    FlatList,
+    View,
+    FlatList, TouchableOpacity,
 } from 'react-native';
-import TypeButton from '../components/TypeButton'
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ItemView from '../components/productItem/itemView'
 import server from '../code'
@@ -19,7 +19,7 @@ import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
 import _ from 'lodash'
 import ListViewCustum from "../components/listViewCustum";
-import * as axios from "axios";
+
 
 let context;
 let isFirstTime;
@@ -80,6 +80,7 @@ class TypePage extends Component {
             dataReady: false,
             basket: [],
             Categories: Categories,
+            sorted: false,
         };
 
         context = this;
@@ -273,6 +274,29 @@ class TypePage extends Component {
 
     }
 
+    sortAs() {
+        let bas = context.state.basket.slice();
+        context.setState({
+            basket: bas.sort(function (a, b) {
+                if (a.price < b.price) return -1;
+                if (a.price > b.price) return 1;
+                return 0;
+            })
+        })
+    }
+
+    sortDe() {
+        let bas = context.state.basket.slice();
+        context.setState({
+            basket: bas.sort(function (a, b) {
+
+                if (a.price > b.price) return -1;
+                if (a.price < b.price) return 1;
+                return 0;
+            })
+        })
+    }
+
     render() {
 
 
@@ -282,27 +306,7 @@ class TypePage extends Component {
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
                         {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
                     style={{height: 10 * vh}} basket={this.addToCart} context={this}
-                    sortAs={() => {
-                        let bas = context.state.basket.slice();
-                        context.setState({
-                            basket: bas.sort(function (a, b) {
-                                if (a.price < b.price) return -1;
-                                if (a.price > b.price) return 1;
-                                return 0;
-                            })
-                        })
-                    }}
-                    sortDe={() => {
-                        let bas = context.state.basket.slice();
-                        context.setState({
-                            basket: bas.sort(function (a, b) {
-
-                                if (a.price > b.price) return -1;
-                                if (a.price < b.price) return 1;
-                                return 0;
-                            })
-                        })
-                    }}/>
+                />
                 <View style={{width: 100 * vw, height: 90 * vh}}>
 
                     <ListViewCustum
@@ -364,22 +368,46 @@ class TypePage extends Component {
                 }}>
                     <Loading/>
                 </View>}
+                <View
+                    style={{
+                        position: 'absolute',
+                        top: 85 * vh, left: 5 * vw,
+                        backgroundColor: 'red',
+                        width: 12 * vw,
+                        height: 12 * vw,
+                        borderRadius: 6 * vw,
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                    <TouchableOpacity onPress={() => {
+                        context.state.sorted ? this.sortDe() : this.sortAs();
+                        context.setState({sorted: !context.state.sorted});
+                    }}>
+                        <MaterialIcon name="sort" size={vw * 8} color="white" style={{}}/>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
 
     onUp = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
-        let list = this.state.basket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        this.setState({
-            basket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
+        if (rowdata.max_in_order > rowdata.count) {
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
+            let list = this.state.basket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        });
+            this.setState({
+                basket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
+        }
+        else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
     onDown = (rowdata) => {
 

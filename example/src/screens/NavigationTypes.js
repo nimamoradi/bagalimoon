@@ -11,7 +11,7 @@ import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/productItem/item'
 import server from '../code'
-import Loading from '../components/loadScreen'
+
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh} from '../viewport'
 import HockeyApp from 'react-native-hockeyapp'
@@ -544,17 +544,20 @@ class NavigationTypes extends React.Component {
 
 
     onUpSpecialOffer = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
-        let list = this.state.superBasket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
+        if (rowdata.max_in_order > rowdata.count) {
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
+            let list = this.state.superBasket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        this.setState({
-            superBasket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
+            this.setState({
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
 
-        });
+            });
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
     onDownSpecialOffer = (rowdata) => {
         let rowDataCopy = Object.assign({}, rowdata);
@@ -575,18 +578,21 @@ class NavigationTypes extends React.Component {
 
     };
     onUpBestSellingProducts = (rowdata) => {
+        if (rowdata.max_in_order > rowdata.count) {
 
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
-        let list = this.state.superBasket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
+            let list = this.state.superBasket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        this.setState({
-            superBasket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
+            this.setState({
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
 
-        });
+            });
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
     onDownBestSellingProducts = (rowdata) => {
         let rowDataCopy = Object.assign({}, rowdata);

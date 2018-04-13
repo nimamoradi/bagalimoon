@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Button, Image, Dimensions, AsyncStorage} from 'react-native';
-import Icon from 'react-native-vector-icons/Foundation';
+import Icon from 'react-native-vector-icons/Entypo';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 class alertBox extends React.Component {
@@ -9,9 +9,9 @@ class alertBox extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{flexDirection: 'row',flex: 8}}>
-                    <Icon name="alert" size={vw * 6} color="#ff0000" style={{margin: 10}}/>
-                    <View style={{flexDirection: 'column',flex: 8}}>
+                <View style={{flexDirection: 'row', flex: 8}}>
+                    <Icon name="info" size={vw * 6} color="green" style={{margin: 10}}/>
+                    <View style={{flexDirection: 'column', flex: 8}}>
                         <Text style={styles.title}>{this.props.title}</Text>
                         <Text style={styles.content}>{this.props.text}</Text>
                     </View>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: Dimensions.get('window').width * 0.5,
         height: Dimensions.get('window').height * 0.35,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f2f2f2',
 
         padding: 16,
     },
@@ -72,9 +72,14 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'B Yekan',
-        fontSize: vw * 5,
+        fontSize: vw * 6,
         fontWeight: '700',
     },
+    content: {
+        fontFamily: 'B Yekan',
+        fontSize: vw * 4,
+        fontWeight: '700',
+    }
 
 });
 

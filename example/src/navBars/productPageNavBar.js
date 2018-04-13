@@ -12,24 +12,16 @@ class productPageNavBar extends Component {
         return (
             <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={() => this.props.context.props.navigator.pop()}>
+                    onPress={() => this.props.context.props.navigator.pop({
+                        animated: true,
+                        animationType: 'fade',
+                    })}>
                     <Ionicons name="ios-arrow-back" size={vw * 8} color="white" style={{margin: 10,}}/>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={_.debounce(() => this.props.sortAs(),
-                    1000, {leading: true, trailing: false})
-                }>
-                    <Icon name="arrow-bold-up" size={vw * 8} color="white" style={{margin: 5, flex: 1}}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={_.debounce(() => this.props.sortDe(),
-                    1000, {leading: true, trailing: false})
-                }>
-                    <Icon name="arrow-bold-down" size={vw * 8} color="white" style={{margin: 5, flex: 1}}/>
-                </TouchableOpacity>
 
-
-                <Text style={styles.text}>لیست محصولات</Text>
                 <View style={{flex: 1}}/>
+                <Text style={styles.text}>لیست محصولات</Text>
                 <TouchableOpacity onPress={_.debounce(() => this.props.search(),
                     1000, {leading: true, trailing: false})
                 }>
@@ -68,9 +60,9 @@ const styles = StyleSheet.create({
 
 productPageNavBar.propTypes = {
     basket: PropTypes.func.isRequired,
-    context:PropTypes.object.isRequired,
-    search:PropTypes.func.isRequired,
-    sortAs:PropTypes.func.isRequired,
-    sortDe:PropTypes.func.isRequired,
+    context: PropTypes.object.isRequired,
+    search: PropTypes.func.isRequired,
+    // sortAs:PropTypes.func.isRequired,
+    // sortDe:PropTypes.func.isRequired,
 };
 export default productPageNavBar;

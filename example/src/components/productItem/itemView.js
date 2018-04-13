@@ -48,7 +48,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
                         indicator={ProgressBar}
                         source={{uri: imageUrl}} style={styles.image}/>
 
-                    <View style={{flexDirection: 'column',}}>
+                    <View style={{flexDirection: 'column', width: 25 * vw}}>
                         <Text style={styles.text}>{title}</Text>
                         <Text style={styles.discount}>{disscount} تومان </Text>
                         <Text style={styles.price}>{price} تومان </Text>

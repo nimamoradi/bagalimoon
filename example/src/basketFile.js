@@ -8,10 +8,7 @@ import TimerMixin from 'react-timer-mixin';
 import {login} from "./screens";
 
 class basketfile {
-
-
     static basketKey = '@CurrentBasket';
-
 
     static async writeBasket(basket) {
         basket = JSON.stringify(basket.filter(function (item) {
@@ -32,9 +29,7 @@ class basketfile {
                 resolve(JSON.parse(item));
                 // console.log('basket ' + item);
             });
-        })
-
-
+        });
     }
 
 }

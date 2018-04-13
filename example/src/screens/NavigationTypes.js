@@ -280,6 +280,7 @@ class NavigationTypes extends React.Component {
 
         };
         basketFile.readBasket().then((item) => {
+            alert(JSON.stringify(item));
             if (item === null) {
                 this.loadMainPage();
             }

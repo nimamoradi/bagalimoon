@@ -32,8 +32,8 @@ android {
         applicationId "com.moonShop"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 126
-        versionName "1.26"
+        versionCode 128
+        versionName "1.28"
         lintOptions {
             abortOnError false
         }
@@ -90,7 +90,6 @@ dependencies {
     compile project(':react-native-device-info')
     compile project(path: ':react-native-exception-handler')
     compile project(':react-native-spinkit')
-
     compile project(path: ':react-native-gesture-handler')
     compile project(path: ':react-native-spinkit')
 }

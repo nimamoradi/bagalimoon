@@ -7,7 +7,7 @@ import ProgressBar from 'react-native-progress/Pie';
 import CountCircle from './countCircle';
 
 
-function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
+function itemView({title, onUp, onDown, imageUrl, price, count, disscount,off}) {
 
 
     return (
@@ -32,7 +32,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
                                 width: 16 * vw,
                             }}
                         />
-                        <Text style={styles.discountText}>{price / disscount * 100} %</Text>
+                        <Text style={styles.discountText}>{off} %</Text>
                     </View> : null}
             </View>
             <View

@@ -106,7 +106,7 @@ export function login() {
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
-
+        portraitOnlyMode: true,
 
     };
     return (startAppdata);
@@ -142,6 +142,7 @@ export function mainPage(api_code) {
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
+        portraitOnlyMode: true,
         passProps: {api_code: api_code,}, // simple serializable object that will pass as props to all top screens (optional)
 
 
@@ -160,6 +161,7 @@ export function serverCheckFailed(api_code, user_number) {
                 navBarHidden: true,
             },
         },
+        portraitOnlyMode: true,
         appStyle: {
             orientation: 'portrait',
         },

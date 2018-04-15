@@ -3,12 +3,14 @@ package com.moonShop;
 import android.support.annotation.Nullable;
 
 import com.airbnb.android.react.maps.MapsPackage;
+import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
 import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
@@ -25,7 +27,6 @@ import com.slowpath.hockeyapp.RNHockeyAppPackage;
 import java.util.Arrays;
 import java.util.List;
 
-//import com.slowpath.hockeyapp.RNHockeyAppModule; // <--- import
 
 public class MainApplication extends NavigationApplication {
     @Override
@@ -37,6 +38,8 @@ public class MainApplication extends NavigationApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         SoLoader.init(this, /* native exopackage */ false);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)

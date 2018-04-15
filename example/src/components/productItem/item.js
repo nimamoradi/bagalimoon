@@ -7,7 +7,7 @@ import CountCircle from './countCircle';
 
 import {vw, vh, vmin, vmax} from '../../viewport'
 
-function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown}) {
+function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown,off}) {
 
     return (
         <TouchableOpacity style={styles.halfRow}
@@ -29,7 +29,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown})
                             width: 16 * vw,
                         }}
                     />
-                    <Text style={styles.discountText}>{price / disscount * 100} %</Text>
+                    <Text style={styles.discountText}>{off} %</Text>
                 </View> : <View
                     style={{
                         flex: 1,

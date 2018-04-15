@@ -51,19 +51,21 @@ class FlatListSearch extends React.Component {
     };
 
     onUp = (rowdata) => {
-
-        rowdata = Object.assign(rowdata, {count: rowdata.count + 1});
-        let list = this.state.data;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-        list[index].count = rowdata.count;
-        this.setState({data: list});
+        if (rowdata.max_in_order > rowdata.count) {
+            rowdata = Object.assign(rowdata, {count: rowdata.count + 1});
+            let list = this.state.data;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+            list[index].count = rowdata.count;
+            this.setState({data: list});
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context);
     };
     onDown = (rowdata) => {
         if (rowdata.count !== 0) {
 
             let list = this.state.data;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index].count = Object.assign(rowdata, {count: rowdata.count - 1});
+            list[index] = Object.assign(rowdata, {count: rowdata.count - 1});
             this.setState({data: list});
         }
 
@@ -119,6 +121,7 @@ class FlatListSearch extends React.Component {
                             disscount={(item.off !== 0) ? item.main_price : null}
                             price={item.price}
                             count={item.count}
+                            off={item.off}
                             onUp={() => this.onUp(item)}
                             onDown={() => this.onDown(item)}
                             imageUrl={server.getServerAddress() + item.photo}/>
@@ -135,7 +138,13 @@ class FlatListSearch extends React.Component {
             borderRadius: 2 * vw, borderWidth: 1
         }}>
             <TouchableOpacity
-                style={{backgroundColor: '#4482c7', height: 16 * vw, flex: 2, justifyContent: 'center', alignItems: 'center'}}
+                style={{
+                    backgroundColor: '#4482c7',
+                    height: 16 * vw,
+                    flex: 2,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
                 onPress={() => {
                     this.makeRemoteRequest(this.state.query);
                 }}>

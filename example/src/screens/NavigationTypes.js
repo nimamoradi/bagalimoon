@@ -515,6 +515,7 @@ class NavigationTypes extends React.Component {
                 onUp={() => this.onUpSpecialOffer(item)}
                 onDown={() => this.onDownSpecialOffer(item)}
                 price={item.price}
+                off={item.off}
                 disscount={(item.off !== 0) ? item.main_price : null}
                 imageUrl={server.getServerAddress() + '/' + item.photo}
                 onPress={_.debounce(() => this.gotoCategoryFromItem(item),
@@ -533,6 +534,7 @@ class NavigationTypes extends React.Component {
                          onUp={() => this.onUpBestSellingProducts(item)}
                          onDown={() => this.onDownBestSellingProducts(item)}
                          price={item.price}
+                         off={item.off}
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
                          onPress={_.debounce(() => this.gotoCategoryFromItem(item),

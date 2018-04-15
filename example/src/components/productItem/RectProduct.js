@@ -8,7 +8,7 @@ import ProgressBar from 'react-native-progress/Bar';
 
 import CountCircle from './countCircle';
 
-function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) {
+function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 
 
     return (
@@ -60,7 +60,7 @@ function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) 
                     <Text style={{
                         fontFamily: 'B Yekan',
                         fontSize: vw * 4,
-                    }}>{price / disscount * 100} %</Text>
+                    }}>{off} %</Text>
                 </View> : null}
         </View>
 

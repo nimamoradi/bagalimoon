@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Dimensions, Platform} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, Platform} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function smallRow({title, des}) {

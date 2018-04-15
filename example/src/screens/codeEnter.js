@@ -7,7 +7,6 @@ import {
     Text,
     TextInput,
     ImageBackground,
-    Dimensions,
     AsyncStorage
 
 } from 'react-native';
@@ -35,14 +34,14 @@ class codeEnter extends React.Component {
         return (
             <ImageBackground
                 style={{
-                    width: Dimensions.get('window').width,
-                    height: Dimensions.get('window').height,
+                    width: 100*vw,
+                    height: 100*vh,
                     backgroundColor: '#ffffff10'
                 }}
                 source={require('../../img/login.png')}>
 
                 <View style={styles.absolote}>
-                    <View style={{width: Dimensions.get('window').width - 150}}>
+                    <View style={{width: 100*vw - 150}}>
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}

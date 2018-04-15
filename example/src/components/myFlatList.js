@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StyleSheet, View, Text, TouchableHighlight, ScrollView, Image, Dimensions, AsyncStorage} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, ScrollView, Image, AsyncStorage} from 'react-native';
 import _ from 'lodash'
 
 import {vw, vh, vmin, vmax} from '../viewport'

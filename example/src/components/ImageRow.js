@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Platform, Image, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, Platform, Image} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 import ProgressiveImage from './progressiveImage'
 import ProgressBar from "react-native-progress/Pie";

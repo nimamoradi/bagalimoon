@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Button, Image, Dimensions, AsyncStorage} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, Button, Image, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import {vw, vh, vmin, vmax} from '../viewport'
 
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
     container: {
         borderWidth: 0.5,
         borderRadius: 10,
-        width: Dimensions.get('window').width * 0.5,
-        height: Dimensions.get('window').height * 0.35,
+        width: 50 *vw,
+        height: vh * 35,
         backgroundColor: '#f2f2f2',
 
         padding: 16,

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight,Dimensions, Platform} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, Platform} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 function tableRowLong({title, des}) {
     return (
@@ -21,7 +21,7 @@ tableRowLong.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        width:  Dimensions.get('window').width,
+        width:  100*vw,
         paddingHorizontal: 16,
         flexDirection: 'row',
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Dimensions, Button, TouchableHighlight, AsyncStorage} from 'react-native';
+import {StyleSheet, View, Text, Button, TouchableHighlight, AsyncStorage} from 'react-native';
 
 import TableRow from '../components/tableRow'
 

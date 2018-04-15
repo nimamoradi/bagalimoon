@@ -8,7 +8,7 @@ import {
     AsyncStorage,
     Image,
     Text,
-    Dimensions,
+
     Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     },
     button: {},
     image: {
-        height: Dimensions.get('window').width / 3, width: Dimensions.get('window').width / 3,
+        height: 33*vw, width:33*vw,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'flex-start',

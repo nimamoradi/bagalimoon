@@ -6,7 +6,7 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
-    Dimensions
+  
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/EvilIcons';

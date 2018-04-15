@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, BackHandler, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {ActivityIndicator, BackHandler, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
 
     },
     activityIndicator: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        width:100*vw,
+        height: 100*vh,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#99999910'

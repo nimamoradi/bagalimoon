@@ -1,21 +1,21 @@
 import React from 'react';
-import {StyleSheet, View, Text, Dimensions, Button} from 'react-native';
-import {vw, vh, vmin, vmax} from '../../viewport'
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { vw, vh, vmin, vmax } from '../../viewport'
 
 class Lightbox extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 8}}>
+        <View style={{ flex: 8 }}>
           <Text style={styles.title}>{this.props.title}</Text>
           <Text style={styles.content}>{this.props.content}</Text>
         </View>
-        <View style={{flex: 2}}>
+        <View style={{ flex: 2 }}>
           <Button
-              large
-              color="green"
-              title={'بستن'}
+            large
+            color="green"
+            title={'بستن'}
             onPress={() => this.props.onClose()}
           />
         </View>
@@ -26,18 +26,18 @@ class Lightbox extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get('window').width * 0.7,
-    height: Dimensions.get('window').height * 0.3,
+    width: vw * 70,
+    height: vh * 30,
     backgroundColor: '#ffffff',
     borderRadius: 5,
     padding: 16,
   },
   title: {
-    fontSize: vw*5,
+    fontSize: vw * 5,
     fontWeight: '700',
   },
   content: {
-      fontSize: vw*4,
+    fontSize: vw * 4,
     marginTop: 8,
   },
 });

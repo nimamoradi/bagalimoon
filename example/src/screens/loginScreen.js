@@ -9,7 +9,6 @@ import {
     Text,
     TextInput,
     ImageBackground,
-    Dimensions,
     AsyncStorage
 } from 'react-native';
 import server from '../code'
@@ -68,14 +67,14 @@ class loginScreen extends React.Component {
             return (
                 <ImageBackground
                     style={{
-                        width: Dimensions.get('window').width,
-                        height: Dimensions.get('window').height,
+                        width:100*vw,
+                        height: 100*vh,
                         backgroundColor: '#ffffff10'
                     }}
                     source={require('../../img/login.png')}>
 
                     <View style={styles.absolote}>
-                        <View style={{width: Dimensions.get('window').width - 100}}>
+                        <View style={{width: 100*vw - 100}}>
                             <Text style={styles.text}>شماره همراه</Text>
                             <TextInput
                                 onChange={(event) => this.onChanged(event.nativeEvent.text)}

@@ -13,7 +13,7 @@ let context;
 class basketPreview extends React.Component {
     constructor(props) {
         super(props);
-        props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
         let basket = (this.props.basket);
         // console.log(basket);
 

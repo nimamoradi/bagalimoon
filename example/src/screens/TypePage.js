@@ -32,7 +32,7 @@ class TypePage extends Component {
     constructor(props) {
         super(props);
         let id = 0;
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
 
         this.props.navigator.setStyle({
             navBarHidden: true,

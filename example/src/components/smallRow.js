@@ -16,7 +16,7 @@ function smallRow({title, des}) {
 
 smallRow.propTypes = {
     title: PropTypes.string.isRequired,
-    des: PropTypes.string.isRequired,
+    des: PropTypes.isRequired,
 };
 
 const styles = StyleSheet.create({

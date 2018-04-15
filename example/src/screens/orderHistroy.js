@@ -72,7 +72,6 @@ class orderHistroy extends React.Component {
     };
 
     componentDidMount() {
-        this.isAvailable();
         this.load_api_code();
     }
 
@@ -93,6 +92,7 @@ class orderHistroy extends React.Component {
             return (
                 <View style={styles.container}>
                     <FlatList
+                        keyExtractor={(item) => item.id}
                         data={this.state.orderData}
                         renderItem={({item}) => <View style={{
                             backgroundColor: '#d2d2d2', borderRadius: 4 * vw,
@@ -106,6 +106,7 @@ class orderHistroy extends React.Component {
                             <SmallRow title={'مبلغ بدون تخفیف'} des={item.sum_price}/>
                             <SmallRow title={'آدرس'} des={item.address.name + ' : ' + item.address.Address}/>
                             <FlatList
+                                keyExtractor={(item) => item.id}
                                 data={item.ordered_products}
                                 renderItem={({item}) =>
                                     <View>

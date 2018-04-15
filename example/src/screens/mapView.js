@@ -241,7 +241,8 @@ class mapView extends Component {
 
     offlineSale = () => {
         // console.log(context.state.myLocation);
-        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[ا-ی]/) === 1) {
+        if (context.state.senderName !== '' && context.state.senderName !== undefined &&
+            context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) > -1) {
             if (context.state.index === 0) {
 
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
@@ -274,7 +275,7 @@ class mapView extends Component {
             }
 
         }
-        else if (context.state.senderName.search(/[a-zA-Z]/) !== -1) {
+        else if (context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) === -1) {
             server.alert('اخطار',
                 'نام تحویل گیرنده باید فارسی باشد',
                 context);
@@ -307,7 +308,7 @@ class mapView extends Component {
 
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
         this.state = {
             latitude: 36.288022,
             longitude: 59.616075,

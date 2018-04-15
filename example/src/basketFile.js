@@ -11,17 +11,16 @@ class basketfile {
     static basketKey = '@CurrentBasket';
 
     static async writeBasket(basket) {
-        basket = basket.map((item) => {
-            return ({count: item.count, id: item.id})
-        });
         basket = JSON.stringify(basket.filter(function (item) {
+            delete  item.isSpecialOffer;
+            delete item.shouldShow;
+            delete item.isBestSellingProduct;
             return (item.count > 0);
         }));
         // await console.log('basket '+basket);
 
         await AsyncStorage.setItem(basketfile.basketKey, basket);
     }
-
 
     static readBasket() {
         return new Promise((resolve) => {

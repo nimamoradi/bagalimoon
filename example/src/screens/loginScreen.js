@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh,} from '../viewport'
 
 import {
     StyleSheet,
@@ -67,52 +66,59 @@ class loginScreen extends React.Component {
             return (
                 <ImageBackground
                     style={{
-                        width:100*vw,
-                        height: 100*vh,
-                        backgroundColor: '#ffffff10'
+                        width: 100 * vw,
+                        height: 100 * vh,
                     }}
                     source={require('../../img/login.png')}>
 
                     <View style={styles.absolote}>
-                        <View style={{width: 100*vw - 100}}>
+                        <View style={{height: 16 * vh}}>
                             <Text style={styles.text}>شماره همراه</Text>
-                            <TextInput
-                                onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                                keyboardType='numeric' style={styles.textInput}
-                                value={this.state.phoneNumber}
-                            />
+                            <View style={{
+                                flexDirection: 'row', flex: 1, margin: 4 * vh,
+                                justifyContent: 'center', alignItems: 'center'
+                            }}>
+                                <TextInput
+                                    onChange={(event) => this.onChanged(event.nativeEvent.text)}
+                                    keyboardType='numeric' style={styles.textInput}
+                                    value={this.state.phoneNumber}
+                                />
 
-                            <TouchableOpacity
-                                onPress={this.isAvailable}
-                            >
-                                <Text style={{
-                                    textAlign: 'center', borderRadius: 20,
-                                    borderColor: '#bec4be',
-                                    borderWidth: 0.5,
-                                    backgroundColor: '#5bca45',
-                                    padding: 10,
-                                    margin: 40,
-                                    fontFamily: 'B Yekan',
-                                    fontSize: 20,
-                                    color: '#ffffff'
-                                }}>ورود</Text>
-                            </TouchableOpacity>
+                            </View>
+
                         </View>
-                    </View>
+                        <TouchableOpacity
+                            onPress={this.doSignUp}
+                        >
+                            <Text style={{
+                                textAlign: 'center', borderRadius: 20,
+                                borderColor: '#bec4be',
+                                borderWidth: 0.5,
+                                backgroundColor: '#5bca45',
+                                padding: 10,
+                                marginTop: 15,
+                                width: 32 * vw,
+                                fontFamily: 'B Yekan',
+                                fontSize: 20,
+                                color: '#ffffff'
+                            }}>ورود</Text>
+                        </TouchableOpacity>
+                        <Text style={{
+                            fontFamily: 'B Yekan',
+                            fontSize: 4 * vw,
+                        }}> برای تکمیل ثبت نام یک کد برای شما ارسال می شود</Text>
 
-
-                    <View style={styles.absolote}>
-                        {(this.state.sendData === true) ? <Loading/> : null}
+                        {(this.state.sendData === true) ? <View style={styles.absolote}> <Loading/> </View> : null}
                     </View>
                 </ImageBackground>);
     }
 
     doSignUp() {
+        context.setState({sendData: true});
         let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
             pin = (isSet)
         });
-        // console.log('inside login form');
-        fetch(server.getServerAddress() + '/api/register', {
+        (fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -120,32 +126,39 @@ class loginScreen extends React.Component {
                 'content-encoding': "gzip, deflate, br"
             },
             body: JSON.stringify({
+                api_code: context.props.api_code,
                 'phone_number': context.state.phoneNumber,
-                "device_info": server.deviceInfo(context.state.phoneNumber)
+                'device_info': server.deviceInfo(context.state.phoneNumber)
             })
-        }).then((response) => response.json())
-            .then((responseData) => {
-                console.log('inside login response json');
-                console.log('response object:', responseData);
-                context.setState({sendData: false});
-                if (responseData.successful === true) {
-                    context.login({
-                        api_code: responseData.api_code,
-                        phone_number: context.state.phoneNumber
-                    });
-                    AsyncStorage.setItem('user_number', context.state.phoneNumber);
-                } else if (responseData.successful === false) {
-                    server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
-                }
-                else if (responseData.phone_number !== null) {
-                    server.alert('هشدار', 'شماره معتبر نمی باشد', context);
-                } else server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
+        }).then((response) => response.json().then((responseData) => {
+            console.log('inside login response json');
+            console.log('response object:', responseData);
 
-            }).catch(error => {
-            server.retryParam(context.isAvailable, context)
-        }).catch(error => {
-            server.retryParam(context.isAvailable, context)
+            context.setState({sendData: false});
+            if (responseData.hasOwnProperty('successful') && responseData.successful === true) {
+                context.login({
+                    api_code: responseData.api_code,
+                    phone_number: context.state.phoneNumber
+                });
+                AsyncStorage.setItem('user_number', context.state.phoneNumber);
+            } else if (responseData.hasOwnProperty('successful') && responseData.successful === false) {
+                server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
+            }
+            else if (responseData.hasOwnProperty('phone_number')) {
+                server.alert('هشدار', 'شماره معتبر نمی باشد', context);
+            } else server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
+
+
+        }))
+            .catch(ignored => {
+                server.retryParam(context.doSignUp, context);
+            }).catch(ignored => {
+                server.retryParam(context.doSignUp, context);
+            })).catch(ignored => {
+            server.retryParam(context.doSignUp, context);
         });
+        // console.log('inside login form');
+
     }
 
 
@@ -161,12 +174,6 @@ class loginScreen extends React.Component {
             },
             passProps: props,
         });
-    };
-
-    isAvailable = () => {
-        context.setState({sendData: true});
-        context.doSignUp();
-
     };
 
 
@@ -192,28 +199,27 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: 'B Yekan',
-        margin: 50,
         fontSize: 5 * vw,
         marginBottom: 10,
         marginLeft: 10,
     },
+
     textInput: {
         fontFamily: 'B Yekan',
         borderRadius: 2 * vw,
+        height: 8 * vh,
         borderColor: '#bec4be',
-        borderWidth: 0.5,
+        borderWidth: 1,
         alignSelf: 'center',
         width: '80%',
 
     },
     flex: {
         flex: 1,
-    }, absolote: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+    },
+    absolote: {
+        marginTop: 10 * vh,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }

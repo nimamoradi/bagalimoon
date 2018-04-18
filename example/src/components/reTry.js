@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, BackHandler, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import _ from 'lodash'
@@ -25,9 +24,12 @@ class reTry extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>اتصال قطع شد</Text>
 
 
+                <MaterialCommunityIcons name="cloud-off-outline" size={vw * 40}
+                                        color="#8B008B80" style={{margin: 2 * vw}}/>
+
+                <Text style={styles.semiText}>ظاهرا ارتباط شما با سرور مشکل پیش آمده</Text>
                 <TouchableOpacity
 
                     onPress={_.debounce(
@@ -42,9 +44,8 @@ class reTry extends React.Component {
                         1000, {leading: true, trailing: false}
                     )}
                 >
-                    <Icon name="redo" size={vw * 20} color="#777777" style={{margin: 2 * vw}}/>
+                    <Text style={styles.text}> دوباره امتحان کنید</Text>
                 </TouchableOpacity>
-                <Text style={styles.text}>دوباره امتحان کنید</Text>
             </View>
         )
     }
@@ -64,16 +65,28 @@ const styles = StyleSheet.create({
 
     },
     activityIndicator: {
-        width:100*vw,
-        height: 100*vh,
+        width: 100 * vw,
+        height: 100 * vh,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#99999910'
+    },
+    semiText: {
+        fontSize: 5 * vw,
+        fontFamily: 'B Yekan',
+        margin: 5 * vw,
     },
     text: {
         fontSize: 5 * vw,
         fontFamily: 'B Yekan',
         margin: 5 * vw,
+        borderWidth: 0.5,
+        width: 45 * vw,
+        height: 6 * vh,
+        backgroundColor: '#d9d9d9',
+        textAlign: 'center',
+        alignSelf: 'center',
+        color:'#1E90FF'
     }
 });
 export default reTry;

@@ -23,15 +23,15 @@ repositories {
     maven { url 'https://maven.google.com' }
 }
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     dexOptions {
         jumboMode true
     }
     defaultConfig {
         applicationId "com.moonShop"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 129
         versionName "1.29"
         lintOptions {
@@ -92,6 +92,8 @@ dependencies {
     compile project(':react-native-spinkit')
     compile project(path: ':react-native-gesture-handler')
     compile project(path: ':react-native-spinkit')
+
+    compile "com.android.support:support-core-utils:27.1.1"
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

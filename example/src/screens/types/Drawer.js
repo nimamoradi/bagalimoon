@@ -78,18 +78,7 @@ class MyClass extends React.Component {
                         </View>
 
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
 
-                        }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Ionicons name="ios-call-outline" size={vw * 8} color="#11ff11"
-                                      style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}> ارتباط با ما</Text>
-
-                        </View>
-
-                    </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
                             this.toggleDrawer();

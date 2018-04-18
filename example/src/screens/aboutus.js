@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Image, ScrollView, Text, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
+import {StyleSheet, View, Image, Linking, Text, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
@@ -30,6 +30,11 @@ class aboutus extends React.Component {
                 <Text style={styles.text}>بقالی مون با هدف راحتی و سرعت در خریدهای روزانه طراحی شده</Text>
                 <View style={{flex: 1}}/>
 
+                <TouchableOpacity
+                    onPress={()=>Linking.openURL('tel: +959 XXXXXXXX')}
+                >
+                    <Text >959 XXXXXXXX شماره تماس </Text>
+                </TouchableOpacity>
 
             </View>
 

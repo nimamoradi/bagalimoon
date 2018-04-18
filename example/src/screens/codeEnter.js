@@ -34,36 +34,54 @@ class codeEnter extends React.Component {
         return (
             <ImageBackground
                 style={{
-                    width: 100*vw,
-                    height: 100*vh,
+                    width: 100 * vw,
+                    height: 100 * vh,
                     backgroundColor: '#ffffff10'
                 }}
                 source={require('../../img/login.png')}>
 
                 <View style={styles.absolote}>
-                    <View style={{width: 100*vw - 150}}>
+                    <View style={{width: 100 * vw - 150}}>
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
-                            value=  {this.state.code}/>
+                            value={this.state.code}/>
 
+                    </View>
+                    <TouchableOpacity
+                        onPress={this.isAvailable}
+                    >
+                        <Text style={{
+                            textAlign: 'center', borderRadius: 20,
+                            borderColor: '#bec4be',
+                            borderWidth: 0.5,
+                            backgroundColor: '#5bca45',
+                            padding: 10,
+                            marginTop: 15,
+                            width: 32 * vw,
+                            fontFamily: 'B Yekan',
+                            fontSize: vw * 6,
+                            color: '#ffffff'
+                        }}>تایید</Text>
+                    </TouchableOpacity>
+                    <View style={{flexDirection: 'row',}}>
 
                         <TouchableOpacity
-                            onPress={this.isAvailable}
+                            onPress={this.doSignUp}
                         >
                             <Text style={{
-                                textAlign: 'center', borderRadius: 20,
-                                borderColor: '#bec4be',
-                                borderWidth: 0.5,
-                                backgroundColor: '#5bca45',
-                                padding: 10,
-                                margin: 40,
                                 fontFamily: 'B Yekan',
-                                fontSize: vw * 6,
-                                color: '#ffffff'
-                            }}>تایید</Text>
+                                fontSize: vw * 5,
+                                color: '#65a4ff'
+                            }}>ارسال مجدد</Text>
                         </TouchableOpacity>
+                        <Text style={{
+
+                            fontFamily: 'B Yekan',
+                            fontSize: vw * 5,
+                            color: 'black'
+                        }}>پیامک دریافت نشد : </Text>
                     </View>
                 </View>
                 <View style={styles.absolote}>
@@ -79,8 +97,44 @@ class codeEnter extends React.Component {
 
     };
 
-    enterCode = () => {
+    doSignUp() {
         context.setState({sendData: true});
+
+        (fetch(server.getServerAddress() + '/api/register', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
+            },
+            body: JSON.stringify({
+                api_code: context.props.api_code,
+                'phone_number': context.state.phoneNumber,
+                'device_info': server.deviceInfo(context.state.phoneNumber)
+            })
+        }).then((response) => response.json().then((responseData) => {
+            console.log('inside login response json');
+            console.log('response object:', responseData);
+            context.setState({sendData: false});
+
+        }))
+            .catch(ignored => {
+                server.retryParam(context.doSignUp, context);
+                alert(ignored);
+            }).catch(ignored => {
+                server.retryParam(context.doSignUp, context);
+                alert(ignored);
+            })).catch(ignored => {
+            server.retryParam(context.doSignUp, context);
+            alert(ignored);
+
+        });
+        // console.log('inside login form');
+
+    }
+
+    enterCode = () => {
+
         // console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',

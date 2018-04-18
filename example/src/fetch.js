@@ -25,12 +25,12 @@ module.exports = function (url, options) {
             let wrappedFetch = function (n) {
                 fetch(url, options)
                     .then(function (response) {
-                        if (response.ok)
+                        // if (response.ok)
                             resolve(response);
-                        else {
-                            console.log("error "+error);
-                            throw error('bad error code');
-                        }
+                        // else {
+                        //     console.log("error "+error);
+                        //     throw error('bad error code');
+                        // }
                     })
                     .catch(function (error) {
                         if (n > 0) {
@@ -38,7 +38,6 @@ module.exports = function (url, options) {
                                 wrappedFetch(--n);
                             }, retryDelay);
                         } else {
-                            console.log("error :"+error);
                             reject(error);
                         }
                     });

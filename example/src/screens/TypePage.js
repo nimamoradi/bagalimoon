@@ -432,7 +432,6 @@ class TypePage extends Component {
 
 TypePage.propTypes = {
     title: propTypes.string.isRequired,
-
 };
 
 

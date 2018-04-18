@@ -4,10 +4,10 @@ import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextIn
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Pie';
-import CountCircle from './countCircle';
 
+import ProductControl from './productControlVertical'
 
-function itemView({title, onUp, onDown, imageUrl, price, count, disscount,off}) {
+function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 
 
     return (
@@ -54,20 +54,9 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,off}) 
                         <Text style={styles.price}>{price} تومان </Text>
                     </View>
 
-                    <View style={{
-                        flexDirection: 'column', alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
 
-                        <TouchableOpacity onPress={onUp}>
-                            <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
-                        </TouchableOpacity>
+                    <ProductControl count={count} onUp={onUp} onDown={onDown}/>
 
-                        <CountCircle count={count}/>
-                        <TouchableOpacity onPress={onDown}>
-                            <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
-                        </TouchableOpacity>
-                    </View>
                 </View>
             </View>
 
@@ -131,8 +120,8 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        height: 33*vw,
-        width: 25*vw,
+        height: 33 * vw,
+        width: 25 * vw,
         margin: 2 * vw,
     },
     countTextHidden: {

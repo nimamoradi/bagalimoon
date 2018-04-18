@@ -30,7 +30,7 @@ class productPageNavBar extends Component {
                 <TouchableOpacity onPress={_.debounce(() => this.props.basket(),
                     1000, {leading: true, trailing: false})
                 }>
-                    <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
+                    <Ionicons name="md-cart" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
                 </TouchableOpacity>
             </View>
         )

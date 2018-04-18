@@ -146,9 +146,9 @@ class NavigationTypes extends React.Component {
         }).then((response) => response.json().then((responseData) => {
 
             this.getBanners(responseData.Banners);
+            this.loadCategories(JSON.parse(responseData.AllCategories));
             this.getBestSellingProducts(JSON.parse(responseData.BestSellingProducts));
             this.getSpecialOffer(JSON.parse(responseData.SpecialOffer));
-            this.loadCategories(JSON.parse(responseData.AllCategories));
 
         }))
             .catch(ignored => {

@@ -4,14 +4,14 @@ import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import ProgressBar from 'react-native-progress/Bar';
 import CountCircle from './countCircle';
-
+import ProductControl from './productControlHorizontal'
 import {vw, vh, vmin, vmax} from '../../viewport'
 
-function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown,off}) {
+function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, off}) {
 
     return (
         <TouchableOpacity style={styles.halfRow}
-              onPress={onPress}>
+                          onPress={onPress}>
             {(disscount) ?
                 <View
                     style={{
@@ -47,19 +47,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown,o
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                 <Text style={styles.price}>{price} تومان </Text>
 
-                <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity onPress={onDown}>
-                        <Icon name="minus" size={vw * 11}
-                              color="black"/>
-                    </TouchableOpacity>
-
-
-                    <CountCircle count={count}/>
-                    <TouchableOpacity onPress={onUp}>
-                        <Icon name="plus" size={vw * 11} color="black"/>
-                    </TouchableOpacity>
-
-                </View>
+                <ProductControl count={count} onUp={onUp} onDown={onDown}/>
 
             </View>
         </TouchableOpacity>
@@ -104,7 +92,7 @@ const styles = StyleSheet.create({
     },
     text: {
         width: 30 * vw,
-        fontSize: vw * 4.5,
+        fontSize: vw * 4,
         textAlign: 'center',
         fontFamily: 'B Yekan',
         color: 'black',

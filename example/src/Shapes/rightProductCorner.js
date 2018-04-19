@@ -84,7 +84,7 @@ rightProductCorner.propTypes = {
 const styles = StyleSheet.create({
     image:{
         width: 25 * vw,
-        height: 12 * vh,
+        height: 8 * vh,
         alignItems:'center',
         flex:1,
         justifyContent:'center'
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {
-        width:25*vw,
+        width:22*vw,
         textAlign: 'center',
         fontSize: 4 * vw,
         color: 'white',

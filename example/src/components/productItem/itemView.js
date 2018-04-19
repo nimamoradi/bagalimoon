@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         width: 70 * vw,
-        height: 45 * vw
+        height: 35 * vw
 
 
     },

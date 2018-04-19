@@ -163,7 +163,7 @@ class basketFinal extends React.Component {
                         </View>
 
                     </View>
-                    <View style={{flexDirection: 'row',height:8*vh }}>
+                    <View style={{flexDirection: 'row', height: 8 * vh}}>
                         <TouchableOpacity onPress={this.address}>
                             <View style={styles.button}>
                                 <Icon name="shopping-cart" size={vw * 5} color="green"/>
@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: vw * 4,
         flex: 1,
+        width: 12 * vw,
         fontFamily: 'B Yekan',
         margin: 10,
         textAlign: 'center'
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        margin: 2,flex:1,
+        margin: 2, flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#23d429',
@@ -265,7 +266,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        margin: 2,flex:1,
+        margin: 2, flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#d46e62',

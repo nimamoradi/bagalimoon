@@ -7,6 +7,7 @@ import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Bar';
 
 import CountCircle from './countCircle';
+import ProductControl from './productControlVertical'
 
 function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 
@@ -21,19 +22,8 @@ function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, of
                 indicator={ProgressBar}
                 source={{uri: imageUrl}} style={styles.image}/>
 
-            <View style={{flex: 1.2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <ProductControl count={count} onUp={onUp} onDown={onDown}/>
 
-                <TouchableOpacity onPress={onUp}>
-                    <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
-                </TouchableOpacity>
-
-                <CountCircle count={count}/>
-
-                <TouchableOpacity onPress={onDown}>
-                    <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
-                </TouchableOpacity>
-
-            </View>
 
             <View style={{flexDirection: 'column',}}>
                 <Text style={styles.text}>{title}</Text>

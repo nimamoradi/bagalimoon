@@ -12,12 +12,13 @@ let context;
 class basketFinal extends React.Component {
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
 
+        console.log(this.props.api_code);
         this.state = {
             basket: [],
             totalPrice: '?',
             sendData: true,
+            order_id: 0,
             customer_receiver_name: ''
         };
         context = this;
@@ -50,6 +51,7 @@ class basketFinal extends React.Component {
             .then((responseData) => {
                 // console.log("inside responsejson");
                 // console.log('response object:', responseData);
+                // alert (JSON.stringify(responseData));
                 context.setState({sendData: false});
                 let totalPrice = 0;
                 let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'
@@ -60,6 +62,7 @@ class basketFinal extends React.Component {
                 }
                 this.setState({
                     basket: basket,
+                    order_id: responseData.id,
                     totalPrice: totalPrice,
                     myAddress: address,
                     customer_receiver_name: responseData.customer_receiver_name
@@ -108,7 +111,7 @@ class basketFinal extends React.Component {
             return (
                 <View style={styles.container}>
 
-                    <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 15 * vh}}>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 10 * vh}}>
                         <Text style={styles.tableHeader}>قیمت نهایی</Text>
                         <Text style={styles.tableHeader}>قیمت عادی</Text>
                         <Text style={styles.tableHeader}>تعداد</Text>
@@ -117,26 +120,26 @@ class basketFinal extends React.Component {
 
 
                     <FlatList
-                        automaticallyAdjustContentInsets={false}
-                        contentContainerStyle={{flexDirection: 'column',}}
+                        style={{flex: 4}}
                         horizontal={false}
+                        keyExtractor={this._keyExtractor}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
                             this.renderRow(item)}
                     />
+                    <View style={{flexDirection: 'column', alignItems: 'center', flex: 0.5, width: 100 * vw}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
+                            <View style={{flex: 1}}/>
+                            <Text style={styles.price}>
+                                {this.state.totalPrice} تومان
+                            </Text>
+                            <Text style={styles.text}>
+                                جمع خرید
+                            </Text>
+                            <View style={{flex: 1}}/>
+                        </View>
 
-                    <View style={{flexDirection: 'row', alignItems: 'center',flex: 1}}>
-                        <View style={{flex: 1}}/>
-                        <Text style={styles.price}>
-                            {this.state.totalPrice} تومان
-                        </Text>
-                        <Text style={styles.text}>
-                            جمع خرید
-                        </Text>
-                        <View style={{flex: 1}}/>
-                    </View>
-                    <View style={{flexDirection: 'column', alignItems: 'center',flex: 1, width: 100 * vw}}>
                         <Text>آدرس:</Text>
                         <Text style={{
                             fontSize: vw * 4,
@@ -145,46 +148,63 @@ class basketFinal extends React.Component {
                             {this.state.myAddress}
                         </Text>
 
-                    </View>
-                    <View style={{flexDirection: 'column', alignItems: 'center',flex: 1, width: 100 * vw}}>
-                        <Text>نام مشتری:</Text>
-                        <Text style={{
-                            fontSize: vw * 4,
-                            fontFamily: 'B Yekan',
-                        }}>
-                            {this.state.customer_receiver_name}
-                        </Text>
+
+                        <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
+                            <Text style={{
+                                fontSize: vw * 4,
+                                fontFamily: 'B Yekan',
+                            }}>
+                                {this.state.customer_receiver_name}
+                            </Text>
+
+                            <Text style={{
+                                fontSize: vw * 4,
+                            }}>نام مشتری:</Text>
+                        </View>
 
                     </View>
-
-                    <View style={{flexDirection: 'row',flex:2, }}>
-                        <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                          onPress={this.address}>
+                    <View style={{flexDirection: 'row',height:8*vh }}>
+                        <TouchableOpacity onPress={this.address}>
                             <View style={styles.button}>
-                                <Icon name="shopping-cart" size={vw * 5} color="#00ff0050" style={{flex: 1}}/>
-                                <View style={{flex: 0.5}}/>
-                                <Text style={{flex: 1, fontSize: vw * 4,}}>پرداخت</Text>
+                                <Icon name="shopping-cart" size={vw * 5} color="green"/>
+                                <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{flex: 1, height: 20 * vh, width: 40 * vw}}
-                                          onPress={() => {
-                                              this.props.navigator.pop();
-                                          }}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.props.navigator.pop();
+                            }}>
                             <View style={styles.buttonCancel}>
-                                <Text style={{flex: 1, fontSize: vw * 4,}}>حذف سفارش</Text>
+                                <Text style={{fontSize: vw * 4,}}>پرداخت هنگام تحویل</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
+
                 </View>
 
             );
 
     }
+
+    _keyExtractor = (item, index) => item.id;
+
+    address() {
+        server.pushScreen('example.Types.checkoutPage', 'پرداخت',
+            {
+                shouldUpdateBasket: context.props.shouldUpdateBasket,
+                setBasket: context.props.setBasket,
+                basket: context.props.basket,
+                fullBasket: context.props.fullBasket,
+                order_id: context.state.order_id,
+                api_code: context.props.api_code,
+                address_id: context.props.id,
+            }
+            , context);
+    }
 }
 
 basketFinal.propTypes = {
     basket: PropTypes.array.isRequired,//encoded array in json
-
 };
 
 const styles = StyleSheet.create({
@@ -221,44 +241,51 @@ const styles = StyleSheet.create({
         fontSize: vw * 5,
         fontFamily: 'B Yekan',
         flex: 1,
-        margin: 10,
+        margin: 8,
         color: '#000',
         textAlign: 'center'
     },
     button: {
-        flex: 1,
+        width: 50 * vw,
+        height: 16 * vh,
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        marginTop: 20,
-        margin: 2,
-        marginLeft: 20,
-        marginBottom: 60,
-        fontFamily: 'B Yekan',
-        alignContent: 'center',
+        margin: 2,flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: '#23d429',
         backgroundColor: '#23d42920'
     },
     buttonCancel: {
-        flex: 1,
-        fontFamily: 'B Yekan',
+        height: 16 * vh,
+        width: 50 * vw,
         flexDirection: 'row',
         borderWidth: 0.5,
         borderRadius: 10,
         padding: 5,
-        margin: 2,
-
-        marginTop: 20,
-        alignContent: 'center',
-        marginRight: 20,
-        marginBottom: 60,
+        margin: 2,flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderColor: '#d46e62',
         backgroundColor: '#d46e6220'
     }, container: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#ffffff',
+    },
+    rowItem: {
+        elevation: 2 * vw,
+        borderColor: '#00000035',
+        borderWidth: 0.75,
+        margin: vw,
+        flexDirection: 'row',
+        borderRadius: 2 * vw,
+        backgroundColor: '#e7e6e6',
+        shadowOpacity: 0.6,
+        shadowColor: '#e7e6e650',
+        shadowOffset: {width: 10, height: 10},
     },
 
 });

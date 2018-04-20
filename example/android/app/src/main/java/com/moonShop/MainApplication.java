@@ -3,11 +3,14 @@ package com.moonShop;
 import android.support.annotation.Nullable;
 
 import com.airbnb.android.react.maps.MapsPackage;
+import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.i18nmanager.I18nUtil;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
 import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
@@ -16,6 +19,7 @@ import com.microsoft.appcenter.reactnative.crashes.BuildConfig;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.onesignal.OneSignal;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.bridge.NavigationReactPackage;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;
@@ -23,7 +27,6 @@ import com.slowpath.hockeyapp.RNHockeyAppPackage;
 import java.util.Arrays;
 import java.util.List;
 
-//import com.slowpath.hockeyapp.RNHockeyAppModule; // <--- import
 
 public class MainApplication extends NavigationApplication {
     @Override
@@ -35,12 +38,15 @@ public class MainApplication extends NavigationApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         SoLoader.init(this, /* native exopackage */ false);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
-
+        I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
+        sharedI18nUtilInstance.allowRTL(this, false);
         // Call syncHashedEmail anywhere in your app if you have the user's email.
         // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
         // OneSignal.syncHashedEmail(userEmail);
@@ -52,7 +58,7 @@ public class MainApplication extends NavigationApplication {
     public List<ReactPackage> createAdditionalReactPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-            new ReactNativeExceptionHandlerPackage(),
+                new ReactNativeExceptionHandlerPackage(),
                 new RNDeviceInfo(),
                 new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),
                 new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appcenterAnalytics_whenToEnableAnalytics)),
@@ -61,9 +67,8 @@ public class MainApplication extends NavigationApplication {
                 new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), this, BuildConfig.DEBUG),
                 new VectorIconsPackage(),
                 new NavigationReactPackage(),
-                new MapsPackage()
-
-
+                new MapsPackage(),
+                new RNSpinkitPackage()
         );
     }
 

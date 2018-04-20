@@ -14,7 +14,7 @@
         tools:replace="android:supportsRtl"
         android:name=".MainApplication"
         android:allowBackup="false"
-        android:icon="@drawable/ic_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 

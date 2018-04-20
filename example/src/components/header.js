@@ -18,12 +18,11 @@ header.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-
+        flex:1,
         marginRight:2*vw,
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
-
     },
     text: {
         fontSize:vw*6,

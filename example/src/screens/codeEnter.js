@@ -46,9 +46,9 @@ class codeEnter extends React.Component {
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}
-                            keyboardType='numeric' style={styles.textInput}>
-                            {this.state.code}
-                        </TextInput>
+                            keyboardType='numeric' style={styles.textInput}
+                            value=  {this.state.code}/>
+
 
                         <TouchableOpacity
                             onPress={this.isAvailable}
@@ -92,12 +92,10 @@ class codeEnter extends React.Component {
             body: JSON.stringify({
                 api_code: context.props.api_code,
                 sms_code: context.state.code,
-                phone_number:context.props.phone_number
+                phone_number: context.props.phone_number
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                // console.log("inside responsejson");
-                // console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
@@ -117,9 +115,9 @@ class codeEnter extends React.Component {
         });
     };
 
-     pushMainScreen(api) {
+    pushMainScreen(api) {
 
-        context.props.navigator.push({
+        context.props.navigator.resetTo({
             backButtonTitle: '',
             screen: 'example.Types',
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -128,7 +126,7 @@ class codeEnter extends React.Component {
                 navBarHidden: true,
             }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             backButtonHidden: true,
-            overrideBackPress: true,
+            overrideBackPress: false,
             passProps: {api_code: api,},
 
         });

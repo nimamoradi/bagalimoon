@@ -32,7 +32,7 @@ ImageRow.propTypes = {
 
 const styles = StyleSheet.create({
     row: {
-        height: vh * 35,
+        height: vh * 30,
         // paddingHorizontal: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -41,11 +41,10 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     image: {
-        height: vh * 35, width: 100 * vw,
+        height: vh * 30, width: 100 * vw,
         resizeMode: 'stretch'
+    },
 
-
-    }
 });
 
 

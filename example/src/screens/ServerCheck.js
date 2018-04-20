@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, BackHandler, View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {
+    ImageBackground,
+    BackHandler,
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Dimensions
+} from 'react-native';
+
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Loading from '../components/loadScreen'
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -7,19 +16,24 @@ import server from "../code";
 import _ from 'lodash'
 import fetch from "../fetch";
 
+const Spinner = require('react-native-spinkit');
+
 class ServerCheck extends React.Component {
     constructor(props) {
         super(props);
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.state = {
-            dataReady: true,
+            dataReady: false,
+            isFirstTime: true,
             param: {api_code: props.api_code, user_number: props.user_number}
         };
         props.navigator.onNavigatorEvent((event) => {
             if (event.id === 'backPress') {
                 BackHandler.exitApp();
             }
-        })
+        });
+        this.loginCheck({api_code: props.api_code, user_number: props.user_number});
+
     }
 
     loginCheck(param) {
@@ -40,7 +54,8 @@ class ServerCheck extends React.Component {
                 console.log(JSON.stringify(responseData));
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
-                    this.props.navigator.push({
+
+                    this.props.navigator.resetTo({
                         backButtonTitle: '',
                         screen: 'example.Types',
                         title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -49,11 +64,12 @@ class ServerCheck extends React.Component {
                             navBarHidden: true,
                         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                         backButtonHidden: true,
-                        overrideBackPress: true,
+                        overrideBackPress: false,
                         passProps: {api_code: param.api_code,},
 
                     });
-                    this.props.navigator.pop();
+
+
                 } else {
                     this.props.navigator.push({
                         backButtonTitle: '',
@@ -67,35 +83,27 @@ class ServerCheck extends React.Component {
                         passProps: {api_code: param.api_code,},
 
                     });
-                    this.props.navigator.push({
-                        screen: 'example.Types.loginScreen',
-                        navigatorStyle: {
-                            navBarHidden: true,
-                        },
-                        title: '',
-                        passProps: passProps,
-                    });
-                    // this.props.navigator.pop();
+
                 }
             }).catch(error => {
-            this.setState({dataReady: true})
+            this.setState({dataReady: true, isFirstTime: false,})
         })
 
     }
 
     render() {
 
-        if (!this.state.dataReady) return <View style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Loading/>
-        </View>;
+        if (!this.state.dataReady)
+            return <ImageBackground style={{
+                width: 100 * vw, height: 100 * vh, justifyContent: 'center', flex: 1,
+                alignItems: 'center'
+            }} source={require('../../img/login.png')}>
+                <Spinner
+                    size={100}
+                    color={'red'}
+                    type={'WanderingCubes'}
+                />
+            </ImageBackground>;
         else
             return <View style={styles.container}>
 
@@ -129,12 +137,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    activityIndicator: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#99999910'
+    spinner: {
+        width: 10 * vw,
+        height: 10 * vw,
+
     },
     text: {
         fontSize: 5 * vw,

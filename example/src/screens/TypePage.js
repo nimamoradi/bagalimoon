@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import {
-    StyleSheet, View,
-    FlatList,
+    View,
+    FlatList, TouchableOpacity,
 } from 'react-native';
-import TypeButton from '../components/TypeButton'
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ItemView from '../components/productItem/itemView'
 import server from '../code'
@@ -19,21 +19,20 @@ import ProductPageNavBar from '../navBars/productPageNavBar'
 import fetch from '../fetch'
 import _ from 'lodash'
 import ListViewCustum from "../components/listViewCustum";
-import * as axios from "axios";
+
 
 let context;
 let isFirstTime;
 
 class TypePage extends Component {
-
-    static setBasket(basket) {
+    setBasket(basket) {
         context.setState({basket: basket})
     }
 
     constructor(props) {
         super(props);
         let id = 0;
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
 
         this.props.navigator.setStyle({
             navBarHidden: true,
@@ -81,6 +80,7 @@ class TypePage extends Component {
             dataReady: false,
             basket: [],
             Categories: Categories,
+            sorted: false,
         };
 
         context = this;
@@ -111,14 +111,7 @@ class TypePage extends Component {
 
     addToCart = () => {
         // todo clean up
-        let newBasket = dataHandeling.arrayUnique((context.props.basket.map((basketItem) => {
-            //update first  basket values with new items then add missing items
-            return {
-                ..._.assign(context.props.basket, _.find(context.state.basket, ['id', basketItem.id]),
-                    {count: basketItem.count})
-            };
-
-        })).concat(context.state.basket));
+        let newBasket = dataHandeling.arrayUnique((context.state.basket.concat(context.props.basket)));
         if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
         else this.props.navigator.push({
@@ -126,10 +119,10 @@ class TypePage extends Component {
             title: 'خرید را نهایی کنید',
             passProps: {
                 basket: newBasket,
-                isParsed: true,
-                UpdateBasket: this.props.UpdateBasket,
-                setBasket: this.props.setBasket,
-                setBasketProduct: TypePage.setBasket
+                isTypePage: true,
+                fullBasket: newBasket,
+                setBasket: this.setBasket,
+                UpdateBasket: TypePage.basketUpdaterSimple,
             },
             navigatorStyle: {
                 navBarHidden: true,
@@ -149,19 +142,16 @@ class TypePage extends Component {
                 id: id,
                 disscount: disscount,
                 off: off,
-
             },
         });
     };
 
     componentWillUnmount() {
-        let basket = this.state.basket.filter(
-            function (x) {
-                return x.count > 0
-            }
-        );
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
+        let basket = this.state.basket;
         this.props.UpdateBasket(basket
         );
+        context.setState({basket: []});
 
     }
 
@@ -195,7 +185,7 @@ class TypePage extends Component {
     loadRenderRowData = async (category_id) => {
 
         context.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
+        (fetch(server.getServerAddress() + '/api/getProducts/' + category_id, {
 
             method: 'POST',
             headers: {
@@ -224,17 +214,21 @@ class TypePage extends Component {
                 }
             ).catch(error => {
                 server.retryParam(this.loadRenderRowData, context, category_id, error)
-            }
-        )
+            }).catch(error => {
+                server.retryParam(this.loadRenderRowData, context, category_id, error)
+            }));
+
 
     };
 
     topLoadData(item) {
-        context.loadRenderRowData(item.id);
+        let subItems = context.findSubItems(context.state.Categories,
+            item.id);
         context.setState({
-            Category_id: item.id,
-            subSelected: item.name
-        })
+            subItems: subItems, mainSelected: item.name,
+            Category_id: subItems[0].id, subSelected: subItems[0].name
+        });
+        context.loadRenderRowData(subItems[0].id)
     }
 
     static basketUpdater(newItems) {//won't remove zero index
@@ -252,9 +246,7 @@ class TypePage extends Component {
         newItems = newItems.filter(function (item) {
             if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
                 return item.count > 0;
-
             } else {
-                delete item.wasInBasket;
                 return false;
             }
 
@@ -265,6 +257,46 @@ class TypePage extends Component {
 
     }
 
+    static basketUpdaterSimple(newItems, oldBasket) {
+        let basket = oldBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j], {count: newItems[j].count});//upDating value of item in old basket
+                }
+            }
+        }
+
+        context.setState({basket: basket});
+        return basket;
+
+    }
+
+    sortAs() {
+        let bas = context.state.basket.slice();
+        context.setState({
+            basket: bas.sort(function (a, b) {
+                if (a.price < b.price) return -1;
+                if (a.price > b.price) return 1;
+                return 0;
+            })
+        })
+    }
+
+    sortDe() {
+        let bas = context.state.basket.slice();
+        context.setState({
+            basket: bas.sort(function (a, b) {
+
+                if (a.price > b.price) return -1;
+                if (a.price < b.price) return 1;
+                return 0;
+            })
+        })
+    }
+
     render() {
 
 
@@ -272,15 +304,16 @@ class TypePage extends Component {
             <View style={{backgroundColor: '#f2f2f2'}}>
                 <ProductPageNavBar
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
-                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}
-                    style={{height: 10 * vh}} basket={this.addToCart} context={this}/>
+                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
+                    style={{height: 10 * vh}} basket={this.addToCart} context={this}
+                />
                 <View style={{width: 100 * vw, height: 90 * vh}}>
 
                     <ListViewCustum
-                        subSelected={this.state.subSelected}
-                        data={this.state.subItems} action={this.topLoadData}/>
+                        subSelected={this.state.mainSelected}
+                        data={this.state.mainItems} action={this.topLoadData}/>
 
-                    <View style={{height: 74 * vh, flexDirection: 'row'}}>
+                    <View style={{height: 77 * vh, flexDirection: 'row'}}>
 
                         <FlatList
                             showsVerticalScrollIndicator={false}
@@ -288,11 +321,13 @@ class TypePage extends Component {
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({item}) =>
                                 <ItemView
                                     keyExtractor={this._keyExtractor}
                                     title={item.name}
-                                    disscount={item.main_price}
+                                    off={item.off}
+                                    disscount={(item.off !== 0) ? item.main_price : null}
                                     price={item.price}
                                     count={item.count}
                                     onUp={() => this.onUp(item)}
@@ -303,26 +338,27 @@ class TypePage extends Component {
                             style={{width: 30 * vw, marginBottom: 4 * vh}}
                             showsVerticalScrollIndicator={false}
                             horizontal={false}
-                            data={this.state.mainItems}
+                            data={this.state.subItems}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({item, index}) =>
                                 <RightProductCorner title={item.name}
                                                     index={index}
                                                     onPress={() => {
-                                                        let subItems = this.findSubItems(context.state.Categories,
-                                                            item.id);
+                                                        context.loadRenderRowData(item.id);
                                                         context.setState({
-                                                            subItems: subItems, mainSelected: item.name,
-                                                            Category_id: subItems[0].id, subSelected: subItems[0].name
+                                                            Category_id: item.id,
+                                                            subSelected: item.name
                                                         });
-                                                        this.loadRenderRowData(subItems[0].id)
+
                                                     }}
-                                                    isSelected={this.state.mainSelected === item.name}
+                                                    isSelected={this.state.subSelected === item.name}
                                 />}
 
                         />
                     </View>
                 </View>
-                {(!this.state.dataReady) && <View style={{
+                {(!this.state.dataReady) &&
+                <View style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
@@ -333,22 +369,46 @@ class TypePage extends Component {
                 }}>
                     <Loading/>
                 </View>}
+                <View
+                    style={{
+                        position: 'absolute',
+                        top: 85 * vh, left: 5 * vw,
+                        backgroundColor: 'red',
+                        width: 12 * vw,
+                        height: 12 * vw,
+                        borderRadius: 6 * vw,
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                    <TouchableOpacity onPress={() => {
+                        context.state.sorted ? this.sortDe() : this.sortAs();
+                        context.setState({sorted: !context.state.sorted});
+                    }}>
+                        <MaterialIcon name="sort" size={vw * 8} color="white" style={{}}/>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
 
     onUp = (rowdata) => {
-        let rowDataCopy = Object.assign({}, rowdata);
-        rowDataCopy.count++;
-        let list = this.state.basket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        this.setState({
-            basket: [...list.slice(0, index),
-                rowDataCopy,
-                ...list.slice(index + 1)]
+        if (rowdata.max_in_order > rowdata.count) {
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
+            let list = this.state.basket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        });
+            this.setState({
+                basket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
+        }
+        else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
     onDown = (rowdata) => {
 

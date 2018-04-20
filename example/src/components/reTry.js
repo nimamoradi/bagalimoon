@@ -25,9 +25,7 @@ class reTry extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {(this.props.massage !== null) ?
-                    <Text style={styles.text}>{this.props.massage}</Text> :
-                    <Text style={styles.text}>اتصال قطع شد</Text>}
+                <Text style={styles.text}>اتصال قطع شد</Text>
 
 
                 <TouchableOpacity

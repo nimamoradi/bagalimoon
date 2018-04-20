@@ -11,8 +11,6 @@ import {
     ImageBackground,
     Dimensions,
     AsyncStorage
-
-
 } from 'react-native';
 import server from '../code'
 import Loading from '../components/loadScreen'
@@ -81,9 +79,9 @@ class loginScreen extends React.Component {
                             <Text style={styles.text}>شماره همراه</Text>
                             <TextInput
                                 onChange={(event) => this.onChanged(event.nativeEvent.text)}
-                                keyboardType='numeric' style={styles.textInput}>
-                                {this.state.phoneNumber}
-                            </TextInput>
+                                keyboardType='numeric' style={styles.textInput}
+                                value={this.state.phoneNumber}
+                            />
 
                             <TouchableOpacity
                                 onPress={this.isAvailable}
@@ -113,7 +111,7 @@ class loginScreen extends React.Component {
     doSignUp() {
         let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
             pin = (isSet)
-        })
+        });
         // console.log('inside login form');
         fetch(server.getServerAddress() + '/api/register', {
             method: 'POST',
@@ -128,7 +126,7 @@ class loginScreen extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                console.log('inside login responsejson');
+                console.log('inside login response json');
                 console.log('response object:', responseData);
                 context.setState({sendData: false});
                 if (responseData.successful === true) {

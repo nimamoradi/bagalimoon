@@ -5,8 +5,8 @@ let React = require('react-native')
     , {width, height} = Dimensions.get('window');
 
 let units = {
-    vw: width/100
-    , vh: height/100
+    vw: Math.min(width, height)/100
+    , vh: Math.max(width, height)/100
 };
 
 units.vmin = Math.min(units.vw, units.vh);

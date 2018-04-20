@@ -15,6 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import dataHandeling from "../dataHandeling";
 import basketFile from "../basketFile";
 
+
 let context;
 
 class FlatListSearch extends React.Component {
@@ -35,43 +36,48 @@ class FlatListSearch extends React.Component {
     makeList = (responseData) => {
         let lastBasket = this.state.lastBasket;
 
-        for (let j = 0; j < lastBasket.length; j++) {
-            for (let i = 0; i < responseData.length; i++) {
-                if (lastBasket[j].id === responseData[i].id) {
-                    responseData[i].count = lastBasket[j].count;
+        for (let j = 0; j < responseData.length; j++) {
+            for (let i = 0; i < lastBasket.length; i++) {
+                if (responseData[j].id === lastBasket[i].id) {
+                    responseData[j].count = lastBasket[i].count;
                 }
             }
         }
 
         context.setState({
-            data: dataHandeling.AddBasket(this.state.lastBasket,responseData),
+            data: responseData,
             loading: true,
         });
     };
 
     onUp = (rowdata) => {
-
-        rowdata.count++;
-        let list = this.state.data;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-        list[index].count = rowdata.count;
-        this.setState({data: list});
+        if (rowdata.max_in_order > rowdata.count) {
+            rowdata = Object.assign(rowdata, {count: rowdata.count + 1});
+            let list = this.state.data;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+            list[index].count = rowdata.count;
+            this.setState({data: list});
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context);
     };
     onDown = (rowdata) => {
         if (rowdata.count !== 0) {
 
             let list = this.state.data;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index].count = rowdata.count - 1;
+            list[index] = Object.assign(rowdata, {count: rowdata.count - 1});
             this.setState({data: list});
         }
 
     };
+    _keyExtractor = (item, index) => item.id;
+
     componentWillUnmount() {
         if (this.state.data.length > 0) {
             context.setState({lastBasket: this.props.UpdateBasket(this.state.data)});
         }
     }
+
     makeRemoteRequest = (item) => {
 
         this.setState({loading: false, noData: false});
@@ -88,11 +94,11 @@ class FlatListSearch extends React.Component {
 
         }).then((response) => response.json().then((responseData) => {
             this.makeList(responseData.product)
-        })).catch(error => {
+        })).catch(ignored => {
             server.retryParam(this.makeRemoteRequest, context,)
-        }).catch(error => {
+        }).catch(ignored => {
             server.retryParam(this.makeRemoteRequest, context,)
-        })).catch(error => {
+        })).catch(ignored => {
             server.retryParam(this.makeRemoteRequest, context,)
         });
     };
@@ -103,6 +109,7 @@ class FlatListSearch extends React.Component {
             <View>
                 <SimpleNavbar back={() => this.props.navigator.pop()} title='جستجو'/>
                 <FlatList
+                    keyExtractor={this._keyExtractor}
                     data={this.state.data}
                     style={{marginBottom: 10 * vh}}
                     ItemSeparatorComponent={this.renderSeparator}
@@ -111,9 +118,10 @@ class FlatListSearch extends React.Component {
                     renderItem={({item}) => (
                         <RectProduct
                             title={item.name}
-                            disscount={item.main_price}
+                            disscount={(item.off !== 0) ? item.main_price : null}
                             price={item.price}
                             count={item.count}
+                            off={item.off}
                             onUp={() => this.onUp(item)}
                             onDown={() => this.onDown(item)}
                             imageUrl={server.getServerAddress() + item.photo}/>
@@ -125,24 +133,34 @@ class FlatListSearch extends React.Component {
     }
 
     renderHeader = () => {
-        return <View style={{margin: 4 * vw, flexDirection: 'row', flex: 1}}>
+        return <View style={{
+            margin: 4 * vw, flexDirection: 'row', flex: 1, borderColor: 'gray',
+            borderRadius: 2 * vw, borderWidth: 1
+        }}>
             <TouchableOpacity
+                style={{
+                    backgroundColor: '#4482c7',
+                    height: 16 * vw,
+                    flex: 2,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
                 onPress={() => {
                     this.makeRemoteRequest(this.state.query);
                 }}>
-                <MaterialIcons name="search" size={vw * 8} color="red" style={{flex: 1}}/>
+                <MaterialIcons name="search" size={vw * 12} color="red" style={{flex: 1}}/>
             </TouchableOpacity>
             <TextInput
                 placeholder='نام کالا را وارد کنید'
                 style={{
                     flex: 10,
-                    height: 16 * vw, borderColor: 'gray',
-                    borderRadius: 2 * vw, borderWidth: 1
+                    height: 16 * vw,
                 }}
                 onChangeText={(text) => {
                     this.setState({query: text});
                 }}
-            >{this.state.query}</TextInput>
+
+                value={this.state.query}/>
 
 
         </View>

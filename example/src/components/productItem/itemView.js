@@ -4,47 +4,72 @@ import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextIn
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Pie';
+import CountCircle from './countCircle';
 
 
-function itemView({title, onUp, onDown, imageUrl, price, count, disscount,}) {
+function itemView({title, onUp, onDown, imageUrl, price, count, disscount,off}) {
 
 
     return (
-
         <ImageBackground
             resizeMode="stretch"
             style={styles.container}
             source={require('../../../img/itemViewBack.png')}
         >
-                <Image
-                    resizeMode="stretch"
-                    indicator={ProgressBar}
-                    source={{uri: imageUrl}} style={styles.image}/>
-
-                <View style={{flexDirection: 'column',}}>
-                    <Text style={styles.text}>{title}</Text>
-                    <Text style={styles.price}>{price} تومان </Text>
-                </View>
-
-            <View style={{flex: 1.2, flexDirection: 'column'}}>
-
-                <TouchableOpacity onPress={onUp}>
-                    <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
-                </TouchableOpacity>
-
-                {(count !== 0) ?
-                    <Text
-                        style={{textAlign: 'center', color: 'black', fontFamily: 'B Yekan', fontSize: vw * 4}}>
-                        {count}
-                    </Text> :
-                    <Text style={styles.countTextHidden}>0</Text>}
-
-                <TouchableOpacity onPress={onDown}>
-                    <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
-                </TouchableOpacity>
-
+            <View style={{
+                height: 16 * vw,
+                width: 16 * vw,
+                zIndex: 2,
+            }}>
+                {(disscount) ?
+                    <View>
+                        <Image
+                            resizeMode="stretch"
+                            source={require('../../../img/mainPage/round.png')}
+                            style={{
+                                zIndex: 0,
+                                height: 16 * vw,
+                                width: 16 * vw,
+                            }}
+                        />
+                        <Text style={styles.discountText}>{off} %</Text>
+                    </View> : null}
             </View>
+            <View
+                style={{
+                    right: 10 * vh,
+                }}>
+                <View style={{
+                    flexDirection: 'row', flex: 1,
+                    justifyContent: 'center', alignItems: 'center'
+                }}>
+                    <Image
+                        resizeMode="stretch"
+                        indicator={ProgressBar}
+                        source={{uri: imageUrl}} style={styles.image}/>
 
+                    <View style={{flexDirection: 'column', width: 25 * vw}}>
+                        <Text style={styles.text}>{title}</Text>
+                        {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
+                        <Text style={styles.price}>{price} تومان </Text>
+                    </View>
+
+                    <View style={{
+                        flexDirection: 'column', alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+
+                        <TouchableOpacity onPress={onUp}>
+                            <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
+                        </TouchableOpacity>
+
+                        <CountCircle count={count}/>
+                        <TouchableOpacity onPress={onDown}>
+                            <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
 
         </ImageBackground>
 
@@ -67,12 +92,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     container: {
-        flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:70*vw,
-        height:45*vw
+        width: 70 * vw,
+        height: 45 * vw
 
 
     },
@@ -98,7 +120,6 @@ const styles = StyleSheet.create({
         fontSize: vw * 4,
         color: 'black',
         width: 25 * vw
-
     },
     price: {fontSize: vw * 4, color: 'black', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
     discount: {
@@ -122,6 +143,16 @@ const styles = StyleSheet.create({
         borderRadius: 3 * vw,
         fontFamily: 'B Yekan',
         opacity: 0
+    },
+    discountText: {
+        zIndex: 1,
+        fontSize: vw * 3.5,
+        fontFamily: 'B Yekan',
+        position: 'absolute',
+        bottom: 7.5 * vw,
+        right: 4.5 * vw,
+        color: 'white',
+        transform: [{rotate: '315deg'}]
     }
 });
 

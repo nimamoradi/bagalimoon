@@ -1,28 +1,36 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image, TextInput, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity,} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import _ from 'lodash'
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
-function navBar({menu,basket,search}) {
+
+function navBar({menu, basket, search}) {
     return (
         <View style={styles.container}>
 
 
-            <TouchableOpacity onPress={basket}>
+            <TouchableOpacity onPress={_.debounce(() => basket(),
+                1000, {leading: true, trailing: false})
+            }>
                 <Icon name="shopping-basket" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={search}>
+            <TouchableOpacity onPress={_.debounce(() => search(),
+                1000, {leading: true, trailing: false})
+            }>
                 <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
 
-            <View style={{flex:0.9}}/>
-            <TouchableOpacity onPress={()=>menu()}>
-            <Ionicons name="ios-menu" size={vw * 10} color="#ffffff" style={{margin: 10, flex: 1}}/>
+            <View style={{flex: 0.9}}/>
+            <TouchableOpacity
+                onPress={_.debounce(() => menu(),
+                    1000, {leading: true, trailing: false})
+                }>
+                <Ionicons name="ios-menu" size={vw * 10} color="#ffffff" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
         </View>
@@ -31,15 +39,15 @@ function navBar({menu,basket,search}) {
 }
 
 const styles = StyleSheet.create({
-container:{
-    flexDirection:'row',
-    backgroundColor:'#ff0030',
-    borderRadius: vw* 3,
-    marginTop:vh,
-    marginRight:vh,
-    marginLeft:vh,
-    borderBottomColor: 'rgba(0, 0, 0, 0.0)',
-}
+    container: {
+        flexDirection: 'row',
+        backgroundColor: '#ff0030',
+        borderRadius: vw * 3,
+        marginTop: vh,
+        marginRight: vh,
+        marginLeft: vh,
+        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
+    }
 
 });
 

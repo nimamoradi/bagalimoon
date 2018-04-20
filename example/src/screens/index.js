@@ -28,8 +28,11 @@ import productPageNavBar from "../navBars/productPageNavBar";
 
 
 import ServerCheck from "./ServerCheck";
+import checkoutPage from "./checkoutPage";
 
 export function registerScreens() {
+
+    Navigation.registerComponent('example.Types.checkoutPage', () => checkoutPage);
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
     Navigation.registerComponent('example.bars.productPageNavBar', () => productPageNavBar);
     Navigation.registerComponent('example.Types', () => Types);
@@ -103,7 +106,7 @@ export function login() {
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
-
+        portraitOnlyMode: true,
 
     };
     return (startAppdata);
@@ -139,13 +142,13 @@ export function mainPage(api_code) {
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
+        portraitOnlyMode: true,
         passProps: {api_code: api_code,}, // simple serializable object that will pass as props to all top screens (optional)
 
 
     };
     return (startAppdata);
 }
-
 
 
 export function serverCheckFailed(api_code, user_number) {
@@ -158,6 +161,7 @@ export function serverCheckFailed(api_code, user_number) {
                 navBarHidden: true,
             },
         },
+        portraitOnlyMode: true,
         appStyle: {
             orientation: 'portrait',
         },
@@ -177,7 +181,7 @@ export function serverCheckFailed(api_code, user_number) {
             // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
             disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
         },
-        passProps: {api_code:api_code,user_number: user_number}, // simple serializable object that will pass as props to all top screens (optional)
+        passProps: {api_code: api_code, user_number: user_number}, // simple serializable object that will pass as props to all top screens (optional)
 
 
     };

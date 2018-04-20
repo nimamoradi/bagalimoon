@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground,  Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Bar';
 
+import CountCircle from './countCircle';
 
-function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) {
+function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 
 
     return (
@@ -19,18 +21,13 @@ function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) 
                 indicator={ProgressBar}
                 source={{uri: imageUrl}} style={styles.image}/>
 
-            <View style={{flex: 1.2, flexDirection: 'column'}}>
+            <View style={{flex: 1.2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
 
                 <TouchableOpacity onPress={onUp}>
                     <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
                 </TouchableOpacity>
 
-                {(count !== 0) ?
-                    <Text
-                        style={{textAlign: 'center', color: 'black', fontFamily: 'B Yekan', fontSize: vw * 4}}>
-                        {count}
-                    </Text> :
-                    <Text style={styles.countTextHidden}>0</Text>}
+                <CountCircle count={count}/>
 
                 <TouchableOpacity onPress={onDown}>
                     <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
@@ -41,9 +38,30 @@ function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount,}) 
             <View style={{flexDirection: 'column',}}>
                 <Text style={styles.text}>{title}</Text>
                 <Text style={styles.price}>{price} تومان </Text>
+                {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
             </View>
 
+            {(disscount) ?
+                <View
+                    style={{
+                        position: 'absolute',
+                        bottom: 18 * vh,
+                        right: 75 * vw,
+                        height: 12 * vw,
+                        width: 12 * vw,
+                        zIndex: 1,
+                        borderRadius: 8 * vw,
+                        backgroundColor: '#ff4c4c',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flex: 1
+                    }}>
 
+                    <Text style={{
+                        fontFamily: 'B Yekan',
+                        fontSize: vw * 4,
+                    }}>{off} %</Text>
+                </View> : null}
         </View>
 
     );
@@ -69,13 +87,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:90*vw,
-        height:45*vw,
-        backgroundColor: '#e7e6e6',
-        marginRight:5*vw,
-        marginLeft:5*vw,
-        borderRadius:4*vw,
-        padding:4*vw
+        width: 90 * vw,
+        height: 45 * vw,
+        backgroundColor: '#f9f9f9',
+        marginRight: 5 * vw,
+        marginLeft: 5 * vw,
+        borderRadius: 4 * vw,
+        padding: 4 * vw,
+        borderWidth: 0.75,
+        elevation: 2 * vw,
+        borderColor: '#00000035',
 
 
     },
@@ -100,10 +121,16 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         fontSize: vw * 4,
         color: 'black',
-        width: 25 * vw
+        width: 35 * vw
 
     },
-    price: {fontSize: vw * 4, color: 'black', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
+    price: {
+        fontSize: vw * 4,
+        color: 'black',
+        fontFamily: 'B Yekan',
+        width: 35 * vw,
+        textAlign: 'left', marginRight: 10
+    },
     discount: {
         textDecorationLine:
             'line-through',
@@ -125,7 +152,8 @@ const styles = StyleSheet.create({
         borderRadius: 3 * vw,
         fontFamily: 'B Yekan',
         opacity: 0
-    }
+    },
+
 });
 
 export default RectProduct;

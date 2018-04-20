@@ -4,7 +4,6 @@ import {
     StyleSheet,
     View,
     Text,
-    ScrollView,
     TouchableOpacity,
     ImageBackground,
     TextInput,
@@ -12,10 +11,11 @@ import {
     PermissionsAndroid,
     Dimensions,
     Picker,
+    Keyboard,
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
-import MapView from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
@@ -33,12 +33,9 @@ class mapView extends Component {
 
     load_api_code = () => {
         AsyncStorage.getItem('api_code').then((item) => {
-
             context.setState({api_code: item}, () => {
                 context.isAvailable();
-
             })
-
         })
     };
 
@@ -55,6 +52,7 @@ class mapView extends Component {
                 api_code: context.state.api_code,
             })
         }).then((response) => response.json().then((responseData) => {
+            console.log('response object:', responseData);
 
             context.setState({oldAddresses: responseData, sendData: false})
 
@@ -110,38 +108,82 @@ class mapView extends Component {
         }
     }
 
-    constructor(props) {
-        super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-        this.state = {
-            latitude: 36.288022,
-            longitude: 59.616075,
-            myLocation: null,
-            optionSelected: 0,
-            error: null,
-            myAddress: [],
-            sendData: true,
-            myAddressName: '',
-            serverAdderss: '',
-            oldAddresses: [],
-            api_code: '',
-            senderName: '',
-            myAddress_id: -1,
-            index: 0,
-            routes: [
-                {key: 'first', title: 'آدرس جدید'},
-                {key: 'second', title: 'آدرس قدیمی'},
-            ],
-        };
-        context = this;
-        this.props.navigator.setStyle({navBarHidden: true,})
-    }
+    _renderScene = ({route}) => {
+        switch (route.key) {
+            case 'first':
+                return <View style={styles.columnItem}>
+                    <View style={styles.rowItem}>
+                        <TextInput style={styles.borderText}
+                                   onChangeText={(text) => this.setState({myAddressName: text})}
+                                   value={this.state.myAddressName}
+                        />
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.imageBack}
+                            source={require('../../img/label.png')}>
+                            <Text style={styles.Text}>نام آدرس</Text>
+                        </ImageBackground>
+                    </View>
 
-    componentDidMount() {
-        this.load_api_code();
-        this.requestLocationPermission();
-    }
+                    <View style={styles.rowItem}>
+                        <TextInput style={styles.borderText}
+                                   onChangeText={(text) => this.setState({myAddress: text})}
+                                   value={this.state.myAddress}
+                        />
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.imageBack}
+                            source={require('../../img/label.png')}>
+                            <Text style={styles.Text}>آدرس</Text>
+                        </ImageBackground>
+                    </View>
 
+                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                        <TouchableOpacity
+                            onPress={_.debounce(this.offlineSale,
+                                1000, {leading: true, trailing: false})}
+                            style={styles.bigButton}>
+                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>;
+            case 'second':
+                let oldAddresses = this.state.oldAddresses.map(function (x) {
+                    return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
+                });
+                return <View style={styles.columnItem}>
+                    <View style={styles.rowItem}>
+                        <Picker
+                            onValueChange={(itemValue, itemIndex) => this.setState({
+                                serverAdderss: itemValue,
+                                myAddress_id: itemValue
+                            })}
+                            style={{flex: 2}}
+                            selectedValue={this.state.serverAdderss}>
+                            <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
+                            {oldAddresses}
+                        </Picker>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.imageBack}
+                            source={require('../../img/label.png')}>
+                            <Text style={styles.Text}>آدرس های قبلی</Text>
+                        </ImageBackground>
+                    </View>
+                    <View style={styles.space}/>
+                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                        <TouchableOpacity
+                            onPress={_.debounce(this.offlineSale,
+                                1000, {leading: true, trailing: false})}
+                            style={styles.bigButton}>
+                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>;
+            default:
+                return null;
+        }
+    };
     newAddresses = () => {
 
 
@@ -177,216 +219,39 @@ class mapView extends Component {
         })
 
     };
-
-
     _handleIndexChange = index => this.setState({index});
-
     _renderHeader = props => <TabBar
         style={{backgroundColor: 'red', borderRadius: 2 * vw, margin: 2 * vw, elevation: 10}} {...props} />;
-
-
-    _renderScene = ({route}) => {
-        switch (route.key) {
-            case 'first':
-                return <View style={styles.columnItem}>
-                    <View style={styles.rowItem}>
-                        <TextInput style={styles.borderText}
-                                   onChangeText={(text) => this.setState({myAddressName: text})}>
-                            {this.state.myAddressName}
-                        </TextInput>
-                        <ImageBackground
-                            resizeMode="stretch"
-                            style={styles.imageBack}
-                            source={require('../../img/label.png')}>
-                            <Text style={styles.Text}>نام آدرس</Text>
-                        </ImageBackground>
-                    </View>
-
-                    <View style={styles.rowItem}>
-                        <TextInput style={styles.borderText}
-                                   onChangeText={(text) => this.setState({myAddress: text})}>
-                            {this.state.myAddress}
-                        </TextInput>
-                        <ImageBackground
-                            resizeMode="stretch"
-                            style={styles.imageBack}
-                            source={require('../../img/label.png')}>
-                            <Text style={styles.Text}>آدرس</Text>
-                        </ImageBackground>
-                    </View>
-
-                    <View style={styles.center}>
-                        <TouchableOpacity
-                            onPress={_.debounce(this.offlineSale,
-                                1000, {leading: true, trailing: false})}
-                            style={styles.bigButton}>
-                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>;
-            case 'second':
-                let oldAddresses = this.state.oldAddresses.map(function (x) {
-                    return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
-                });
-                return <View style={styles.columnItem}>
-                    <View style={styles.rowItem}>
-                        <Picker
-                            onValueChange={(itemValue, itemIndex) => this.setState({
-                                serverAdderss: itemValue,
-                                myAddress_id: itemValue
-                            })}
-                            style={{flex: 2}}
-                            selectedValue={this.state.serverAdderss}>
-                            <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
-                            {oldAddresses}
-                        </Picker>
-                        <ImageBackground
-                            resizeMode="stretch"
-                            style={styles.imageBack}
-                            source={require('../../img/label.png')}>
-                            <Text style={styles.Text}>آدرس های قبلی</Text>
-                        </ImageBackground>
-                    </View>
-                    <View style={styles.space}/>
-                    <View style={styles.center}>
-                        <TouchableOpacity
-                            onPress={_.debounce(this.offlineSale,
-                                1000, {leading: true, trailing: false})}
-                            style={styles.bigButton}>
-                            <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>;
-            default:
-                return null;
-        }
+    keyboardWillShow = (event) => {
+        this.setState({flexSize: 0, buttonHeight: 0});
+    };
+    keyboardWillHide = (event) => {
+        this.setState({flexSize: 3.5, buttonHeight: 1});
     };
 
-    render() {
-
-        if (this.state.sendData) return <View style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Loading/>
-        </View>;
-        else
-            return (
-                <ScrollView contentContainerStyle ={{
-                    flex: 1,
-                }}>
-                    <View style={{
-                        flex: 1,
-                    }}>
-                        <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
-
-                        <View style={{
-                            backgroundColor: '#f2f2f2',
-                            elevation: vw * 2,
-                            top: 0, left: 5 * vw, right: 0, bottom: 0,
-                            width: 90 * vw,
-                            borderRadius: 4 * vw,
-                            flex: 3.5,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'hidden'
-                        }}>
-
-                            <MapView
-                                style={styles.map}
-                                region={{
-                                    latitude: this.state.latitude,
-                                    longitude: this.state.longitude,
-                                    latitudeDelta: 0.01,
-                                    longitudeDelta: 0.01,
-                                }}
-                                onLongPress={(e) => {
-                                    this.setState({
-                                        myLocation: e.nativeEvent.coordinate,
-                                        latitude: e.nativeEvent.coordinate.latitude,
-                                        longitude: e.nativeEvent.coordinate.longitude
-                                    });
-                                }}>
-
-
-                                {((context.state.myLocation !== null)) ?
-                                    <MapView.Marker draggable
-                                                    coordinate={this.state.myLocation}
-                                                    onDragEnd={(e) => {
-                                                        this.setState({
-                                                            myLocation: e.nativeEvent.coordinate,
-                                                            latitude: e.nativeEvent.coordinate.latitude,
-                                                            longitude: e.nativeEvent.coordinate.longitude
-                                                        });
-                                                    }
-                                                    }
-
-                                    /> : null}
-                            </MapView>
-
-
-                        </View>
-                        <View
-                            style={{
-                                flex: 1.5,
-                                flexDirection: 'column',
-                                alignContent: 'center',
-                                alignItems: 'flex-start'
-                            }}>
-                            <View style={styles.rowItem}>
-
-                                <TextInput style={styles.borderText}
-                                           placeholder="نام"
-                                           onChangeText={(text) => this.setState({senderName: text})}>
-                                    {context.state.senderName}
-                                </TextInput>
-                                <ImageBackground
-                                    resizeMode="stretch"
-                                    style={styles.imageBack}
-                                    source={require('../../img/label.png')}>
-                                    <Text style={styles.Text}>نام تحویل گیرنده</Text>
-                                </ImageBackground>
-                            </View>
-
-
-                        </View>
-                        <TabViewAnimated
-                            style={{flex: 4}}
-                            navigationState={this.state}
-                            renderScene={this._renderScene}
-                            renderFooter={this._renderHeader}
-                            onIndexChange={this._handleIndexChange}
-                            initialLayout={{
-                                height: 20 * vh,
-                                width: vw * 100,
-                            }}
-                            useNativeDriver
-                        />
-
-                    </View>
-                </ScrollView>
-            );
+    componentWillMount() {
+        this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardWillShow);
+        this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardWillHide);
     }
 
+    componentWillUnmount() {
+        this.keyboardWillShowSub.remove();
+        this.keyboardWillHideSub.remove();
+    }
 
     offlineSale = () => {
         // console.log(context.state.myLocation);
-        if (context.state.senderName !== '' && context.state.senderName !== undefined && context.state.senderName.search(/[a-zA-Z]/) === -1) {
+        if (context.state.senderName !== '' && context.state.senderName !== undefined &&
+            context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) > -1) {
             if (context.state.index === 0) {
 
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
-                        && context.state.myAddressName !== null)) {
+                    && context.state.myAddressName !== null)) {
                     server.alert('اخطار',
                         'همه فیلدها پر نشده اند',
                         context);
                 }
-                else if (context.state.myLocation === null) {
+                else if (context.state.myLocation === null && context.state.myLocation.length > 0) {
                     server.alert('اخطار',
                         'موقیت خود را انتخاب کنید',
                         context);
@@ -410,7 +275,7 @@ class mapView extends Component {
             }
 
         }
-        else if (context.state.senderName.search(/[a-zA-Z]/) !== -1) {
+        else if (context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) === -1) {
             server.alert('اخطار',
                 'نام تحویل گیرنده باید فارسی باشد',
                 context);
@@ -429,21 +294,167 @@ class mapView extends Component {
             screen: 'example.Types.basketFinal',
             title: 'خرید را نهایی کنید',
             passProps: {
+                shouldUpdateBasket: context.props.shouldUpdateBasket,
+                setBasket: context.props.setBasket,
+                basket: context.props.basket,
+                fullBasket: context.props.fullBasket,
                 api_code: context.state.api_code,
                 id: context.state.myAddress_id,
-                basket: context.props.basket,
                 senderName: context.state.senderName,
             },
         });
+    };
+    _keyExtractor = (item, index) => item.id;
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            latitude: 36.288022,
+            longitude: 59.616075,
+            myLocation: null,
+            optionSelected: 0,
+            error: null,
+            myAddress: '',
+            sendData: true,
+            myAddressName: '',
+            serverAdderss: '',
+            oldAddresses: [],
+            api_code: '',
+            senderName: '',
+            myAddress_id: -1,
+            index: 0,
+            routes: [
+                {key: 'first', title: 'آدرس جدید'},
+                {key: 'second', title: 'آدرس قدیمی'},
+            ],
+            flexSize: 3.5,
+            buttonHeight: 1
+        };
+        context = this;
+        props.navigator.setStyle({navBarHidden: true,});
+
+
+    }
+
+    componentDidMount() {
+        this.load_api_code();
+        this.requestLocationPermission();
+    }
+
+    render() {
+
+        if (this.state.sendData) return <View style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Loading/>
+        </View>;
+        else
+            return (
+                <View style={{flex: 1}}>
+                    <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
+
+                    <View style={[{
+                        backgroundColor: '#f2f2f2',
+                        elevation: vw * 2,
+                        top: 0, left: 5 * vw, right: 0, bottom: 0,
+                        width: 90 * vw,
+                        borderRadius: 4 * vw,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        overflow: 'hidden'
+                    }, {flex: this.state.flexSize}]}>
+
+                        <MapView
+                            provider={PROVIDER_GOOGLE}
+                            style={styles.map}
+                            region={{
+                                latitude: this.state.latitude,
+                                longitude: this.state.longitude,
+                                latitudeDelta: 0.01,
+                                longitudeDelta: 0.01,
+                            }}
+                            onLongPress={(e) => {
+                                this.setState({
+                                    myLocation: e.nativeEvent.coordinate,
+                                    latitude: e.nativeEvent.coordinate.latitude,
+                                    longitude: e.nativeEvent.coordinate.longitude
+                                });
+                            }}>
+
+
+                            {((context.state.myLocation !== null)) ?
+                                <MapView.Marker draggable
+                                                coordinate={this.state.myLocation}
+                                                onDragEnd={(e) => {
+                                                    this.setState({
+                                                        myLocation: e.nativeEvent.coordinate,
+                                                        latitude: e.nativeEvent.coordinate.latitude,
+                                                        longitude: e.nativeEvent.coordinate.longitude
+                                                    });
+                                                }
+                                                }
+
+                                /> : null}
+                        </MapView>
+
+
+                    </View>
+                    <View
+                        style={{
+                            flex: 1.5,
+                            flexDirection: 'column',
+                            alignContent: 'center',
+                            alignItems: 'flex-start'
+                        }}>
+                        <View style={styles.rowItem}>
+
+                            <TextInput style={styles.borderText}
+                                       placeholder="نام"
+                                       onChangeText={(text) => this.setState({senderName: text})}
+                                       value={context.state.senderName}
+                            />
+                            <ImageBackground
+                                resizeMode="stretch"
+                                style={styles.imageBack}
+                                source={require('../../img/label.png')}>
+                                <Text style={styles.Text}>نام تحویل گیرنده</Text>
+                            </ImageBackground>
+                        </View>
+
+
+                    </View>
+                    <TabViewAnimated
+                        style={{flex: 4}}
+                        navigationState={this.state}
+                        renderScene={this._renderScene}
+                        keyExtractor={this._keyExtractor}
+                        renderFooter={this._renderHeader}
+                        onIndexChange={this._handleIndexChange}
+                        initialLayout={{
+                            height: 20 * vh,
+                            width: vw * 100,
+                        }}
+                        useNativeDriver
+                    />
+
+                </View>
+            );
     }
 
 }
 
 const styles = StyleSheet.create({
         center: {
+            flex: 1,
             alignContent: 'center',
             alignItems: 'center',
-            flex: 1,
         },
         space: {
             height: 8 * vh,
@@ -482,10 +493,9 @@ const styles = StyleSheet.create({
         borderText: {
             width: 60 * vw,
             fontSize: vw * 4,
-
             color: 'black',
             fontFamily: 'B Yekan',
-            height: vh * 6,
+            height: vh * 7,
 
         },
         Text: {

@@ -3,13 +3,15 @@ import {
     ScrollView,
     View,
     FlatList,
+    AppState, Image
 } from 'react-native';
+
 import fetch from '../fetch'
 import ImageRow from "../components/ImageRow";
 import Header from '../components/header'
 import Item from '../components/productItem/item'
 import server from '../code'
-import Loading from '../components/loadScreen'
+
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh} from '../viewport'
 import HockeyApp from 'react-native-hockeyapp'
@@ -31,6 +33,22 @@ class NavigationTypes extends React.Component {
         context.setState({superBasket: basket})
     }
 
+    static basketUpdaterNoConcat(newItems) {//won't remove zero index and don't have concat
+        let basket = context.state.superBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
+                }
+            }
+        }
+
+        context.setState({superBasket: basket});
+        return basket;
+    }
+
     static basketUpdater(newItems) {//won't remove zero index
         let basket = context.state.superBasket.slice();
 
@@ -49,6 +67,33 @@ class NavigationTypes extends React.Component {
 
             } else {
                 delete item.wasInBasket;
+                return false;
+            }
+
+        });
+        let bas = basket.concat(newItems);
+        context.setState({superBasket: bas});
+        return bas;
+
+    }
+
+    static basketUpdaterForTypePage(newItems) {//won't remove zero index
+        let basket = context.state.superBasket.slice();
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < newItems.length; j++) {
+                if (basket[i].id === newItems[j].id) {
+                    basket[i] =
+                        Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
+                    newItems[j] = Object.assign({}, newItems[j], {wasInBasket: true});
+                }
+            }
+        }
+        newItems = newItems.filter(function (item) {
+            if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
+                return item.count > 0;
+            } else {
+                // delete item.wasInBasket;
                 return false;
             }
 
@@ -106,12 +151,11 @@ class NavigationTypes extends React.Component {
             this.loadCategories(JSON.parse(responseData.AllCategories));
 
         }))
-            .catch(error => {
+            .catch(ignored => {
                 server.retryParam(context.loadMainPage, context);
-
-            }).catch(error => {
+            }).catch(ignored => {
                 server.retryParam(context.loadMainPage, context);
-            })).catch(error => {
+            })).catch(ignored => {
             server.retryParam(this.loadRenderRowData, context,)
         });
 
@@ -161,7 +205,7 @@ class NavigationTypes extends React.Component {
                 };
                 context.setState({
                     superBasket: context.state.superBasket.push(item)
-                })
+                });
             }
 
             this.props.navigator.push({
@@ -210,11 +254,6 @@ class NavigationTypes extends React.Component {
         context.setState({dataSourceOffer: responseData, dataReady: true})
     }
 
-    componentWillUnmount() {
-        basketFile.writeBasket(context.state.superBasket);
-        // super.componentWillUnmount();
-    }
-
 
     componentWillMount() {
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
@@ -223,14 +262,7 @@ class NavigationTypes extends React.Component {
     componentDidMount() {
         HockeyApp.start();
         HockeyApp.checkForUpdate(); // optional
-        basketFile.readBasket().then((item) => {
-            if (item === null)
-                item = [];
-            context.setState({superBasket: item}, () => {
-                this.loadMainPage();
-            });
 
-        });
 
     }
 
@@ -245,10 +277,30 @@ class NavigationTypes extends React.Component {
             Types: [],
             dataSourceOffer: [],
             superBasket: []
-        };
-        context = this;
 
+        };
+        basketFile.readBasket().then((item) => {
+
+            if (item === null) {
+                this.loadMainPage();
+            }
+            else
+                context.setState({superBasket: item}, () => {
+                    this.loadMainPage();
+                });
+
+        });
+
+        context = this;
+        AppState.addEventListener('change', state => {
+            if (state === 'background') {
+                basketFile.writeBasket(context.state.superBasket)
+            } else if (state === 'inactive') {
+                basketFile.writeBasket(context.state.superBasket)
+            }
+        });
     }
+
 
     static getBasket() {
         return context.state.getBasket;
@@ -316,7 +368,7 @@ class NavigationTypes extends React.Component {
             title: 'لیست محصولات',
             passProps: {
                 title: item.name,
-                UpdateBasket: NavigationTypes.basketUpdater,
+                UpdateBasket: NavigationTypes.basketUpdaterForTypePage,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
                 setBasket: NavigationTypes.setBasket
@@ -339,20 +391,31 @@ class NavigationTypes extends React.Component {
     };
 
     basket = () => {
-        server.showLightBox('example.Types.basketLightBox', {
-            basket: context.state.superBasket,
-            title: context.props.title,
-            onClose: context.dismissLightBox,
-            UpdateBasket: NavigationTypes.basketUpdater,
-            setBasket: NavigationTypes.setBasket
-        }, context);
+        let json = dataHandeling.basketFilter(this.state.superBasket);
+        if (json.length > 0) {
+            server.pushScreen('example.Types.basketPreview', 'لیست خرید',
+                {
+                    UpdateBasket: NavigationTypes.basketUpdaterNoConcat,
+                    basket: json,
+                    fullBasket: this.state.superBasket,
+                    setBasket: NavigationTypes.setBasket
+                }, this)
+        } else {
+            server.showLightBox('example.Types.basketLightBox', {
+                basket: context.state.superBasket,
+                title: context.props.title,
+                onClose: context.dismissLightBox,
+                UpdateBasket: NavigationTypes.basketUpdaterNoConcat,
+                setBasket: NavigationTypes.setBasket
+            }, context);
+        }
 
     };
 
 
     static _renderItem({item, index}) {
         return (
-            <View style={{height: 35 * vh}}>
+            <View style={{height: 30 * vh}}>
                 <ImageRow className='indent' key={item.id}
                           imageUrl={server.getServerAddress() + item.photo}
                           title={item.description}
@@ -365,25 +428,16 @@ class NavigationTypes extends React.Component {
     }
 
     render() {
-        if (!this.state.dataReady) return <View style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Loading/>
-        </View>;
+        if (!this.state.dataReady) return null;
         else
             return (
-                <ScrollView>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}>
 
                     <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
                             search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
                                 {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
-                    <Carousel
+                    {this.state.dataSourceOffer != null ? <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
                         autoplay={true}
@@ -393,22 +447,22 @@ class NavigationTypes extends React.Component {
                         data={this.state.dataSourceOffer}
                         renderItem={NavigationTypes._renderItem}
                         sliderHeight={vh * 2}
-                        itemHeight={vh * 35}
+                        itemHeight={vh * 30}
                         sliderWidth={100 * vw}
                         itemWidth={100 * vw}
                         loop={false}
-                    />
+                    /> : null}
+
 
                     <ListViewCustum
                         data={this.state.Types} action={this.dummyTypePage}/>
 
-                    <Header style={{width: '100%', height: vh * 10}} title="پیشنهاد ویژه"/>
-
+                    <Header title="پیشنهاد ویژه"/>
 
                     <FlatList
                         style={{
                             flexDirection: 'row',
-                            width: 100 * vw, height: 55 * vh
+                            width: 100 * vw, height: 45 * vh
                         }}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
@@ -416,16 +470,29 @@ class NavigationTypes extends React.Component {
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderSpecialOffer(item)}
                     />
-                    <Header style={{width: '100%', height: vh * 10}} title="پرفروش ترین ها"/>
+                    <Header style={{height: vh * 10}} title="پرفروش ترین ها"/>
 
                     <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 50 * vh,}}
+                        style={{flexDirection: 'row', width: 100 * vw, height: 45 * vh,}}
                         horizontal={true}
                         keyExtractor={(item) => item.id}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.superBasket}
                         renderItem={({item}) => this.renderBestSellingProducts(item)}
                     />
+
+                    <Image
+                        resizeMode="cover"
+                        style={{
+                            top: 0,
+                            left: 40 * vw,
+                            bottom: 2,
+                            right: 40 * vw,
+                            position: 'absolute',
+                            width: 24 * vw,
+                            height: 24 * vw,
+                        }}
+                        source={require('../../img/mainPage/icon.png')}/>
 
 
                 </ScrollView>
@@ -448,6 +515,7 @@ class NavigationTypes extends React.Component {
                 onUp={() => this.onUpSpecialOffer(item)}
                 onDown={() => this.onDownSpecialOffer(item)}
                 price={item.price}
+                off={item.off}
                 disscount={(item.off !== 0) ? item.main_price : null}
                 imageUrl={server.getServerAddress() + '/' + item.photo}
                 onPress={_.debounce(() => this.gotoCategoryFromItem(item),
@@ -466,6 +534,7 @@ class NavigationTypes extends React.Component {
                          onUp={() => this.onUpBestSellingProducts(item)}
                          onDown={() => this.onDownBestSellingProducts(item)}
                          price={item.price}
+                         off={item.off}
                          disscount={(item.off !== 0) ? item.main_price : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
                          onPress={_.debounce(() => this.gotoCategoryFromItem(item),
@@ -478,43 +547,71 @@ class NavigationTypes extends React.Component {
 
 
     onUpSpecialOffer = (rowdata) => {
+        if (rowdata.max_in_order > rowdata.count) {
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
+            let list = this.state.superBasket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
 
-        rowdata.count++;
-        let list = this.state.superBasket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-        list[index] = rowdata;
-        this.setState({
-            superBasket: list
+            this.setState({
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
 
-        });
+            });
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
     onDownSpecialOffer = (rowdata) => {
+        let rowDataCopy = Object.assign({}, rowdata);
         if (rowdata.count !== 0) {
-            rowdata.count--;
+            rowDataCopy.count--;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index] = rowdata;
+
             this.setState({
-                superBasket: list
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
             });
+
         }
+
+
     };
     onUpBestSellingProducts = (rowdata) => {
+        if (rowdata.max_in_order > rowdata.count) {
 
-        rowdata.count++;
-        let list = this.state.superBasket;
-        let index = dataHandeling.indexOfId(list, rowdata.id);
-        list[index] = rowdata;
-        this.setState({superBasket: list});
-    };
-    onDownBestSellingProducts = (rowdata) => {
-        if (rowdata.count !== 0) {
-            rowdata.count--;
+            let rowDataCopy = Object.assign({}, rowdata);
+            rowDataCopy.count++;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-            list[index] = rowdata;
-            this.setState({superBasket: list});
+
+            this.setState({
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
+        } else
+            server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
+    };
+    onDownBestSellingProducts = (rowdata) => {
+        let rowDataCopy = Object.assign({}, rowdata);
+        if (rowdata.count !== 0) {
+            rowDataCopy.count--;
+            let list = this.state.superBasket;
+            let index = dataHandeling.indexOfId(list, rowdata.id);
+
+            this.setState({
+                superBasket: [...list.slice(0, index),
+                    rowDataCopy,
+                    ...list.slice(index + 1)]
+
+            });
         }
+
 
     };
 }

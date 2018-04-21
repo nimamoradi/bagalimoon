@@ -50,6 +50,7 @@ class MyClass extends React.Component {
         this.toggleDrawer();
         this.props.navigator.push({
             screen: 'example.Types.orderHistroy',
+            title:'سوابق سفارش',
             passProps: {
                 api_code: this.props.api_code
             },

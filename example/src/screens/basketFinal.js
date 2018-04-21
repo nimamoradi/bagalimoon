@@ -6,6 +6,8 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
+import SimpleItem from '../components/productItem/SimpleItem'
+import SimpleHeader from '../components/productItem/SimpleHeader'
 
 let context;
 
@@ -82,18 +84,6 @@ class basketFinal extends React.Component {
     }
 
 
-    renderRow = (rowData) => {
-        return (
-            <View style={styles.row}>
-
-                <Text style={styles.price}>{rowData.final_price}</Text>
-                <Text style={styles.price}>{rowData.regular_price}</Text>
-                <Text style={styles.price}>{rowData.count}</Text>
-                <Text style={styles.text}>{rowData['product']['name']}</Text>
-            </View>
-        );
-    };
-
     render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
@@ -110,14 +100,7 @@ class basketFinal extends React.Component {
         else
             return (
                 <View style={styles.container}>
-
-                    <View style={{flexDirection: 'row', alignItems: 'flex-start', width: '100%', height: 10 * vh}}>
-                        <Text style={styles.tableHeader}>قیمت نهایی</Text>
-                        <Text style={styles.tableHeader}>قیمت عادی</Text>
-                        <Text style={styles.tableHeader}>تعداد</Text>
-                        <Text style={styles.tableHeader}>نام</Text>
-                    </View>
-
+                 <SimpleHeader/>
 
                     <FlatList
                         style={{flex: 4}}
@@ -126,7 +109,10 @@ class basketFinal extends React.Component {
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
-                            this.renderRow(item)}
+                            <SimpleItem regular_price={item.regular_price}
+                                        name={item['product']['name']}
+                                        final_price={item.final_price}
+                                        count={item.count}/>}
                     />
                     <View style={{flexDirection: 'column', alignItems: 'center', flex: 0.5, width: 100 * vw}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
@@ -225,7 +211,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: vw * 4,
-        flex: 1,
+        flex: 3,
         width: 12 * vw,
         fontFamily: 'B Yekan',
         margin: 10,
@@ -238,14 +224,7 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         textAlign: 'center'
     },
-    tableHeader: {
-        fontSize: vw * 5,
-        fontFamily: 'B Yekan',
-        flex: 1,
-        margin: 8,
-        color: '#000',
-        textAlign: 'center'
-    },
+
     button: {
         width: 50 * vw,
         height: 16 * vh,

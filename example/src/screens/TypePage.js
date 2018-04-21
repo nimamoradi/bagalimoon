@@ -317,7 +317,7 @@ class TypePage extends Component {
 
                         <FlatList
                             showsVerticalScrollIndicator={false}
-                            style={{width: 75 * vw,}}
+                            style={{width: 75 * vw, marginBottom: 4 * vh}}
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}

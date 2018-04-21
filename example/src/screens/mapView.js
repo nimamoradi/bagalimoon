@@ -8,9 +8,11 @@ import {
     ImageBackground,
     TextInput,
     AsyncStorage,
+    ScrollView,
     PermissionsAndroid,
     Picker,
     Keyboard,
+    Platform
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
@@ -123,7 +125,7 @@ class mapView extends Component {
                 (error) => {
                     // console.log(error)
                 }),
-                { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+                {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
             ;
         }
     }
@@ -317,6 +319,13 @@ class mapView extends Component {
         this.props.navigator.push({
             screen: 'example.Types.basketFinal',
             title: 'خرید را نهایی کنید',
+            navigatorButtons: {
+                leftButtons: [
+                    {}
+                ]
+            },
+
+            overrideBackPress: true,
             passProps: {
                 shouldUpdateBasket: context.props.shouldUpdateBasket,
                 setBasket: context.props.setBasket,
@@ -381,6 +390,7 @@ class mapView extends Component {
         </View>;
         else
             return (
+
                 <View style={{flex: 1}}>
                     <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
 
@@ -430,6 +440,14 @@ class mapView extends Component {
 
 
                     </View>
+
+                    <Text style={{
+                        fontSize: vw * 3.5,
+                        color: '#00000075',
+                        fontFamily: 'B Yekan',
+                    }}>
+                        برای ارسال سریعتر مختصات خود وارد کنید
+                    </Text>
                     <View
                         style={{
                             flex: 1.5,
@@ -469,6 +487,7 @@ class mapView extends Component {
                     />
 
                 </View>
+
             );
     }
 

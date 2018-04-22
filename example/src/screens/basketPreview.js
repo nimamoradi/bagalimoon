@@ -32,10 +32,13 @@ class basketPreview extends React.Component {
         context.setState({shouldUpdateBasket: value});
     }
 
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
     componentWillUnmount() {
-
-
-
         if (context.state.shouldUpdateBasket) {
             let basket = this.state.basket;
             this.props.UpdateBasket(basket, this.props.basket);
@@ -147,7 +150,7 @@ class basketPreview extends React.Component {
                     alignItems: 'center',
                     flex: 1
                 }}>
-                    <Text style={styles.price}>{rowData.price}</Text>
+                    <Text style={styles.price}>{this.numberFormat(rowData.price)}</Text>
                     <Text style={styles.price}>تومان</Text>
                     <CountCircle count={rowData.count}/>
                 </View>
@@ -210,7 +213,7 @@ class basketPreview extends React.Component {
                                 مبلغ اصلی
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.wholePrice} تومان
+                                {this.numberFormat(this.state.wholePrice)} تومان
                             </Text>
                         </View>
                     </ImageBackground>
@@ -223,7 +226,7 @@ class basketPreview extends React.Component {
                                 با تخفیف
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.totalPrice}
+                                {this.numberFormat(this.state.totalPrice)}
                             </Text>
                         </View>
 
@@ -237,7 +240,7 @@ class basketPreview extends React.Component {
                                 سود شما
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.discounted}
+                                {this.numberFormat(this.state.discounted)}
                             </Text>
                         </View>
 

@@ -77,7 +77,11 @@ class orderHistroy extends React.Component {
         this.load_api_code();
     }
 
-
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
     render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
@@ -106,8 +110,8 @@ class orderHistroy extends React.Component {
                                       des={item.receiver_name}/>
                             <SmallRow des={item.mobile_phone_number} title={'شماره تماس'}/>
 
-                            <SmallRow title={'مبلغ قابل پرداخت'} des={item.paid_price+" تومان"}/>
-                            <SmallRow title={'مبلغ بدون تخفیف'} des={item.sum_price+" تومان"}/>
+                            <SmallRow title={'مبلغ قابل پرداخت'} des={this.numberFormat(item.paid_price)+" تومان"}/>
+                            <SmallRow title={'مبلغ بدون تخفیف'} des={this.numberFormat(item.sum_price)+" تومان"}/>
                             <SmallRow title={'آدرس'} des={item.address.name + ' : ' + item.address.Address}/>
                             <FlatList
                                 style={{flex:1,width:'95%'}}
@@ -115,9 +119,9 @@ class orderHistroy extends React.Component {
                                 data={item.ordered_products}
                                 ListHeaderComponent={<SimpleHeader/>}
                                 renderItem={({item}) =>
-                                    <SimpleItem regular_price={item.regular_price}
+                                    <SimpleItem regular_price={this.numberFormat(item.regular_price)}
                                                 name={item.product.name}
-                                                final_price={item.final_price}
+                                                final_price={this.numberFormat(item.final_price)}
                                                 count={item.count}/>}
 
                             />

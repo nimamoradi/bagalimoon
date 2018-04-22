@@ -301,6 +301,12 @@ class NavigationTypes extends React.Component {
         });
     }
 
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
 
     static getBasket() {
         return context.state.getBasket;
@@ -514,9 +520,9 @@ class NavigationTypes extends React.Component {
                 count={item.count}
                 onUp={() => this.onUpSpecialOffer(item)}
                 onDown={() => this.onDownSpecialOffer(item)}
-                price={item.price}
+                price={this.numberFormat(item.price)}
                 off={item.off}
-                disscount={(item.off !== 0) ? item.main_price : null}
+                disscount={(item.off !== 0) ? this.numberFormat(item.main_price) : null}
                 imageUrl={server.getServerAddress() + '/' + item.photo}
                 onPress={_.debounce(() => this.gotoCategoryFromItem(item),
                     1000, {leading: true, trailing: false})}
@@ -533,9 +539,9 @@ class NavigationTypes extends React.Component {
                          count={item.count}
                          onUp={() => this.onUpBestSellingProducts(item)}
                          onDown={() => this.onDownBestSellingProducts(item)}
-                         price={item.price}
+                         price={this.numberFormat(item.price)}
                          off={item.off}
-                         disscount={(item.off !== 0) ? item.main_price : null}
+                         disscount={(item.off !== 0) ? this.numberFormat(item.main_price) : null}
                          imageUrl={server.getServerAddress() + '/' + item.photo}
                          onPress={_.debounce(() => this.gotoCategoryFromItem(item),
                              1000, {leading: true, trailing: false})}

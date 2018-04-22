@@ -220,6 +220,11 @@ class TypePage extends Component {
 
 
     };
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
 
     topLoadData(item) {
         let subItems = context.findSubItems(context.state.Categories,
@@ -327,8 +332,8 @@ class TypePage extends Component {
                                     keyExtractor={this._keyExtractor}
                                     title={item.name}
                                     off={item.off}
-                                    disscount={(item.off !== 0) ? item.main_price : null}
-                                    price={item.price}
+                                    disscount={(item.off !== 0) ? this.numberFormat(item.main_price) : null}
+                                    price={this.numberFormat(item.price)}
                                     count={item.count}
                                     onUp={() => this.onUp(item)}
                                     onDown={() => this.onDown(item)}

@@ -32,7 +32,11 @@ class FlatListSearch extends React.Component {
         };
         context = this;
     }
-
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
     makeList = (responseData) => {
         let lastBasket = this.state.lastBasket;
 
@@ -118,8 +122,8 @@ class FlatListSearch extends React.Component {
                     renderItem={({item}) => (
                         <RectProduct
                             title={item.name}
-                            disscount={(item.off !== 0) ? item.main_price : null}
-                            price={item.price}
+                            disscount={(item.off !== 0) ? this.numberFormat(item.main_price) : null}
+                            price={this.numberFormat(item.price)}
                             count={item.count}
                             off={item.off}
                             onUp={() => this.onUp(item)}

@@ -83,7 +83,11 @@ class basketFinal extends React.Component {
         this.isAvailable();
     }
 
-
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
     render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
@@ -109,16 +113,16 @@ class basketFinal extends React.Component {
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
-                            <SimpleItem regular_price={item.regular_price}
+                            <SimpleItem regular_price={this.numberFormat(item.regular_price)}
                                         name={item['product']['name']}
-                                        final_price={item.final_price}
+                                        final_price={this.numberFormat(item.final_price)}
                                         count={item.count}/>}
                     />
                     <View style={{flexDirection: 'column', alignItems: 'center', flex: 0.5, width: 100 * vw}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
                             <View style={{flex: 1}}/>
                             <Text style={styles.price}>
-                                {this.state.totalPrice} تومان
+                                {this.numberFormat(this.state.totalPrice)} تومان
                             </Text>
                             <Text style={styles.text}>
                                 جمع خرید

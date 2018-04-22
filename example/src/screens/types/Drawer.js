@@ -21,16 +21,7 @@ import basketfile from "../../basketFile";
 let context;
 
 class MyClass extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {user_number: ''};
-        context = this;
-        AsyncStorage.getItem('user_number').then((item) => {
-            context.setState({user_number: item})
-        });
-
-    }
 
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -50,7 +41,7 @@ class MyClass extends React.Component {
         this.toggleDrawer();
         this.props.navigator.push({
             screen: 'example.Types.orderHistroy',
-            title:'سوابق سفارش',
+            title: 'سوابق سفارش',
             passProps: {
                 api_code: this.props.api_code
             },
@@ -63,10 +54,18 @@ class MyClass extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{backgroundColor: '#eeeceb', flex: 1, width: 300, justifyContent: 'center',}}>
-                    <Image style={styles.image} source={require('../../../img/grocery.png')}/>
-                    <Text style={{alignSelf: 'flex-end', fontSize: vw * 5}}>{this.state.user_number}</Text>
+                    <Image
+                        resizeMode='stretch'
+                        style={styles.image} source={require('../../../img/grocery.png')}/>
+                    <Text style={{alignSelf: 'center', fontSize: vw * 5, fontFamily: 'B Yekan',}}>فروشگاه بزرگ
+                        بقالیمون</Text>
                 </View>
-                <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
+                <View style={{
+                    backgroundColor: '#fafafa50', flex: 3,
+                    flexDirection: 'column', marginRight: 2 * vw,
+                    marginBottom: 4 * vh,
+                    justifyContent: 'space-between', width: 300,
+                }}>
 
 
                     <TouchableOpacity
@@ -74,7 +73,7 @@ class MyClass extends React.Component {
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <MaterialIcon name="history" size={vw * 8} color="#ff5500"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}> سوابق سفارش</Text>
+                            <Text style={styles.textFont}> سوابق سفارش</Text>
 
                         </View>
 
@@ -91,7 +90,7 @@ class MyClass extends React.Component {
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <Icon name="info-circle" size={vw * 8} color="#72bcd4"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>درباره ما</Text>
+                            <Text style={styles.textFont}>درباره ما</Text>
 
                         </View>
 
@@ -108,7 +107,7 @@ class MyClass extends React.Component {
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <Icon name="share-square-o" size={vw * 8} color="#ff0d04"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>اشتراک</Text>
+                            <Text style={styles.textFont}>اشتراک</Text>
                         </View>
 
                     </TouchableOpacity>
@@ -121,7 +120,7 @@ class MyClass extends React.Component {
                         <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
                             <MaterialIcon name="logout" size={vw * 8} color="#C42B2D"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>خروج</Text>
+                            <Text style={styles.textFont}>خروج</Text>
 
                         </View>
 
@@ -163,12 +162,13 @@ const styles = StyleSheet.create({
     },
     button: {},
     image: {
-        height: 33*vw, width:33*vw,
+        height: 30 * vw, width: 30 * vw,
         alignSelf: 'center',
+        flex: 4,
         alignItems: 'center',
         justifyContent: 'flex-start',
     }
-    ,
+    , textFont: {marginTop: 35 / 2, fontFamily: 'B Yekan', fontSize: vw * 6}
 });
 
 export default MyClass;

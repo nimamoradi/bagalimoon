@@ -13,12 +13,12 @@ import com.android.build.OutputFile
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 repositories {
     maven { url 'https://maven.google.com' }
 }
@@ -32,10 +32,11 @@ android {
         applicationId "com.moonShop"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 132
-        versionName "1.32"
+        versionCode 134
+        versionName "1.34"
         lintOptions {
             abortOnError false
+            checkReleaseBuilds false
         }
         ndk {
             abiFilters "armeabi-v7a", "x86"

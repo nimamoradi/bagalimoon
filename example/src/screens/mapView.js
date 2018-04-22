@@ -441,13 +441,6 @@ class mapView extends Component {
 
                     </View>
 
-                    <Text style={{
-                        fontSize: vw * 3.5,
-                        color: '#00000075',
-                        fontFamily: 'B Yekan',
-                    }}>
-                        برای ارسال سریعتر مختصات خود وارد کنید
-                    </Text>
                     <View
                         style={{
                             flex: 1.5,

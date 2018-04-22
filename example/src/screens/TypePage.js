@@ -147,7 +147,7 @@ class TypePage extends Component {
     };
 
     componentWillUnmount() {
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
+
         let basket = this.state.basket;
         this.props.UpdateBasket(basket
         );

@@ -35,7 +35,7 @@ class basketPreview extends React.Component {
     componentWillUnmount() {
 
 
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
+
         if (context.state.shouldUpdateBasket) {
             let basket = this.state.basket;
             this.props.UpdateBasket(basket, this.props.basket);
@@ -197,7 +197,7 @@ class basketPreview extends React.Component {
                             source={require('../../img/green.png')}
                         >
 
-                            <Text style={{fontSize: vw * 5, color: 'black',}}>پرداخت</Text>
+                            <Text style={{fontSize: vw * 4.5, color: 'black',}}>تکمیل خرید</Text>
 
                         </ImageBackground>
                     </TouchableOpacity>

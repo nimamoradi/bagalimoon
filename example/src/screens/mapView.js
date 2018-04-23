@@ -16,7 +16,7 @@ import {
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, AnimatedRegion, Animated} from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
@@ -275,7 +275,6 @@ class mapView extends Component {
         if (context.state.senderName !== '' && context.state.senderName !== undefined &&
             context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) > -1) {
             if (context.state.index === 0) {
-
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
                     && context.state.myAddressName !== null)) {
                     server.alert('اخطار',
@@ -288,16 +287,12 @@ class mapView extends Component {
                 }
             }
             else if (context.state.index === 1) {
-
                 if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
                     server.alert('اخطار',
                         "لطفا آدرس را انتخاب کنید",
                         context);
-
                 else
                     this.finalBasket();
-
-
             }
 
         }
@@ -391,6 +386,7 @@ class mapView extends Component {
         else
             return (
 
+
                 <View style={{flex: 1}}>
                     <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
 
@@ -408,13 +404,14 @@ class mapView extends Component {
                         <MapView
                             provider={PROVIDER_GOOGLE}
                             style={styles.map}
-                            region={{
+                            region={new AnimatedRegion({
                                 latitude: this.state.latitude,
                                 longitude: this.state.longitude,
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
+                                latitudeDelta: 0.02,
+                                longitudeDelta: 0.02,
+                            })}
                             onLongPress={(e) => {
+                                alert(JSON.stringify(e.nativeEvent.coordinate));
                                 this.setState({
                                     myLocation: e.nativeEvent.coordinate,
                                     latitude: e.nativeEvent.coordinate.latitude,
@@ -500,20 +497,19 @@ const styles = StyleSheet.create({
         },
         rowItem: {
             flexDirection: 'row',
-            backgroundColor: '#f2f2f2',
+            backgroundColor: '#f2f2f200',
             elevation: 2 * vw,
             borderRadius: 2 * vw,
             margin: 5,
             alignItems: 'center',
-            height: 7 * vh,
+            height: 8 * vh,
         },
         imageBack: {
-            width: 20 * vw, height: 10 * vh,
+            width: 20 * vw,
+            height: 8 * vh,
             alignContent: 'center',
             alignItems: 'center',
             flex: 1,
-            margin: 2 * vw,
-            marginRight: -2 * vw,
             justifyContent: 'center',
         },
         container: {

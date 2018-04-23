@@ -50,8 +50,10 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
 
                     <View style={{flexDirection: 'column', width: 25 * vw}}>
                         <Text style={styles.text}>{title}</Text>
+                        <View>
                         {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                         <Text style={styles.price}>{price} تومان </Text>
+                        </View>
                     </View>
 
 
@@ -82,8 +84,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
-        width: 70 * vw,
-        height: 35 * vw
+        width: 72 * vw,
+        height: 38 * vw
 
 
     },
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        height: 33 * vw,
+        height: 35 * vw,
         width: 25 * vw,
         margin: 2 * vw,
     },

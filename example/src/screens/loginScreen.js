@@ -125,6 +125,7 @@ class loginScreen extends React.Component {
                 'Content-Type': 'application/json',
                 'content-encoding': "gzip, deflate, br"
             },
+            retries: 1,
             body: JSON.stringify({
                 api_code: context.props.api_code,
                 'phone_number': context.state.phoneNumber,

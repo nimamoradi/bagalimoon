@@ -107,6 +107,7 @@ class codeEnter extends React.Component {
                 'Content-Type': 'application/json',
                 'content-encoding': "gzip, deflate, br"
             },
+            retries: 1,
             body: JSON.stringify({
                 api_code: context.props.api_code,
                 'phone_number': context.state.phoneNumber,
@@ -120,13 +121,11 @@ class codeEnter extends React.Component {
         }))
             .catch(ignored => {
                 server.retryParam(context.doSignUp, context);
-                alert(ignored);
+
             }).catch(ignored => {
                 server.retryParam(context.doSignUp, context);
-                alert(ignored);
             })).catch(ignored => {
             server.retryParam(context.doSignUp, context);
-            alert(ignored);
 
         });
         // console.log('inside login form');

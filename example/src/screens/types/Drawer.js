@@ -99,7 +99,7 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={() => {
                             Share.share({
-                                message: 'خرید اسان با قیمت مناسب',
+                                message: 'بقالمون خرید اسان با قیمت مناسب https://www.baghali.amins.ir',
                                 url: 'https://www.baghali.amins.ir',
                                 title: 'بقالمون'
                             }, {});

@@ -17,7 +17,9 @@ class listViewCustum extends React.Component {
     scrollListToStart(contentWidth, contentHeight) {
         this.scrollView.scrollTo({x: contentWidth});
     }
-
+    scrollTo(contentWidth, contentHeight) {
+        this.scrollView.scrollTo({x: contentWidth, y: contentHeight, animated: true})
+    }
     render() {
         let listItem = this.props.data.map((item) => {
             return <TypeButton title={item.name}

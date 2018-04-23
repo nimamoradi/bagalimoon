@@ -161,7 +161,7 @@ class basketPreview extends React.Component {
                 </TouchableOpacity>
                 <Text style={styles.text}>{rowData.name}</Text>
                 <Image source={{uri: server.getServerAddress() + '/' + rowData.photo}}
-                       style={{width: 16 * vw, height: 16 * vw, margin: 2 * vw}}
+                       style={{width: 16 * vw, height: 16 * vw, marginRight: 2 * vw}}
                 />
 
             </View>
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
         fontSize: vw * 4,
         flex: 1,
         fontFamily: 'B Yekan',
-        margin: 10,
+
         textAlign: 'center',
         color: 'black'
     },

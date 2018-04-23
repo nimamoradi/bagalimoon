@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     },
     price: {
         fontFamily: 'B Yekan',
-        flex: 1, fontSize: vw * 4,
+        flex: 1,
+        fontSize: vw * 4,
         color: 'black',
         textAlign: 'left'
     },

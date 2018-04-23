@@ -24,17 +24,16 @@ function SimpleNavbar({back, title}) {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 90 * vw,
-        height: 8 * vh,
         flexDirection: 'row',
         backgroundColor: '#ff0030',
         borderRadius: vw * 3,
-        margin:2*vw ,
-        marginRight:5*vw,
-        marginLeft:5*vw,
-        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
+        marginTop: vh,
+        marginRight: vh,
+        marginLeft: vh,
+        borderBottomColor: '#f2f2f2',
+        height: 8 * vh,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 
 });

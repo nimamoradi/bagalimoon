@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         marginTop: vh,
         marginRight: vh,
         marginLeft: vh,
-        borderBottomColor: 'rgba(0, 0, 0, 0.0)',
+        borderBottomColor: '#f2f2f2',
     },
     text: {
         fontSize: vw * 6,

@@ -160,14 +160,7 @@ class basketFinal extends React.Component {
                                 <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                this.props.navigator.pop();
-                            }}>
-                            <View style={styles.buttonCancel}>
-                                <Text style={{fontSize: vw * 4,}}>پرداخت هنگام تحویل</Text>
-                            </View>
-                        </TouchableOpacity>
+
                     </View>
 
                 </View>

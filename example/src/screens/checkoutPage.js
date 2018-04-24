@@ -135,7 +135,7 @@ class checkoutPage extends React.Component {
                         startInLoadingState={true}
                         javaScriptEnabled={true}
                         onMessage={this.onMessage}
-                        injectedJavaScript={'var imgs = document.getElementsByTagName("img");for(var i=0, l=imgs.length;i<l;i++){imgs[i].src = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";}'}
+
                         source={{uri: 'https://sandbox.zarinpal.com/pg/StartPay/' + this.state.order_checkout}}
                     />
                 </View>
@@ -143,7 +143,7 @@ class checkoutPage extends React.Component {
 
     }
 
-
+//     injectedJavaScript={'var imgs = document.getElementsByTagName("img");for(var i=0, l=imgs.length;i<l;i++){imgs[i].src = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";}'}
 }
 
 

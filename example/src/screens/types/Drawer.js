@@ -13,10 +13,10 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {vw, vh, vmin, vmax} from '../../viewport'
-import server from "../../code";
-import basketfile from "../../basketFile";
+
+import DrawerItem from "./drawerItem";
 
 let context;
 
@@ -64,17 +64,16 @@ class MyClass extends React.Component {
                     backgroundColor: '#fafafa50', flex: 3,
                     flexDirection: 'column', marginRight: 2 * vw,
                     marginBottom: 4 * vh,
-                    justifyContent: 'space-between', width: 300,
+                    justifyContent: 'flex-start', width: 300,
                 }}>
 
 
                     <TouchableOpacity
                         onPress={(() => this.orderHistroy())}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <MaterialIcon name="history" size={vw * 8} color="#ff5500"
-                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
+                        <View style={styles.row}>
                             <Text style={styles.textFont}> سوابق سفارش</Text>
-
+                            <MaterialIcon name="history" size={vw * 8} color="cyan"
+                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
                     </TouchableOpacity>
@@ -87,11 +86,10 @@ class MyClass extends React.Component {
                                 title: 'درباره ما',
                             });
                         }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Icon name="info-circle" size={vw * 8} color="#72bcd4"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                        <View style={styles.row}>
                             <Text style={styles.textFont}>درباره ما</Text>
-
+                            <Icon name="info-circle" size={vw * 8} color="cyan"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
                     </TouchableOpacity>
@@ -104,10 +102,10 @@ class MyClass extends React.Component {
                                 title: 'بقالمون'
                             }, {});
                         }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Icon name="share-square-o" size={vw * 8} color="#ff0d04"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                        <View style={styles.row}>
                             <Text style={styles.textFont}>اشتراک</Text>
+                            <Icon name="share-square-o" size={vw * 8} color="cyan"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
                     </TouchableOpacity>
@@ -115,13 +113,11 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={() => {
                             this.backPressed();
-
                         }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <MaterialIcon name="logout" size={vw * 8} color="#C42B2D"
+                        <View style={styles.row}>
+                            <Text style={styles.textFont}>خروج از حساب کاربری</Text>
+                            <MaterialIcon name="logout" size={vw * 8} color="cyan"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={styles.textFont}>خروج</Text>
-
                         </View>
 
                     </TouchableOpacity>
@@ -161,14 +157,29 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     button: {},
+    row: {
+        flexDirection: 'row-reverse',
+        backgroundColor: 'red',
+        width: 300,
+        height: 10 * vh,
+        borderRadius: 4 * vw,
+        flexGrow: 1,
+        justifyContent: 'center',
+        margin: 2 * vw,
+        alignContent: 'center',
+    },
     image: {
         height: 30 * vw, width: 30 * vw,
         alignSelf: 'center',
         flex: 4,
         alignItems: 'center',
         justifyContent: 'flex-start',
+    },
+    textFont: {
+        marginTop: 35 / 2,
+        color: 'white',
+        fontFamily: 'B Yekan', fontSize: vw * 6
     }
-    , textFont: {marginTop: 35 / 2, fontFamily: 'B Yekan', fontSize: vw * 6}
 });
 
 export default MyClass;

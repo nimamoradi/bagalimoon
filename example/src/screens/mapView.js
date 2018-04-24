@@ -138,6 +138,14 @@ class mapView extends Component {
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddressName: text})}
                                    value={this.state.myAddressName}
+                                   blurOnSubmit={false}
+                                   onSubmitEditing={() => {
+                                       this.focusNextField('three');
+                                   }}
+                                   returnKeyType={"next"}
+                                   ref={input => {
+                                       this.inputs['two'] = input;
+                                   }}
                         />
                         <ImageBackground
                             resizeMode="stretch"
@@ -151,6 +159,11 @@ class mapView extends Component {
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddress: text})}
                                    value={this.state.myAddress}
+                                   blurOnSubmit={true}
+                                   returnKeyType={"done"}
+                                   ref={input => {
+                                       this.inputs['three'] = input;
+                                   }}
                         />
                         <ImageBackground
                             resizeMode="stretch"
@@ -160,7 +173,7 @@ class mapView extends Component {
                         </ImageBackground>
                     </View>
 
-                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                    <View style={styles.center}>
                         <TouchableOpacity
                             onPress={_.debounce(this.offlineSale,
                                 1000, {leading: true, trailing: false})}
@@ -237,7 +250,7 @@ class mapView extends Component {
                 }
             })
         }).then((response) => response.json().then((responseData) => {
-            context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
+            context.setState({sendData: false, myAddress_id: parseInt(responseData.id)});//add oldAddresses
             // console.log('respone' + responseData);
             context.finalBasket();
         }))
@@ -362,7 +375,13 @@ class mapView extends Component {
         context = this;
         props.navigator.setStyle({navBarHidden: true,});
 
+        this.focusNextField = this.focusNextField.bind(this);
+        // to store our input refs
+        this.inputs = {};
+    }
 
+    focusNextField(id) {
+        this.inputs[id].focus();
     }
 
     componentDidMount() {
@@ -411,7 +430,7 @@ class mapView extends Component {
                                 longitudeDelta: 0.02,
                             })}
                             onLongPress={(e) => {
-                                alert(JSON.stringify(e.nativeEvent.coordinate));
+
                                 this.setState({
                                     myLocation: e.nativeEvent.coordinate,
                                     latitude: e.nativeEvent.coordinate.latitude,
@@ -440,7 +459,7 @@ class mapView extends Component {
 
                     <View
                         style={{
-                            flex: 1.5,
+                            flex: 1,
                             flexDirection: 'column',
                             alignContent: 'center',
                             alignItems: 'flex-start'
@@ -449,8 +468,16 @@ class mapView extends Component {
 
                             <TextInput style={styles.borderText}
                                        placeholder="نام"
+                                       blurOnSubmit={false}
+                                       onSubmitEditing={() => {
+                                           this.focusNextField('two');
+                                       }}
+                                       returnKeyType={"next"}
                                        onChangeText={(text) => this.setState({senderName: text})}
                                        value={context.state.senderName}
+                                       ref={input => {
+                                           this.inputs['one'] = input;
+                                       }}
                             />
                             <ImageBackground
                                 resizeMode="stretch"

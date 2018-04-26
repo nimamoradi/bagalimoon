@@ -49,10 +49,11 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
                         source={{uri: imageUrl}} style={styles.image}/>
 
                     <View style={{flexDirection: 'column', width: 25 * vw}}>
-                        <Text style={styles.text}>{title}</Text>
+                        <Text adjustsFontSizeToFit style={styles.text}>{title}</Text>
 
-                        {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
-                        <Text style={styles.price}>{price} تومان </Text>
+                        {(disscount) ?
+                            <Text numberOfLines={1} adjustsFontSizeToFit style={styles.discount}>{disscount} تومان </Text> : null}
+                        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.price}>{price} تومان </Text>
 
                     </View>
 
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         width: 72 * vw,
-        height: 38 * vw
+        height: 45 * vw
 
 
     },
@@ -110,7 +111,8 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         fontSize: vw * 4,
         color: 'black',
-        width: 25 * vw
+        width: 25 * vw,
+        height: 14 * vh
     },
     price: {fontSize: vw * 4, color: 'black', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
     discount: {

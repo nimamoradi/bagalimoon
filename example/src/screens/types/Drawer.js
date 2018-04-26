@@ -55,7 +55,7 @@ class MyClass extends React.Component {
                     <Image
                         resizeMode='stretch'
                         style={styles.image} source={require('../../../img/grocery.png')}/>
-                    <Text style={{alignSelf: 'center', fontSize: vw * 5, fontFamily: 'B Yekan',}}>فروشگاه بزرگ
+                    <Text style={{alignSelf: 'center', fontSize: vw * 6, fontFamily: 'B Yekan',}}>فروشگاه بزرگ
                         بقالیمون</Text>
                 </View>
                 <View style={{
@@ -70,8 +70,27 @@ class MyClass extends React.Component {
                         onPress={(() => this.orderHistroy())}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}> سوابق سفارش</Text>
+                            <View style={{flex: 1}}/>
                             <MaterialIcon name="history" size={vw * 8} color="#1064d3"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
+                        </View>
+
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            Share.share({
+                                message: 'بقالمون خرید اسان با قیمت مناسب https://www.baghali.amins.ir',
+                                url: 'https://www.baghali.amins.ir',
+                                title: 'بقالمون'
+                            }, {});
+                        }}>
+                        <View style={styles.row}>
+                            <Text style={styles.textFont}>معرفی به دوستان</Text>
+                            <View style={{flex: 1}}/>
+                            <Icon name="share-square-o" size={vw * 8} color="#1064d3"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
                     </TouchableOpacity>
@@ -86,23 +105,8 @@ class MyClass extends React.Component {
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>درباره ما</Text>
+                            <View style={{flex: 1}}/>
                             <Icon name="info-circle" size={vw * 8} color="#1064d3"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
-                        </View>
-
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => {
-                            Share.share({
-                                message: 'بقالمون خرید اسان با قیمت مناسب https://www.baghali.amins.ir',
-                                url: 'https://www.baghali.amins.ir',
-                                title: 'بقالمون'
-                            }, {});
-                        }}>
-                        <View style={styles.row}>
-                            <Text style={styles.textFont}>اشتراک</Text>
-                            <Icon name="share-square-o" size={vw * 8} color="#1064d3"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
@@ -114,6 +118,7 @@ class MyClass extends React.Component {
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>خروج از حساب کاربری</Text>
+                            <View style={{flex: 1}}/>
                             <MaterialIcon name="logout" size={vw * 8} color="#1064d3"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
@@ -176,7 +181,8 @@ const styles = StyleSheet.create({
     textFont: {
         marginTop: 35 / 2,
         color: 'white',
-        fontFamily: 'B Yekan', fontSize: vw * 6
+        marginRight: 2 * vw,
+        fontFamily: 'B Yekan', fontSize: vw * 4.5
     }
 });
 

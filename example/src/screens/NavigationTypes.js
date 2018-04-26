@@ -3,7 +3,7 @@ import {
     ScrollView,
     View,
     FlatList,
-    AppState, Image
+    AppState, Image, TextInput
 } from 'react-native';
 
 import fetch from '../fetch'

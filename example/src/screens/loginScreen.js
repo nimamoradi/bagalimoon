@@ -79,6 +79,9 @@ class loginScreen extends React.Component {
                                 justifyContent: 'center', alignItems: 'center'
                             }}>
                                 <TextInput
+                                    onSubmitEditing={() => {
+                                        this.doSignUp();
+                                    }}
                                     onChange={(event) => this.onChanged(event.nativeEvent.text)}
                                     keyboardType='numeric' style={styles.textInput}
                                     value={this.state.phoneNumber}

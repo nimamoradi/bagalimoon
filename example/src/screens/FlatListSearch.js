@@ -143,7 +143,7 @@ class FlatListSearch extends React.Component {
         }}>
             <TouchableOpacity
                 style={{
-                    backgroundColor: '#4482c7',
+                    backgroundColor: '#D3D3D3',
                     height: 16 * vw,
                     flex: 2,
                     justifyContent: 'center',

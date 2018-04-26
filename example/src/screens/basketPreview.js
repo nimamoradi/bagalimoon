@@ -200,7 +200,7 @@ class basketPreview extends React.Component {
                             source={require('../../img/green.png')}
                         >
 
-                            <Text style={{fontSize: vw * 4.5, color: 'black',}}>تکمیل خرید</Text>
+                            <Text style={{fontSize: vw * 4.5, color: 'black',fontFamily: 'B Yekan',}}>تکمیل خرید</Text>
 
                         </ImageBackground>
                     </TouchableOpacity>

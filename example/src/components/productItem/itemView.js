@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput} from 'react-native';
+import {StyleSheet, View, Text, Image, ImageBackground, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Pie';
@@ -50,10 +50,10 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
 
                     <View style={{flexDirection: 'column', width: 25 * vw}}>
                         <Text style={styles.text}>{title}</Text>
-                        <View>
+
                         {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                         <Text style={styles.price}>{price} تومان </Text>
-                        </View>
+
                     </View>
 
 

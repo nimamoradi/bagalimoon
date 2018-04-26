@@ -44,6 +44,9 @@ class codeEnter extends React.Component {
                     <View style={{width: 100 * vw - 150}}>
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
+                            onSubmitEditing={() => {
+                                this.enterCode();
+                            }}
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
                             value={this.state.code}/>
@@ -238,7 +241,8 @@ const styles = StyleSheet.create({
     },
     flex: {
         flex: 1,
-    }, absolote: {
+    },
+    absolote: {
         position: 'absolute',
         top: 0,
         left: 0,

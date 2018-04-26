@@ -133,7 +133,7 @@ class mapView extends Component {
     _renderScene = ({route}) => {
         switch (route.key) {
             case 'first':
-                return <View style={styles.columnItem}>
+                return <ScrollView style={styles.columnItem}>
                     <View style={styles.rowItem}>
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddressName: text})}
@@ -181,7 +181,7 @@ class mapView extends Component {
                             <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
                         </TouchableOpacity>
                     </View>
-                </View>;
+                </ScrollView>;
             case 'second':
                 let oldAddresses = this.state.oldAddresses.map(function (x) {
                     return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
@@ -206,7 +206,7 @@ class mapView extends Component {
                         </ImageBackground>
                     </View>
                     <View style={styles.space}/>
-                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                    <View style={styles.center}>
                         <TouchableOpacity
                             onPress={_.debounce(this.offlineSale,
                                 1000, {leading: true, trailing: false})}

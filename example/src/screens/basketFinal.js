@@ -6,8 +6,8 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
-import SimpleItem from '../components/productItem/SimpleItem'
-import SimpleHeader from '../components/productItem/SimpleHeader'
+
+import BasketItem from '../components/productItem/basketItem'
 
 let context;
 
@@ -21,7 +21,8 @@ class basketFinal extends React.Component {
             totalPrice: '?',
             sendData: true,
             order_id: 0,
-            customer_receiver_name: ''
+            customer_receiver_name: '',
+            photos: [],
         };
         context = this;
         // console.log(dataArray)
@@ -55,27 +56,26 @@ class basketFinal extends React.Component {
                 // console.log('response object:', responseData);
                 // alert (JSON.stringify(responseData));
                 context.setState({sendData: false});
-                let totalPrice = 0;
+
                 let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'
                     + responseData['address'].city_name + ' ،' + responseData['address'].Address;
                 let basket = responseData.items;
-                for (let i = 0; i < basket.length; i++) {
-                    totalPrice += Number.parseInt(basket[i]['final_price']) * Number.parseInt(basket[i]['count'])
-                }
+                // alert(JSON.stringify(basket));
+                let photos = responseData.order;
+                basket.map(function (item) {
+                    item.imgUrl = photos[item.product.id];
+                    return item;
+                });
+
                 this.setState({
                     basket: basket,
                     order_id: responseData.id,
-                    totalPrice: totalPrice,
+                    totalPrice: responseData.order_outcome_price,
                     myAddress: address,
                     customer_receiver_name: responseData.customer_receiver_name
                 });
 
-            }).catch(error => {
-            server.retryParam(this.isAvailable, context)
-        }).catch(error => {
-            server.retryParam(this.isAvailable, context)
-        });
-
+            })
 
     };
 
@@ -88,6 +88,7 @@ class basketFinal extends React.Component {
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return parts.join(".");
     };
+
     render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
@@ -104,20 +105,22 @@ class basketFinal extends React.Component {
         else
             return (
                 <View style={styles.container}>
-                 <SimpleHeader/>
 
                     <FlatList
-                        style={{flex: 4}}
-                        horizontal={false}
+                        style={{flex: 4, marginTop: vh}}
+                        horizontal={true}
                         keyExtractor={this._keyExtractor}
                         showsHorizontalScrollIndicator={false}
                         data={this.state.basket}
                         renderItem={({item}) =>
-                            <SimpleItem regular_price={this.numberFormat(item.regular_price)}
-                                        name={item['product']['name']}
-                                        final_price={this.numberFormat(item.final_price)}
+                            <BasketItem price={this.numberFormat(item.final_price)}
+                                        title={item['product']['name']}
+                                        off={item.off}
+                                        disscount={(item.off !== 0) ? this.numberFormat(item.regular_price) : null}
+                                        imageUrl={server.getServerAddress() + '/' + item.imgUrl}
                                         count={item.count}/>}
                     />
+
                     <View style={{flexDirection: 'column', alignItems: 'center', flex: 0.5, width: 100 * vw}}>
                         <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
                             <View style={{flex: 1}}/>
@@ -153,14 +156,27 @@ class basketFinal extends React.Component {
                         </View>
 
                     </View>
-                    <View style={{flexDirection: 'row', height: 8 * vh}}>
+                    <View style={{
+                        flexDirection: 'row', height: 8 * vh, justifyContent: 'center'
+                        , alignItems: 'center',
+                    }}>
                         <TouchableOpacity onPress={this.address}>
                             <View style={styles.button}>
                                 <Icon name="shopping-cart" size={vw * 5} color="green"/>
                                 <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
-
+                        <TouchableOpacity onPress={function () {
+                            context.props.setBasket(context.props.fullBasket.map(item => {
+                                return Object.assign({}, item, {count: 0});
+                            }));
+                            context.props.shouldUpdateBasket(false);
+                            context.props.navigator.popToRoot();
+                        }}>
+                            <View style={styles.buttonCancel}>
+                                <Text style={{fontSize: vw * 4,}}>پرداخت در محل</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
 
                 </View>
@@ -214,6 +230,12 @@ const styles = StyleSheet.create({
         margin: 10,
         textAlign: 'center'
     },
+    textDes: {
+        fontSize: vw * 4,
+        fontFamily: 'B Yekan',
+        margin: 10,
+        textAlign: 'center'
+    },
     price: {
         margin: 10,
         fontSize: vw * 4,
@@ -245,8 +267,8 @@ const styles = StyleSheet.create({
         margin: 2, flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#d46e62',
-        backgroundColor: '#d46e6220'
+        borderColor: '#2d3bff',
+        backgroundColor: '#86c1ff'
     }, container: {
         flex: 1,
         justifyContent: 'center',

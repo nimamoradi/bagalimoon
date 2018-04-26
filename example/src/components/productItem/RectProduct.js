@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
         width: 6 * vw,
         height: 6 * vw,
         borderRadius: 3 * vw,
-        fontFamily: 'B Yekan',
         opacity: 0
     },
 

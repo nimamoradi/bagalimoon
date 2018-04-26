@@ -1,9 +1,7 @@
 import React from 'react';
 import {
     StyleSheet,
-    BackHandler,
     View,
-    Button,
     TouchableOpacity,
     AsyncStorage,
     Image,
@@ -72,7 +70,7 @@ class MyClass extends React.Component {
                         onPress={(() => this.orderHistroy())}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}> سوابق سفارش</Text>
-                            <MaterialIcon name="history" size={vw * 8} color="cyan"
+                            <MaterialIcon name="history" size={vw * 8} color="#1064d3"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
@@ -88,7 +86,7 @@ class MyClass extends React.Component {
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>درباره ما</Text>
-                            <Icon name="info-circle" size={vw * 8} color="cyan"
+                            <Icon name="info-circle" size={vw * 8} color="#1064d3"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
@@ -104,7 +102,7 @@ class MyClass extends React.Component {
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>اشتراک</Text>
-                            <Icon name="share-square-o" size={vw * 8} color="cyan"
+                            <Icon name="share-square-o" size={vw * 8} color="#1064d3"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
@@ -116,7 +114,7 @@ class MyClass extends React.Component {
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>خروج از حساب کاربری</Text>
-                            <MaterialIcon name="logout" size={vw * 8} color="cyan"
+                            <MaterialIcon name="logout" size={vw * 8} color="#1064d3"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
@@ -159,7 +157,7 @@ const styles = StyleSheet.create({
     button: {},
     row: {
         flexDirection: 'row-reverse',
-        backgroundColor: 'red',
+        backgroundColor: '#ff3232',
         width: 300,
         height: 10 * vh,
         borderRadius: 4 * vw,

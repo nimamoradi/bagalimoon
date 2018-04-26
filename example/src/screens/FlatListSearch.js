@@ -159,6 +159,8 @@ class FlatListSearch extends React.Component {
                 style={{
                     flex: 10,
                     height: 16 * vw,
+                    fontSize: vw * 4.5,
+                    fontFamily: 'B Yekan',
                 }}
                 onChangeText={(text) => {
                     this.setState({query: text});

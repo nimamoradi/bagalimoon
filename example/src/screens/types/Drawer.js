@@ -60,7 +60,7 @@ class MyClass extends React.Component {
                 </View>
                 <View style={{
                     backgroundColor: '#fafafa50', flex: 3,
-                    flexDirection: 'column', marginRight: 2 * vw,
+                    flexDirection: 'column',
                     marginBottom: 4 * vh,
                     justifyContent: 'flex-start', width: 75 * vw,
                 }}>
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row-reverse',
         backgroundColor: '#ff3232',
-        width: 75 * vw,
+        width: 70 * vw,
         height: 10 * vh,
         borderRadius: 4 * vw,
         flexGrow: 1,

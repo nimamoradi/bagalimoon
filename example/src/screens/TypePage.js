@@ -250,6 +250,7 @@ class TypePage extends Component {
         }
         newItems = newItems.filter(function (item) {
             if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
+                delete item.wasInBasket;
                 return item.count > 0;
             } else {
                 return false;
@@ -309,7 +310,10 @@ class TypePage extends Component {
             <View style={{backgroundColor: '#f2f2f2'}}>
                 <ProductPageNavBar
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
-                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
+                        {
+                            basket: dataHandeling.arrayUnique((context.state.basket.concat(context.props.basket))),
+                            UpdateBasket: TypePage.basketUpdater
+                        }, this)}//for search bar
                     style={{height: 10 * vh}} basket={this.addToCart} context={this}
                 />
                 <View style={{width: 100 * vw, height: 90 * vh}}>

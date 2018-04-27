@@ -32,8 +32,8 @@ android {
         applicationId "com.moonShop"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 135
-        versionName "1.35"
+        versionCode 136
+        versionName "1.36"
         lintOptions {
             abortOnError false
             checkReleaseBuilds false

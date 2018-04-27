@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Image, Linking, Text, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
+import {StyleSheet, View, WebView, Linking, Text, TouchableOpacity, AsyncStorage, ListView,} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
@@ -16,28 +16,16 @@ class aboutus extends React.Component {
         return (
 
             <View style={styles.container}>
-                <Image
-                    style={{
-                        width: 50 * vw,
-                        height: 25 * vh,
-
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#ffffff10'
+                <WebView
+                    renderLoading={() => {
+                        return <Loading/>
                     }}
-                    source={require('../../img/grocery.png')}>
-                </Image>
-                <Text style={styles.text}>بقالی مون با هدف راحتی و سرعت در خریدهای روزانه طراحی شده</Text>
-                <View style={{flex: 1}}/>
+                    startInLoadingState={true}
+                    javaScriptEnabled={true}
 
-                <TouchableOpacity
-                    onPress={()=>Linking.openURL('tel: +959 XXXXXXXX')}
-                >
-                    <Text >959 XXXXXXXX شماره تماس </Text>
-                </TouchableOpacity>
-
+                    source={{uri: 'http://baghali.amins.ir/about_us'}}
+                />
             </View>
-
         );
 
     }
@@ -61,13 +49,11 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         margin: 10,
         textAlign: 'center'
-    }, container: {
+    },
+    container: {
         flex: 1,
-        height: 100 * vh,
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#eeeceb'
     },
 
 });

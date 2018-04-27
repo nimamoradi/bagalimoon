@@ -52,8 +52,8 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
                         <Text adjustsFontSizeToFit style={styles.text}>{title}</Text>
 
                         {(disscount) ?
-                            <Text numberOfLines={1} adjustsFontSizeToFit style={styles.discount}>{disscount} تومان </Text> : null}
-                        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.price}>{price} تومان </Text>
+                            <Text numberOfLines={1} style={styles.discount}>{disscount} تومان </Text> : null}
+                        <Text numberOfLines={1} style={styles.price}>{price} تومان </Text>
 
                     </View>
 
@@ -106,21 +106,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: vw,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        height: 40 * vw
     },
     text: {
+        textAlignVertical: "center",
         fontFamily: 'B Yekan',
-        fontSize: vw * 4,
+        fontSize: vw * 3.75,
         color: 'black',
-        width: 25 * vw,
-        height: 14 * vh
+        flex: 3,
+        textAlign:'center',
     },
-    price: {fontSize: vw * 4, color: 'black', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
+    price: {fontSize: vw * 4,
+        flex: 1,
+        color: 'black', fontFamily: 'B Yekan', textAlign: 'right',},
     discount: {
         textDecorationLine:
             'line-through',
+        flex: 1,
         fontSize: vw * 4,
         color: '#d94c3d',
-        fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10
+        fontFamily: 'B Yekan', textAlign: 'right',
 
     },
     image: {

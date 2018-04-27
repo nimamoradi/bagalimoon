@@ -47,7 +47,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, 
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                 <Text style={styles.price}>{price} تومان </Text>
 
-                <ProductControl count={count} onUp={onUp} onDown={onDown}/>
+                <ProductControl style={{ justifyContent: 'flex-end'}} count={count} onUp={onUp} onDown={onDown}/>
 
             </View>
         </TouchableOpacity>
@@ -88,10 +88,11 @@ const styles = StyleSheet.create({
         right: 8 * vw,
         alignItems: 'center',
         justifyContent: 'center',
-
+        marginLeft: -7 * vw,
+        marginRight: -7 * vw,
     },
     text: {
-        width: 30 * vw,
+        width: 40 * vw,
         fontSize: vw * 4,
         textAlign: 'center',
         fontFamily: 'B Yekan',

@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     },
     discountText: {
         zIndex: 1,
-        fontSize: vw * 3.5,
+        fontSize: vw * 4,
         fontFamily: 'B Yekan',
         position: 'absolute',
         bottom: 7.5 * vw,

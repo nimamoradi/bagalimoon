@@ -35,26 +35,33 @@ class NavigationTypes extends React.Component {
 
     static basketUpdaterNoConcat(newItems) {//won't remove zero index and don't have concat
         let basket = context.state.superBasket.slice();
-
+        let count = 0;
         for (let i = 0; i < basket.length; i++) {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
+                    if (newItems[j].count === 0 && basket[i].count !== 0)
+                        count--;//item removed
                     basket[i] =
                         Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
                 }
             }
         }
 
-        context.setState({superBasket: basket});
+        context.setState({
+            superBasket: basket,
+            basketSize: context.state.basketSize + count
+        });
         return basket;
     }
 
     static basketUpdater(newItems) {//won't remove zero index
         let basket = context.state.superBasket.slice();
-
+        let count = 0;
         for (let i = 0; i < basket.length; i++) {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
+                    if (newItems[j].count === 0 && basket[i].count !== 0)
+                        count--;//item removed
                     basket[i] =
                         Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
                     newItems[j].wasInBasket = true;
@@ -72,17 +79,22 @@ class NavigationTypes extends React.Component {
 
         });
         let bas = basket.concat(newItems);
-        context.setState({superBasket: bas});
+        context.setState({
+            superBasket: bas,
+            basketSize: context.state.basketSize + count + newItems.length
+        });
         return bas;
 
     }
 
     static basketUpdaterForTypePage(newItems) {//won't remove zero index
         let basket = context.state.superBasket.slice();
-
+        let count = 0;
         for (let i = 0; i < basket.length; i++) {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
+                    if (newItems[j].count === 0 && basket[i].count !== 0)
+                        count--;//item removed
                     basket[i] =
                         Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
                     newItems[j] = Object.assign({}, newItems[j], {wasInBasket: true});
@@ -99,7 +111,10 @@ class NavigationTypes extends React.Component {
 
         });
         let bas = basket.concat(newItems);
-        context.setState({superBasket: bas});
+        context.setState({
+            superBasket: bas,
+            basketSize: context.state.basketSize + count + newItems.length
+        });
         return bas;
 
     }
@@ -276,7 +291,8 @@ class NavigationTypes extends React.Component {
             Categories: '',
             Types: [],
             dataSourceOffer: [],
-            superBasket: []
+            superBasket: [],
+            basketSize: 0,
 
         };
         basketFile.readBasket().then((item) => {
@@ -285,7 +301,7 @@ class NavigationTypes extends React.Component {
                 this.loadMainPage();
             }
             else
-                context.setState({superBasket: item}, () => {
+                context.setState({superBasket: item, basketSize: item.length}, () => {
                     this.loadMainPage();
                 });
 
@@ -440,9 +456,11 @@ class NavigationTypes extends React.Component {
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
 
-                    <NavBar menu={() => this.toggleDrawer()} basket={this.basket}
-                            search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
-                                {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
+                    <NavBar
+                        basketSize={this.state.basketSize}
+                        menu={() => this.toggleDrawer()} basket={this.basket}
+                        search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
+                            {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
                     {this.state.dataSourceOffer != null ? <Carousel
                         autoplayInterval={5000}
                         autoplayDelay={5000}
@@ -558,13 +576,21 @@ class NavigationTypes extends React.Component {
             rowDataCopy.count++;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
+            if (rowdata.count !== 0)
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)]
 
-            this.setState({
-                superBasket: [...list.slice(0, index),
-                    rowDataCopy,
-                    ...list.slice(index + 1)]
+                });
+            else
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)],
+                    basketSize: context.state.basketSize + 1
 
-            });
+                });
         } else
             server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
@@ -574,13 +600,19 @@ class NavigationTypes extends React.Component {
             rowDataCopy.count--;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-
-            this.setState({
-                superBasket: [...list.slice(0, index),
-                    rowDataCopy,
-                    ...list.slice(index + 1)]
-
-            });
+            if (rowdata.count !== 1)
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)]
+                });
+            else
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)],
+                    basketSize: this.state.basketSize - 1
+                });
 
         }
 
@@ -593,13 +625,19 @@ class NavigationTypes extends React.Component {
             rowDataCopy.count++;
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-
-            this.setState({
-                superBasket: [...list.slice(0, index),
-                    rowDataCopy,
-                    ...list.slice(index + 1)]
-
-            });
+            if (rowdata.count !== 0)
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)]
+                });
+            else
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)],
+                    basketSize: context.state.basketSize + 1
+                });
         } else
             server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
     };
@@ -610,12 +648,20 @@ class NavigationTypes extends React.Component {
             let list = this.state.superBasket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
 
-            this.setState({
-                superBasket: [...list.slice(0, index),
-                    rowDataCopy,
-                    ...list.slice(index + 1)]
+            if (rowdata.count !== 1)
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)]
 
-            });
+                });
+            else
+                this.setState({
+                    superBasket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)],
+                    basketSize: this.state.basketSize - 1
+                });
         }
 
 

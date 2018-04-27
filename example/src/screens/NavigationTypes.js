@@ -393,7 +393,8 @@ class NavigationTypes extends React.Component {
                 UpdateBasket: NavigationTypes.basketUpdaterForTypePage,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
-                setBasket: NavigationTypes.setBasket
+                setBasket: NavigationTypes.setBasket,
+                basketSize: context.state.basketSize
             },
         });
     };
@@ -407,7 +408,8 @@ class NavigationTypes extends React.Component {
                 UpdateBasket: NavigationTypes.basketUpdater,
                 basket: context.state.superBasket,
                 Categories: context.state.Categories,
-                setBasket: NavigationTypes.setBasket
+                setBasket: NavigationTypes.setBasket,
+                basketSize: context.state.basketSize
             },
         });
     };

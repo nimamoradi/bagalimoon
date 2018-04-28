@@ -185,7 +185,8 @@ class codeEnter extends React.Component {
             drawer: { // optional, add this if you want a side menu drawer in your app
                 right: { // optional, define if you want a drawer from the right
                     screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                    passProps: {} // simple serializable object that will pass as props to all top screens (optional)
+                    passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                    fixedWidth:75*vw
                 },
                 style: { // ( iOS only )
                     drawerShadow: true, // optional, add this if you want a side menu drawer shadow

@@ -57,11 +57,11 @@ class basketFinal extends React.Component {
                 // alert (JSON.stringify(responseData));
                 context.setState({sendData: false});
 
-                let address = responseData['address'].name + ' : ' + responseData['address'].state_name + '،'
-                    + responseData['address'].city_name + ' ،' + responseData['address'].Address;
-                let basket = responseData.items;
+                let address = responseData.order.address.name + ' : خراسان رضوی ،'
+                    + 'مشهد ،' + responseData.order.address.Address;
+                let basket = responseData.order.ordered_products;
                 // alert(JSON.stringify(basket));
-                let photos = responseData.order;
+                let photos = responseData.order.photos;
                 basket.map(function (item) {
                     item.imgUrl = photos[item.product.id];
                     return item;
@@ -69,10 +69,10 @@ class basketFinal extends React.Component {
 
                 this.setState({
                     basket: basket,
-                    order_id: responseData.id,
-                    totalPrice: responseData.order_outcome_price,
+                    order_id: responseData.order.id,
+                    totalPrice: responseData.order.order_outcome_price,
                     myAddress: address,
-                    customer_receiver_name: responseData.customer_receiver_name
+                    customer_receiver_name: responseData.order.receiver_name
                 });
 
             })

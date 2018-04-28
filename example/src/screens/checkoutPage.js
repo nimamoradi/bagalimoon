@@ -24,7 +24,7 @@ class checkoutPage extends React.Component {
             order_checkout: null,
             webRes: false,
             webMassage: null,//code 1 good sell , code 2 sold already ,code 3 bad pay
-            postMass:''
+            postMass: ''
         };
 
         context = this;
@@ -91,7 +91,7 @@ class checkoutPage extends React.Component {
 
 
         }
-        context.setState({webRes: true,postMass:data.massage_fa});
+        context.setState({webRes: true, postMass: data.massage_fa});
     }
 
     onClose() {

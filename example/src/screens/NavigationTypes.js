@@ -30,7 +30,7 @@ class NavigationTypes extends React.Component {
     };
 
     static setBasket(basket) {
-        context.setState({superBasket: basket})
+        context.setState({superBasket: basket,basketSize:0})
     }
 
     static basketUpdaterNoConcat(newItems) {//won't remove zero index and don't have concat

@@ -26,7 +26,7 @@ let isFirstTime;
 
 class TypePage extends Component {
     setBasket(basket) {
-        context.setState({basket: basket})
+        context.setState({basket: basket, basketSize: 0})
     }
 
     constructor(props) {

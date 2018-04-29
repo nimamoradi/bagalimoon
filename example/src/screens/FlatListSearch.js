@@ -156,6 +156,9 @@ class FlatListSearch extends React.Component {
             </TouchableOpacity>
             <TextInput
                 placeholder='نام کالا را وارد کنید'
+                onSubmitEditing={() => {
+                    this.makeRemoteRequest(this.state.query);
+                }}
                 style={{
                     flex: 10,
                     height: 16 * vw,

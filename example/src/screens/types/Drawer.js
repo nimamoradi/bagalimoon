@@ -43,6 +43,12 @@ class MyClass extends React.Component {
             passProps: {
                 api_code: this.props.api_code
             },
+            navigatorStyle: {
+                navBarTranslucent: true,
+                navBarTextFontFamily: 'B Yekan',// Changes the title font
+                navBarComponentAlignment: 'center',
+                navBarTitleTextCentered: true,
+            },
 
 
         });
@@ -101,6 +107,12 @@ class MyClass extends React.Component {
                             this.props.navigator.push({
                                 screen: 'example.about_us',
                                 title: 'درباره ما',
+                                navigatorStyle: {
+                                    navBarTranslucent: true,
+                                    navBarTextFontFamily: 'B Yekan',// Changes the title font
+                                    navBarComponentAlignment: 'center',
+                                    navBarTitleTextCentered: true,
+                                },
                             });
                         }}>
                         <View style={styles.row}>

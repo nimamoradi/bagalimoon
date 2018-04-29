@@ -23,7 +23,8 @@ import FlatListSearch from './FlatListSearch'
 
 import about_us from './aboutus';
 
-import orderHistroy from './orderHistroy'
+import productView from './orderHistroy/productView'
+import orderHistroy from './orderHistroy/orderHistroy'
 import productPageNavBar from "../navBars/productPageNavBar";
 
 
@@ -35,6 +36,8 @@ import {vw, vh} from '../viewport'
 export function registerScreens() {
 
     Navigation.registerComponent('example.Types.checkoutPage', () => checkoutPage);
+    Navigation.registerComponent('example.Types.productView', () => productView);
+
     Navigation.registerComponent('example.Types.loginScreen', () => loginScreen);
     Navigation.registerComponent('example.bars.productPageNavBar', () => productPageNavBar);
     Navigation.registerComponent('example.Types', () => Types);
@@ -94,7 +97,7 @@ export function login() {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
                 percentOfScreenWidth: 0.75,
             },
 
@@ -130,7 +133,7 @@ export function mainPage(api_code) {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
                 percentOfScreenWidth: 0.75,
             },
             style: { // ( iOS only )
@@ -168,7 +171,7 @@ export function serverCheckFailed(api_code, user_number) {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
                 percentOfScreenWidth: 0.75,
             },
             style: { // ( iOS only )

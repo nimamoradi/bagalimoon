@@ -16,6 +16,21 @@ class code {
             screen: screen,
             navigatorStyle: {
                 navBarHidden: true,
+                navBarTitleTextCentered: true,
+            },
+            title: title,
+            passProps: passProps,
+        });
+
+    };
+
+    static pushScreenNavBar(screen, title, passProps, context) {
+        context.props.navigator.push({
+            screen: screen,
+            navigatorStyle: {
+                navBarTranslucent: true,
+                navBarTextFontFamily: 'B Yekan',// Changes the title font
+                navBarTitleTextCentered: true,
             },
             title: title,
             passProps: passProps,
@@ -103,13 +118,6 @@ class code {
         return -1; //to handle the case where the value doesn't exist
     };
 
-    static performTasks = (input, tasks) => {
-        if (tasks.length === 1)
-            return tasks[0](input);
-        tasks[0](input, function (output) {
-            performTasks(output, tasks.slice(2)); //Performs the tasks in the 'tasks[]' array }); }
-        });
-    };
 
     static deviceInfo(phoneNumber) {
         return {

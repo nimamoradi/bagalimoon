@@ -26,7 +26,7 @@ let isFirstTime;
 
 class TypePage extends Component {
     setBasket(basket) {
-        context.setState({basket: basket})
+        context.setState({basket: basket, basketSize: 0})
     }
 
     constructor(props) {
@@ -81,6 +81,7 @@ class TypePage extends Component {
             basket: [],
             Categories: Categories,
             sorted: false,
+            basketSize: this.props.basketSize
         };
 
         context = this;
@@ -147,7 +148,7 @@ class TypePage extends Component {
     };
 
     componentWillUnmount() {
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
+
         let basket = this.state.basket;
         this.props.UpdateBasket(basket
         );
@@ -220,6 +221,11 @@ class TypePage extends Component {
 
 
     };
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
 
     topLoadData(item) {
         let subItems = context.findSubItems(context.state.Categories,
@@ -233,10 +239,12 @@ class TypePage extends Component {
 
     static basketUpdater(newItems) {//won't remove zero index
         let basket = context.state.basket.slice();
-
+        let count = 0;
         for (let i = 0; i < basket.length; i++) {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
+                    if (newItems[j].count === 0 && basket[i].count !== 0)
+                        count--;//item removed
                     basket[i] =
                         Object.assign({}, basket[i], newItems[j]);//upDating value of item in old basket
                     newItems[j].wasInBasket = true;
@@ -245,6 +253,7 @@ class TypePage extends Component {
         }
         newItems = newItems.filter(function (item) {
             if (!item.hasOwnProperty('wasInBasket')) {////adding new  item to old basket
+                delete item.wasInBasket;
                 return item.count > 0;
             } else {
                 return false;
@@ -252,24 +261,32 @@ class TypePage extends Component {
 
         });
         let bas = basket.concat(newItems);
-        context.setState({basket: bas});
+        context.setState({
+            basket: bas,
+            basketSize: context.state.basketSize + count + newItems.length
+        });
         return bas;
 
     }
 
     static basketUpdaterSimple(newItems, oldBasket) {
         let basket = oldBasket.slice();
-
+        let count = 0;
         for (let i = 0; i < basket.length; i++) {
             for (let j = 0; j < newItems.length; j++) {
                 if (basket[i].id === newItems[j].id) {
+                    if (newItems[j].count === 0 && basket[i].count !== 0)
+                        count--;//item removed
                     basket[i] =
                         Object.assign({}, basket[i], newItems[j], {count: newItems[j].count});//upDating value of item in old basket
                 }
             }
         }
 
-        context.setState({basket: basket});
+        context.setState({
+            basket: basket,
+            basketSize: context.state.basketSize + count
+        });
         return basket;
 
     }
@@ -303,8 +320,12 @@ class TypePage extends Component {
         return (
             <View style={{backgroundColor: '#f2f2f2'}}>
                 <ProductPageNavBar
+                    basketSize={this.state.basketSize}
                     search={() => server.pushScreen('example.FlatListSearch', 'جستجو',
-                        {basket: this.state.basket, UpdateBasket: TypePage.basketUpdater}, this)}//for search bar
+                        {
+                            basket: dataHandeling.arrayUnique((context.state.basket.concat(context.props.basket))),
+                            UpdateBasket: TypePage.basketUpdater
+                        }, this)}//for search bar
                     style={{height: 10 * vh}} basket={this.addToCart} context={this}
                 />
                 <View style={{width: 100 * vw, height: 90 * vh}}>
@@ -317,7 +338,7 @@ class TypePage extends Component {
 
                         <FlatList
                             showsVerticalScrollIndicator={false}
-                            style={{width: 75 * vw,}}
+                            style={{width: 75 * vw, marginBottom: 4 * vh}}
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}
@@ -327,8 +348,8 @@ class TypePage extends Component {
                                     keyExtractor={this._keyExtractor}
                                     title={item.name}
                                     off={item.off}
-                                    disscount={(item.off !== 0) ? item.main_price : null}
-                                    price={item.price}
+                                    disscount={(item.off !== 0) ? this.numberFormat(item.main_price) : null}
+                                    price={this.numberFormat(item.price)}
                                     count={item.count}
                                     onUp={() => this.onUp(item)}
                                     onDown={() => this.onDown(item)}
@@ -399,13 +420,19 @@ class TypePage extends Component {
             rowDataCopy.count++;
             let list = this.state.basket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-
-            this.setState({
-                basket: [...list.slice(0, index),
-                    rowDataCopy,
-                    ...list.slice(index + 1)]
-
-            });
+            if (rowdata.count !== 0)
+                this.setState({
+                    basket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)]
+                });
+            else
+                this.setState({
+                    basket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)],
+                    basketSize: context.state.basketSize + 1
+                });
         }
         else
             server.alert('توجه', 'محدویت سفارش این کالا ' + rowdata.max_in_order + ' می باشد', context)
@@ -417,13 +444,19 @@ class TypePage extends Component {
             rowDataCopy.count--;
             let list = this.state.basket;
             let index = dataHandeling.indexOfId(list, rowdata.id);
-
-            this.setState({
-                basket: [...list.slice(0, index),
-                    rowDataCopy,
-                    ...list.slice(index + 1)]
-
-            });
+            if (rowdata.count !== 1)
+                this.setState({
+                    basket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)]
+                });
+            else
+                this.setState({
+                    basket: [...list.slice(0, index),
+                        rowDataCopy,
+                        ...list.slice(index + 1)],
+                    basketSize: context.state.basketSize - 1
+                });
         }
 
     };
@@ -432,7 +465,6 @@ class TypePage extends Component {
 
 TypePage.propTypes = {
     title: propTypes.string.isRequired,
-
 };
 
 

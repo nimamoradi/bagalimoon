@@ -6,25 +6,25 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
-    Dimensions
+
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Loading from '../components/loadScreen'
+import Retry from '../components/reTry'
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import _ from 'lodash'
 import fetch from "../fetch";
 
 const Spinner = require('react-native-spinkit');
+let context;
 
 class ServerCheck extends React.Component {
     constructor(props) {
         super(props);
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.state = {
-            dataReady: false,
-            isFirstTime: true,
             param: {api_code: props.api_code, user_number: props.user_number}
         };
         props.navigator.onNavigatorEvent((event) => {
@@ -32,13 +32,14 @@ class ServerCheck extends React.Component {
                 BackHandler.exitApp();
             }
         });
+        context = this;
         this.loginCheck({api_code: props.api_code, user_number: props.user_number});
 
     }
 
     loginCheck(param) {
-        this.setState({dataReady: false});
-        fetch(server.getServerAddress() + '/api/UserDetails', {
+
+        (fetch(server.getServerAddress() + '/api/UserDetails', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -55,7 +56,7 @@ class ServerCheck extends React.Component {
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
 
-                    this.props.navigator.resetTo({
+                    context.props.navigator.resetTo({
                         backButtonTitle: '',
                         screen: 'example.Types',
                         title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -65,13 +66,13 @@ class ServerCheck extends React.Component {
                         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                         backButtonHidden: true,
                         overrideBackPress: false,
-                        passProps: {api_code: param.api_code,},
+                        passProps: {api_code: param.api_code, user_number: param.user_number},
 
                     });
 
 
                 } else {
-                    this.props.navigator.push({
+                    context.props.navigator.push({
                         backButtonTitle: '',
                         screen: 'example.Types.loginScreen',
                         navigatorStyle: {
@@ -86,40 +87,27 @@ class ServerCheck extends React.Component {
 
                 }
             }).catch(error => {
-            this.setState({dataReady: true, isFirstTime: false,})
-        })
+                server.retryParam();
+            }).catch(error => {
+                server.retryParam(context.loginCheck, context, param);
+            }));
+
 
     }
 
     render() {
 
-        if (!this.state.dataReady)
-            return <ImageBackground style={{
-                width: 100 * vw, height: 100 * vh, justifyContent: 'center', flex: 1,
-                alignItems: 'center'
-            }} source={require('../../img/login.png')}>
-                <Spinner
-                    size={100}
-                    color={'red'}
-                    type={'WanderingCubes'}
-                />
-            </ImageBackground>;
-        else
-            return <View style={styles.container}>
+        return <ImageBackground style={{
+            width: 100 * vw, height: 100 * vh, justifyContent: 'center', flex: 1,
+            alignItems: 'center'
+        }} source={require('../../img/login.png')}>
+            <Spinner
+                size={100}
+                color={'red'}
+                type={'WanderingCubes'}
+            />
+        </ImageBackground>;
 
-                <Text style={styles.text}>اتصال قطع شد</Text>
-                <TouchableOpacity
-                    onPress={_.debounce(
-                        () => {
-                            this.loginCheck(this.state.param);
-                        },
-                        1000, {leading: true, trailing: false}
-                    )}
-                >
-                    <Icon name="redo" size={vw * 20} color="#777777" style={{margin: 2 * vw}}/>
-                </TouchableOpacity>
-                <Text style={styles.text}>دوباره امتحان کنید</Text>
-            </View>
 
     }
 

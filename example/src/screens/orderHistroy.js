@@ -7,6 +7,8 @@ import server from "../code";
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
 import SmallRow from '../components/smallRow'
+import SimpleItem from "../components/productItem/SimpleItem";
+import SimpleHeader from "../components/productItem/SimpleHeader";
 
 let context;
 
@@ -75,7 +77,11 @@ class orderHistroy extends React.Component {
         this.load_api_code();
     }
 
-
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
     render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
@@ -92,29 +98,32 @@ class orderHistroy extends React.Component {
             return (
                 <View style={styles.container}>
                     <FlatList
+                        showsVerticalScrollIndicator={false}
+                        style={{flex:1,width:'100%'}}
                         keyExtractor={(item) => item.id}
                         data={this.state.orderData}
                         renderItem={({item}) => <View style={{
-                            backgroundColor: '#d2d2d2', borderRadius: 4 * vw,
+                            backgroundColor: '#f2f2f2', borderRadius: 4 * vw,
                             margin: 2 * vw,
                         }}>
                             <SmallRow style={{backgroundColor: 'red'}} title={'نام دریافت کننده'}
                                       des={item.receiver_name}/>
                             <SmallRow des={item.mobile_phone_number} title={'شماره تماس'}/>
 
-                            <SmallRow title={'مبلغ قابل پرداخت'} des={item.paid_price}/>
-                            <SmallRow title={'مبلغ بدون تخفیف'} des={item.sum_price}/>
+                            <SmallRow title={'مبلغ قابل پرداخت'} des={this.numberFormat(item.paid_price)+" تومان"}/>
+                            <SmallRow title={'مبلغ بدون تخفیف'} des={this.numberFormat(item.sum_price)+" تومان"}/>
                             <SmallRow title={'آدرس'} des={item.address.name + ' : ' + item.address.Address}/>
                             <FlatList
+                                style={{flex:1,width:'95%'}}
                                 keyExtractor={(item) => item.id}
                                 data={item.ordered_products}
+                                ListHeaderComponent={<SimpleHeader/>}
                                 renderItem={({item}) =>
-                                    <View>
-                                        <SmallRow title={'نام محصول'} des={item.product.name}/>
-                                        <SmallRow title={'تعداد'} des={item.count}/>
-                                        <SmallRow title={'قیمت عادی'} des={item.regular_price}/>
-                                        <SmallRow title={'قیمت بعد از تخفیف'} des={item.final_price}/>
-                                    </View>}
+                                    <SimpleItem regular_price={this.numberFormat(item.regular_price)}
+                                                name={item.product.name}
+                                                final_price={this.numberFormat(item.final_price)}
+                                                count={item.count}/>}
+
                             />
 
                         </View>
@@ -137,76 +146,15 @@ orderHistroy.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    row: {
-        width: 100 * vw,
-        paddingHorizontal: 2 * vw,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
-    },
-    text: {
-        fontSize: vw * 4,
-        flex: 1,
-        fontFamily: 'B Yekan',
-        margin: 10,
-        textAlign: 'center'
-    },
-    price: {
-        margin: 10,
-        fontSize: vw * 4,
-        flex: 1,
-        fontFamily: 'B Yekan',
-        textAlign: 'center'
-    },
-    tableHeader: {
-        fontSize: vw * 5,
-        fontFamily: 'B Yekan',
-        flex: 1,
-        margin: 10,
-        color: '#000',
-        textAlign: 'center'
-    },
-    button: {
-        flex: 1,
-        flexDirection: 'row',
-        borderWidth: 0.5,
-        borderRadius: 10,
-        padding: 5,
-        marginTop: 20,
-        margin: 2,
-        marginLeft: 20,
-        marginBottom: 60,
-        fontFamily: 'B Yekan',
-        alignContent: 'center',
-        borderColor: '#23d429',
-        backgroundColor: '#23d42920'
-    },
-    buttonCancel: {
-        flex: 1,
-        fontFamily: 'B Yekan',
-        flexDirection: 'row',
-        borderWidth: 0.5,
-        borderRadius: 10,
-        padding: 5,
-        margin: 2,
 
-        marginTop: 20,
-        alignContent: 'center',
-        marginRight: 20,
-        marginBottom: 60,
-        borderColor: '#d46e62',
-        backgroundColor: '#d46e6220'
-    }, container: {
+    container: {
         flex: 1,
-        margin: 8,
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
     },
-    item: {width: 40 * vw},
+
 
 });
 

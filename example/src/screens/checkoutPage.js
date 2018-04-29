@@ -23,7 +23,8 @@ class checkoutPage extends React.Component {
             sendData: true,
             order_checkout: null,
             webRes: false,
-            webMassage: null
+            webMassage: null,//code 1 good sell , code 2 sold already ,code 3 bad pay
+            postMass: ''
         };
 
         context = this;
@@ -76,37 +77,31 @@ class checkoutPage extends React.Component {
 
     onMessage(event) {
 
-        switch (event.nativeEvent.data) {
-            case'the paymant was unsuccessful':
-                context.setState({webMassage: 'پرداخت موفقیت نبود بعدا امتحان کنید'});
-                break;
-            case'pss':
-                context.setState({webMassage: 'پرداخت موفقیت آمیز بود '});
-                context.props.setBasket(context.props.fullBasket.map(item => {
-                    return Object.assign({}, item, {count: 0});
-                }));
-                context.props.shouldUpdateBasket(false);
+        let data = JSON.parse(event.nativeEvent.data);
 
-                break;
-            case'verified_before':
-                context.setState({webMassage: 'سفارش قبلا پرداخت شده'});
-                context.props.shouldUpdateBasket(false);
-                context.props.setBasket(context.props.fullBasket.map(item => {
-                    return Object.assign({}, item, {count: 0});
-                }));
-                break;
+        if (data.succes === false)
+            context.setState({webMassage: 3});
+
+        else if (data.succes === true) {
+            context.setState({webMassage: 1});
+            context.props.setBasket(context.props.fullBasket.map(item => {
+                return Object.assign({}, item, {count: 0});
+            }));
+            context.props.shouldUpdateBasket(false);
+
+
         }
-        context.setState({webRes: true});
+        context.setState({webRes: true, postMass: data.massage_fa});
     }
 
     onClose() {
         context.props.navigator.dismissLightBox();
         switch (context.state.webMassage) {
-            case'پرداخت موفقیت نبود بعدا امتحان کنید':
+            case 3:
                 context.props.navigator.popToRoot();
                 break;
-            case'پرداخت موفقیت آمیز بود ':
-            case'سفارش قبلا پرداخت شده':
+            case 1:
+            case 2:
                 context.props.navigator.popToRoot();
                 break;
         }
@@ -116,7 +111,7 @@ class checkoutPage extends React.Component {
 
     render() {
         if (this.state.webRes) {
-            server.alertAdvanced('توجه', this.state.webMassage, context, this.onClose)
+            server.alertAdvanced('توجه', this.state.postMass, context, this.onClose)
         }
 
         if (this.state.sendData) return <View style={{
@@ -140,7 +135,7 @@ class checkoutPage extends React.Component {
                         startInLoadingState={true}
                         javaScriptEnabled={true}
                         onMessage={this.onMessage}
-                        injectedJavaScript={'var imgs = document.getElementsByTagName("img");for(var i=0, l=imgs.length;i<l;i++){imgs[i].src = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";}'}
+
                         source={{uri: 'https://sandbox.zarinpal.com/pg/StartPay/' + this.state.order_checkout}}
                     />
                 </View>
@@ -148,52 +143,54 @@ class checkoutPage extends React.Component {
 
     }
 
-
+//     injectedJavaScript={'var imgs = document.getElementsByTagName("img");for(var i=0, l=imgs.length;i<l;i++){imgs[i].src = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";}'}
 }
 
 
-checkoutPage.propTypes = {};
+checkoutPage
+    .propTypes = {};
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#eeeceb'
-    },
-    rowMain: {},
-    subRow: {
-        flex: 1,
-        margin: 50,
-        flexDirection: 'column',
-        alignItems: 'flex-end'
+const
+    styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            flexDirection: 'column',
+            backgroundColor: '#eeeceb'
+        },
+        rowMain: {},
+        subRow: {
+            flex: 1,
+            margin: 50,
+            flexDirection: 'column',
+            alignItems: 'flex-end'
 
-    },
-    text: {
-        fontSize: vw * 5,
-        fontFamily: 'B Yekan',
-        margin: 50,
-        marginBottom: 10,
-        marginLeft: 10,
-    },
-    textInput: {
-        fontSize: vw * 5,
-        borderRadius: 10,
-        borderColor: '#bec4be',
-        borderWidth: 0.5,
-        fontFamily: 'B Yekan',
-        width: '100%',
+        },
+        text: {
+            fontSize: vw * 5,
+            fontFamily: 'B Yekan',
+            margin: 50,
+            marginBottom: 10,
+            marginLeft: 10,
+        },
+        textInput: {
+            fontSize: vw * 5,
+            borderRadius: 10,
+            borderColor: '#bec4be',
+            borderWidth: 0.5,
+            fontFamily: 'B Yekan',
+            width: '100%',
 
-    },
-    flex: {
-        flex: 1,
-    }, absolote: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-});
+        },
+        flex: {
+            flex: 1,
+        }, absolote: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    });
 export default checkoutPage;

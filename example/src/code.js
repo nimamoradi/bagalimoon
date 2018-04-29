@@ -4,8 +4,8 @@ import {Navigation} from "react-native-navigation";
 import {Platform} from 'react-native';
 
 class code {
-    static serverAddress = 'https://www.baghali.amins.ir/';
-    static serverAddressNoSsl = 'http://www.baghali.amins.ir/';
+    static serverAddress = 'https://www.baghali.amins.ir';
+    static serverAddressNoSsl = 'http://www.baghali.amins.ir';
 
     static timeOut = 8000;
     static retryCount = 5;

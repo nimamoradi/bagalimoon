@@ -13,29 +13,30 @@ import com.android.build.OutputFile
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 repositories {
     maven { url 'https://maven.google.com' }
 }
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     dexOptions {
         jumboMode true
     }
     defaultConfig {
         applicationId "com.moonShop"
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 128
-        versionName "1.28"
+        targetSdkVersion 27
+        versionCode 137
+        versionName "1.37"
         lintOptions {
             abortOnError false
+            checkReleaseBuilds false
         }
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -57,6 +58,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
         }
     }
     // applicationVariants are e.g. debug, release
@@ -92,6 +94,8 @@ dependencies {
     compile project(':react-native-spinkit')
     compile project(path: ':react-native-gesture-handler')
     compile project(path: ':react-native-spinkit')
+
+    compile "com.android.support:support-core-utils:27.1.1"
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

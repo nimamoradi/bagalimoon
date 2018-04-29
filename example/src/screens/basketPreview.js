@@ -32,10 +32,13 @@ class basketPreview extends React.Component {
         context.setState({shouldUpdateBasket: value});
     }
 
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
     componentWillUnmount() {
-
-
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
         if (context.state.shouldUpdateBasket) {
             let basket = this.state.basket;
             this.props.UpdateBasket(basket, this.props.basket);
@@ -147,7 +150,7 @@ class basketPreview extends React.Component {
                     alignItems: 'center',
                     flex: 1
                 }}>
-                    <Text style={styles.price}>{rowData.price}</Text>
+                    <Text style={styles.price}>{this.numberFormat(rowData.price)}</Text>
                     <Text style={styles.price}>تومان</Text>
                     <CountCircle count={rowData.count}/>
                 </View>
@@ -158,7 +161,7 @@ class basketPreview extends React.Component {
                 </TouchableOpacity>
                 <Text style={styles.text}>{rowData.name}</Text>
                 <Image source={{uri: server.getServerAddress() + '/' + rowData.photo}}
-                       style={{width: 16 * vw, height: 16 * vw, margin: 2 * vw}}
+                       style={{width: 16 * vw, height: 16 * vw, marginRight: 2 * vw}}
                 />
 
             </View>
@@ -197,7 +200,7 @@ class basketPreview extends React.Component {
                             source={require('../../img/green.png')}
                         >
 
-                            <Text style={{fontSize: vw * 5, color: 'black',}}>پرداخت</Text>
+                            <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل خرید</Text>
 
                         </ImageBackground>
                     </TouchableOpacity>
@@ -210,7 +213,7 @@ class basketPreview extends React.Component {
                                 مبلغ اصلی
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.wholePrice} تومان
+                                {this.numberFormat(this.state.wholePrice)} تومان
                             </Text>
                         </View>
                     </ImageBackground>
@@ -223,7 +226,7 @@ class basketPreview extends React.Component {
                                 با تخفیف
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.totalPrice}
+                                {this.numberFormat(this.state.totalPrice)}
                             </Text>
                         </View>
 
@@ -237,7 +240,7 @@ class basketPreview extends React.Component {
                                 سود شما
                             </Text>
                             <Text style={styles.price}>
-                                {this.state.discounted}
+                                {this.numberFormat(this.state.discounted)}
                             </Text>
                         </View>
 
@@ -285,6 +288,9 @@ const styles = StyleSheet.create({
         borderWidth: 0.75,
         margin: vw,
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
         borderRadius: 2 * vw,
         backgroundColor: '#e7e6e6',
         shadowOpacity: 0.6,
@@ -296,7 +302,7 @@ const styles = StyleSheet.create({
         fontSize: vw * 4,
         flex: 1,
         fontFamily: 'B Yekan',
-        margin: 10,
+
         textAlign: 'center',
         color: 'black'
     },

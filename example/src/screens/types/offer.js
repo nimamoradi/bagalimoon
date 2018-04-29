@@ -5,7 +5,7 @@ import {
     View,
     Text,
     TouchableOpacity,
-    Dimensions,
+
     Image,
     ScrollView,
     TextInput,

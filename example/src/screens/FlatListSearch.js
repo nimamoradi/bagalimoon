@@ -32,7 +32,11 @@ class FlatListSearch extends React.Component {
         };
         context = this;
     }
-
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
     makeList = (responseData) => {
         let lastBasket = this.state.lastBasket;
 
@@ -118,8 +122,8 @@ class FlatListSearch extends React.Component {
                     renderItem={({item}) => (
                         <RectProduct
                             title={item.name}
-                            disscount={(item.off !== 0) ? item.main_price : null}
-                            price={item.price}
+                            disscount={(item.off !== 0) ? this.numberFormat(item.main_price) : null}
+                            price={this.numberFormat(item.price)}
                             count={item.count}
                             off={item.off}
                             onUp={() => this.onUp(item)}
@@ -139,7 +143,7 @@ class FlatListSearch extends React.Component {
         }}>
             <TouchableOpacity
                 style={{
-                    backgroundColor: '#4482c7',
+                    backgroundColor: '#D3D3D3',
                     height: 16 * vw,
                     flex: 2,
                     justifyContent: 'center',
@@ -152,9 +156,14 @@ class FlatListSearch extends React.Component {
             </TouchableOpacity>
             <TextInput
                 placeholder='نام کالا را وارد کنید'
+                onSubmitEditing={() => {
+                    this.makeRemoteRequest(this.state.query);
+                }}
                 style={{
                     flex: 10,
                     height: 16 * vw,
+                    fontSize: vw * 4.5,
+                    fontFamily: 'B Yekan',
                 }}
                 onChangeText={(text) => {
                     this.setState({query: text});

@@ -12,12 +12,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
             {(isSelected) ?
                 <TouchableOpacity
                     underlayColor={'#ff7778'}
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: 5,
-                    }}
+                    style={styles.row}
                     onPress={onPress}
                 >
                     {(index % 2 === 0) ?
@@ -40,12 +35,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                 </TouchableOpacity> :
                 <TouchableOpacity
                     underlayColor={'rgba(0, 0, 0, 0.054)'}
-                    style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: 5,
-                    }}
+                    style={styles.row}
                     onPress={onPress}
                 >
                     {(index % 2 === 0) ?
@@ -84,26 +74,19 @@ rightProductCorner.propTypes = {
 const styles = StyleSheet.create({
     image:{
         width: 25 * vw,
-        height: 12 * vh,
+        height: 8 * vh,
         alignItems:'center',
         flex:1,
         justifyContent:'center'
     },
     row: {
-        fontSize: vw * 3,
-        paddingHorizontal: 16,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomWidth: 1,
-        margin: 15,
-        borderRadius: 15,
-        borderColor: '#ff1d1e',
-        borderWidth: 0.5,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        margin: 2,
     },
     text: {
-        width:25*vw,
+        width:22*vw,
         textAlign: 'center',
         fontSize: 4 * vw,
         color: 'white',

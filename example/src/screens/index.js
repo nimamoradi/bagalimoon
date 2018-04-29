@@ -1,5 +1,5 @@
 import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
-import {AsyncStorage} from 'react-native';
+import {Dimensions} from 'react-native';
 import Types from './NavigationTypes';
 import basketLightBox from './basketLightBox'
 import SimpleNavbar from '../navBars/SimpleNavbar'
@@ -29,6 +29,8 @@ import productPageNavBar from "../navBars/productPageNavBar";
 
 import ServerCheck from "./ServerCheck";
 import checkoutPage from "./checkoutPage";
+import {vw, vh} from '../viewport'
+
 
 export function registerScreens() {
 
@@ -92,14 +94,13 @@ export function login() {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {} // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                percentOfScreenWidth: 0.75,
             },
 
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow
                 contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
             },
             type: 'TheSideBar', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
             animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
@@ -129,13 +130,12 @@ export function mainPage(api_code) {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {} // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                percentOfScreenWidth: 0.75,
             },
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow
                 contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
             },
             type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
             animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
@@ -168,13 +168,12 @@ export function serverCheckFailed(api_code, user_number) {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {} // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                percentOfScreenWidth: 0.75,
             },
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow
                 contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-                leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
-                rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
             },
             type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
             animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'

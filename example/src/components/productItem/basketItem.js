@@ -1,70 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
-import ProgressBar from 'react-native-progress/Bar';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import CountCircle from './countCircle';
 import ProductControl from './productControlHorizontal'
-import {vw, vh, vmin, vmax} from '../../viewport'
 
-function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, off}) {
+import {vw, vh, vmin, vmax} from '../../viewport'
+import ProgressBar from 'react-native-progress/Bar';
+
+
+function basketItem({title, price, count, disscount, off, imageUrl}) {
+
 
     return (
-        <TouchableOpacity style={styles.halfRow}
-                          onPress={onPress}>
-            {(disscount) ?
-                <View
-                    style={{
-                        flex: 1,
-                        height: 16 * vw,
-                        width: 16 * vw,
-                        zIndex: 1,
-                    }}>
-                    <Image
-                        resizeMode="stretch"
-                        source={require('../../../img/mainPage/round.png')}
-                        style={{
-                            zIndex: 0,
-                            height: 16 * vw,
-                            width: 16 * vw,
-                        }}
-                    />
-                    <Text style={styles.discountText}>{off} %</Text>
-                </View> : <View
-                    style={{
-                        flex: 1,
-                        height: 16 * vw,
-                        width: 16 * vw,
-                        zIndex: 1,
-                    }}/>}
+        <View style={styles.halfRow}
+        >
+            <View
+                style={{
+                    flex: 1,
+                    height: 16 * vw,
+                    width: 16 * vw,
+                    zIndex: 1,
+                }}/>
             <View style={styles.row}>
 
                 <Image
                     resizeMode="stretch"
                     indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
                 />
-                <Text numberOfLines={2} style={styles.text}>{title}</Text>
+                <Text numberOfLines={3} style={styles.text}>{title}</Text>
                 {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
                 <Text style={styles.price}>{price} تومان </Text>
-
-                <ProductControl style={{ justifyContent: 'flex-end'}} count={count} onUp={onUp} onDown={onDown}/>
-
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.countText}>{count}</Text>
+                    <Text style={styles.countText}>تعداد : </Text>
+                </View>
             </View>
-        </TouchableOpacity>
+        </View>
     );
-
 
 }
 
-item.propTypes = {
+basketItem.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     disscount: PropTypes.number,
     imageUrl: PropTypes.string.isRequired,
-
 };
 
 const styles = StyleSheet.create({
+    countText: {
+        color: 'black',
+        fontSize: vw * 4.5,
+        fontFamily: 'B Yekan',
+        marginBottom: vh,
+        textAlign: 'center',
+    },
     priceView: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -73,7 +63,7 @@ const styles = StyleSheet.create({
     halfRow: {
         flexDirection: 'row',
         borderColor: '#00000035',
-        height: 40 * vh,
+        height: 43 * vh,
         backgroundColor: '#ebebeb',
         borderBottomWidth: 1,
         borderRadius: 5 * vh,
@@ -88,11 +78,10 @@ const styles = StyleSheet.create({
         right: 8 * vw,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: -7 * vw,
-        marginRight: -7 * vw,
+
     },
     text: {
-        width: 40 * vw,
+        width: 30 * vw,
         fontSize: vw * 4,
         textAlign: 'center',
         fontFamily: 'B Yekan',
@@ -120,7 +109,7 @@ const styles = StyleSheet.create({
 
     discountText: {
         zIndex: 1,
-        fontSize: vw * 4,
+        fontSize: vw * 3.5,
         fontFamily: 'B Yekan',
         position: 'absolute',
         bottom: 7.5 * vw,
@@ -130,4 +119,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default item;
+export default basketItem;

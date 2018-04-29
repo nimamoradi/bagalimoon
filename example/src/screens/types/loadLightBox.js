@@ -1,23 +1,22 @@
 import React from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet,ActivityIndicator, View, Text, Button} from 'react-native';
 import {vw, vh, vmin, vmax} from '../../viewport'
 
-class Lightbox extends React.Component {
+class loadLightbox extends React.Component {
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={{flex: 8,}}>
                     <Text style={styles.title}>{this.props.title}</Text>
-                    <Text style={styles.content}>{this.props.content}</Text>
                 </View>
-                <View style={{flex: 2}}>
-                    <Button
-                        large
-                        color="#44ff61"
-                        title={'بستن'}
-                        onPress={() => this.props.onClose()}
-                    />
+                <View
+                    style={{
+                        paddingVertical: 20,
+                        borderTopWidth: 1,
+                        borderColor: "#CED0CE"
+                    }}>
+                    <ActivityIndicator animating size="large"/>
                 </View>
             </View>
         );
@@ -45,4 +44,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Lightbox;
+export default loadLightbox;

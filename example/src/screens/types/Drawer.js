@@ -1,36 +1,25 @@
 import React from 'react';
 import {
     StyleSheet,
-    BackHandler,
     View,
-    Button,
     TouchableOpacity,
     AsyncStorage,
     Image,
     Text,
-    Dimensions,
+
     Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {vw, vh, vmin, vmax} from '../../viewport'
-import server from "../../code";
-import basketfile from "../../basketFile";
+
+import DrawerItem from "./drawerItem";
 
 let context;
 
 class MyClass extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {user_number: ''};
-        context = this;
-        AsyncStorage.getItem('user_number').then((item) => {
-            context.setState({user_number: item})
-        });
-
-    }
 
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
@@ -50,6 +39,7 @@ class MyClass extends React.Component {
         this.toggleDrawer();
         this.props.navigator.push({
             screen: 'example.Types.orderHistroy',
+            title: 'سوابق سفارش',
             passProps: {
                 api_code: this.props.api_code
             },
@@ -61,35 +51,50 @@ class MyClass extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{backgroundColor: '#eeeceb', flex: 1, width: 300, justifyContent: 'center',}}>
-                    <Image style={styles.image} source={require('../../../img/grocery.png')}/>
-                    <Text style={{alignSelf: 'flex-end', fontSize: vw * 5}}>{this.state.user_number}</Text>
+                <View style={{backgroundColor: '#eeeceb', flex: 1, width: 75 * vw, justifyContent: 'center',}}>
+                    <Image
+                        resizeMode='stretch'
+                        style={styles.image} source={require('../../../img/grocery.png')}/>
+                    <Text style={{alignSelf: 'center', fontSize: vw * 6, fontFamily: 'B Yekan',}}>فروشگاه بزرگ
+                        بقالیمون</Text>
                 </View>
-                <View style={{backgroundColor: '#fafafa50', flex: 3, width: 300,}}>
+                <View style={{
+                    backgroundColor: '#fafafa50', flex: 3,
+                    flexDirection: 'column',
+                    marginBottom: 4 * vh,
+                    justifyContent: 'flex-start', width: 75 * vw,
+                }}>
 
 
                     <TouchableOpacity
                         onPress={(() => this.orderHistroy())}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <MaterialIcon name="history" size={vw * 8} color="#ff5500"
+                        <View style={styles.row}>
+                            <Text style={styles.textFont}> سوابق سفارش</Text>
+                            <View style={{flex: 1}}/>
+                            <MaterialIcon name="history" size={vw * 8} color="#1064d3"
                                           style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}> سوابق سفارش</Text>
-
                         </View>
 
                     </TouchableOpacity>
+
+
                     <TouchableOpacity
                         onPress={() => {
-
+                            Share.share({
+                                message: 'بقالمون خرید اسان با قیمت مناسب https://www.baghali.amins.ir',
+                                url: 'https://www.baghali.amins.ir',
+                                title: 'بقالمون'
+                            }, {});
                         }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Ionicons name="ios-call-outline" size={vw * 8} color="#11ff11"
-                                      style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}> ارتباط با ما</Text>
-
+                        <View style={styles.row}>
+                            <Text style={styles.textFont}>معرفی به دوستان</Text>
+                            <View style={{flex: 1}}/>
+                            <Icon name="share-square-o" size={vw * 8} color="#1064d3"
+                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
                         </View>
 
                     </TouchableOpacity>
+
                     <TouchableOpacity
                         onPress={() => {
                             this.toggleDrawer();
@@ -98,45 +103,14 @@ class MyClass extends React.Component {
                                 title: 'درباره ما',
                             });
                         }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Icon name="info-circle" size={vw * 8} color="#72bcd4"
+                        <View style={styles.row}>
+                            <Text style={styles.textFont}>درباره ما</Text>
+                            <View style={{flex: 1}}/>
+                            <Icon name="info-circle" size={vw * 8} color="#1064d3"
                                   style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>درباره ما</Text>
-
                         </View>
 
                     </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => {
-                            Share.share({
-                                message: 'خرید اسان با قیمت مناسب',
-                                url: 'https://www.baghali.amins.ir',
-                                title: 'بقالمون'
-                            }, {});
-                        }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <Icon name="share-square-o" size={vw * 8} color="#ff0d04"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>اشتراک</Text>
-                        </View>
-
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => {
-                            this.backPressed();
-
-                        }}>
-                        <View style={{flexDirection: 'row', alignSelf: 'flex-end', alignContent: 'center'}}>
-                            <MaterialIcon name="logout" size={vw * 8} color="#C42B2D"
-                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
-                            <Text style={{marginTop: 35 / 2, fontSize: vw * 6}}>خروج</Text>
-
-                        </View>
-
-                    </TouchableOpacity>
-
 
                 </View>
 
@@ -164,21 +138,38 @@ class MyClass extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        width: 300,
+        width: 75 * vw,
+        height: 100 * vh,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
         flexDirection: 'column'
     },
     button: {},
+    row: {
+        flexDirection: 'row-reverse',
+        backgroundColor: '#ff3232',
+        width: 70 * vw,
+        height: 10 * vh,
+        borderRadius: 4 * vw,
+        flexGrow: 1,
+        justifyContent: 'center',
+        margin: 2 * vw,
+        alignContent: 'center',
+    },
     image: {
-        height: Dimensions.get('window').width / 3, width: Dimensions.get('window').width / 3,
+        height: 25 * vw, width: 30 * vw,
         alignSelf: 'center',
+        flex: 4,
         alignItems: 'center',
         justifyContent: 'flex-start',
+    },
+    textFont: {
+        marginTop: 35 / 2,
+        color: 'white',
+        marginRight: 2 * vw,
+        fontFamily: 'B Yekan', fontSize: vw * 4.5
     }
-    ,
 });
 
 export default MyClass;

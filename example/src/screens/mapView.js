@@ -8,14 +8,15 @@ import {
     ImageBackground,
     TextInput,
     AsyncStorage,
+    ScrollView,
     PermissionsAndroid,
-    Dimensions,
     Picker,
     Keyboard,
+    Platform
 
 } from 'react-native';
 import Loading from '../components/loadScreen'
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, AnimatedRegion, Animated} from 'react-native-maps';
 import server from "../code";
 import {vw, vh, vmin, vmax} from '../viewport'
 import fetch from '../fetch'
@@ -68,54 +69,83 @@ class mapView extends Component {
     }
 
     async requestLocationPermission() {
-        try {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                {
+        if (Platform.Version < 23) {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                    {
 
-                    'title': 'مجوز دسترسی به موقیت',
-                    'message': 'برنامه برای رساندن محصول نیاز به ادرس شماست'
-                }
-            );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                // console.log("You can use the Location");
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        // console.log(position);
-                        this.setState({
-                            myLocation: {
+                        'title': 'مجوز دسترسی به موقیت',
+                        'message': 'برنامه برای رساندن محصول نیاز به ادرس شماست'
+                    }
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    // console.log("You can use the Location");
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            // console.log(position);
+                            this.setState({
+                                myLocation: {
+                                    latitude: position.coords.latitude,
+                                    longitude: position.coords.longitude,
+                                },
                                 latitude: position.coords.latitude,
                                 longitude: position.coords.longitude,
-                            },
+                                error: null,
+                            });
+                        },
+                        (error) => {
+                            // console.log(error)
+                        }),
+                        {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
+                    ;
+                } else {
+                    this.setState({
+                        error: null,
+                    });
+                    server.alert('اخطار', 'مجوز داده نشد', context)
+                }
+            } catch (err) {
+                console.warn(err)
+            }
+        } else {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    // console.log(position);
+                    this.setState({
+                        myLocation: {
                             latitude: position.coords.latitude,
                             longitude: position.coords.longitude,
-                            error: null,
-                        });
-                    },
-                    (error) => {
-                        // console.log(error)
-                    }),
-                    {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
-                ;
-            } else {
-                this.setState({
-                    error: null,
-                });
-                server.alert('اخطار', 'مجوز داده نشد', context)
-            }
-        } catch (err) {
-            console.warn(err)
+                        },
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        error: null,
+                    });
+                },
+                (error) => {
+                    // console.log(error)
+                }),
+                {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
+            ;
         }
     }
 
     _renderScene = ({route}) => {
         switch (route.key) {
             case 'first':
-                return <View style={styles.columnItem}>
+                return <ScrollView style={styles.columnItem}>
                     <View style={styles.rowItem}>
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddressName: text})}
                                    value={this.state.myAddressName}
+                                   blurOnSubmit={false}
+                                   onSubmitEditing={() => {
+                                       this.focusNextField('three');
+                                   }}
+                                   returnKeyType={"next"}
+                                   ref={input => {
+                                       this.inputs['two'] = input;
+                                   }}
                         />
                         <ImageBackground
                             resizeMode="stretch"
@@ -129,6 +159,11 @@ class mapView extends Component {
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddress: text})}
                                    value={this.state.myAddress}
+                                   blurOnSubmit={true}
+                                   returnKeyType={"done"}
+                                   ref={input => {
+                                       this.inputs['three'] = input;
+                                   }}
                         />
                         <ImageBackground
                             resizeMode="stretch"
@@ -138,7 +173,7 @@ class mapView extends Component {
                         </ImageBackground>
                     </View>
 
-                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                    <View style={styles.center}>
                         <TouchableOpacity
                             onPress={_.debounce(this.offlineSale,
                                 1000, {leading: true, trailing: false})}
@@ -146,7 +181,7 @@ class mapView extends Component {
                             <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
                         </TouchableOpacity>
                     </View>
-                </View>;
+                </ScrollView>;
             case 'second':
                 let oldAddresses = this.state.oldAddresses.map(function (x) {
                     return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
@@ -171,7 +206,7 @@ class mapView extends Component {
                         </ImageBackground>
                     </View>
                     <View style={styles.space}/>
-                    <View style={[styles.center, {opacity: this.state.buttonHeight}]}>
+                    <View style={styles.center}>
                         <TouchableOpacity
                             onPress={_.debounce(this.offlineSale,
                                 1000, {leading: true, trailing: false})}
@@ -186,6 +221,15 @@ class mapView extends Component {
     };
     newAddresses = () => {
 
+        let latitude;
+        if (context.state.myLocation === null || context.state.myLocation.latitude === null)
+            latitude = 0;
+        else latitude = context.state.myLocation.latitude;
+
+        let longitude;
+        if (context.state.myLocation === null || context.state.myLocation.longitude === null)
+            longitude = 0;
+        else longitude = context.state.myLocation.longitude;
 
         (fetch(server.getServerAddress() + '/api/addNewAddress', {
             method: 'POST',
@@ -201,12 +245,12 @@ class mapView extends Component {
                     city_id: "0",        //now select 0
                     state_id: "0", //now select 0
                     Address: context.state.myAddress,
-                    lat: context.state.myLocation.latitude,
-                    lng: context.state.myLocation.longitude,
+                    lat: latitude,
+                    lng: longitude,
                 }
             })
         }).then((response) => response.json().then((responseData) => {
-            context.setState({sendData: false, myAddress_id: parseInt(responseData.id)})//add oldAddresses
+            context.setState({sendData: false, myAddress_id: parseInt(responseData.id)});//add oldAddresses
             // console.log('respone' + responseData);
             context.finalBasket();
         }))
@@ -244,16 +288,10 @@ class mapView extends Component {
         if (context.state.senderName !== '' && context.state.senderName !== undefined &&
             context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) > -1) {
             if (context.state.index === 0) {
-
                 if (!(context.state.myAddress !== null && context.state.myAddress !== '' && context.state.myAddressName !== ''
                     && context.state.myAddressName !== null)) {
                     server.alert('اخطار',
                         'همه فیلدها پر نشده اند',
-                        context);
-                }
-                else if (context.state.myLocation === null && context.state.myLocation.length > 0) {
-                    server.alert('اخطار',
-                        'موقیت خود را انتخاب کنید',
                         context);
                 }
                 else {
@@ -262,29 +300,25 @@ class mapView extends Component {
                 }
             }
             else if (context.state.index === 1) {
-
                 if (context.state.myAddress_id === null || context.state.myAddress_id === -1)
                     server.alert('اخطار',
                         "لطفا آدرس را انتخاب کنید",
                         context);
-
                 else
                     this.finalBasket();
-
-
             }
 
         }
-        else if (context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) === -1) {
-            server.alert('اخطار',
-                'نام تحویل گیرنده باید فارسی باشد',
-                context);
-
+        else if (context.state.senderName.length === 0 || context.state.senderName.trim() || context.state.senderName.search(/^[\u0600-\u06FF\s]+$/) === -1) {
+            if (context.state.senderName.length === 0 || context.state.senderName.trim())
+                server.alert('اخطار',
+                    'نام تحویل گیرنده الزامی است',
+                    context);
+            else
+                server.alert('اخطار',
+                    'نام تحویل گیرنده باید فارسی باشد',
+                    context);
         }
-        else
-            server.alert('اخطار',
-                'نام تحویل گیرنده الزامی است',
-                context);
 
 
     };
@@ -293,6 +327,13 @@ class mapView extends Component {
         this.props.navigator.push({
             screen: 'example.Types.basketFinal',
             title: 'خرید را نهایی کنید',
+            navigatorButtons: {
+                leftButtons: [
+                    {}
+                ]
+            },
+
+            overrideBackPress: true,
             passProps: {
                 shouldUpdateBasket: context.props.shouldUpdateBasket,
                 setBasket: context.props.setBasket,
@@ -334,7 +375,13 @@ class mapView extends Component {
         context = this;
         props.navigator.setStyle({navBarHidden: true,});
 
+        this.focusNextField = this.focusNextField.bind(this);
+        // to store our input refs
+        this.inputs = {};
+    }
 
+    focusNextField(id) {
+        this.inputs[id].focus();
     }
 
     componentDidMount() {
@@ -357,6 +404,8 @@ class mapView extends Component {
         </View>;
         else
             return (
+
+
                 <View style={{flex: 1}}>
                     <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
 
@@ -374,13 +423,14 @@ class mapView extends Component {
                         <MapView
                             provider={PROVIDER_GOOGLE}
                             style={styles.map}
-                            region={{
+                            region={new AnimatedRegion({
                                 latitude: this.state.latitude,
                                 longitude: this.state.longitude,
-                                latitudeDelta: 0.01,
-                                longitudeDelta: 0.01,
-                            }}
+                                latitudeDelta: 0.02,
+                                longitudeDelta: 0.02,
+                            })}
                             onLongPress={(e) => {
+
                                 this.setState({
                                     myLocation: e.nativeEvent.coordinate,
                                     latitude: e.nativeEvent.coordinate.latitude,
@@ -406,9 +456,10 @@ class mapView extends Component {
 
 
                     </View>
+
                     <View
                         style={{
-                            flex: 1.5,
+                            flex: 1,
                             flexDirection: 'column',
                             alignContent: 'center',
                             alignItems: 'flex-start'
@@ -417,8 +468,16 @@ class mapView extends Component {
 
                             <TextInput style={styles.borderText}
                                        placeholder="نام"
+                                       blurOnSubmit={false}
+                                       onSubmitEditing={() => {
+                                           this.focusNextField('two');
+                                       }}
+                                       returnKeyType={"next"}
                                        onChangeText={(text) => this.setState({senderName: text})}
                                        value={context.state.senderName}
+                                       ref={input => {
+                                           this.inputs['one'] = input;
+                                       }}
                             />
                             <ImageBackground
                                 resizeMode="stretch"
@@ -445,6 +504,7 @@ class mapView extends Component {
                     />
 
                 </View>
+
             );
     }
 
@@ -464,25 +524,24 @@ const styles = StyleSheet.create({
         },
         rowItem: {
             flexDirection: 'row',
-            backgroundColor: '#f2f2f2',
+            backgroundColor: '#f2f2f200',
             elevation: 2 * vw,
             borderRadius: 2 * vw,
             margin: 5,
             alignItems: 'center',
-            height: 7 * vh,
+            height: 8 * vh,
         },
         imageBack: {
-            width: 20 * vw, height: 10 * vh,
+            width: 20 * vw,
+            height: 8 * vh,
             alignContent: 'center',
             alignItems: 'center',
             flex: 1,
-            margin: 2 * vw,
-            marginRight: -2 * vw,
             justifyContent: 'center',
         },
         container: {
-            height: Dimensions.get('window').width * 0.9,
-            width: Dimensions.get('window').width * 0.9,
+            height: 90 * vw,
+            width: 90 * vw,
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 5 * vw,

@@ -12,10 +12,13 @@ class basketfile {
 
     static async writeBasket(basket) {
         basket = JSON.stringify(basket.filter(function (item) {
-            delete  item.isSpecialOffer;
-            delete item.shouldShow;
-            delete item.isBestSellingProduct;
-            return (item.count > 0);
+            if (item.count > 0) {
+                delete  item.isSpecialOffer;
+                delete item.shouldShow;
+                delete item.isBestSellingProduct;
+                return true
+            }
+            return false;
         }));
         // await console.log('basket '+basket);
 

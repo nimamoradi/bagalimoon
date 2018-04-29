@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 const Spinner = require('react-native-spinkit');
+import {vw, vh, vmin, vmax} from '../viewport'
 
 
 function loadScreen() {
@@ -20,8 +21,8 @@ const styles = StyleSheet.create({
     background: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        width: 100*vw,
+        height:100*vh,
         flex: 1,
         opacity:0.65,
         backgroundColor: 'grey'

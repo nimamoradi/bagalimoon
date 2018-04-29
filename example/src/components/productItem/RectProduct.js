@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Bar';
 
 import CountCircle from './countCircle';
+import ProductControl from './productControlVertical'
 
 function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 
@@ -21,19 +22,8 @@ function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, of
                 indicator={ProgressBar}
                 source={{uri: imageUrl}} style={styles.image}/>
 
-            <View style={{flex: 1.2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <ProductControl count={count} onUp={onUp} onDown={onDown}/>
 
-                <TouchableOpacity onPress={onUp}>
-                    <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
-                </TouchableOpacity>
-
-                <CountCircle count={count}/>
-
-                <TouchableOpacity onPress={onDown}>
-                    <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
-                </TouchableOpacity>
-
-            </View>
 
             <View style={{flexDirection: 'column',}}>
                 <Text style={styles.text}>{title}</Text>
@@ -140,8 +130,8 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        height: Dimensions.get('window').width / 3,
-        width: Dimensions.get('window').width / 4,
+        height: 33*vw,
+        width: 25*vw,
         margin: 2 * vw,
     },
     countTextHidden: {
@@ -150,7 +140,6 @@ const styles = StyleSheet.create({
         width: 6 * vw,
         height: 6 * vw,
         borderRadius: 3 * vw,
-        fontFamily: 'B Yekan',
         opacity: 0
     },
 

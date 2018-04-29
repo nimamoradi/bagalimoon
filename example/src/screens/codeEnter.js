@@ -7,7 +7,6 @@ import {
     Text,
     TextInput,
     ImageBackground,
-    Dimensions,
     AsyncStorage
 
 } from 'react-native';
@@ -35,40 +34,61 @@ class codeEnter extends React.Component {
         return (
             <ImageBackground
                 style={{
-                    width: Dimensions.get('window').width,
-                    height: Dimensions.get('window').height,
+                    width: 100 * vw,
+                    height: 100 * vh,
                     backgroundColor: '#ffffff10'
                 }}
                 source={require('../../img/login.png')}>
 
                 <View style={styles.absolote}>
-                    <View style={{width: Dimensions.get('window').width - 150}}>
+                    <View style={{width: 100 * vw - 150}}>
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
+                            onSubmitEditing={() => {
+                                this.enterCode();
+                            }}
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
-                            value=  {this.state.code}/>
+                            value={this.state.code}/>
 
+                    </View>
+                    <TouchableOpacity
+                        onPress={this.isAvailable}
+                    >
+                        <Text style={{
+                            textAlign: 'center', borderRadius: 20,
+                            borderColor: '#bec4be',
+                            borderWidth: 0.5,
+                            backgroundColor: '#5bca45',
+                            padding: 10,
+                            marginTop: 15,
+                            width: 32 * vw,
+                            fontFamily: 'B Yekan',
+                            fontSize: vw * 6,
+                            color: '#ffffff'
+                        }}>تایید</Text>
+                    </TouchableOpacity>
+                    <View style={{flexDirection: 'row',}}>
 
                         <TouchableOpacity
-                            onPress={this.isAvailable}
+                            onPress={this.doSignUp}
                         >
                             <Text style={{
-                                textAlign: 'center', borderRadius: 20,
-                                borderColor: '#bec4be',
-                                borderWidth: 0.5,
-                                backgroundColor: '#5bca45',
-                                padding: 10,
-                                margin: 40,
                                 fontFamily: 'B Yekan',
-                                fontSize: vw * 6,
-                                color: '#ffffff'
-                            }}>تایید</Text>
+                                fontSize: vw * 5,
+                                color: '#65a4ff'
+                            }}>ارسال مجدد</Text>
                         </TouchableOpacity>
+                        <Text style={{
+
+                            fontFamily: 'B Yekan',
+                            fontSize: vw * 5,
+                            color: 'black'
+                        }}>پیامک دریافت نشد : </Text>
                     </View>
                 </View>
                 <View style={styles.absolote}>
-                    {(this.state.sendData === true) ? <Loading/> : null}
+                    {(this.state.sendData) ? <Loading/> : null}
                 </View>
             </ImageBackground>
         );
@@ -80,9 +100,45 @@ class codeEnter extends React.Component {
 
     };
 
+    doSignUp() {
+        context.setState({sendData: true});
+
+        (fetch(server.getServerAddress() + '/api/register', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'content-encoding': "gzip, deflate, br"
+            },
+            retries: 1,
+            body: JSON.stringify({
+                api_code: context.props.api_code,
+                'phone_number': context.state.phoneNumber,
+                'device_info': server.deviceInfo(context.state.phoneNumber)
+            })
+        }).then((response) => response.json().then((responseData) => {
+            console.log('inside login response json');
+            console.log('response object:', responseData);
+            context.setState({sendData: false});
+
+        }))
+            .catch(ignored => {
+                server.retryParam(context.doSignUp, context);
+
+            }).catch(ignored => {
+                server.retryParam(context.doSignUp, context);
+            })).catch(ignored => {
+            server.retryParam(context.doSignUp, context);
+
+        });
+        // console.log('inside login form');
+
+    }
+
     enterCode = () => {
         context.setState({sendData: true});
-        // console.log("inside post smsVerify");
+
+        console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',
             headers: {
@@ -126,8 +182,25 @@ class codeEnter extends React.Component {
                 navBarHidden: true,
             }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
             backButtonHidden: true,
+            drawer: { // optional, add this if you want a side menu drawer in your app
+                right: { // optional, define if you want a drawer from the right
+                    screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
+                    passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
+                    fixedWidth:75*vw
+                },
+                style: { // ( iOS only )
+                    drawerShadow: true, // optional, add this if you want a side menu drawer shadow
+                    contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
+                    leftDrawerWidth: 50, // optional, add this if you want a define left drawer width (50=percent)
+                    rightDrawerWidth: 50 // optional, add this if you want a define right drawer width (50=percent)
+                },
+                type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
+                animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
+                // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
+                disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
+            },
             overrideBackPress: false,
-            passProps: {api_code: api,},
+            passProps: {api_code: api, user_number: context.state.phoneNumber},
 
         });
     }
@@ -169,7 +242,8 @@ const styles = StyleSheet.create({
     },
     flex: {
         flex: 1,
-    }, absolote: {
+    },
+    absolote: {
         position: 'absolute',
         top: 0,
         left: 0,

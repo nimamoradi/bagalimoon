@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StyleSheet, View, Text, TouchableHighlight, Button, Image, Dimensions, AsyncStorage} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, Button, Image,  AsyncStorage} from 'react-native';
 
 import {vw, vh, vmin, vmax} from '../viewport'
 

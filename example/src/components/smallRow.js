@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableHighlight, Dimensions, Platform} from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight, Platform} from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 
 function smallRow({title, des}) {
@@ -16,7 +16,7 @@ function smallRow({title, des}) {
 
 smallRow.propTypes = {
     title: PropTypes.string.isRequired,
-    des: PropTypes.isRequired,
+    des: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -30,11 +30,13 @@ const styles = StyleSheet.create({
     text: {
         fontSize: vw * 4,
         margin: 20,
+        fontFamily: 'B Yekan',
         alignSelf: 'flex-end'
     },
     des: {
         fontSize: vw * 4,
         margin: 20,
+        fontFamily: 'B Yekan',
         alignSelf: 'flex-start'
     },
 });

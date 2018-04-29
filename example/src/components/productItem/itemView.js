@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground, TextInput, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Image, ImageBackground, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Pie';
-import CountCircle from './countCircle';
 
+import ProductControl from './productControlVertical'
 
-function itemView({title, onUp, onDown, imageUrl, price, count, disscount,off}) {
+function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 
 
     return (
@@ -49,25 +49,17 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount,off}) 
                         source={{uri: imageUrl}} style={styles.image}/>
 
                     <View style={{flexDirection: 'column', width: 25 * vw}}>
-                        <Text style={styles.text}>{title}</Text>
-                        {(disscount) ? <Text style={styles.discount}>{disscount} تومان </Text> : null}
-                        <Text style={styles.price}>{price} تومان </Text>
+                        <Text adjustsFontSizeToFit style={styles.text}>{title}</Text>
+
+                        {(disscount) ?
+                            <Text numberOfLines={1} style={styles.discount}>{disscount} تومان </Text> : null}
+                        <Text numberOfLines={1} style={styles.price}>{price} تومان </Text>
+
                     </View>
 
-                    <View style={{
-                        flexDirection: 'column', alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
 
-                        <TouchableOpacity onPress={onUp}>
-                            <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
-                        </TouchableOpacity>
+                    <ProductControl count={count} onUp={onUp} onDown={onDown}/>
 
-                        <CountCircle count={count}/>
-                        <TouchableOpacity onPress={onDown}>
-                            <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
-                        </TouchableOpacity>
-                    </View>
                 </View>
             </View>
 
@@ -93,7 +85,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
-        width: 70 * vw,
+        width: 72 * vw,
         height: 45 * vw
 
 
@@ -114,25 +106,31 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: vw,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        height: 40 * vw
     },
     text: {
+        textAlignVertical: "center",
         fontFamily: 'B Yekan',
-        fontSize: vw * 4,
+        fontSize: vw * 3.75,
         color: 'black',
-        width: 25 * vw
+        flex: 3,
+        textAlign:'center',
     },
-    price: {fontSize: vw * 4, color: 'black', fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10},
+    price: {fontSize: vw * 4,
+        flex: 1,
+        color: 'black', fontFamily: 'B Yekan', textAlign: 'right',},
     discount: {
         textDecorationLine:
             'line-through',
+        flex: 1,
         fontSize: vw * 4,
         color: '#d94c3d',
-        fontFamily: 'B Yekan', textAlign: 'left', marginRight: 10
+        fontFamily: 'B Yekan', textAlign: 'right',
 
     },
     image: {
-        height: Dimensions.get('window').width / 3,
-        width: Dimensions.get('window').width / 4,
+        height: 35 * vw,
+        width: 25 * vw,
         margin: 2 * vw,
     },
     countTextHidden: {
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
     },
     discountText: {
         zIndex: 1,
-        fontSize: vw * 3.5,
+        fontSize: vw * 4,
         fontFamily: 'B Yekan',
         position: 'absolute',
         bottom: 7.5 * vw,

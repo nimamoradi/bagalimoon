@@ -200,7 +200,7 @@ class basketPreview extends React.Component {
                             source={require('../../img/green.png')}
                         >
 
-                            <Text style={{fontSize: vw * 4.5, color: 'black',fontFamily: 'B Yekan',}}>تکمیل خرید</Text>
+                            <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل خرید</Text>
 
                         </ImageBackground>
                     </TouchableOpacity>
@@ -288,6 +288,9 @@ const styles = StyleSheet.create({
         borderWidth: 0.75,
         margin: vw,
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
         borderRadius: 2 * vw,
         backgroundColor: '#e7e6e6',
         shadowOpacity: 0.6,

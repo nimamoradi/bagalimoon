@@ -138,8 +138,8 @@ class MyClass extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         width: 75 * vw,
+        height: 100 * vh,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     image: {
-        height: 30 * vw, width: 30 * vw,
+        height: 25 * vw, width: 30 * vw,
         alignSelf: 'center',
         flex: 4,
         alignItems: 'center',

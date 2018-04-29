@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         shadowColor: '#eeeeee',
         borderWidth: 0.75,
         margin: vw,
-        elevation: 5 * vw,
+        elevation: 2 * vw,
     },
     row: {
         zIndex: 0,

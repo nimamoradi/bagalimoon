@@ -13,8 +13,6 @@ import SimpleNavbar from "../navBars/SimpleNavbar";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import dataHandeling from "../dataHandeling";
-import basketFile from "../basketFile";
-
 
 let context;
 

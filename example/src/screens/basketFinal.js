@@ -1,6 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, View, ScrollView, FlatList, Text, TouchableOpacity, AsyncStorage} from 'react-native';
+import {
+    StyleSheet,
+    Linking,
+    Image,
+    View,
+    ScrollView,
+    FlatList,
+    Text,
+    TouchableOpacity,
+    AsyncStorage
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
@@ -160,10 +170,17 @@ class basketFinal extends React.Component {
                         flexDirection: 'row', height: 8 * vh, justifyContent: 'center'
                         , alignItems: 'center',
                     }}>
-                        <TouchableOpacity onPress={this.address}>
+
+                        <TouchableOpacity onPress={() => {
+                            this.address()
+                            context.props.setBasket(context.props.fullBasket.map(item => {
+                                return Object.assign({}, item, {count: 0});
+                            }));
+                            context.props.shouldUpdateBasket(false);
+                        }}>
                             <View style={styles.button}>
                                 <Icon name="shopping-cart" size={vw * 5} color="green"/>
-                                <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
+                                <Text style={styles.textButton}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={function () {
@@ -174,7 +191,7 @@ class basketFinal extends React.Component {
                             context.props.navigator.popToRoot();
                         }}>
                             <View style={styles.buttonCancel}>
-                                <Text style={{fontSize: vw * 4,}}>پرداخت در محل</Text>
+                                <Text style={styles.textButton}>پرداخت در محل</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

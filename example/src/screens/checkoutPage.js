@@ -4,12 +4,14 @@ import {
     StyleSheet,
     TouchableOpacity,
     View,
-    WebView
+    WebView, Text,
+    Linking
 
 } from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
+import Feather from 'react-native-vector-icons/Feather';
 
 let context;
 import server from '../code'
@@ -58,11 +60,16 @@ class checkoutPage extends React.Component {
                 // console.log("inside responsejson");
                 // console.log('response object:', responseData);
                 // alert(JSON.stringify(responseData));
-
-                if (responseData.ok === true)
+                if (responseData.ok === true && !responseData.hasOwnProperty('error'))
                     context.setState({sendData: false, order_checkout: responseData.authority});
+                else if (responseData.ok === false && responseData.hasOwnProperty('error')) {
+                    context.setState({
+                        sendData: false, order_checkout: responseData.authority,
+                        webRes: true, postMass: responseData.message_fa
+                    });
 
-
+                }
+                alert(JSON.stringify(responseData));
             }).catch(ignored => {
             // console.log('response error:', ignored);
             server.retryParam(this.getPayStatus, context)
@@ -96,17 +103,7 @@ class checkoutPage extends React.Component {
 
     onClose() {
         context.props.navigator.dismissLightBox();
-        switch (context.state.webMassage) {
-            case 3:
-                context.props.navigator.popToRoot();
-                break;
-            case 1:
-            case 2:
-                context.props.navigator.popToRoot();
-                break;
-        }
-
-
+        context.props.navigator.popToRoot();
     }
 
     render() {
@@ -128,16 +125,24 @@ class checkoutPage extends React.Component {
         else
             return (
                 <View style={styles.container}>
-                    <WebView
-                        renderLoading={() => {
-                            return <Loading/>
-                        }}
-                        startInLoadingState={true}
-                        javaScriptEnabled={true}
-                        onMessage={this.onMessage}
+                    <Text style={styles.text}>
+                        . برای تکمیل خرید صفحه را در مرورگر باز کنید
+                    </Text>
+                    <View style={{margin: 4 * vh}}/>
+                    <TouchableOpacity onPress={() => {
+                        context.props.navigator.popToRoot();
 
-                        source={{uri: 'https://sandbox.zarinpal.com/pg/StartPay/' + this.state.order_checkout}}
-                    />
+                        Linking.openURL('https://sandbox.zarinpal.com/pg/StartPay/'
+                            + this.state.order_checkout).then(() => {
+                            context.props.navigator.popToRoot();
+                        }).catch(err => console.error('An error occurred', err));
+                        context.props.navigator.popToRoot();
+                    }}>
+                        <View style={styles.button}>
+                            <Feather name="chrome" size={vw * 5} style={{margin: 2 * vw,}} color="#ee1111"/>
+                            <Text style={styles.text}>پرداخت</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             );
 
@@ -154,8 +159,11 @@ const
     styles = StyleSheet.create({
         container: {
             flex: 1,
+            height: 100 * vh,
             flexDirection: 'column',
-            backgroundColor: '#eeeceb'
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f2f2f2',
         },
         rowMain: {},
         subRow: {
@@ -168,9 +176,6 @@ const
         text: {
             fontSize: vw * 5,
             fontFamily: 'B Yekan',
-            margin: 50,
-            marginBottom: 10,
-            marginLeft: 10,
         },
         textInput: {
             fontSize: vw * 5,
@@ -183,14 +188,20 @@ const
         },
         flex: {
             flex: 1,
-        }, absolote: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+        },
+
+        button: {
+            width: 70 * vw,
+            height: 10 * vh,
+            flexDirection: 'row',
+            borderWidth: 0.5,
+            borderRadius: 10,
+            padding: 5,
+            margin: 2,
             justifyContent: 'center',
-            alignItems: 'center'
-        }
+            alignItems: 'center',
+            borderColor: '#23d429',
+            backgroundColor: '#23d42920'
+        },
     });
 export default checkoutPage;

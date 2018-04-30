@@ -186,14 +186,14 @@ class basketPreview extends React.Component {
                     renderItem={({item}) =>
                         this.renderRow(item)}
                 />
+                <TouchableOpacity onPress={_.debounce(this.address,
+                    1000, {leading: true, trailing: false})}>
+                    <ImageBackground
+                        resizeMode="stretch"
+                        style={{width: 90 * vw, height: 12 * vh, flexDirection: 'row',}}
+                        source={require('../../img/basketPreview.png')}
+                    >
 
-                <ImageBackground
-                    resizeMode="stretch"
-                    style={{width: 90 * vw, height: 12 * vh, flexDirection: 'row',}}
-                    source={require('../../img/basketPreview.png')}
-                >
-                    <TouchableOpacity onPress={_.debounce(this.address,
-                        1000, {leading: true, trailing: false})}>
                         <ImageBackground
                             resizeMode="stretch"
                             style={styles.greenBox}
@@ -203,51 +203,51 @@ class basketPreview extends React.Component {
                             <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل خرید</Text>
 
                         </ImageBackground>
-                    </TouchableOpacity>
-                    <ImageBackground
-                        resizeMode="stretch"
-                        style={styles.rightEdge}
-                        source={require('../../img/basketPreview/rightEdge.png')}>
-                        <View style={styles.center}>
-                            <Text style={styles.price}>
-                                مبلغ اصلی
-                            </Text>
-                            <Text style={styles.price}>
-                                {this.numberFormat(this.state.wholePrice)} تومان
-                            </Text>
-                        </View>
+
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.rightEdge}
+                            source={require('../../img/basketPreview/rightEdge.png')}>
+                            <View style={styles.center}>
+                                <Text style={styles.price}>
+                                    مبلغ اصلی
+                                </Text>
+                                <Text style={styles.price}>
+                                    {this.numberFormat(this.state.wholePrice)} تومان
+                                </Text>
+                            </View>
+                        </ImageBackground>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.rightEdge}
+                            source={require('../../img/basketPreview/rightEdge.png')}>
+                            <View style={styles.center}>
+                                <Text style={styles.price}>
+                                    با تخفیف
+                                </Text>
+                                <Text style={styles.price}>
+                                    {this.numberFormat(this.state.totalPrice)}
+                                </Text>
+                            </View>
+
+                        </ImageBackground>
+                        <ImageBackground
+                            resizeMode="stretch"
+                            style={styles.rightEdge}
+                            source={require('../../img/basketPreview/rightEdge.png')}>
+                            <View style={styles.center}>
+                                <Text style={styles.price}>
+                                    سود شما
+                                </Text>
+                                <Text style={styles.price}>
+                                    {this.numberFormat(this.state.discounted)}
+                                </Text>
+                            </View>
+
+                        </ImageBackground>
                     </ImageBackground>
-                    <ImageBackground
-                        resizeMode="stretch"
-                        style={styles.rightEdge}
-                        source={require('../../img/basketPreview/rightEdge.png')}>
-                        <View style={styles.center}>
-                            <Text style={styles.price}>
-                                با تخفیف
-                            </Text>
-                            <Text style={styles.price}>
-                                {this.numberFormat(this.state.totalPrice)}
-                            </Text>
-                        </View>
 
-                    </ImageBackground>
-                    <ImageBackground
-                        resizeMode="stretch"
-                        style={styles.rightEdge}
-                        source={require('../../img/basketPreview/rightEdge.png')}>
-                        <View style={styles.center}>
-                            <Text style={styles.price}>
-                                سود شما
-                            </Text>
-                            <Text style={styles.price}>
-                                {this.numberFormat(this.state.discounted)}
-                            </Text>
-                        </View>
-
-                    </ImageBackground>
-                </ImageBackground>
-
-
+                </TouchableOpacity>
             </View>
 
         );
@@ -263,7 +263,8 @@ const styles = StyleSheet.create({
     },
     greenBox: {
         width: 30 * vw,
-        height: 12 * vh,
+        height: 14 * vh,
+        marginTop: -2 * vw,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1

@@ -22,9 +22,11 @@ smallRow.propTypes = {
 const styles = StyleSheet.create({
     row: {
         paddingHorizontal: 16,
+        height: 10 * vh,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         borderBottomWidth: 1,
+        flex: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.054)',
     },
     text: {

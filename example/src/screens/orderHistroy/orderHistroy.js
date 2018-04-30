@@ -168,7 +168,7 @@ class orderHistroy extends React.Component {
                             margin: 4 * vw, borderWidth: 1, borderColor: 'black',
                             elevation: vw
                         }}>
-                            <SmallRow style={{backgroundColor: 'red'}} title={'نام دریافت کننده'}
+                            <SmallRow  title={'نام دریافت کننده'}
                                       des={item.receiver_name}/>
                             <SmallRow des={item.mobile_phone_number} title={'شماره تماس'}/>
                             <View style={styles.row}>

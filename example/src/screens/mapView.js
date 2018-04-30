@@ -133,7 +133,7 @@ class mapView extends Component {
     _renderScene = ({route}) => {
         switch (route.key) {
             case 'first':
-                return <ScrollView style={styles.columnItem}>
+                return <View style={styles.columnItem}>
                     <View style={styles.rowItem}>
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddressName: text})}
@@ -181,7 +181,7 @@ class mapView extends Component {
                             <Text style={styles.bigButtonText}>نهایی کردن خرید</Text>
                         </TouchableOpacity>
                     </View>
-                </ScrollView>;
+                </View>;
             case 'second':
                 let oldAddresses = this.state.oldAddresses.map(function (x) {
                     return <Picker.Item value={x.id} label={x.name + ' : ' + x.Address}/>
@@ -267,10 +267,10 @@ class mapView extends Component {
     _renderHeader = props => <TabBar
         style={{backgroundColor: 'red', borderRadius: 2 * vw, margin: 2 * vw, elevation: 10}} {...props} />;
     keyboardWillShow = (event) => {
-        this.setState({flexSize: 0, buttonHeight: 0});
+        this.setState({flexSize: 0, buttonHeight: 0, scroll: 110});
     };
     keyboardWillHide = (event) => {
-        this.setState({flexSize: 3.5, buttonHeight: 1});
+        this.setState({flexSize: 3.5, buttonHeight: 1, scroll: 100});
     };
 
     componentWillMount() {
@@ -370,7 +370,8 @@ class mapView extends Component {
                 {key: 'second', title: 'آدرس قدیمی'},
             ],
             flexSize: 3.5,
-            buttonHeight: 1
+            buttonHeight: 1,
+            scroll: 100
         };
         context = this;
         props.navigator.setStyle({navBarHidden: true,});
@@ -406,7 +407,7 @@ class mapView extends Component {
             return (
 
 
-                <View style={{flex: 1}}>
+                <ScrollView contentContainerStyle={{flexGrow: 1, height: this.state.scroll * vh}}>
                     <SimpleNavbar title='آدرس' back={() => this.props.navigator.pop()}/>
 
                     <View style={[{
@@ -503,7 +504,7 @@ class mapView extends Component {
                         useNativeDriver
                     />
 
-                </View>
+                </ScrollView>
 
             );
     }
@@ -523,6 +524,7 @@ const styles = StyleSheet.create({
             flex: 1,
         },
         rowItem: {
+            width: 95 * vw,
             flexDirection: 'row',
             backgroundColor: '#f2f2f200',
             elevation: 2 * vw,
@@ -550,7 +552,7 @@ const styles = StyleSheet.create({
             ...StyleSheet.absoluteFillObject,
         },
         borderText: {
-            width: 60 * vw,
+            width: 55 * vw,
             fontSize: vw * 4,
             color: 'black',
             fontFamily: 'B Yekan',

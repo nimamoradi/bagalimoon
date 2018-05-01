@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-
+import MapView, {PROVIDER_GOOGLE, UrlTile} from 'react-native-maps';
 import {
     StyleSheet,
     TouchableOpacity,
     View,
-    WebView, Text,
+    Text,
     Linking
 
 } from 'react-native';
@@ -12,6 +12,7 @@ import {vw, vh, vmin, vmax} from '../viewport'
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
 import Feather from 'react-native-vector-icons/Feather';
+import SmallRow from '../components/smallRow'
 
 let context;
 import server from '../code'
@@ -67,9 +68,11 @@ class checkoutPage extends React.Component {
                         sendData: false, order_checkout: responseData.authority,
                         webRes: true, postMass: responseData.message_fa
                     });
-
+                    context.setState({
+                        sendData: false,
+                    });
                 }
-                alert(JSON.stringify(responseData));
+
             }).catch(ignored => {
             // console.log('response error:', ignored);
             server.retryParam(this.getPayStatus, context)
@@ -82,24 +85,12 @@ class checkoutPage extends React.Component {
 
     };
 
-    onMessage(event) {
 
-        let data = JSON.parse(event.nativeEvent.data);
-
-        if (data.succes === false)
-            context.setState({webMassage: 3});
-
-        else if (data.succes === true) {
-            context.setState({webMassage: 1});
-            context.props.setBasket(context.props.fullBasket.map(item => {
-                return Object.assign({}, item, {count: 0});
-            }));
-            context.props.shouldUpdateBasket(false);
-
-
-        }
-        context.setState({webRes: true, postMass: data.massage_fa});
-    }
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
 
     onClose() {
         context.props.navigator.dismissLightBox();
@@ -125,6 +116,44 @@ class checkoutPage extends React.Component {
         else
             return (
                 <View style={styles.container}>
+
+                    <MapView
+                        provider={PROVIDER_GOOGLE}
+                        style={styles.map}
+                        showsUserLocation={true}
+                        showsMyLocationButton={true}
+                        zoomEnabled={false}
+                        onRegionChangeComplete={(s) => {
+                        }}
+                        initialRegion={{
+                            latitude: parseFloat(this.props.addressObject.lat),
+                            longitude: parseFloat(this.props.addressObject.lng),
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+                        {((context.state.myLocation !== null)) ?
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: parseFloat(this.props.addressObject.lat),
+                                    longitude: parseFloat(this.props.addressObject.lng),
+                                }}
+                            /> : null}
+                    </MapView>
+                    <Text style={styles.text}>
+                        جزییات سفارش
+                    </Text>
+                    <View style={{
+                        height: 40 * vh, margin: 4 * vw, borderWidth: 2,
+                        borderRadius: 4 * vw, borderColor: 'black',
+                        backgroundColor: '#ADD8E650'
+                    }}>
+                        <SmallRow title={'شماره سفارش'} des={this.props.order_id}/>
+                        <SmallRow title={'مبلغ قابل پرداخت'} des={this.numberFormat(this.props.paid_price) + " تومان"}/>
+                        <SmallRow title={'مبلغ بدون تخفیف'} des={this.numberFormat(this.props.sum_price) + " تومان"}/>
+                        <SmallRow title={'آدرس'} des={this.props.address}/>
+
+                    </View>
                     <Text style={styles.text}>
                         . برای تکمیل خرید صفحه را در مرورگر باز کنید
                     </Text>
@@ -159,7 +188,6 @@ const
     styles = StyleSheet.create({
         container: {
             flex: 1,
-            height: 100 * vh,
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
@@ -176,6 +204,7 @@ const
         text: {
             fontSize: vw * 5,
             fontFamily: 'B Yekan',
+            color: 'black'
         },
         textInput: {
             fontSize: vw * 5,
@@ -184,6 +213,7 @@ const
             borderWidth: 0.5,
             fontFamily: 'B Yekan',
             width: '100%',
+            color: 'black'
 
         },
         flex: {
@@ -202,6 +232,9 @@ const
             alignItems: 'center',
             borderColor: '#23d429',
             backgroundColor: '#23d42920'
+        },
+        map: {
+            ...StyleSheet.absoluteFillObject,
         },
     });
 export default checkoutPage;

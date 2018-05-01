@@ -168,7 +168,7 @@ class orderHistroy extends React.Component {
                             margin: 4 * vw, borderWidth: 1, borderColor: 'black',
                             elevation: vw
                         }}>
-                            <SmallRow  title={'نام دریافت کننده'}
+                            <SmallRow title={'نام دریافت کننده'}
                                       des={item.receiver_name}/>
                             <SmallRow des={item.mobile_phone_number} title={'شماره تماس'}/>
                             <View style={styles.row}>
@@ -188,8 +188,8 @@ class orderHistroy extends React.Component {
                                 flexDirection: 'row', height: 8 * vh, justifyContent: 'center'
                                 , alignItems: 'center',
                             }}>
-                                {item.canPayOrder ?
-                                    <TouchableOpacity onPress={() => this.address(item.id, item.address.id)}>
+                                {item.canPayOrder === true ?
+                                    <TouchableOpacity onPress={() => this.address(item.id, item.address.id, item)}>
                                         <View style={styles.button}>
                                             <Text style={styles.textButton}>پرداخت آنلاین</Text>
                                         </View>
@@ -222,9 +222,9 @@ class orderHistroy extends React.Component {
     funcNoOp() {
     }
 
-    address(id, address) {
+    address(id, address, item) {
 
-        server.pushScreen('example.Types.checkoutPage', 'پرداخت',
+        server.pushScreenTrans('example.Types.checkoutPage', 'پرداخت',
             {
                 shouldUpdateBasket: context.funcNoOp,
                 setBasket: context.funcNoOp,
@@ -233,6 +233,10 @@ class orderHistroy extends React.Component {
                 order_id: id,
                 api_code: context.props.api_code,
                 address_id: 1000,
+                address: item.address.name + ' : ' + item.address.Address,
+                paid_price: item.paid_price,
+                sum_price: item.sum_price,
+                addressObject: item.address,
             }
             , context);
     }

@@ -152,14 +152,16 @@ class codeEnter extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-                context.setState({sendData: false});
+
                 if (responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
                     this.pushMainScreen(responseData.api_code);
                 } else if (responseData.successful === false) {
+                    context.setState({sendData: false});
                     server.alert('هشدار', 'کد اشتباه است', context);
                 }
                 else if (responseData.sms_code !== null) {
+                    context.setState({sendData: false});
                     server.alert('هشدار', 'شماره کد را وارد کنید', context);
                 }
 

@@ -38,6 +38,21 @@ class code {
 
     };
 
+    static pushScreenTrans(screen, title, passProps, context) {
+        context.props.navigator.push({
+            screen: screen,
+            navigatorStyle: {
+                navBarBackgroundColor: 'transparent', // the background is white
+                drawUnderNavBar: true,
+                drawUnderTabBar: true,
+                navBarTranslucent: false
+            },
+            title: title,
+            passProps: passProps,
+        });
+
+    };
+
     static getServerAddress() {
         if (Platform.Version < 21)
             return this.serverAddressNoSsl;
@@ -48,9 +63,9 @@ class code {
         return this.timeOut;
     }
 
-    static getReTry() {
-        return this.retryCount;
-    }
+    // static getReTry() {
+    //     return this.retryCount;
+    // }
 
     static showLightBox(screen, passProps, context) {
         Navigation.showLightBox({

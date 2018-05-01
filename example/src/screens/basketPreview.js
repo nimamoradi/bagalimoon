@@ -16,8 +16,10 @@ import server from "../code";
 import dataHandeling from "../dataHandeling";
 import SimpleNavbar from '../navBars/SimpleNavbar'
 import CountCircle from '../components/productItem/countCircle';
+import alertWithButton from "../components/alertWithButton";
 
 let context;
+const fireRidePrice = 20000;
 
 class basketPreview extends React.Component {
     constructor(props) {
@@ -75,20 +77,44 @@ class basketPreview extends React.Component {
         });
     }
 
-    address = () => {
-        if (this.state.totalPrice !== 0) {
-            // this.props.navigator.pop();
-            this.props.navigator.push({
-                screen: 'example.mapView',
-                title: 'آدرس',
-                passProps: {
-                    setBasket: context.props.setBasket,
-                    fullBasket: context.props.fullBasket,
-                    basket: context.state.basket,
-                    shouldUpdateBasket: this.shouldUpdateBasket
-                },
-            });
+    checkPrice() {
+        if (context.state.totalPrice !== 0) {
+            if (context.state.totalPrice < fireRidePrice) {
+                context.props.navigator.showLightBox({
+                    screen: 'example.alert',
+                    passProps: {
+                        title: 'توجه',
+                        text: 'حداقل سفارش بیست هزار تومان است',
+                        onClose: context.props.navigator.dismissLightBox,
+                        OptionTwo: context.address,
+                        textOne: 'بازگشت',
+                        textTwo: 'ادامه'
+                    },
+                    style: {
+                        backgroundBlur: 'dark',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        tapBackgroundToDismiss: true
+                    }
+                })
+            }
+            else context.address();
         } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);
+
+    }
+
+    address = () => {
+        context.props.navigator.dismissLightBox();
+        // this.props.navigator.pop();
+        context.props.navigator.push({
+            screen: 'example.mapView',
+            title: 'آدرس',
+            passProps: {
+                setBasket: context.props.setBasket,
+                fullBasket: context.props.fullBasket,
+                basket: context.state.basket,
+                shouldUpdateBasket: this.shouldUpdateBasket
+            },
+        });
     };
     onUp = (rowdata) => {
         if (rowdata.max_in_order > rowdata.count) {
@@ -196,7 +222,7 @@ class basketPreview extends React.Component {
                     renderItem={({item}) =>
                         this.renderRow(item)}
                 />
-                <TouchableWithoutFeedback onPress={_.debounce(this.address,
+                <TouchableWithoutFeedback onPress={_.debounce(this.checkPrice,
                     1000, {leading: true, trailing: false})}>
                     <View>
                         <ImageBackground
@@ -268,96 +294,98 @@ class basketPreview extends React.Component {
 }
 
 
-const styles = StyleSheet.create({
-    rightEdge: {
-        marginLeft: -4 * vw,
-        width: 26 * vw, height: 11 * vh,
-    },
-    greenBox: {
-        width: 30 * vw,
-        height: 13 * vh,
-        marginTop: -2 * vw,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1
-    },
-    center: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-        marginTop: -2 * vh
-    },
-    row: {
+const
+    styles = StyleSheet.create({
+        rightEdge: {
+            marginLeft: -4 * vw,
+            width: 26 * vw, height: 11 * vh,
+        },
+        greenBox: {
+            width: 30 * vw,
+            height: 13 * vh,
+            marginTop: -2 * vw,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1
+        },
+        center: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+            marginTop: -2 * vh
+        },
+        row: {
 
-        paddingHorizontal: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
-    },
-    rowItem: {
-        elevation: 2 * vw,
-        borderColor: '#00000035',
-        borderWidth: 0.75,
-        margin: vw,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        borderRadius: 2 * vw,
-        backgroundColor: '#e7e6e6',
-        shadowOpacity: 0.6,
-        shadowColor: '#e7e6e650',
-        shadowOffset: {width: 10, height: 10},
-    },
-    text: {
+            paddingHorizontal: 16,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        },
+        rowItem: {
+            elevation: 2 * vw,
+            borderColor: '#00000035',
+            borderWidth: 0.75,
+            margin: vw,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            borderRadius: 2 * vw,
+            backgroundColor: '#e7e6e6',
+            shadowOpacity: 0.6,
+            padding: 4 * vw,
+            shadowColor: '#e7e6e650',
+            shadowOffset: {width: 10, height: 10},
+        },
+        text: {
 
-        fontSize: vw * 4,
-        flex: 1,
-        fontFamily: 'B Yekan',
+            fontSize: vw * 4,
+            flex: 1,
+            fontFamily: 'B Yekan',
 
-        textAlign: 'center',
-        color: 'black'
-    },
-    price: {
-        color: 'black',
-        fontSize: vw * 3.75,
-        fontFamily: 'B Yekan',
-        textAlign: 'center'
-    },
-    tableHeader: {
-        fontSize: vw * 5,
-        fontFamily: 'B Yekan',
-        flex: 1,
-        margin: 10,
-        color: '#000',
-        textAlign: 'center'
-    },
-    button: {
-        flex: 1,
-        flexDirection: 'row',
-        borderWidth: 0.5,
-        borderRadius: 10,
-        padding: 5,
-        marginTop: 20,
-        margin: 2,
-        marginLeft: 20,
-        marginBottom: 60,
-        alignContent: 'center',
-        borderColor: '#23d429',
-        backgroundColor: '#23d42920'
-    },
+            textAlign: 'center',
+            color: 'black'
+        },
+        price: {
+            color: 'black',
+            fontSize: vw * 3.75,
+            fontFamily: 'B Yekan',
+            textAlign: 'center'
+        },
+        tableHeader: {
+            fontSize: vw * 5,
+            fontFamily: 'B Yekan',
+            flex: 1,
+            margin: 10,
+            color: '#000',
+            textAlign: 'center'
+        },
+        button: {
+            flex: 1,
+            flexDirection: 'row',
+            borderWidth: 0.5,
+            borderRadius: 10,
+            padding: 5,
+            marginTop: 20,
+            margin: 2,
+            marginLeft: 20,
+            marginBottom: 60,
+            alignContent: 'center',
+            borderColor: '#23d429',
+            backgroundColor: '#23d42920'
+        },
 
-    container: {
-        flex: 1,
-        height: 100 * vh,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f2f2f2',
-    },
+        container: {
+            flex: 1,
+            height: 100 * vh,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f2f2f2',
+        },
 
-});
+    });
 
 export default basketPreview;

@@ -24,6 +24,7 @@ import ListViewCustum from "../components/listViewCustum";
 
 let context;
 
+
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();

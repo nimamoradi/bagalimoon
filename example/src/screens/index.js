@@ -11,7 +11,7 @@ import offer from './types/offer';
 import loadScreen from '../components/loadScreen'
 import descriptionPan from '../components/descriptionPan';
 import opinion from '../components/opinion'
-
+import alertWithButton from '../components/alertWithButton'
 import TypePage from './TypePage'
 import loginScreen from './loginScreen'
 
@@ -42,7 +42,7 @@ export function registerScreens() {
     Navigation.registerComponent('example.bars.productPageNavBar', () => productPageNavBar);
     Navigation.registerComponent('example.Types', () => Types);
     Navigation.registerComponent('example.alert', () => alert);
-
+    Navigation.registerComponent('example.alertWithButton', () => alertWithButton);
     Navigation.registerComponent('example.about_us', () => about_us);
     Navigation.registerComponent('example.ServerCheck', () => ServerCheck);
     Navigation.registerComponent('example.Types.basketFinal', () => finalBasket);

@@ -23,7 +23,7 @@ let context;
 class ServerCheck extends React.Component {
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         this.state = {
             param: {api_code: props.api_code, user_number: props.user_number}
         };

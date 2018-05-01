@@ -155,7 +155,7 @@ class checkoutPage extends React.Component {
 
                     </View>
                     <Text style={styles.text}>
-                        . برای تکمیل خرید صفحه را در مرورگر باز کنید
+                        
                     </Text>
                     <View style={{margin: 4 * vh}}/>
                     <TouchableOpacity onPress={() => {
@@ -164,7 +164,8 @@ class checkoutPage extends React.Component {
                         Linking.openURL('https://sandbox.zarinpal.com/pg/StartPay/'
                             + this.state.order_checkout).then(() => {
                             context.props.navigator.popToRoot();
-                        }).catch(err => console.error('An error occurred', err));
+                        }).catch(err => server.alertAdvanced('اخطار', 'برنامه مرورگر یافت نشد', context, context.onClose)
+                        );
                         context.props.navigator.popToRoot();
                     }}>
                         <View style={styles.button}>

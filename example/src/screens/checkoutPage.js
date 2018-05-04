@@ -39,11 +39,8 @@ class checkoutPage extends React.Component {
 
     getPayStatus = () => {
 
-        // console.log("inside basket", JSON.stringify({
-        //     api_code: context.props.api_code,
-        //     address_id: context.props.address_id,
-        //     order_id: context.props.order_id,
-        // }));
+        context.setState({
+            sendData: true});
         fetch(server.getServerAddress() + '/api/payOrder', {
             method: 'POST',
             headers: {
@@ -161,7 +158,7 @@ class checkoutPage extends React.Component {
                     <TouchableOpacity onPress={() => {
                         context.props.navigator.popToRoot();
 
-                        Linking.openURL('https://sandbox.zarinpal.com/pg/StartPay/'
+                        Linking.openURL('https://www.zarinpal.com/pg/pay/'
                             + this.state.order_checkout).then(() => {
                             context.props.navigator.popToRoot();
                         }).catch(err => server.alertAdvanced('اخطار', 'برنامه مرورگر یافت نشد', context, context.onClose)

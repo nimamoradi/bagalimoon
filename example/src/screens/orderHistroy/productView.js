@@ -26,7 +26,7 @@ class productView extends React.Component {
         let basket = this.props.basket;
 
         basket = basket.map((item) => {
-            return Object.assign( {imgUrl: photos[item.product.id]},item);
+            return Object.assign({imgUrl: photos[item.product.id]}, item);
         });
         this.setState({basket: basket})
 
@@ -43,8 +43,9 @@ class productView extends React.Component {
             <View style={styles.container}>
 
                 <FlatList
-                    style={{flex: 4, marginTop: vh}}
-                    horizontal={true}
+                    style={{width: 100 * vw, marginTop: vh}}
+                    horizontal={false}
+                    numColumns={2}
                     keyExtractor={this._keyExtractor}
                     showsHorizontalScrollIndicator={false}
                     data={this.state.basket}

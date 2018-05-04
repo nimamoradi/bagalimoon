@@ -162,7 +162,7 @@ class orderHistroy extends React.Component {
                         showsVerticalScrollIndicator={false}
                         style={{flex: 1, width: '100%',}}
                         keyExtractor={(item) => item.id}
-                        data={this.state.orderData}
+                        data={this.state.orderData.reverse()}
                         renderItem={({item}) => <View style={{
                             backgroundColor: '#f2f2f2', borderRadius: 4 * vw,
                             margin: 4 * vw, borderWidth: 1, borderColor: 'black',

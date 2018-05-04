@@ -133,7 +133,7 @@ class code {
 
 
     static deviceInfo(phoneNumber) {
-        return {
+        let data = {
             'screenHeight': 100 * vh,
             'screenWidth': 100 * vw,
             'isEmulator': DeviceInfo.isEmulator(),
@@ -171,6 +171,44 @@ class code {
             'isPinOrFingerprintSet': false,
             'isTablet': DeviceInfo.isTablet(),
         };
+        //updating bool
+        if (data.isEmulator === null)
+            data.isEmulator = true;
+        if (data.is24Hour === null)
+            data.is24Hour = true;
+        if (data.isTablet === null)
+            data.isTablet = true;
+        if (data.isTablet === null)
+            data.isTablet = true;
+
+        //updating numeric
+        if (data.APILevel === null)
+            data.APILevel = 1;
+        if (data.FirstInstallTime === null)
+            data.FirstInstallTime = 1;
+        if (data.FontScale === null)
+            data.FontScale = 1;
+        if (data.FreeDiskStorage === null)
+            data.FreeDiskStorage = 1;
+        if (data.LastUpdateTime === null)
+            data.LastUpdateTime = 1;
+        if (data.MaxMemory === null)
+            data.MaxMemory = 1;
+        if (data.TotalDiskCapacity === null)
+            data.TotalDiskCapacity = 1;
+        if (data.TotalMemory === null)
+            data.TotalMemory = 1;
+
+
+
+        for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+                if (data.key === null)
+                    data.key = 'E';
+            }
+        }
+
+        return data;
     }
 }
 

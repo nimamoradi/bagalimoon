@@ -152,7 +152,8 @@ class loginScreen extends React.Component {
                 server.alert('هشدار', 'شماره معتبر نمی باشد', context);
             } else if (responseData.hasOwnProperty('successful') && responseData.successful === false) {
                 server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
-            } else server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
+            } else
+                server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
 
 
         }))

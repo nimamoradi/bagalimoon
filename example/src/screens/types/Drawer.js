@@ -12,7 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {vw, vh, vmin, vmax} from '../../viewport'
+import { vw, vh, vmin, vmax } from '../../viewport'
 
 import DrawerItem from "./drawerItem";
 
@@ -57,11 +57,11 @@ class MyClass extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{backgroundColor: '#eeeceb', flex: 1, width: 75 * vw, justifyContent: 'center',}}>
+                <View style={{ backgroundColor: '#eeeceb', flex: 1, width: 75 * vw, justifyContent: 'center', }}>
                     <Image
                         resizeMode='stretch'
-                        style={styles.image} source={require('../../../img/grocery.png')}/>
-                    <Text style={{alignSelf: 'center', fontSize: vw * 6, fontFamily: 'B Yekan',}}>فروشگاه بزرگ
+                        style={styles.image} source={require('../../../img/grocery.png')} />
+                    <Text style={{ alignSelf: 'center', fontSize: vw * 6, fontFamily: 'B Yekan', }}>فروشگاه بزرگ
                         بقالیمون</Text>
                 </View>
                 <View style={{
@@ -76,9 +76,9 @@ class MyClass extends React.Component {
                         onPress={(() => this.orderHistroy())}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}> سوابق سفارش</Text>
-                            <View style={{flex: 1}}/>
+                            <View style={{ flex: 1 }} />
                             <MaterialIcon name="history" size={vw * 8} color="#1064d3"
-                                          style={{margin: 10, alignSelf: 'flex-start'}}/>
+                                style={{ margin: 10, alignSelf: 'flex-start' }} />
                         </View>
 
                     </TouchableOpacity>
@@ -87,16 +87,18 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={() => {
                             Share.share({
-                                message: 'بقالمون خرید اسان با قیمت مناسب https://www.baghali.amins.ir',
-                                url: 'https://www.baghali.amins.ir',
+                                message: 'هیچ وقت خرید از بقالی این قدر راحت نبوده!' +
+                                    'خرید آسان با قیمت های باور نکردنی ' +
+                                    'همین الان اپلیکیشن رو نصب کنید.'+'baghalimoon.ir'+'تازه پیکش هم رایگان هستش',
+                                url: 'http://baghalimoon.ir',
                                 title: 'بقالمون'
                             }, {});
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>معرفی به دوستان</Text>
-                            <View style={{flex: 1}}/>
+                            <View style={{ flex: 1 }} />
                             <Icon name="share-square-o" size={vw * 8} color="#1064d3"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                                style={{ margin: 10, alignSelf: 'flex-start' }} />
                         </View>
 
                     </TouchableOpacity>
@@ -117,9 +119,9 @@ class MyClass extends React.Component {
                         }}>
                         <View style={styles.row}>
                             <Text style={styles.textFont}>درباره ما</Text>
-                            <View style={{flex: 1}}/>
+                            <View style={{ flex: 1 }} />
                             <Icon name="info-circle" size={vw * 8} color="#1064d3"
-                                  style={{margin: 10, alignSelf: 'flex-start'}}/>
+                                style={{ margin: 10, alignSelf: 'flex-start' }} />
                         </View>
 
                     </TouchableOpacity>

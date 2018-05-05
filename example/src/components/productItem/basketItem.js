@@ -14,13 +14,7 @@ function basketItem({title, price, count, disscount, off, imageUrl}) {
     return (
         <View style={styles.halfRow}
         >
-            <View
-                style={{
-                    flex: 1,
-                    height: 16 * vw,
-                    width: 16 * vw,
-                    zIndex: 1,
-                }}/>
+
             <View style={styles.row}>
 
                 <Image
@@ -70,12 +64,13 @@ const styles = StyleSheet.create({
         shadowColor: '#eeeeee',
         borderWidth: 0.75,
         margin: vw,
-        elevation: 2 * vw,
+        justifyContent:'center',
+        alignItems:'center',
+        width:47*vw,
+        elevation:vw,
     },
     row: {
-        zIndex: 0,
-        flex: 10,
-        right: 8 * vw,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
 

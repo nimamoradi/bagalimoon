@@ -27,7 +27,7 @@ function productPageNavBar({context, basket, search, basketSize}) {
             }>
                 <MaterialIcons name="search" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={_.debounce(() => basket(),
+            <TouchableOpacity style={{marginRight: 2 * vw}} onPress={_.debounce(() => basket(),
                 1000, {leading: true, trailing: false})
             }>
                 {basketSize !== 0 ? <Text style={{

@@ -14,6 +14,7 @@ import server from '../code'
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
 import * as DeviceInfo from 'react-native-device-info';
+import _ from 'lodash'
 
 let context;
 
@@ -26,7 +27,7 @@ class loginScreen extends React.Component {
             phoneNumber: '09',
             login: this.login.bind(this)
         };
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         context = this;
     }
 
@@ -91,7 +92,8 @@ class loginScreen extends React.Component {
 
                         </View>
                         <TouchableOpacity
-                            onPress={this.doSignUp}
+                            onPress={_.debounce(() => this.doSignUp(),
+                                1000, {leading: true, trailing: false})}
                         >
                             <Text style={{
                                 textAlign: 'center', borderRadius: 20,
@@ -145,12 +147,13 @@ class loginScreen extends React.Component {
                     phone_number: context.state.phoneNumber
                 });
                 AsyncStorage.setItem('user_number', context.state.phoneNumber);
+            }
+            else if (responseData.hasOwnProperty('phone_number_error') && responseData.phone_number_error === true) {
+                server.alert('هشدار', 'شماره معتبر نمی باشد', context);
             } else if (responseData.hasOwnProperty('successful') && responseData.successful === false) {
                 server.alert('هشدار', 'درخواست های زیاد با این شماره لطفا بعدا امتحان کنید', context);
-            }
-            else if (responseData.hasOwnProperty('phone_number')) {
-                server.alert('هشدار', 'شماره معتبر نمی باشد', context);
-            } else server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
+            } else
+                server.alert('هشدار', 'اشکالی پیش آماده بعد امتحان کنید', context);
 
 
         }))

@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, View, ScrollView, FlatList, Text, TouchableOpacity, AsyncStorage} from 'react-native';
+import {
+    StyleSheet,
+    Linking,
+    Image,
+    View,
+    ScrollView,
+    FlatList,
+    Text,
+    TouchableOpacity,
+    AsyncStorage
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh,} from '../viewport'
 import server from "../code";
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
@@ -21,6 +31,8 @@ class basketFinal extends React.Component {
             totalPrice: '?',
             sendData: true,
             order_id: 0,
+            sumPrice: 0,
+            addressObject: {},
             customer_receiver_name: '',
             photos: [],
         };
@@ -72,7 +84,14 @@ class basketFinal extends React.Component {
                     order_id: responseData.order.id,
                     totalPrice: responseData.order.order_outcome_price,
                     myAddress: address,
+                    addressObject: responseData.order.address,
+                    sumPrice: responseData.order.sum_price,
                     customer_receiver_name: responseData.order.receiver_name
+                }, () => {
+                    context.props.setBasket(context.props.fullBasket.map(item => {
+                        return Object.assign({}, item, {count: 0});
+                    }));
+                    context.props.shouldUpdateBasket(false);
                 });
 
             })
@@ -160,21 +179,21 @@ class basketFinal extends React.Component {
                         flexDirection: 'row', height: 8 * vh, justifyContent: 'center'
                         , alignItems: 'center',
                     }}>
-                        <TouchableOpacity onPress={this.address}>
+
+                        <TouchableOpacity onPress={() => {
+                            this.address();
+
+                        }}>
                             <View style={styles.button}>
                                 <Icon name="shopping-cart" size={vw * 5} color="green"/>
-                                <Text style={{fontSize: vw * 4,}}>پرداخت آنلاین</Text>
+                                <Text style={styles.textButton}>پرداخت آنلاین</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={function () {
-                            context.props.setBasket(context.props.fullBasket.map(item => {
-                                return Object.assign({}, item, {count: 0});
-                            }));
-                            context.props.shouldUpdateBasket(false);
-                            context.props.navigator.popToRoot();
+                            server.alertAdvanced('با تشکر', 'سفارش به زودی برای شما ارسال می شود',context,context.onClose)
                         }}>
                             <View style={styles.buttonCancel}>
-                                <Text style={{fontSize: vw * 4,}}>پرداخت در محل</Text>
+                                <Text style={styles.textButton}>پرداخت در محل</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -185,10 +204,15 @@ class basketFinal extends React.Component {
 
     }
 
+    onClose() {
+        context.props.navigator.dismissLightBox();
+        context.props.navigator.popToRoot();
+    }
+
     _keyExtractor = (item, index) => item.id;
 
     address() {
-        server.pushScreen('example.Types.checkoutPage', 'پرداخت',
+        server.pushScreenTrans('example.Types.checkoutPage', 'پرداخت',
             {
                 shouldUpdateBasket: context.props.shouldUpdateBasket,
                 setBasket: context.props.setBasket,
@@ -197,6 +221,10 @@ class basketFinal extends React.Component {
                 order_id: context.state.order_id,
                 api_code: context.props.api_code,
                 address_id: context.props.id,
+                address: this.state.myAddress,
+                paid_price: this.state.totalPrice,
+                sum_price: this.state.sumPrice,
+                addressObject: this.state.addressObject,
             }
             , context);
     }

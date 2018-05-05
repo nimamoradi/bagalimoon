@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Image, ImageBackground, TextInput} from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import {vw, vh, vmin, vmax} from '../../viewport'
+import { vw, vh, vmin, vmax } from '../../viewport'
 import ProgressBar from 'react-native-progress/Pie';
 
 import ProductControl from './productControlVertical'
 
-function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
+function itemView({ title, onUp, onDown, imageUrl, price, count, disscount, off }) {
 
 
     return (
@@ -19,6 +19,8 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
             <View style={{
                 height: 16 * vw,
                 width: 16 * vw,
+                marginTop: vw,
+                marginLeft: vw,
                 zIndex: 2,
             }}>
                 {(disscount) ?
@@ -30,6 +32,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
                                 zIndex: 0,
                                 height: 16 * vw,
                                 width: 16 * vw,
+                                
                             }}
                         />
                         <Text style={styles.discountText}>{off} %</Text>
@@ -46,9 +49,9 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
                     <Image
                         resizeMode="stretch"
                         indicator={ProgressBar}
-                        source={{uri: imageUrl}} style={styles.image}/>
+                        source={{ uri: imageUrl }} style={styles.image} />
 
-                    <View style={{flexDirection: 'column', width: 25 * vw}}>
+                    <View style={{ flexDirection: 'column', width: 25 * vw }}>
                         <Text adjustsFontSizeToFit style={styles.text}>{title}</Text>
 
                         {(disscount) ?
@@ -58,7 +61,7 @@ function itemView({title, onUp, onDown, imageUrl, price, count, disscount, off})
                     </View>
 
 
-                    <ProductControl count={count} onUp={onUp} onDown={onDown}/>
+                    <ProductControl count={count} onUp={onUp} onDown={onDown} />
 
                 </View>
             </View>
@@ -114,11 +117,13 @@ const styles = StyleSheet.create({
         fontSize: vw * 3.75,
         color: 'black',
         flex: 3,
-        textAlign:'center',
+        textAlign: 'center',
     },
-    price: {fontSize: vw * 4,
+    price: {
+        fontSize: vw * 4,
         flex: 1,
-        color: 'black', fontFamily: 'B Yekan', textAlign: 'right',},
+        color: 'black', fontFamily: 'B Yekan', textAlign: 'right',
+    },
     discount: {
         textDecorationLine:
             'line-through',
@@ -132,6 +137,7 @@ const styles = StyleSheet.create({
         height: 35 * vw,
         width: 25 * vw,
         margin: 2 * vw,
+        marginLeft: 4 * vw,
     },
     countTextHidden: {
         backgroundColor: 'red',
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
         bottom: 7.5 * vw,
         right: 4.5 * vw,
         color: 'white',
-        transform: [{rotate: '315deg'}]
+        transform: [{ rotate: '315deg' }]
     }
 });
 

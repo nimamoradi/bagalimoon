@@ -1,8 +1,8 @@
 #import "AppDelegate.h"
-#import <CodePush/CodePush.h>
-#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
-#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
-#import <AppCenterReactNative/AppCenterReactNative.h>
+//#import <CodePush/CodePush.h>
+//#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
+//#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
+//#import <AppCenterReactNative/AppCenterReactNative.h>
 #import <React/RCTBundleURLProvider.h>
 
 // **********************************************
@@ -21,11 +21,11 @@
 {
   NSURL *jsCodeLocation;
 
-  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
+//  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
 
-  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
+//  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
 
-  [AppCenterReactNative register];  // Initialize AppCenter 
+//  [AppCenterReactNative register];  // Initialize AppCenter
 #ifdef DEBUG
 //  
     #ifdef DEBUG

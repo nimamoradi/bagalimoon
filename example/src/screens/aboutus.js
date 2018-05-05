@@ -23,7 +23,7 @@ class aboutus extends React.Component {
                     startInLoadingState={true}
                     javaScriptEnabled={true}
 
-                    source={{uri: 'http://baghali.amins.ir/about_us'}}
+                    source={{uri: server.getServerAddress() + '/about_us'}}
                 />
             </View>
         );

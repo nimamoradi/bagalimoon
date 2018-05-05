@@ -1,14 +1,25 @@
 import React from 'react';
 import _ from 'lodash'
-import {StyleSheet, ImageBackground, View, Text, FlatList, Image, TouchableOpacity,} from 'react-native';
+import {
+    StyleSheet,
+    ImageBackground,
+    View,
+    Text,
+    FlatList,
+    Image,
+    TouchableOpacity,
+    TouchableWithoutFeedback
+} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
 import dataHandeling from "../dataHandeling";
 import SimpleNavbar from '../navBars/SimpleNavbar'
 import CountCircle from '../components/productItem/countCircle';
+import alertWithButton from "../components/alertWithButton";
 
 let context;
+const fireRidePrice = 20000;
 
 class basketPreview extends React.Component {
     constructor(props) {
@@ -66,20 +77,44 @@ class basketPreview extends React.Component {
         });
     }
 
-    address = () => {
-        if (this.state.totalPrice !== 0) {
-            // this.props.navigator.pop();
-            this.props.navigator.push({
-                screen: 'example.mapView',
-                title: 'آدرس',
-                passProps: {
-                    setBasket: context.props.setBasket,
-                    fullBasket: context.props.fullBasket,
-                    basket: context.state.basket,
-                    shouldUpdateBasket: this.shouldUpdateBasket
-                },
-            });
+    checkPrice() {
+        if (context.state.totalPrice !== 0) {
+            if (context.state.totalPrice < fireRidePrice) {
+                context.props.navigator.showLightBox({
+                    screen: 'example.alert',
+                    passProps: {
+                        title: 'توجه',
+                        text: 'حداقل سفارش بیست هزار تومان است',
+                        onClose: context.props.navigator.dismissLightBox,
+                        OptionTwo: context.address,
+                        textOne: 'بازگشت',
+                        textTwo: 'ادامه'
+                    },
+                    style: {
+                        backgroundBlur: 'dark',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        tapBackgroundToDismiss: true
+                    }
+                })
+            }
+            else context.address();
         } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);
+
+    }
+
+    address = () => {
+        context.props.navigator.dismissLightBox();
+        // this.props.navigator.pop();
+        context.props.navigator.push({
+            screen: 'example.mapView',
+            title: 'آدرس',
+            passProps: {
+                setBasket: context.props.setBasket,
+                fullBasket: context.props.fullBasket,
+                basket: context.state.basket,
+                shouldUpdateBasket: this.shouldUpdateBasket
+            },
+        });
     };
     onUp = (rowdata) => {
         if (rowdata.max_in_order > rowdata.count) {
@@ -178,6 +213,7 @@ class basketPreview extends React.Component {
                 }}
                               title={'لیست خرید'}/>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={this._keyExtractor}
                     style={{flexDirection: 'column', width: 85 * vw,}}
                     horizontal={false}
@@ -186,68 +222,70 @@ class basketPreview extends React.Component {
                     renderItem={({item}) =>
                         this.renderRow(item)}
                 />
-
-                <ImageBackground
-                    resizeMode="stretch"
-                    style={{width: 90 * vw, height: 12 * vh, flexDirection: 'row',}}
-                    source={require('../../img/basketPreview.png')}
-                >
-                    <TouchableOpacity onPress={_.debounce(this.address,
-                        1000, {leading: true, trailing: false})}>
+                <TouchableWithoutFeedback onPress={_.debounce(this.checkPrice,
+                    1000, {leading: true, trailing: false})}>
+                    <View>
                         <ImageBackground
                             resizeMode="stretch"
-                            style={styles.greenBox}
-                            source={require('../../img/green.png')}
+                            style={{width: 96 * vw, height: 12 * vh, flexDirection: 'row',}}
+                            source={require('../../img/basketPreview.png')}
                         >
 
-                            <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل خرید</Text>
+                            <ImageBackground
+                                resizeMode="stretch"
+                                style={styles.greenBox}
+                                source={require('../../img/green.png')}
+                            >
 
+                                <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل
+                                    خرید</Text>
+
+                            </ImageBackground>
+
+                            <ImageBackground
+                                resizeMode="stretch"
+                                style={styles.rightEdge}
+                                source={require('../../img/basketPreview/rightEdge.png')}>
+                                <View style={styles.center}>
+                                    <Text style={styles.price}>
+                                        مبلغ اصلی
+                                    </Text>
+                                    <Text style={styles.price}>
+                                        {this.numberFormat(this.state.wholePrice)} تومان
+                                    </Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground
+                                resizeMode="stretch"
+                                style={styles.rightEdge}
+                                source={require('../../img/basketPreview/rightEdge.png')}>
+                                <View style={styles.center}>
+                                    <Text style={styles.price}>
+                                        با تخفیف
+                                    </Text>
+                                    <Text style={styles.price}>
+                                        {this.numberFormat(this.state.totalPrice)}
+                                    </Text>
+                                </View>
+
+                            </ImageBackground>
+                            <ImageBackground
+                                resizeMode="stretch"
+                                style={styles.rightEdge}
+                                source={require('../../img/basketPreview/rightEdge.png')}>
+                                <View style={styles.center}>
+                                    <Text style={styles.price}>
+                                        سود شما
+                                    </Text>
+                                    <Text style={styles.price}>
+                                        {this.numberFormat(this.state.discounted)}
+                                    </Text>
+                                </View>
+
+                            </ImageBackground>
                         </ImageBackground>
-                    </TouchableOpacity>
-                    <ImageBackground
-                        resizeMode="stretch"
-                        style={styles.rightEdge}
-                        source={require('../../img/basketPreview/rightEdge.png')}>
-                        <View style={styles.center}>
-                            <Text style={styles.price}>
-                                مبلغ اصلی
-                            </Text>
-                            <Text style={styles.price}>
-                                {this.numberFormat(this.state.wholePrice)} تومان
-                            </Text>
-                        </View>
-                    </ImageBackground>
-                    <ImageBackground
-                        resizeMode="stretch"
-                        style={styles.rightEdge}
-                        source={require('../../img/basketPreview/rightEdge.png')}>
-                        <View style={styles.center}>
-                            <Text style={styles.price}>
-                                با تخفیف
-                            </Text>
-                            <Text style={styles.price}>
-                                {this.numberFormat(this.state.totalPrice)}
-                            </Text>
-                        </View>
-
-                    </ImageBackground>
-                    <ImageBackground
-                        resizeMode="stretch"
-                        style={styles.rightEdge}
-                        source={require('../../img/basketPreview/rightEdge.png')}>
-                        <View style={styles.center}>
-                            <Text style={styles.price}>
-                                سود شما
-                            </Text>
-                            <Text style={styles.price}>
-                                {this.numberFormat(this.state.discounted)}
-                            </Text>
-                        </View>
-
-                    </ImageBackground>
-                </ImageBackground>
-
-
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
 
         );
@@ -256,94 +294,98 @@ class basketPreview extends React.Component {
 }
 
 
-const styles = StyleSheet.create({
-    rightEdge: {
-        marginLeft: -4 * vw,
-        width: 24 * vw, height: 11 * vh,
-    },
-    greenBox: {
-        width: 30 * vw,
-        height: 12 * vh,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1
-    },
-    center: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1
-    },
-    row: {
+const
+    styles = StyleSheet.create({
+        rightEdge: {
+            marginLeft: -4 * vw,
+            width: 26 * vw, height: 11 * vh,
+        },
+        greenBox: {
+            width: 30 * vw,
+            height: 13 * vh,
+            marginTop: -2 * vw,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1
+        },
+        center: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+            marginTop: -2 * vh
+        },
+        row: {
 
-        paddingHorizontal: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.054)',
-    },
-    rowItem: {
-        elevation: 2 * vw,
-        borderColor: '#00000035',
-        borderWidth: 0.75,
-        margin: vw,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        borderRadius: 2 * vw,
-        backgroundColor: '#e7e6e6',
-        shadowOpacity: 0.6,
-        shadowColor: '#e7e6e650',
-        shadowOffset: {width: 10, height: 10},
-    },
-    text: {
+            paddingHorizontal: 16,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(0, 0, 0, 0.054)',
+        },
+        rowItem: {
+            elevation: 2 * vw,
+            borderColor: '#00000035',
+            borderWidth: 0.75,
+            margin: vw,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            borderRadius: 2 * vw,
+            backgroundColor: '#e7e6e6',
+            shadowOpacity: 0.6,
+            padding: 4 * vw,
+            shadowColor: '#e7e6e650',
+            shadowOffset: {width: 10, height: 10},
+        },
+        text: {
 
-        fontSize: vw * 4,
-        flex: 1,
-        fontFamily: 'B Yekan',
+            fontSize: vw * 4,
+            flex: 1,
+            fontFamily: 'B Yekan',
 
-        textAlign: 'center',
-        color: 'black'
-    },
-    price: {
-        color: 'black',
-        fontSize: vw * 3.75,
-        fontFamily: 'B Yekan',
-        textAlign: 'center'
-    },
-    tableHeader: {
-        fontSize: vw * 5,
-        fontFamily: 'B Yekan',
-        flex: 1,
-        margin: 10,
-        color: '#000',
-        textAlign: 'center'
-    },
-    button: {
-        flex: 1,
-        flexDirection: 'row',
-        borderWidth: 0.5,
-        borderRadius: 10,
-        padding: 5,
-        marginTop: 20,
-        margin: 2,
-        marginLeft: 20,
-        marginBottom: 60,
-        alignContent: 'center',
-        borderColor: '#23d429',
-        backgroundColor: '#23d42920'
-    },
+            textAlign: 'center',
+            color: 'black'
+        },
+        price: {
+            color: 'black',
+            fontSize: vw * 3.75,
+            fontFamily: 'B Yekan',
+            textAlign: 'center'
+        },
+        tableHeader: {
+            fontSize: vw * 5,
+            fontFamily: 'B Yekan',
+            flex: 1,
+            margin: 10,
+            color: '#000',
+            textAlign: 'center'
+        },
+        button: {
+            flex: 1,
+            flexDirection: 'row',
+            borderWidth: 0.5,
+            borderRadius: 10,
+            padding: 5,
+            marginTop: 20,
+            margin: 2,
+            marginLeft: 20,
+            marginBottom: 60,
+            alignContent: 'center',
+            borderColor: '#23d429',
+            backgroundColor: '#23d42920'
+        },
 
-    container: {
-        flex: 1,
-        height: 100 * vh,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f2f2f2',
-    },
+        container: {
+            flex: 1,
+            height: 100 * vh,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f2f2f2',
+        },
 
-});
+    });
 
 export default basketPreview;

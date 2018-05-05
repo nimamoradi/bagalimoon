@@ -12,28 +12,28 @@ function navBar({menu, basket, search, basketSize}) {
         <View style={styles.container}>
 
 
-            <TouchableOpacity onPress={_.debounce(() => basket(),
+            <TouchableOpacity style={{paddingRight: 2 * vw}} onPress={_.debounce(() => basket(),
                 1000, {leading: true, trailing: false})
             }>
-                {basketSize!==0?<Text style={{
-                position: 'absolute',
-                left: 5 * vw,
-                zIndex: 2,
-                width: 8 * vw, height: 8 * vw,
-                borderColor: '#ff0030',
-                borderWidth: vw,
-                borderRadius: 4 * vw,
-                textAlign: 'center',
-                fontSize: vw * 4,
-                fontFamily: 'B Yekan',
-                textAlignVertical: 'center',
-                backgroundColor: 'white', color: '#ff0030'
-            }}>{basketSize}</Text>:null}
+                {basketSize !== 0 ? <Text style={{
+                    position: 'absolute',
+                    left: 5 * vw,
+                    zIndex: 2,
+                    width: 8 * vw, height: 8 * vw,
+                    borderColor: '#ff0030',
+                    borderWidth: vw,
+                    borderRadius: 4 * vw,
+                    textAlign: 'center',
+                    fontSize: vw * 4,
+                    fontFamily: 'B Yekan',
+                    textAlignVertical: 'center',
+                    backgroundColor: 'white', color: '#ff0030'
+                }}>{basketSize}</Text> : null}
                 <Ionicons name="md-cart" size={vw * 8} color="white" style={{margin: 10, flex: 1}}/>
             </TouchableOpacity>
 
 
-            <View style={{flex: 0.9}}/>
+            <View style={{flex: 0.9,}}/>
             <TouchableOpacity onPress={_.debounce(() => search(),
                 1000, {leading: true, trailing: false})
             }>

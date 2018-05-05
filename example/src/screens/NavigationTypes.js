@@ -24,13 +24,14 @@ import ListViewCustum from "../components/listViewCustum";
 
 let context;
 
+
 class NavigationTypes extends React.Component {
     dismissLightBox = async (sendTOHome) => {
         this.props.navigator.dismissLightBox();
     };
 
     static setBasket(basket) {
-        context.setState({superBasket: basket,basketSize:0})
+        context.setState({superBasket: basket, basketSize: 0})
     }
 
     static basketUpdaterNoConcat(newItems) {//won't remove zero index and don't have concat
@@ -377,6 +378,7 @@ class NavigationTypes extends React.Component {
             screen: screen,
             navigatorStyle: {
                 navBarHidden: true,
+                navBarTitleTextCentered: true,
             },
             title: title,
             passProps: passProps,
@@ -396,6 +398,12 @@ class NavigationTypes extends React.Component {
                 setBasket: NavigationTypes.setBasket,
                 basketSize: context.state.basketSize
             },
+            navigatorStyle: {
+                navBarTranslucent: true,
+                navBarTitleTextCentered: true,
+                navBarTextFontFamily: 'B Yekan',// Changes the title font
+                navBarComponentAlignment: 'center',
+            },
         });
     };
 
@@ -410,6 +418,12 @@ class NavigationTypes extends React.Component {
                 Categories: context.state.Categories,
                 setBasket: NavigationTypes.setBasket,
                 basketSize: context.state.basketSize
+            },
+            navigatorStyle: {
+                navBarTranslucent: true,
+                navBarTitleTextCentered: true,
+                navBarTextFontFamily: 'B Yekan',// Changes the title font
+                navBarComponentAlignment: 'center',
             },
         });
     };
@@ -456,6 +470,7 @@ class NavigationTypes extends React.Component {
         else
             return (
                 <ScrollView
+                    style={{backgroundColor: '#f2f2f2'}}
                     showsVerticalScrollIndicator={false}>
 
                     <NavBar

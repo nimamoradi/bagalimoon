@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-
+import MapView, {PROVIDER_GOOGLE, UrlTile} from 'react-native-maps';
 import {
     StyleSheet,
     TouchableOpacity,
     View,
-    WebView
+    Text,
+    Linking
 
 } from 'react-native';
 import {vw, vh, vmin, vmax} from '../viewport'
 import Loading from '../components/loadScreen'
 import fetch from '../fetch'
+import Feather from 'react-native-vector-icons/Feather';
+import SmallRow from '../components/smallRow'
 
 let context;
 import server from '../code'
@@ -36,11 +39,8 @@ class checkoutPage extends React.Component {
 
     getPayStatus = () => {
 
-        // console.log("inside basket", JSON.stringify({
-        //     api_code: context.props.api_code,
-        //     address_id: context.props.address_id,
-        //     order_id: context.props.order_id,
-        // }));
+        context.setState({
+            sendData: true});
         fetch(server.getServerAddress() + '/api/payOrder', {
             method: 'POST',
             headers: {
@@ -58,10 +58,17 @@ class checkoutPage extends React.Component {
                 // console.log("inside responsejson");
                 // console.log('response object:', responseData);
                 // alert(JSON.stringify(responseData));
-
-                if (responseData.ok === true)
+                if (responseData.ok === true && !responseData.hasOwnProperty('error'))
                     context.setState({sendData: false, order_checkout: responseData.authority});
-
+                else if (responseData.ok === false && responseData.hasOwnProperty('error')) {
+                    context.setState({
+                        sendData: false, order_checkout: responseData.authority,
+                        webRes: true, postMass: responseData.message_fa
+                    });
+                    context.setState({
+                        sendData: false,
+                    });
+                }
 
             }).catch(ignored => {
             // console.log('response error:', ignored);
@@ -75,38 +82,16 @@ class checkoutPage extends React.Component {
 
     };
 
-    onMessage(event) {
 
-        let data = JSON.parse(event.nativeEvent.data);
-
-        if (data.succes === false)
-            context.setState({webMassage: 3});
-
-        else if (data.succes === true) {
-            context.setState({webMassage: 1});
-            context.props.setBasket(context.props.fullBasket.map(item => {
-                return Object.assign({}, item, {count: 0});
-            }));
-            context.props.shouldUpdateBasket(false);
-
-
-        }
-        context.setState({webRes: true, postMass: data.massage_fa});
-    }
+    numberFormat = (x) => {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
 
     onClose() {
         context.props.navigator.dismissLightBox();
-        switch (context.state.webMassage) {
-            case 3:
-                context.props.navigator.popToRoot();
-                break;
-            case 1:
-            case 2:
-                context.props.navigator.popToRoot();
-                break;
-        }
-
-
+        context.props.navigator.popToRoot();
     }
 
     render() {
@@ -128,16 +113,63 @@ class checkoutPage extends React.Component {
         else
             return (
                 <View style={styles.container}>
-                    <WebView
-                        renderLoading={() => {
-                            return <Loading/>
-                        }}
-                        startInLoadingState={true}
-                        javaScriptEnabled={true}
-                        onMessage={this.onMessage}
 
-                        source={{uri: 'https://sandbox.zarinpal.com/pg/StartPay/' + this.state.order_checkout}}
-                    />
+                    <MapView
+                        provider={PROVIDER_GOOGLE}
+                        style={styles.map}
+                        showsUserLocation={true}
+                        showsMyLocationButton={true}
+                        zoomEnabled={false}
+                        onRegionChangeComplete={(s) => {
+                        }}
+                        initialRegion={{
+                            latitude: parseFloat(this.props.addressObject.lat),
+                            longitude: parseFloat(this.props.addressObject.lng),
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+                        {((context.state.myLocation !== null)) ?
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: parseFloat(this.props.addressObject.lat),
+                                    longitude: parseFloat(this.props.addressObject.lng),
+                                }}
+                            /> : null}
+                    </MapView>
+                    <Text style={styles.text}>
+                        جزییات سفارش
+                    </Text>
+                    <View style={{
+                        height: 40 * vh, margin: 4 * vw, borderWidth: 2,
+                        borderRadius: 4 * vw, borderColor: 'black',
+                        backgroundColor: '#ADD8E650'
+                    }}>
+                        <SmallRow title={'شماره سفارش'} des={this.props.order_id}/>
+                        <SmallRow title={'مبلغ قابل پرداخت'} des={this.numberFormat(this.props.paid_price) + " تومان"}/>
+                        <SmallRow title={'مبلغ بدون تخفیف'} des={this.numberFormat(this.props.sum_price) + " تومان"}/>
+                        <SmallRow title={'آدرس'} des={this.props.address}/>
+
+                    </View>
+                    <Text style={styles.text}>
+                        
+                    </Text>
+                    <View style={{margin: 4 * vh}}/>
+                    <TouchableOpacity onPress={() => {
+                        context.props.navigator.popToRoot();
+
+                        Linking.openURL('https://www.zarinpal.com/pg/pay/'
+                            + this.state.order_checkout).then(() => {
+                            context.props.navigator.popToRoot();
+                        }).catch(err => server.alertAdvanced('اخطار', 'برنامه مرورگر یافت نشد', context, context.onClose)
+                        );
+                        context.props.navigator.popToRoot();
+                    }}>
+                        <View style={styles.button}>
+                            <Feather name="chrome" size={vw * 5} style={{margin: 2 * vw,}} color="#ee1111"/>
+                            <Text style={styles.text}>پرداخت</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             );
 
@@ -155,7 +187,9 @@ const
         container: {
             flex: 1,
             flexDirection: 'column',
-            backgroundColor: '#eeeceb'
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f2f2f2',
         },
         rowMain: {},
         subRow: {
@@ -168,9 +202,7 @@ const
         text: {
             fontSize: vw * 5,
             fontFamily: 'B Yekan',
-            margin: 50,
-            marginBottom: 10,
-            marginLeft: 10,
+            color: 'black'
         },
         textInput: {
             fontSize: vw * 5,
@@ -179,18 +211,28 @@ const
             borderWidth: 0.5,
             fontFamily: 'B Yekan',
             width: '100%',
+            color: 'black'
 
         },
         flex: {
             flex: 1,
-        }, absolote: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+        },
+
+        button: {
+            width: 70 * vw,
+            height: 10 * vh,
+            flexDirection: 'row',
+            borderWidth: 0.5,
+            borderRadius: 10,
+            padding: 5,
+            margin: 2,
             justifyContent: 'center',
-            alignItems: 'center'
-        }
+            alignItems: 'center',
+            borderColor: '#23d429',
+            backgroundColor: '#23d42920'
+        },
+        map: {
+            ...StyleSheet.absoluteFillObject,
+        },
     });
 export default checkoutPage;

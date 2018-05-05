@@ -69,14 +69,14 @@ class mapView extends Component {
     }
 
     async requestLocationPermission() {
-        if (Platform.Version < 23) {
+        if (Platform.Version > 22) {
             try {
                 const granted = await PermissionsAndroid.request(
                     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
                     {
 
                         'title': 'مجوز دسترسی به موقیت',
-                        'message': 'برنامه برای رساندن محصول نیاز به ادرس شماست'
+                        'message': 'برنامه برای رساندن محصول نیاز به آدرس شماست'
                     }
                 );
                 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -133,7 +133,9 @@ class mapView extends Component {
     _renderScene = ({route}) => {
         switch (route.key) {
             case 'first':
-                return <ScrollView style={styles.columnItem}>
+                return <ScrollView
+                    keyboardShouldPersistTaps="handled"
+                    style={styles.columnItem}>
                     <View style={styles.rowItem}>
                         <TextInput style={styles.borderText}
                                    onChangeText={(text) => this.setState({myAddressName: text})}

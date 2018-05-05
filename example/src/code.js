@@ -4,8 +4,8 @@ import {Navigation} from "react-native-navigation";
 import {Platform} from 'react-native';
 
 class code {
-    static serverAddress = 'https://www.baghali.amins.ir';
-    static serverAddressNoSsl = 'http://www.baghali.amins.ir';
+    static serverAddress = 'https://application.baghalimoon.com';
+
 
     static timeOut = 8000;
     static retryCount = 5;
@@ -16,6 +16,36 @@ class code {
             screen: screen,
             navigatorStyle: {
                 navBarHidden: true,
+                navBarTitleTextCentered: true,
+            },
+            title: title,
+            passProps: passProps,
+        });
+
+    };
+
+    static pushScreenNavBar(screen, title, passProps, context) {
+        context.props.navigator.push({
+            screen: screen,
+            navigatorStyle: {
+                navBarTranslucent: true,
+                navBarTextFontFamily: 'B Yekan',// Changes the title font
+                navBarTitleTextCentered: true,
+            },
+            title: title,
+            passProps: passProps,
+        });
+
+    };
+
+    static pushScreenTrans(screen, title, passProps, context) {
+        context.props.navigator.push({
+            screen: screen,
+            navigatorStyle: {
+                navBarBackgroundColor: 'transparent', // the background is white
+                drawUnderNavBar: true,
+                drawUnderTabBar: true,
+                navBarTranslucent: false
             },
             title: title,
             passProps: passProps,
@@ -24,8 +54,6 @@ class code {
     };
 
     static getServerAddress() {
-        if (Platform.Version < 21)
-            return this.serverAddressNoSsl;
         return this.serverAddress;
     }
 
@@ -33,9 +61,9 @@ class code {
         return this.timeOut;
     }
 
-    static getReTry() {
-        return this.retryCount;
-    }
+    // static getReTry() {
+    //     return this.retryCount;
+    // }
 
     static showLightBox(screen, passProps, context) {
         Navigation.showLightBox({
@@ -103,42 +131,35 @@ class code {
         return -1; //to handle the case where the value doesn't exist
     };
 
-    static performTasks = (input, tasks) => {
-        if (tasks.length === 1)
-            return tasks[0](input);
-        tasks[0](input, function (output) {
-            performTasks(output, tasks.slice(2)); //Performs the tasks in the 'tasks[]' array }); }
-        });
-    };
 
     static deviceInfo(phoneNumber) {
-        return {
+        let data =  {
             'screenHeight': 100 * vh,
             'screenWidth': 100 * vw,
             'isEmulator': DeviceInfo.isEmulator(),
             'Application_name': DeviceInfo.getApplicationName(),
-            'APILevel': DeviceInfo.getAPILevel(),
+            'APILevel': Platform.Version,
             'Brand': DeviceInfo.getBrand(),
             'BuildNumber': DeviceInfo.getBuildNumber().toString(),
             'BundleId': DeviceInfo.getBundleId(),
-            'Carrier': DeviceInfo.getCarrier(),
+            'Carrier': 'ios',
             'DeviceCountry': DeviceInfo.getDeviceCountry(),
             'DeviceId': DeviceInfo.getDeviceId(),
             'DeviceLocale': DeviceInfo.getDeviceLocale(),
             'DeviceName': DeviceInfo.getDeviceName(),
-            'FirstInstallTime': DeviceInfo.getFirstInstallTime(),
+            'FirstInstallTime': 0,
             'FontScale': DeviceInfo.getFontScale(),
             'FreeDiskStorage': DeviceInfo.getFreeDiskStorage(),
-            'IPAddress': DeviceInfo.getIPAddress().toString(),
-            'InstanceID': DeviceInfo.getInstanceID(),
-            'LastUpdateTime': DeviceInfo.getLastUpdateTime(),
-            'MACAddress': DeviceInfo.getMACAddress().toString(),
+            'IPAddress': 'ios',
+            'InstanceID':'ios',
+            'LastUpdateTime': 0,
+            'MACAddress': 'ios',
             'Manufacturer': DeviceInfo.getManufacturer(),
-            'MaxMemory': DeviceInfo.getMaxMemory(),
+            'MaxMemory':0,
             'Model': DeviceInfo.getModel(),
             'PhoneNumber': phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
             'ReadableVersion': DeviceInfo.getReadableVersion(),
-            'SerialNumber': DeviceInfo.getSerialNumber(),
+            'SerialNumber': 'ios',
             'SystemName': DeviceInfo.getSystemName(),
             'SystemVersion': DeviceInfo.getSystemVersion(),
             'Timezone': DeviceInfo.getTimezone(),
@@ -150,6 +171,44 @@ class code {
             'isPinOrFingerprintSet': false,
             'isTablet': DeviceInfo.isTablet(),
         };
+        //updating bool
+        if (data.isEmulator === null)
+            data.isEmulator = true;
+        if (data.is24Hour === null)
+            data.is24Hour = true;
+        if (data.isTablet === null)
+            data.isTablet = true;
+        if (data.isTablet === null)
+            data.isTablet = true;
+
+        //updating numeric
+        if (data.APILevel === null)
+            data.APILevel = 1;
+        if (data.FirstInstallTime === null)
+            data.FirstInstallTime = 1;
+        if (data.FontScale === null)
+            data.FontScale = 1;
+        if (data.FreeDiskStorage === null)
+            data.FreeDiskStorage = 1;
+        if (data.LastUpdateTime === null)
+            data.LastUpdateTime = 1;
+        if (data.MaxMemory === null)
+            data.MaxMemory = 1;
+        if (data.TotalDiskCapacity === null)
+            data.TotalDiskCapacity = 1;
+        if (data.TotalMemory === null)
+            data.TotalMemory = 1;
+
+
+
+        for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+                if (data.key === null)
+                    data.key = 'E';
+            }
+        }
+
+        return data;
     }
 }
 

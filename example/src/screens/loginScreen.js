@@ -22,13 +22,28 @@ class loginScreen extends React.Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind();
-        this.state = {
-            sendData: false,
-            phoneNumber: '09',
-            login: this.login.bind(this)
-        };
-        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         context = this;
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
+        if (props.semi_api_code !== null && props.semi_api_code.length > 0) {
+            this.state = {
+                sendData: false,
+                phoneNumber: props.user_number,
+                login: this.login.bind(this)
+            };
+            this.login({
+                api_code: props.semi_api_code,
+                phone_number: props.user_number
+            });
+        } else
+            this.state = {
+                sendData: false,
+                phoneNumber: '09',
+                login: this.login.bind(this)
+            };
+
+        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
     }
 
     onChanged = (text) => {
@@ -81,7 +96,7 @@ class loginScreen extends React.Component {
                             }}>
                                 <TextInput
                                     onSubmitEditing={() => {
-                                        this.doSignUp();
+                                        this.numberCheck(this.state.phoneNumber);
                                     }}
                                     onChange={(event) => this.onChanged(event.nativeEvent.text)}
                                     keyboardType='numeric' style={styles.textInput}
@@ -92,7 +107,7 @@ class loginScreen extends React.Component {
 
                         </View>
                         <TouchableOpacity
-                            onPress={_.debounce(() => this.doSignUp(),
+                            onPress={_.debounce(() => this.numberCheck(this.state.phoneNumber),
                                 1000, {leading: true, trailing: false})}
                         >
                             <Text style={{
@@ -118,7 +133,28 @@ class loginScreen extends React.Component {
                 </ImageBackground>);
     }
 
+    numberCheck(number) {
+        context.props.navigator.showLightBox({
+            screen: 'example.alertWithButton',
+            passProps: {
+                title: 'توجه',
+                text:'آیا از صحت شماره وارد شده '+number+' اطمینان دارید؟',
+                OptionOne: context.props.navigator.dismissLightBox,
+                OptionTwo: context.doSignUp,
+                textOne: 'ویرایش',
+                textTwo: 'تایید'
+            },
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        })
+    }
+
     doSignUp() {
+        context.props.navigator.dismissLightBox();
+        AsyncStorage.setItem('semi_api_code', '');
         context.setState({sendData: true});
         let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
             pin = (isSet)
@@ -146,6 +182,7 @@ class loginScreen extends React.Component {
                     api_code: responseData.api_code,
                     phone_number: context.state.phoneNumber
                 });
+                AsyncStorage.setItem('semi_api_code', responseData.api_code);
                 AsyncStorage.setItem('user_number', context.state.phoneNumber);
             }
             else if (responseData.hasOwnProperty('phone_number_error') && responseData.phone_number_error === true) {

@@ -83,14 +83,15 @@ export function registerScreenVisibilityListener() {
     }).register();
 }
 
-export function login() {
-    let startAppdata = {
+export function login(semi_api_code,user_number) {
+    let startAppData = {
         screen: {
             screen: 'example.Types.loginScreen', // unique ID registered with Navigation.registerScreen
             navigatorStyle: {
                 navBarHidden: true,
             }
         },
+        passProps: {semi_api_code:semi_api_code,user_number: user_number},
         appStyle: {
             orientation: 'portrait',
         },
@@ -113,11 +114,11 @@ export function login() {
         portraitOnlyMode: true,
 
     };
-    return (startAppdata);
+    return (startAppData);
 }
 
 export function mainPage(api_code) {
-    let startAppdata = {
+    let startAppData = {
         screen: {
             screen: 'example.Types', // unique ID registered with Navigation.registerScreen
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -133,7 +134,7 @@ export function mainPage(api_code) {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
+                passProps: {api_code: api_code, shouldUpdate: false}, // simple serializable object that will pass as props to all top screens (optional)
                 percentOfScreenWidth: 0.75,
             },
             style: { // ( iOS only )
@@ -150,12 +151,12 @@ export function mainPage(api_code) {
 
 
     };
-    return (startAppdata);
+    return (startAppData);
 }
 
 
 export function serverCheckFailed(api_code, user_number) {
-    let startAppdata = {
+    let startAppData = {
         screen: {
             screen: 'example.ServerCheck', // unique ID registered with Navigation.registerScreen
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -187,6 +188,6 @@ export function serverCheckFailed(api_code, user_number) {
 
 
     };
-    return startAppdata;
+    return startAppData;
 
 }

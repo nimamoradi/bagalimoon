@@ -47,7 +47,7 @@ function itemView({ title, onUp, onDown, imageUrl, price, count, disscount, off 
                     justifyContent: 'center', alignItems: 'center'
                 }}>
                     <Image
-                        resizeMode="stretch"
+                        resizeMethod="resize"
                         indicator={ProgressBar}
                         source={{ uri: imageUrl }} style={styles.image} />
 

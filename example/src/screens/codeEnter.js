@@ -21,10 +21,13 @@ import server from '../code'
 class codeEnter extends React.Component {
     constructor(props) {
         super(props);
+        props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
         this.state = {
             code: '',
             sendData: false,
         };
+
 
         context = this;
     }

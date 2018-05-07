@@ -36,6 +36,8 @@ class listViewCustum extends React.Component {
                 onContentSizeChange={this.scrollListToStart.bind(this)}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
+                scrollEventThrottle={16}
+                removeClippedSubviews={true}
                 showsHorizontalScrollIndicator={false}
                 style={styles.container}>
                 <Image style={{width: 5 * vh, height: 10 * vh, marginRight:  vh}}

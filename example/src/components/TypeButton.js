@@ -11,6 +11,7 @@ function TypeButton({title, onPress, isSelected}) {
 
             {(isSelected) ?
                 <ImageBackground
+                    key={title}
                     opacity={0.6}
                     resizeMode="stretch"
                     style={{
@@ -30,7 +31,7 @@ function TypeButton({title, onPress, isSelected}) {
                 </ImageBackground> :
 
                 <ImageBackground
-
+                    key={title}
                     resizeMode="stretch"
                     style={{height: 10 * vh, marginLeft: -15, width: 28 * vw}}
                     source={require('../../img/corner/flatListItem.png')}>
@@ -69,11 +70,11 @@ const styles = StyleSheet.create({
         fontSize: 4 * vw,
         color: 'white',
         fontFamily: 'B Yekan',
-        width: 20 * vw,
+        width: 17 * vw,
     },
     selText: {
         marginRight: 5 * vw,
-        width: 20 * vw,
+        width: 17 * vw,
         flex: 1,
         textAlign: 'center',
         fontSize: 4 * vw,

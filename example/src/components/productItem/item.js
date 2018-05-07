@@ -40,7 +40,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, 
             <View style={styles.row}>
 
                 <Image
-                    resizeMode="stretch"
+                    resizeMethod="resize"
                     indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
                 />
                 <Text numberOfLines={2} style={styles.text}>{title}</Text>

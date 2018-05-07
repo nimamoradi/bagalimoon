@@ -17,6 +17,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                 >
                     {(index % 2 === 0) ?
                         <ImageBackground
+                            key={index}
                             resizeMode="stretch"
                             opacity={0.60}
                             style={styles.image}
@@ -25,6 +26,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                                     style={styles.text}>{title}</Text>
                         </ImageBackground> :
                         <ImageBackground
+                            key={index}
                             resizeMode="stretch"
                             opacity={0.60}
                             style={styles.image}
@@ -40,6 +42,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                 >
                     {(index % 2 === 0) ?
                         <ImageBackground
+                            key={index}
                             resizeMode="stretch"
                             style={styles.image}
                             source={require('../../img/corner/corner_edge_up.png')}>
@@ -48,6 +51,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                                 style={styles.text}>{title}</Text>
                         </ImageBackground> :
                         <ImageBackground
+                            key={index}
                             resizeMode="stretch"
                             style={styles.image}
                             source={require('../../img/corner/corner_edge_down.png')}>

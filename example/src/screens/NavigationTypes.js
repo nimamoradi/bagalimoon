@@ -543,7 +543,9 @@ class NavigationTypes extends React.Component {
 
     gotoCategoryFromItem(item) {
         let Categories = context.state.Categories;
-        this.TypePage(Categories[server.getIndex(item.Category_id, Categories, 'id')].name);
+        if (server.getIndex(item.Category_id, Categories, 'id') !== -1)
+            this.TypePage(Categories[server.getIndex(item.Category_id, Categories, 'id')].name);
+        else server.alert('توجه','دسته بندی موجود نیست',context)
     }
 
     renderSpecialOffer(item) {

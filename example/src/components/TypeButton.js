@@ -14,11 +14,7 @@ function TypeButton({title, onPress, isSelected}) {
                     key={title}
                     opacity={0.6}
                     resizeMode="stretch"
-                    style={{
-                        height: 10 * vh, marginLeft: -15, width: 28 * vw, flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
+                    style={styles.imageStyle}
 
                     source={require('../../img/corner/flatListItem.png')}>
                     <TouchableOpacity
@@ -33,7 +29,7 @@ function TypeButton({title, onPress, isSelected}) {
                 <ImageBackground
                     key={title}
                     resizeMode="stretch"
-                    style={{height: 10 * vh, marginLeft: -15, width: 28 * vw}}
+                    style={styles.imageStyle}
                     source={require('../../img/corner/flatListItem.png')}>
                     <TouchableOpacity
                         onPress={onPress}
@@ -61,19 +57,25 @@ TypeButton.propTypes = {
 };
 
 const styles = StyleSheet.create({
-
+    imageStyle: {
+        height: 10 * vh, width: 28 * vw, flex: 1,
+        justifyContent: 'center',
+        marginLeft: -15,
+        alignItems: 'center'
+    },
     text: {
+        textAlign:'center',
 
-        right: 5 * vw,
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 4 * vw,
         color: 'white',
+        textAlignVertical: 'center',
         fontFamily: 'B Yekan',
         width: 17 * vw,
     },
     selText: {
-        marginRight: 5 * vw,
+
         width: 17 * vw,
         flex: 1,
         textAlign: 'center',

@@ -6,6 +6,7 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
+    AsyncStorage
 
 } from 'react-native';
 
@@ -72,6 +73,7 @@ class ServerCheck extends React.Component {
 
 
                 } else {
+                    AsyncStorage.clear();
                     context.props.navigator.push({
                         backButtonTitle: '',
                         screen: 'example.Types.loginScreen',

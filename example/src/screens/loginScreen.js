@@ -24,8 +24,7 @@ class loginScreen extends React.Component {
         this.login = this.login.bind();
         context = this;
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
-
-        if (props.semi_api_code !== null && props.semi_api_code.length > 0) {
+        if (props.semi_api_code !== null && props.semi_api_code !== undefined && props.semi_api_code.length > 0) {
             this.state = {
                 sendData: false,
                 phoneNumber: props.user_number,
@@ -138,7 +137,7 @@ class loginScreen extends React.Component {
             screen: 'example.alertWithButton',
             passProps: {
                 title: 'توجه',
-                text:'آیا از صحت شماره وارد شده '+number+' اطمینان دارید؟',
+                text: 'آیا از صحت شماره وارد شده ' + number + ' اطمینان دارید؟',
                 OptionOne: context.props.navigator.dismissLightBox,
                 OptionTwo: context.doSignUp,
                 textOne: 'ویرایش',

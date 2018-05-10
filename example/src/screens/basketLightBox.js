@@ -20,23 +20,24 @@ class basketLightBox extends React.Component {
 
 
             return (<View style={styles.container}>
-                    <View style={{flex: 8}}>
+                <View style={{
+                    flex: 8, alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
                         <Text style={styles.title}>سبد خرید خالی است</Text>
 
 
-                    </View>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
+                    </View>  
+                       
+                    <Button
+                        large
+                        color="red"
+                        title={'بستن'}
+                        onPress={() => this.props.onClose(false)}
+                    />
+     
 
-
-                        <View style={{flex: 1}}/>
-                        <TouchableHighlight
-                            style={styles.button}
-                            onPress={() => this.props.onClose(false)}
-                        ><Text style={{fontSize: vw * 4, fontFamily: 'B Yekan',}}>{'بستن'}</Text></TouchableHighlight>
-                        <View style={{flex: 1}}/>
-
-                    </View>
-
+                   
 
                 </View>
             );
@@ -46,11 +47,13 @@ class basketLightBox extends React.Component {
 basketLightBox.propTypes = {};
 const styles = StyleSheet.create({
     container: {
-        width: vw * 75,
+        width: vw * 45,
         height: vh * 30,
         backgroundColor: '#ffffff',
         borderRadius: 5,
         padding: 16,
+        alignItems:'center',
+        justifyContent:'center'
     },
     button1: {
         borderRadius: 5,
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'B Yekan',
         fontSize: vw * 4,
-        fontWeight: '700',
+        fontWeight: '900',
     },
     content: {
         marginTop: 8,

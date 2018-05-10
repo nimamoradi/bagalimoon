@@ -8,7 +8,8 @@ import {
     FlatList,
     Image,
     TouchableOpacity,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../viewport'
@@ -19,7 +20,7 @@ import CountCircle from '../components/productItem/countCircle';
 import alertWithButton from "../components/alertWithButton";
 
 let context;
-const fireRidePrice = 20000;
+
 
 class basketPreview extends React.Component {
     constructor(props) {
@@ -34,9 +35,12 @@ class basketPreview extends React.Component {
             totalPrice: '?',
             discounted: '?',
             wholePrice: '?',
-            shouldUpdateBasket: true
+            shouldUpdateBasket: true,
+            fireRidePrice: 30000
+
         };
         context = this;
+
     }
 
     shouldUpdateBasket(value) {
@@ -44,6 +48,7 @@ class basketPreview extends React.Component {
     }
 
     numberFormat = (x) => {
+        x=Number.parseFloat(x).toFixed(0);
         let parts = x.toString().split(".");
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return parts.join(".");
@@ -59,6 +64,10 @@ class basketPreview extends React.Component {
 
 
     componentDidMount() {
+        AsyncStorage.getItem('minimum_cart_price').then((value) => {
+            context.setState({fireRidePrice: value})
+        });
+
         let totalPrice = 0;
         let wholePrice = 0;
 
@@ -79,27 +88,29 @@ class basketPreview extends React.Component {
 
     checkPrice() {
         if (context.state.totalPrice !== 0) {
-            if (context.state.totalPrice < fireRidePrice) {
-                context.props.navigator.showLightBox({
-                    screen: 'example.alert',
-                    passProps: {
-                        title: 'توجه',
-                        text: 'حداقل سفارش بیست هزار تومان است',
-                        onClose: context.props.navigator.dismissLightBox,
-                        OptionTwo: context.address,
-                        textOne: 'بازگشت',
-                        textTwo: 'ادامه'
-                    },
-                    style: {
-                        backgroundBlur: 'dark',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        tapBackgroundToDismiss: true
-                    }
-                })
+            if (context.state.totalPrice < context.state.fireRidePrice) {
+
+                context.showAlert('توجه', 'حداقل سفارش ' + context.numberFormat(context.state.fireRidePrice) + ' تومان است')
             }
             else context.address();
-        } else server.alert('توجه', 'هیچ کالای انتخاب نشده', this);
+        } else context.showAlert('توجه', 'هیچ کالای انتخاب نشده');
 
+    }
+
+    showAlert(title, text) {
+        context.props.navigator.showLightBox({
+            screen: 'example.alert',
+            passProps: {
+                title: title,
+                text: text,
+                onClose: context.props.navigator.dismissLightBox,
+            },
+            style: {
+                backgroundBlur: 'dark',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                tapBackgroundToDismiss: true
+            }
+        })
     }
 
     address = () => {

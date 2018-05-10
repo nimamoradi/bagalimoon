@@ -54,9 +54,10 @@ class ServerCheck extends React.Component {
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log(JSON.stringify(responseData));
+       
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
-
+                   
                     context.props.navigator.resetTo({
                         backButtonTitle: '',
                         screen: 'example.Types',
@@ -67,7 +68,8 @@ class ServerCheck extends React.Component {
                         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                         backButtonHidden: true,
                         overrideBackPress: false,
-                        passProps: {api_code: param.api_code, user_number: param.user_number},
+                        passProps: {api_code: param.api_code, user_number: param.user_number,
+                            minimum_cart_price:responseData.minimum_cart_price},
 
                     });
 

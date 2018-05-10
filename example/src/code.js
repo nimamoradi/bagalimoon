@@ -1,7 +1,16 @@
 import * as DeviceInfo from 'react-native-device-info';
-import {vw, vh, vmin, vmax} from './viewport'
-import {Navigation} from "react-native-navigation";
-import {Platform} from 'react-native';
+import {
+    vw,
+    vh,
+    vmin,
+    vmax
+} from './viewport'
+import {
+    Navigation
+} from "react-native-navigation";
+import {
+    Platform
+} from 'react-native';
 
 class code {
     static serverAddress = 'https://application.baghalimoon.com';
@@ -29,7 +38,7 @@ class code {
             screen: screen,
             navigatorStyle: {
                 navBarTranslucent: true,
-                navBarTextFontFamily: 'B Yekan',// Changes the title font
+                navBarTextFontFamily: 'B Yekan', // Changes the title font
                 navBarTitleTextCentered: true,
             },
             title: title,
@@ -80,7 +89,11 @@ class code {
     static alert(title, text, context) {
         Navigation.showLightBox({
             screen: 'example.alert',
-            passProps: {title: title, text: text, onClose: () => this.dismissLightBox(context)},
+            passProps: {
+                title: title,
+                text: text,
+                onClose: (() => context.props.navigator.dismissLightBox()),
+            },
             style: {
                 backgroundBlur: 'dark',
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -92,7 +105,11 @@ class code {
     static alertAdvanced(title, text, context, onclose) {
         context.props.navigator.showLightBox({
             screen: 'example.alert',
-            passProps: {title: title, text: text, onClose: onclose},
+            passProps: {
+                title: title,
+                text: text,
+                onClose: onclose
+            },
             style: {
                 backgroundBlur: 'dark',
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -122,7 +139,7 @@ class code {
     }
 
 
-    static  getIndex = (value, arr, prop) => {
+    static getIndex = (value, arr, prop) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i][prop] === value) {
                 return i;
@@ -157,7 +174,7 @@ class code {
             'Manufacturer': DeviceInfo.getManufacturer(),
             'MaxMemory': DeviceInfo.getMaxMemory(),
             'Model': DeviceInfo.getModel(),
-            'PhoneNumber': phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
+            'PhoneNumber': phoneNumber, // DeviceInfo.getPhoneNumber().toString() not working
             'ReadableVersion': DeviceInfo.getReadableVersion(),
             'SerialNumber': DeviceInfo.getSerialNumber(),
             'SystemName': DeviceInfo.getSystemName(),

@@ -3,6 +3,7 @@ import {
     ScrollView,
     View,
     FlatList,
+    AsyncStorage,
     AppState, Image, TextInput
 } from 'react-native';
 
@@ -272,6 +273,7 @@ class NavigationTypes extends React.Component {
 
 
     componentWillMount() {
+        AsyncStorage.setItem('minimum_cart_price',this.props.minimum_cart_price.toString());
         HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
     }
 

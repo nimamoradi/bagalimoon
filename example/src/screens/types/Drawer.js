@@ -57,7 +57,7 @@ class MyClass extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{ backgroundColor: '#eeeceb', flex: 1, width: 75 * vw, justifyContent: 'center', }}>
+                <View style={{ backgroundColor: '#eeeceb', flex: 1, width: 280, justifyContent: 'center', }}>
                     <Image
                         resizeMode='stretch'
                         style={styles.image} source={require('../../../img/grocery.png')} />
@@ -152,8 +152,8 @@ class MyClass extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: 75 * vw,
-        height: 100 * vh,
+        width: 280,
+        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row-reverse',
         backgroundColor: '#ff3232',
-        width: 70 * vw,
         height: 10 * vh,
         borderRadius: 4 * vw,
         flexGrow: 1,
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     image: {
-        height: 25 * vw, width: 30 * vw,
+        height: 25 * vw, width: '36%',
         alignSelf: 'center',
         flex: 4,
         alignItems: 'center',

@@ -4,7 +4,7 @@ import {
     registerScreens,
     login,
     serverCheckFailed,
-    mainPage,
+
 } from './screens';
 
 

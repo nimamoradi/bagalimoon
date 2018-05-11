@@ -99,7 +99,6 @@ export function login(semi_api_code,user_number) {
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
                 passProps: {shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
-                percentOfScreenWidth: 0.75,
             },
 
             style: { // ( iOS only )
@@ -135,7 +134,7 @@ export function mainPage(api_code) {
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
                 passProps: {api_code: api_code, shouldUpdate: false}, // simple serializable object that will pass as props to all top screens (optional)
-                percentOfScreenWidth: 0.75,
+
             },
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow
@@ -173,7 +172,7 @@ export function serverCheckFailed(api_code, user_number) {
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
                 passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
-                percentOfScreenWidth: 0.75,
+
             },
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow

@@ -33,39 +33,41 @@ class codeEnter extends React.Component {
     render() {
         return (
             <ImageBackground
-                style={{
-                    width: 100 * vw,
-                    height: 100 * vh,
-                    backgroundColor: '#ffffff10'
-                }}
-                source={require('../../img/login.png')}>
+            style={{
+                width: '100%',
+                height:'100%',
+            }}
+                    source={require('../../img/login.png')}>
 
-                <View style={styles.absolote}>
-                    <View style={{width: 100 * vw - 150}}>
+                    <View style={styles.absolote}>
+                        <View style={{height: 16 * vh}}>
                         <Text style={styles.text}>کد دریافتی</Text>
+                        <View style={{
+                                flexDirection: 'row', flex: 1, margin: 4 * vh,
+                                justifyContent: 'center', alignItems: 'center'
+                            }}>
                         <TextInput
-                            onSubmitEditing={() => {
-                                this.enterCode();
-                            }}
-                            onChange={(event) => this.setState({code: event.nativeEvent.text})}
+                            onChange={(event) => context.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
                             value={this.state.code}/>
+                        </View>
 
                     </View>
                     <TouchableOpacity
                         onPress={this.isAvailable}
                     >
-                        <Text style={{
-                            textAlign: 'center', borderRadius: 20,
-                            borderColor: '#bec4be',
-                            borderWidth: 0.5,
-                            backgroundColor: '#5bca45',
-                            padding: 10,
-                            marginTop: 15,
-                            width: 32 * vw,
-                            fontFamily: 'B Yekan',
-                            fontSize: vw * 6,
-                            color: '#ffffff'
+                      <Text style={{
+                                textAlign: 'center', borderRadius: 20,
+                                borderColor: '#bec4be',
+                                borderWidth: 0.5,
+                                backgroundColor: '#5bca45',
+                                padding: 10,
+                                marginTop: 15,
+                                borderRadius:4*vw,
+                                width: 32 * vw,
+                                fontFamily: 'B Yekan',
+                                fontSize: 20,
+                                color: '#ffffff'
                         }}>تایید</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row',}}>
@@ -76,6 +78,7 @@ class codeEnter extends React.Component {
                             <Text style={{
                                 fontFamily: 'B Yekan',
                                 fontSize: vw * 5,
+                                borderRadius:4*vw,
                                 color: '#65a4ff'
                             }}>ارسال مجدد</Text>
                         </TouchableOpacity>
@@ -87,13 +90,10 @@ class codeEnter extends React.Component {
                         }}>پیامک دریافت نشد : </Text>
                     </View>
                 </View>
-                <View style={styles.absolote}>
-                    {(this.state.sendData) ? <Loading/> : null}
-                </View>
+                {this.state.sendData === true ? <View style={styles.absolote}> <Loading/> </View> : null}
             </ImageBackground>
         );
     }
-
     isAvailable = () => {
         context.setState({sendData: true});
         context.enterCode();
@@ -211,7 +211,6 @@ class codeEnter extends React.Component {
 
 
 codeEnter.propTypes = {};
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -227,30 +226,29 @@ const styles = StyleSheet.create({
 
     },
     text: {
-        fontSize: vw * 5,
         fontFamily: 'B Yekan',
-        margin: 50,
+        fontSize: 5 * vw,
         marginBottom: 10,
         marginLeft: 10,
     },
+
     textInput: {
-        fontSize: vw * 5,
-        borderRadius: 10,
-        borderColor: '#bec4be',
-        borderWidth: 0.5,
         fontFamily: 'B Yekan',
-        width: '100%',
+        borderRadius: 2 * vw,
+        height: 8 * vh,
+            fontSize: 4 * vw,
+        borderColor: '#bec4be',
+        borderWidth: 1,
+        alignSelf: 'center',
+        width: '80%',
 
     },
     flex: {
         flex: 1,
     },
     absolote: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        marginTop: 10 * vh,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     }

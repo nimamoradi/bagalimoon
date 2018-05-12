@@ -14,18 +14,18 @@ function productControlVertical({count, onUp, onDown}) {
             justifyContent: 'center',
         }}>
             <TouchableOpacity onPress={onUp}>
-                <Icon name="plus" size={vw * 8} color="black" style={{margin: 10}}/>
+                <Icon name="plus" size={vw * 8} color="black" style={{margin: 10,backgroundColor: 'transparent',}}/>
             </TouchableOpacity>
 
             <CountCircle count={count}/>
             <TouchableOpacity onPress={onDown}>
-                <Icon name="minus" size={vw * 8} color="black" style={{margin: 10}}/>
+                <Icon name="minus" size={vw * 8} color="black" style={{margin: 10,backgroundColor: 'transparent',}}/>
             </TouchableOpacity>
 
         </View>;
 
     return <TouchableOpacity onPress={onUp}>
-        <MaterialIcons name="add-shopping-cart" size={vw * 11} color="green"/>
+        <MaterialIcons name="add-shopping-cart" style={{backgroundColor: 'transparent',}} size={vw * 11} color="green"/>
     </TouchableOpacity>
 }
 

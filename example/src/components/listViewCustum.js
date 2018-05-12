@@ -33,7 +33,6 @@ class listViewCustum extends React.Component {
         return (
             <ScrollView
                 ref={ref => this.scrollView = ref}
-                onContentSizeChange={this.scrollListToStart.bind(this)}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

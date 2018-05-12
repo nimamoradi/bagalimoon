@@ -91,12 +91,14 @@ const styles = StyleSheet.create({
         fontSize: 4 * vw,
         color: 'white',
         fontFamily: 'B Yekan',
+        backgroundColor: 'transparent',
     },
     selText: {
         flex: 1,
         textAlign: 'center',
         fontSize: 4 * vw,
         color: 'red',
+        backgroundColor: 'transparent',
         fontFamily: 'B Yekan',
     },
 });

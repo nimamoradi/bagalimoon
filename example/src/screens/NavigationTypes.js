@@ -14,7 +14,7 @@ import server from '../code'
 
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh} from '../viewport'
-import HockeyApp from 'react-native-hockeyapp'
+// import HockeyApp from 'react-native-hockeyapp'
 import NavBar from '../navBars/navBar'
 import dataHandeling from '../dataHandeling'
 import _ from 'lodash'
@@ -271,16 +271,16 @@ class NavigationTypes extends React.Component {
     }
 
 
-    componentWillMount() {
-        HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
-    }
+    // componentWillMount() {
+    //     HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
+    // }
 
-    componentDidMount() {
-        HockeyApp.start();
-        HockeyApp.checkForUpdate(); // optional
+    // componentDidMount() {
+    //     HockeyApp.start();
+    //     HockeyApp.checkForUpdate(); // optional
 
 
-    }
+    // }
 
     constructor(props) {
         super(props);
@@ -543,7 +543,9 @@ class NavigationTypes extends React.Component {
 
     gotoCategoryFromItem(item) {
         let Categories = context.state.Categories;
-        this.TypePage(Categories[server.getIndex(item.Category_id, Categories, 'id')].name);
+        if (server.getIndex(item.Category_id, Categories, 'id') !== -1)
+            this.TypePage(Categories[server.getIndex(item.Category_id, Categories, 'id')].name);
+        else server.alert('توجه','دسته بندی موجود نیست',context)
     }
 
     renderSpecialOffer(item) {

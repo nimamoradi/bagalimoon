@@ -28,9 +28,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderColor: 'black',
         borderWidth: vw * 0.4,
+        backgroundColor: 'transparent',
     },
     countTextHidden: {
         backgroundColor: 'red',
+        backgroundColor: 'transparent',
         fontSize: vw * 4.5,
         width: 8 * vw,
         height: 8 * vw,

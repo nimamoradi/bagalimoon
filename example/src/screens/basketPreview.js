@@ -237,7 +237,7 @@ class basketPreview extends React.Component {
                                 source={require('../../img/green.png')}
                             >
 
-                                <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل
+                                <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',   backgroundColor: 'transparent',}}>تکمیل
                                     خرید</Text>
 
                             </ImageBackground>
@@ -344,7 +344,7 @@ const
             fontSize: vw * 4,
             flex: 1,
             fontFamily: 'B Yekan',
-
+            
             textAlign: 'center',
             color: 'black'
         },
@@ -352,6 +352,7 @@ const
             color: 'black',
             fontSize: vw * 3.75,
             fontFamily: 'B Yekan',
+            backgroundColor: 'transparent',
             textAlign: 'center'
         },
         tableHeader: {

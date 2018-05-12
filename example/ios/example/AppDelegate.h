@@ -8,7 +8,7 @@
  */
 
 #import <UIKit/UIKit.h>
-
+@import GoogleMaps;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;

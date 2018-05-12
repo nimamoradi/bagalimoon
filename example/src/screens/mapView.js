@@ -423,7 +423,7 @@ class mapView extends Component {
                     }, {flex: this.state.flexSize}]}>
 
                         <MapView
-                            provider={PROVIDER_GOOGLE}
+                          
                             style={styles.map}
                             region={new AnimatedRegion({
                                 latitude: this.state.latitude,

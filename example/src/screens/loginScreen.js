@@ -50,7 +50,7 @@ class loginScreen extends React.Component {
         this.setState({phoneNumber: newText});
     };
 
-    render() {
+        render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
             top: 0,
@@ -67,8 +67,8 @@ class loginScreen extends React.Component {
             return (
                 <ImageBackground
                     style={{
-                        width: 100 * vw,
-                        height: 100 * vh,
+                        flex:1,
+                        resizeMode:'cover'
                     }}
                     source={require('../../img/login.png')}>
 
@@ -80,9 +80,6 @@ class loginScreen extends React.Component {
                                 justifyContent: 'center', alignItems: 'center'
                             }}>
                                 <TextInput
-                                    onSubmitEditing={() => {
-                                        this.doSignUp();
-                                    }}
                                     onChange={(event) => this.onChanged(event.nativeEvent.text)}
                                     keyboardType='numeric' style={styles.textInput}
                                     value={this.state.phoneNumber}
@@ -102,6 +99,7 @@ class loginScreen extends React.Component {
                                 backgroundColor: '#5bca45',
                                 padding: 10,
                                 marginTop: 15,
+                                borderRadius:4*vw,
                                 width: 32 * vw,
                                 fontFamily: 'B Yekan',
                                 fontSize: 20,
@@ -118,6 +116,7 @@ class loginScreen extends React.Component {
                 </ImageBackground>);
     }
 
+    
     doSignUp() {
         context.setState({sendData: true});
         let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
@@ -177,7 +176,9 @@ class loginScreen extends React.Component {
                 navBarBackgroundColor: 'transparent', // the background is white
                 drawUnderNavBar: true,
                 drawUnderTabBar: true,
-                navBarTranslucent: false
+                navBarTranslucent: false,
+                navBarBlur: true,
+                navBarTransparent: true
             },
             passProps: props,
         });
@@ -199,7 +200,6 @@ const styles = StyleSheet.create({
     subRow: {
         flex: 1,
         margin: 50,
-
         flexDirection: 'column',
         alignItems: 'flex-end'
 
@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         borderRadius: 2 * vw,
         height: 8 * vh,
+        fontSize: 4 * vw,
         borderColor: '#bec4be',
         borderWidth: 1,
         alignSelf: 'center',

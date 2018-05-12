@@ -62,7 +62,7 @@ TypeButton.propTypes = {
 const styles = StyleSheet.create({
 
     text: {
-
+        backgroundColor: 'transparent',
         right: 5 * vw,
         alignItems: 'center',
         justifyContent: 'center',
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         width: 20 * vw,
         flex: 1,
         textAlign: 'center',
+        textAlignVertical:'center',
         fontSize: 4 * vw,
         color: 'red',
         fontFamily: 'B Yekan',

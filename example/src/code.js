@@ -4,7 +4,7 @@ import {Navigation} from "react-native-navigation";
 import {Platform} from 'react-native';
 
 class code {
-    static serverAddress = 'https://application.baghalimoon.com';
+    static serverAddress = 'http://baghali.amins.ir';
 
 
     static timeOut = 8000;
@@ -137,7 +137,7 @@ class code {
             'screenHeight': 100 * vh,
             'screenWidth': 100 * vw,
             'isEmulator': DeviceInfo.isEmulator(),
-            'Application_name': DeviceInfo.getApplicationName(),
+            'Application_name': 'ios '+DeviceInfo.getApplicationName(),
             'APILevel': Platform.Version,
             'Brand': DeviceInfo.getBrand(),
             'BuildNumber': DeviceInfo.getBuildNumber().toString(),

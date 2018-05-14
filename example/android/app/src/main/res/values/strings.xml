@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">Baghalimoon</string>
     <string name="appcenterCrashes_whenToSendCrashes">ALWAYS_SEND</string>
     <string name="appcenterAnalytics_whenToEnableAnalytics">ALWAYS_SEND</string>
     <string name="reactNativeCodePush_androidDeploymentKey">sPHx7FV1jOLQ8njEscjf7eoxqXAl47b54919-64b0-489c-ac94-333876a50ddc</string>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 </resources>

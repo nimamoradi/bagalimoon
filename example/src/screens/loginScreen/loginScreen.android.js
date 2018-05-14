@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {vw, vh,} from '../viewport'
+import {vw, vh,} from '../../viewport'
 
 import {
     StyleSheet,
@@ -10,9 +10,9 @@ import {
     ImageBackground,
     AsyncStorage
 } from 'react-native';
-import server from '../code'
-import Loading from '../components/loadScreen'
-import fetch from '../fetch'
+import server from '../../code'
+import Loading from '../../components/loadScreen'
+import fetch from '../../fetch'
 import * as DeviceInfo from 'react-native-device-info';
 import _ from 'lodash'
 
@@ -84,7 +84,7 @@ class loginScreen extends React.Component {
                         width: 100 * vw,
                         height: 100 * vh,
                     }}
-                    source={require('../../img/login.png')}>
+                    source={require('../../../img/login.png')}>
 
                     <View style={styles.absolote}>
                         <View style={{height: 16 * vh}}>

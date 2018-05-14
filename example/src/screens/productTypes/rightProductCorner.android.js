@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground} from 'react-native';
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
 
 function rightProductCorner({title, onPress, isSelected, index}) {
     return (
@@ -21,7 +21,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                             resizeMode="stretch"
                             opacity={0.60}
                             style={styles.image}
-                            source={require('../../img/corner/corner_edge_up.png')}>
+                            source={require('../../../img/corner/corner_edge_up.png')}>
                             <Text   numberOfLines={2}
                                     style={styles.text}>{title}</Text>
                         </ImageBackground> :
@@ -30,7 +30,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                             resizeMode="stretch"
                             opacity={0.60}
                             style={styles.image}
-                            source={require('../../img/corner/corner_edge_down.png')}>
+                            source={require('../../../img/corner/corner_edge_down.png')}>
                             <Text   numberOfLines={2}
                                     style={styles.text}>{title}</Text>
                         </ImageBackground>}
@@ -45,7 +45,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                             key={index}
                             resizeMode="stretch"
                             style={styles.image}
-                            source={require('../../img/corner/corner_edge_up.png')}>
+                            source={require('../../../img/corner/corner_edge_up.png')}>
                             <Text
                                 numberOfLines={2}
                                 style={styles.text}>{title}</Text>
@@ -54,7 +54,7 @@ function rightProductCorner({title, onPress, isSelected, index}) {
                             key={index}
                             resizeMode="stretch"
                             style={styles.image}
-                            source={require('../../img/corner/corner_edge_down.png')}>
+                            source={require('../../../img/corner/corner_edge_down.png')}>
                             <Text
                                 numberOfLines={2}
                                 style={styles.text}>{title}</Text>

@@ -12,12 +12,12 @@ import {
     AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import {vw, vh, vmin, vmax} from '../viewport'
-import server from "../code";
-import dataHandeling from "../dataHandeling";
-import SimpleNavbar from '../navBars/SimpleNavbar'
-import CountCircle from '../components/productItem/countCircle';
-import alertWithButton from "../components/alertWithButton";
+import {vw, vh, vmin, vmax} from '../../viewport'
+import server from "../../code";
+import dataHandeling from "../../dataHandeling";
+import SimpleNavbar from '../../navBars/SimpleNavbar'
+import CountCircle from '../../components/productItem/countCircle';
+import alertWithButton from "../../components/alertWithButton";
 
 let context;
 
@@ -239,16 +239,16 @@ class basketPreview extends React.Component {
                         <ImageBackground
                             resizeMode="stretch"
                             style={{width: 96 * vw, height: 12 * vh, flexDirection: 'row',}}
-                            source={require('../../img/basketPreview.png')}
+                            source={require('../../../img/basketPreview.png')}
                         >
 
                             <ImageBackground
                                 resizeMode="stretch"
                                 style={styles.greenBox}
-                                source={require('../../img/green.png')}
+                                source={require('../../../img/green.png')}
                             >
 
-                                <Text style={{fontSize: vw * 4.5, color: 'black', fontFamily: 'B Yekan',}}>تکمیل
+                                <Text style={{fontSize: vw * 4.5, backgroundColor: 'transparent', color: 'black', fontFamily: 'B Yekan',}}>تکمیل
                                     خرید</Text>
 
                             </ImageBackground>
@@ -256,7 +256,7 @@ class basketPreview extends React.Component {
                             <ImageBackground
                                 resizeMode="stretch"
                                 style={styles.rightEdge}
-                                source={require('../../img/basketPreview/rightEdge.png')}>
+                                source={require('../../../img/basketPreview/rightEdge.png')}>
                                 <View style={styles.center}>
                                     <Text style={styles.price}>
                                         مبلغ اصلی
@@ -269,7 +269,7 @@ class basketPreview extends React.Component {
                             <ImageBackground
                                 resizeMode="stretch"
                                 style={styles.rightEdge}
-                                source={require('../../img/basketPreview/rightEdge.png')}>
+                                source={require('../../../img/basketPreview/rightEdge.png')}>
                                 <View style={styles.center}>
                                     <Text style={styles.price}>
                                         با تخفیف
@@ -283,7 +283,7 @@ class basketPreview extends React.Component {
                             <ImageBackground
                                 resizeMode="stretch"
                                 style={styles.rightEdge}
-                                source={require('../../img/basketPreview/rightEdge.png')}>
+                                source={require('../../../img/basketPreview/rightEdge.png')}>
                                 <View style={styles.center}>
                                     <Text style={styles.price}>
                                         سود شما
@@ -363,6 +363,7 @@ const
             color: 'black',
             fontSize: vw * 3.75,
             fontFamily: 'B Yekan',
+            backgroundColor: 'transparent',
             textAlign: 'center'
         },
         tableHeader: {

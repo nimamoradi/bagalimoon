@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+
 import ProgressBar from 'react-native-progress/Bar';
-import CountCircle from './countCircle';
-import ProductControl from './productControlHorizontal'
+
+import ProductControl from '../../components/productItem/productControlHorizontal'
 import {vw, vh, vmin, vmax} from '../../viewport'
 
 function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, off}) {

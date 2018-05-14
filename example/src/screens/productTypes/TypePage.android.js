@@ -6,19 +6,19 @@ import {
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ItemView from '../components/productItem/itemView'
-import server from '../code'
-import Loading from '../components/loadScreen'
+import ItemView from './itemView'
+import server from '../../code'
+import Loading from '../../components/loadScreen'
 
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
 
-import dataHandeling from '../dataHandeling';
+import dataHandeling from '../../dataHandeling';
 
-import RightProductCorner from '../Shapes/rightProductCorner'
-import ProductPageNavBar from '../navBars/productPageNavBar'
-import fetch from '../fetch'
+import RightProductCorner from './rightProductCorner'
+import ProductPageNavBar from '../../navBars/productPageNavBar'
+import fetch from '../../fetch'
 import _ from 'lodash'
-import ListViewCustum from "../components/listViewCustum";
+import ListViewCustum from "../../components/listViewCustum";
 
 
 let context;

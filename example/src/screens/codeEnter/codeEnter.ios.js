@@ -51,6 +51,7 @@ class codeEnter extends React.Component {
                                 justifyContent: 'center', alignItems: 'center'
                             }}>
                         <TextInput
+                            onSubmitEditing={this.enterCode}
                             onChange={(event) => context.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
                             value={this.state.code}/>
@@ -58,7 +59,7 @@ class codeEnter extends React.Component {
 
                     </View>
                     <TouchableOpacity
-                        onPress={this.isAvailable}
+                        onPress={this.enterCode}
                     >
                       <Text style={{
                                 textAlign: 'center', borderRadius: 20,
@@ -98,11 +99,7 @@ class codeEnter extends React.Component {
             </ImageBackground>
         );
     }
-    isAvailable = () => {
-        context.setState({sendData: true});
-        context.enterCode();
 
-    };
 
     doSignUp() {
         context.setState({sendData: true});
@@ -142,7 +139,7 @@ class codeEnter extends React.Component {
 
     enterCode = () => {
 
-
+        context.setState({sendData: true});
         console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',

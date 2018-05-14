@@ -284,8 +284,6 @@ class NavigationTypes extends React.Component {
         HockeyApp.start();
         if (Platform.OS === 'android')
             HockeyApp.checkForUpdate(); // optional
-
-
     }
 
     constructor(props) {

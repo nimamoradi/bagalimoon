@@ -34,10 +34,10 @@ class ServerCheck extends React.Component {
             }
         });
         context = this;
-        this.loginCheck({api_code: props.api_code, user_number: props.user_number});
 
     }
     componentWillMount(){
+        this.loginCheck({api_code: this.props.api_code, user_number: this.props.user_number});
         this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
     }
 
@@ -94,7 +94,7 @@ class ServerCheck extends React.Component {
 
                 }
             }).catch(error => {
-                server.retryParam();
+                server.retryParam(context.loginCheck, context, param);
             }).catch(error => {
                 server.retryParam(context.loginCheck, context, param);
             }));

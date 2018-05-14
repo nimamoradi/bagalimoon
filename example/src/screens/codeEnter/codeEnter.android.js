@@ -47,16 +47,14 @@ class codeEnter extends React.Component {
                     <View style={{width: 100 * vw - 150}}>
                         <Text style={styles.text}>کد دریافتی</Text>
                         <TextInput
-                            onSubmitEditing={() => {
-                                this.enterCode();
-                            }}
+                            onSubmitEditing={this.enterCode}
                             onChange={(event) => this.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
                             value={this.state.code}/>
 
                     </View>
                     <TouchableOpacity
-                        onPress={this.isAvailable}
+                        onPress={this.enterCode}
                     >
                         <Text style={{
                             textAlign: 'center', borderRadius: 20,
@@ -97,11 +95,6 @@ class codeEnter extends React.Component {
         );
     }
 
-    isAvailable = () => {
-        context.setState({sendData: true});
-        context.enterCode();
-
-    };
 
     doSignUp() {
         context.setState({sendData: true});
@@ -140,6 +133,7 @@ class codeEnter extends React.Component {
 
     enterCode = () => {
 
+        context.setState({sendData: true});
 
         console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
@@ -159,13 +153,16 @@ class codeEnter extends React.Component {
                 if (responseData.hasOwnProperty('successful') && responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
                     this.pushMainScreen(responseData.api_code, responseData.minimum_cart_price);
+                    return;
                 } else if (responseData.hasOwnProperty('successful') && responseData.successful === false) {
                     context.setState({sendData: false});
                     server.alert('هشدار', 'کد اشتباه است', context);
+                    return;
                 }
                 else if (responseData.sms_code !== null) {
                     context.setState({sendData: false});
                     server.alert('هشدار', 'شماره کد را وارد کنید', context);
+                    return;
                 }
 
 
@@ -191,7 +188,7 @@ class codeEnter extends React.Component {
                 right: { // optional, define if you want a drawer from the right
                     screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
                     passProps: {api_code: api,}, // simple serializable object that will pass as props to all top screens (optional)
-                    fixedWidth:75*vw
+                    fixedWidth: 75 * vw
                 },
                 style: { // ( iOS only )
                     drawerShadow: true, // optional, add this if you want a side menu drawer shadow
@@ -205,7 +202,7 @@ class codeEnter extends React.Component {
                 disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
             overrideBackPress: false,
-            passProps: {api_code: api, user_number: context.state.phoneNumber, minimum_cart_price:minimum_cart_price},
+            passProps: {api_code: api, user_number: context.state.phoneNumber, minimum_cart_price: minimum_cart_price},
 
         });
     }

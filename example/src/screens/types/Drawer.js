@@ -6,17 +6,12 @@ import {
     AsyncStorage,
     Image,
     Text,
-
     Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { vw, vh, vmin, vmax } from '../../viewport'
-
-import DrawerItem from "./drawerItem";
-
-let context;
+import { vw, vh,  } from '../../viewport'
 
 class MyClass extends React.Component {
 
@@ -68,7 +63,7 @@ class MyClass extends React.Component {
                     backgroundColor: '#fafafa50', flex: 3,
                     flexDirection: 'column',
                     marginBottom: 4 * vh,
-                    justifyContent: 'flex-start', width: 75 * vw,
+                    justifyContent: 'flex-start', width: 280 ,
                 }}>
 
 
@@ -87,10 +82,11 @@ class MyClass extends React.Component {
                     <TouchableOpacity
                         onPress={() => {
                             Share.share({
-                                message: 'هیچ وقت خرید از بقالی این قدر راحت نبوده!' +
+                                Type: 'text/html',
+                                message: 'هیچ وقت خرید از بقالی این قدر راحت نبوده!\n' +
                                     'خرید آسان با قیمت های باور نکردنی ' +
-                                    'همین الان اپلیکیشن رو نصب کنید.'+'baghalimoon.ir'+'تازه پیکش هم رایگان هستش',
-                                url: 'http://baghalimoon.ir',
+                                    ' همین الان اپلیکیشن رو نصب کنید.'+"<a href=\\\"https://baghalimoon.com\\\">baghalimoon</a>"+'تازه پیکش هم رایگان هستش ',
+                                url: 'Https://baghalimoon.com',
                                 title: 'بقالمون'
                             }, {});
                         }}>
@@ -127,7 +123,7 @@ class MyClass extends React.Component {
                     </TouchableOpacity>
 
                 </View>
-
+                <Text style={styles.text}>نسخه-1.45</Text>
             </View>
         );
     }
@@ -153,7 +149,7 @@ class MyClass extends React.Component {
 const styles = StyleSheet.create({
     container: {
         width: 280,
-        height: '100%',
+        flex:1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
@@ -182,6 +178,12 @@ const styles = StyleSheet.create({
         color: 'white',
         marginRight: 2 * vw,
         fontFamily: 'B Yekan', fontSize: vw * 4.5
+    },
+    text: {
+        color: 'black',
+        marginRight: 2 * vw,
+        fontFamily: 'B Yekan',
+         fontSize: vw * 4.5
     }
 });
 

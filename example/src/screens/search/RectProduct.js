@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Bar';
 
-import CountCircle from './countCircle';
-import ProductControl from './productControlVertical'
+import CountCircle from '../../components/productItem/countCircle';
+import ProductControl from '../../components/productItem/productControlVertical'
 
 function RectProduct({title, onUp, onDown, imageUrl, price, count, disscount, off}) {
 

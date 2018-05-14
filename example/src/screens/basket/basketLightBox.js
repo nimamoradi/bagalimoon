@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, Text, Button, TouchableHighlight, AsyncStorage} from 'react-native';
 
-import TableRow from '../components/tableRow'
+import TableRow from '../../components/tableRow'
 
-import {vw, vh, vmin, vmax} from '../viewport'
-import dataHandeling from '../dataHandeling'
+import {vw, vh, vmin, vmax} from '../../viewport'
+import dataHandeling from '../../dataHandeling'
 
 class basketLightBox extends React.Component {
     constructor(props) {
@@ -12,35 +12,29 @@ class basketLightBox extends React.Component {
 
     }
 
-
-
-
-
     render() {
 
 
-            return (<View style={styles.container}>
+        return (<View style={styles.container}>
                 <View style={{
                     flex: 8, alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-                        <Text style={styles.title}>سبد خرید خالی است</Text>
+                    <Text style={styles.title}>سبد خرید خالی است</Text>
 
-
-                    </View>  
-                       
-                    <Button
-                        large
-                        color="red"
-                        title={'بستن'}
-                        onPress={() => this.props.onClose(false)}
-                    />
-     
-
-                   
 
                 </View>
-            );
+
+                <Button
+                    large
+                    color="red"
+                    title={'بستن'}
+                    onPress={() => this.props.onClose(false)}
+                />
+
+
+            </View>
+        );
     }
 }
 
@@ -52,8 +46,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         borderRadius: 5,
         padding: 16,
-        alignItems:'center',
-        justifyContent:'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     button1: {
         borderRadius: 5,
@@ -70,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: '#bec4be',
         borderWidth: 0.5, flex: 4,
-        height:4*vh,
+        height: 4 * vh,
         backgroundColor: '#c4282280',
     },
     title: {

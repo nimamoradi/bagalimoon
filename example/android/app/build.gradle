@@ -29,11 +29,11 @@ android {
         jumboMode true
     }
     defaultConfig {
-        applicationId "com.moonShop"
+        applicationId 'ir.saffarino.baghalimoon'
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 144
-        versionName "1.44"
+        versionCode 145
+        versionName "1.45"
         lintOptions {
             abortOnError false
             checkReleaseBuilds false
@@ -41,7 +41,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "12637e49-1ef9-44d3-b902-de1f14e4cd5c",
+        manifestPlaceholders = [onesignal_app_id               : "12637e49-1ef9-44d3-b902-de1f14e4cd5c",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
 
@@ -69,21 +69,24 @@ android {
             def versionCodes = ["armeabi-v7a": 1, "x86": 2]
             def abi = output.getFilter(OutputFile.ABI)
 //            if (abi != null) {  // null for the universal-debug, universal-release variants
-                output.versionCodeOverride =
-                        2 * 1048576 + defaultConfig.versionCode
+            output.versionCodeOverride =
+                    2 * 1048576 + defaultConfig.versionCode
 //            }
         }
+    }
+    productFlavors {
     }
 }
 
 dependencies {
     compile project(':react-native-maps')
     compile project(':react-native-vector-icons')
-    compile('com.facebook.android:facebook-android-sdk:4.22.1')
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.facebook.android:facebook-android-sdk:4.22.1'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.facebook.react:react-native:0.51.1'
     compile project(':react-native-navigation')
-	compile project(":react-native-hockeyapp") // <--- add this
+    compile project(':react-native-hockeyapp')
+    // <--- add this
     compile project(path: ':appcenter-crashes')
     compile project(path: ':appcenter-analytics')
     compile project(path: ':appcenter')
@@ -94,8 +97,7 @@ dependencies {
     compile project(':react-native-spinkit')
     compile project(path: ':react-native-gesture-handler')
     compile project(path: ':react-native-spinkit')
-
-    compile "com.android.support:support-core-utils:27.1.1"
+    compile 'com.android.support:support-core-utils:27.1.1'
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

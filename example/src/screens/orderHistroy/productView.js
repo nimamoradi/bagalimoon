@@ -6,7 +6,7 @@ import {vw, vh, vmin, vmax} from '../../viewport'
 import server from "../../code";
 import Loading from '../../components/loadScreen'
 
-import BasketItem from '../../components/productItem/basketItem'
+import BasketItem from './basketItem'
 
 let context;
 

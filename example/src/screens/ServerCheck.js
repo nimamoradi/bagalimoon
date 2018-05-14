@@ -37,6 +37,9 @@ class ServerCheck extends React.Component {
         this.loginCheck({api_code: props.api_code, user_number: props.user_number});
 
     }
+    componentWillMount(){
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+    }
 
     loginCheck(param) {
 

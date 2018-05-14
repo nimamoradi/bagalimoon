@@ -1,25 +1,25 @@
 import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
 import {Dimensions} from 'react-native';
-import Types from './NavigationTypes';
-import basketLightBox from './basketLightBox'
+import Types from './mainScreen/NavigationTypes';
+import basketLightBox from './basket/basketLightBox'
 import SimpleNavbar from '../navBars/SimpleNavbar'
 import LightBox from './types/LightBox';
-import basketPreview from './basketPreview'
+import basketPreview from './basket/basketPreview'
 import mapView from './mapView'
 import Drawer from './types/Drawer';
 import offer from './types/offer';
 import loadScreen from '../components/loadScreen'
-import descriptionPan from '../components/descriptionPan';
-import opinion from '../components/opinion'
-import alertWithButton from '../components/alertWithButton'
-import TypePage from './TypePage'
-import loginScreen from './loginScreen'
 
-import codeEnter from './codeEnter'
+
+import alertWithButton from '../components/alertWithButton'
+import TypePage from './productTypes/TypePage'
+import loginScreen from './loginScreen/loginScreen'
+
+import codeEnter from './codeEnter/codeEnter'
 import alert from '../components/alertBox'
-import finalBasket from './basketFinal'
+import finalBasket from './basket/basketFinal'
 import reTry from '../components/reTry'
-import FlatListSearch from './FlatListSearch'
+import FlatListSearch from './search/FlatListSearch'
 
 import about_us from './aboutus';
 
@@ -60,8 +60,8 @@ export function registerScreens() {
     Navigation.registerComponent('example.mapView', () => mapView);
     Navigation.registerComponent('example.TypePage', () => TypePage);
     Navigation.registerComponent('example.Types.offer', () => offer);
-    Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
-    Navigation.registerComponent('example.Types.opinion', () => opinion);
+
+
 
 
     Navigation.registerComponent('example.Types.basketLightBox', () => basketLightBox);

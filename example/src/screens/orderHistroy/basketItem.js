@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground} from 'react-native';
-import CountCircle from './countCircle';
-import ProductControl from './productControlHorizontal'
+import CountCircle from '../../components/productItem/countCircle';
+import ProductControl from '../../components/productItem/productControlHorizontal'
 
 import {vw, vh, vmin, vmax} from '../../viewport'
 import ProgressBar from 'react-native-progress/Bar';

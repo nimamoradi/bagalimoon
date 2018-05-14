@@ -12,12 +12,12 @@ import {
     AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {vw, vh,} from '../viewport'
-import server from "../code";
-import Loading from '../components/loadScreen'
-import fetch from '../fetch'
+import {vw, vh,} from '../../viewport'
+import server from "../../code";
+import Loading from '../../components/loadScreen'
+import fetch from '../../fetch'
 
-import BasketItem from '../components/productItem/basketItem'
+import BasketItem from '../orderHistroy/basketItem'
 
 let context;
 
@@ -47,7 +47,9 @@ class basketFinal extends React.Component {
 
     getLastBasket = () => {
 
-        // console.log("inside basket");
+        let items = context.props.basket.filter((item) => {
+            return item.count > 0
+        });
         fetch(server.getServerAddress() + '/api/order', {
             method: 'POST',
             headers: {
@@ -59,7 +61,7 @@ class basketFinal extends React.Component {
                 api_code: context.props.api_code,
                 address_id: context.props.id,
                 customer_receiver_name: context.props.senderName,
-                items: context.props.basket,
+                items: items,
 
             })
         }).then((response) => response.json())
@@ -190,7 +192,7 @@ class basketFinal extends React.Component {
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={function () {
-                            server.alertAdvanced('با تشکر', 'سفارش به زودی برای شما ارسال می شود',context,context.onClose)
+                            server.alertAdvanced('با تشکر', 'سفارش به زودی برای شما ارسال می شود', context, context.onClose)
                         }}>
                             <View style={styles.buttonCancel}>
                                 <Text style={styles.textButton}>پرداخت در محل</Text>

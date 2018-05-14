@@ -3,16 +3,16 @@ import React from 'react';
 import {StyleSheet, Text, ActivityIndicator, TouchableOpacity, View, FlatList, TextInput} from 'react-native';
 
 
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
 import Entypo from 'react-native-vector-icons/Entypo';
-import RectProduct from '../components/productItem/RectProduct'
+import RectProduct from './RectProduct'
 
-import fetch from "../fetch";
-import server from "../code";
-import SimpleNavbar from "../navBars/SimpleNavbar";
+import fetch from "../../fetch";
+import server from "../../code";
+import SimpleNavbar from "../../navBars/SimpleNavbar";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import dataHandeling from "../dataHandeling";
+import dataHandeling from "../../dataHandeling";
 
 let context;
 

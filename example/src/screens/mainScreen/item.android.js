@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+
 import ProgressBar from 'react-native-progress/Bar';
-import CountCircle from './countCircle';
-import ProductControl from './productControlHorizontal'
+
+import ProductControl from '../../components/productItem/productControlHorizontal'
 import {vw, vh, vmin, vmax} from '../../viewport'
 
 function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, off}) {
@@ -40,7 +40,7 @@ function item({title, imageUrl, onPress, price, disscount, count, onUp, onDown, 
             <View style={styles.row}>
 
                 <Image
-                    resizeMode="stretch"
+                    resizeMethod="resize"
                     indicator={ProgressBar} source={{uri: imageUrl}} style={styles.image} key={imageUrl}
                 />
                 <Text numberOfLines={2} style={styles.text}>{title}</Text>
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
 
     discountText: {
         zIndex: 1,
-        backgroundColor: 'transparent',
         fontSize: vw * 4,
         fontFamily: 'B Yekan',
         position: 'absolute',

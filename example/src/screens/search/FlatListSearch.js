@@ -1,18 +1,18 @@
 import React from 'react';
 
-import {StyleSheet, ActivityIndicator, TouchableOpacity, View, FlatList, TextInput} from 'react-native';
+import {StyleSheet, Text, ActivityIndicator, TouchableOpacity, View, FlatList, TextInput} from 'react-native';
 
 
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
+import Entypo from 'react-native-vector-icons/Entypo';
+import RectProduct from './RectProduct'
 
-import RectProduct from '../components/productItem/RectProduct'
-
-import fetch from "../fetch";
-import server from "../code";
-import SimpleNavbar from "../navBars/SimpleNavbar";
+import fetch from "../../fetch";
+import server from "../../code";
+import SimpleNavbar from "../../navBars/SimpleNavbar";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import dataHandeling from "../dataHandeling";
+import dataHandeling from "../../dataHandeling";
 
 let context;
 
@@ -26,10 +26,12 @@ class FlatListSearch extends React.Component {
             data: [],
             noData: false,
             query: '',
-            lastBasket: props.basket
+            lastBasket: props.basket,
+            isFirstTime:true
         };
         context = this;
     }
+
     numberFormat = (x) => {
         let parts = x.toString().split(".");
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -49,6 +51,7 @@ class FlatListSearch extends React.Component {
         context.setState({
             data: responseData,
             loading: true,
+            isFirstTime:false
         });
     };
 
@@ -113,10 +116,12 @@ class FlatListSearch extends React.Component {
                 <FlatList
                     keyExtractor={this._keyExtractor}
                     data={this.state.data}
+                    refreshing={!this.state.loading}
                     style={{marginBottom: 10 * vh}}
                     ItemSeparatorComponent={this.renderSeparator}
                     ListHeaderComponent={this.renderHeader}
-                    ListFooterComponent={this.renderFooter}
+                    ListEmptyComponent={this.renderEmpty}
+                    onRefresh={() => this.makeRemoteRequest(this.state.query)}
                     renderItem={({item}) => (
                         <RectProduct
                             title={item.name}
@@ -172,22 +177,26 @@ class FlatListSearch extends React.Component {
 
         </View>
     };
-    renderFooter = () => {
-        if (this.state.loading) return null;
-
-        if (this.state.noData)
-            return <FontAwesome name="history" size={vw * 5} color="red" style={{flex: 5}}/>
-
-        return (
-            <View
-                style={{
-                    paddingVertical: 20,
-                    borderTopWidth: 1,
-                    borderColor: "#CED0CE"
-                }}>
-                <ActivityIndicator animating size="large"/>
-            </View>
-        );
+    renderEmpty = () => {
+        if (! this.state.isFirstTime)
+            return (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flex: 1,
+                        borderRadius: vw,
+                        borderColor: 'green'
+                    }}>
+                    <Entypo name="emoji-sad" size={vw * 25} color="red"/>
+                    <Text style={{
+                        fontSize: vw * 4.5,
+                        fontFamily: 'B Yekan',
+                        color: 'black'
+                    }}>کالای یافت نشد</Text>
+                </View>
+            );
+        return null;
     };
 
     renderSeparator = () => {

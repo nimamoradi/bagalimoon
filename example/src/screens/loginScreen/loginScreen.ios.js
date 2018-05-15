@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {vw, vh,} from '../viewport'
+import {vw, vh,} from '../../viewport'
 
 import {
     StyleSheet,
@@ -10,9 +10,9 @@ import {
     ImageBackground,
     AsyncStorage
 } from 'react-native';
-import server from '../code'
-import Loading from '../components/loadScreen'
-import fetch from '../fetch'
+import server from '../../code'
+import Loading from '../../components/loadScreen'
+import fetch from '../../fetch'
 import * as DeviceInfo from 'react-native-device-info';
 import _ from 'lodash'
 
@@ -70,7 +70,7 @@ class loginScreen extends React.Component {
                         flex:1,
                         resizeMode:'cover'
                     }}
-                    source={require('../../img/login.png')}>
+                    source={require('../../../img/login.png')}>
 
                     <View style={styles.absolote}>
                         <View style={{height: 16 * vh}}>
@@ -138,7 +138,7 @@ class loginScreen extends React.Component {
         }).then((response) => response.json().then((responseData) => {
             console.log('inside login response json');
             console.log('response object:', responseData);
-
+            
             context.setState({sendData: false});
             if (responseData.hasOwnProperty('successful') && responseData.successful === true) {
                 context.login({

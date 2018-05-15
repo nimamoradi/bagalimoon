@@ -6,6 +6,7 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
+    AsyncStorage
 
 } from 'react-native';
 
@@ -33,8 +34,11 @@ class ServerCheck extends React.Component {
             }
         });
         context = this;
-        this.loginCheck({api_code: props.api_code, user_number: props.user_number});
 
+    }
+    componentWillMount(){
+        this.loginCheck({api_code: this.props.api_code, user_number: this.props.user_number});
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
     }
 
     loginCheck(param) {
@@ -53,9 +57,10 @@ class ServerCheck extends React.Component {
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log(JSON.stringify(responseData));
+       
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
-
+                   
                     context.props.navigator.resetTo({
                         backButtonTitle: '',
                         screen: 'example.Types',
@@ -66,12 +71,14 @@ class ServerCheck extends React.Component {
                         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                         backButtonHidden: true,
                         overrideBackPress: false,
-                        passProps: {api_code: param.api_code, user_number: param.user_number},
+                        passProps: {api_code: param.api_code, user_number: param.user_number,
+                            minimum_cart_price:responseData.minimum_cart_price},
 
                     });
 
 
                 } else {
+                    AsyncStorage.clear();
                     context.props.navigator.push({
                         backButtonTitle: '',
                         screen: 'example.Types.loginScreen',
@@ -87,7 +94,7 @@ class ServerCheck extends React.Component {
 
                 }
             }).catch(error => {
-                server.retryParam();
+                server.retryParam(context.loginCheck, context, param);
             }).catch(error => {
                 server.retryParam(context.loginCheck, context, param);
             }));

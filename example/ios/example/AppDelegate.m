@@ -29,8 +29,7 @@
 
 //  [AppCenterReactNative register];  // Initialize AppCenter
   
-
-  
+    
 #ifdef DEBUG
 //  
     #ifdef DEBUG

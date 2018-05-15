@@ -7,7 +7,7 @@ import server from "../../code";
 import Loading from '../../components/loadScreen'
 import fetch from '../../fetch'
 import SmallRow from '../../components/smallRow'
-
+import Entypo from 'react-native-vector-icons/Entypo';
 
 let context;
 
@@ -159,6 +159,7 @@ class orderHistroy extends React.Component {
             return (
                 <View style={styles.container}>
                     <FlatList
+                        ListEmptyComponent={this.renderEmpty}
                         showsVerticalScrollIndicator={false}
                         style={{flex: 1, width: '100%',}}
                         keyExtractor={(item) => item.id}
@@ -240,6 +241,29 @@ class orderHistroy extends React.Component {
             }
             , context);
     }
+
+    renderEmpty = () => {
+
+        return (
+            <View
+                style={{
+
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1,
+                    borderRadius: vw,
+                    borderColor: 'green'
+                }}>
+                <Entypo name="emoji-sad" size={vw * 25} color="red"/>
+                <Text style={{
+                    fontSize: vw * 4.5,
+                    fontFamily: 'B Yekan',
+                    color: 'black'
+                }}>شما تا حالا سفارشی نداشتید</Text>
+            </View>
+        );
+
+    };
 
 }
 

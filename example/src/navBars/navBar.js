@@ -19,8 +19,7 @@ function navBar({menu, basket, search, basketSize}) {
                     position: 'absolute',
                     left: 5 * vw,
                     zIndex: 2,
-                    
-                    width: 6 * vw, height: 6 * vw,
+                    width: 8 * vw, height: 8 * vw,
                     borderColor: '#ff0030',
                     borderWidth: vw,
                     borderRadius: 4 * vw,

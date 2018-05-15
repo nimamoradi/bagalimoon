@@ -3,23 +3,26 @@ import {
     ScrollView,
     View,
     FlatList,
-    AppState, Image, TextInput
+    AsyncStorage,
+    AppState, Image, TextInput,
+    TouchableWithoutFeedback,
+    Platform
 } from 'react-native';
 
-import fetch from '../fetch'
-import ImageRow from "../components/ImageRow";
-import Header from '../components/header'
-import Item from '../components/productItem/item'
-import server from '../code'
+import fetch from '../../fetch'
+import ImageRow from "./ImageRow";
+import Header from './header'
+import Item from './item'
+import server from '../../code'
 
 import Carousel from 'react-native-snap-carousel';
-import {vw, vh} from '../viewport'
-// import HockeyApp from 'react-native-hockeyapp'
-import NavBar from '../navBars/navBar'
-import dataHandeling from '../dataHandeling'
+import {vw, vh} from '../../viewport'
+import HockeyApp from 'react-native-hockeyapp'
+import NavBar from '../../navBars/navBar'
+import dataHandeling from '../../dataHandeling'
 import _ from 'lodash'
-import basketFile from "../basketFile";
-import ListViewCustum from "../components/listViewCustum";
+import basketFile from "../../basketFile";
+import ListViewCustum from "../../components/listViewCustum";
 
 
 let context;
@@ -271,16 +274,17 @@ class NavigationTypes extends React.Component {
     }
 
 
-    // componentWillMount() {
-    //     HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
-    // }
+    componentWillMount() {
+        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+         AsyncStorage.setItem('minimum_cart_price', this.props.minimum_cart_price.toString());
+        HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
+    }
 
-    // componentDidMount() {
-    //     HockeyApp.start();
-    //     HockeyApp.checkForUpdate(); // optional
-
-
-    // }
+    componentDidMount() {
+        HockeyApp.start();
+        // if (Platform.OS !== 'ios')
+        //     HockeyApp.checkForUpdate(); // optional
+    }
 
     constructor(props) {
         super(props);
@@ -294,6 +298,7 @@ class NavigationTypes extends React.Component {
             dataSourceOffer: [],
             superBasket: [],
             basketSize: 0,
+            clickCount: 1
 
         };
         basketFile.readBasket().then((item) => {
@@ -522,19 +527,25 @@ class NavigationTypes extends React.Component {
                         renderItem={({item}) => this.renderBestSellingProducts(item)}
                     />
 
-                    <Image
-                        resizeMode="cover"
-                        style={{
-                            top: 0,
-                            left: 40 * vw,
-                            bottom: 2,
-                            right: 40 * vw,
-                            position: 'absolute',
-                            width: 24 * vw,
-                            height: 24 * vw,
-                        }}
-                        source={require('../../img/mainPage/icon.png')}/>
-
+                    <TouchableWithoutFeedback onPress={() => {
+                        if (context.state.clickCount % 6 === 0) {
+                            server.alert('سازندگان', 'نیما مرادی \n امین اخوان صفار', context)
+                        }
+                        context.setState({clickCount: context.state.clickCount + 1})
+                    }}>
+                        <Image
+                            resizeMode="cover"
+                            style={{
+                                top: 0,
+                                left: 40 * vw,
+                                bottom: 2,
+                                right: 40 * vw,
+                                position: 'absolute',
+                                width: 24 * vw,
+                                height: 24 * vw,
+                            }}
+                            source={require('../../../img/mainPage/icon.png')}/>
+                    </TouchableWithoutFeedback>
 
                 </ScrollView>
             );
@@ -545,7 +556,7 @@ class NavigationTypes extends React.Component {
         let Categories = context.state.Categories;
         if (server.getIndex(item.Category_id, Categories, 'id') !== -1)
             this.TypePage(Categories[server.getIndex(item.Category_id, Categories, 'id')].name);
-        else server.alert('توجه','دسته بندی موجود نیست',context)
+        else server.alert('توجه', 'دسته بندی موجود نیست', context)
     }
 
     renderSpecialOffer(item) {

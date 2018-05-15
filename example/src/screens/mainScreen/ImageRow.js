@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableHighlight, Platform, Image} from 'react-native';
-import {vw, vh, vmin, vmax} from '../viewport'
-import ProgressiveImage from './progressiveImage'
+import {vw, vh, vmin, vmax} from '../../viewport'
+
 import ProgressBar from "react-native-progress/Pie";
 
 function ImageRow({title, onPress, imageUrl}) {

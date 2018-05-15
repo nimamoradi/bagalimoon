@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    ScrollView, Image
+    ScrollView, Image,Platform 
 } from 'react-native';
 
 import _ from 'lodash'
@@ -15,7 +15,8 @@ class listViewCustum extends React.Component {
     }
 
     scrollListToStart(contentWidth, contentHeight) {
-        this.scrollView.scrollTo({x: contentWidth});
+        if (Platform.OS === 'android')
+           this.scrollView.scrollTo({x: contentWidth});
     }
     scrollTo(contentWidth, contentHeight) {
         this.scrollView.scrollTo({x: contentWidth, y: contentHeight, animated: true})
@@ -33,8 +34,11 @@ class listViewCustum extends React.Component {
         return (
             <ScrollView
                 ref={ref => this.scrollView = ref}
+                onContentSizeChange={this.scrollListToStart.bind(this)}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
+                scrollEventThrottle={16}
+                removeClippedSubviews={true}
                 showsHorizontalScrollIndicator={false}
                 style={styles.container}>
                 <Image style={{width: 5 * vh, height: 10 * vh, marginRight:  vh}}

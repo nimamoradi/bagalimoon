@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text} from 'react-native';
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
 function header({title}) {
     return (
 
         <View style={styles.row}>
-            <Text style={styles.text}>{title}</Text>
+            <Text numberOfLines={1} style={styles.text}>{title}</Text>
         </View>
 
     );
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     text: {
+        flexWrap: "wrap",
         fontSize:vw*5,
         backgroundColor:'#ff1d1e',
         padding:2*vw,

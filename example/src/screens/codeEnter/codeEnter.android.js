@@ -10,21 +10,24 @@ import {
     AsyncStorage
 
 } from 'react-native';
-import {vw, vh, vmin, vmax} from '../viewport'
-import Loading from '../components/loadScreen'
-import fetch from '../fetch'
+import {vw, vh, vmin, vmax} from '../../viewport'
+import Loading from '../../components/loadScreen'
+import fetch from '../../fetch'
 
 let context;
-import server from '../code'
+import server from '../../code'
 
 
 class codeEnter extends React.Component {
     constructor(props) {
         super(props);
+        props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
         this.state = {
             code: '',
             sendData: false,
         };
+
 
         context = this;
     }
@@ -33,41 +36,37 @@ class codeEnter extends React.Component {
     render() {
         return (
             <ImageBackground
-            style={{
-                width: '100%',
-                height:'100%',
-            }}
-                    source={require('../../img/login.png')}>
+                style={{
+                    width: 100 * vw,
+                    height: 100 * vh,
+                    backgroundColor: '#ffffff10'
+                }}
+                source={require('../../../img/login.png')}>
 
-                    <View style={styles.absolote}>
-                        <View style={{height: 16 * vh}}>
+                <View style={styles.absolote}>
+                    <View style={{width: 100 * vw - 150}}>
                         <Text style={styles.text}>کد دریافتی</Text>
-                        <View style={{
-                                flexDirection: 'row', flex: 1, margin: 4 * vh,
-                                justifyContent: 'center', alignItems: 'center'
-                            }}>
                         <TextInput
-                            onChange={(event) => context.setState({code: event.nativeEvent.text})}
+                            onSubmitEditing={this.enterCode}
+                            onChange={(event) => this.setState({code: event.nativeEvent.text})}
                             keyboardType='numeric' style={styles.textInput}
                             value={this.state.code}/>
-                        </View>
 
                     </View>
                     <TouchableOpacity
-                        onPress={this.isAvailable}
+                        onPress={this.enterCode}
                     >
-                      <Text style={{
-                                textAlign: 'center', borderRadius: 20,
-                                borderColor: '#bec4be',
-                                borderWidth: 0.5,
-                                backgroundColor: '#5bca45',
-                                padding: 10,
-                                marginTop: 15,
-                                borderRadius:4*vw,
-                                width: 32 * vw,
-                                fontFamily: 'B Yekan',
-                                fontSize: 20,
-                                color: '#ffffff'
+                        <Text style={{
+                            textAlign: 'center', borderRadius: 20,
+                            borderColor: '#bec4be',
+                            borderWidth: 0.5,
+                            backgroundColor: '#5bca45',
+                            padding: 10,
+                            marginTop: 15,
+                            width: 32 * vw,
+                            fontFamily: 'B Yekan',
+                            fontSize: vw * 6,
+                            color: '#ffffff'
                         }}>تایید</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row',}}>
@@ -78,7 +77,6 @@ class codeEnter extends React.Component {
                             <Text style={{
                                 fontFamily: 'B Yekan',
                                 fontSize: vw * 5,
-                                borderRadius:4*vw,
                                 color: '#65a4ff'
                             }}>ارسال مجدد</Text>
                         </TouchableOpacity>
@@ -90,15 +88,13 @@ class codeEnter extends React.Component {
                         }}>پیامک دریافت نشد : </Text>
                     </View>
                 </View>
-                {this.state.sendData === true ? <View style={styles.absolote}> <Loading/> </View> : null}
+                <View style={styles.absolote}>
+                    {(this.state.sendData) ? <Loading/> : null}
+                </View>
             </ImageBackground>
         );
     }
-    isAvailable = () => {
-        context.setState({sendData: true});
-        context.enterCode();
 
-    };
 
     doSignUp() {
         context.setState({sendData: true});
@@ -136,6 +132,7 @@ class codeEnter extends React.Component {
     }
 
     enterCode = () => {
+
         context.setState({sendData: true});
 
         console.log("inside post smsVerify");
@@ -152,17 +149,20 @@ class codeEnter extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-
-                if (responseData.successful === true) {
+                alert(JSON.stringify(responseData))
+                if (responseData.hasOwnProperty('successful') && responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
-                    this.pushMainScreen(responseData.api_code);
-                } else if (responseData.successful === false) {
+                    this.pushMainScreen(responseData.api_code, responseData.minimum_cart_price);
+                    return;
+                } else if (responseData.hasOwnProperty('successful') && responseData.successful === false) {
                     context.setState({sendData: false});
                     server.alert('هشدار', 'کد اشتباه است', context);
+                    return;
                 }
                 else if (responseData.sms_code !== null) {
                     context.setState({sendData: false});
                     server.alert('هشدار', 'شماره کد را وارد کنید', context);
+                    return;
                 }
 
 
@@ -173,7 +173,7 @@ class codeEnter extends React.Component {
         });
     };
 
-    pushMainScreen(api) {
+    pushMainScreen(api, minimum_cart_price) {
 
         context.props.navigator.resetTo({
             backButtonTitle: '',
@@ -187,8 +187,8 @@ class codeEnter extends React.Component {
             drawer: { // optional, add this if you want a side menu drawer in your app
                 right: { // optional, define if you want a drawer from the right
                     screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                    passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
-                    fixedWidth:75*vw
+                    passProps: {api_code: api,}, // simple serializable object that will pass as props to all top screens (optional)
+                    fixedWidth: 75 * vw
                 },
                 style: { // ( iOS only )
                     drawerShadow: true, // optional, add this if you want a side menu drawer shadow
@@ -202,7 +202,7 @@ class codeEnter extends React.Component {
                 disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
             },
             overrideBackPress: false,
-            passProps: {api_code: api, user_number: context.state.phoneNumber},
+            passProps: {api_code: api, user_number: context.state.phoneNumber, minimum_cart_price: minimum_cart_price},
 
         });
     }
@@ -211,6 +211,7 @@ class codeEnter extends React.Component {
 
 
 codeEnter.propTypes = {};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -226,29 +227,30 @@ const styles = StyleSheet.create({
 
     },
     text: {
+        fontSize: vw * 5,
         fontFamily: 'B Yekan',
-        fontSize: 5 * vw,
+        margin: 50,
         marginBottom: 10,
         marginLeft: 10,
     },
-
     textInput: {
-        fontFamily: 'B Yekan',
-        borderRadius: 2 * vw,
-        height: 8 * vh,
-            fontSize: 4 * vw,
+        fontSize: vw * 5,
+        borderRadius: 10,
         borderColor: '#bec4be',
-        borderWidth: 1,
-        alignSelf: 'center',
-        width: '80%',
+        borderWidth: 0.5,
+        fontFamily: 'B Yekan',
+        width: '100%',
 
     },
     flex: {
         flex: 1,
     },
     absolote: {
-        marginTop: 10 * vh,
-        flex: 1,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         justifyContent: 'center',
         alignItems: 'center'
     }

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import { vw, vh, vmin, vmax } from '../../viewport'
 import ProgressBar from 'react-native-progress/Pie';
 
-import ProductControl from './productControlVertical'
+import ProductControl from '../../components/productItem/productControlVertical'
 
 function itemView({ title, onUp, onDown, imageUrl, price, count, disscount, off }) {
 
@@ -19,8 +19,6 @@ function itemView({ title, onUp, onDown, imageUrl, price, count, disscount, off 
             <View style={{
                 height: 16 * vw,
                 width: 16 * vw,
-                marginTop: vw,
-                marginLeft: vw,
                 zIndex: 2,
             }}>
                 {(disscount) ?
@@ -47,7 +45,7 @@ function itemView({ title, onUp, onDown, imageUrl, price, count, disscount, off 
                     justifyContent: 'center', alignItems: 'center'
                 }}>
                     <Image
-                        resizeMode="stretch"
+                        resizeMethod="resize"
                         indicator={ProgressBar}
                         source={{ uri: imageUrl }} style={styles.image} />
 
@@ -96,8 +94,8 @@ const styles = StyleSheet.create({
     priceView: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'transparent',
-        justifyContent: 'center'
     },
     row: {
         borderRadius: 5 * vh,
@@ -130,6 +128,7 @@ const styles = StyleSheet.create({
     discount: {
         textDecorationLine:
             'line-through',
+        backgroundColor: 'transparent',
         flex: 1,
         fontSize: vw * 4,
         color: '#d94c3d',
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
         fontFamily: 'B Yekan',
         position: 'absolute',
         backgroundColor: 'transparent',
-        bottom: 7.5 * vw,
+        bottom: 8 * vw,
         right: 4.5 * vw,
         color: 'white',
         transform: [{ rotate: '315deg' }]

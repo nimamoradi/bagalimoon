@@ -1,24 +1,25 @@
 import React, {Component} from 'react';
 import propTypes from 'prop-types';
 import {
-    View,
+    View,Text,
     FlatList, TouchableOpacity,
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
-import ItemView from '../components/productItem/itemView'
-import server from '../code'
-import Loading from '../components/loadScreen'
+import ItemView from './itemView'
+import server from '../../code'
+import Loading from '../../components/loadScreen'
 
-import {vw, vh, vmin, vmax} from '../viewport'
+import {vw, vh, vmin, vmax} from '../../viewport'
 
-import dataHandeling from '../dataHandeling';
+import dataHandeling from '../../dataHandeling';
 
-import RightProductCorner from '../Shapes/rightProductCorner'
-import ProductPageNavBar from '../navBars/productPageNavBar'
-import fetch from '../fetch'
-import _ from 'lodash'
-import ListViewCustum from "../components/listViewCustum";
+import RightProductCorner from './rightProductCorner'
+import ProductPageNavBar from '../../navBars/productPageNavBar'
+import fetch from '../../fetch'
+
+import ListViewCustum from "../../components/listViewCustum";
 
 
 let context;
@@ -28,6 +29,27 @@ class TypePage extends Component {
     setBasket(basket) {
         context.setState({basket: basket, basketSize: 0})
     }
+    renderEmpty = () => {
+        if (this.state.dataReady)
+            return (
+                <View
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flex: 1,
+                        borderRadius: vw,
+                        borderColor: 'green'
+                    }}>
+                    <Entypo name="emoji-sad" size={vw * 25} color="red"/>
+                    <Text style={{
+                        fontSize: vw * 4.5,
+                        fontFamily: 'B Yekan',
+                        color: 'black'
+                    }}>کالای یافت نشد</Text>
+                </View>
+            );
+        return null;
+    };
 
     constructor(props) {
         super(props);
@@ -111,7 +133,7 @@ class TypePage extends Component {
     }
 
     addToCart = () => {
-        // todo clean up
+
         let newBasket = dataHandeling.arrayUnique((context.state.basket.concat(context.props.basket)));
         if (dataHandeling.basketFilter(newBasket).length === 0)
             server.alert('توجه', 'سبد خرید خالی است', context);
@@ -342,6 +364,9 @@ class TypePage extends Component {
                             data={this.state.basket.filter((item) => {
                                 return item.Category_id === this.state.Category_id;
                             })}
+                            ListEmptyComponent={this.renderEmpty}
+                            scrollEventThrottle={16}
+                            removeClippedSubviews={true}
                             keyExtractor={this._keyExtractor}
                             renderItem={({item}) =>
                                 <ItemView
@@ -360,6 +385,8 @@ class TypePage extends Component {
                             showsVerticalScrollIndicator={false}
                             horizontal={false}
                             data={this.state.subItems}
+                            scrollEventThrottle={16}
+                            removeClippedSubviews={true}
                             keyExtractor={this._keyExtractor}
                             renderItem={({item, index}) =>
                                 <RightProductCorner title={item.name}

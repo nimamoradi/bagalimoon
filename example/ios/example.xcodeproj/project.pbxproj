@@ -34,6 +34,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		846E61BB20A394FE00B2CE17 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849F06A2209A16F400F3EE8B /* libRNDeviceInfo.a */; };
 		84EB8452209E06AE0075157E /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849F06AB209A16F400F3EE8B /* libRNSpinkit.a */; };
+		84EE921220A815F800DA18CA /* libRNHockeyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EE920E20A815E300DA18CA /* libRNHockeyApp.a */; };
 		886393EBECAD4186BD3D28EF /* B Yekan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99DE7A60F8B4446AB137E19 /* B Yekan.ttf */; };
 		8DABADEFBE584209947DFCD1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 871B38E3603D41A7A294E487 /* FontAwesome.ttf */; };
 		9A3C7BB4E044453F94336A2A /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D3685C6F6CE404FAE275426 /* Ionicons.ttf */; };
@@ -339,6 +340,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		84EE920D20A815E300DA18CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EE91E320A815E300DA18CA /* RNHockeyApp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 73DDCB891EF02ADD008888CA;
+			remoteInfo = RNHockeyApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -381,6 +389,7 @@
 		846E61BC20A3951D00B2CE17 /* libGoogle-Maps-iOS-Utils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libGoogle-Maps-iOS-Utils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846E61BE20A3951D00B2CE17 /* libreact-native-google-maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-google-maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846E61C020A3951D00B2CE17 /* libreact-native-maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EE91E320A815E300DA18CA /* RNHockeyApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNHockeyApp.xcodeproj; path = "../node_modules/react-native-hockeyapp/RNHockeyApp/RNHockeyApp.xcodeproj"; sourceTree = "<group>"; };
 		871B38E3603D41A7A294E487 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9A8952C790B5419093A60556 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		9E2745D220AA4EB7AF37BFD6 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -405,6 +414,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EE921220A815F800DA18CA /* libRNHockeyApp.a in Frameworks */,
 				846E61BB20A394FE00B2CE17 /* libRNDeviceInfo.a in Frameworks */,
 				84EB8452209E06AE0075157E /* libRNSpinkit.a in Frameworks */,
 				7B9B39861DEB4091004A6281 /* libRCTAnimation.a in Frameworks */,
@@ -591,6 +601,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				84EE91E320A815E300DA18CA /* RNHockeyApp.xcodeproj */,
 				7B9B395C1DEB4076004A6281 /* RCTAnimation.xcodeproj */,
 				2647D6591DB175B300B23722 /* ReactNativeNavigation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -683,6 +694,14 @@
 			children = (
 				849F06AB209A16F400F3EE8B /* libRNSpinkit.a */,
 				849F06AD209A16F400F3EE8B /* libRNSpinkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84EE91E420A815E300DA18CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84EE920E20A815E300DA18CA /* libRNHockeyApp.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -838,6 +857,10 @@
 				{
 					ProductGroup = 849F0686209A16F300F3EE8B /* Products */;
 					ProjectRef = 099D16DBBB4A4F7B841FE8F5 /* RNGestureHandler.xcodeproj */;
+				},
+				{
+					ProductGroup = 84EE91E420A815E300DA18CA /* Products */;
+					ProjectRef = 84EE91E320A815E300DA18CA /* RNHockeyApp.xcodeproj */;
 				},
 				{
 					ProductGroup = 849F0688209A16F300F3EE8B /* Products */;
@@ -1144,6 +1167,13 @@
 			remoteRef = 849F06AF209A16F400F3EE8B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		84EE920E20A815E300DA18CA /* libRNHockeyApp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNHockeyApp.a;
+			remoteRef = 84EE920D20A815E300DA18CA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1220,10 +1250,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-example/Pods-example-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1351,6 +1383,7 @@
 					"-l\"c++\"",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = ir.saffarino.Baghalimoon;
 				PRODUCT_NAME = Baghalimoon;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1374,6 +1407,7 @@
 					"-l\"c++\"",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = ir.saffarino.Baghalimoon;
 				PRODUCT_NAME = Baghalimoon;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

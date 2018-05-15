@@ -40,6 +40,7 @@ function productPageNavBar({context, basket, search, basketSize}) {
                     borderRadius: 4 * vw,
                     textAlign: 'center',
                     fontSize: vw * 4,
+                    overflow: 'hidden',
                     fontFamily: 'B Yekan',
                     textAlignVertical: 'center',
                     backgroundColor: 'white', color: '#ff0030'

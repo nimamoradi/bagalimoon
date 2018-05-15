@@ -33,6 +33,9 @@
 		7CA517F376424BD9A85D9185 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40B3D4F33BAC40EEAAE333C4 /* Zocial.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		846E61BB20A394FE00B2CE17 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849F06A2209A16F400F3EE8B /* libRNDeviceInfo.a */; };
+		84A2C66B20AB74DA0063629D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A2C66A20AB74DA0063629D /* MapKit.framework */; };
+		84A2C67520AB764C0063629D /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2C67420AB764C0063629D /* NotificationService.m */; };
+		84A2C67920AB764C0063629D /* example_push.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 84A2C67120AB764C0063629D /* example_push.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		84EB8452209E06AE0075157E /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849F06AB209A16F400F3EE8B /* libRNSpinkit.a */; };
 		84EE921220A815F800DA18CA /* libRNHockeyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EE920E20A815E300DA18CA /* libRNHockeyApp.a */; };
 		886393EBECAD4186BD3D28EF /* B Yekan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E99DE7A60F8B4446AB137E19 /* B Yekan.ttf */; };
@@ -340,6 +343,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		84A2C67720AB764C0063629D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84A2C67020AB764C0063629D;
+			remoteInfo = example_push;
+		};
 		84EE920D20A815E300DA18CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84EE91E320A815E300DA18CA /* RNHockeyApp.xcodeproj */;
@@ -348,6 +358,20 @@
 			remoteInfo = RNHockeyApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84A2C67D20AB764C0063629D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				84A2C67920AB764C0063629D /* example_push.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -389,6 +413,12 @@
 		846E61BC20A3951D00B2CE17 /* libGoogle-Maps-iOS-Utils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libGoogle-Maps-iOS-Utils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846E61BE20A3951D00B2CE17 /* libreact-native-google-maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-google-maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846E61C020A3951D00B2CE17 /* libreact-native-maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84A2C66A20AB74DA0063629D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		84A2C66C20AB75B80063629D /* Baghalimoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Baghalimoon.entitlements; path = example/Baghalimoon.entitlements; sourceTree = "<group>"; };
+		84A2C67120AB764C0063629D /* example_push.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = example_push.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		84A2C67320AB764C0063629D /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		84A2C67420AB764C0063629D /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		84A2C67620AB764C0063629D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84EE91E320A815E300DA18CA /* RNHockeyApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNHockeyApp.xcodeproj; path = "../node_modules/react-native-hockeyapp/RNHockeyApp/RNHockeyApp.xcodeproj"; sourceTree = "<group>"; };
 		871B38E3603D41A7A294E487 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9A8952C790B5419093A60556 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -418,6 +448,7 @@
 				846E61BB20A394FE00B2CE17 /* libRNDeviceInfo.a in Frameworks */,
 				84EB8452209E06AE0075157E /* libRNSpinkit.a in Frameworks */,
 				7B9B39861DEB4091004A6281 /* libRCTAnimation.a in Frameworks */,
+				84A2C66B20AB74DA0063629D /* MapKit.framework in Frameworks */,
 				2647D65F1DB175C200B23722 /* libReactNativeNavigation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -431,6 +462,13 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				4B857310247640C183EAFEB6 /* libz.tbd in Frameworks */,
 				247A53A59546F6D88C355386 /* libPods-example.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84A2C66E20AB764C0063629D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +557,7 @@
 		13B07FAE1A68108700A75B9A /* example */ = {
 			isa = PBXGroup;
 			children = (
+				84A2C66C20AB75B80063629D /* Baghalimoon.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -562,6 +601,7 @@
 		40B90220BDDC4825B43FE4DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84A2C66A20AB74DA0063629D /* MapKit.framework */,
 				846E61BC20A3951D00B2CE17 /* libGoogle-Maps-iOS-Utils.a */,
 				846E61BE20A3951D00B2CE17 /* libreact-native-google-maps.a */,
 				846E61C020A3951D00B2CE17 /* libreact-native-maps.a */,
@@ -638,6 +678,7 @@
 				13B07FAE1A68108700A75B9A /* example */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* exampleTests */,
+				84A2C67220AB764C0063629D /* example_push */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A9FEBCC2E8024C5DA24915C1 /* Resources */,
 				40B90220BDDC4825B43FE4DA /* Frameworks */,
@@ -652,6 +693,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Baghalimoon.app */,
 				00E356EE1AD99517003FC87E /* exampleTests.xctest */,
+				84A2C67120AB764C0063629D /* example_push.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -696,6 +738,16 @@
 				849F06AD209A16F400F3EE8B /* libRNSpinkit.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		84A2C67220AB764C0063629D /* example_push */ = {
+			isa = PBXGroup;
+			children = (
+				84A2C67320AB764C0063629D /* NotificationService.h */,
+				84A2C67420AB764C0063629D /* NotificationService.m */,
+				84A2C67620AB764C0063629D /* Info.plist */,
+			);
+			path = example_push;
 			sourceTree = "<group>";
 		};
 		84EE91E420A815E300DA18CA /* Products */ = {
@@ -758,15 +810,34 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				C7B6FF03F47F28D04069AE92 /* [CP] Copy Pods Resources */,
+				84A2C67D20AB764C0063629D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84A2C67820AB764C0063629D /* PBXTargetDependency */,
 			);
 			name = example;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* Baghalimoon.app */;
 			productType = "com.apple.product-type.application";
+		};
+		84A2C67020AB764C0063629D /* example_push */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84A2C67A20AB764C0063629D /* Build configuration list for PBXNativeTarget "example_push" */;
+			buildPhases = (
+				84A2C66D20AB764C0063629D /* Sources */,
+				84A2C66E20AB764C0063629D /* Frameworks */,
+				84A2C66F20AB764C0063629D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = example_push;
+			productName = example_push;
+			productReference = 84A2C67120AB764C0063629D /* example_push.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -783,6 +854,22 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = SC39RWPYNB;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					84A2C67020AB764C0063629D = {
+						CreatedOnToolsVersion = 9.3;
+						DevelopmentTeam = SC39RWPYNB;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -875,6 +962,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* example */,
 				00E356ED1AD99517003FC87E /* exampleTests */,
+				84A2C67020AB764C0063629D /* example_push */,
 			);
 		};
 /* End PBXProject section */
@@ -1207,6 +1295,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84A2C66F20AB764C0063629D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1282,6 +1377,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84A2C66D20AB764C0063629D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A2C67520AB764C0063629D /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1289,6 +1392,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* example */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		84A2C67820AB764C0063629D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84A2C67020AB764C0063629D /* example_push */;
+			targetProxy = 84A2C67720AB764C0063629D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1369,6 +1477,8 @@
 			baseConfigurationReference = 2F18ED4EEC727D75E1081DA8 /* Pods-example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = example/Baghalimoon.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = SC39RWPYNB;
 				HEADER_SEARCH_PATHS = (
@@ -1394,6 +1504,8 @@
 			baseConfigurationReference = 5E3F8C6A28D937E8EDF026D9 /* Pods-example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = example/Baghalimoon.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = SC39RWPYNB;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1491,6 +1603,78 @@
 			};
 			name = Release;
 		};
+		84A2C67B20AB764C0063629D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SC39RWPYNB;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = example_push/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ir.saffarino.Baghalimoon.example-push";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84A2C67C20AB764C0063629D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SC39RWPYNB;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = example_push/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ir.saffarino.Baghalimoon.example-push";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1517,6 +1701,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84A2C67A20AB764C0063629D /* Build configuration list for PBXNativeTarget "example_push" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84A2C67B20AB764C0063629D /* Debug */,
+				84A2C67C20AB764C0063629D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

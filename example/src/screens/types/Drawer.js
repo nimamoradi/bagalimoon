@@ -24,11 +24,8 @@ class MyClass extends React.Component {
     };
 
     toggleDrawer = () => {
-        this.props.navigator.toggleDrawer({
-            side: 'right',
-            animated: true
-        });
-    };
+        this.props._drawer.close();
+        };
 
     orderHistroy() {
         this.toggleDrawer();

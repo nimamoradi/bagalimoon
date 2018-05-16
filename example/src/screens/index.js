@@ -95,21 +95,7 @@ export function login(semi_api_code,user_number) {
         appStyle: {
             orientation: 'portrait',
         },
-        drawer: { // optional, add this if you want a side menu drawer in your app
-            right: { // optional, define if you want a drawer from the right
-                screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
-            },
 
-            style: { // ( iOS only )
-                drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-            },
-            type: 'TheSideBar', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-            animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-            // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-            disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
-        },
         portraitOnlyMode: true,
 
     };
@@ -130,21 +116,7 @@ export function mainPage(api_code) {
         appStyle: {
             orientation: 'portrait',
         },
-        drawer: { // optional, add this if you want a side menu drawer in your app
-            right: { // optional, define if you want a drawer from the right
-                screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {api_code: api_code, shouldUpdate: false}, // simple serializable object that will pass as props to all top screens (optional)
 
-            },
-            style: { // ( iOS only )
-                drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-            },
-            type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-            animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-            // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-            disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
-        },
         portraitOnlyMode: true,
         passProps: {api_code: api_code,}, // simple serializable object that will pass as props to all top screens (optional)
 
@@ -168,21 +140,7 @@ export function serverCheckFailed(api_code, user_number) {
         appStyle: {
             orientation: 'portrait',
         },
-        drawer: { // optional, add this if you want a side menu drawer in your app
-            right: { // optional, define if you want a drawer from the right
-                screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
 
-            },
-            style: { // ( iOS only )
-                drawerShadow: true, // optional, add this if you want a side menu drawer shadow
-                contentOverlayColor: 'rgba(0,0,0,0.25)', // optional, add this if you want a overlay color when drawer is open
-            },
-            type: 'MMDrawer', // optional, iOS only, types: 'TheSideBar', 'MMDrawer' default: 'MMDrawer'
-            animationType: 'parallax', //optional, iOS only, for MMDrawer: 'door', 'parallax', 'slide', 'slide-and-scale'
-            // for TheSideBar: 'airbnb', 'facebook', 'luvocracy','wunder-list'
-            disableOpenGesture: false // optional, can the drawer be opened with a swipe instead of button
-        },
         passProps: {api_code: api_code, user_number: user_number}, // simple serializable object that will pass as props to all top screens (optional)
 
 

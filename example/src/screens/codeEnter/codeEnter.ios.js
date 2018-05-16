@@ -169,9 +169,9 @@ class codeEnter extends React.Component {
 
 
             }).catch(error => {
-            server.retryParam(context.isAvailable, context)
+            server.retryParam(context.enterCode, context)
         }).catch(error => {
-            server.retryParam(context.isAvailable, context)
+            server.retryParam(context.enterCode, context)
         });
     };
 

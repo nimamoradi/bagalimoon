@@ -141,7 +141,7 @@ class code {
                 'isEmulator': DeviceInfo.isEmulator(),
                 'Application_name': 'ios ' + DeviceInfo.getApplicationName(),
                 'APILevel': (() => {
-                    if (Platform.os === 'ios') return 1 ; else return Platform.Version;
+                    if (Platform.OS === 'ios') return 1 ; else return Platform.Version;
                 }),
                 'Brand': DeviceInfo.getBrand(),
                 'BuildNumber': DeviceInfo.getBuildNumber().toString(),

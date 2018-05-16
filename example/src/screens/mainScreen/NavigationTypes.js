@@ -23,7 +23,8 @@ import dataHandeling from '../../dataHandeling'
 import _ from 'lodash'
 import basketFile from "../../basketFile";
 import ListViewCustum from "../../components/listViewCustum";
-
+import Drawer from 'react-native-drawer'
+import DrawerView from '../types/Drawer'
 
 let context;
 
@@ -298,7 +299,8 @@ class NavigationTypes extends React.Component {
             dataSourceOffer: [],
             superBasket: [],
             basketSize: 0,
-            clickCount: 1
+            clickCount: 1,
+            drawerOpen: false
 
         };
         basketFile.readBasket().then((item) => {
@@ -335,13 +337,9 @@ class NavigationTypes extends React.Component {
     }
 
     toggleDrawer = () => {
-
-        this.props.navigator.toggleDrawer({
-            side: 'right',
-            animated: true,
-            basket: context.getBasket,
-            api_code: context.props.api_code
-        });
+        if (context.state.drawerOpen)
+            this._drawer.close();
+        else this._drawer.open();
     };
 
 
@@ -474,80 +472,105 @@ class NavigationTypes extends React.Component {
         if (!this.state.dataReady) return null;
         else
             return (
-                <ScrollView
-                    style={{backgroundColor: '#f2f2f2'}}
-                    showsVerticalScrollIndicator={false}>
+                <Drawer
+                    ref={(ref) => this._drawer = ref}
+                    type="static"
+                    animation={this.state.animation}
+                    content={
+                        <DrawerView navigator={this.props.navigator} _drawer={this._drawer} api_code={this.props.api_code}/>
+                    }
+                    side='right'
+                    styles={drawerStyles}
+                    captureGestures={false}
+                    tweenDuration={1000}
+                    openDrawerOffset={0.2} // 20% gap on the right side of drawer
+                    closedDrawerOffset={-3}
+                    panCloseMask={0.2}
+                    onOpen={() => {
+                        this.setState({drawerOpen: true})
+                    }}
+                    onClose={() => {
+                        this.setState({drawerOpen: false})
+                    }}
+                    acceptDoubleTap
+                    panThreshold={0.08}
+                    negotiatePan
+                >
+                    <ScrollView
+                        style={{backgroundColor: '#f2f2f2'}}
+                        showsVerticalScrollIndicator={false}>
 
-                    <NavBar
-                        basketSize={this.state.basketSize}
-                        menu={() => this.toggleDrawer()} basket={this.basket}
-                        search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
-                            {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
-                    {this.state.dataSourceOffer != null ? <Carousel
-                        autoplayInterval={5000}
-                        autoplayDelay={5000}
-                        autoplay={true}
-                        ref={(c) => {
-                            this._carousel = c;
-                        }}
-                        data={this.state.dataSourceOffer}
-                        renderItem={NavigationTypes._renderItem}
-                        sliderHeight={vh * 2}
-                        itemHeight={vh * 30}
-                        sliderWidth={100 * vw}
-                        itemWidth={100 * vw}
-                        loop={false}
-                    /> : null}
-
-
-                    <ListViewCustum
-                        data={this.state.Types} action={this.dummyTypePage}/>
-
-                    <Header title="پیشنهاد ویژه"/>
-
-                    <FlatList
-                        style={{
-                            flexDirection: 'row',
-                            width: 100 * vw, height: 45 * vh
-                        }}
-                        horizontal={true}
-                        keyExtractor={(item) => item.id}
-                        showsHorizontalScrollIndicator={false}
-                        data={this.state.superBasket}
-                        renderItem={({item}) => this.renderSpecialOffer(item)}
-                    />
-                    <Header style={{height: vh * 10}} title="پرفروش ترین ها"/>
-
-                    <FlatList
-                        style={{flexDirection: 'row', width: 100 * vw, height: 45 * vh,}}
-                        horizontal={true}
-                        keyExtractor={(item) => item.id}
-                        showsHorizontalScrollIndicator={false}
-                        data={this.state.superBasket}
-                        renderItem={({item}) => this.renderBestSellingProducts(item)}
-                    />
-
-                    <TouchableWithoutFeedback onPress={() => {
-                        if (context.state.clickCount % 6 === 0) {
-                            server.alert('سازندگان', 'نیما مرادی \n امین اخوان صفار', context)
-                        }
-                        context.setState({clickCount: context.state.clickCount + 1})
-                    }}>
-                        <Image
-                            resizeMode="cover"
-                            style={{
-                                top: 0,
-                                left: 40 * vw,
-                                bottom: 2,
-                                right: 40 * vw,
-                                position: 'absolute',
-                                width: 24 * vw,
-                                height: 24 * vw,
+                        <NavBar
+                            basketSize={this.state.basketSize}
+                            menu={() => this.toggleDrawer()} basket={this.basket}
+                            search={() => this.pushScreen('example.FlatListSearch', 'جستجو',
+                                {basket: this.state.superBasket, UpdateBasket: NavigationTypes.basketUpdater})}/>
+                        {this.state.dataSourceOffer != null ? <Carousel
+                            autoplayInterval={5000}
+                            autoplayDelay={5000}
+                            autoplay={true}
+                            ref={(c) => {
+                                this._carousel = c;
                             }}
-                            source={require('../../../img/mainPage/icon.png')}/>
-                    </TouchableWithoutFeedback>
+                            data={this.state.dataSourceOffer}
+                            renderItem={NavigationTypes._renderItem}
+                            sliderHeight={vh * 2}
+                            itemHeight={vh * 30}
+                            sliderWidth={100 * vw}
+                            itemWidth={100 * vw}
+                            loop={false}
+                        /> : null}
 
-                </ScrollView>
+
+                        <ListViewCustum
+                            data={this.state.Types} action={this.dummyTypePage}/>
+
+                        <Header title="پیشنهاد ویژه"/>
+
+                        <FlatList
+                            style={{
+                                flexDirection: 'row',
+                                width: 100 * vw, height: 45 * vh
+                            }}
+                            horizontal={true}
+                            keyExtractor={(item) => item.id}
+                            showsHorizontalScrollIndicator={false}
+                            data={this.state.superBasket}
+                            renderItem={({item}) => this.renderSpecialOffer(item)}
+                        />
+                        <Header style={{height: vh * 10}} title="پرفروش ترین ها"/>
+
+                        <FlatList
+                            style={{flexDirection: 'row', width: 100 * vw, height: 45 * vh,}}
+                            horizontal={true}
+                            keyExtractor={(item) => item.id}
+                            showsHorizontalScrollIndicator={false}
+                            data={this.state.superBasket}
+                            renderItem={({item}) => this.renderBestSellingProducts(item)}
+                        />
+
+                        <TouchableWithoutFeedback onPress={() => {
+                            if (context.state.clickCount % 6 === 0) {
+                                server.alert('سازندگان', 'نیما مرادی \n امین اخوان صفار', context)
+                            }
+                            context.setState({clickCount: context.state.clickCount + 1})
+                        }}>
+                            <Image
+                                resizeMode="cover"
+                                style={{
+                                    top: 0,
+                                    left: 40 * vw,
+                                    bottom: 2,
+                                    right: 40 * vw,
+                                    position: 'absolute',
+                                    width: 24 * vw,
+                                    height: 24 * vw,
+                                }}
+                                source={require('../../../img/mainPage/icon.png')}/>
+                        </TouchableWithoutFeedback>
+
+                    </ScrollView>
+                </Drawer>
             );
 
     }
@@ -698,4 +721,8 @@ class NavigationTypes extends React.Component {
     };
 }
 
+const drawerStyles = {
+    drawer: {shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
+    main: {paddingLeft: 3},
+};
 export default (NavigationTypes);

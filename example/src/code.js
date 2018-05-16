@@ -140,7 +140,9 @@ class code {
                 'screenWidth': 100 * vw,
                 'isEmulator': DeviceInfo.isEmulator(),
                 'Application_name': 'ios ' + DeviceInfo.getApplicationName(),
-                'APILevel': Platform.Version,
+                'APILevel': (() => {
+                    if (Platform.os === 'ios') return 1 ; else return Platform.Version;
+                }),
                 'Brand': DeviceInfo.getBrand(),
                 'BuildNumber': DeviceInfo.getBuildNumber().toString(),
                 'BundleId': DeviceInfo.getBundleId(),

@@ -57,7 +57,8 @@ class ServerCheck extends React.Component {
         }).then((response) => response.json())
             .then((responseData) => {
                 console.log(JSON.stringify(responseData));
-       
+                alert(JSON.stringify(responseData));
+
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
                    

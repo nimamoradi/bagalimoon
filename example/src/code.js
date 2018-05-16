@@ -243,10 +243,12 @@ class code {
 
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
-                if (data.key === null)
-                    data.key = 'E';
+                if (data[key] === undefined || (data[key] == null || data[key] === "")) {
+                    data[key] = 'E';
+                }
             }
         }
+
 
         return data;
     }

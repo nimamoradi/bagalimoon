@@ -118,6 +118,18 @@ class MyClass extends React.Component {
                         </View>
 
                     </TouchableOpacity>
+  <TouchableOpacity
+                        onPress={() => {
+                           this.backPressed();
+                        }}>
+                        <View style={styles.row}>
+                            <Text style={styles.textFont}>خروج از حساب کاربری</Text>
+                            <View style={{ flex: 1 }} />
+                            <MaterialIcon name="exit-to-app" size={vw * 8} color="#1064d3"
+                                style={{ margin: 10, alignSelf: 'flex-start' }} />
+                        </View>
+
+                    </TouchableOpacity>
 
                 </View>
                 <Text style={styles.text}>نسخه-1.45</Text>

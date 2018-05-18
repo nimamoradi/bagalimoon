@@ -477,14 +477,15 @@ class NavigationTypes extends React.Component {
                     type="static"
                     animation={this.state.animation}
                     content={
-                        <DrawerView navigator={this.props.navigator} _drawer={this._drawer} api_code={this.props.api_code}/>
+                        <DrawerView navigator={this.props.navigator} _drawer={this._drawer}
+                                    api_code={this.props.api_code}/>
                     }
                     side='right'
                     styles={drawerStyles}
                     captureGestures={false}
                     tweenDuration={1000}
                     openDrawerOffset={0.2} // 20% gap on the right side of drawer
-                    closedDrawerOffset={-3}
+
                     panCloseMask={0.2}
                     onOpen={() => {
                         this.setState({drawerOpen: true})
@@ -723,6 +724,5 @@ class NavigationTypes extends React.Component {
 
 const drawerStyles = {
     drawer: {shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
-    main: {paddingLeft: 3},
 };
 export default (NavigationTypes);

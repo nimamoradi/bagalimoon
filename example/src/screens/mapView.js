@@ -531,6 +531,7 @@ const styles = StyleSheet.create({
             borderRadius: 2 * vw,
             margin: 5,
             alignItems: 'center',
+            borderWidth:1,
             height: 8 * vh,
         },
         imageBack: {
@@ -539,6 +540,7 @@ const styles = StyleSheet.create({
             alignContent: 'center',
             alignItems: 'center',
             flex: 1,
+            right:vw,
             justifyContent: 'center',
         },
         container: {

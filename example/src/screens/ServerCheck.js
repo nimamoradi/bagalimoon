@@ -104,8 +104,10 @@ class ServerCheck extends React.Component {
 
     render() {
 
-        return <ImageBackground style={{
-            width: 100 * vw, height: 100 * vh, justifyContent: 'center', flex: 1,
+               return <ImageBackground 
+        resizeMode="stretch"
+        style={{
+      justifyContent: 'center', flex: 1,
             alignItems: 'center'
         }} source={require('../../img/login.png')}>
             <Spinner

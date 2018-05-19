@@ -98,7 +98,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
@@ -182,15 +181,16 @@
     <orderEntry type="library" name="com.google.firebase:firebase-iid-license-12.0.1" level="project" />
     <orderEntry type="library" name="android.arch.core:runtime-1.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-27.1.1" level="project" />
-    <orderEntry type="module" module-name="react-native-navigation" />
     <orderEntry type="module" module-name="react-native-spinkit" />
     <orderEntry type="module" module-name="appcenter-analytics" />
-    <orderEntry type="module" module-name="react-native-exception-handler" />
     <orderEntry type="module" module-name="appcenter-crashes" />
     <orderEntry type="module" module-name="react-native-hockeyapp" />
+    <orderEntry type="module" module-name="react-native-device-info" />
+    <orderEntry type="module" module-name="react-native-navigation" />
+    <orderEntry type="module" module-name="react-native-exception-handler" />
     <orderEntry type="module" module-name="react-native-maps" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
-    <orderEntry type="module" module-name="react-native-device-info" />
+    <orderEntry type="module" module-name="react-native-onesignal" />
     <orderEntry type="module" module-name="react-native-gesture-handler" />
     <orderEntry type="module" module-name="appcenter" />
     <orderEntry type="module" module-name="react-native-code-push" />

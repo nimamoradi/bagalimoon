@@ -59,7 +59,11 @@ class orderHistroy extends React.Component {
                 // console.log(responseData);
 
                 this.setState({
-                    orderData: responseData,
+                    orderData: responseData.sort(function (a, b) {
+                        if (a.id < b.id) return 1;
+                        if (a.id > b.id) return -1;
+                        return 0;
+                    }),
                     sendData: false
                 });
 
@@ -143,6 +147,13 @@ class orderHistroy extends React.Component {
         return parts.join(".");
     };
 
+    initalIndex(id) {
+        let index = server.getIndex(id, context.state.orderData, 'id');
+        if (index !== -1)
+            return index;
+        return 0;
+    }
+
     render() {
         if (this.state.sendData) return <View style={{
             position: 'absolute',
@@ -159,13 +170,19 @@ class orderHistroy extends React.Component {
             return (
                 <View style={styles.container}>
                     <FlatList
+                        initialScrollIndex={this.initalIndex(this.props.index)}
+                        onScrollIndexFailed={0}
+                        getItemLayout={(data, index) => (
+                            {length: 80 * vh, offset: 80 * vh * index, index}
+                        )}
                         ListEmptyComponent={this.renderEmpty}
                         showsVerticalScrollIndicator={false}
                         style={{flex: 1, width: '100%',}}
                         keyExtractor={(item) => item.id}
-                        data={this.state.orderData.reverse()}
+                        data={this.state.orderData}
                         renderItem={({item}) => <View style={{
                             backgroundColor: '#f2f2f2', borderRadius: 4 * vw,
+                            height: 72 * vh,
                             margin: 4 * vw, borderWidth: 1, borderColor: 'black',
                             elevation: vw
                         }}>
@@ -196,6 +213,7 @@ class orderHistroy extends React.Component {
                                         </View>
                                     </TouchableOpacity> : null}
                                 <TouchableOpacity onPress={function () {
+
                                     server.pushScreenNavBar('example.Types.productView', 'محصولات',
                                         {
                                             basket: item.ordered_products,

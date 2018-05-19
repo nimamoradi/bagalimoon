@@ -6,6 +6,7 @@ import {
     AsyncStorage,
     AppState, Image, TextInput,
     TouchableWithoutFeedback,
+    Linking,
     Platform
 } from 'react-native';
 
@@ -276,10 +277,54 @@ class NavigationTypes extends React.Component {
 
 
     componentWillMount() {
+
         AsyncStorage.setItem('minimum_cart_price', this.props.minimum_cart_price.toString());
     }
 
+    onOpened(openResult) {
+        alert(openResult.notification.payload.additionalData);
 
+    }
+
+    componentDidMount() { // B
+        if (Platform.OS === 'android') {
+            Linking.getInitialURL().then(url => {
+                this.parseNavUrl(url)
+            });
+        } else {
+            Linking.addEventListener('url', this.handleOpenURL);
+        }
+    }
+
+    componentWillUnmount() {
+        Linking.removeEventListener('url', context.handleOpenURL);
+    }
+
+    handleOpenURL(event) {
+        //baghalimoon://main
+        this.parseNavUrl(event.url);
+    }
+
+    parseNavUrl(url) {
+        const route = url.replace(/.*?:\/\//g, '');
+        const id = route.match(/\/([^\/]+)\/?$/)[1];
+        const routeName = route.split('/')[1];
+        if (routeName !== null)
+            context.props.navigator.push({
+                screen: 'example.Types.orderHistroy',
+                title: 'سوابق سفارش',
+                passProps: {
+                    api_code: this.props.api_code,
+                    index: parseInt(id)
+                },
+                navigatorStyle: {
+                    navBarTranslucent: true,
+                    navBarTextFontFamily: 'B Yekan',// Changes the title font
+                    navBarComponentAlignment: 'center',
+                    navBarTitleTextCentered: true,
+                },
+            });
+    }
 
     constructor(props) {
         super(props);

@@ -9,6 +9,7 @@ import com.facebook.react.modules.i18nmanager.I18nUtil;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
@@ -58,6 +59,7 @@ public class MainApplication extends NavigationApplication {
     public List<ReactPackage> createAdditionalReactPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+                new ReactNativeOneSignalPackage(),
                 new ReactNativeExceptionHandlerPackage(),
                 new RNDeviceInfo(),
                 new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),

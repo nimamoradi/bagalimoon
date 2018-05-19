@@ -36,7 +36,8 @@ class MyClass extends React.Component {
             screen: 'example.Types.orderHistroy',
             title: 'سوابق سفارش',
             passProps: {
-                api_code: this.props.api_code
+                api_code: this.props.api_code,
+                index: 0
             },
             navigatorStyle: {
                 navBarTranslucent: true,
@@ -44,8 +45,6 @@ class MyClass extends React.Component {
                 navBarComponentAlignment: 'center',
                 navBarTitleTextCentered: true,
             },
-
-
         });
     }
 

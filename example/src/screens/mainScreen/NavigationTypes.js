@@ -17,7 +17,7 @@ import server from '../../code'
 
 import Carousel from 'react-native-snap-carousel';
 import {vw, vh} from '../../viewport'
-import HockeyApp from 'react-native-hockeyapp'
+
 import NavBar from '../../navBars/navBar'
 import dataHandeling from '../../dataHandeling'
 import _ from 'lodash'
@@ -167,9 +167,9 @@ class NavigationTypes extends React.Component {
 
             this.getBanners(responseData.Banners);
             this.loadCategories(JSON.parse(responseData.AllCategories));
-            this.getSpecialOffer(JSON.parse(responseData.SpecialOffer));
             this.getBestSellingProducts(JSON.parse(responseData.BestSellingProducts));
-
+            this.getSpecialOffer(JSON.parse(responseData.SpecialOffer));
+            context.setState({dataReady: true});
         }))
             .catch(ignored => {
                 server.retryParam(context.loadMainPage, context);
@@ -271,25 +271,19 @@ class NavigationTypes extends React.Component {
     };
 
     getBanners(responseData) {
-        context.setState({dataSourceOffer: responseData, dataReady: true})
+        context.setState({dataSourceOffer: responseData,})
     }
 
 
     componentWillMount() {
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         AsyncStorage.setItem('minimum_cart_price', this.props.minimum_cart_price.toString());
-        HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
     }
 
-    componentDidMount() {
-        HockeyApp.start();
-        if (Platform.OS === 'android')
-            HockeyApp.checkForUpdate(); // optional
-    }
+
 
     constructor(props) {
         super(props);
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: true});
+
         this.state = {
             dataReady: false,
             SpecialOffer: '',
@@ -484,8 +478,7 @@ class NavigationTypes extends React.Component {
                     styles={drawerStyles}
                     captureGestures={false}
                     tweenDuration={1000}
-                    openDrawerOffset={0.2} // 20% gap on the right side of drawer
-
+                    openDrawerOffset={25 * vw} // 25% gap on the right side of drawer
                     panCloseMask={0.2}
                     onOpen={() => {
                         this.setState({drawerOpen: true})
@@ -533,6 +526,7 @@ class NavigationTypes extends React.Component {
                                 flexDirection: 'row',
                                 width: 100 * vw, height: 45 * vh
                             }}
+                            removeClippedSubviews={false}
                             horizontal={true}
                             keyExtractor={(item) => item.id}
                             showsHorizontalScrollIndicator={false}
@@ -542,6 +536,7 @@ class NavigationTypes extends React.Component {
                         <Header style={{height: vh * 10}} title="پرفروش ترین ها"/>
 
                         <FlatList
+                            removeClippedSubviews={false}
                             style={{flexDirection: 'row', width: 100 * vw, height: 45 * vh,}}
                             horizontal={true}
                             keyExtractor={(item) => item.id}

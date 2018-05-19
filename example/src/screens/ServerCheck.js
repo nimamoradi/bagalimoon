@@ -2,21 +2,20 @@ import React, {Component} from 'react';
 import {
     ImageBackground,
     BackHandler,
-    View,
-    Text,
-    TouchableOpacity,
+    Platform,
     StyleSheet,
     AsyncStorage
 
 } from 'react-native';
+import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
-import Icon from 'react-native-vector-icons/EvilIcons';
-import Loading from '../components/loadScreen'
-import Retry from '../components/reTry'
+
 import {vw, vh, vmin, vmax} from '../viewport'
 import server from "../code";
-import _ from 'lodash'
+
 import fetch from "../fetch";
+import HockeyApp from 'react-native-hockeyapp'
+
 
 const Spinner = require('react-native-spinkit');
 let context;
@@ -24,7 +23,7 @@ let context;
 class ServerCheck extends React.Component {
     constructor(props) {
         super(props);
-        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
         this.state = {
             param: {api_code: props.api_code, user_number: props.user_number}
         };
@@ -35,10 +34,6 @@ class ServerCheck extends React.Component {
         });
         context = this;
 
-    }
-    componentWillMount(){
-        this.loginCheck({api_code: this.props.api_code, user_number: this.props.user_number});
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
     }
 
     loginCheck(param) {
@@ -60,7 +55,7 @@ class ServerCheck extends React.Component {
 
                 if (!responseData.hasOwnProperty("error")) {
                     console.log('example.Types');
-                   
+
                     context.props.navigator.resetTo({
                         backButtonTitle: '',
                         screen: 'example.Types',
@@ -71,8 +66,10 @@ class ServerCheck extends React.Component {
                         }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
                         backButtonHidden: true,
                         overrideBackPress: false,
-                        passProps: {api_code: param.api_code, user_number: param.user_number,
-                            minimum_cart_price:responseData.minimum_cart_price},
+                        passProps: {
+                            api_code: param.api_code, user_number: param.user_number,
+                            minimum_cart_price: responseData.minimum_cart_price
+                        },
 
                     });
 
@@ -102,12 +99,26 @@ class ServerCheck extends React.Component {
 
     }
 
+    componentWillMount() {
+        // OneSignal.init("YOUR_ONESIGNAL_APPID");
+        OneSignal.init("12637e49-1ef9-44d3-b902-de1f14e4cd5c");
+        OneSignal.sendTag("phone_number", this.props.user_number);
+
+        this.loginCheck({api_code: this.props.api_code, user_number: this.props.user_number});
+        HockeyApp.configure('d1de9e5fa7984b029c084fa1ff56672e', true);
+    }
+
+    componentDidMount() {
+        HockeyApp.start();
+        if (Platform.OS === 'android')
+            HockeyApp.checkForUpdate(); // optional
+        // Sending single tag
+    }
+
     render() {
 
-               return <ImageBackground 
-        resizeMode="stretch"
-        style={{
-      justifyContent: 'center', flex: 1,
+        return <ImageBackground style={{
+            width: 100 * vw, height: 100 * vh, justifyContent: 'center', flex: 1,
             alignItems: 'center'
         }} source={require('../../img/login.png')}>
             <Spinner

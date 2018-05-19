@@ -21,6 +21,7 @@ function navBar({menu, basket, search, basketSize}) {
                     zIndex: 2,
                     width: 8 * vw, height: 8 * vw,
                     borderColor: '#ff0030',
+                     overflow: 'hidden',
                     borderWidth: vw,
                     borderRadius: 4 * vw,
                     textAlign: 'center',

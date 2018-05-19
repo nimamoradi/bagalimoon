@@ -23,7 +23,7 @@ class loginScreen extends React.Component {
         super(props);
         this.login = this.login.bind();
         context = this;
-        this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+
         if (props.semi_api_code !== null && props.semi_api_code !== undefined && props.semi_api_code.length > 0) {
             this.state = {
                 sendData: false,
@@ -41,7 +41,7 @@ class loginScreen extends React.Component {
                 login: this.login.bind(this)
             };
 
-        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
+   
 
     }
 

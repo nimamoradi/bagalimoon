@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    ScrollView, Image
+    ScrollView, Image,
+    Platform
 } from 'react-native';
 
 import _ from 'lodash'
@@ -15,11 +16,14 @@ class listViewCustum extends React.Component {
     }
 
     scrollListToStart(contentWidth, contentHeight) {
-        this.scrollView.scrollTo({x: contentWidth});
+        if (Platform.OS === 'android')
+            this.scrollView.scrollTo({x: contentWidth});
     }
+
     scrollTo(contentWidth, contentHeight) {
         this.scrollView.scrollTo({x: contentWidth, y: contentHeight, animated: true})
     }
+
     render() {
         let listItem = this.props.data.map((item) => {
             return <TypeButton title={item.name}
@@ -40,7 +44,7 @@ class listViewCustum extends React.Component {
                 removeClippedSubviews={true}
                 showsHorizontalScrollIndicator={false}
                 style={styles.container}>
-                <Image style={{width: 5 * vh, height: 10 * vh, marginRight:  vh}}
+                <Image style={{width: 5 * vh, height: 10 * vh, marginRight: vh}}
                        source={require('../../img/leftCorner.png')}/>
                 {listItem}
                 <Image style={{width: 5 * vh, height: 10 * vh, marginLeft: -2 * vh}}

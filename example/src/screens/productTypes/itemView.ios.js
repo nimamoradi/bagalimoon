@@ -19,8 +19,6 @@ function itemView({ title, onUp, onDown, imageUrl, price, count, disscount, off 
             <View style={{
                 height: 16 * vw,
                 width: 16 * vw,
-                marginTop: vw,
-                marginLeft: vw,
                 zIndex: 2,
             }}>
                 {(disscount) ?
@@ -96,7 +94,8 @@ const styles = StyleSheet.create({
     priceView: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
     },
     row: {
         borderRadius: 5 * vh,
@@ -118,15 +117,18 @@ const styles = StyleSheet.create({
         color: 'black',
         flex: 3,
         textAlign: 'center',
+        backgroundColor: 'transparent',
     },
     price: {
         fontSize: vw * 4,
         flex: 1,
+        backgroundColor: 'transparent',
         color: 'black', fontFamily: 'B Yekan', textAlign: 'right',
     },
     discount: {
         textDecorationLine:
             'line-through',
+        backgroundColor: 'transparent',
         flex: 1,
         fontSize: vw * 4,
         color: '#d94c3d',
@@ -153,7 +155,8 @@ const styles = StyleSheet.create({
         fontSize: vw * 4,
         fontFamily: 'B Yekan',
         position: 'absolute',
-        bottom: 7.5 * vw,
+        backgroundColor: 'transparent',
+        bottom: 8 * vw,
         right: 4.5 * vw,
         color: 'white',
         transform: [{ rotate: '315deg' }]

@@ -4,6 +4,7 @@
     <string name="appcenterAnalytics_whenToEnableAnalytics">ALWAYS_SEND</string>
     <string name="reactNativeCodePush_androidDeploymentKey">sPHx7FV1jOLQ8njEscjf7eoxqXAl47b54919-64b0-489c-ac94-333876a50ddc</string>
 
+    <string name="onesignal_app_id">2637e49-1ef9-44d3-b902-de1f14e4cd5c</string>
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>

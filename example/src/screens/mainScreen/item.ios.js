@@ -80,8 +80,7 @@ const styles = StyleSheet.create({
         shadowColor: '#eeeeee',
         borderWidth: 0.75,
         margin: vw,
-        elevation: 2 * vw,
-        paddingBottom:2*vw,
+        paddingBottom: 2 * vw,
     },
     row: {
         zIndex: 0,
@@ -127,6 +126,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 7.5 * vw,
         right: 4.5 * vw,
+        paddingBottom: vw,
         color: 'white',
         transform: [{rotate: '315deg'}]
     }

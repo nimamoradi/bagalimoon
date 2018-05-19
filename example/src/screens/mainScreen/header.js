@@ -6,7 +6,7 @@ function header({title}) {
     return (
 
         <View style={styles.row}>
-            <Text style={styles.text}>{title}</Text>
+            <Text numberOfLines={1} style={styles.text}>{title}</Text>
         </View>
 
     );

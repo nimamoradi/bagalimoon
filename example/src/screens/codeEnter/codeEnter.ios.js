@@ -38,9 +38,9 @@ class codeEnter extends React.Component {
         return (
             <ImageBackground
             style={{
-                width: '100%',
-                height:'100%',
-            }}
+                flex:1,
+                }}
+            resizeMode="stretch"
                     source={require('../../../img/login.png')}>
 
                     <View style={styles.absolote}>
@@ -94,8 +94,9 @@ class codeEnter extends React.Component {
                             color: 'black'
                         }}>پیامک دریافت نشد : </Text>
                     </View>
+                    {(this.state.sendData === true) ?<View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}><Loading/></View>  : null}
                 </View>
-                {(this.state.sendData === true) ? <View style={styles.absolote}> <Loading/> </View> : null}
+               
             </ImageBackground>
         );
     }
@@ -140,6 +141,7 @@ class codeEnter extends React.Component {
     enterCode = () => {
 
         context.setState({sendData: true});
+
         console.log("inside post smsVerify");
         fetch(server.getServerAddress() + '/api/smsVerify', {
             method: 'POST',
@@ -154,31 +156,34 @@ class codeEnter extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-
+              
                 if (responseData.hasOwnProperty('successful') && responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
                     this.pushMainScreen(responseData.api_code, responseData.minimum_cart_price);
+                    return;
                 } else if (responseData.hasOwnProperty('successful') && responseData.successful === false) {
                     context.setState({sendData: false});
                     server.alert('هشدار', 'کد اشتباه است', context);
+                    return;
                 }
                 else if (responseData.sms_code !== null) {
                     context.setState({sendData: false});
                     server.alert('هشدار', 'شماره کد را وارد کنید', context);
+                    return;
                 }
 
 
             }).catch(error => {
-            server.retryParam(context.enterCode, context)
+            server.retryParam(context.isAvailable, context)
         }).catch(error => {
-            server.retryParam(context.enterCode, context)
+            server.retryParam(context.isAvailable, context)
         });
     };
 
     pushMainScreen(api, minimum_cart_price) {
 
         context.props.navigator.resetTo({
-            backButtonTitle: '',
+            
             screen: 'example.Types',
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
             navigatorStyle: {

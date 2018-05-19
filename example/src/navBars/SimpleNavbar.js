@@ -14,10 +14,13 @@ function SimpleNavbar({back, title}) {
             <Text style={{
                 flex: 1,
                 justifyContent: 'center',
+                textAlignVertical:'center',
+                textAlign:'center',
                 fontFamily: 'B Yekan',
+                alignSelf:'center',
                 alignItems: 'center', fontSize: 5 * vw, color: 'white'
             }}>{title}</Text>
-            <View style={{flex: 0.75}}/>
+          
         </View>
     )
 

@@ -22,14 +22,29 @@ class loginScreen extends React.Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind();
-        this.state = {
-            sendData: false,
-            phoneNumber: '09',
-            login: this.login.bind(this)
-        };
-        // this.props.navigator.setDrawerEnabled({side: 'right', enabled: false});
         context = this;
+     
+        if (props.semi_api_code !== null && props.semi_api_code !== undefined && props.semi_api_code.length > 0) {
+            this.state = {
+                sendData: false,
+                phoneNumber: props.user_number,
+                login: this.login.bind(this)
+            };
+            this.login({
+                api_code: props.semi_api_code,
+                phone_number: props.user_number
+            });
+        } else
+            this.state = {
+                sendData: false,
+                phoneNumber: '09',
+                login: this.login.bind(this)
+            };
+
+       
+
     }
+
 
     onChanged = (text) => {
         let newText = '';
@@ -68,8 +83,8 @@ class loginScreen extends React.Component {
                 <ImageBackground
                     style={{
                         flex:1,
-                        resizeMode:'cover'
-                    }}
+                        }}
+                    resizeMode="stretch"
                     source={require('../../../img/login.png')}>
 
                     <View style={styles.absolote}>
@@ -118,6 +133,8 @@ class loginScreen extends React.Component {
 
     
     doSignUp() {
+        context.props.navigator.dismissLightBox();
+        AsyncStorage.setItem('semi_api_code', '');
         context.setState({sendData: true});
         let pin = DeviceInfo.isPinOrFingerprintSet(isSet => {
             pin = (isSet)
@@ -145,6 +162,7 @@ class loginScreen extends React.Component {
                     api_code: responseData.api_code,
                     phone_number: context.state.phoneNumber
                 });
+                AsyncStorage.setItem('semi_api_code', responseData.api_code);
                 AsyncStorage.setItem('user_number', context.state.phoneNumber);
             }
             else if (responseData.hasOwnProperty('phone_number_error') && responseData.phone_number_error === true) {
@@ -166,7 +184,6 @@ class loginScreen extends React.Component {
         // console.log('inside login form');
 
     }
-
 
     login(props) {
 

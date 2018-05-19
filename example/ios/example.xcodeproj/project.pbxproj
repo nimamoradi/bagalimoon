@@ -54,6 +54,7 @@
 		04D07156A6354DFCB8346B10 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB369D350744561BB0C1126 /* libRCTVideo.a */; };
 		ABBF5568CCA1410285B33160 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944120B2C8964EB69DFF35FE /* libRNGestureHandler.a */; };
 		AEF3E6316F6246E28CCDBEBC /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C129209B7B504A9AA22684EF /* libRNSpinkit.a */; };
+		704A32DE346945A6B03C4CBC /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4134056761F43E3B4FAB111 /* libRCTOneSignal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +317,8 @@
 		944120B2C8964EB69DFF35FE /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		CF006CCA8F0A476B9DA5443F /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; name = "RNSpinkit.xcodeproj"; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C129209B7B504A9AA22684EF /* libRNSpinkit.a */ = {isa = PBXFileReference; name = "libRNSpinkit.a"; path = "libRNSpinkit.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		4D415FF8970247E7840A1CF8 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; name = "RCTOneSignal.xcodeproj"; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		C4134056761F43E3B4FAB111 /* libRCTOneSignal.a */ = {isa = PBXFileReference; name = "libRCTOneSignal.a"; path = "libRCTOneSignal.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +361,7 @@
 				04D07156A6354DFCB8346B10 /* libRCTVideo.a in Frameworks */,
 				ABBF5568CCA1410285B33160 /* libRNGestureHandler.a in Frameworks */,
 				AEF3E6316F6246E28CCDBEBC /* libRNSpinkit.a in Frameworks */,
+				704A32DE346945A6B03C4CBC /* libRCTOneSignal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +528,7 @@
 				067A2C1404E041E28B73A6BA /* RCTVideo.xcodeproj */,
 				099D16DBBB4A4F7B841FE8F5 /* RNGestureHandler.xcodeproj */,
 				CF006CCA8F0A476B9DA5443F /* RNSpinkit.xcodeproj */,
+				4D415FF8970247E7840A1CF8 /* RCTOneSignal.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1019,6 +1024,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1039,6 +1045,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

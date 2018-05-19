@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
     priceView: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'transparent',
+        justifyContent: 'center'
     },
     row: {
         borderRadius: 5 * vh,
@@ -119,12 +118,10 @@ const styles = StyleSheet.create({
         color: 'black',
         flex: 3,
         textAlign: 'center',
-        backgroundColor: 'transparent',
     },
     price: {
         fontSize: vw * 4,
         flex: 1,
-        backgroundColor: 'transparent',
         color: 'black', fontFamily: 'B Yekan', textAlign: 'right',
     },
     discount: {
@@ -156,7 +153,6 @@ const styles = StyleSheet.create({
         fontSize: vw * 4,
         fontFamily: 'B Yekan',
         position: 'absolute',
-        backgroundColor: 'transparent',
         bottom: 7.5 * vw,
         right: 4.5 * vw,
         color: 'white',

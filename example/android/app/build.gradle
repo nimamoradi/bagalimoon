@@ -32,8 +32,8 @@ android {
         applicationId 'com.moonShop'
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 145
-        versionName "1.45"
+        versionCode 146
+        versionName "1.46"
         lintOptions {
             abortOnError false
             checkReleaseBuilds false
@@ -79,7 +79,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-maps')
     compile project(':react-native-vector-icons')
     compile 'com.facebook.android:facebook-android-sdk:4.22.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -91,13 +90,14 @@ dependencies {
     compile project(path: ':appcenter-analytics')
     compile project(path: ':appcenter')
     compile project(':react-native-code-push')
-    compile 'com.onesignal:OneSignal:3.8.3'
+    compile 'com.onesignal:OneSignal:3.9.1'
     compile project(':react-native-device-info')
     compile project(path: ':react-native-exception-handler')
     compile project(':react-native-spinkit')
     compile project(path: ':react-native-gesture-handler')
     compile project(path: ':react-native-spinkit')
     compile 'com.android.support:support-core-utils:27.1.1'
+    compile project(path: ':react-native-maps')
 }
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

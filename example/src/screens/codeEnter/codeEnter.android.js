@@ -149,7 +149,7 @@ class codeEnter extends React.Component {
             })
         }).then((response) => response.json())
             .then((responseData) => {
-
+              
                 if (responseData.hasOwnProperty('successful') && responseData.successful === true) {
                     AsyncStorage.setItem('api_code', responseData.api_code);
                     this.pushMainScreen(responseData.api_code, responseData.minimum_cart_price);
@@ -167,9 +167,9 @@ class codeEnter extends React.Component {
 
 
             }).catch(error => {
-            server.retryParam(context.enterCode, context)
+            server.retryParam(context.isAvailable, context)
         }).catch(error => {
-            server.retryParam(context.enterCode, context)
+            server.retryParam(context.isAvailable, context)
         });
     };
 

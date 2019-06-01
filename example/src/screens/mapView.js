@@ -190,16 +190,18 @@ class mapView extends Component {
                 });
                 return <View style={styles.columnItem}>
                     <View style={styles.rowItem}>
+
                         <Picker
                             onValueChange={(itemValue, itemIndex) => this.setState({
                                 serverAdderss: itemValue,
                                 myAddress_id: itemValue
                             })}
-                            style={{flex: 2}}
+                            style={{flex:2}}
                             selectedValue={this.state.serverAdderss}>
                             <Picker.Item value={-1} label={"لطفا یک آدرس انتخاب کنید"}/>
                             {oldAddresses}
                         </Picker>
+                        
                         <ImageBackground
                             resizeMode="stretch"
                             style={styles.imageBack}
@@ -417,6 +419,7 @@ class mapView extends Component {
                         top: 0, left: 5 * vw, right: 0, bottom: 0,
                         width: 90 * vw,
                         borderRadius: 4 * vw,
+                        borderWidth: 1,
                         justifyContent: 'center',
                         alignItems: 'center',
                         overflow: 'hidden'
@@ -531,6 +534,7 @@ const styles = StyleSheet.create({
             borderRadius: 2 * vw,
             margin: 5,
             alignItems: 'center',
+            borderWidth:1,
             height: 8 * vh,
         },
         imageBack: {
@@ -539,6 +543,7 @@ const styles = StyleSheet.create({
             alignContent: 'center',
             alignItems: 'center',
             flex: 1,
+            right:vw,
             justifyContent: 'center',
         },
         container: {

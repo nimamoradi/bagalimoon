@@ -1,25 +1,25 @@
 import {Navigation, ScreenVisibilityListener} from 'react-native-navigation';
 import {Dimensions} from 'react-native';
-import Types from './NavigationTypes';
-import basketLightBox from './basketLightBox'
+import Types from './mainScreen/NavigationTypes';
+import basketLightBox from './basket/basketLightBox'
 import SimpleNavbar from '../navBars/SimpleNavbar'
 import LightBox from './types/LightBox';
-import basketPreview from './basketPreview'
+import basketPreview from './basket/basketPreview'
 import mapView from './mapView'
 import Drawer from './types/Drawer';
 import offer from './types/offer';
 import loadScreen from '../components/loadScreen'
-import descriptionPan from '../components/descriptionPan';
-import opinion from '../components/opinion'
-import alertWithButton from '../components/alertWithButton'
-import TypePage from './TypePage'
-import loginScreen from './loginScreen'
 
-import codeEnter from './codeEnter'
+
+import alertWithButton from '../components/alertWithButton'
+import TypePage from './productTypes/TypePage'
+import loginScreen from './loginScreen/loginScreen'
+
+import codeEnter from './codeEnter/codeEnter'
 import alert from '../components/alertBox'
-import finalBasket from './basketFinal'
+import finalBasket from './basket/basketFinal'
 import reTry from '../components/reTry'
-import FlatListSearch from './FlatListSearch'
+import FlatListSearch from './search/FlatListSearch'
 
 import about_us from './aboutus';
 
@@ -60,8 +60,8 @@ export function registerScreens() {
     Navigation.registerComponent('example.mapView', () => mapView);
     Navigation.registerComponent('example.TypePage', () => TypePage);
     Navigation.registerComponent('example.Types.offer', () => offer);
-    Navigation.registerComponent('example.Types.descriptionPan', () => descriptionPan);
-    Navigation.registerComponent('example.Types.opinion', () => opinion);
+
+
 
 
     Navigation.registerComponent('example.Types.basketLightBox', () => basketLightBox);
@@ -83,14 +83,15 @@ export function registerScreenVisibilityListener() {
     }).register();
 }
 
-export function login() {
-    let startAppdata = {
+export function login(semi_api_code,user_number) {
+    let startAppData = {
         screen: {
             screen: 'example.Types.loginScreen', // unique ID registered with Navigation.registerScreen
             navigatorStyle: {
                 navBarHidden: true,
             }
         },
+        passProps: {semi_api_code:semi_api_code,user_number: user_number},
         appStyle: {
             orientation: 'portrait',
         },
@@ -98,7 +99,6 @@ export function login() {
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
                 passProps: {shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
-                percentOfScreenWidth: 0.75,
             },
 
             style: { // ( iOS only )
@@ -113,11 +113,11 @@ export function login() {
         portraitOnlyMode: true,
 
     };
-    return (startAppdata);
+    return (startAppData);
 }
 
 export function mainPage(api_code) {
-    let startAppdata = {
+    let startAppData = {
         screen: {
             screen: 'example.Types', // unique ID registered with Navigation.registerScreen
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -133,8 +133,8 @@ export function mainPage(api_code) {
         drawer: { // optional, add this if you want a side menu drawer in your app
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
-                passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
-                percentOfScreenWidth: 0.75,
+                passProps: {api_code: api_code, shouldUpdate: false}, // simple serializable object that will pass as props to all top screens (optional)
+
             },
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow
@@ -150,12 +150,12 @@ export function mainPage(api_code) {
 
 
     };
-    return (startAppdata);
+    return (startAppData);
 }
 
 
 export function serverCheckFailed(api_code, user_number) {
-    let startAppdata = {
+    let startAppData = {
         screen: {
             screen: 'example.ServerCheck', // unique ID registered with Navigation.registerScreen
             title: 'بقالی مون', // title of the screen as appears in the nav bar (optional)
@@ -172,7 +172,7 @@ export function serverCheckFailed(api_code, user_number) {
             right: { // optional, define if you want a drawer from the right
                 screen: 'example.Types.Drawer', // unique ID registered with Navigation.registerScreen
                 passProps: {api_code: api_code,shouldUpdate:false}, // simple serializable object that will pass as props to all top screens (optional)
-                percentOfScreenWidth: 0.75,
+
             },
             style: { // ( iOS only )
                 drawerShadow: true, // optional, add this if you want a side menu drawer shadow
@@ -187,6 +187,6 @@ export function serverCheckFailed(api_code, user_number) {
 
 
     };
-    return startAppdata;
+    return startAppData;
 
 }

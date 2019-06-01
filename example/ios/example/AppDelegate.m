@@ -15,17 +15,21 @@
 
 #import <React/RCTRootView.h>
 
+@import GoogleMaps;
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  NSURL *jsCodeLocation;
-
+   NSURL *jsCodeLocation;
+  [GMSServices provideAPIKey:@"AIzaSyAeuW_i1EAaXKVTtnGe7o5_JPlL5wcIEWE"];
 //  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
 
 //  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
 
 //  [AppCenterReactNative register];  // Initialize AppCenter
+  
+    
 #ifdef DEBUG
 //  
     #ifdef DEBUG
@@ -38,7 +42,8 @@
    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 
-
+  
+  
   // **********************************************
   // *** DON'T MISS: THIS IS HOW WE BOOTSTRAP *****
   // **********************************************
@@ -58,7 +63,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   */
-  
+
 
   return YES;
 }

@@ -58,6 +58,8 @@ public class MainApplication extends NavigationApplication {
     public List<ReactPackage> createAdditionalReactPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+            new MapsPackage(),
+            new MapsPackage(),
                 new ReactNativeExceptionHandlerPackage(),
                 new RNDeviceInfo(),
                 new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appcenterCrashes_whenToSendCrashes)),

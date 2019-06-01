@@ -133,44 +133,85 @@ class code {
 
 
     static deviceInfo(phoneNumber) {
-        let data =  {
-            'screenHeight': 100 * vh,
-            'screenWidth': 100 * vw,
-            'isEmulator': DeviceInfo.isEmulator(),
-            'Application_name': DeviceInfo.getApplicationName(),
-            'APILevel': Platform.Version,
-            'Brand': DeviceInfo.getBrand(),
-            'BuildNumber': DeviceInfo.getBuildNumber().toString(),
-            'BundleId': DeviceInfo.getBundleId(),
-            'Carrier': 'ios',
-            'DeviceCountry': DeviceInfo.getDeviceCountry(),
-            'DeviceId': DeviceInfo.getDeviceId(),
-            'DeviceLocale': DeviceInfo.getDeviceLocale(),
-            'DeviceName': DeviceInfo.getDeviceName(),
-            'FirstInstallTime': 0,
-            'FontScale': DeviceInfo.getFontScale(),
-            'FreeDiskStorage': DeviceInfo.getFreeDiskStorage(),
-            'IPAddress': 'ios',
-            'InstanceID':'ios',
-            'LastUpdateTime': 0,
-            'MACAddress': 'ios',
-            'Manufacturer': DeviceInfo.getManufacturer(),
-            'MaxMemory':0,
-            'Model': DeviceInfo.getModel(),
-            'PhoneNumber': phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
-            'ReadableVersion': DeviceInfo.getReadableVersion(),
-            'SerialNumber': 'ios',
-            'SystemName': DeviceInfo.getSystemName(),
-            'SystemVersion': DeviceInfo.getSystemVersion(),
-            'Timezone': DeviceInfo.getTimezone(),
-            'TotalDiskCapacity': DeviceInfo.getTotalDiskCapacity(),
-            'TotalMemory': DeviceInfo.getTotalMemory(),
-            'UniqueID': DeviceInfo.getUniqueID(),
-            'Version': DeviceInfo.getVersion(),
-            'is24Hour': DeviceInfo.is24Hour(),
-            'isPinOrFingerprintSet': false,
-            'isTablet': DeviceInfo.isTablet(),
-        };
+        let data = [];
+        if (Platform.OS === 'ios')
+            data = {
+                'screenHeight': 100 * vh,
+                'screenWidth': 100 * vw,
+                'isEmulator': DeviceInfo.isEmulator(),
+                'Application_name': 'ios ' + DeviceInfo.getApplicationName(),
+                'APILevel': 1,
+                'Brand': DeviceInfo.getBrand(),
+                'BuildNumber': DeviceInfo.getBuildNumber().toString(),
+                'BundleId': DeviceInfo.getBundleId(),
+                'Carrier': 'ios',
+                'DeviceCountry': DeviceInfo.getDeviceCountry(),
+                'DeviceId': DeviceInfo.getDeviceId(),
+                'DeviceLocale': DeviceInfo.getDeviceLocale(),
+                'DeviceName': DeviceInfo.getDeviceName(),
+                'FirstInstallTime': 0,
+                'FontScale': DeviceInfo.getFontScale(),
+                'FreeDiskStorage': DeviceInfo.getFreeDiskStorage(),
+                'IPAddress': 'ios',
+                'InstanceID': 'ios',
+                'LastUpdateTime': 0,
+                'MACAddress': 'ios',
+                'Manufacturer': DeviceInfo.getManufacturer(),
+                'MaxMemory': 0,
+                'Model': DeviceInfo.getModel(),
+                'PhoneNumber': phoneNumber,// DeviceInfo.getPhoneNumber().toString() not working
+                'ReadableVersion': DeviceInfo.getReadableVersion(),
+                'SerialNumber': 'ios',
+                'SystemName': DeviceInfo.getSystemName(),
+                'SystemVersion': DeviceInfo.getSystemVersion(),
+                'Timezone': DeviceInfo.getTimezone(),
+                'TotalDiskCapacity': DeviceInfo.getTotalDiskCapacity(),
+                'TotalMemory': DeviceInfo.getTotalMemory(),
+                'UniqueID': DeviceInfo.getUniqueID(),
+                'Version': DeviceInfo.getVersion(),
+                'is24Hour': DeviceInfo.is24Hour(),
+                'isPinOrFingerprintSet': false,
+                'isTablet': DeviceInfo.isTablet(),
+            };
+        else
+            data = {
+                'screenHeight': 100 * vh,
+                'screenWidth': 100 * vw,
+                'isEmulator': DeviceInfo.isEmulator(),
+                'Application_name': DeviceInfo.getApplicationName(),
+                'APILevel': DeviceInfo.getAPILevel(),
+                'Brand': DeviceInfo.getBrand(),
+                'BuildNumber': DeviceInfo.getBuildNumber().toString(),
+                'BundleId': DeviceInfo.getBundleId(),
+                'Carrier': DeviceInfo.getCarrier(),
+                'DeviceCountry': DeviceInfo.getDeviceCountry(),
+                'DeviceId': DeviceInfo.getDeviceId(),
+                'DeviceLocale': DeviceInfo.getDeviceLocale(),
+                'DeviceName': DeviceInfo.getDeviceName(),
+                'FirstInstallTime': DeviceInfo.getFirstInstallTime(),
+                'FontScale': DeviceInfo.getFontScale(),
+                'FreeDiskStorage': DeviceInfo.getFreeDiskStorage(),
+                'IPAddress': DeviceInfo.getIPAddress().toString(),
+                'InstanceID': DeviceInfo.getInstanceID(),
+                'LastUpdateTime': DeviceInfo.getLastUpdateTime(),
+                'MACAddress': DeviceInfo.getMACAddress().toString(),
+                'Manufacturer': DeviceInfo.getManufacturer(),
+                'MaxMemory': DeviceInfo.getMaxMemory(),
+                'Model': DeviceInfo.getModel(),
+                'PhoneNumber': phoneNumber, // DeviceInfo.getPhoneNumber().toString() not working
+                'ReadableVersion': DeviceInfo.getReadableVersion(),
+                'SerialNumber': DeviceInfo.getSerialNumber(),
+                'SystemName': DeviceInfo.getSystemName(),
+                'SystemVersion': DeviceInfo.getSystemVersion(),
+                'Timezone': DeviceInfo.getTimezone(),
+                'TotalDiskCapacity': DeviceInfo.getTotalDiskCapacity(),
+                'TotalMemory': DeviceInfo.getTotalMemory(),
+                'UniqueID': DeviceInfo.getUniqueID(),
+                'Version': DeviceInfo.getVersion(),
+                'is24Hour': DeviceInfo.is24Hour(),
+                'isPinOrFingerprintSet': false,
+                'isTablet': DeviceInfo.isTablet(),
+            };
         //updating bool
         if (data.isEmulator === null)
             data.isEmulator = true;
@@ -200,11 +241,10 @@ class code {
             data.TotalMemory = 1;
 
 
-
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
-                if (data.key === null)
-                    data.key = 'E';
+                if (data[key]=== null ||data[key]=== ""|| data[key]=== undefined)
+                data[key] = 'E';
             }
         }
 
